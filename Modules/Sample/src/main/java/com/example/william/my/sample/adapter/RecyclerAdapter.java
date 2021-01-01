@@ -1,6 +1,5 @@
 package com.example.william.my.sample.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +15,15 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<String> mData;
-    private final Context mContext;
 
-    public RecyclerAdapter(Context context, List<String> data) {
-        this.mContext = context;
+    public RecyclerAdapter(List<String> data) {
         this.mData = data;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.sample_item_primary, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.sample_item_primary, parent, false));
     }
 
     @Override

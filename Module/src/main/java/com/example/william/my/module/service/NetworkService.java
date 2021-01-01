@@ -2,14 +2,15 @@ package com.example.william.my.module.service;
 
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.base.Urls;
+import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannersBean;
-import com.example.william.my.module.bean.LoginData;
 
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -19,6 +20,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
@@ -38,12 +40,21 @@ public interface NetworkService {
     @POST(Urls.login)
     Call<ResponseBody> call(@Query("username") String username, @Query("password") String password);
 
+    /**
+     * Repository
+     */
+    @POST(Urls.article)
+    Single<ArticlesBean> getArticle(@Path("page") int page);
+
+    /**
+     * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository
+     */
     @GET(Urls.banner)
     Observable<BannersBean> getBanners();
 
-    @POST(Urls.login)
-    Observable<RetrofitResponse<LoginData>> login(@Query("username") String username, @Query("password") String password);
-
+    /**
+     * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository
+     */
     @GET(Urls.banner)
     Observable<RetrofitResponse<List<BannerBean>>> getBannersResponse();
 

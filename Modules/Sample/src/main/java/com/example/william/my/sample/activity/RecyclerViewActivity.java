@@ -64,7 +64,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         for (int i = 1; i < 61; i++) {
             mData.add("POSITION " + i);
         }
-        mRecyclerView.setAdapter(new RAdapter<String>(this, mData,
+        mRecyclerView.setAdapter(new RAdapter<String>(mData,
                 R.layout.sample_item_primary, R.layout.sample_item_primary_dark) {
             @Override
             public int setItemViewType(int position, String data) {
@@ -81,7 +81,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
             }
         });
-        RecyclerAdapter mRecyclerAdapter = new RecyclerAdapter(this, mData);
+        RecyclerAdapter mRecyclerAdapter = new RecyclerAdapter(mData);
         mRecyclerView.setAdapter(mRecyclerAdapter);
     }
 }

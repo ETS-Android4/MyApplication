@@ -10,7 +10,6 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.jet.repository.Repository;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;
-import com.example.william.my.module.bean.LoginData;
 
 import java.util.List;
 
@@ -33,40 +32,30 @@ public class LoginViewModel extends ViewModel {
 
     private final Repository repository;
 
-    private final MutableLiveData<Object> bannersLiveData;
-    private final LiveData<RetrofitResponse<LoginData>> loginData;
+    private final MutableLiveData<Object> mutableLiveData;
     private final LiveData<RetrofitResponse<List<BannerBean>>> bannersBean;
     private final LiveData<RetrofitResponse<List<BannerData>>> bannersData;
 
     public LoginViewModel() {
+
         repository = Repository.getInstance();
 
-        bannersLiveData = new MutableLiveData<>();
-        loginData = Transformations.switchMap(bannersLiveData, new Function<Object, LiveData<RetrofitResponse<LoginData>>>() {
+        mutableLiveData = new MutableLiveData<>();
 
-            @Override
-            public LiveData<RetrofitResponse<LoginData>> apply(Object input) {
-                return repository.login("17778060027", "ww123456");
-            }
-        });
-        bannersBean = Transformations.switchMap(bannersLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerBean>>>>() {
+        bannersBean = Transformations.switchMap(mutableLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerBean>>>>() {
 
             @Override
             public LiveData<RetrofitResponse<List<BannerBean>>> apply(Object input) {
                 return repository.bannerBean();
             }
         });
-        bannersData = Transformations.switchMap(bannersLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerData>>>>() {
+        bannersData = Transformations.switchMap(mutableLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerData>>>>() {
 
             @Override
             public LiveData<RetrofitResponse<List<BannerData>>> apply(Object input) {
                 return repository.bannerData();
             }
         });
-    }
-
-    public LiveData<RetrofitResponse<LoginData>> getLoginData() {
-        return loginData;
     }
 
     public LiveData<RetrofitResponse<List<BannerBean>>> getBannersBean() {
@@ -78,6 +67,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void request() {
-        bannersLiveData.postValue(true);
+        mutableLiveData.postValue(true);
     }
+
 }

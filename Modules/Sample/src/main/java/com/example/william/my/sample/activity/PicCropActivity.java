@@ -23,10 +23,6 @@ import com.example.william.my.module.router.provider.ImageUtilsService;
 import com.example.william.my.sample.R;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 @Route(path = ARouterPath.Sample.Sample_PicCrop)
 public class PicCropActivity extends AppCompatActivity implements View.OnClickListener {

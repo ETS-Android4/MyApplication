@@ -7,6 +7,9 @@ import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 
+/**
+ * {@link DownloadUtils}
+ */
 @Route(path = ARouterPath.NetWork.NetWork_RetrofitDownload)
 public class RetrofitDownloadActivity extends ResponseActivity {
 

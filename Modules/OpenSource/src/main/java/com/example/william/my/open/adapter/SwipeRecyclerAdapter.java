@@ -1,6 +1,5 @@
 package com.example.william.my.open.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,18 +19,16 @@ import java.util.List;
 
 public class SwipeRecyclerAdapter extends RecyclerSwipeAdapter<SwipeRecyclerAdapter.ViewHolder> {
 
-    private final Context mContext;
     private List<String> mData;
 
-    public SwipeRecyclerAdapter(Context mContext, List<String> mData) {
-        this.mContext = mContext;
+    public SwipeRecyclerAdapter(List<String> mData) {
         this.mData = mData;
     }
 
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.open_item_swipe, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.open_item_swipe, parent, false));
     }
 
     @Override

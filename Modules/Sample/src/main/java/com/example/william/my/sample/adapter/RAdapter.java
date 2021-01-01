@@ -20,15 +20,13 @@ import java.util.List;
  */
 public abstract class RAdapter<T> extends RecyclerView.Adapter<RAdapter.ViewHolder> {
 
-    private final Context mContext;
 
     private List<T> mData;
     private final int[] mLayoutResID;
 
     private int mItemViewType;//item类型
 
-    protected RAdapter(Context mContext, List<T> mData, int... mLayoutResID) {
-        this.mContext = mContext;
+    protected RAdapter(List<T> mData, int... mLayoutResID) {
         this.mData = mData;
         this.mLayoutResID = mLayoutResID;
     }
@@ -57,7 +55,7 @@ public abstract class RAdapter<T> extends RecyclerView.Adapter<RAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return ViewHolder.onCreateViewHolder(mContext, parent, viewType);
+        return ViewHolder.onCreateViewHolder(parent.getContext(), parent, viewType);
     }
 
     @Override

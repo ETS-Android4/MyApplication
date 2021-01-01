@@ -1,6 +1,5 @@
 package com.example.william.my.sample.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,9 @@ import java.util.List;
 
 public class ViewPagerAdapter extends PagerAdapter {
 
-    private final Context mContext;
     private final List<String> mData;
 
-    public ViewPagerAdapter(Context mContext, List<String> data) {
-        this.mContext = mContext;
+    public ViewPagerAdapter(List<String> data) {
         this.mData = data;
     }
 
@@ -36,7 +33,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View mView = LayoutInflater.from(mContext).inflate(R.layout.sample_page, container, false);
+        View mView = LayoutInflater.from(container.getContext()).inflate(R.layout.sample_page, container, false);
         ((TextView) mView.findViewById(R.id.page_response)).setText(mData.get(position));
         container.addView(mView);
         return mView;

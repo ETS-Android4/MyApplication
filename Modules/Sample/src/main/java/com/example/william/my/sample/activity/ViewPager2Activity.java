@@ -36,7 +36,7 @@ public class ViewPager2Activity extends AppCompatActivity {
         ViewPager2 mPageFragment = findViewById(R.id.page2_fragment).findViewById(R.id.page2_fragment);
 
         mPageView.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        mPageView.setAdapter(new ViewPager2Adapter(this, Arrays.asList(mData)));
+        mPageView.setAdapter(new ViewPager2Adapter(Arrays.asList(mData)));
 
         mPageFragment.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);//设置滚动方向
         mPageFragment.setAdapter(new ViewPager2FragmentAdapter(getSupportFragmentManager(), getLifecycle(), Arrays.asList(mFragments)));

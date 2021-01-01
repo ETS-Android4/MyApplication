@@ -18,13 +18,10 @@ import java.util.List;
  */
 public abstract class LAdapter<T> extends BaseAdapter {
 
-    private final Context mContext;
-
     private List<T> mData;
     private final int mLayoutResID;
 
-    protected LAdapter(Context mContext, List<T> mData, int mLayoutResID) {
-        this.mContext = mContext;
+    protected LAdapter(List<T> mData, int mLayoutResID) {
         this.mData = mData;
         this.mLayoutResID = mLayoutResID;
     }
@@ -46,7 +43,7 @@ public abstract class LAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = ViewHolder.getView(mContext, convertView, parent, mLayoutResID);
+        ViewHolder viewHolder = ViewHolder.getView(parent.getContext(), convertView, parent, mLayoutResID);
         convert(viewHolder, mData.get(position));
         return viewHolder.getConvertView();
     }

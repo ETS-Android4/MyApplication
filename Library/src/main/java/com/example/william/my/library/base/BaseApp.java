@@ -26,6 +26,8 @@ public class BaseApp extends Application {
 
     private static final String[] modulesList = {
             "com.example.william.my.module.base.ModuleApp",
+            "com.example.william.my.open.base.NetWorkApp",
+            "com.example.william.my.open.base.JetPackApp",
             "com.example.william.my.open.base.OpenSourceApp"
     };
 

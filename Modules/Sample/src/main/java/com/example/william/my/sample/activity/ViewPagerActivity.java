@@ -31,7 +31,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         ViewPager mPageView = findViewById(R.id.page_view).findViewById(R.id.page_view);
         ViewPager mPageFragment = findViewById(R.id.page_fragment).findViewById(R.id.page_fragment);
 
-        mPageView.setAdapter(new ViewPagerAdapter(this, Arrays.asList(mData)));
+        mPageView.setAdapter(new ViewPagerAdapter(Arrays.asList(mData)));
         mPageFragment.setAdapter(new ViewPagerFragmentAdapter(getSupportFragmentManager(), Arrays.asList(mFragments)));
     }
 }

@@ -1,35 +1,44 @@
 package com.example.william.my.jet.source;
 
-import androidx.lifecycle.LiveData;
-import androidx.paging.PagingSource;
+import androidx.paging.rxjava3.RxPagingSource;
 
-import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
-import com.example.william.my.jet.repository.Repository;
-import com.example.william.my.module.bean.BannerBean;
+import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
+import com.example.william.my.module.bean.ArticlesBean;
+import com.example.william.my.module.service.NetworkService;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
-import kotlin.coroutines.Continuation;
+public class DataSource extends RxPagingSource<Integer, ArticlesBean.DataBean.ArticleBean> {
 
-public class DataSource extends PagingSource<Integer, BannerBean> {
-
-    @Nullable
+    @NotNull
     @Override
-    public Object load(@NotNull LoadParams<Integer> loadParams, @NotNull Continuation<? super LoadResult<Integer, BannerBean>> continuation) {
-        return null;
-    }
+    public Single<LoadResult<Integer, ArticlesBean.DataBean.ArticleBean>> loadSingle(@NotNull LoadParams<Integer> loadParams) {
 
-    public LoadResult<Integer, BannerBean> load(@NotNull LoadParams<Integer> loadParams) {
+        // Start refresh at page 1 if undefined.
+        int nextPageNumber = loadParams.getKey();
 
-        LiveData<RetrofitResponse<List<BannerBean>>> data = Repository.getInstance().bannerBean();
-
-        if (data.getValue().getData().size() > 0) {
-            return new LoadResult.Page<>(data.getValue().getData(), null, null);
-        } else {
-            return null;
-        }
+        return RetrofitUtils.buildApi(NetworkService.class)
+                .getArticle(nextPageNumber)
+                .subscribeOn(Schedulers.io())
+                .map(new Function<ArticlesBean, LoadResult<Integer, ArticlesBean.DataBean.ArticleBean>>() {
+                    @Override
+                    public LoadResult<Integer, ArticlesBean.DataBean.ArticleBean> apply(ArticlesBean articlesBean) throws Throwable {
+                        return new LoadResult.Page<>(
+                                articlesBean.getData().getDatas(),
+                                null,
+                                nextPageNumber + 1
+                        );
+                    }
+                })
+                .onErrorReturn(new Function<Throwable, LoadResult<Integer, ArticlesBean.DataBean.ArticleBean>>() {
+                    @Override
+                    public LoadResult<Integer, ArticlesBean.DataBean.ArticleBean> apply(Throwable throwable) throws Throwable {
+                        return new LoadResult.Error<>(throwable);
+                    }
+                });
     }
 }

@@ -32,7 +32,7 @@ public class SwipeLayoutActivity extends AppCompatActivity {
 
         RecyclerView mRecycleView = findViewById(R.id.basics_recycleView);
 
-        SwipeRecyclerAdapter mAdapter = new SwipeRecyclerAdapter(this, mData);
+        SwipeRecyclerAdapter mAdapter = new SwipeRecyclerAdapter(mData);
         //mAdapter.setMode(Attributes.Mode.Multiple);//默认为Single
 
         mRecycleView.setAdapter(mAdapter);

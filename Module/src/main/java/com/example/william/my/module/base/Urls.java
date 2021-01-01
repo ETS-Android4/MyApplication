@@ -11,6 +11,8 @@ public class Urls {
 
     public static final String banner = baseUrl + "banner/json";
 
+    public static final String article = baseUrl + "article/list/{page}/json";
+
     public static final String upload = "http://10.0.1.150:5566/upload";
     //public static final String upload = "http://192.168.199.176:5566/upload";
 

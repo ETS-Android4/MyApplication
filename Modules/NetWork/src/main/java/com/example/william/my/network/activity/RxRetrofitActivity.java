@@ -13,6 +13,9 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+/**
+ * {@link RxRetrofit}
+ */
 @Route(path = ARouterPath.NetWork.NetWork_RxRetrofit)
 public class RxRetrofitActivity extends ResponseActivity {
 

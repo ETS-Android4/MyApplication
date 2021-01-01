@@ -1,7 +1,6 @@
 package com.example.william.my.network;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.network.base.RxRetrofitConfig;
 import com.example.william.my.module.activity.ARouterActivity;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -11,7 +10,6 @@ public class NetWorkActivity extends ARouterActivity {
     @Override
     public void initData() {
         super.initData();
-        RxRetrofitConfig.init(getApplication());
         mMap.put("GlideActivity", ARouterPath.NetWork.NetWork_Glide);
         mMap.put("HttpURLActivity", ARouterPath.NetWork.NetWork_HttpURL);
         mMap.put("VolleyActivity", ARouterPath.NetWork.NetWork_Volley);

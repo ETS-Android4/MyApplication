@@ -1,6 +1,5 @@
 package com.example.william.my.sample.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +14,16 @@ import java.util.List;
 
 public class ViewPager2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final Context mContext;
     private final List<String> mData;
 
-    public ViewPager2Adapter(Context context, List<String> data) {
-        this.mContext = context;
+    public ViewPager2Adapter(List<String> data) {
         this.mData = data;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.sample_page, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.sample_page, parent, false));
     }
 
     @Override

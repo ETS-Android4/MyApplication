@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.jet.databinding.JetItemBindBinding;
+import com.example.william.my.jet.databinding.JetItemRecycleBinding;
 
 import java.util.List;
 
@@ -21,13 +21,13 @@ public class BindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        JetItemBindBinding bind = JetItemBindBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        JetItemRecycleBinding bind = JetItemRecycleBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(bind);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).itemBind.bindItemTextView.setText(mData.get(position));
+        ((ViewHolder) holder).itemBind.itemRecycleTextView.setText(mData.get(position));
     }
 
     @Override
@@ -37,9 +37,9 @@ public class BindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public JetItemBindBinding itemBind;
+        public JetItemRecycleBinding itemBind;
 
-        public ViewHolder(JetItemBindBinding bind) {
+        public ViewHolder(JetItemRecycleBinding bind) {
             super(bind.getRoot());
             this.itemBind = bind;
         }
