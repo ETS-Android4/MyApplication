@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion Config.compileSdkVersion
+    buildToolsVersion Config.buildToolsVersion
+    defaultConfig {
+        minSdkVersion Config.minSdkVersion
+        targetSdkVersion Config.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(),
+                             "eventBusIndex"    : 'com.example.william.my.module.MyModuleEventBusIndex']
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api project(path: ':Library')
+    implementation project(path: ':Libraries:lib_network')
+    //Android
+    implementation Dependencies.appcompat
+    implementation Dependencies.constraintlayout
+    implementation Dependencies.recyclerview
+    //ARouter
+    implementation Dependencies.arouter
+    annotationProcessor Dependencies.arouter_compiler
+    //Retrofit
+    implementation Dependencies.retrofit_gson
+    implementation Dependencies.retrofit_rxjava
+    //EventBus
+    implementation Dependencies.eventbus
+    annotationProcessor Dependencies.eventbus_processor
+    //LiveBus
+    implementation Dependencies.livebus
+    //SmartEventBus
+    implementation Dependencies.smartbus
+    annotationProcessor Dependencies.smartbus_compiler
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="GestureLock">
+        <attr name="count" format="integer" />
+        <attr name="tryTimes" format="integer" />
+        <attr name="colorInnerOn" format="color" />
+        <attr name="colorOuterOn" format="color" />
+        <attr name="colorInnerUp" format="color" />
+        <attr name="colorOuterUp" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundProgressBar">
+        <attr name="roundColor" format="color" />
+        <attr name="roundProgressColor" format="color" />
+        <attr name="roundWidth" format="dimension" />
+        <attr name="max" format="integer" />
+        <attr name="style">
+            <enum name="STROKE" value="0" />
+            <enum name="FILL" value="1" />
+        </attr>
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textDisplayable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ScrollPage">
+        <attr name="pageOne" format="reference" />
+        <attr name="pageTwo" format="reference" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,22 @@
+android {
+    resourcePrefix "net_"
+}
+dependencies {
+    implementation project(path: ':Libraries:lib_network')
+    //Glide
+    implementation Dependencies.glide
+    annotationProcessor Dependencies.glide_compiler
+    //RxAndroid
+    implementation Dependencies.rxandroid
+    //Retrofit
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofit_gson
+    implementation Dependencies.retrofit_scalars
+    implementation Dependencies.retrofit_rxjava
+    //FastJson
+    implementation Dependencies.fastjson
+    //NanoHttpD
+    implementation Dependencies.nanohttpd
+    //WebSocket
+    implementation Dependencies.websocket
+}

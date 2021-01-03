@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="basics_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/basics_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/basics_colorPrimaryDark</item>
+        <item name="colorAccent">@color/basics_colorAccent</item>
+
+        <!--        窗口半透明        -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--        禁用窗口预览        -->
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="basics_ScrollStyle">
+        <!--下拉时顶部出现的半月形阴影效果-->
+        <item name="android:overScrollMode">never</item>
+        <!--滑出控件边界时的虚化的效果-->
+        <item name="android:fadingEdge">none</item>
+        <!--滚动条-->
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="basics_Fullscreen" parent="basics_AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+</resources>

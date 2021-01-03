@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.william.my.open">
+
+    <application>
+        <activity android:name=".OpenSourceActivity" />
+        <activity android:name=".activity.EventBusActivity" />
+        <activity android:name=".activity.LiveEventBusActivity" />
+        <activity android:name=".activity.SmartEventBusActivity" />
+        <activity android:name=".activity.BackgroundActivity" />
+        <activity android:name=".activity.BadgeViewActivity" />
+        <activity android:name=".activity.BannerActivity" />
+        <activity android:name=".activity.CityPickerActivity" />
+        <activity android:name=".activity.CountdownActivity" />
+        <activity android:name=".activity.CropActivity" />
+        <activity android:name=".activity.FlycoTabLayoutActivity" />
+        <activity android:name=".activity.GSYPlayerActivity" />
+        <activity android:name=".activity.ImageSelectorActivity" />
+        <activity android:name=".activity.PicSelectorActivity" />
+        <activity android:name=".activity.PhotoViewActivity" />
+        <activity android:name=".activity.PickerViewActivity" />
+        <activity android:name=".activity.PopWindowActivity" />
+        <activity android:name=".activity.SmartRefreshActivity" />
+        <activity android:name=".activity.SwipeLayoutActivity" />
+        <activity android:name=".activity.SwipeToLoadActivity" />
+        <activity android:name=".activity.TangramActivity" />
+        <activity android:name=".activity.X5Activity" />
+    </application>
+
+</manifest>

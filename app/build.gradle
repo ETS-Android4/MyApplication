@@ -1,0 +1,114 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id 'com.android.application'
+    id 'com.blankj.bus'
+}
+
+android {
+    compileSdkVersion Config.compileSdkVersion
+    buildToolsVersion Config.buildToolsVersion
+    defaultConfig {
+        applicationId Config.applicationId
+        minSdkVersion Config.minSdkVersion
+        targetSdkVersion Config.targetSdkVersion
+        versionCode Config.versionCode
+        versionName Config.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true//minSdkVersion小于21时，需启用多dex文件支持
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        //resConfig 'xxhdpi'
+        ndk {
+            // armeabi：万金油架构平台（占用率：0%）
+            // armeabi-v7a：曾经主流的架构平台（占用率：10%）
+            // arm64-v8a：目前主流架构平台（占用率：90%）
+            //abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+    signingConfigs {
+        sample {
+            keyAlias 'key'
+            keyPassword 'password'
+            storeFile file('app.keystore')
+            storePassword 'password'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false // 混淆
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            android.applicationVariants.all { variant ->//过滤器
+                variant.outputs.all {
+                    outputFileName = outputFileName.replace(
+                            "-release.apk", "_v${variant.mergedFlavor.versionName}_${time()}_release.apk")
+                }
+            }
+        }
+        debug {
+            //给applicationId添加后缀“.mock”
+            //applicationIdSuffix ".mock"
+            signingConfig signingConfigs.sample//签名配置
+
+            minifyEnabled true// 混淆
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        //支持JAVA8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //多渠道支持
+    //flavorDimensions "api", "appStore"
+    //productFlavors {//多版本打包
+    //    minApi19 {
+    //        dimension = 'api'
+    //        //applicationIdSuffix = '.minApi19'
+    //        //versionNameSuffix = "-minApi19"
+    //    }
+    //    minApi24 {
+    //        dimension = 'api'
+    //        //applicationIdSuffix = '.minApi24'
+    //        //versionNameSuffix = "-minApi24"
+    //    }
+    //    wandoujia {
+    //        dimension = 'appStore'
+    //        //applicationIdSuffix = '.wandoujia'
+    //        //versionNameSuffix = "-wandoujia"
+    //        //manifestPlaceholders = [CHANNEL_VALUE: "wandoujia"]
+    //    }
+    //    yingyongbao {
+    //        dimension = 'appStore'
+    //        //applicationIdSuffix = ".yingyongbao"
+    //        //versionNameSuffix = "-yingyongbao"
+    //        //manifestPlaceholders = [CHANNEL_VALUE: "yingyongbao"]
+    //    }
+    //}
+}
+
+dependencies {
+    for (def entrySet : ConfigUtils.getApplyModules().entrySet()) {
+        api entrySet.value.dep
+    }
+    //Android
+    implementation Dependencies.material
+    implementation Dependencies.appcompat
+    implementation Dependencies.constraintlayout
+    //ARouter
+    implementation Dependencies.arouter
+    annotationProcessor Dependencies.arouter_compiler
+    //EventBus
+    implementation Dependencies.eventbus
+    //AndroidTest
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
+
+static def time() {
+    return new SimpleDateFormat("yyyy-MM-dd").format(new Date())
+}

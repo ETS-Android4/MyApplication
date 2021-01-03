@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.william.my.jet">
+
+    <application>
+        <activity android:name=".JetPackActivity" />
+        <activity android:name=".activity.ViewModelActivity" />
+        <activity android:name=".activity.PagingActivity" />
+        <activity android:name=".activity.RoomActivity" />
+        <activity android:name=".activity.NavigationActivity" />
+        <activity android:name=".activity.WorkManagerActivity" />
+    </application>
+
+</manifest>

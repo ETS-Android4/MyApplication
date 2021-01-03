@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidDomInspection -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.william.my.wx">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- for mta statistics, not necessary-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/wx_app_name"
+        android:theme="@style/basics_AppTheme">
+        <activity android:name=".WeChatActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="${applicationId}.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="net.sourceforge.simcpux"
+            tools:ignore="MissingClass" />
+    </application>
+
+</manifest>

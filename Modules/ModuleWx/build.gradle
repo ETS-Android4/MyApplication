@@ -1,0 +1,17 @@
+android {
+    if (!ConfigUtils.isApply(project)) {
+        defaultConfig {
+            applicationId "com.example.sample"
+        }
+        buildTypes {
+            debug {
+                //signingConfig signingConfigs.debug
+            }
+        }
+    }
+    resourcePrefix "wx_"
+}
+dependencies {
+    //微信登录
+    implementation Dependencies.wechat
+}

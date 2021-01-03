@@ -1,0 +1,7 @@
+android {
+    resourcePrefix "sample_"
+}
+
+dependencies {
+    implementation Dependencies.gson
+}

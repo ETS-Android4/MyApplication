@@ -1,0 +1,151 @@
+package com.example.william.my.network.activity;
+
+import androidx.annotation.NonNull;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.core.network.webSocket.RxWebSocketObserver;
+import com.example.william.my.core.network.webSocket.RxWebSocketUtils;
+import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.router.ARouterPath;
+import com.google.gson.Gson;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.disposables.Disposable;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
+import okio.ByteString;
+
+@Route(path = ARouterPath.NetWork.NetWork_WebSocket)
+public class WebSocketActivity extends ResponseActivity {
+
+    private final String url = "wss://echo.websocket.org";
+
+    @Override
+    public void setOnClick() {
+        super.setOnClick();
+        webSocketUtils();
+    }
+
+    private void webSocket() {
+        OkHttpClient client = new OkHttpClient.Builder()
+                //.retryOnConnectionFailure(true)//允许失败重试
+                .readTimeout(5, TimeUnit.SECONDS)//设置读取超时时间
+                .writeTimeout(5, TimeUnit.SECONDS)//设置写的超时时间
+                .connectTimeout(5, TimeUnit.SECONDS)//设置连接超时时间
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newWebSocket(request, new WebSocketListener() {
+            /**
+             * 和远程建立连接时回调
+             */
+            @Override
+            public void onOpen(@NonNull WebSocket webSocket, @NonNull Response response) {
+                super.onOpen(webSocket, response);
+                showResponse("onOpen：" + response.code());
+            }
+
+            /**
+             * 接收到消息时回调
+             */
+            @Override
+            public void onMessage(@NonNull WebSocket webSocket, @NonNull String text) {
+                super.onMessage(webSocket, text);
+                webSocket.send("heart");
+                showResponse("onMessageString：" + text);
+            }
+
+            /**
+             * 接收到消息时回调
+             */
+            @Override
+            public void onMessage(@NonNull WebSocket webSocket, @NonNull ByteString bytes) {
+                super.onMessage(webSocket, bytes);
+                showResponse("onMessageByteString：" + bytes.toString());
+            }
+
+            /**
+             * 准备关闭时回调
+             */
+            @Override
+            public void onClosing(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
+                super.onClosing(webSocket, code, reason);
+                showResponse("onClosing:" + "code:" + code + "reason:" + reason);
+            }
+
+            /**
+             * 连接关闭时回调
+             */
+            @Override
+            public void onClosed(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
+                super.onClosed(webSocket, code, reason);
+                showResponse("onClosed:" + "code:" + code + "reason:" + reason);
+            }
+
+            /**
+             * 失败时被回调
+             */
+            @Override
+            public void onFailure(@NonNull WebSocket webSocket, @NonNull Throwable t, Response response) {
+                super.onFailure(webSocket, t, response);
+                StringBuilder builder = new StringBuilder("onFailure:");
+                if (t.getMessage() != null) {
+                    builder.append("Throwable:").append(t.getMessage());
+                }
+                if (response != null) {
+                    builder.append("onFailure：").append(response.code());
+                    builder.append("onFailure：").append(new Gson().toJson(response.body()));
+                }
+                showResponse(builder.toString());
+            }
+        });
+    }
+
+    private void webSocketUtils() {
+        RxWebSocketUtils
+                .getInstance()
+                .createWebSocket(url)
+                .subscribe(new RxWebSocketObserver() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        super.onSubscribe(disposable);
+                    }
+
+                    @Override
+                    protected void onOpen(WebSocket webSocket, Response response) {
+                        super.onOpen(webSocket, response);
+                        showResponse("onOpen：" + response.code());
+                    }
+
+                    @Override
+                    protected void onMessage(WebSocket webSocket, String text) {
+                        super.onMessage(webSocket, text);
+                        webSocket.send("heart");
+                        showResponse("onMessageString：" + text);
+                    }
+
+                    @Override
+                    protected void onMessage(WebSocket webSocket, ByteString bytes) {
+                        super.onMessage(webSocket, bytes);
+                        showResponse("onMessageByteString：" + bytes.toString());
+                    }
+
+                    @Override
+                    protected void onReconnect() {
+                        super.onReconnect();
+                    }
+
+                    @Override
+                    protected void onClosed() {
+                        super.onClosed();
+                    }
+                });
+    }
+}

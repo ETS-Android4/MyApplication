@@ -1,0 +1,71 @@
+[
+  {
+    "type": "container-onePlusN",
+    "items": [
+      {
+        "type": "InterfaceCell",
+        "text": "接口方式自定义View"
+      },
+      {
+        "type": "InterfaceCell",
+        "text": "接口方式自定义View"
+      },
+      {
+        "type": "InterfaceCell",
+        "text": "接口方式自定义View"
+      },
+      {
+        "type": "InterfaceCell",
+        "text": "接口方式自定义View"
+      }
+    ]
+  },
+  {
+    "type": "container-fourColumn",
+    "items": [
+      {
+        "type": "AnnotationCell",
+        "text": "注解方式自定义View"
+      },
+      {
+        "type": "AnnotationCell",
+        "text": "注解方式自定义View"
+      },
+      {
+        "type": "AnnotationCell",
+        "text": "注解方式自定义View"
+      },
+      {
+        "type": "AnnotationCell",
+        "text": "注解方式自定义View"
+      }
+    ]
+  },
+  {
+    "type": "container-oneColumn",
+    "items": [
+      {
+        "type": "CustomCell",
+        "text": "自定义model",
+        "imageUrl": "https://www.baidu.com/img/baidu_jgylogo1.gif"
+      }
+    ]
+  },
+  {
+    "type": "container-threeColumn",
+    "items": [
+      {
+        "type": "HolderCell",
+        "text": "自定义model和ViewHolder"
+      },
+      {
+        "type": "HolderCell",
+        "text": "自定义model和ViewHolder"
+      },
+      {
+        "type": "HolderCell",
+        "text": "自定义model和ViewHolder"
+      }
+    ]
+  }
+]

@@ -1,0 +1,77 @@
+package com.example.william.my.open.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
+import com.example.william.my.open.R;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
+public class SwipeRecyclerAdapter extends RecyclerSwipeAdapter<SwipeRecyclerAdapter.ViewHolder> {
+
+    private final Context mContext;
+    private List<String> mData;
+
+    public SwipeRecyclerAdapter(Context mContext, List<String> mData) {
+        this.mContext = mContext;
+        this.mData = mData;
+    }
+
+    @NotNull
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.open_item_swipe, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(@NotNull ViewHolder viewHolder, final int i) {
+        if (viewHolder.itemView instanceof SwipeLayout) {
+            mItemManger.bindView(viewHolder.itemView, i);
+        }
+        viewHolder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItemManger.closeItem(i);
+                mItemManger.closeAllItems();
+            }
+        });
+        viewHolder.textView.setText(mData.get(i));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mData == null ? 0 : mData.size();
+    }
+
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.item_swipe_swipeLayout;
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private final Button button;
+        private final TextView textView;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            button = itemView.findViewById(R.id.item_swipe_button);
+            textView = itemView.findViewById(R.id.item_swipe_textView);
+        }
+    }
+
+    public void setData(List<String> data) {
+        this.mData = data;
+    }
+}

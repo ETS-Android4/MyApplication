@@ -1,0 +1,8 @@
+<resources>
+    <string name="open_app_name">开源框架</string>
+    <!--    Matisse    -->
+    <string name="open_error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
+    <!--    SmartRefreshLayout    -->
+    <string name="open_str_refresh">下拉刷新</string>
+    <string name="open_str_load_more">加载更多</string>
+</resources>

@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- CityPicker theme -->
+    <style name="open_CityPickerTheme" parent="DefaultCityPickerTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Background -->
+    <style name="open_bg_btn_stroke">
+        <item name="bl_corners_radius">4dp</item>
+        <item name="bl_solid_color">@color/colorPrimary</item>
+        <item name="bl_stroke_color">@color/colorPrimaryDark</item>
+        <item name="bl_stroke_width">2dp</item>
+    </style>
+
+</resources>

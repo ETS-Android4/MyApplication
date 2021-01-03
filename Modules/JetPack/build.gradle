@@ -1,0 +1,30 @@
+android {
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME  : project.getName(), AROUTER_GENERATE_DOC: "enable",
+                             "room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    resourcePrefix "jet_"
+}
+
+dependencies {
+    implementation project(path: ':Libraries:lib_network')
+    //Retrofit
+    implementation Dependencies.retrofit_gson
+    implementation Dependencies.retrofit_rxjava
+    //Room
+    implementation Dependencies.room
+    implementation Dependencies.room_rxjava
+    annotationProcessor Dependencies.room_compiler
+    //Navigation
+    implementation Dependencies.navigation
+    implementation Dependencies.navigation_ui
+    //Work
+    implementation Dependencies.work
+}

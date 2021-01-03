@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.BackgroundActivity">
+
+    <TextView
+        android:id="@+id/open_textview1"
+        style="@style/open_bg_btn_stroke"
+        android:layout_width="@dimen/basics_btn_width"
+        android:layout_height="@dimen/basics_btn_height"
+        android:gravity="center"
+        android:text="边框"
+        app:layout_constraintBottom_toTopOf="@id/open_textview2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingPrefix" />
+
+    <TextView
+        android:id="@+id/open_textview2"
+        android:layout_width="@dimen/basics_btn_width"
+        android:layout_height="@dimen/basics_btn_height"
+        android:gravity="center"
+        android:text="渐变"
+        app:bl_corners_radius="2dp"
+        app:bl_gradient_angle="0"
+        app:bl_gradient_endColor="@color/colorPrimaryDark"
+        app:bl_gradient_startColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/open_textview3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open_textview1"
+        tools:ignore="MissingPrefix" />
+
+    <TextView
+        android:id="@+id/open_textview3"
+        android:layout_width="@dimen/basics_btn_width"
+        android:layout_height="@dimen/basics_btn_height"
+        android:gravity="center"
+        android:text="点击效果"
+        app:bl_pressed_drawable="@drawable/open_shape_btn_pressed"
+        app:bl_unPressed_drawable="@drawable/open_shape_btn_normal"
+        app:layout_constraintBottom_toTopOf="@id/open_textview4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open_textview2"
+        tools:ignore="MissingPrefix" />
+
+    <Button
+        android:id="@+id/open_textview4"
+        android:layout_width="@dimen/basics_btn_width"
+        android:layout_height="@dimen/basics_btn_height"
+        android:gravity="center"
+        android:text="点击文字变色"
+        app:bl_pressed_textColor="@color/colorPrimaryDark"
+        app:bl_unPressed_textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/open_textview5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open_textview3"
+        tools:ignore="MissingPrefix" />
+
+    <Button
+        android:id="@+id/open_textview5"
+        android:layout_width="@dimen/basics_btn_width"
+        android:layout_height="@dimen/basics_btn_height"
+        android:gravity="center"
+        android:text="点击边框变色"
+        app:bl_pressed_solid_color="@color/colorPrimaryDark"
+        app:bl_pressed_stroke_color="@color/colorPrimary"
+        app:bl_stroke_width="2dp"
+        app:bl_unPressed_solid_color="@color/colorPrimary"
+        app:bl_unPressed_stroke_color="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open_textview4"
+        tools:ignore="MissingPrefix" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

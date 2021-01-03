@@ -1,0 +1,68 @@
+android {
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable",
+                             "eventBusIndex"    : 'com.example.william.my.open.MyModuleOpenEventBusIndex']
+            }
+        }
+    }
+    resourcePrefix "open_"
+}
+dependencies {
+    //https://github.com/greenrobot/EventBus
+    implementation Dependencies.eventbus
+    annotationProcessor Dependencies.eventbus_processor
+    //https://github.com/JeremyLiao/LiveEventBus
+    implementation Dependencies.livebus
+    //https://github.com/JeremyLiao/SmartEventBus
+    implementation Dependencies.smartbus
+    annotationProcessor Dependencies.smartbus_compiler
+    //https://github.com/JavaNoober/BackgroundLibrary
+    implementation Dependencies.background
+    //https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    implementation Dependencies.brvah
+    //https://github.com/qstumn/BadgeView
+    implementation Dependencies.badgeview
+    //https://github.com/saiwu-bigkoo/Android-ConvenientBanner
+    implementation Dependencies.banner
+    //https://github.com/zaaach/CityPicker
+    implementation Dependencies.citypicker
+    //https://github.com/iwgang/CountdownView
+    implementation Dependencies.countdown
+    //https://github.com/Yalantis/uCrop
+    implementation Dependencies.crop
+    //https://github.com/H07000223/FlycoTabLayout
+    implementation Dependencies.tablayout
+    //https://github.com/zhihu/Matisse
+    implementation Dependencies.glide
+    implementation Dependencies.matisse
+    //https://github.com/chrisbanes/PhotoView
+    implementation Dependencies.photoview
+    //https://github.com/Bigkoo/Android-PickerView
+    implementation Dependencies.gson
+    implementation Dependencies.pickerview
+    //https://github.com/pinguo-zhouwei/CustomPopwindow
+    implementation Dependencies.popwindow
+    //https://github.com/scwang90/SmartRefreshLayout
+    implementation Dependencies.refresh_layout
+    implementation Dependencies.refresh_classics_header
+    implementation Dependencies.refresh_classics_footer
+    //https://github.com/daimajia/AndroidSwipeLayout
+    implementation Dependencies.swipelayout
+    //https://github.com/Aspsine/SwipeToLoadLayout
+    implementation Dependencies.swipetoload
+    //https://github.com/alibaba/Tangram-Android
+    implementation Dependencies.tangram
+    implementation(Dependencies.virtualview) {
+        transitive = true
+    }
+    implementation(Dependencies.vlayout) {
+        transitive = true
+    }
+    implementation(Dependencies.ultraviewpager) {
+        transitive = true
+    }
+    //https://github.com/guolindev/Glance
+    //debugImplementation Dependencies.glance
+}

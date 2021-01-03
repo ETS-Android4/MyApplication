@@ -1,0 +1,4 @@
+<resources>
+    <!--    Matisse    -->
+    <dimen name="open_grid_expected_size">120dp</dimen>
+</resources>

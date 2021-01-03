@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.william.my.util">
+
+    <application>
+        <activity android:name=".UtilActivity" />
+        <activity android:name=".activity.AdaptScreenActivity" />
+        <activity android:name=".activity.AppUtilsActivity" />
+        <activity android:name=".activity.BusUtilsActivity" />
+        <activity android:name=".activity.CacheActivity" />
+        <activity android:name=".activity.CrashUtilsActivity" />
+        <activity android:name=".activity.EncryptActivity" />
+        <activity android:name=".activity.LanguageActivity" />
+        <activity android:name=".activity.PermissionUtilsActivity" />
+    </application>
+
+</manifest>

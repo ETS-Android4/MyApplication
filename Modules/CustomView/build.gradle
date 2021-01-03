@@ -1,0 +1,6 @@
+android {
+    resourcePrefix "custom_"
+}
+dependencies {
+    implementation project(path: ':Libraries:lib_customview')
+}

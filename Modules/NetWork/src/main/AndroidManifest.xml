@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.william.my.network">
+
+    <application>
+        <activity android:name=".NetWorkActivity" />
+        <activity android:name=".activity.GlideActivity" />
+        <activity android:name=".activity.HttpURLActivity" />
+        <activity android:name=".activity.OkHttpActivity" />
+        <activity android:name=".activity.RetrofitActivity" />
+        <activity android:name=".activity.RetrofitRxJavaActivity" />
+        <activity android:name=".activity.RetrofitUtilsActivity" />
+        <activity android:name=".activity.RxRetrofitActivity" />
+        <activity android:name=".activity.VolleyActivity" />
+        <activity android:name=".activity.WebSocketActivity" />
+        <activity android:name=".activity.NanoHttpDActivity" />
+        <activity android:name=".activity.WebServerActivity" />
+        <activity android:name=".activity.NettyActivity" />
+
+        <service android:name=".nano.HttpService" />
+        <service android:name=".socket.SocketService" />
+    </application>
+
+</manifest>
