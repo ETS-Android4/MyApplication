@@ -12,6 +12,9 @@ class AndroidVersions {
     static viewpager2_version = "1.0.0"
     //https://developer.android.google.cn/jetpack/androidx/releases/viewpager2
 
+    static coordinatorlayout_version = "1.1.0"
+    //https://developer.android.google.cn/jetpack/androidx/releases/coordinatorlayout
+
     static flexbox_version = "2.0.1"
     //https://github.com/google/flexbox-layout
 

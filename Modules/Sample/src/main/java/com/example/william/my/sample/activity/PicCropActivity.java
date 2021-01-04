@@ -212,10 +212,10 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
                     path = uri.getPath();
                     break;
                 case ContentResolver.SCHEME_CONTENT:
-                    Cursor cursor = getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+                    Cursor cursor = getContentResolver().query(uri, new String[]{MediaStore.Images.Media._ID}, null, null, null);
                     if (null != cursor) {
                         if (cursor.moveToFirst()) {
-                            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                            int index = cursor.getColumnIndex(MediaStore.Images.Media._ID);
                             if (index > -1) {
                                 path = cursor.getString(index);
                             }

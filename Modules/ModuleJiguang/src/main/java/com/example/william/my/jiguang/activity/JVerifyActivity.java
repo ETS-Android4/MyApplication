@@ -65,7 +65,7 @@ public class JVerifyActivity extends AppCompatActivity implements View.OnClickLi
                     final String errorMsg = "operator=" + operator + ",code=" + code + "\ncontent=" + token;
                     if (code == Constants.CODE_LOGIN_SUCCESS) {
                         Log.e(TAG, "onResult: loginSuccess");
-                    } else if (code != Constants.CODE_LOGIN_CANCELD) {
+                    } else if (code != Constants.CODE_LOGIN_CANCELED) {
                         Log.e(TAG, "onResult: loginError");
                     }
                 }
@@ -81,7 +81,7 @@ public class JVerifyActivity extends AppCompatActivity implements View.OnClickLi
                     final String errorMsg = "operator=" + operator + ",code=" + code + "\ncontent=" + token;
                     if (code == Constants.CODE_LOGIN_SUCCESS) {
                         Log.e(TAG, "onResult: loginSuccess");
-                    } else if (code != Constants.CODE_LOGIN_CANCELD) {
+                    } else if (code != Constants.CODE_LOGIN_CANCELED) {
                         Log.e(TAG, "onResult: loginError");
                     }
                 }

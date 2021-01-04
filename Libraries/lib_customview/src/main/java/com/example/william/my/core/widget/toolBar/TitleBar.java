@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.example.william.my.core.widget.R;
-import com.example.william.my.core.widget.utils.ConvertUtils;
+import com.example.william.my.core.widget.utils.SizeUtils;
 
 public class TitleBar extends RelativeLayout {
 
@@ -39,7 +39,7 @@ public class TitleBar extends RelativeLayout {
     private void initTitleBar(Context context) {
         this.activity = (Activity) context;
 
-        setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, ConvertUtils.dp2px(48)));
+        setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, SizeUtils.dp2px(48)));
         setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimaryDark));
         setGravity(Gravity.CENTER_VERTICAL);
 
@@ -59,7 +59,7 @@ public class TitleBar extends RelativeLayout {
         mTitle.setTextColor(ContextCompat.getColor(activity, R.color.colorAccent));
 
         mTitle.setGravity(Gravity.CENTER);
-        mTitle.setPadding(ConvertUtils.dp2px(8), 0, ConvertUtils.dp2px(8), 0);
+        mTitle.setPadding(SizeUtils.dp2px(8), 0, SizeUtils.dp2px(8), 0);
 
         LayoutParams titleParam = new LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         titleParam.addRule(CENTER_IN_PARENT);//居中
@@ -74,9 +74,9 @@ public class TitleBar extends RelativeLayout {
         mBtnBack.setTextColor(ContextCompat.getColor(activity, R.color.colorAccent));
 
         mBtnBack.setGravity(Gravity.CENTER);
-        mBtnBack.setPadding(ConvertUtils.dp2px(8), 0, ConvertUtils.dp2px(8), 0);
+        mBtnBack.setPadding(SizeUtils.dp2px(8), 0, SizeUtils.dp2px(8), 0);
 
-        LayoutParams backParam = new LayoutParams(ConvertUtils.dp2px(48), ConvertUtils.dp2px(48));
+        LayoutParams backParam = new LayoutParams(SizeUtils.dp2px(48), SizeUtils.dp2px(48));
         backParam.addRule(ALIGN_PARENT_START);
 
         addView(mBtnBack, backParam);
@@ -88,9 +88,9 @@ public class TitleBar extends RelativeLayout {
         mBtnRight.setTextColor(ContextCompat.getColor(activity, R.color.colorAccent));
 
         mBtnRight.setGravity(Gravity.CENTER);
-        mBtnRight.setPadding(ConvertUtils.dp2px(8), 0, ConvertUtils.dp2px(8), 0);
+        mBtnRight.setPadding(SizeUtils.dp2px(8), 0, SizeUtils.dp2px(8), 0);
 
-        LayoutParams rightParam = new LayoutParams(ConvertUtils.dp2px(48), ConvertUtils.dp2px(48));
+        LayoutParams rightParam = new LayoutParams(SizeUtils.dp2px(48), SizeUtils.dp2px(48));
         rightParam.addRule(ALIGN_PARENT_END);
 
         addView(mBtnRight, rightParam);

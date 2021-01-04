@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.example.william.my.core.widget.R;
-import com.example.william.my.core.widget.utils.ConvertUtils;
+import com.example.william.my.core.widget.utils.SizeUtils;
 import com.example.william.my.core.widget.utils.ScreenUtils;
 
 import java.util.ArrayList;
@@ -123,7 +123,7 @@ public class IosItemAlertDialog {
             textView.setGravity(Gravity.CENTER);
 
             textView.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, ConvertUtils.dp2px(48)));
+                    LinearLayout.LayoutParams.MATCH_PARENT, SizeUtils.dp2px(48)));
 
             if (showTitle) {
                 if (alertItems.size() == 1) {

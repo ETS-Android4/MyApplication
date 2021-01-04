@@ -8,6 +8,7 @@ class Dependencies {
 
     static recyclerview = "androidx.recyclerview:recyclerview:${AndroidVersions.recyclerview_version}"
     static viewpager2 = "androidx.viewpager2:viewpager2:${AndroidVersions.viewpager2_version}"
+    static coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:${AndroidVersions.coordinatorlayout_version}"
     static flexbox = "com.google.android:flexbox:${AndroidVersions.flexbox_version}"
 
     static core = "androidx.core:core:${AndroidVersions.core_version}"

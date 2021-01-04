@@ -11,6 +11,7 @@ import java.lang.ref.WeakReference;
 /**
  * AsyncTask
  */
+@SuppressWarnings("deprecation")
 @Route(path = ARouterPath.Sample.Sample_AsyncTask)
 public class AsyncTaskActivity extends ResponseActivity {
 
@@ -38,7 +39,7 @@ public class AsyncTaskActivity extends ResponseActivity {
 
         private final WeakReference<AsyncTaskActivity> softReference;
 
-        @SuppressWarnings("deprecation")
+
         MyAsyncTask(AsyncTaskActivity activity) {
             this.softReference = new WeakReference<>(activity);
         }

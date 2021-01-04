@@ -4,7 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.loading.LoadingTip;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.jet.viewmodel.LoginViewModel;
-import com.example.william.my.library.utils.dataBus.ActivityDataBus;
+import com.example.william.my.library.utils.ActivityDataBus;
 import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;

@@ -1,4 +1,4 @@
-package com.example.william.my.library.utils.dataBus;
+package com.example.william.my.library.utils;
 
 import android.app.Activity;
 import android.content.Context;

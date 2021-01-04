@@ -46,9 +46,9 @@ public class Constants {
     public static final int FETCH_TOKEN_SUCCESS = 2000;//获取token成功
     public static final int CODE_LOGIN_SUCCESS = 6000;
     public static final int CODE_LOGIN_FAILED = 6001;
-    public static final int CODE_LOGIN_CANCELD = 6002;
+    public static final int CODE_LOGIN_CANCELED = 6002;
 
-    public static final String KEY_ERORRO_MSG = "error_msg";
+    public static final String KEY_ERROR_MSG = "error_msg";
     public static final String KEY_ERROR_CODE = "error_code";
 
 

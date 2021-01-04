@@ -355,7 +355,7 @@ public final class PermissionUtils {
         };
         private static final String[] GROUP_PHONE = {
                 Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE, Manifest.permission.READ_CALL_LOG, Manifest.permission.WRITE_CALL_LOG,
-                Manifest.permission.ADD_VOICEMAIL, Manifest.permission.USE_SIP, Manifest.permission.PROCESS_OUTGOING_CALLS
+                Manifest.permission.ADD_VOICEMAIL, Manifest.permission.USE_SIP, Manifest.permission.ANSWER_PHONE_CALLS
         };
         private static final String[] GROUP_SENSORS = {
                 Manifest.permission.BODY_SENSORS

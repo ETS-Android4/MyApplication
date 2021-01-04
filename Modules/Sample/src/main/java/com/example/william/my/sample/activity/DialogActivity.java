@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.router.ARouterPath;
@@ -115,6 +116,8 @@ public class DialogActivity extends AppCompatActivity implements AdapterView.OnI
                  * setView 是 AlertDialog 的方法 ，对应的是 CustomView 的部分而不是整个窗体 ，在dialog.show之前使用
                  */
                 View view = getLayoutInflater().inflate(R.layout.basics_layout_response, (ViewGroup) getWindow().getDecorView(), false);
+                TextView textView = view.findViewById(R.id.basics_response);
+                textView.setBackgroundColor(ContextCompat.getColor(DialogActivity.this, R.color.colorPrimary));
                 //AlertDialog dialog = new AlertDialog.Builder(DialogActivity.this)
                 //        .create();
                 //dialog.show();

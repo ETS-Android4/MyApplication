@@ -34,6 +34,7 @@ public class LiveEventBusActivity extends ResponseActivity {
         super.setOnClick();
         LiveEventBus
                 .get("some_key")
-                .post("LiveEventBus");
+                //.post("LiveEventBus")
+                .postDelay("LiveEventBus", 1000);
     }
 }
