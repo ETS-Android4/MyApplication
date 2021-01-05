@@ -1,4 +1,4 @@
-package com.example.william.my.module.utils;
+package com.example.william.my.jiguang.common;
 
 import android.Manifest;
 import android.app.Activity;

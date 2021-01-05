@@ -14,6 +14,7 @@ import com.example.william.my.sample.IMyAidlInterface;
 
 public class AIDLService extends Service {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private XBinder xBinder;
     private AIDLBinder aidlBinder;
 

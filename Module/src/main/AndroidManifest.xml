@@ -4,9 +4,6 @@
 
     <application>
         <activity android:name=".ModuleActivity" />
-        <activity
-            android:name=".utils.PermissionUtils$PermissionActivity"
-            android:launchMode="singleTask" />
     </application>
 
 </manifest>

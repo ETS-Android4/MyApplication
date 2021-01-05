@@ -19,7 +19,7 @@ public class UriUtils {
         Cursor cursor = context.getContentResolver().query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,//查询数据库
                 new String[]{MediaStore.Images.Media._ID},//返回ID的List
-                MediaStore.Images.Media.DATA + "=? ",//查询条件
+                MediaStore.Images.Media._ID + "=? ",//查询条件
                 new String[]{path},//查询条件参数，替换第三个参数中的?
                 null);//排序
         if (cursor != null && cursor.moveToFirst()) {
@@ -30,7 +30,7 @@ public class UriUtils {
             // 如果图片不在手机的共享图片数据库，就先把它插入。
             if (new File(path).exists()) {
                 ContentValues values = new ContentValues();
-                values.put(MediaStore.Images.Media.DATA, path);
+                values.put(MediaStore.Images.Media._ID, path);
                 return context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
             } else {
                 return null;

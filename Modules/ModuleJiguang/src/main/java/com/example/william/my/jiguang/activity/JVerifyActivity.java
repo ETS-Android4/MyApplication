@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.william.my.jiguang.R;
 import com.example.william.my.jiguang.common.Constants;
 import com.example.william.my.jiguang.common.JVerifyUIConfigUtil;
-import com.example.william.my.module.utils.PermissionUtils;
+import com.example.william.my.jiguang.common.PermissionUtils;
 
 import cn.jiguang.verifysdk.api.JVerificationInterface;
 import cn.jiguang.verifysdk.api.VerifyListener;

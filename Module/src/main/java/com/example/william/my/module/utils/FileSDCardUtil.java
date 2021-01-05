@@ -34,7 +34,7 @@ public class FileSDCardUtil {
         return cachePath;
     }
 
-
+    @SuppressWarnings("deprecation")
     public static String getSdCardPublic() {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
@@ -45,6 +45,7 @@ public class FileSDCardUtil {
         return "";
     }
 
+    @SuppressWarnings("deprecation")
     public static String getSdCard() {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
