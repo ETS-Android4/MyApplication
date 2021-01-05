@@ -16,6 +16,7 @@ import java.util.LinkedList;
 
 import static android.Manifest.permission.ACCESS_NETWORK_STATE;
 
+@SuppressWarnings("deprecation")
 public class NetworkUtils {
 
     @RequiresPermission(ACCESS_NETWORK_STATE)

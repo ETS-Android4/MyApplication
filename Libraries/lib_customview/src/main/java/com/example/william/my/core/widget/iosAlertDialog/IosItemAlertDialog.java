@@ -15,8 +15,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.example.william.my.core.widget.R;
-import com.example.william.my.core.widget.utils.SizeUtils;
 import com.example.william.my.core.widget.utils.ScreenUtils;
+import com.example.william.my.core.widget.utils.SizeUtils;
 
 import java.util.ArrayList;
 import java.util.List;

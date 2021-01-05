@@ -10,9 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.utils.ResourceUtils;
+import com.example.william.my.module.router.provider.ResourceUtilsService;
 import com.example.william.my.open.R;
 import com.example.william.my.open.tangram.cell.CustomCell;
 import com.example.william.my.open.tangram.cell.CustomHolderCell;
@@ -116,7 +117,8 @@ public class TangramActivity extends AppCompatActivity {
          */
 
         try {
-            JSONArray data = new JSONArray(ResourceUtils.getAssets(this, "data.json"));
+            ResourceUtilsService service = (ResourceUtilsService) ARouter.getInstance().build(ARouterPath.Service.ResourceUtilsService).navigation();
+            JSONArray data = new JSONArray(service.getAssets("data.json"));
             engine.setData(data);
         } catch (JSONException e) {
             e.printStackTrace();

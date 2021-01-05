@@ -20,7 +20,7 @@
         <activity android:name=".activity.AsyncTaskActivity" />
         <activity android:name=".activity.BroadcastActivity" />
         <activity android:name=".activity.MessengerActivity" />
-        <activity android:name=".activity.NetStatusActivity"/>
+        <activity android:name=".activity.NetStatusActivity" />
         <activity android:name=".activity.PermissionActivity" />
         <activity android:name=".activity.PicCropActivity" />
         <activity android:name=".activity.ServiceActivity" />

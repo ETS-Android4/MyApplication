@@ -1,5 +1,6 @@
 package com.example.william.my.sample;
 
+@SuppressWarnings("InstantiationOfUtilityClass")
 public class Singleton {
 
     /**

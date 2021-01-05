@@ -34,6 +34,7 @@ public class MyKit {
     /**
      * @return 检查是否登录，如果未登录，则跳转登录页面
      */
+    @SuppressWarnings("StatementWithEmptyBody")
     public boolean checkLogin(Context context) {
         if (isLogin()) {
             return true;

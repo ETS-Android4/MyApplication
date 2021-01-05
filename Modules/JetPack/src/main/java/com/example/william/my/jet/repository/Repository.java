@@ -34,7 +34,7 @@ public class Repository {
                 RetrofitUtils
                         .buildApi(NetworkService.class)
                         .getBannersResponse(),
-                new LiveDataCallback<List<BannerBean>, List<BannerBean>>(liveData));
+                new LiveDataCallback<>(liveData));
 
         return liveData;
     }

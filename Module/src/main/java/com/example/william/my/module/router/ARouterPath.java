@@ -13,6 +13,7 @@ public class ARouterPath {
 
     public static class Service {
         public static final String ModuleService = "/service/module";
+        public static final String ResourceUtilsService = "/service/resource";
     }
 
     public static class Fragment {

@@ -1,7 +1,6 @@
 package com.example.william.my.open.activity;
 
 import android.app.Dialog;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
@@ -19,14 +19,12 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.router.provider.ResourceUtilsService;
 import com.example.william.my.open.data.CityPickerData;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -86,7 +84,9 @@ public class PickerViewActivity extends ResponseActivity {
          * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
          * 关键逻辑在于循环体
          */
-        String JsonData = getAssets("province.json");//获取assets目录下的json文件数据
+        ResourceUtilsService service = (ResourceUtilsService) ARouter.getInstance().build(ARouterPath.Service.ResourceUtilsService).navigation();
+
+        String JsonData = service.getAssets("province.json");//获取assets目录下的json文件数据
 
         ArrayList<CityPickerData> cityPickerData = parseData(JsonData);
 
@@ -137,25 +137,6 @@ public class PickerViewActivity extends ResponseActivity {
         }
 
         isLoaded = true;
-    }
-
-    /**
-     * 读取Assets
-     */
-    public String getAssets(String fileName) {
-        StringBuilder stringBuilder = new StringBuilder();
-        try {
-            AssetManager assetManager = getAssets();
-            BufferedReader bf = new BufferedReader(new InputStreamReader(
-                    assetManager.open(fileName)));
-            String line;
-            while ((line = bf.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return stringBuilder.toString();
     }
 
     public ArrayList<CityPickerData> parseData(String result) {
