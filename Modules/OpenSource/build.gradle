@@ -10,6 +10,8 @@ android {
     resourcePrefix "open_"
 }
 dependencies {
+    //https://github.com/ReactiveX/RxJava
+    implementation Dependencies.rxandroid
     //https://github.com/greenrobot/EventBus
     implementation Dependencies.eventbus
     annotationProcessor Dependencies.eventbus_processor
