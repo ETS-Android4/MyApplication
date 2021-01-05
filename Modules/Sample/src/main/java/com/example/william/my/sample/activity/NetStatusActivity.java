@@ -1,6 +1,7 @@
 package com.example.william.my.sample.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.utils.NetworkChangeHelper;
 import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -12,4 +13,15 @@ import com.example.william.my.module.router.ARouterPath;
 @Route(path = ARouterPath.Sample.Sample_NetStatus)
 public class NetStatusActivity extends ResponseActivity {
 
+
+    @Override
+    public void initView() {
+        super.initView();
+        NetworkChangeHelper.getInstance().register(this, new NetworkChangeHelper.NetworkChangeListener() {
+            @Override
+            public void onNetworkChange(boolean isAvailable) {
+                showResponse("网络是否连接 ： " + isAvailable);
+            }
+        });
+    }
 }

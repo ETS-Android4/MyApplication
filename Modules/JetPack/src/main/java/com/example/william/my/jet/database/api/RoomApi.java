@@ -30,7 +30,11 @@ public class RoomApi {
 
     public static RoomApi getInstance() {
         if (api == null) {
-            api = new RoomApi();
+            synchronized (RoomApi.class) {
+                if (api == null) {
+                    api = new RoomApi();
+                }
+            }
         }
         return api;
     }

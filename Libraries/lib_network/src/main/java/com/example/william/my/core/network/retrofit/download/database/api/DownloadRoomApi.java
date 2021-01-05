@@ -37,7 +37,11 @@ public class DownloadRoomApi {
 
     public static DownloadRoomApi getInstance() {
         if (api == null) {
-            api = new DownloadRoomApi();
+            synchronized (DownloadRoomApi.class) {
+                if (api == null) {
+                    api = new DownloadRoomApi();
+                }
+            }
         }
         return api;
     }
