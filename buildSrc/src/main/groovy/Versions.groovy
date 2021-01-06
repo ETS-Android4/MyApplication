@@ -56,6 +56,9 @@ class DependenciesVersions {
     static arouter_version = "1.5.1"
     static arouter_compiler_version = "1.5.1"
 
+    //https://github.com/ReactiveX/RxJava/releases
+    static rxjava_version = "3.0.9"
+
     //https://github.com/ReactiveX/RxAndroid/releases
     static rxandroid_version = "3.0.0"
 

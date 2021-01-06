@@ -11,6 +11,7 @@ android {
 }
 dependencies {
     //https://github.com/ReactiveX/RxJava
+    //https://github.com/ReactiveX/RxAndroid
     implementation Dependencies.rxandroid
     //https://github.com/greenrobot/EventBus
     implementation Dependencies.eventbus

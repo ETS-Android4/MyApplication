@@ -64,32 +64,26 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
                 switch (i) {
                     case 0:// 跳转图库界面
                         Intent intentFromAlbum = new Intent(Intent.ACTION_PICK);
-                        if (intentFromAlbum.resolveActivity(getPackageManager()) != null) {
-                            intentFromAlbum.setType("image/*");
-                            startActivityForResult(intentFromAlbum, TO_ALBUM);
-                        }
+                        intentFromAlbum.setType("image/*");
+                        startActivityForResult(intentFromAlbum, TO_ALBUM);
                         break;
                     case 1:// 跳转拍照界面
                         Intent intentFromCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (intentFromCamera.resolveActivity(getPackageManager()) != null) {
-                            startActivityForResult(intentFromCamera, TO_CAMERA);
-                        }
+                        startActivityForResult(intentFromCamera, TO_CAMERA);
                         break;
                     case 2:// Save the full-size photo
                         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                            File photoFile = null;
-                            try {
-                                photoFile = createImageFile();
-                            } catch (IOException ex) {
-                                ex.printStackTrace();
-                            }
-                            if (photoFile != null) {
-                                image_crop_uri = FileProvider.getUriForFile(PicCropActivity.this,
-                                        getPackageName() + ".fileProvider", photoFile);
-                                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_crop_uri);
-                                startActivityForResult(takePictureIntent, TO_CAMERA_FULL);
-                            }
+                        File photoFile = null;
+                        try {
+                            photoFile = createImageFile();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        if (photoFile != null) {
+                            image_crop_uri = FileProvider.getUriForFile(PicCropActivity.this,
+                                    getPackageName() + ".fileProvider", photoFile);
+                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_crop_uri);
+                            startActivityForResult(takePictureIntent, TO_CAMERA_FULL);
                         }
                         break;
                 }
@@ -144,6 +138,7 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
+        //创建临时文件
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",    /* suffix */

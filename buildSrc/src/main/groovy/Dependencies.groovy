@@ -38,6 +38,7 @@ class Dependencies {
     static arouter = "com.alibaba:arouter-api:${DependenciesVersions.arouter_version}"
     static arouter_compiler = "com.alibaba:arouter-compiler:${DependenciesVersions.arouter_compiler_version}"
 
+    static rxjava = "io.reactivex.rxjava3:rxjava:${DependenciesVersions.rxjava_version}"
     static rxandroid = "io.reactivex.rxjava3:rxandroid:${DependenciesVersions.rxandroid_version}"
     static rxlifecycle = "com.trello.rxlifecycle4:rxlifecycle-android-lifecycle:${DependenciesVersions.rxlifecycle_version}"
 
