@@ -1,16 +1,17 @@
 package com.example.william.my.jiguang.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.william.my.jiguang.R;
 import com.example.william.my.jiguang.common.Constants;
 import com.example.william.my.jiguang.common.JVerifyUIConfigUtil;
-import com.example.william.my.jiguang.common.PermissionUtils;
 
 import cn.jiguang.verifysdk.api.JVerificationInterface;
 import cn.jiguang.verifysdk.api.VerifyListener;
@@ -37,18 +38,8 @@ public class JVerifyActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initPermission() {
-        PermissionUtils.permission(PermissionUtils.PermissionConstants.STORAGE, PermissionUtils.PermissionConstants.PHONE)
-                .callback(new PermissionUtils.SimpleCallback() {
-                    @Override
-                    public void onGranted() {
-
-                    }
-
-                    @Override
-                    public void onDenied() {
-
-                    }
-                }).request();
+        ActivityCompat.requestPermissions(JVerifyActivity.this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE}, 1000);
     }
 
     @Override
