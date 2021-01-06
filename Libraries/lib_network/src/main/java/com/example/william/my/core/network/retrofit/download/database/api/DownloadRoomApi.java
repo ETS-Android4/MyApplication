@@ -17,23 +17,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DownloadRoomApi {
 
-    private static DownloadRoomApi api;
-
     private final DownloadDao mDownloadDao;
     private final DownloadDataBase mDownloadDataBase;
 
     private static CompositeDisposable mDisposable;
     private final ExecutorService mExecutor;
 
-    public DownloadRoomApi() {
-        mDownloadDataBase = DownloadDataBase.getInstance(RxRetrofitConfig.getApp());
-        mDownloadDao = mDownloadDataBase.getDownloadDao();
-
-        mDisposable = new CompositeDisposable();
-        mExecutor = new ThreadPoolExecutor(1, 1,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>());
-    }
+    private static DownloadRoomApi api;
 
     public static DownloadRoomApi getInstance() {
         if (api == null) {
@@ -44,6 +34,16 @@ public class DownloadRoomApi {
             }
         }
         return api;
+    }
+
+    private DownloadRoomApi() {
+        mDownloadDataBase = DownloadDataBase.getInstance(RxRetrofitConfig.getApp());
+        mDownloadDao = mDownloadDataBase.getDownloadDao();
+
+        mDisposable = new CompositeDisposable();
+        mExecutor = new ThreadPoolExecutor(1, 1,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
     }
 
     public DownloadDataBase getDownloadDataBase() {

@@ -27,6 +27,10 @@ public class Repository {
         return repository;
     }
 
+    private Repository() {
+
+    }
+
     public LiveData<RetrofitResponse<List<BannerBean>>> bannerBean() {
         final MutableLiveData<RetrofitResponse<List<BannerBean>>> liveData = new MutableLiveData<>();
 

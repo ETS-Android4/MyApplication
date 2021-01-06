@@ -13,4 +13,7 @@
     <color name="colorAlertLine">#CCCCCC</color>
     <color name="colorAlertPressed">#CCCCCC</color>
     <color name="colorAlertBackground">#FFFFFF</color>
+
+    <!--RecyclerView.ItemDecoration-->
+    <color name="colorDivider">#CCCCCC</color>
 </resources>

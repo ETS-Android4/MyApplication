@@ -31,6 +31,9 @@ public class RxWebSocketUtils {
 
     private static final String TAG = "RxWebSocketUtils";
 
+    private final Map<String, WebSocket> webSocketMap;
+    private final Map<String, Observable<RxWebSocketInfo>> observableMap;
+
     private static RxWebSocketUtils instance;
 
     public static RxWebSocketUtils getInstance() {
@@ -43,9 +46,6 @@ public class RxWebSocketUtils {
         }
         return instance;
     }
-
-    private final Map<String, WebSocket> webSocketMap;
-    private final Map<String, Observable<RxWebSocketInfo>> observableMap;
 
     private RxWebSocketUtils() {
         webSocketMap = new ConcurrentHashMap<>();

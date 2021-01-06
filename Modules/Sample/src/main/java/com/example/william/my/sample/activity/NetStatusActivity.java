@@ -1,7 +1,7 @@
 package com.example.william.my.sample.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.library.utils.NetworkChangeHelper;
+import com.example.william.my.library.helper.NetworkChangeHelper;
 import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 

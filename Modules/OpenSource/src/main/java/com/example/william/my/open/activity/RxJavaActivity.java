@@ -239,7 +239,7 @@ public class RxJavaActivity extends ResponseActivity {
                 new BiFunction<String, Integer, String>() {
                     @Override
                     public String apply(String s, Integer integer) throws Throwable {
-                        return s + String.valueOf(integer);
+                        return s + integer;
                     }
                 })
                 .subscribe(new Consumer<String>() {
@@ -254,7 +254,7 @@ public class RxJavaActivity extends ResponseActivity {
                 new BiFunction<String, Long, String>() {
                     @Override
                     public String apply(String s, Long aLong) throws Throwable {
-                        return s + String.valueOf(aLong);
+                        return s + aLong;
                     }
                 })
                 .subscribe(new Consumer<String>() {
@@ -622,7 +622,7 @@ public class RxJavaActivity extends ResponseActivity {
      * 条件操作符
      * https://www.jianshu.com/p/954426f90325
      */
-    private void conditional(){
+    private void conditional() {
 
     }
 }

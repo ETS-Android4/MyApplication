@@ -34,16 +34,6 @@ public class DownloadUtils {
     private final ExecutorService mExecutor;
     private final HashMap<String, DownloadObserver> mCallMap;
 
-    private DownloadUtils() {
-        mCallMap = new HashMap<>();
-
-        mHandler = new Handler(Looper.getMainLooper());
-
-        mExecutor = new ThreadPoolExecutor(1, 1,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>());
-    }
-
     private volatile static DownloadUtils mInstance;
 
     public static DownloadUtils getInstance() {
@@ -55,6 +45,16 @@ public class DownloadUtils {
             }
         }
         return mInstance;
+    }
+
+    private DownloadUtils() {
+        mCallMap = new HashMap<>();
+
+        mHandler = new Handler(Looper.getMainLooper());
+
+        mExecutor = new ThreadPoolExecutor(1, 1,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
     }
 
     public void enqueue(final DownloadTask downloadTask) {

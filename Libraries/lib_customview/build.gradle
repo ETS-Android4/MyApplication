@@ -25,4 +25,5 @@ dependencies {
     //Android
     implementation Dependencies.constraintlayout
     implementation Dependencies.recyclerview
+    implementation Dependencies.coordinatorlayout
 }

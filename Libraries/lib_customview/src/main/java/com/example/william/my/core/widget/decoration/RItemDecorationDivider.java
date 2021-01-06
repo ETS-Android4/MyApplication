@@ -1,4 +1,4 @@
-package com.example.william.my.sample.decoration;
+package com.example.william.my.core.widget.decoration;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.sample.R;
+import com.example.william.my.core.widget.R;
 
 /**
  * RecyclerView分割线

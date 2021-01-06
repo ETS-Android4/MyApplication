@@ -1,6 +1,7 @@
 package com.example.william.my.sample.activity;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -99,7 +100,8 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
             switch (requestCode) {
                 case TO_ALBUM:
                     if (data != null && data.getData() != null) {
-                        cropImage(data.getData(), "TO_ALBUM");
+                        Uri uri = data.getData();
+                        cropImage(uri, "TO_ALBUM");
                     }
                     break;
                 case TO_CAMERA:
@@ -137,7 +139,7 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
+        File storageDir = getExternalFilesDir(null);
         //创建临时文件
         File image = File.createTempFile(
                 imageFileName,  /* prefix */

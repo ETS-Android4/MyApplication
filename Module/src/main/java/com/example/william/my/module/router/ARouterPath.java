@@ -30,6 +30,7 @@ public class ARouterPath {
         public static final String Util_Cache = "/module_util/cache";
         public static final String Util_Crash = "/module_util/crash";
         public static final String Util_Encrypt = "/module_util/encrypt";
+        public static final String Util_ImageUtils = "/module_util/image";
         public static final String Util_Language = "/module_util/language";
         public static final String Util_Permission = "/module_util/permission";
     }

@@ -1,4 +1,4 @@
-package com.example.william.my.library.utils;
+package com.example.william.my.library.helper;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -42,6 +42,7 @@ public class NetworkChangeHelper {
 
     }
 
+    @SuppressWarnings("deprecation")
     public void register(Context context, NetworkChangeListener networkChangeListener) {
 
         mNetworkChangeListener = networkChangeListener;
@@ -65,6 +66,7 @@ public class NetworkChangeHelper {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public static class NetworkChangeReceiver extends BroadcastReceiver {
 
         private static final String TAG = "NetworkChangeReceiver";

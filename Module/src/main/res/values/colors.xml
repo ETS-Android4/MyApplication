@@ -6,8 +6,4 @@
 
     <color name="colorWarning">#FF7559</color>
     <color name="colorSuccess">#5FB84F</color>
-
-    <!--RecyclerView.ItemDecoration-->
-    <color name="colorDivider">#CCCCCC</color>
-
 </resources>

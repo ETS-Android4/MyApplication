@@ -1,4 +1,4 @@
-package com.example.william.my.sample.behavior;
+package com.example.william.my.core.widget.behavior;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.module.utils.SizeUtils;
+import com.example.william.my.core.widget.utils.SizeUtils;
 
 public class NestedBehavior extends CoordinatorLayout.Behavior<View> {
 

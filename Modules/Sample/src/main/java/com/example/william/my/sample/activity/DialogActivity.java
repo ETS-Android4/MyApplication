@@ -2,6 +2,7 @@ package com.example.william.my.sample.activity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,6 @@ import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.utils.SizeUtils;
 import com.example.william.my.sample.R;
 import com.example.william.my.sample.adapter.LAdapter;
 
@@ -128,9 +128,14 @@ public class DialogActivity extends AppCompatActivity implements AdapterView.OnI
                 dialog.show();
                 //注意：需要在show()之后，才能再设置宽高属性
                 WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-                params.height = SizeUtils.dp2px(180);
+                params.height = dp2px(180);
                 dialog.getWindow().setAttributes(params);
                 break;
         }
+    }
+
+    public static int dp2px(final float dpValue) {
+        final float scale = Resources.getSystem().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

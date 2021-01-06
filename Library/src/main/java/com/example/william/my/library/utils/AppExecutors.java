@@ -32,6 +32,11 @@ public class AppExecutors {
         return instance;
     }
 
+    private AppExecutors() {
+        this(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
+                new MainThreadExecutor(), Executors.newScheduledThreadPool(count));
+    }
+
     //磁盘IO线程
     private final Executor mDiskIO;
 
@@ -51,11 +56,6 @@ public class AppExecutors {
         this.mNetworkIO = networkIO;
         this.mMainThread = mainThread;
         this.scheduledExecutor = scheduledExecutor;
-    }
-
-    private AppExecutors() {
-        this(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
-                new MainThreadExecutor(), Executors.newScheduledThreadPool(count));
     }
 
     public Executor diskIO() {

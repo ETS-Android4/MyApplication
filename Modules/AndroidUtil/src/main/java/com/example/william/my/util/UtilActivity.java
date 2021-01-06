@@ -18,6 +18,7 @@ public class UtilActivity extends ARouterActivity {
         mMap.put("BusUtilsActivity", ARouterPath.Util.Util_BusUtils);
         mMap.put("CacheActivity", ARouterPath.Util.Util_Cache);
         mMap.put("CrashUtilsActivity", ARouterPath.Util.Util_Crash);
+        mMap.put("ImageUtilsActivity", ARouterPath.Util.Util_ImageUtils);
         mMap.put("LanguageActivity", ARouterPath.Util.Util_Language);
         mMap.put("PermissionActivity", ARouterPath.Util.Util_Permission);
     }

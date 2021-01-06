@@ -3,6 +3,7 @@
     package="com.example.william.my.util">
 
     <application>
+
         <activity android:name=".UtilActivity" />
         <activity android:name=".activity.AdaptScreenActivity" />
         <activity android:name=".activity.AppUtilsActivity" />
@@ -10,6 +11,7 @@
         <activity android:name=".activity.CacheActivity" />
         <activity android:name=".activity.CrashUtilsActivity" />
         <activity android:name=".activity.EncryptActivity" />
+        <activity android:name=".activity.ImageUtilsActivity" />
         <activity android:name=".activity.LanguageActivity" />
         <activity android:name=".activity.PermissionUtilsActivity" />
     </application>

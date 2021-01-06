@@ -16,8 +16,8 @@ import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.sample.R;
 import com.example.william.my.sample.adapter.RAdapter;
 import com.example.william.my.sample.adapter.RecyclerAdapter;
-import com.example.william.my.sample.decoration.RItemDecorationDivider;
-import com.example.william.my.sample.decoration.RItemDecorationTop;
+import com.example.william.my.core.widget.decoration.RItemDecorationDivider;
+import com.example.william.my.core.widget.decoration.RItemDecorationTop;
 
 import java.util.ArrayList;
 import java.util.List;

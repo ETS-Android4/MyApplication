@@ -1,4 +1,4 @@
-package com.example.william.my.sample.decoration;
+package com.example.william.my.core.widget.decoration;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.william.my.module.utils.SizeUtils;
+import com.example.william.my.core.widget.utils.SizeUtils;
 
 /**
  * RecyclerView分割线
