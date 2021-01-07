@@ -27,10 +27,10 @@ android {
 
 dependencies {
     //Android
-    implementation Dependencies.core
-    implementation Dependencies.appcompat
-    implementation Dependencies.lifecycle
+    implementation Deps.core
+    implementation Deps.appcompat
+    implementation Deps.lifecycle
     //EventBus
-    implementation Dependencies.eventbus
-    annotationProcessor Dependencies.eventbus_processor
+    implementation Deps.eventbus
+    annotationProcessor Deps.eventbus_processor
 }

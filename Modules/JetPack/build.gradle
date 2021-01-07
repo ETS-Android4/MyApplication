@@ -16,15 +16,15 @@ android {
 dependencies {
     implementation project(path: ':Libraries:lib_network')
     //Retrofit
-    implementation Dependencies.retrofit_gson
-    implementation Dependencies.retrofit_rxjava
+    implementation Deps.retrofit_gson
+    implementation Deps.retrofit_rxjava
     //Room
-    implementation Dependencies.room
-    implementation Dependencies.room_rxjava
-    annotationProcessor Dependencies.room_compiler
+    implementation Deps.room
+    implementation Deps.room_rxjava
+    annotationProcessor Deps.room_compiler
     //Navigation
-    implementation Dependencies.navigation
-    implementation Dependencies.navigation_ui
+    implementation Deps.navigation
+    implementation Deps.navigation_ui
     //Work
-    implementation Dependencies.work
+    implementation Deps.work
 }

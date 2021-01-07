@@ -12,58 +12,58 @@ android {
 dependencies {
     //https://github.com/ReactiveX/RxJava
     //https://github.com/ReactiveX/RxAndroid
-    implementation Dependencies.rxandroid
+    implementation Deps.rxandroid
     //https://github.com/greenrobot/EventBus
-    implementation Dependencies.eventbus
-    annotationProcessor Dependencies.eventbus_processor
+    implementation Deps.eventbus
+    annotationProcessor Deps.eventbus_processor
     //https://github.com/JeremyLiao/LiveEventBus
-    implementation Dependencies.livebus
+    implementation Deps.livebus
     //https://github.com/JeremyLiao/SmartEventBus
-    implementation Dependencies.smartbus
-    annotationProcessor Dependencies.smartbus_compiler
+    implementation Deps.smartbus
+    annotationProcessor Deps.smartbus_compiler
     //https://github.com/JavaNoober/BackgroundLibrary
-    implementation Dependencies.background
+    implementation Deps.background
     //https://github.com/CymChad/BaseRecyclerViewAdapterHelper
-    implementation Dependencies.brvah
+    implementation Deps.brvah
     //https://github.com/qstumn/BadgeView
-    implementation Dependencies.badgeview
+    implementation Deps.badgeview
     //https://github.com/saiwu-bigkoo/Android-ConvenientBanner
-    implementation Dependencies.banner
+    implementation Deps.banner
     //https://github.com/zaaach/CityPicker
-    implementation Dependencies.citypicker
+    implementation Deps.citypicker
     //https://github.com/iwgang/CountdownView
-    implementation Dependencies.countdown
+    implementation Deps.countdown
     //https://github.com/Yalantis/uCrop
-    implementation Dependencies.crop
+    implementation Deps.crop
     //https://github.com/H07000223/FlycoTabLayout
-    implementation Dependencies.tablayout
+    implementation Deps.tablayout
     //https://github.com/zhihu/Matisse
-    implementation Dependencies.glide
-    implementation Dependencies.matisse
+    implementation Deps.glide
+    implementation Deps.matisse
     //https://github.com/chrisbanes/PhotoView
-    implementation Dependencies.photoview
+    implementation Deps.photoview
     //https://github.com/Bigkoo/Android-PickerView
-    implementation Dependencies.gson
-    implementation Dependencies.pickerview
+    implementation Deps.gson
+    implementation Deps.pickerview
     //https://github.com/pinguo-zhouwei/CustomPopwindow
-    implementation Dependencies.popwindow
+    implementation Deps.popwindow
     //https://github.com/scwang90/SmartRefreshLayout
-    implementation Dependencies.refresh_layout
-    implementation Dependencies.refresh_classics_header
-    implementation Dependencies.refresh_classics_footer
+    implementation Deps.refresh_layout
+    implementation Deps.refresh_classics_header
+    implementation Deps.refresh_classics_footer
     //https://github.com/daimajia/AndroidSwipeLayout
-    implementation Dependencies.swipelayout
+    implementation Deps.swipelayout
     //https://github.com/Aspsine/SwipeToLoadLayout
-    implementation Dependencies.swipetoload
+    implementation Deps.swipetoload
     //https://github.com/alibaba/Tangram-Android
-    implementation Dependencies.tangram
-    implementation(Dependencies.virtualview) {
+    implementation Deps.tangram
+    implementation(Deps.virtualview) {
         transitive = true
     }
-    implementation(Dependencies.vlayout) {
+    implementation(Deps.vlayout) {
         transitive = true
     }
-    implementation(Dependencies.ultraviewpager) {
+    implementation(Deps.ultraviewpager) {
         transitive = true
     }
     //https://github.com/guolindev/Glance

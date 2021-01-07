@@ -24,7 +24,7 @@ public class LoadingDialog extends Dialog {
         params.dimAmount = 0f;
         getWindow().setAttributes(params);
 
-        setCancelable(false);
-        setCanceledOnTouchOutside(false);
+        setCancelable(false);//点击屏幕或物理返回键，dialog不消失
+        setCanceledOnTouchOutside(false);//点击屏幕，dialog不消失；点击物理返回键dialog消失
     }
 }

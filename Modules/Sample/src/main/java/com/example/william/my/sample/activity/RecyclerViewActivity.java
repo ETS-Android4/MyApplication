@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.core.widget.decoration.RItemDecorationDivider;
+import com.example.william.my.core.widget.decoration.RItemDecorationTop;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.sample.R;
 import com.example.william.my.sample.adapter.RAdapter;
 import com.example.william.my.sample.adapter.RecyclerAdapter;
-import com.example.william.my.core.widget.decoration.RItemDecorationDivider;
-import com.example.william.my.core.widget.decoration.RItemDecorationTop;
 
 import java.util.ArrayList;
 import java.util.List;

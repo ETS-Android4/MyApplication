@@ -9,6 +9,9 @@ class AndroidVersions {
     static recyclerview_version = "1.1.0"
     //https://developer.android.google.cn/jetpack/androidx/releases/recyclerview
 
+    static swiperefreshlayout_version = "1.1.0"
+    //https://developer.android.google.cn/jetpack/androidx/releases/swiperefreshlayout
+
     static viewpager2_version = "1.0.0"
     //https://developer.android.google.cn/jetpack/androidx/releases/viewpager2
 
@@ -37,7 +40,7 @@ class AndroidVersions {
     //https://developer.android.google.cn/jetpack/androidx/releases/work
 }
 
-class DependenciesVersions {
+class DepsVersions {
 
     //Base
 
@@ -82,6 +85,9 @@ class DependenciesVersions {
 
     //https://developer.android.com/training/volley
     static volley_version = "1.1.1"
+
+    //https://github.com/square/okhttp/releases
+    static okhttp_version = "4.9.0"
 
     //https://github.com/square/retrofit/releases
     static retrofit_version = "2.9.0"

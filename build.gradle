@@ -4,12 +4,13 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
+        //mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
         maven { url "https://maven.aliyun.com/repository/public" }
         maven { url "https://maven.aliyun.com/repository/google" }
         maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+        maven { url "http://mirrors.cloud.tencent.com/nexus/repository/maven-public" }
     }
     dependencies {
         for (def entrySet : ConfigUtils.getApplyPlugins().entrySet()) {
@@ -27,12 +28,13 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
+        //mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
         maven { url "https://maven.aliyun.com/repository/public" }
         maven { url "https://maven.aliyun.com/repository/google" }
         maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+        maven { url "http://mirrors.cloud.tencent.com/nexus/repository/maven-public" }
     }
 }
 

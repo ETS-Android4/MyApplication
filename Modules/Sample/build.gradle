@@ -4,5 +4,5 @@ android {
 
 dependencies {
     implementation project(path: ':Libraries:lib_customview')
-    implementation Dependencies.gson
+    implementation Deps.gson
 }

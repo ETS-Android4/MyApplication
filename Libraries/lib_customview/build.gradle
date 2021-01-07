@@ -23,7 +23,7 @@ android {
 
 dependencies {
     //Android
-    implementation Dependencies.constraintlayout
-    implementation Dependencies.recyclerview
-    implementation Dependencies.coordinatorlayout
+    implementation Deps.constraintlayout
+    implementation Deps.recyclerview
+    implementation Deps.coordinatorlayout
 }
