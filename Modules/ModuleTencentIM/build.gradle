@@ -22,23 +22,23 @@ dependencies {
 
     implementation 'com.tencent.imsdk:imsdk:5.1.10'
     implementation 'com.tencent.imsdk:tuikit:5.1.10'
-//    implementation 'com.tencent.imsdk:tuikit-live:5.1.10'
+    implementation 'com.tencent.imsdk:tuikit-live:5.1.10'
 
 
-//    // google firebase
-//    implementation 'com.google.firebase:firebase-core:17.4.0'
-//    // google 云消息传递
-//    implementation 'com.google.firebase:firebase-messaging:20.1.6'
-//    // 小米
-//    implementation "com.tencent.tpns:xiaomi:1.2.1.2-release"
-//    // 魅族
-//    implementation "com.tencent.tpns:meizu:1.2.1.2-release"
-//    // OPPO
-//    implementation "com.tencent.tpns:oppo:1.2.1.2-release"
-//    // vivo
-//    implementation "com.tencent.tpns:vivo:1.2.1.2-release"
-//    // 华为
-//    implementation 'com.tencent.tpns:huawei:1.2.1.2-release'
-//    //
-//    implementation 'com.huawei.hms:push:5.0.2.300'
+    // google firebase
+    implementation 'com.google.firebase:firebase-core:18.0.0'
+    // google 云消息传递
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
+    // 小米
+    implementation "com.tencent.tpns:xiaomi:1.2.1.2-release"
+    // 魅族
+    implementation "com.tencent.tpns:meizu:1.2.1.2-release"
+    // OPPO
+    implementation "com.tencent.tpns:oppo:1.2.1.2-release"
+    // vivo
+    implementation "com.tencent.tpns:vivo:1.2.1.2-release"
+    // 华为
+    //implementation 'com.tencent.tpns:huawei:1.2.1.2-release'
+    //
+    implementation 'com.huawei.hms:push:5.0.2.300'
 }
