@@ -22,7 +22,7 @@ dependencies {
 
     implementation 'com.tencent.imsdk:imsdk:5.1.10'
     implementation 'com.tencent.imsdk:tuikit:5.1.10'
-    implementation 'com.tencent.imsdk:tuikit-live:5.1.10'
+//    implementation 'com.tencent.imsdk:tuikit-live:5.1.10'
 
 
 //    // google firebase
