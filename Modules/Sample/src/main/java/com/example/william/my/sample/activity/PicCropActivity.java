@@ -1,9 +1,7 @@
 package com.example.william.my.sample.activity;
 
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -19,7 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.router.provider.ImageUtilsService;
 import com.example.william.my.sample.R;
 
 import java.io.File;
@@ -41,7 +41,7 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
 
     private final String[] mItems = {"图库", "拍照", "拍照"};
 
-    private Uri image_crop_uri;
+    private Uri sourceUri, destinationUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +70,16 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
                         break;
                     case 2:// Save the full-size photo
                         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        File photoFile = createImageFile();
-                        image_crop_uri = FileProvider.getUriForFile(PicCropActivity.this,
-                                getPackageName() + ".fileProvider", photoFile);
-                        Log.e("TAG", "Save the full-size photo : " + image_crop_uri);
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_crop_uri);
+                        File file = new File(getExternalCacheDir() + File.separator + System.currentTimeMillis() + ".jpg");
+                        sourceUri = FileProvider.getUriForFile(PicCropActivity.this, getPackageName() + ".fileProvider", file);
+                        Log.e("TAG", "Save the full-size photo : " + sourceUri);
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, sourceUri);
                         startActivityForResult(takePictureIntent, TO_CAMERA_FULL);
                         break;
                 }
             }
         }).show();
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -90,23 +88,36 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
             switch (requestCode) {
                 case TO_ALBUM:
                     if (data != null && data.getData() != null) {
-                        Uri uri = data.getData();
-                        cropImage(uri, Uri.fromFile(createImageFile()), "TO_ALBUM");
+
+                        Uri source = data.getData();
+
+                        File file = new File(getExternalCacheDir() + File.separator + System.currentTimeMillis() + ".jpg");
+                        Uri destination = Uri.fromFile(file);
+                        toCrop(source, destination);
                     }
                     break;
                 case TO_CAMERA:
                     if (data != null && data.getExtras() != null) {
                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                        Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));
-                        cropImage(uri, Uri.fromFile(createImageFile()), "TO_CAMERA");
+
+                        Uri source = saveBitmap2Uri(bitmap);
+
+                        File file = new File(getExternalCacheDir() + File.separator + System.currentTimeMillis() + ".jpg");
+                        Uri destination = Uri.fromFile(file);
+                        toCrop(source, destination);
                     }
                     break;
                 case TO_CAMERA_FULL:
-                    if (image_crop_uri != null) {
-                        cropImage(image_crop_uri, Uri.fromFile(createImageFile()), "TO_CAMERA_FULL");
+                    if (sourceUri != null) {
+                        File file = new File(getExternalCacheDir() + File.separator + System.currentTimeMillis() + ".jpg");
+                        Uri destination = Uri.fromFile(file);
+                        toCrop(sourceUri, destination);
                     }
                     break;
-                case TO_CROP://不返回data数据
+                case TO_CROP:
+                    /*
+                     * 设置 MediaStore.EXTRA_OUTPUT false，不返回data数据，通过Uri获取数据
+                     */
                     try {
                         Bitmap bitmap;
                         //if (data != null && data.getExtras() != null) {
@@ -114,7 +125,7 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
                         //} else {
                         //	bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(image_crop_uri));
                         //}
-                        bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(image_crop_uri));
+                        bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(destinationUri));
                         mImageView.setImageBitmap(bitmap);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -124,29 +135,11 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    String mCurrentPhotoPath;
+    private void toCrop(Uri source, Uri destination) {
 
-    private File createImageFile() {
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA).format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(null);
-        //创建临时文件
-        File image = null;
-        try {
-            image = File.createTempFile(
-                    imageFileName,  /* prefix */
-                    ".jpg",    /* suffix */
-                    storageDir      /* directory */
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
+        Log.e("TAG", "source : " + source);
+        Log.e("TAG", "destination : " + destination);
 
-    private void cropImage(Uri source, Uri destination, String type) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(source, "image/*");
 
@@ -162,8 +155,8 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra("aspectY", 1);
 
         // outputX,outputY 是剪裁图片的宽高
-        intent.putExtra("outputX", 300);
-        intent.putExtra("outputY", 300);
+        intent.putExtra("outputX", 1024);
+        intent.putExtra("outputY", 1024);
 
         /*
          * 是否通过intent传递截获的图片，此方法返回的图片只能是小图片
@@ -171,49 +164,19 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
          */
         intent.putExtra("return-data", false);
 
-        if ("TO_ALBUM".equals(type)) {
-            Log.e(type, "File Path：" + getFilePath(source));
-        } else if ("TO_CAMERA".equals(type)) {
-            Log.e(type, "File Path：" + getFilePath(source));
-        } else if ("TO_CAMERA_FULL".equals(type)) {
-            Log.e(type, "File Path：" + mCurrentPhotoPath);
-        }
-
-        image_crop_uri = Uri.fromFile(createImageFile());
-
-        Log.e("TAG", "uri : " + image_crop_uri);
+        destinationUri = destination;//保存指定Uri
 
         //necessary!
-        //将URI指向相应的file:///...
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, image_crop_uri);//需要使用Uri.fromFile(file)生成
+        //将URI指向相应的file:///... , 需要使用Uri.fromFile(file)生成
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, destination);
 
         startActivityForResult(intent, TO_CROP);
     }
 
-    /**
-     * 获取文件路径
-     */
-    public String getFilePath(Uri uri) {
-        String path = "";
-        if (null != uri.getScheme()) {
-            switch (uri.getScheme()) {
-                case ContentResolver.SCHEME_FILE:
-                    path = uri.getPath();
-                    break;
-                case ContentResolver.SCHEME_CONTENT:
-                    Cursor cursor = getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
-                    if (null != cursor) {
-                        if (cursor.moveToFirst()) {
-                            int index = cursor.getColumnIndex(MediaStore.Images.Media._ID);
-                            if (index > -1) {
-                                path = cursor.getString(index);
-                            }
-                        }
-                        cursor.close();
-                    }
-                    break;
-            }
-        }
-        return path;
+    private Uri saveBitmap2Uri(Bitmap bitmap) {
+        File file = new File(getExternalCacheDir() + File.separator + System.currentTimeMillis() + ".jpg");
+        ImageUtilsService service = (ImageUtilsService) ARouter.getInstance().build(ARouterPath.Service.ImageUtilsService).navigation();
+        service.save(bitmap, file, Bitmap.CompressFormat.JPEG);
+        return FileProvider.getUriForFile(PicCropActivity.this, getPackageName() + ".fileProvider", file);
     }
 }

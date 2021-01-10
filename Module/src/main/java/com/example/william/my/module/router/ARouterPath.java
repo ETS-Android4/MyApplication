@@ -14,6 +14,7 @@ public class ARouterPath {
     public static class Service {
         public static final String ModuleService = "/service/module";
         public static final String FileIOUtilsService = "/service/file_io";
+        public static final String ImageUtilsService = "/service/image";
         public static final String ResourceUtilsService = "/service/resource";
     }
 
@@ -82,7 +83,6 @@ public class ARouterPath {
         public static final String OpenSource_Banner = "/module_open/banner";
         public static final String OpenSource_CityPicker = "/module_open/city_picker";
         public static final String OpenSource_Countdown = "/module_open/countdown";
-        public static final String OpenSource_Crop = "/module_open/crop";
         public static final String OpenSource_FlycoTabLayout = "/module_open/flyco_tab_layout";
         public static final String OpenSource_GSYPlayer = "/module_open/gsy_player";
         public static final String OpenSource_ImageSelector = "/module_open/image_picker";
@@ -115,7 +115,7 @@ public class ARouterPath {
         public static final String Sample_AsyncTask = "/module_sample/async";
         public static final String Sample_Broadcast = "/module_sample/broadcast";
         public static final String Sample_Messenger = "/module_sample/messenger";
-        public static final String Sample_NetStatus = "/module_sample/net_status";
+        public static final String Sample_NetworkStatus = "/module_sample/net_status";
         public static final String Sample_Permission = "/module_sample/permission";
         public static final String Sample_PicCrop = "/module_sample/pic_crop";
         public static final String Sample_Service = "/module_sample/service";

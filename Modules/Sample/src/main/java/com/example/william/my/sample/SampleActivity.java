@@ -26,7 +26,7 @@ public class SampleActivity extends ARouterActivity {
         mMap.put("AsyncTaskActivity", ARouterPath.Sample.Sample_AsyncTask);
         mMap.put("BroadcastActivity", ARouterPath.Sample.Sample_Broadcast);
         mMap.put("MessengerActivity", ARouterPath.Sample.Sample_Messenger);
-        mMap.put("NetStatusActivity", ARouterPath.Sample.Sample_NetStatus);
+        mMap.put("NetworkStatusActivity", ARouterPath.Sample.Sample_NetworkStatus);
         mMap.put("PermissionActivity", ARouterPath.Sample.Sample_Permission);
         mMap.put("PicCropActivity", ARouterPath.Sample.Sample_PicCrop);
         mMap.put("ServiceActivity", ARouterPath.Sample.Sample_Service);
