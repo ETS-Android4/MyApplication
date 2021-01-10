@@ -7,14 +7,20 @@ import com.blankj.utilcode.util.FileIOUtils;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.FileIOUtilsService;
 
+import java.io.File;
 import java.io.InputStream;
 
 @Route(path = ARouterPath.Service.FileIOUtilsService)
 public class FileIOUtilsServiceImpl implements FileIOUtilsService {
 
     @Override
-    public boolean writeFileFromIS(String filePath, InputStream is) {
-        return FileIOUtils.writeFileFromIS(filePath, is);
+    public boolean writeFileFromIS(File file, InputStream is) {
+        return FileIOUtils.writeFileFromIS(file, is);
+    }
+
+    @Override
+    public boolean writeFileFromString(File file, String string) {
+        return FileIOUtils.writeFileFromString(file, string);
     }
 
     @Override

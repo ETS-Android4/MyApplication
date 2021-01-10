@@ -3,6 +3,7 @@ package com.example.william.my.network.activity;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.william.my.core.network.retrofit.body.CountingRequestBody;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitRequestListener;
@@ -10,6 +11,7 @@ import com.example.william.my.core.network.retrofit.listener.RetrofitResponseLis
 import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.router.provider.FileIOUtilsService;
 import com.example.william.my.module.service.NetworkService;
 import com.google.gson.Gson;
 
@@ -35,7 +37,8 @@ public class RetrofitActivity extends ResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        login();
+        //login();
+        download();
     }
 
     private void login() {
@@ -89,7 +92,11 @@ public class RetrofitActivity extends ResponseActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
-
+                if (response.isSuccessful() && response.body() != null) {
+                    FileIOUtilsService service = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+                    File file = new File(getExternalCacheDir() + File.separator + "retrofit_download.apk");
+                    service.writeFileFromIS(file, response.body().byteStream());
+                }
             }
 
             @Override
@@ -102,7 +109,10 @@ public class RetrofitActivity extends ResponseActivity {
 
 
     private void update() {
-        File mFile = null;
+        File file = new File(getExternalCacheDir() + File.separator + "retrofit_update.apk");
+
+        FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+        fileIOUtils.writeFileFromString(file, "update");
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.baseUrl)//baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
@@ -113,7 +123,7 @@ public class RetrofitActivity extends ResponseActivity {
         //创建表单
         MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         RequestBody multipartBody = multipartBuilder
-                .addFormDataPart("file", mFile == null ? "" : mFile.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), mFile))
+                .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file))
                 .build();
         //监听上传进度
         RequestBody requestBody = new CountingRequestBody(multipartBody, new RetrofitRequestListener() {
@@ -124,7 +134,7 @@ public class RetrofitActivity extends ResponseActivity {
             }
         });
         //创建Part
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", mFile.getName(), requestBody);
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
 
         // RetrofitUtils -> buildMultipart()
         //MultipartBody filePart = RetrofitUtils.buildMultipart("file", mFile, new RetrofitRequestListener() {

@@ -130,11 +130,10 @@ public class DownloadUtils {
         DownloadRoomApi.getInstance().delete(downloadTask.getDownloadUrl());
     }
 
-
-    public HashMap<String, DownloadObserver> getDownloadCallMap() {
-        if (mCallMap == null) {
-            return new HashMap<>();
-        }
-        return mCallMap;
-    }
+//    private HashMap<String, DownloadObserver> getDownloadCallMap() {
+//        if (mCallMap == null) {
+//            return new HashMap<>();
+//        }
+//        return mCallMap;
+//    }
 }

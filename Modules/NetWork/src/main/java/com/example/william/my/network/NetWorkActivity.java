@@ -19,6 +19,7 @@ public class NetWorkActivity extends ARouterActivity {
         mMap.put("RetrofitActivity", ARouterPath.NetWork.NetWork_Retrofit);
         mMap.put("RetrofitRxJavaActivity", ARouterPath.NetWork.NetWork_RetrofitRxJava);
         mMap.put("RetrofitUtilsActivity", ARouterPath.NetWork.NetWork_RetrofitUtils);
+        mMap.put("RetrofitDownloadActivity", ARouterPath.NetWork.NetWork_RetrofitDownload);
         mMap.put("RxRetrofitActivity", ARouterPath.NetWork.NetWork_RxRetrofit);
         mMap.put("WebSocketActivity", ARouterPath.NetWork.NetWork_WebSocket);
         mMap.put("NanoHttpDActivity", ARouterPath.NetWork.NetWork_NanoHttpD);

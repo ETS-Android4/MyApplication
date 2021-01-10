@@ -3,6 +3,7 @@ package com.example.william.my.network.activity;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.william.my.core.network.retrofit.body.CountingRequestBody;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitRequestListener;
@@ -10,6 +11,7 @@ import com.example.william.my.core.network.retrofit.listener.RetrofitResponseLis
 import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.router.provider.FileIOUtilsService;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +35,8 @@ public class OkHttpActivity extends ResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        login();
+        //login();
+        download();
     }
 
     private void login() {
@@ -103,19 +106,27 @@ public class OkHttpActivity extends ResponseActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
-
+                if (response.isSuccessful() && response.body() != null) {
+                    FileIOUtilsService service = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+                    File file = new File(getExternalCacheDir() + File.separator + "ok_http_download.apk");
+                    service.writeFileFromIS(file, response.body().byteStream());
+                }
             }
         });
     }
 
     private void upload() {
-        File mFile = null;
+        File file = new File(getExternalCacheDir() + File.separator + "retrofit_update.apk");
+
+        FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+        fileIOUtils.writeFileFromString(file, "update");
+
         //创建Client对象
         OkHttpClient okHttpClient = new OkHttpClient();
         //创建表单
         MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         RequestBody multipartBody = multipartBuilder
-                .addFormDataPart("file", mFile == null ? "" : mFile.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), mFile))
+                .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file))
                 .build();
         //监听上传进度
         RequestBody countingRequestBody = new CountingRequestBody(multipartBody, new RetrofitRequestListener() {

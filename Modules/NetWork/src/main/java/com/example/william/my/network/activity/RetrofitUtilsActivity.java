@@ -19,15 +19,22 @@ import io.reactivex.rxjava3.core.Observable;
 @Route(path = ARouterPath.NetWork.NetWork_RetrofitUtils)
 public class RetrofitUtilsActivity extends ResponseActivity {
 
+    private boolean b;
+
+    private final NetworkService service = RetrofitUtils.buildApi(NetworkService.class);
+
     @Override
     public void setOnClick() {
         super.setOnClick();
-        getBanner();
+        b = !b;
+        if (b) {
+            getBanners();
+        } else {
+            getBannerList();
+        }
     }
 
-    private void getBanner() {
-        NetworkService service = RetrofitUtils.buildApi(NetworkService.class);
-
+    private void getBanners() {
         Observable<BannersBean> obs = RetrofitUtils.buildObs(service.getBanners());
 
         obs.subscribe(new RetrofitObserver<BannersBean>() {
@@ -43,9 +50,10 @@ public class RetrofitUtilsActivity extends ResponseActivity {
                 showResponse(net_error);
             }
         });
+    }
 
+    private void getBannerList() {
         Observable<RetrofitResponse<List<BannerBean>>> responseObs = RetrofitUtils.buildObs(service.getBannersResponse());
-
         responseObs.subscribe(new RetrofitObserver<RetrofitResponse<List<BannerBean>>>() {
             @Override
             public void onResponse(RetrofitResponse<List<BannerBean>> response) {
