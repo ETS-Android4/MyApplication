@@ -1,4 +1,4 @@
-package com.tencent.qcloud.tim.demo.profile;
+package com.tencent.qcloud.tim.demo.main;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -34,7 +34,6 @@ import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 
 public class ProfileFragment extends BaseFragment implements View.OnClickListener {
 

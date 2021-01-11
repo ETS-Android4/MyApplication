@@ -1,6 +1,5 @@
 package com.tencent.qcloud.tim.demo.helper;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import com.google.gson.Gson;
 import com.tencent.imsdk.v2.V2TIMCustomElem;
 import com.tencent.imsdk.v2.V2TIMMessage;
 import com.tencent.qcloud.tim.demo.R;
-import com.tencent.qcloud.tim.demo.utils.DemoLog;
 import com.tencent.qcloud.tim.uikit.modules.chat.ChatLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.BaseInputFragment;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.input.InputLayout;
@@ -26,17 +24,14 @@ import com.tencent.qcloud.tim.uikit.modules.message.MessageInfoUtil;
 import com.tencent.qcloud.tim.uikit.utils.TUIKitConstants;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
+/**
+ * 自定义聊天界面
+ */
 public class ChatLayoutHelper {
 
     private static final String TAG = ChatLayoutHelper.class.getSimpleName();
 
-    private Context mContext;
-
-    public ChatLayoutHelper(Context context) {
-        mContext = context;
-    }
-
-    public void customizeChatLayout(final ChatLayout layout) {
+    public static void customizeChatLayout(final ChatLayout layout) {
 
 //        //====== NoticeLayout使用范例 ======//
 //        NoticeLayout noticeLayout = layout.getNoticeLayout();
@@ -97,7 +92,7 @@ public class ChatLayoutHelper {
 //        messageLayout.setTipsMessageFontColor(0xFF7E848C);
 //
         // 设置自定义的消息渲染时的回调
-        messageLayout.setOnCustomMessageDrawListener(new CustomMessageDraw());
+        messageLayout.setOnCustomMessageDrawListener(new CustomMessageDrawListener());
 
         // 设置点击群消息
 //        messageLayout.setIGroupMessageClickListener(new IGroupMessageClickListener() {
@@ -159,6 +154,7 @@ public class ChatLayoutHelper {
 //                layout.sendMessage(info, false);
 //            }
 //        });
+//
 //        // TODO 可以用自定义的fragment来替换更多功能，可以打开下面代码测试
 //        inputLayout.replaceMoreInput(new CustomInputFragment().setChatLayout(layout));
 //
@@ -167,8 +163,6 @@ public class ChatLayoutHelper {
 //        inputLayout.disableSendFileAction(true);
 //        inputLayout.disableSendPhotoAction(true);
 //        inputLayout.disableVideoRecordAction(true);
-        inputLayout.enableAudioCall();
-        inputLayout.enableVideoCall();
 
         // TODO 可以自己增加一些功能，可以打开下面代码测试
         // 增加一个欢迎提示富文本
@@ -192,6 +186,9 @@ public class ChatLayoutHelper {
         inputLayout.addAction(unit);
     }
 
+    /**
+     * 自定义输入Fragment
+     */
     public static class CustomInputFragment extends BaseInputFragment {
         @Nullable
         @Override
@@ -230,7 +227,7 @@ public class ChatLayoutHelper {
 
     }
 
-    public class CustomMessageDraw implements IOnCustomMessageDrawListener {
+    public static class CustomMessageDrawListener implements IOnCustomMessageDrawListener {
 
         /**
          * 自定义消息渲染时，会调用该方法，本方法实现了自定义消息的创建，以及交互逻辑
@@ -250,47 +247,14 @@ public class ChatLayoutHelper {
             try {
                 data = new Gson().fromJson(new String(elem.getData()), CustomHelloMessage.class);
             } catch (Exception e) {
-                DemoLog.w(TAG, "invalid json: " + new String(elem.getData()) + " " + e.getMessage());
+                e.printStackTrace();
             }
-            if (data == null) {
-                DemoLog.e(TAG, "No Custom Data: " + new String(elem.getData()));
-            } else if (data.version == TUIKitConstants.JSON_VERSION_1
-                    || (data.version == TUIKitConstants.JSON_VERSION_4 && data.businessID.equals("text_link"))) {
-                CustomHelloTIMUIController.onDraw(parent, data);
-            } else {
-                DemoLog.w(TAG, "unsupported version: " + data);
+            if (data != null) {
+                if (data.version == TUIKitConstants.JSON_VERSION_1 ||
+                        (data.version == TUIKitConstants.JSON_VERSION_4 && data.businessID.equals("text_link"))) {
+                    CustomHelloTIMUIController.onDraw(parent, data);
+                }
             }
         }
     }
-
-//    private static void checkRoomExist(final LiveMessageInfo info) {
-//        RoomManager.getInstance().checkRoomExist(RoomManager.TYPE_GROUP_LIVE, info.roomId, new RoomManager.ActionCallback() {
-//            @Override
-//            public void onSuccess() {
-//                enterRoom(info);
-//            }
-//
-//            @Override
-//            public void onFailed(int code, String msg) {
-//                ToastUtil.toastShortMessage(TUIKitLive.getAppContext().getString(R.string.live_is_over));
-//            }
-//        });
-//    }
-
-//    private static void createRoom(String groupId) {
-//        LiveRoomAnchorActivity.start(DemoApplication.instance(), groupId);
-//    }
-
-//    private static void enterRoom(LiveMessageInfo info) {
-//        Intent intent = new Intent(DemoApplication.instance(), LiveRoomAudienceActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        intent.putExtra(RoomManager.ROOM_TITLE, info.roomName);
-//        intent.putExtra(RoomManager.GROUP_ID, info.roomId);
-//        intent.putExtra(RoomManager.USE_CDN_PLAY, false);
-//        intent.putExtra(RoomManager.ANCHOR_ID, info.anchorId);
-//        intent.putExtra(RoomManager.PUSHER_NAME, info.anchorName);
-//        intent.putExtra(RoomManager.COVER_PIC, info.roomCover);
-//        intent.putExtra(RoomManager.PUSHER_AVATAR, info.roomCover);
-//        DemoApplication.instance().startActivity(intent);
-//    }
 }

@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tencent.qcloud.tim.demo.login.LoginActivity;
 import com.tencent.qcloud.tim.demo.login.UserInfo;
 import com.tencent.qcloud.tim.demo.utils.Constants;
-import com.tencent.qcloud.tim.demo.utils.DemoLog;
 import com.tencent.qcloud.tim.uikit.TUIKit;
 import com.tencent.qcloud.tim.uikit.base.IMEventListener;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
@@ -37,7 +36,6 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        DemoLog.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
         Log.e("TAG", getClass().getSimpleName());
@@ -54,7 +52,6 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public static void logout(Context context) {
-        DemoLog.i(TAG, "logout");
         UserInfo.getInstance().setToken("");
         UserInfo.getInstance().setAutoLogin(false);
 

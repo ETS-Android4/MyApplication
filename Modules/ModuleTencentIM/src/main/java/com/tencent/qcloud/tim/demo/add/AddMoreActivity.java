@@ -1,12 +1,11 @@
-package com.tencent.qcloud.tim.demo.menu;
+package com.tencent.qcloud.tim.demo.add;
 
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.annotation.Nullable;
 
 import com.tencent.imsdk.BaseConstants;
 import com.tencent.imsdk.v2.V2TIMCallback;
@@ -14,9 +13,8 @@ import com.tencent.imsdk.v2.V2TIMFriendAddApplication;
 import com.tencent.imsdk.v2.V2TIMFriendOperationResult;
 import com.tencent.imsdk.v2.V2TIMManager;
 import com.tencent.imsdk.v2.V2TIMValueCallback;
-import com.tencent.qcloud.tim.demo.base.BaseActivity;
 import com.tencent.qcloud.tim.demo.R;
-import com.tencent.qcloud.tim.demo.utils.DemoLog;
+import com.tencent.qcloud.tim.demo.base.BaseActivity;
 import com.tencent.qcloud.tim.uikit.component.TitleBarLayout;
 import com.tencent.qcloud.tim.uikit.utils.SoftKeyBoardUtil;
 import com.tencent.qcloud.tim.uikit.utils.TUIKitConstants;
@@ -29,7 +27,6 @@ public class AddMoreActivity extends BaseActivity {
 
     private static final String TAG = AddMoreActivity.class.getSimpleName();
 
-    private TitleBarLayout mTitleBar;
     private EditText mUserID;
     private EditText mAddWording;
     private boolean mIsGroup;
@@ -40,21 +37,24 @@ public class AddMoreActivity extends BaseActivity {
         if (getIntent() != null) {
             mIsGroup = getIntent().getExtras().getBoolean(TUIKitConstants.GroupType.GROUP);
         }
-
         setContentView(R.layout.contact_add_activity);
 
-        mTitleBar = findViewById(R.id.add_friend_titlebar);
-        mTitleBar.setTitle(mIsGroup ? getResources().getString(R.string.add_group) : getResources().getString(R.string.add_friend), TitleBarLayout.POSITION.LEFT);
-        mTitleBar.setOnLeftClickListener(new View.OnClickListener() {
+        mUserID = findViewById(R.id.user_id);
+        mAddWording = findViewById(R.id.add_wording);
+
+        initTitleAction();
+    }
+
+    private void initTitleAction() {
+        TitleBarLayout titleBar = findViewById(R.id.add_friend_titlebar);
+        titleBar.setTitle(mIsGroup ? getResources().getString(R.string.add_group) : getResources().getString(R.string.add_friend), TitleBarLayout.POSITION.LEFT);
+        titleBar.setOnLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        mTitleBar.getRightGroup().setVisibility(View.GONE);
-
-        mUserID = findViewById(R.id.user_id);
-        mAddWording = findViewById(R.id.add_wording);
+        titleBar.getRightGroup().setVisibility(View.GONE);
     }
 
     public void add(View view) {
@@ -70,20 +70,17 @@ public class AddMoreActivity extends BaseActivity {
         if (TextUtils.isEmpty(id)) {
             return;
         }
-
         V2TIMFriendAddApplication v2TIMFriendAddApplication = new V2TIMFriendAddApplication(id);
         v2TIMFriendAddApplication.setAddWording(mAddWording.getText().toString());
         v2TIMFriendAddApplication.setAddSource("android");
         V2TIMManager.getFriendshipManager().addFriend(v2TIMFriendAddApplication, new V2TIMValueCallback<V2TIMFriendOperationResult>() {
             @Override
             public void onError(int code, String desc) {
-                DemoLog.e(TAG, "addFriend err code = " + code + ", desc = " + desc);
                 ToastUtil.toastShortMessage("Error code = " + code + ", desc = " + desc);
             }
 
             @Override
             public void onSuccess(V2TIMFriendOperationResult v2TIMFriendOperationResult) {
-                DemoLog.i(TAG, "addFriend success");
                 switch (v2TIMFriendOperationResult.getResultCode()) {
                     case BaseConstants.ERR_SUCC:
                         ToastUtil.toastShortMessage("成功");
@@ -125,17 +122,14 @@ public class AddMoreActivity extends BaseActivity {
         if (TextUtils.isEmpty(id)) {
             return;
         }
-
         V2TIMManager.getInstance().joinGroup(id, mAddWording.getText().toString(), new V2TIMCallback() {
             @Override
             public void onError(int code, String desc) {
-                DemoLog.e(TAG, "addGroup err code = " + code + ", desc = " + desc);
                 ToastUtil.toastShortMessage("Error code = " + code + ", desc = " + desc);
             }
 
             @Override
             public void onSuccess() {
-                DemoLog.i(TAG, "addGroup success");
                 ToastUtil.toastShortMessage("加群请求已发送");
                 finish();
             }

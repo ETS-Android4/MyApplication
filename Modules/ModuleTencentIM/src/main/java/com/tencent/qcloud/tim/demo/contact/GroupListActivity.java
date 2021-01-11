@@ -9,10 +9,10 @@ import androidx.annotation.Nullable;
 
 import com.tencent.imsdk.v2.V2TIMConversation;
 import com.tencent.qcloud.tim.demo.R;
+import com.tencent.qcloud.tim.demo.add.AddMoreActivity;
 import com.tencent.qcloud.tim.demo.base.BaseActivity;
 import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.demo.chat.ChatActivity;
-import com.tencent.qcloud.tim.demo.menu.AddMoreActivity;
 import com.tencent.qcloud.tim.demo.utils.Constants;
 import com.tencent.qcloud.tim.uikit.component.TitleBarLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.ChatInfo;

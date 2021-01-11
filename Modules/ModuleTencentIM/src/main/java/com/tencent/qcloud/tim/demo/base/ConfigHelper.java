@@ -1,30 +1,21 @@
-package com.tencent.qcloud.tim.demo.helper;
+package com.tencent.qcloud.tim.demo.base;
 
-import android.os.Environment;
-
-import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.uikit.TUIKit;
 import com.tencent.qcloud.tim.uikit.config.CustomFaceConfig;
 import com.tencent.qcloud.tim.uikit.config.GeneralConfig;
 import com.tencent.qcloud.tim.uikit.config.TUIKitConfigs;
 
-import java.io.File;
-
 public class ConfigHelper {
-
-    public ConfigHelper() {
-
-    }
 
     public TUIKitConfigs getConfigs() {
         GeneralConfig config = new GeneralConfig();
         // 显示对方是否已读的view将会展示
         config.setShowRead(true);
+        // 设置缓存文件夹
         config.setAppCacheDir(DemoApplication.instance().getFilesDir().getPath());
-        if (new File(Environment.getExternalStorageDirectory() + "/111222333").exists()) {
-            config.setTestEnv(true);
-        }
+        //设置常规配置
         TUIKit.getConfigs().setGeneralConfig(config);
+        //设置自定义表情
         TUIKit.getConfigs().setCustomFaceConfig(initCustomFaceConfig());
         return TUIKit.getConfigs();
     }

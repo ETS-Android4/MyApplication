@@ -1,17 +1,16 @@
-package com.tencent.qcloud.tim.demo.menu;
+package com.tencent.qcloud.tim.demo.start;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import com.tencent.imsdk.v2.V2TIMConversation;
+import com.tencent.qcloud.tim.demo.R;
 import com.tencent.qcloud.tim.demo.base.BaseActivity;
 import com.tencent.qcloud.tim.demo.base.DemoApplication;
-import com.tencent.qcloud.tim.demo.R;
 import com.tencent.qcloud.tim.demo.chat.ChatActivity;
 import com.tencent.qcloud.tim.demo.utils.Constants;
 import com.tencent.qcloud.tim.uikit.component.TitleBarLayout;
@@ -20,50 +19,29 @@ import com.tencent.qcloud.tim.uikit.modules.contact.ContactItemBean;
 import com.tencent.qcloud.tim.uikit.modules.contact.ContactListView;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class StartC2CChatActivity extends BaseActivity {
 
-    private static final String TAG = StartC2CChatActivity.class.getSimpleName();
-
-    private TitleBarLayout mTitleBar;
-    private ContactListView mContactListView;
     private ContactItemBean mSelectedItem;
-    private List<ContactItemBean> mContacts = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_start_c2c_chat_activity);
 
-        mTitleBar = findViewById(R.id.start_c2c_chat_title);
-        mTitleBar.setTitle(getResources().getString(R.string.sure), TitleBarLayout.POSITION.RIGHT);
-        mTitleBar.getRightTitle().setTextColor(getResources().getColor(R.color.title_bar_font_color));
-        mTitleBar.getRightIcon().setVisibility(View.GONE);
-        mTitleBar.setOnRightClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startConversation();
-            }
-        });
-        mTitleBar.setOnLeftClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        initView();
+        initTitleAction();
+    }
 
-        mContactListView = findViewById(R.id.contact_list_view);
+    private void initView() {
+        ContactListView mContactListView = findViewById(R.id.contact_list_view);
         mContactListView.setSingleSelectMode(true);
         mContactListView.loadDataSource(ContactListView.DataSource.FRIEND_LIST);
+
         mContactListView.setOnSelectChangeListener(new ContactListView.OnSelectChangedListener() {
             @Override
             public void onSelectChanged(ContactItemBean contact, boolean selected) {
                 if (selected) {
-                    if (mSelectedItem == contact) {
-                        // 相同的Item，忽略
-                    } else {
+                    if (mSelectedItem != contact) {
                         if (mSelectedItem != null) {
                             mSelectedItem.setSelected(false);
                         }
@@ -74,6 +52,25 @@ public class StartC2CChatActivity extends BaseActivity {
                         mSelectedItem.setSelected(false);
                     }
                 }
+            }
+        });
+    }
+
+    private void initTitleAction() {
+        TitleBarLayout titleBar = findViewById(R.id.start_c2c_chat_title);
+        titleBar.setTitle(getResources().getString(R.string.sure), TitleBarLayout.POSITION.RIGHT);
+        titleBar.getRightTitle().setTextColor(getResources().getColor(R.color.title_bar_font_color));
+        titleBar.getRightIcon().setVisibility(View.GONE);
+        titleBar.setOnRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startConversation();
+            }
+        });
+        titleBar.setOnLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

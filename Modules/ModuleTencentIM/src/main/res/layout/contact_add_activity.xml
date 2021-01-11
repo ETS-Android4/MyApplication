@@ -26,17 +26,17 @@
 
         <EditText
             android:id="@+id/user_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
+            android:hint="@string/hint_add_user_id"
             android:iconifiedByDefault="false"
-            android:textSize="@dimen/btn_text_size"
-            android:padding="10dp"
             android:maxLength="30"
+            android:padding="10dp"
             android:singleLine="true"
             android:textCursorDrawable="@drawable/my_cursor"
-            android:hint="@string/hint_add_user_id" />
+            android:textSize="@dimen/btn_text_size" />
 
     </LinearLayout>
 
@@ -56,26 +56,26 @@
 
         <EditText
             android:id="@+id/add_wording"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:textSize="@dimen/btn_text_size"
-            android:padding="10dp"
+            android:hint="@string/hint_add_wording"
             android:maxLength="100"
+            android:padding="10dp"
             android:textCursorDrawable="@drawable/my_cursor"
-            android:hint="@string/hint_add_wording" />
+            android:textSize="@dimen/btn_text_size" />
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_marginStart="@dimen/btn_margin_left"
         android:layout_marginTop="@dimen/btn_margin_top"
-        android:layout_marginLeft="@dimen/btn_margin_left"
-        android:layout_marginRight="@dimen/btn_margin_right"
+        android:layout_marginEnd="@dimen/btn_margin_right"
         android:background="@color/bg_negative_btn"
-        android:text="@string/contact_add"
         android:onClick="add"
+        android:text="@string/contact_add"
         android:textColor="#fb6155" />
 
 </LinearLayout>

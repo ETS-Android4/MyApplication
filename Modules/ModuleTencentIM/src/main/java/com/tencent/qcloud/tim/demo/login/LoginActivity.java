@@ -4,24 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.tencent.qcloud.tim.demo.R;
 import com.tencent.qcloud.tim.demo.main.MainActivity;
 import com.tencent.qcloud.tim.demo.signature.GenerateTestUserSig;
-import com.tencent.qcloud.tim.demo.utils.DemoLog;
 import com.tencent.qcloud.tim.demo.utils.Utils;
 import com.tencent.qcloud.tim.uikit.TUIKit;
 import com.tencent.qcloud.tim.uikit.base.IUIKitCallBack;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * <p>
@@ -67,7 +64,6 @@ public class LoginActivity extends Activity {
                                 ToastUtil.toastLongMessage("登录失败, errCode = " + code + ", errInfo = " + desc);
                             }
                         });
-                        DemoLog.i(TAG, "imLogin errorCode = " + code + ", errorInfo = " + desc);
                     }
 
                     @Override

@@ -43,7 +43,7 @@ public class UserInfo implements Serializable {
         SharedPreferences shareInfo = DemoApplication.instance().getSharedPreferences(Constants.USERINFO, 0);
         SharedPreferences.Editor editor = shareInfo.edit();
         editor.putString(PER_USER_MODEL, new Gson().toJson(info));
-        editor.commit();
+        editor.apply();
     }
 
     public String getUserSig() {

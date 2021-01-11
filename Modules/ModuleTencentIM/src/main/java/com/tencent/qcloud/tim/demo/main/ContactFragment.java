@@ -1,4 +1,4 @@
-package com.tencent.qcloud.tim.demo.contact;
+package com.tencent.qcloud.tim.demo.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import androidx.annotation.Nullable;
 
 import com.tencent.qcloud.tim.demo.R;
 import com.tencent.qcloud.tim.demo.base.DemoApplication;
+import com.tencent.qcloud.tim.demo.contact.BlackListActivity;
+import com.tencent.qcloud.tim.demo.contact.FriendProfileActivity;
+import com.tencent.qcloud.tim.demo.contact.GroupListActivity;
+import com.tencent.qcloud.tim.demo.contact.NewFriendActivity;
 import com.tencent.qcloud.tim.demo.menu.Menu;
 import com.tencent.qcloud.tim.uikit.base.BaseFragment;
 import com.tencent.qcloud.tim.uikit.modules.contact.ContactItemBean;

@@ -4,9 +4,7 @@ import android.app.Application;
 
 import androidx.multidex.MultiDex;
 
-import com.tencent.qcloud.tim.demo.helper.ConfigHelper;
 import com.tencent.qcloud.tim.demo.signature.GenerateTestUserSig;
-import com.tencent.qcloud.tim.demo.utils.DemoLog;
 import com.tencent.qcloud.tim.uikit.TUIKit;
 
 public class DemoApplication extends Application {
@@ -21,7 +19,6 @@ public class DemoApplication extends Application {
 
     @Override
     public void onCreate() {
-        DemoLog.i(TAG, "onCreate");
         super.onCreate();
         instance = this;
         MultiDex.install(this);

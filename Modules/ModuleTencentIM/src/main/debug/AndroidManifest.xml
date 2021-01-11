@@ -47,7 +47,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".menu.AddMoreActivity"
+            android:name=".add.AddMoreActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".contact.FriendProfileActivity"
@@ -62,10 +62,10 @@
             android:name=".contact.GroupListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".menu.StartC2CChatActivity"
+            android:name=".start.StartC2CChatActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".menu.StartGroupChatActivity"
+            android:name=".start.StartGroupChatActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 

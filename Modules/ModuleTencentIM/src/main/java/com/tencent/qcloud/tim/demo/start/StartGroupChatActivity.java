@@ -1,17 +1,16 @@
-package com.tencent.qcloud.tim.demo.menu;
+package com.tencent.qcloud.tim.demo.start;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import android.view.View;
-
 import com.tencent.imsdk.v2.V2TIMConversation;
 import com.tencent.imsdk.v2.V2TIMManager;
+import com.tencent.qcloud.tim.demo.R;
 import com.tencent.qcloud.tim.demo.base.BaseActivity;
 import com.tencent.qcloud.tim.demo.base.DemoApplication;
-import com.tencent.qcloud.tim.demo.R;
 import com.tencent.qcloud.tim.demo.chat.ChatActivity;
 import com.tencent.qcloud.tim.demo.utils.Constants;
 import com.tencent.qcloud.tim.uikit.base.IUIKitCallBack;
@@ -49,17 +48,12 @@ public class StartGroupChatActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_start_group_chat_activity);
 
-        init();
+        initView();
+
+        initTitleAction();
     }
 
-    private void init() {
-        String[] array = getResources().getStringArray(R.array.group_type);
-        mGroupTypeValue.addAll(Arrays.asList(array));
-        array = getResources().getStringArray(R.array.group_join_type);
-        mJoinTypes.addAll(Arrays.asList(array));
-        GroupMemberInfo memberInfo = new GroupMemberInfo();
-        memberInfo.setAccount(V2TIMManager.getInstance().getLoginUser());
-        mMembers.add(0, memberInfo);
+    private void initTitleAction() {
         mTitleBar = findViewById(R.id.group_create_title_bar);
         mTitleBar.setTitle(getResources().getString(R.string.sure), TitleBarLayout.POSITION.RIGHT);
         mTitleBar.getRightTitle().setTextColor(getResources().getColor(R.color.title_bar_font_color));
@@ -76,6 +70,18 @@ public class StartGroupChatActivity extends BaseActivity {
                 finish();
             }
         });
+    }
+
+    private void initView() {
+        String[] array = getResources().getStringArray(R.array.group_type);
+        mGroupTypeValue.addAll(Arrays.asList(array));
+
+        array = getResources().getStringArray(R.array.group_join_type);
+        mJoinTypes.addAll(Arrays.asList(array));
+
+        GroupMemberInfo memberInfo = new GroupMemberInfo();
+        memberInfo.setAccount(V2TIMManager.getInstance().getLoginUser());
+        mMembers.add(0, memberInfo);
 
         mJoinType = findViewById(R.id.group_type_join);
         mJoinType.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +111,6 @@ public class StartGroupChatActivity extends BaseActivity {
                 }
             }
         });
-
         setGroupType(getIntent().getIntExtra("type", TUIKitConstants.GroupType.PRIVATE));
     }
 
@@ -193,5 +198,4 @@ public class StartGroupChatActivity extends BaseActivity {
             }
         });
     }
-
 }

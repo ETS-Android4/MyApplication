@@ -1,8 +1,17 @@
 package com.tencent.qcloud.tim.demo.helper;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.tencent.qcloud.tim.uikit.modules.conversation.ConversationLayout;
 import com.tencent.qcloud.tim.uikit.modules.conversation.ConversationListLayout;
+import com.tencent.qcloud.tim.uikit.modules.conversation.base.ConversationInfo;
 
+import java.util.Collections;
+
+/**
+ * 自定义会话列表
+ */
 public class ConversationLayoutHelper {
 
     public static void customizeConversation(final ConversationLayout layout) {
@@ -16,27 +25,25 @@ public class ConversationLayoutHelper {
         listLayout.disableItemUnreadDot(false);// 设置adapter item是否不显示未读红点，默认显示
 
         // 动态插入，删除Item，包括自定义会话
-//        final ConversationInfo customInfo = new ConversationInfo();
-//        customInfo.setType(ConversationInfo.TYPE_CUSTOM);
-//        customInfo.setId("自定义会话");
-//        customInfo.setGroup(false);
-//        customInfo.setTitle("乔丹风行8代跑鞋 风随我动！");
-//        customInfo.setIconUrl("https://img1.gtimg.com/ninja/2/2019/03/ninja155375585738456.jpg");
-//
-//
-//        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                layout.addConversationInfo(0, customInfo);
-//            }
-//        }, 3000);
+        final ConversationInfo customInfo = new ConversationInfo();
+        customInfo.setType(ConversationInfo.TYPE_CUSTOM);
+        customInfo.setId("自定义会话");
+        customInfo.setGroup(false);
+        customInfo.setTitle("乔丹风行8代跑鞋 风随我动！");
+        customInfo.setIconUrlList(Collections.singletonList("https://img1.gtimg.com/ninja/2/2019/03/ninja155375585738456.jpg"));
 
-//        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                layout.removeConversationInfo(0);
-//            }
-//        }, 5000);
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                layout.addConversationInfo(0, customInfo);
+            }
+        }, 3000);
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                layout.removeConversationInfo(0);
+            }
+        }, 5000);
     }
-
 }

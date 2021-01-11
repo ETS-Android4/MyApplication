@@ -13,9 +13,9 @@ import com.tencent.imsdk.v2.V2TIMFriendApplicationResult;
 import com.tencent.imsdk.v2.V2TIMManager;
 import com.tencent.imsdk.v2.V2TIMValueCallback;
 import com.tencent.qcloud.tim.demo.R;
+import com.tencent.qcloud.tim.demo.add.AddMoreActivity;
 import com.tencent.qcloud.tim.demo.base.BaseActivity;
 import com.tencent.qcloud.tim.demo.base.DemoApplication;
-import com.tencent.qcloud.tim.demo.menu.AddMoreActivity;
 import com.tencent.qcloud.tim.uikit.component.TitleBarLayout;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 

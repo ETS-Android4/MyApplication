@@ -15,14 +15,10 @@ import com.tencent.qcloud.tim.demo.contact.FriendProfileActivity;
 import com.tencent.qcloud.tim.demo.helper.ChatLayoutHelper;
 import com.tencent.qcloud.tim.demo.utils.Constants;
 import com.tencent.qcloud.tim.uikit.base.BaseFragment;
-import com.tencent.qcloud.tim.uikit.component.AudioPlayer;
 import com.tencent.qcloud.tim.uikit.component.TitleBarLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.ChatLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.ChatInfo;
-import com.tencent.qcloud.tim.uikit.modules.chat.layout.input.InputLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.MessageLayout;
-import com.tencent.qcloud.tim.uikit.modules.group.info.GroupInfo;
-import com.tencent.qcloud.tim.uikit.modules.group.info.StartGroupMemberSelectActivity;
 import com.tencent.qcloud.tim.uikit.modules.message.MessageInfo;
 import com.tencent.qcloud.tim.uikit.utils.TUIKitConstants;
 
@@ -30,17 +26,27 @@ import com.tencent.qcloud.tim.uikit.utils.TUIKitConstants;
 public class ChatFragment extends BaseFragment {
 
     private View mBaseView;
-    private ChatLayout mChatLayout;
-    private TitleBarLayout mTitleBar;
-    private ChatInfo mChatInfo;
 
-    private static final String TAG = ChatFragment.class.getSimpleName();
+    private ChatInfo mChatInfo;
+    private ChatLayout mChatLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mBaseView = inflater.inflate(R.layout.chat_fragment, container, false);
         return mBaseView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Bundle bundle = getArguments();
+        mChatInfo = (ChatInfo) bundle.getSerializable(Constants.CHAT_INFO);
+        if (mChatInfo == null) {
+            return;
+        }
+        initView();
     }
 
     private void initView() {
@@ -50,32 +56,15 @@ public class ChatFragment extends BaseFragment {
         //单聊组件的默认UI和交互初始化
         mChatLayout.initDefault();
 
+        // TODO 通过api设置ChatLayout各种属性的样例
+        ChatLayoutHelper.customizeChatLayout(mChatLayout);
+
         /*
          * 需要聊天的基本信息
          */
         mChatLayout.setChatInfo(mChatInfo);
 
-        //获取单聊面板的标题栏
-        mTitleBar = mChatLayout.getTitleBar();
-
-        //单聊面板标记栏返回按钮点击事件，这里需要开发者自行控制
-        mTitleBar.setOnLeftClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
-        if (mChatInfo.getType() == V2TIMConversation.V2TIM_C2C) {
-            mTitleBar.setOnRightClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(DemoApplication.instance(), FriendProfileActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra(TUIKitConstants.ProfileType.CONTENT, mChatInfo);
-                    DemoApplication.instance().startActivity(intent);
-                }
-            });
-        }
+        //消息点击事件
         mChatLayout.getMessageLayout().setOnItemClickListener(new MessageLayout.OnItemClickListener() {
             @Override
             public void onMessageLongClick(View view, int position, MessageInfo messageInfo) {
@@ -96,63 +85,30 @@ public class ChatFragment extends BaseFragment {
                 DemoApplication.instance().startActivity(intent);
             }
         });
+        initTitleAction();
+    }
 
-        mChatLayout.getInputLayout().setStartActivityListener(new InputLayout.onStartActivityListener() {
+    private void initTitleAction() {
+        //获取单聊面板的标题栏
+        TitleBarLayout titleBar = mChatLayout.getTitleBar();
+        //单聊面板标记栏返回按钮点击事件，这里需要开发者自行控制
+        titleBar.setOnLeftClickListener(new View.OnClickListener() {
             @Override
-            public void onStartGroupMemberSelectActivity() {
-                Intent intent = new Intent(DemoApplication.instance(), StartGroupMemberSelectActivity.class);
-                GroupInfo groupInfo = new GroupInfo();
-                groupInfo.setId(mChatInfo.getId());
-                groupInfo.setChatName(mChatInfo.getChatName());
-                intent.putExtra(TUIKitConstants.Group.GROUP_INFO, groupInfo);
-                startActivityForResult(intent, 1);
+            public void onClick(View view) {
+                getActivity().finish();
             }
-
-            @Override
-            public boolean handleStartGroupLiveActivity() {
-                return false;
-            }
-
-//            @Override
-//            public boolean handleStartGroupLiveActivity() {
-//                // 打开群直播
-//                LiveRoomAnchorActivity.start(DemoApplication.instance(), mChatInfo.getId());
-//                // demo层对消息进行处理，不走默认的逻辑
-//                return true;
-//            }
         });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == 3) {
-            String result_id = data.getStringExtra(TUIKitConstants.Selection.USER_ID_SELECT);
-            String result_name = data.getStringExtra(TUIKitConstants.Selection.USER_NAMECARD_SELECT);
-            mChatLayout.getInputLayout().updateInputText(result_name, result_id);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        Bundle bundle = getArguments();
-        mChatInfo = (ChatInfo) bundle.getSerializable(Constants.CHAT_INFO);
-        if (mChatInfo == null) {
-            return;
-        }
-        initView();
-
-        // TODO 通过api设置ChatLayout各种属性的样例
-        ChatLayoutHelper helper = new ChatLayoutHelper(getActivity());
-        helper.customizeChatLayout(mChatLayout);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        AudioPlayer.getInstance().stopPlay();
+        titleBar.setOnRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mChatInfo.getType() == V2TIMConversation.V2TIM_C2C) {
+                    Intent intent = new Intent(DemoApplication.instance(), FriendProfileActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(TUIKitConstants.ProfileType.CONTENT, mChatInfo);
+                    DemoApplication.instance().startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -162,5 +118,4 @@ public class ChatFragment extends BaseFragment {
             mChatLayout.exitChat();
         }
     }
-
 }

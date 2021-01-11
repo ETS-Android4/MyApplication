@@ -6,9 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.demo.R;
-import com.tencent.qcloud.tim.demo.utils.DemoLog;
+import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.ICustomMessageViewGroup;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
@@ -35,7 +34,6 @@ public class CustomHelloTIMUIController {
             @Override
             public void onClick(View v) {
                 if (data == null) {
-                    DemoLog.e(TAG, "Do what?");
                     ToastUtil.toastShortMessage(text);
                     return;
                 }

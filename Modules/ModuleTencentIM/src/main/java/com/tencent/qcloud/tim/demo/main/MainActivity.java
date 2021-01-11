@@ -11,10 +11,6 @@ import androidx.fragment.app.Fragment;
 
 import com.tencent.qcloud.tim.demo.R;
 import com.tencent.qcloud.tim.demo.base.BaseActivity;
-import com.tencent.qcloud.tim.demo.contact.ContactFragment;
-import com.tencent.qcloud.tim.demo.conversation.ConversationFragment;
-import com.tencent.qcloud.tim.demo.profile.ProfileFragment;
-import com.tencent.qcloud.tim.demo.utils.DemoLog;
 import com.tencent.qcloud.tim.uikit.modules.chat.GroupChatManagerKit;
 import com.tencent.qcloud.tim.uikit.modules.conversation.ConversationManagerKit;
 import com.tencent.qcloud.tim.uikit.utils.FileUtil;
@@ -70,8 +66,6 @@ public class MainActivity extends BaseActivity implements ConversationManagerKit
         if (current != null && !current.isAdded()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.empty_view, current).commitAllowingStateLoss();
             getSupportFragmentManager().executePendingTransactions();
-        } else {
-            DemoLog.w(TAG, "fragment added!");
         }
     }
 

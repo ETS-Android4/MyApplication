@@ -12,8 +12,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
-import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.demo.R;
+import com.tencent.qcloud.tim.demo.add.AddMoreActivity;
+import com.tencent.qcloud.tim.demo.base.DemoApplication;
+import com.tencent.qcloud.tim.demo.start.StartC2CChatActivity;
+import com.tencent.qcloud.tim.demo.start.StartGroupChatActivity;
 import com.tencent.qcloud.tim.uikit.component.action.PopActionClickListener;
 import com.tencent.qcloud.tim.uikit.component.action.PopMenuAction;
 import com.tencent.qcloud.tim.uikit.component.action.PopMenuAdapter;

@@ -1,4 +1,4 @@
-package com.tencent.qcloud.tim.demo.conversation;
+package com.tencent.qcloud.tim.demo.main;
 
 import android.content.Intent;
 import android.os.Bundle;
