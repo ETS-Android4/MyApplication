@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity implements ConversationManagerKit
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.im_activity_main);
         initView();
     }
 
@@ -53,15 +53,15 @@ public class MainActivity extends BaseActivity implements ConversationManagerKit
         if (view.getId() == R.id.conversation_btn_group) {
             current = new ConversationFragment();
             mConversationBtn.setTextColor(getResources().getColor(R.color.tab_text_selected_color));
-            mConversationBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.conversation_selected), null, null);
+            mConversationBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.im_conversation_selected), null, null);
         } else if (view.getId() == R.id.contact_btn_group) {
             current = new ContactFragment();
             mContactBtn.setTextColor(getResources().getColor(R.color.tab_text_selected_color));
-            mContactBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.contact_selected), null, null);
+            mContactBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.im_contact_selected), null, null);
         } else if (view.getId() == R.id.myself_btn_group) {
             current = new ProfileFragment();
             mProfileBtn.setTextColor(getResources().getColor(R.color.tab_text_selected_color));
-            mProfileBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.myself_selected), null, null);
+            mProfileBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.im_profile_selected), null, null);
         }
         if (current != null && !current.isAdded()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.empty_view, current).commitAllowingStateLoss();
@@ -71,11 +71,11 @@ public class MainActivity extends BaseActivity implements ConversationManagerKit
 
     private void initTab() {
         mConversationBtn.setTextColor(getResources().getColor(R.color.tab_text_normal_color));
-        mConversationBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.conversation_normal), null, null);
+        mConversationBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.im_conversation_normal), null, null);
         mContactBtn.setTextColor(getResources().getColor(R.color.tab_text_normal_color));
-        mContactBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.contact_normal), null, null);
+        mContactBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.im_contact_normal), null, null);
         mProfileBtn.setTextColor(getResources().getColor(R.color.tab_text_normal_color));
-        mProfileBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.myself_normal), null, null);
+        mProfileBtn.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(this, R.drawable.im_profile_normal), null, null);
     }
 
     /**

@@ -46,7 +46,7 @@ public class ConversationFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        mBaseView = inflater.inflate(R.layout.conversation_fragment, container, false);
+        mBaseView = inflater.inflate(R.layout.im_fragment_conversation, container, false);
         initView();
         return mBaseView;
     }

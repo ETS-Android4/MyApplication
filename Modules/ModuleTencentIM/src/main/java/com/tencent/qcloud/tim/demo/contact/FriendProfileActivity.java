@@ -26,7 +26,7 @@ public class FriendProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contact_friend_profile_activity);
+        setContentView(R.layout.im_activity_friend_profile);
 
         initView();
     }

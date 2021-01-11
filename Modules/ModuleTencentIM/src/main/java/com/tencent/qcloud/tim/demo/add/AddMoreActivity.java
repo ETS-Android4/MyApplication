@@ -37,7 +37,7 @@ public class AddMoreActivity extends BaseActivity {
         if (getIntent() != null) {
             mIsGroup = getIntent().getExtras().getBoolean(TUIKitConstants.GroupType.GROUP);
         }
-        setContentView(R.layout.contact_add_activity);
+        setContentView(R.layout.im_activity_add);
 
         mUserID = findViewById(R.id.user_id);
         mAddWording = findViewById(R.id.add_wording);

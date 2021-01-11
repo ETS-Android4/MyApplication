@@ -99,7 +99,7 @@ public class Menu {
         if (menuType == MENU_TYPE_CONVERSATION) {
             action.setActionName(mActivity.getResources().getString(R.string.start_conversation));
             action.setActionClickListener(popActionClickListener);
-            action.setIconResId(R.drawable.create_c2c);
+            action.setIconResId(R.drawable.chat_c2c);
             menuActions.add(action);
         }
 
@@ -112,7 +112,7 @@ public class Menu {
 
             action = new PopMenuAction();
             action.setActionName(mActivity.getResources().getString(R.string.add_group));
-            action.setIconResId(R.drawable.ic_contact_join_group);
+            action.setIconResId(R.drawable.group_new_friend);
             action.setActionClickListener(popActionClickListener);
             menuActions.add(action);
         }
@@ -125,19 +125,19 @@ public class Menu {
 
         action = new PopMenuAction();
         action.setActionName(mActivity.getResources().getString(R.string.create_private_group));
-        action.setIconResId(R.drawable.group_icon);
+        action.setIconResId(R.drawable.chat_group);
         action.setActionClickListener(popActionClickListener);
         menuActions.add(action);
 
         action = new PopMenuAction();
         action.setActionName(mActivity.getResources().getString(R.string.create_group_chat));
-        action.setIconResId(R.drawable.group_icon);
+        action.setIconResId(R.drawable.chat_group);
         action.setActionClickListener(popActionClickListener);
         menuActions.add(action);
 
         action = new PopMenuAction();
         action.setActionName(mActivity.getResources().getString(R.string.create_chat_room));
-        action.setIconResId(R.drawable.group_icon);
+        action.setIconResId(R.drawable.chat_group);
         action.setActionClickListener(popActionClickListener);
         menuActions.add(action);
 
@@ -163,7 +163,7 @@ public class Menu {
         mMenuWindow = new PopupWindow(mActivity);
         mMenuAdapter = new PopMenuAdapter();
         mMenuAdapter.setDataSource(mActions);
-        View menuView = LayoutInflater.from(mActivity).inflate(R.layout.conversation_pop_menu, null);
+        View menuView = LayoutInflater.from(mActivity).inflate(R.layout.im_pop_menu, null);
         // 设置布局文件
         mMenuWindow.setContentView(menuView);
 
@@ -180,7 +180,7 @@ public class Menu {
         });
         mMenuWindow.setWidth(ScreenUtil.getPxByDp(160));
         mMenuWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        mMenuWindow.setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.top_pop));
+        mMenuWindow.setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.im_top_pop));
         // 设置pop获取焦点，如果为false点击返回按钮会退出当前Activity，如果pop中有Editor的话，focusable必须要为true
         mMenuWindow.setFocusable(true);
         // 设置pop可点击，为false点击事件无效，默认为true

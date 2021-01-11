@@ -21,6 +21,6 @@ public class PhotoViewActivity extends AppCompatActivity {
         setContentView(R.layout.open_activity_photo_view);
 
         PhotoView photoView = findViewById(R.id.photoView);
-        photoView.setImageResource(R.drawable.ic_launcher);
+        photoView.setImageResource(R.drawable.im_ic_launcher);
     }
 }

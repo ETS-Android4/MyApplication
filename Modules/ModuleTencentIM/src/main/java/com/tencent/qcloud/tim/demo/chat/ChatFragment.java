@@ -33,7 +33,7 @@ public class ChatFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        mBaseView = inflater.inflate(R.layout.chat_fragment, container, false);
+        mBaseView = inflater.inflate(R.layout.im_fragment_chat, container, false);
         return mBaseView;
     }
 

@@ -26,7 +26,7 @@ public class StartC2CChatActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.popup_start_c2c_chat_activity);
+        setContentView(R.layout.im_activity_start_c2c_chat);
 
         initView();
         initTitleAction();

@@ -46,7 +46,7 @@ public class StartGroupChatActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.popup_start_group_chat_activity);
+        setContentView(R.layout.im_activity_start_group_chat);
 
         initView();
 

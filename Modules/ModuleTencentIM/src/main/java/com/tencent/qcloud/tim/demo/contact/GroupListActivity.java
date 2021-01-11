@@ -27,7 +27,7 @@ public class GroupListActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.group_list_activity);
+        setContentView(R.layout.im_activity_group_list);
 
         initTitleAction();
         initView();

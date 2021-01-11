@@ -21,7 +21,7 @@ public class BlackListActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contact_blacklist_activity);
+        setContentView(R.layout.im_activity_blacklist);
 
         initTitleAction();
         initView();

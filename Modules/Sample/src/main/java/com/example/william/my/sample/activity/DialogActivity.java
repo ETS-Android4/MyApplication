@@ -50,7 +50,7 @@ public class DialogActivity extends AppCompatActivity implements AdapterView.OnI
         switch (i) {
             case 0:
                 new AlertDialog.Builder(DialogActivity.this)
-                        .setIcon(R.drawable.ic_launcher)
+                        .setIcon(R.drawable.im_ic_launcher)
                         .setTitle("标题")
                         .setMessage("内容")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -71,7 +71,7 @@ public class DialogActivity extends AppCompatActivity implements AdapterView.OnI
             case 1:
                 String[] items = {"item1", "item2"};
                 new AlertDialog.Builder(DialogActivity.this)
-                        .setIcon(R.drawable.ic_launcher)
+                        .setIcon(R.drawable.im_ic_launcher)
                         .setTitle("标题")
                         .setItems(items, new DialogInterface.OnClickListener() {
                             @Override

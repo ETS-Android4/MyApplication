@@ -167,7 +167,7 @@ public class ChatLayoutHelper {
         // TODO 可以自己增加一些功能，可以打开下面代码测试
         // 增加一个欢迎提示富文本
         InputMoreActionUnit unit = new InputMoreActionUnit();
-        unit.setIconResId(R.drawable.custom);
+        unit.setIconResId(R.drawable.im_custom);
         unit.setTitleId(R.string.test_custom_action);
         unit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,7 +193,7 @@ public class ChatLayoutHelper {
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-            View baseView = inflater.inflate(R.layout.test_chat_input_custom_fragment, container, false);
+            View baseView = inflater.inflate(R.layout.im_layout_fragment_input, container, false);
             Button btn1 = baseView.findViewById(R.id.test_send_message_btn1);
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -32,7 +32,7 @@ public class NewFriendActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contact_new_friend_activity);
+        setContentView(R.layout.im_activity_new_friend);
 
         initTitleAction();
         initView();
@@ -82,7 +82,7 @@ public class NewFriendActivity extends BaseActivity {
                 mNewFriendLv.setVisibility(View.VISIBLE);
                 mList.clear();
                 mList.addAll(v2TIMFriendApplicationResult.getFriendApplicationList());
-                mAdapter = new NewFriendAdapter(NewFriendActivity.this, R.layout.contact_new_friend_item, mList);
+                mAdapter = new NewFriendAdapter(NewFriendActivity.this, R.layout.im_item_new_friend, mList);
                 mNewFriendLv.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
             }

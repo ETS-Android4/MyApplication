@@ -51,7 +51,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        mBaseView = inflater.inflate(R.layout.profile_layout, container, false);
+        mBaseView = inflater.inflate(R.layout.im_fragment_profile, container, false);
         initView();
         return mBaseView;
     }

@@ -36,7 +36,7 @@ public class ForegroundService extends Service {
         // startActivity(intent);
 
         Notification notification = new NotificationCompat.Builder(this, "channelId")
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.drawable.im_ic_launcher)
                 .setContentTitle("通知标题")//通知标题
                 .setContentText("通知内容")//通知内容
                 .build();
