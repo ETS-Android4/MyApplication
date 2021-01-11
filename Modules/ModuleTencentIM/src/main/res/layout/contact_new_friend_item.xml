@@ -50,6 +50,6 @@
         android:paddingLeft="@dimen/btn_padding_left"
         android:paddingRight="@dimen/btn_padding_right"
         android:layout_marginRight="@dimen/btn_margin_right"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
 </LinearLayout>

@@ -2,16 +2,15 @@ package com.tencent.qcloud.tim.demo.contact;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import com.tencent.imsdk.v2.V2TIMConversation;
-import com.tencent.qcloud.tim.demo.BaseActivity;
-import com.tencent.qcloud.tim.demo.DemoApplication;
 import com.tencent.qcloud.tim.demo.R;
+import com.tencent.qcloud.tim.demo.base.BaseActivity;
+import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.demo.chat.ChatActivity;
 import com.tencent.qcloud.tim.demo.menu.AddMoreActivity;
 import com.tencent.qcloud.tim.demo.utils.Constants;
@@ -20,39 +19,32 @@ import com.tencent.qcloud.tim.uikit.modules.chat.base.ChatInfo;
 import com.tencent.qcloud.tim.uikit.modules.contact.ContactItemBean;
 import com.tencent.qcloud.tim.uikit.modules.contact.ContactListView;
 
+/**
+ * 我的群聊
+ */
 public class GroupListActivity extends BaseActivity {
-
-    private static final String TAG = GroupListActivity.class.getSimpleName();
-
-    private TitleBarLayout mTitleBar;
-    private ContactListView mListView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_list_activity);
 
-        init();
+        initTitleAction();
+        initView();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadDataSource();
-    }
-
-    private void init() {
-        mTitleBar = findViewById(R.id.group_list_titlebar);
-        mTitleBar.setTitle(getResources().getString(R.string.group), TitleBarLayout.POSITION.LEFT);
-        mTitleBar.setOnLeftClickListener(new View.OnClickListener() {
+    private void initTitleAction() {
+        TitleBarLayout titleBar = findViewById(R.id.group_list_titlebar);
+        titleBar.setTitle(getResources().getString(R.string.group), TitleBarLayout.POSITION.LEFT);
+        titleBar.setOnLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        mTitleBar.setTitle(getResources().getString(R.string.add_group), TitleBarLayout.POSITION.RIGHT);
-        mTitleBar.getRightIcon().setVisibility(View.GONE);
-        mTitleBar.setOnRightClickListener(new View.OnClickListener() {
+        titleBar.setTitle(getResources().getString(R.string.add_group), TitleBarLayout.POSITION.RIGHT);
+        titleBar.getRightIcon().setVisibility(View.GONE);
+        titleBar.setOnRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DemoApplication.instance(), AddMoreActivity.class);
@@ -61,9 +53,12 @@ public class GroupListActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
 
-        mListView = findViewById(R.id.group_list);
-        mListView.setOnItemClickListener(new ContactListView.OnItemClickListener() {
+    private void initView() {
+        ContactListView listView = findViewById(R.id.group_list);
+        listView.loadDataSource(ContactListView.DataSource.GROUP_LIST);
+        listView.setOnItemClickListener(new ContactListView.OnItemClickListener() {
             @Override
             public void onItemClick(int position, ContactItemBean contact) {
                 ChatInfo chatInfo = new ChatInfo();
@@ -82,14 +77,5 @@ public class GroupListActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    public void loadDataSource() {
-        mListView.loadDataSource(ContactListView.DataSource.GROUP_LIST);
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
     }
 }

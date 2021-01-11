@@ -2,15 +2,14 @@ package com.tencent.qcloud.tim.demo.contact;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
+
 import com.tencent.imsdk.v2.V2TIMConversation;
-import com.tencent.qcloud.tim.demo.BaseActivity;
-import com.tencent.qcloud.tim.demo.DemoApplication;
 import com.tencent.qcloud.tim.demo.R;
+import com.tencent.qcloud.tim.demo.base.BaseActivity;
+import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.demo.chat.ChatActivity;
 import com.tencent.qcloud.tim.demo.main.MainActivity;
 import com.tencent.qcloud.tim.demo.utils.Constants;
@@ -19,16 +18,23 @@ import com.tencent.qcloud.tim.uikit.modules.contact.ContactItemBean;
 import com.tencent.qcloud.tim.uikit.modules.contact.FriendProfileLayout;
 import com.tencent.qcloud.tim.uikit.utils.TUIKitConstants;
 
+/**
+ * 好友详情
+ */
 public class FriendProfileActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_friend_profile_activity);
-        FriendProfileLayout layout = findViewById(R.id.friend_profile);
 
-        layout.initData(getIntent().getSerializableExtra(TUIKitConstants.ProfileType.CONTENT));
-        layout.setOnButtonClickListener(new FriendProfileLayout.OnButtonClickListener() {
+        initView();
+    }
+
+    private void initView() {
+        FriendProfileLayout profile = findViewById(R.id.friend_profile);
+        profile.initData(getIntent().getSerializableExtra(TUIKitConstants.ProfileType.CONTENT));
+        profile.setOnButtonClickListener(new FriendProfileLayout.OnButtonClickListener() {
             @Override
             public void onStartConversationClick(ContactItemBean info) {
                 ChatInfo chatInfo = new ChatInfo();
@@ -54,5 +60,4 @@ public class FriendProfileActivity extends BaseActivity {
             }
         });
     }
-
 }

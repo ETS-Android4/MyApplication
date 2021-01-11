@@ -116,7 +116,7 @@ public class OkHttpActivity extends ResponseActivity {
     }
 
     private void upload() {
-        File file = new File(getExternalCacheDir() + File.separator + "retrofit_update.apk");
+        File file = new File(getExternalCacheDir() + File.separator + "ok_http__update.txt");
 
         FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
         fileIOUtils.writeFileFromString(file, "update");

@@ -3,7 +3,7 @@ package com.tencent.qcloud.tim.demo.login;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
-import com.tencent.qcloud.tim.demo.DemoApplication;
+import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.demo.utils.Constants;
 
 import java.io.Serializable;

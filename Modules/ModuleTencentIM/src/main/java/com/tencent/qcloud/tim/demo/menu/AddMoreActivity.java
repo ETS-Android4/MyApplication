@@ -1,7 +1,7 @@
 package com.tencent.qcloud.tim.demo.menu;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 
 import android.text.TextUtils;
@@ -14,7 +14,7 @@ import com.tencent.imsdk.v2.V2TIMFriendAddApplication;
 import com.tencent.imsdk.v2.V2TIMFriendOperationResult;
 import com.tencent.imsdk.v2.V2TIMManager;
 import com.tencent.imsdk.v2.V2TIMValueCallback;
-import com.tencent.qcloud.tim.demo.BaseActivity;
+import com.tencent.qcloud.tim.demo.base.BaseActivity;
 import com.tencent.qcloud.tim.demo.R;
 import com.tencent.qcloud.tim.demo.utils.DemoLog;
 import com.tencent.qcloud.tim.uikit.component.TitleBarLayout;
@@ -22,6 +22,9 @@ import com.tencent.qcloud.tim.uikit.utils.SoftKeyBoardUtil;
 import com.tencent.qcloud.tim.uikit.utils.TUIKitConstants;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
+/**
+ * 添加群聊 / 添加好友
+ */
 public class AddMoreActivity extends BaseActivity {
 
     private static final String TAG = AddMoreActivity.class.getSimpleName();

@@ -7,7 +7,7 @@ import android.os.Build;
 
 import androidx.core.app.ActivityCompat;
 
-import com.tencent.qcloud.tim.demo.DemoApplication;
+import com.tencent.qcloud.tim.demo.base.DemoApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class Utils {
     public static final int REQ_PERMISSION_CODE = 0x100;
 
     //权限检查
-    public static boolean checkPermission(Activity activity) {
+    public static void checkPermission(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             List<String> permissions = new ArrayList<>();
             if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(DemoApplication.instance(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -42,10 +42,7 @@ public class Utils {
                 ActivityCompat.requestPermissions(activity,
                         permissionsArray,
                         REQ_PERMISSION_CODE);
-                return false;
             }
         }
-
-        return true;
     }
 }

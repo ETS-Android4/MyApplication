@@ -2,10 +2,8 @@ package com.tencent.qcloud.tim.demo.helper;
 
 import android.os.Environment;
 
-import com.tencent.qcloud.tim.demo.DemoApplication;
+import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.uikit.TUIKit;
-import com.tencent.qcloud.tim.uikit.component.face.CustomFace;
-import com.tencent.qcloud.tim.uikit.component.face.CustomFaceGroup;
 import com.tencent.qcloud.tim.uikit.config.CustomFaceConfig;
 import com.tencent.qcloud.tim.uikit.config.GeneralConfig;
 import com.tencent.qcloud.tim.uikit.config.TUIKitConfigs;

@@ -2,9 +2,6 @@ package com.tencent.qcloud.tim.demo.conversation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
+import androidx.annotation.Nullable;
+
 import com.tencent.imsdk.v2.V2TIMConversation;
-import com.tencent.qcloud.tim.demo.DemoApplication;
 import com.tencent.qcloud.tim.demo.R;
+import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.demo.chat.ChatActivity;
 import com.tencent.qcloud.tim.demo.menu.Menu;
 import com.tencent.qcloud.tim.demo.utils.Constants;
@@ -32,16 +31,17 @@ import com.tencent.qcloud.tim.uikit.utils.PopWindowUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 会话列表
+ */
 public class ConversationFragment extends BaseFragment {
 
+    private Menu mMenu;
     private View mBaseView;
     private ConversationLayout mConversationLayout;
-    private ListView mConversationPopList;
-    private PopDialogAdapter mConversationPopAdapter;
+
     private PopupWindow mConversationPopWindow;
-    private List<PopMenuAction> mConversationPopActions = new ArrayList<>();
-    private Menu mMenu;
+    private final List<PopMenuAction> mConversationPopActions = new ArrayList<>();
 
     @Nullable
     @Override
@@ -54,11 +54,13 @@ public class ConversationFragment extends BaseFragment {
     private void initView() {
         // 从布局文件中获取会话列表面板
         mConversationLayout = mBaseView.findViewById(R.id.conversation_layout);
-        mMenu = new Menu(getActivity(), (TitleBarLayout) mConversationLayout.getTitleBar(), Menu.MENU_TYPE_CONVERSATION);
-        // 会话列表面板的默认UI和交互初始化
+
+        // 初始化聊天列表
         mConversationLayout.initDefault();
+
         // 通过API设置ConversataonLayout各种属性的样例，开发者可以打开注释，体验效果
-//        ConversationLayoutHelper.customizeConversation(mConversationLayout);
+        //ConversationLayoutHelper.customizeConversation(mConversationLayout);
+
         mConversationLayout.getConversationList().setOnItemClickListener(new ConversationListLayout.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, ConversationInfo conversationInfo) {
@@ -77,6 +79,7 @@ public class ConversationFragment extends BaseFragment {
     }
 
     private void initTitleAction() {
+        mMenu = new Menu(getActivity(), (TitleBarLayout) mConversationLayout.getTitleBar(), Menu.MENU_TYPE_CONVERSATION);
         mConversationLayout.getTitleBar().setOnRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +93,6 @@ public class ConversationFragment extends BaseFragment {
     }
 
     private void initPopMenuAction() {
-
         // 设置长按conversation显示PopAction
         List<PopMenuAction> conversationPopActions = new ArrayList<PopMenuAction>();
         PopMenuAction action = new PopMenuAction();
@@ -124,11 +126,11 @@ public class ConversationFragment extends BaseFragment {
      * @param locationY        长按时Y坐标
      */
     private void showItemPopMenu(final int index, final ConversationInfo conversationInfo, float locationX, float locationY) {
-        if (mConversationPopActions == null || mConversationPopActions.size() == 0)
+        if (mConversationPopActions.size() == 0)
             return;
         View itemPop = LayoutInflater.from(getActivity()).inflate(R.layout.pop_menu_layout, null);
-        mConversationPopList = itemPop.findViewById(R.id.pop_menu_list);
-        mConversationPopList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListView popMenuList = itemPop.findViewById(R.id.pop_menu_list);
+        popMenuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PopMenuAction action = mConversationPopActions.get(position);
@@ -152,8 +154,8 @@ public class ConversationFragment extends BaseFragment {
 
             }
         }
-        mConversationPopAdapter = new PopDialogAdapter();
-        mConversationPopList.setAdapter(mConversationPopAdapter);
+        PopDialogAdapter mConversationPopAdapter = new PopDialogAdapter();
+        popMenuList.setAdapter(mConversationPopAdapter);
         mConversationPopAdapter.setDataSource(mConversationPopActions);
         mConversationPopWindow = PopWindowUtil.popupWindow(itemPop, mBaseView, (int) locationX, (int) locationY);
         mBaseView.postDelayed(new Runnable() {
@@ -165,7 +167,7 @@ public class ConversationFragment extends BaseFragment {
     }
 
     private void startPopShow(View view, int position, ConversationInfo info) {
-        showItemPopMenu(position, info, view.getX(), view.getY() + view.getHeight() / 2);
+        showItemPopMenu(position, info, view.getX(), view.getY() + view.getHeight() / 2f);
     }
 
     private void startChatActivity(ConversationInfo conversationInfo) {

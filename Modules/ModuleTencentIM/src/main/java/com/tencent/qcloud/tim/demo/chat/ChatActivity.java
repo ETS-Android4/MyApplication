@@ -6,15 +6,14 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.tencent.imsdk.v2.V2TIMManager;
-import com.tencent.qcloud.tim.demo.BaseActivity;
 import com.tencent.qcloud.tim.demo.R;
-import com.tencent.qcloud.tim.demo.SplashActivity;
+import com.tencent.qcloud.tim.demo.base.BaseActivity;
+import com.tencent.qcloud.tim.demo.login.LoginActivity;
 import com.tencent.qcloud.tim.demo.thirdpush.OfflineMessageDispatcher;
 import com.tencent.qcloud.tim.demo.utils.Constants;
 import com.tencent.qcloud.tim.demo.utils.DemoLog;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.ChatInfo;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.OfflineMessageBean;
-import com.tencent.qcloud.tim.uikit.modules.chat.base.OfflineMessageContainerBean;
 
 import static com.tencent.imsdk.v2.V2TIMManager.V2TIM_STATUS_LOGINED;
 
@@ -50,7 +49,7 @@ public class ChatActivity extends BaseActivity {
         Bundle bundle = intent.getExtras();
         DemoLog.i(TAG, "bundle: " + bundle + " intent: " + intent);
         if (bundle == null) {
-            startSplashActivity(null);
+            startLoginActivity(null);
             return;
         }
 
@@ -64,7 +63,7 @@ public class ChatActivity extends BaseActivity {
         } else {
             mChatInfo = (ChatInfo) bundle.getSerializable(Constants.CHAT_INFO);
             if (mChatInfo == null) {
-                startSplashActivity(null);
+                startLoginActivity(null);
                 return;
             }
         }
@@ -74,12 +73,12 @@ public class ChatActivity extends BaseActivity {
             mChatFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.empty_view, mChatFragment).commitAllowingStateLoss();
         } else {
-            startSplashActivity(bundle);
+            startLoginActivity(bundle);
         }
     }
 
-    private void startSplashActivity(Bundle bundle) {
-        Intent intent = new Intent(ChatActivity.this, SplashActivity.class);
+    private void startLoginActivity(Bundle bundle) {
+        Intent intent = new Intent(ChatActivity.this, LoginActivity.class);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

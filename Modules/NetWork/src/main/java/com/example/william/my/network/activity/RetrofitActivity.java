@@ -109,7 +109,7 @@ public class RetrofitActivity extends ResponseActivity {
 
 
     private void update() {
-        File file = new File(getExternalCacheDir() + File.separator + "retrofit_update.apk");
+        File file = new File(getExternalCacheDir() + File.separator + "retrofit_update.txt");
 
         FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
         fileIOUtils.writeFileFromString(file, "update");
