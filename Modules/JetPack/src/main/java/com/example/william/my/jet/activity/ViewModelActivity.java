@@ -8,6 +8,7 @@ import com.example.william.my.library.utils.ActivityDataBus;
 import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;
+import com.example.william.my.module.bean.LoginData;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
@@ -42,6 +43,12 @@ public class ViewModelActivity extends ResponseActivity implements LoadingTip.Lo
 
         mViewModel = ActivityDataBus.getData(this, BannerViewModel.class);
 
+        mViewModel.getLoginData().observe(this, new WithLoadingTipObserver<LoginData>(mLoadingTip) {
+            @Override
+            protected void callback(LoginData response) {
+                showResponse(new Gson().toJson(response));
+            }
+        });
         // List<MovieBean>
         mViewModel.getBannersBean().observe(this, new WithLoadingTipObserver<List<BannerBean>>(mLoadingTip) {
             @Override

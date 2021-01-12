@@ -8,6 +8,7 @@ import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannersBean;
+import com.example.william.my.module.bean.LoginData;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.service.NetworkService;
 import com.google.gson.Gson;
@@ -24,6 +25,12 @@ public class RetrofitUtilsActivity extends ResponseActivity {
     private final NetworkService service = RetrofitUtils.buildApi(NetworkService.class);
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        login();
+    }
+
+    @Override
     public void setOnClick() {
         super.setOnClick();
         b = !b;
@@ -32,6 +39,26 @@ public class RetrofitUtilsActivity extends ResponseActivity {
         } else {
             getBannerList();
         }
+    }
+
+    private void login() {
+        Observable<RetrofitResponse<LoginData>> obs = RetrofitUtils.buildObs(
+                service.login("17778060027", "ww123456")
+        );
+
+        obs.subscribe(new RetrofitObserver<RetrofitResponse<LoginData>>() {
+            @Override
+            public void onResponse(RetrofitResponse<LoginData> response) {
+                String net_success = "Success: " + new Gson().toJson(response);
+                showResponse(net_success);
+            }
+
+            @Override
+            public void onFailure(ApiException e) {
+                String net_error = "Error: " + e.getMessage();
+                showResponse(net_error);
+            }
+        });
     }
 
     private void getBanners() {

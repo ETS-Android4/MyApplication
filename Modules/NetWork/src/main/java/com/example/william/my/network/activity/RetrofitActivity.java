@@ -37,8 +37,8 @@ public class RetrofitActivity extends ResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        //login();
-        download();
+        login();
+        //download();
     }
 
     private void login() {

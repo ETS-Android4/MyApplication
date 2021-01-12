@@ -4,6 +4,7 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannersBean;
+import com.example.william.my.module.bean.LoginData;
 
 import java.util.List;
 import java.util.Map;
@@ -33,8 +34,12 @@ import retrofit2.http.Url;
  * @Header("Range") 断点续传
  */
 public interface NetworkService {
+
     @POST(Urls.login)
     Call<ResponseBody> call(@Query("username") String username, @Query("password") String password);
+
+    @POST(Urls.login)
+    Observable<RetrofitResponse<LoginData>> login(@Query("username") String username, @Query("password") String password);
 
     /**
      * GsonConverterFactory

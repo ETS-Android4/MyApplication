@@ -16,7 +16,7 @@ public class LoginBean extends BaseBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean extends BaseBean{
 
         @SerializedName("id")
         private String id;

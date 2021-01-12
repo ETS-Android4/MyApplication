@@ -10,6 +10,7 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.jet.repository.Repository;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;
+import com.example.william.my.module.bean.LoginData;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class BannerViewModel extends ViewModel {
     private final Repository repository;
 
     private final MutableLiveData<Object> bannersLiveData;
+    private final LiveData<RetrofitResponse<LoginData>> loginData;
     private final LiveData<RetrofitResponse<List<BannerBean>>> bannersBean;
     private final LiveData<RetrofitResponse<List<BannerData>>> bannersData;
 
@@ -40,6 +42,13 @@ public class BannerViewModel extends ViewModel {
         repository = Repository.getInstance();
 
         bannersLiveData = new MutableLiveData<>();
+        loginData = Transformations.switchMap(bannersLiveData, new Function<Object, LiveData<RetrofitResponse<LoginData>>>() {
+
+            @Override
+            public LiveData<RetrofitResponse<LoginData>> apply(Object input) {
+                return repository.login("17778060027", "ww123456");
+            }
+        });
         bannersBean = Transformations.switchMap(bannersLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerBean>>>>() {
 
             @Override
@@ -54,6 +63,10 @@ public class BannerViewModel extends ViewModel {
                 return repository.bannerData();
             }
         });
+    }
+
+    public LiveData<RetrofitResponse<LoginData>> getLoginData() {
+        return loginData;
     }
 
     public LiveData<RetrofitResponse<List<BannerBean>>> getBannersBean() {

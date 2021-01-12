@@ -8,6 +8,7 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;
+import com.example.william.my.module.bean.LoginData;
 import com.example.william.my.module.service.NetworkService;
 
 import java.util.ArrayList;
@@ -29,6 +30,18 @@ public class Repository {
 
     private Repository() {
 
+    }
+
+    public LiveData<RetrofitResponse<LoginData>> login(String username, String password) {
+        final MutableLiveData<RetrofitResponse<LoginData>> liveData = new MutableLiveData<>();
+
+        RetrofitUtils.buildLiveData(
+                RetrofitUtils
+                        .buildApi(NetworkService.class)
+                        .login(username, password),
+                new LiveDataCallback<>(liveData));
+
+        return liveData;
     }
 
     public LiveData<RetrofitResponse<List<BannerBean>>> bannerBean() {
