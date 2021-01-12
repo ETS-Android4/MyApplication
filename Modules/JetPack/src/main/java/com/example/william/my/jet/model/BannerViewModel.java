@@ -1,4 +1,4 @@
-package com.example.william.my.jet.viewmodel;
+package com.example.william.my.jet.model;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
@@ -10,6 +10,7 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.jet.repository.Repository;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;
+import com.example.william.my.module.bean.LoginBean;
 
 import java.util.List;
 
@@ -23,8 +24,8 @@ import java.util.List;
  * 2.LiveData在实体类里可以通知指定某个字段的数据更新.
  * 3.MutableLiveData则是完全是整个实体类或者数据类型变化后才通知.不会细节到某个字段
  */
-public class LoginViewModel extends ViewModel {
-//public class LoginViewModel extends AndroidViewModel {
+public class BannerViewModel extends ViewModel {
+//public class BannerViewModel extends AndroidViewModel {
 
     //public LoginViewModel(@NonNull Application application) {
     //    super(application);
@@ -36,7 +37,7 @@ public class LoginViewModel extends ViewModel {
     private final LiveData<RetrofitResponse<List<BannerBean>>> bannersBean;
     private final LiveData<RetrofitResponse<List<BannerData>>> bannersData;
 
-    public LoginViewModel() {
+    public BannerViewModel() {
         repository = Repository.getInstance();
 
         bannersLiveData = new MutableLiveData<>();
@@ -64,7 +65,7 @@ public class LoginViewModel extends ViewModel {
         return bannersData;
     }
 
-    public void banners() {
+    public void request() {
         bannersLiveData.postValue(true);
     }
 }

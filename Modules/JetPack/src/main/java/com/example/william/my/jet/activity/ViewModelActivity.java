@@ -3,7 +3,7 @@ package com.example.william.my.jet.activity;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.loading.LoadingTip;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
-import com.example.william.my.jet.viewmodel.LoginViewModel;
+import com.example.william.my.jet.model.BannerViewModel;
 import com.example.william.my.library.utils.ActivityDataBus;
 import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.bean.BannerBean;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ViewModelActivity extends ResponseActivity implements LoadingTip.LoadingTipListener {
 
     private LoadingTip mLoadingTip;
-    private LoginViewModel mViewModel;
+    private BannerViewModel mViewModel;
 
     @Override
     public void initView() {
@@ -33,14 +33,14 @@ public class ViewModelActivity extends ResponseActivity implements LoadingTip.Lo
     @Override
     protected void onStart() {
         super.onStart();
-        mViewModel.banners();
+        mViewModel.request();
     }
 
     private void initViewModel() {
         mLoadingTip = LoadingTip.addLoadingTipWithTopBar(this);
         mLoadingTip.setOnReloadListener(this);
 
-        mViewModel = ActivityDataBus.getData(this, LoginViewModel.class);
+        mViewModel = ActivityDataBus.getData(this, BannerViewModel.class);
 
         // List<MovieBean>
         mViewModel.getBannersBean().observe(this, new WithLoadingTipObserver<List<BannerBean>>(mLoadingTip) {
@@ -60,6 +60,6 @@ public class ViewModelActivity extends ResponseActivity implements LoadingTip.Lo
 
     @Override
     public void reload() {
-        mViewModel.banners();
+        mViewModel.request();
     }
 }

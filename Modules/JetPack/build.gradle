@@ -8,8 +8,8 @@ android {
         }
     }
     buildFeatures {
-        dataBinding = true
         viewBinding = true
+        dataBinding = true
     }
     resourcePrefix "jet_"
 }
