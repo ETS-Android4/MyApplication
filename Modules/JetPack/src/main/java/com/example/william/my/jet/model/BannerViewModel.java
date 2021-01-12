@@ -10,7 +10,6 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.jet.repository.Repository;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;
-import com.example.william.my.module.bean.LoginBean;
 
 import java.util.List;
 
