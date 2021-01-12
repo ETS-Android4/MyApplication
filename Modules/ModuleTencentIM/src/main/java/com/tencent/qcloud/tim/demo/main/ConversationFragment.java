@@ -15,6 +15,7 @@ import com.tencent.imsdk.v2.V2TIMConversation;
 import com.tencent.qcloud.tim.demo.R;
 import com.tencent.qcloud.tim.demo.base.DemoApplication;
 import com.tencent.qcloud.tim.demo.chat.ChatActivity;
+import com.tencent.qcloud.tim.demo.helper.ConversationLayoutHelper;
 import com.tencent.qcloud.tim.demo.menu.Menu;
 import com.tencent.qcloud.tim.demo.utils.Constants;
 import com.tencent.qcloud.tim.uikit.base.BaseFragment;
@@ -59,7 +60,7 @@ public class ConversationFragment extends BaseFragment {
         mConversationLayout.initDefault();
 
         // 通过API设置ConversataonLayout各种属性的样例，开发者可以打开注释，体验效果
-        //ConversationLayoutHelper.customizeConversation(mConversationLayout);
+        ConversationLayoutHelper.customizeConversation(mConversationLayout);
 
         mConversationLayout.getConversationList().setOnItemClickListener(new ConversationListLayout.OnItemClickListener() {
             @Override

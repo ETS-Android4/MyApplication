@@ -31,16 +31,13 @@ import java.util.Arrays;
 
 public class StartGroupChatActivity extends BaseActivity {
 
-    private static final String TAG = StartGroupChatActivity.class.getSimpleName();
-
     private TitleBarLayout mTitleBar;
-    private ContactListView mContactListView;
     private LineControllerView mJoinType;
-    private ArrayList<GroupMemberInfo> mMembers = new ArrayList<>();
+    private final ArrayList<GroupMemberInfo> mMembers = new ArrayList<>();
     private int mGroupType = -1;
     private int mJoinTypeIndex = 2;
-    private ArrayList<String> mJoinTypes = new ArrayList<>();
-    private ArrayList<String> mGroupTypeValue = new ArrayList<>();
+    private final ArrayList<String> mJoinTypes = new ArrayList<>();
+    private final ArrayList<String> mGroupTypeValue = new ArrayList<>();
     private boolean mCreating;
 
     @Override
@@ -93,9 +90,9 @@ public class StartGroupChatActivity extends BaseActivity {
         mJoinType.setCanNav(true);
         mJoinType.setContent(mJoinTypes.get(2));
 
-        mContactListView = findViewById(R.id.group_create_member_list);
-        mContactListView.loadDataSource(ContactListView.DataSource.FRIEND_LIST);
-        mContactListView.setOnSelectChangeListener(new ContactListView.OnSelectChangedListener() {
+        ContactListView contactListView = findViewById(R.id.group_create_member_list);
+        contactListView.loadDataSource(ContactListView.DataSource.FRIEND_LIST);
+        contactListView.setOnSelectChangeListener(new ContactListView.OnSelectChangedListener() {
             @Override
             public void onSelectChanged(ContactItemBean contact, boolean selected) {
                 if (selected) {
