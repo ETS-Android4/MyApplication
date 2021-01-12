@@ -4,6 +4,7 @@
 
     <application>
         <activity android:name=".JetPackActivity" />
+        <activity android:name=".activity.BindActivity"/>
         <activity android:name=".activity.ViewModelActivity" />
         <activity android:name=".activity.PagingActivity" />
         <activity android:name=".activity.RoomActivity" />
