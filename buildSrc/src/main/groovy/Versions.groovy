@@ -27,7 +27,7 @@ class AndroidVersions {
     static lifecycle_version = "2.2.0"
     //https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
 
-    static paging_version = "3.0.0-alpha09"
+    static paging_version = "3.0.0-alpha11"
     //https://developer.android.google.cn/jetpack/androidx/releases/paging
 
     static room_version = "2.3.0-alpha03"

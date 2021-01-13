@@ -21,6 +21,8 @@ class Deps {
     static room_rxjava = "androidx.room:room-rxjava3:${AndroidVersions.room_version}"
     static room_compiler = "androidx.room:room-compiler:${AndroidVersions.room_version}"
 
+    static paging = "androidx.paging:paging-runtime:${AndroidVersions.paging_version}"
+
     static navigation = "androidx.navigation:navigation-fragment:${AndroidVersions.navigation_version}"
     static navigation_ui = "androidx.navigation:navigation-ui:${AndroidVersions.navigation_version}"
 

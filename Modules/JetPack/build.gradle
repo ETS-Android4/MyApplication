@@ -19,6 +19,8 @@ dependencies {
     //Retrofit
     implementation Deps.retrofit_gson
     implementation Deps.retrofit_rxjava
+    //Paging3
+    implementation Deps.paging
     //Room
     implementation Deps.room
     implementation Deps.room_rxjava
