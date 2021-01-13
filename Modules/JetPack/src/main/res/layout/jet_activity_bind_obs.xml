@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.william.my.jet.model.LiveDataViewModel" />
+            type="com.example.william.my.jet.model.ObservableViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
