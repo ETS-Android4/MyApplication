@@ -38,18 +38,12 @@ public interface NetworkService {
     @POST(Urls.login)
     Call<ResponseBody> call(@Query("username") String username, @Query("password") String password);
 
-    @POST(Urls.login)
-    Observable<RetrofitResponse<LoginData>> login(@Query("username") String username, @Query("password") String password);
-
-    /**
-     * GsonConverterFactory
-     */
     @GET(Urls.banner)
     Observable<BannersBean> getBanners();
 
-    /**
-     * RetrofitConverterFactory
-     */
+    @POST(Urls.login)
+    Observable<RetrofitResponse<LoginData>> login(@Query("username") String username, @Query("password") String password);
+
     @GET(Urls.banner)
     Observable<RetrofitResponse<List<BannerBean>>> getBannersResponse();
 

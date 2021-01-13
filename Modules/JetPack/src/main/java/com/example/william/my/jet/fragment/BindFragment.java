@@ -13,18 +13,18 @@ import com.example.william.my.jet.databinding.JetFragmentBindBinding;
 
 public class BindFragment extends Fragment {
 
-    private JetFragmentBindBinding bind;
+    private JetFragmentBindBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        bind = JetFragmentBindBinding.inflate(inflater, container, false);
-        return bind.getRoot();
+        binding = JetFragmentBindBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onDestroyView() {
-        bind = null;
+        binding = null;
         super.onDestroyView();
     }
 }

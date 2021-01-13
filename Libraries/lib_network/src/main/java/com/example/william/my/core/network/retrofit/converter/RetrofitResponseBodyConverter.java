@@ -51,6 +51,6 @@ public class RetrofitResponseBodyConverter<T> implements Converter<ResponseBody,
     }
 
     private String getErrMessage(JsonObject jsonObject) {
-        return jsonObject.has("message") ? jsonObject.get("message").getAsString() : "数据异常";
+        return jsonObject.has("errorMsg") ? jsonObject.get("errorMsg").getAsString() : "数据异常";
     }
 }

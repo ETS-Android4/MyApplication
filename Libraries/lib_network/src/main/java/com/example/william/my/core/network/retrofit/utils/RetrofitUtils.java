@@ -67,7 +67,7 @@ public class RetrofitUtils {
     /**
      * ViewModel -> LiveDataCallback
      *
-     * @param callback LiveDataCallback
+     * @param callback LiveDataCallback(需要RetrofitResponse<Bean>格式数据)
      */
     public static <T> void buildLiveData(Observable<T> observable, final RetrofitCallback<T> callback) {
         observable

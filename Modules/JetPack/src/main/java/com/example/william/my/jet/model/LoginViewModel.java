@@ -24,8 +24,8 @@ import java.util.List;
  * 2.LiveData在实体类里可以通知指定某个字段的数据更新.
  * 3.MutableLiveData则是完全是整个实体类或者数据类型变化后才通知.不会细节到某个字段
  */
-public class BannerViewModel extends ViewModel {
-//public class BannerViewModel extends AndroidViewModel {
+public class LoginViewModel extends ViewModel {
+//public class LoginViewModel extends AndroidViewModel {
 
     //public LoginViewModel(@NonNull Application application) {
     //    super(application);
@@ -38,7 +38,7 @@ public class BannerViewModel extends ViewModel {
     private final LiveData<RetrofitResponse<List<BannerBean>>> bannersBean;
     private final LiveData<RetrofitResponse<List<BannerData>>> bannersData;
 
-    public BannerViewModel() {
+    public LoginViewModel() {
         repository = Repository.getInstance();
 
         bannersLiveData = new MutableLiveData<>();
