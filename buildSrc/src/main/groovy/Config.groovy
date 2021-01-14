@@ -25,26 +25,27 @@ class Config {
     //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
 
     static depConfig = [
-            plugin_gradle : new DepConfig(pluginPath: "com.android.tools.build:gradle:$gradleVersion"),
-            plugin_kotlin : new DepConfig(pluginPath: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"),
-            plugin_arouter: new DepConfig(pluginPath: "com.alibaba:arouter-register:$routerVersion"),
-            plugin_bus    : new DepConfig(pluginPath: "com.blankj:bus-gradle-plugin:$busVersion"),
+            plugin_gradle  : new DepConfig(pluginPath: "com.android.tools.build:gradle:$gradleVersion"),
+            plugin_kotlin  : new DepConfig(pluginPath: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"),
+            plugin_arouter : new DepConfig(pluginPath: "com.alibaba:arouter-register:$routerVersion"),
+            plugin_bus     : new DepConfig(pluginPath: "com.blankj:bus-gradle-plugin:$busVersion"),
 
-            Module        : new DepConfig(true, ":Module"),
+            Module         : new DepConfig(true, ":Module"),
 
-            AndroidUtil   : new DepConfig(true, ":Modules:AndroidUtil"),
+            AndroidUtil    : new DepConfig(true, ":Modules:AndroidUtil"),
 
-            NetWork       : new DepConfig(true, ":Modules:NetWork"),
-            CustomView    : new DepConfig(true, ":Modules:CustomView"),
+            NetWork        : new DepConfig(true, ":Modules:NetWork"),
+            CustomView     : new DepConfig(true, ":Modules:CustomView"),
 
-            JetPack       : new DepConfig(true, ":Modules:JetPack"),
-            OpenSource    : new DepConfig(true, ":Modules:OpenSource"),
-            Sample        : new DepConfig(true, ":Modules:Sample"),
+            JetPack        : new DepConfig(true, ":Modules:JetPack"),
+            OpenSource     : new DepConfig(true, ":Modules:OpenSource"),
+            Sample         : new DepConfig(true, ":Modules:Sample"),
 
-            ModuleWx      : new DepConfig(false, ":Modules:ModuleWx"),
-            ModuleJiguang : new DepConfig(false, ":Modules:ModuleJiguang"),
+            ModuleWx       : new DepConfig(false, ":Modules:ModuleWx"),
+            ModuleJiguang  : new DepConfig(false, ":Modules:ModuleJiguang"),
+            ModuleTencentIM: new DepConfig(false, ":Modules:ModuleTencentIM"),
 
-            Kotlin        : new DepConfig(true, ":Modules:Kotlin"),
+            Kotlin         : new DepConfig(true, ":Modules:Kotlin"),
             //ModuleTV      : new DepConfig(false, ":Modules:ModuleTV"),
     ]
 }

@@ -77,7 +77,7 @@ public class ModuleActivity extends ARouterActivity {
         mMap.put("OpenSourceActivity", ARouterPath.OpenSource.OpenSource);
         mMap.put("SampleActivity", ARouterPath.Sample.Sample);
 
-        //mMap.put("KotlinActivity", ARouterPath.Kotlin.Kotlin);
+        mMap.put("KotlinActivity", ARouterPath.Kotlin.Kotlin);
 
         LiveEventBus
                 .get("some_key", String.class)
