@@ -1,7 +1,5 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-}
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -44,5 +42,5 @@ dependencies {
     implementation Deps.constraintlayout
     //ARouter
     implementation Deps.arouter
-    kapt Deps.arouter_compiler
+    //kapt Deps.arouter_compiler
 }

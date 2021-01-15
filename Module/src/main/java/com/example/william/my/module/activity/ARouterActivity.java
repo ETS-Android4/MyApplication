@@ -32,8 +32,6 @@ public class ARouterActivity extends AppCompatActivity implements AdapterView.On
         Log.e(TAG, getClass().getSimpleName());
         setContentView(R.layout.basics_layout_router);
 
-        ARouter.getInstance()
-                .inject(this);//BaseActivity
 
         findView();
         initData();
