@@ -15,21 +15,29 @@ public class ModuleApp extends BaseApp implements IComponentApplication {
 
     @Override
     public void init(Application application) {
+        initCrash();
+        initARouter();
+    }
+
+    @Override
+    public void initAsync(Application application) {
+
+    }
+
+    private void initCrash() {
         Crash.init(new Crash.OnCrashListener() {
             @Override
             public void onCrash(String crashInfo, Throwable e) {
                 Log.e(TAG, crashInfo);
             }
         });
+    }
+
+    private void initARouter() {
         if (BuildConfig.DEBUG) {
             ARouter.openLog();//打印日志
             ARouter.openDebug();//开启调试模式
         }
         ARouter.init(getApp());//初始化
-    }
-
-    @Override
-    public void initAsync(Application application) {
-
     }
 }
