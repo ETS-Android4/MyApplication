@@ -35,7 +35,6 @@ public class OpenSourceActivity extends ARouterActivity {
         mMap.put("FlycoTabLayoutActivity", ARouterPath.OpenSource.OpenSource_FlycoTabLayout);
         mMap.put("GSYPlayerActivity", ARouterPath.OpenSource.OpenSource_GSYPlayer);
         mMap.put("ImageSelectorActivity", ARouterPath.OpenSource.OpenSource_ImageSelector);
-        mMap.put("PicSelectorActivity", ARouterPath.OpenSource.OpenSource_PicSelector);
         mMap.put("PhotoViewActivity", ARouterPath.OpenSource.OpenSource_PhotoView);
         mMap.put("PickerViewActivity", ARouterPath.OpenSource.OpenSource_PickerView);
         mMap.put("PopWindowActivity", ARouterPath.OpenSource.OpenSource_PopWindow);

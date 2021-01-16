@@ -16,7 +16,6 @@
         <activity android:name=".activity.FlycoTabLayoutActivity" />
         <activity android:name=".activity.GSYPlayerActivity" />
         <activity android:name=".activity.ImageSelectorActivity" />
-        <activity android:name=".activity.PicSelectorActivity" />
         <activity android:name=".activity.PhotoViewActivity" />
         <activity android:name=".activity.PickerViewActivity" />
         <activity android:name=".activity.PopWindowActivity" />
