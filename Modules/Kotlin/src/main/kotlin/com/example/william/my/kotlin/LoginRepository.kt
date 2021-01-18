@@ -7,6 +7,7 @@ import java.net.URL
 
 class LoginRepository(private val responseParser: LoginResponseParser) {
 
+    // 发出网络请求，阻塞当前线程
     // Function that makes the network request, blocking the current thread
     fun makeLoginRequest(jsonBody: String): Result<LoginBean> {
         val url = URL(loginUrl)
@@ -16,10 +17,7 @@ class LoginRepository(private val responseParser: LoginResponseParser) {
             setRequestProperty("Accept", "application/json")
             doOutput = true
             outputStream.write(jsonBody.toByteArray())
-            //return withContext(Dispatchers.IO) {
-            //    Result.Success(responseParser.parse(inputStream))
-            //}
-            Result.Success(responseParser.parse(inputStream))
+            return Result.Success(responseParser.parse(inputStream))
         }
         return Result.Error(Exception("Cannot open HttpURLConnection"))
     }

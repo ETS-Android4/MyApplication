@@ -5,6 +5,7 @@ import com.example.william.my.module.activity.ARouterActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
+ * https://developer.android.google.cn/jetpack/guide
  * https://developer.android.google.cn/topic/libraries/architecture/index.html
  */
 @Route(path = ARouterPath.JetPack.JetPack)
