@@ -114,6 +114,7 @@ public class ARouterPath {
 
         public static final String Sample_Animator = "/module_sample/animator";
         public static final String Sample_AsyncTask = "/module_sample/async";
+        public static final String Sample_AudioPlayer = "/module_sample/audio_player";
         public static final String Sample_Broadcast = "/module_sample/broadcast";
         public static final String Sample_Messenger = "/module_sample/messenger";
         public static final String Sample_NetworkStatus = "/module_sample/net_status";

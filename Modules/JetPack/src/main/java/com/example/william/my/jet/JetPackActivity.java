@@ -4,6 +4,9 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.ARouterActivity;
 import com.example.william.my.module.router.ARouterPath;
 
+/**
+ * https://developer.android.google.cn/topic/libraries/architecture/index.html
+ */
 @Route(path = ARouterPath.JetPack.JetPack)
 public class JetPackActivity extends ARouterActivity {
 

@@ -3,6 +3,7 @@
     package="com.example.william.my.sample">
 
     <application>
+
         <activity android:name=".SampleActivity" />
         <activity android:name=".activity.AppBarActivity" />
         <activity android:name=".activity.DialogActivity" />
@@ -15,9 +16,9 @@
         <activity android:name=".activity.ViewPager2Activity" />
         <activity android:name=".activity.WebViewActivity" />
 
-
         <activity android:name=".activity.AnimatorActivity" />
         <activity android:name=".activity.AsyncTaskActivity" />
+        <activity android:name=".activity.AudioPlayerActivity" />
         <activity android:name=".activity.BroadcastActivity" />
         <activity android:name=".activity.MessengerActivity" />
         <activity android:name=".activity.NetworkStatusActivity" />
@@ -28,7 +29,6 @@
         <activity android:name=".activity.TransitionSecondActivity" />
         <activity android:name=".activity.TurntableActivity" />
         <activity android:name=".activity.TypefaceActivity" />
-
 
         <service android:name=".service.AIDLService" />
         <service android:name=".service.ForegroundService" />

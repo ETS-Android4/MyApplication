@@ -2,17 +2,10 @@ package com.example.william.my.jet.repository;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.paging.Pager;
-import androidx.paging.PagingConfig;
-import androidx.paging.PagingData;
-import androidx.paging.PagingSource;
-import androidx.paging.rxjava3.PagingRx;
 
 import com.example.william.my.core.network.retrofit.callback.LiveDataCallback;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
-import com.example.william.my.jet.source.DataSource;
-import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;
 import com.example.william.my.module.service.NetworkService;
@@ -20,11 +13,12 @@ import com.example.william.my.module.service.NetworkService;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Flowable;
-import kotlin.jvm.functions.Function0;
-
 /**
  * 数据仓库
+ * LiveData 是一个生命周期感知组件，它并不属于 Repositories 或者 DataSource 层，最好在 View 和 ViewModel 层中使用它。
+ * 如果在 Repositories 或者 DataSource 中使用会有几个问题：
+ * 1. 它不支持线程切换，其次不支持背压，也就是在一段时间内发送数据的速度 > 接受数据的速度，LiveData 无法正确的处理这些请求
+ * 2. 使用 LiveData 的最大问题是所有数据转换都将在主线程上完成
  */
 public class Repository {
 
