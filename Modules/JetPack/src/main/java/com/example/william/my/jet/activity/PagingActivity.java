@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.paging.PagingData;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,17 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.jet.R;
 import com.example.william.my.jet.adapter.PagingAdapter;
-import com.example.william.my.jet.model.LoginViewModel;
-import com.example.william.my.library.utils.ActivityDataBus;
 import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.router.ARouterPath;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import kotlin.Unit;
-import kotlin.coroutines.Continuation;
-import kotlinx.coroutines.flow.FlowCollector;
 
 /**
  * https://developer.android.google.cn/topic/libraries/architecture/paging/v3-overview

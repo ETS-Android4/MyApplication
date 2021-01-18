@@ -38,6 +38,9 @@ class AndroidVersions {
 
     static work_version = "2.4.0"
     //https://developer.android.google.cn/jetpack/androidx/releases/work
+
+    static kotlin_coroutines = "1.3.9"
+    //https://developer.android.google.cn/kotlin/coroutines
 }
 
 class DepsVersions {

@@ -12,10 +12,8 @@ class Deps {
     static coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:${AndroidVersions.coordinatorlayout_version}"
     static flexbox = "com.google.android:flexbox:${AndroidVersions.flexbox_version}"
 
-    static core = "androidx.core:core:${AndroidVersions.core_version}"
     static core_ktx = "androidx.core:core-ktx:${AndroidVersions.core_version}"
-
-    static lifecycle = "androidx.lifecycle:lifecycle-extensions:${AndroidVersions.lifecycle_version}"
+    static viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${AndroidVersions.lifecycle_version}"
 
     static room = "androidx.room:room-runtime:${AndroidVersions.room_version}"
     static room_rxjava = "androidx.room:room-rxjava3:${AndroidVersions.room_version}"
@@ -28,6 +26,8 @@ class Deps {
     static navigation_ui = "androidx.navigation:navigation-ui:${AndroidVersions.navigation_version}"
 
     static work = "androidx.work:work-runtime:${AndroidVersions.work_version}"
+
+    static kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${AndroidVersions.kotlin_coroutines}"
 
     //Base
 

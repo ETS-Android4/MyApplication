@@ -4,12 +4,12 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.jet.R;
 import com.example.william.my.jet.databinding.JetActivityBindObsBinding;
 import com.example.william.my.jet.model.ObservableViewModel;
-import com.example.william.my.library.utils.ActivityDataBus;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
@@ -53,7 +53,7 @@ public class BindActivity extends AppCompatActivity {
 
         // DataBinding -> ObservableViewModel
         // An alternative ViewModel using Observable fields and @Bindable properties can be used:
-        ObservableViewModel mObsViewModel = ActivityDataBus.getData(this, ObservableViewModel.class);
+        ObservableViewModel mObsViewModel = new ViewModelProvider(this).get(ObservableViewModel.class);
         JetActivityBindObsBinding mObsDataBinding = DataBindingUtil.setContentView(this, R.layout.jet_activity_bind_obs);
         mObsDataBinding.setLifecycleOwner(this);
         mObsDataBinding.setModel(mObsViewModel);

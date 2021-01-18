@@ -27,9 +27,7 @@ android {
 
 dependencies {
     //Android
-    implementation Deps.core
     implementation Deps.appcompat
-    implementation Deps.lifecycle
     //EventBus
     implementation Deps.eventbus
     annotationProcessor Deps.eventbus_processor
