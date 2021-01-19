@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.example.william.my.kotlin.Singleton
 import com.example.william.my.kotlin.databinding.KotlinActivityKotlinBinding
+import com.example.william.my.kotlin.utils.Singleton
 import com.example.william.my.module.router.ARouterPath
 
 /**
@@ -21,9 +21,11 @@ class KotlinActivity : AppCompatActivity() {
         setContentView(binding.root)
         //setContentView(R.layout.kotlin_activity_kotlin)
 
+        startActivity(Intent(this, CoroutinesActivity::class.java))
+        finish()
+
         binding.kotlinTextView.setOnClickListener {
             Singleton.getInstance(this).showToast()
-            startActivity(Intent(this, CoroutinesActivity::class.java))
         }
     }
 

@@ -1,20 +1,18 @@
 package com.example.william.my.kotlin.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.example.william.my.kotlin.LoginRepository
-import com.example.william.my.kotlin.LoginResponseParser
-import com.example.william.my.kotlin.LoginViewModel
 import com.example.william.my.kotlin.databinding.KotlinActivityKotlinBinding
-import com.example.william.my.module.bean.LoginBean
+import com.example.william.my.kotlin.model.LoginViewModel
+import com.example.william.my.kotlin.repository.LoginRepository
 import com.example.william.my.module.router.ARouterPath
-import com.google.gson.Gson
 
 /**
+ * https://developer.android.google.cn/kotlin/coroutines
  * https://codelabs.developers.google.com/codelabs/kotlin-coroutines#0
+ *
  * launch、async：启动一个新协程
  * withContext：不启动新协程，在原来的协程中切换线程，需要传入一个CoroutineContext对象
  */
@@ -29,10 +27,10 @@ class CoroutinesActivity : AppCompatActivity() {
         val binding = KotlinActivityKotlinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = LoginViewModel(LoginRepository(LoginResponseParser()))
+        viewModel = LoginViewModel(LoginRepository())
 
-        viewModel.loginBean.observe(this, Observer {
-            Log.e("TAG", Gson().toJson(it))
+        viewModel.login.observe(this, Observer {
+            binding.kotlinTextView.text = it
         })
 
         binding.kotlinTextView.setOnClickListener {
