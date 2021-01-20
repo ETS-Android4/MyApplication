@@ -7,6 +7,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ArticlesDataSource(private val refreshIntervalMs: Long = 3000) {
 
@@ -20,7 +21,8 @@ class ArticlesDataSource(private val refreshIntervalMs: Long = 3000) {
 
     private fun buildApi(): KotlinService {
         val retrofit = Retrofit.Builder()
-            .baseUrl(Urls.baseUrl) //baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
+            .baseUrl(Urls.baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit.create(KotlinService::class.java)
     }
