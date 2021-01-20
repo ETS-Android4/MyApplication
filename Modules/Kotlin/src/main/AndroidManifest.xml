@@ -3,6 +3,7 @@
     package="com.example.william.my.kotlin">
 
     <application>
+        <activity android:name=".activity.FlowActivity"></activity>
         <activity android:name=".activity.KotlinActivity" />
         <activity android:name=".activity.CoroutinesActivity" />
     </application>

@@ -21,7 +21,7 @@ class KotlinActivity : AppCompatActivity() {
         setContentView(binding.root)
         //setContentView(R.layout.kotlin_activity_kotlin)
 
-        startActivity(Intent(this, CoroutinesActivity::class.java))
+        startActivity(Intent(this, FlowActivity::class.java))
         finish()
 
         binding.kotlinTextView.setOnClickListener {

@@ -25,7 +25,7 @@ class LoginRepository {
     // 发出网络请求，阻塞当前线程
     // Function that makes the network request, blocking the current thread
     private fun makeLoginRequest(jsonBody: String): NetworkResult<LoginData> {
-        val url = URL(loginUrl)
+        val url = URL(Urls.login)
         (url.openConnection() as? HttpURLConnection)?.run {
             requestMethod = "POST"
             setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -48,9 +48,5 @@ class LoginRepository {
         reader.close()
         val response = msg.toString()
         return Gson().fromJson(response, LoginData::class.java)
-    }
-
-    companion object {
-        private const val loginUrl = Urls.login
     }
 }

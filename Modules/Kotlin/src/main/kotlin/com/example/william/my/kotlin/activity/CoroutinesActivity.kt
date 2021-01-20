@@ -10,8 +10,8 @@ import com.example.william.my.kotlin.repository.LoginRepository
 import com.example.william.my.module.router.ARouterPath
 
 /**
+ * 协程
  * https://developer.android.google.cn/kotlin/coroutines
- * https://codelabs.developers.google.com/codelabs/kotlin-coroutines#0
  *
  * launch、async：启动一个新协程
  * withContext：不启动新协程，在原来的协程中切换线程，需要传入一个CoroutineContext对象
