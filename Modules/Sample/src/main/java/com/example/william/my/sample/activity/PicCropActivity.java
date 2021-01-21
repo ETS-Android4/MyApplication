@@ -172,7 +172,7 @@ public class PicCropActivity extends AppCompatActivity implements View.OnClickLi
     private Uri saveBitmap2Uri(Bitmap bitmap) {
         File file = new File(getExternalCacheDir() + File.separator + System.currentTimeMillis() + ".jpg");
         ImageUtilsService service = (ImageUtilsService) ARouter.getInstance().build(ARouterPath.Service.ImageUtilsService).navigation();
-        service.save(bitmap, file, Bitmap.CompressFormat.JPEG);
+        boolean successful = service.save(bitmap, file, Bitmap.CompressFormat.JPEG);
         return FileProvider.getUriForFile(PicCropActivity.this, getPackageName() + ".fileProvider", file);
     }
 }

@@ -93,9 +93,9 @@ public class RetrofitActivity extends ResponseActivity {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    FileIOUtilsService service = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+                    FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
                     File file = new File(getExternalCacheDir() + File.separator + "retrofit_download.apk");
-                    service.writeFileFromIS(file, response.body().byteStream());
+                    boolean successful = fileIOUtils.writeFileFromIS(file, response.body().byteStream());
                 }
             }
 
@@ -112,7 +112,7 @@ public class RetrofitActivity extends ResponseActivity {
         File file = new File(getExternalCacheDir() + File.separator + "retrofit_update.txt");
 
         FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
-        fileIOUtils.writeFileFromString(file, "update");
+        boolean successful = fileIOUtils.writeFileFromString(file, "update");
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.baseUrl)//baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException

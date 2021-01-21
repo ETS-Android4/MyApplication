@@ -107,9 +107,9 @@ public class OkHttpActivity extends ResponseActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
                 if (response.isSuccessful() && response.body() != null) {
-                    FileIOUtilsService service = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+                    FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
                     File file = new File(getExternalCacheDir() + File.separator + "ok_http_download.apk");
-                    service.writeFileFromIS(file, response.body().byteStream());
+                    boolean successful = fileIOUtils.writeFileFromIS(file, response.body().byteStream());
                 }
             }
         });
@@ -119,7 +119,7 @@ public class OkHttpActivity extends ResponseActivity {
         File file = new File(getExternalCacheDir() + File.separator + "ok_http__update.txt");
 
         FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
-        fileIOUtils.writeFileFromString(file, "update");
+        boolean successful = fileIOUtils.writeFileFromString(file, "update");
 
         //创建Client对象
         OkHttpClient okHttpClient = new OkHttpClient();
