@@ -22,7 +22,7 @@ class ArticlesRepository {
         ArticlesDataSource().latestNews
             // 中间运算符 map 转换数据
             .map { articles ->
-                articles
+                articlesTakeOne(articles)
             }
             // Intermediate operation to save the latest news in the cache
             .onEach {
@@ -34,6 +34,11 @@ class ArticlesRepository {
             // 下游不受影响
             // the downstream flow ↓ is not affected
             .catch { exception ->
-                Log.e("TAG", exception.message.toString())
+                Log.e("TAG", "exception : " + exception.message.toString())
             }
+
+    private fun articlesTakeOne(articles: ArticlesBean): ArticlesBean {
+        articles.data.datas = articles.data.datas.take(1)
+        return articles
+    }
 }
