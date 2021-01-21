@@ -1,13 +1,11 @@
 package com.example.william.my.kotlin.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.william.my.kotlin.repository.ArticlesRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
@@ -40,6 +38,18 @@ class ArticlesViewModel(private val articlesRepository: ArticlesRepository) : Vi
                 .collect { article ->
                     _articles.postValue(Gson().toJson(article))
                 }
+
         }
+    }
+
+    /**
+     * 使用 LiveData 协程构造方法
+     */
+    fun getArticles2() = liveData<String> {
+        articlesRepository.getArticles
+            // 在一段时间内发送多次数据，只会接受最新的一次发射过来的数据
+            .collectLatest { article ->
+                emit(Gson().toJson(article))
+            }
     }
 }

@@ -33,5 +33,9 @@ class FlowActivity : AppCompatActivity() {
         binding.kotlinTextView.setOnClickListener {
             articlesViewModel.getArticles()
         }
+
+        //articlesViewModel.getArticles2().observe(this, Observer { articles ->
+        //    binding.kotlinTextView.text = articles
+        //})
     }
 }

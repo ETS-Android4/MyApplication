@@ -19,7 +19,7 @@ class ArticlesRepository {
      * the current value emitted by the flow at that point in time.
      */
     val getArticles: Flow<ArticlesBean> =
-        ArticlesDataSource().latestNews
+        ArticlesDataSource().getArticles
             // 中间运算符 map 转换数据
             .map { articles ->
                 articlesTakeOne(articles)
