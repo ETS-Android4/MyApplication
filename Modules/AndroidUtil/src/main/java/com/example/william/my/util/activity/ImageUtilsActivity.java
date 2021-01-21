@@ -34,11 +34,11 @@ public class ImageUtilsActivity extends AppCompatActivity {
         //mImageView.setImageBitmap(bitmap);
         Drawable bitmap2Drawable = ImageUtils.bitmap2Drawable(bitmap);
 
+        //采样压缩 压缩格式为JPEG
+        mImageView.setImageBitmap(ImageUtils.compressBySampleSize(bitmap, 2));
+
         //缩放压缩
         mImageView.setImageBitmap(ImageUtils.compressByScale(bitmap, 0.5f, 0.5f));
-
-        //采样压缩
-        mImageView.setImageBitmap(ImageUtils.compressBySampleSize(bitmap, 2));
 
         String filePath = getExternalCacheDir() + File.separator + "launcher.png";
 
