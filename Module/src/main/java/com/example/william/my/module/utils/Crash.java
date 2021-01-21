@@ -11,8 +11,6 @@ import java.util.Locale;
 
 public final class Crash {
 
-    private static final String FILE_SEP = System.getProperty("file.separator");
-
     private static final Thread.UncaughtExceptionHandler DEFAULT_UNCAUGHT_EXCEPTION_HANDLER = Thread.getDefaultUncaughtExceptionHandler();
 
     private Crash() {

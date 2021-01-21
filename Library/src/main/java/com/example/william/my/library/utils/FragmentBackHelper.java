@@ -1,4 +1,4 @@
-package com.example.william.my.library.fragment;
+package com.example.william.my.library.utils;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -6,7 +6,31 @@ import androidx.fragment.app.FragmentManager;
 
 import java.util.List;
 
-public class FragmentBackHandler {
+/**
+ *   1. 在Activity中覆盖onBackPressed()方法
+ *   @Override
+ *    public void onBackPressed() {
+ *        if (!BackHandlerHelper.handleBackPress(this)) {
+ *            super.onBackPressed();
+ *        }
+ *    }
+ *   2. 实现实现 FragmentBackHandler
+ *   @Override
+ *   public boolean onBackPressed() {
+ *       if (handleBackPressed) {
+ *           //外理返回键
+ *           return true;
+ *       } else {
+ *           // 如果不包含子Fragment
+ *           // 或子Fragment没有外理back需求
+ *           // 可如直接 return false;
+ *           // 注：如果Fragment/Activity 中可以使用ViewPager 代替 this
+ *           //
+ *           return BackHandlerHelper.handleBackPress(this);
+ *       }
+ *   }
+ */
+public class FragmentBackHelper {
 
     /**
      * 将back事件分发给 FragmentManager 中管理的子Fragment，如果该 FragmentManager 中的所有Fragment都
@@ -66,11 +90,11 @@ public class FragmentBackHandler {
         return fragment != null
                 && fragment.isVisible()
                 && fragment.getUserVisibleHint() //for ViewPager
-                && fragment instanceof OnBackPressed
-                && ((OnBackPressed) fragment).onBackPressed();
+                && fragment instanceof FragmentBackHandler
+                && ((FragmentBackHandler) fragment).onBackPressed();
     }
 
-    public interface OnBackPressed {
+    public interface FragmentBackHandler {
         boolean onBackPressed();
     }
 }
