@@ -1,6 +1,6 @@
 package com.example.william.my.kotlin.source
 
-import com.example.william.my.kotlin.service.KotlinService
+import com.example.william.my.kotlin.service.KotlinApi
 import com.example.william.my.module.base.Urls
 import com.example.william.my.module.bean.ArticlesBean
 import kotlinx.coroutines.delay
@@ -9,7 +9,10 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ArticlesDataSource(private val refreshIntervalMs: Long = 3000) {
+/**
+ * 创建数据流
+ */
+class ArticlesDataSource(private val refreshIntervalMs: Long = 5000) {
 
     val latestNews: Flow<ArticlesBean> = flow {
         while (true) {
@@ -19,12 +22,12 @@ class ArticlesDataSource(private val refreshIntervalMs: Long = 3000) {
         }
     }
 
-    private fun buildApi(): KotlinService {
+    private fun buildApi(): KotlinApi {
         val retrofit = Retrofit.Builder()
             .baseUrl(Urls.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        return retrofit.create(KotlinService::class.java)
+        return retrofit.create(KotlinApi::class.java)
     }
 }
 

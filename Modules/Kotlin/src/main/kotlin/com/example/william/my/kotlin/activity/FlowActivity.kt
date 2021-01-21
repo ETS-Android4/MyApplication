@@ -8,7 +8,6 @@ import com.example.william.my.kotlin.databinding.KotlinActivityKotlinBinding
 import com.example.william.my.kotlin.model.ArticlesViewModel
 import com.example.william.my.kotlin.repository.ArticlesRepository
 import com.example.william.my.module.router.ARouterPath
-import com.google.gson.Gson
 
 /**
  * 数据流
@@ -27,13 +26,12 @@ class FlowActivity : AppCompatActivity() {
 
         articlesViewModel = ArticlesViewModel(ArticlesRepository())
 
-
         articlesViewModel.articles.observe(this, Observer { articles ->
-            binding.kotlinTextView.text = Gson().toJson(articles)
+            binding.kotlinTextView.text = articles
         })
 
         binding.kotlinTextView.setOnClickListener {
-            articlesViewModel.getArticle()
+            articlesViewModel.getArticles()
         }
     }
 }
