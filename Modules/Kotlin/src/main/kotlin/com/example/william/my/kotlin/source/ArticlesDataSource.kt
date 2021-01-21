@@ -13,7 +13,7 @@ class ArticlesDataSource(private val refreshIntervalMs: Long = 3000) {
 
     val latestNews: Flow<ArticlesBean> = flow {
         while (true) {
-            val latestNews = buildApi().getArticle(0)
+            val latestNews = buildApi().getArticles(0)
             emit(latestNews) // Emits the result of the request to the flow 向数据流发送请求结果
             delay(refreshIntervalMs) // Suspends the coroutine for some time 挂起一段时间
         }
