@@ -57,6 +57,9 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
         //initRadioButtons();
     }
 
+    /**
+     * setMaxLifecycle 限制生命周期
+     */
     private void initFragment(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             for (int i = 0; i < mFragments.length; i++) {
@@ -91,6 +94,9 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
         }
     }
 
+    /**
+     * setMaxLifecycle 限制生命周期
+     */
     private void switchTo(int position) {
         mTransaction = getSupportFragmentManager().beginTransaction();
         mTransaction.show(mFragments[position]);
