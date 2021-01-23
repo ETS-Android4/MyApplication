@@ -24,10 +24,6 @@ class ArticlesRepository {
             .map { articles ->
                 articlesTakeOne(articles)
             }
-            // Intermediate operation to save the latest news in the cache
-            .onEach {
-                //Log.e("TAG", Gson().toJson(it))
-            }
             // flowOn 只影响上游
             // flowOn affects the upstream flow ↑
             .flowOn(Dispatchers.IO)

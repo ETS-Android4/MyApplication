@@ -5,13 +5,27 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelKt;
+import androidx.paging.Pager;
+import androidx.paging.PagingConfig;
+import androidx.paging.PagingData;
+import androidx.paging.PagingSource;
+import androidx.paging.rxjava3.PagingRx;
 
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.jet.repository.Repository;
+import com.example.william.my.jet.source.DataPagingSource;
+import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Flowable;
+import kotlin.jvm.functions.Function0;
+import kotlinx.coroutines.CoroutineScope;
+
+;
 
 /**
  * 如果需要Context则使用AndroidViewModel
@@ -64,6 +78,29 @@ public class LoginViewModel extends ViewModel {
 
     public LiveData<RetrofitResponse<List<BannerData>>> getBannersData() {
         return bannersData;
+    }
+
+    private Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> flowable;
+
+    public Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> getFlowable() {
+        return flowable;
+    }
+
+    public void getArticles() {
+        // CoroutineScope 由 lifecycle-viewmodel-ktx 提供
+        // CoroutineScope helper provided by the lifecycle-viewmodel-ktx artifact.
+        CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
+        Pager<Integer, ArticlesBean.DataBean.ArticleBean> pager = new Pager<>(
+                new PagingConfig(0),
+                new Function0<PagingSource<Integer, ArticlesBean.DataBean.ArticleBean>>() {
+                    @Override
+                    public PagingSource<Integer, ArticlesBean.DataBean.ArticleBean> invoke() {
+                        return new DataPagingSource();
+                    }
+                });
+        Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> flowable = PagingRx.getFlowable(pager);
+        // cachedIn() 运算符使数据流可共享
+        PagingRx.cachedIn(flowable, viewModelScope);
     }
 
     public void request() {
