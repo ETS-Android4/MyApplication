@@ -15,12 +15,14 @@ import java.io.OutputStream;
 
 public class UriUtils {
 
+    private static final String RELATIVE_PATH = Environment.DIRECTORY_DOWNLOADS + "/" + BaseApp.getApp().getPackageName();
+
     public static Uri save(InputStream is, String fileName) {
         ContentValues contentValues = new ContentValues();
         // 设置文件名
         contentValues.put(MediaStore.Downloads.DISPLAY_NAME, fileName);
         // 指定次级目录
-        contentValues.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/" + BaseApp.getApp().getPackageName());
+        contentValues.put(MediaStore.Downloads.RELATIVE_PATH, RELATIVE_PATH);
         Uri uri = BaseApp.getApp().getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
         if (uri == null) {
             return null;
@@ -51,10 +53,27 @@ public class UriUtils {
     }
 
     public static void isExist() {
-        Cursor cursor = BaseApp.getApp().getContentResolver().query(MediaStore.Downloads.EXTERNAL_CONTENT_URI, null, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            Log.e("UriUtils", "fileName");
+        String[] projection = new String[]{};//返回哪些列表
+
+        String selection = null;//查询条件
+        String[] selectionArgs = new String[]{};//查询条件参数
+
+        // 只找jpg跟png图片
+        //String selection = MediaStore.Images.Media.MIME_TYPE + "=? or " + MediaStore.Images.Media.MIME_TYPE + "=?";
+        //String[] selectionArgs = new String[]{"image/jpeg", "image/png"};
+        Cursor cursor = BaseApp.getApp().getContentResolver().query(
+                MediaStore.Downloads.EXTERNAL_CONTENT_URI,//文件路径
+                null,
+                null,
+                null,
+                null);//排序
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int name = cursor.getColumnIndexOrThrow(MediaStore.Downloads.DISPLAY_NAME);
+                Log.e("TAG", cursor.getString(name));
+            }
+            cursor.close();
         }
-        cursor.close();
     }
 }

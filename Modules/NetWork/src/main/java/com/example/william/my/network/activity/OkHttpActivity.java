@@ -1,8 +1,5 @@
 package com.example.william.my.network.activity;
 
-import android.net.Uri;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -15,7 +12,6 @@ import com.example.william.my.module.activity.ResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.FileIOUtilsService;
-import com.example.william.my.module.utils.UriUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,8 +35,8 @@ public class OkHttpActivity extends ResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        //login();
-        download();
+        login();
+        //download();
     }
 
     private void login() {
@@ -111,11 +107,9 @@ public class OkHttpActivity extends ResponseActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
                 if (response.isSuccessful() && response.body() != null) {
-                    //FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
-                    //File file = new File(getExternalCacheDir() + File.separator + "ok_http_download.apk");
-                    //boolean successful = fileIOUtils.writeFileFromIS(file, response.body().byteStream());
-                    Uri uri = UriUtils.save(response.body().byteStream(), "uri.apk");
-                    Log.e("TAG", uri.toString());
+                    FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+                    File file = new File(getExternalCacheDir() + File.separator + "ok_http_download.apk");
+                    boolean successful = fileIOUtils.writeFileFromIS(file, response.body().byteStream());
                 }
             }
         });
