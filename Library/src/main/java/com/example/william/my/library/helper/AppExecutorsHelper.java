@@ -1,4 +1,4 @@
-package com.example.william.my.library.utils;
+package com.example.william.my.library.helper;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -17,22 +17,22 @@ import java.util.concurrent.ScheduledExecutorService;
  * Grouping tasks like this avoids the effects of task starvation
  * (e.g. disk reads don't wait behind webservice requests).
  */
-public class AppExecutors {
+public class AppExecutorsHelper {
 
-    private static AppExecutors instance;
+    private static AppExecutorsHelper instance;
 
-    public static AppExecutors getInstance() {
+    public static AppExecutorsHelper getInstance() {
         if (instance == null) {
-            synchronized (AppExecutors.class) {
+            synchronized (AppExecutorsHelper.class) {
                 if (instance == null) {
-                    instance = new AppExecutors();
+                    instance = new AppExecutorsHelper();
                 }
             }
         }
         return instance;
     }
 
-    private AppExecutors() {
+    private AppExecutorsHelper() {
         this(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
                 new MainThreadExecutor(), Executors.newScheduledThreadPool(count));
     }
@@ -51,7 +51,7 @@ public class AppExecutors {
 
     private static final int count = Runtime.getRuntime().availableProcessors() * 3 + 2;
 
-    private AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread, ScheduledExecutorService scheduledExecutor) {
+    private AppExecutorsHelper(Executor diskIO, Executor networkIO, Executor mainThread, ScheduledExecutorService scheduledExecutor) {
         this.mDiskIO = diskIO;
         this.mNetworkIO = networkIO;
         this.mMainThread = mainThread;

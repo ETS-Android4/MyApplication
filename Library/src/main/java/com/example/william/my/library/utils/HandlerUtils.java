@@ -19,21 +19,21 @@ public class HandlerUtils {
 
     public static class HandlerHolder extends Handler {
 
-        private final WeakReference<OnReceiveMessageListener> mListenerWeakReference;
+        private final WeakReference<OnReceiveMessageHandler> mListenerWeakReference;
 
         /**
          * 使用必读：推荐在Activity或者Activity内部持有类中实现该接口，不要使用匿名类，可能会被GC
          *
-         * @param listener 收到消息回调接口
+         * @param handler 收到消息回调接口
          */
         @SuppressWarnings("deprecation")
-        public HandlerHolder(OnReceiveMessageListener listener) {
-            mListenerWeakReference = new WeakReference<>(listener);
+        public HandlerHolder(OnReceiveMessageHandler handler) {
+            mListenerWeakReference = new WeakReference<>(handler);
         }
 
-        public HandlerHolder(@NonNull Looper looper, OnReceiveMessageListener listener) {
+        public HandlerHolder(@NonNull Looper looper, OnReceiveMessageHandler handler) {
             super(looper);
-            mListenerWeakReference = new WeakReference<>(listener);
+            mListenerWeakReference = new WeakReference<>(handler);
         }
 
         @Override
@@ -47,7 +47,7 @@ public class HandlerUtils {
     /**
      * 收到消息回调接口
      */
-    public interface OnReceiveMessageListener {
+    public interface OnReceiveMessageHandler {
         void handlerMessage(Message msg);
     }
 }
