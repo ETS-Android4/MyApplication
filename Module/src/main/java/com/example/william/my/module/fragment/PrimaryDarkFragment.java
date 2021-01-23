@@ -14,7 +14,7 @@ import com.example.william.my.module.R;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.Fragment.FragmentPrimaryDark)
-public class PrimaryDarkFragment extends Fragment {
+public class PrimaryDarkFragment extends BaseFragment {
 
     @Nullable
     @Override

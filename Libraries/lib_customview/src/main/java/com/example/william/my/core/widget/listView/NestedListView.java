@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.nestedListView;
+package com.example.william.my.core.widget.listView;
 
 import android.content.Context;
 import android.util.AttributeSet;

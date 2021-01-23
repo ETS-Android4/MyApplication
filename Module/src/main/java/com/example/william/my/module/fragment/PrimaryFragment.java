@@ -7,14 +7,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.R;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.Fragment.FragmentPrimary)
-public class PrimaryFragment extends Fragment {
+public class PrimaryFragment extends BaseFragment {
 
     @Nullable
     @Override

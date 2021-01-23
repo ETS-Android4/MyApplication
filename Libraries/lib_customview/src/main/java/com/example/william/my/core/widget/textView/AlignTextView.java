@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.alignTextView;
+package com.example.william.my.core.widget.textView;
 
 import android.content.Context;
 import android.graphics.Canvas;
