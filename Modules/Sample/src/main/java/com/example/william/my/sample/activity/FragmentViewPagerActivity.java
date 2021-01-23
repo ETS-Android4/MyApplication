@@ -12,26 +12,28 @@ import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryLightFragment;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.sample.R;
-import com.example.william.my.sample.adapter.ViewPagerAdapter;
 import com.example.william.my.sample.adapter.ViewPagerFragmentAdapter;
 
 import java.util.Arrays;
 
-@Route(path = ARouterPath.Sample.Sample_ViewPager)
-public class ViewPagerActivity extends AppCompatActivity {
+@Route(path = ARouterPath.Sample.Sample_FragmentViewPager)
+public class FragmentViewPagerActivity extends AppCompatActivity {
 
-    private final String[] mData = new String[]{"fragment_primary", "fragment_primary_dark", "fragment_primary_light"};
+    private final String[] mTitle = new String[]{"首页", "列表", "消息"};
+    private final int[] mButtons = new int[]{R.id.fragment_button1, R.id.fragment_button2, R.id.fragment_button3};
     private final Fragment[] mFragments = new Fragment[]{new PrimaryFragment(), new PrimaryDarkFragment(), new PrimaryLightFragment()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sample_activity_viewpager);
+        setContentView(R.layout.sample_activity_fragment_view_pager);
 
-        ViewPager mPageView = findViewById(R.id.page_view);
-        ViewPager mPageFragment = findViewById(R.id.page_fragment);
+        initFragment();
+    }
 
-        mPageView.setAdapter(new ViewPagerAdapter(Arrays.asList(mData)));
+    private void initFragment() {
+        ViewPager mPageFragment = findViewById(R.id.fragment_viewPager);
+        mPageFragment.setOffscreenPageLimit(4);
         mPageFragment.setAdapter(new ViewPagerFragmentAdapter(getSupportFragmentManager(), Arrays.asList(mFragments)));
     }
 }

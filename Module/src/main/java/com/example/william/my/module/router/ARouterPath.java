@@ -105,6 +105,7 @@ public class ARouterPath {
         public static final String Sample_Fragment = "/module_sample/fragment";
         public static final String Sample_FragmentGroup = "/module_sample/fragment_group";
         public static final String Sample_FragmentTabHost = "/module_sample/fragment_tab_host";
+        public static final String Sample_FragmentViewPager = "/module_sample/fragment_view_pager";
         public static final String Sample_Notification = "/module_sample/notification";
         public static final String Sample_RecyclerView = "/module_sample/recycler_view";
         public static final String Sample_ViewPager = "/module_sample/view_pager";

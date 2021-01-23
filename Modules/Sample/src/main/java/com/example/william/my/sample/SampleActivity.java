@@ -16,6 +16,7 @@ public class SampleActivity extends BaseListActivity {
         mMap.put("FragmentActivity", ARouterPath.Sample.Sample_Fragment);
         mMap.put("FragmentGroupActivity", ARouterPath.Sample.Sample_FragmentGroup);
         mMap.put("FragmentTabHostActivity", ARouterPath.Sample.Sample_FragmentTabHost);
+        mMap.put("FragmentViewPagerActivity", ARouterPath.Sample.Sample_FragmentViewPager);
         mMap.put("NotificationActivity", ARouterPath.Sample.Sample_Notification);
         mMap.put("RecyclerViewActivity", ARouterPath.Sample.Sample_RecyclerView);
         mMap.put("ViewPagerActivity", ARouterPath.Sample.Sample_ViewPager);

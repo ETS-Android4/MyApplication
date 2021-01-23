@@ -32,8 +32,8 @@ public class ViewPager2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_activity_viewpager2);
 
-        ViewPager2 mPageView = findViewById(R.id.page2_view).findViewById(R.id.page2_view);
-        ViewPager2 mPageFragment = findViewById(R.id.page2_fragment).findViewById(R.id.page2_fragment);
+        ViewPager2 mPageView = findViewById(R.id.page2_view);
+        ViewPager2 mPageFragment = findViewById(R.id.page2_fragment);
 
         mPageView.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         mPageView.setAdapter(new ViewPager2Adapter(Arrays.asList(mData)));

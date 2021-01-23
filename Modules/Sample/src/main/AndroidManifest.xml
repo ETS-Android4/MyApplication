@@ -10,6 +10,7 @@
         <activity android:name=".activity.FragmentActivity" />
         <activity android:name=".activity.FragmentGroupActivity" />
         <activity android:name=".activity.FragmentTabHostActivity" />
+        <activity android:name=".activity.FragmentViewPagerActivity" />
         <activity android:name=".activity.NotificationActivity" />
         <activity android:name=".activity.RecyclerViewActivity" />
         <activity android:name=".activity.ViewPagerActivity" />
