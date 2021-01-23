@@ -9,7 +9,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.List;
  * 权限申请
  */
 @Route(path = ARouterPath.Sample.Sample_Permission)
-public class PermissionActivity extends ResponseActivity {
+public class PermissionActivity extends BaseResponseActivity {
 
     private final String[] permissions = new String[]{
             Manifest.permission.READ_CALENDAR,

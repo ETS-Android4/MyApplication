@@ -1,7 +1,7 @@
 package com.example.william.my.open.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.event.MessageEvent;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -18,7 +18,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * https://greenrobot.org/eventbus/documentation/subscriber-index
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_EventBus)
-public class EventBusActivity extends ResponseActivity {
+public class EventBusActivity extends BaseResponseActivity {
 
     @Override
     public void setOnClick() {

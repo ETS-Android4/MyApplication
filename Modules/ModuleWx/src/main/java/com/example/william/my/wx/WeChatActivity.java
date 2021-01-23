@@ -1,13 +1,13 @@
 package com.example.william.my.wx;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.wx.base.Config;
 import com.example.william.my.wx.presenter.WxPresenter;
 
 @Route(path = ARouterPath.Module_WeChat)
-public class WeChatActivity extends ResponseActivity {
+public class WeChatActivity extends BaseResponseActivity {
 
     private WxPresenter mPresenter;
 

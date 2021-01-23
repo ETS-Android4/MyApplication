@@ -3,7 +3,7 @@ package com.example.william.my.network.activity;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.download.DownloadUtils;
 import com.example.william.my.core.network.retrofit.download.database.table.DownloadTask;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -11,7 +11,7 @@ import com.example.william.my.module.router.ARouterPath;
  * {@link DownloadUtils}
  */
 @Route(path = ARouterPath.NetWork.NetWork_RetrofitDownload)
-public class RetrofitDownloadActivity extends ResponseActivity {
+public class RetrofitDownloadActivity extends BaseResponseActivity {
 
     @Override
     public void setOnClick() {

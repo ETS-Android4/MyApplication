@@ -1,11 +1,11 @@
 package com.example.william.my.custom;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ARouterActivity;
+import com.example.william.my.module.activity.BaseListActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.CustomView.CustomView)
-public class CustomViewActivity extends ARouterActivity {
+public class CustomViewActivity extends BaseListActivity {
 
     @Override
     protected void initData() {

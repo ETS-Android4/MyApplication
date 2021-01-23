@@ -7,11 +7,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.iosAlertDialog.IosAlertDialog;
 import com.example.william.my.core.widget.iosAlertDialog.IosItemAlertDialog;
 import com.example.william.my.custom.R;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.CustomView.CustomView_IosDialog)
-public class IosDialogActivity extends ResponseActivity {
+public class IosDialogActivity extends BaseResponseActivity {
 
     private boolean b;
 

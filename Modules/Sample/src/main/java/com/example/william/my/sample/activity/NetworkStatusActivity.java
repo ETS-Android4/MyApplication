@@ -2,7 +2,7 @@ package com.example.william.my.sample.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.helper.NetworkChangeHelper;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
@@ -11,7 +11,7 @@ import com.example.william.my.module.router.ARouterPath;
  * 7.0及以上静态注册广播不能收到"ConnectivityManager.CONNECTIVITY_ACTION"这个广播了
  */
 @Route(path = ARouterPath.Sample.Sample_NetworkStatus)
-public class NetworkStatusActivity extends ResponseActivity {
+public class NetworkStatusActivity extends BaseResponseActivity {
 
 
     @Override

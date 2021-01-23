@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.loading.LoadingTip;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.jet.model.LoginViewModel;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.bean.BannerData;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
@@ -18,7 +18,7 @@ import java.util.List;
  * https://developer.android.google.cn/topic/libraries/architecture/viewmodel
  */
 @Route(path = ARouterPath.JetPack.JetPack_ViewModel)
-public class ViewModelActivity extends ResponseActivity implements LoadingTip.LoadingTipListener {
+public class ViewModelActivity extends BaseResponseActivity implements LoadingTip.LoadingTipListener {
 
     private LoadingTip mLoadingTip;
     private LoginViewModel mViewModel;

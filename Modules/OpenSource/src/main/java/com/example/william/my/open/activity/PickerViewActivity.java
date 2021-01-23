@@ -17,7 +17,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.ResourceUtilsService;
 import com.example.william.my.open.data.CityPickerData;
@@ -40,7 +40,7 @@ import java.util.Locale;
  * https://github.com/Bigkoo/Android-PickerView
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_PickerView)
-public class PickerViewActivity extends ResponseActivity {
+public class PickerViewActivity extends BaseResponseActivity {
 
     private boolean isLoaded, isSwitch;
 

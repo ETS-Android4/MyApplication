@@ -17,7 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ARouterActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class BaseListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     public final String TAG = this.getClass().getSimpleName();
 

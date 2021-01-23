@@ -4,7 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
@@ -13,7 +13,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
  * https://github.com/JeremyLiao/LiveEventBus
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_LiveEventBus)
-public class LiveEventBusActivity extends ResponseActivity {
+public class LiveEventBusActivity extends BaseResponseActivity {
 
     @Override
     public void initView() {

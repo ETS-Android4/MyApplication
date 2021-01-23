@@ -7,7 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.lang.ref.WeakReference;
@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference;
  * BroadcastReceiver
  */
 @Route(path = ARouterPath.Sample.Sample_Broadcast)
-public class BroadcastActivity extends ResponseActivity {
+public class BroadcastActivity extends BaseResponseActivity {
 
     private MessageReceiver mMessageReceiver;
 

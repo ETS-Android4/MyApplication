@@ -4,12 +4,12 @@ import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.sample.utils.AudioPlayer;
 
 @Route(path = ARouterPath.Sample.Sample_AudioPlayer)
-public class AudioPlayerActivity extends ResponseActivity {
+public class AudioPlayerActivity extends BaseResponseActivity {
 
     private boolean isPlay;
 

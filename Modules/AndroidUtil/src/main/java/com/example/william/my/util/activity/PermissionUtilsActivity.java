@@ -9,11 +9,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.Util.Util_Permission)
-public class PermissionUtilsActivity extends ResponseActivity {
+public class PermissionUtilsActivity extends BaseResponseActivity {
 
     @Override
     public void setOnClick() {

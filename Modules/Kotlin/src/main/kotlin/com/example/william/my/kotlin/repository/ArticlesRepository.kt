@@ -4,7 +4,10 @@ import android.util.Log
 import com.example.william.my.kotlin.source.ArticlesDataSource
 import com.example.william.my.module.bean.ArticlesBean
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 
 /**
  * 修改数据流

@@ -3,7 +3,7 @@ package com.example.william.my.open.activity;
 import androidx.lifecycle.Observer;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.event.DefaultSmartEventBus;
 import com.example.william.my.module.event.SmartMessageEvent;
 import com.example.william.my.module.router.ARouterPath;
@@ -13,7 +13,7 @@ import com.example.william.my.module.router.ARouterPath;
  * https://github.com/JeremyLiao/SmartEventBus/blob/master/docs/bus_all.md
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_SmartEventBus)
-public class SmartEventBusActivity extends ResponseActivity {
+public class SmartEventBusActivity extends BaseResponseActivity {
 
     @Override
     public void initView() {

@@ -13,7 +13,7 @@ import androidx.work.WorkManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.jet.worker.UploadWorker;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.util.concurrent.TimeUnit;
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * 向后端服务发送日志或分析数据，定期将应用数据与服务器同步
  */
 @Route(path = ARouterPath.JetPack.JetPack_WorkManager)
-public class WorkManagerActivity extends ResponseActivity {
+public class WorkManagerActivity extends BaseResponseActivity {
 
     private OneTimeWorkRequest oneTimeWorkRequest;
 

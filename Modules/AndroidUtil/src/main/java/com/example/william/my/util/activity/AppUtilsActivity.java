@@ -3,9 +3,9 @@ package com.example.william.my.util.activity;
 import android.util.Log;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 
-public class AppUtilsActivity extends ResponseActivity {
+public class AppUtilsActivity extends BaseResponseActivity {
 
     @Override
     public void initView() {

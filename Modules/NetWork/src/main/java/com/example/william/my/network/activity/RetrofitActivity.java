@@ -8,7 +8,7 @@ import com.example.william.my.core.network.retrofit.body.CountingRequestBody;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitRequestListener;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.FileIOUtilsService;
@@ -32,7 +32,7 @@ import retrofit2.Retrofit;
  * https://github.com/square/retrofit
  */
 @Route(path = ARouterPath.NetWork.NetWork_Retrofit)
-public class RetrofitActivity extends ResponseActivity {
+public class RetrofitActivity extends BaseResponseActivity {
 
     @Override
     public void setOnClick() {

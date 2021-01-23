@@ -5,7 +5,7 @@ import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannersBean;
 import com.example.william.my.module.router.ARouterPath;
@@ -20,7 +20,7 @@ import io.reactivex.rxjava3.core.Observable;
  * {@link RetrofitUtils}
  */
 @Route(path = ARouterPath.NetWork.NetWork_RetrofitUtils)
-public class RetrofitUtilsActivity extends ResponseActivity {
+public class RetrofitUtilsActivity extends BaseResponseActivity {
 
     private boolean b;
 

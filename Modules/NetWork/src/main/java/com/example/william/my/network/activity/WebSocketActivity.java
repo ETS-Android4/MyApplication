@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.webSocket.RxWebSocketObserver;
 import com.example.william.my.core.network.webSocket.RxWebSocketUtils;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
@@ -20,7 +20,7 @@ import okhttp3.WebSocketListener;
 import okio.ByteString;
 
 @Route(path = ARouterPath.NetWork.NetWork_WebSocket)
-public class WebSocketActivity extends ResponseActivity {
+public class WebSocketActivity extends BaseResponseActivity {
 
     private final String url = "wss://echo.websocket.org";
 

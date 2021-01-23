@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.open.R;
 import com.zaaach.citypicker.CityPicker;
@@ -20,7 +20,7 @@ import com.zaaach.citypicker.model.LocatedCity;
  * https://github.com/zaaach/CityPicker
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_CityPicker)
-public class CityPickerActivity extends ResponseActivity {
+public class CityPickerActivity extends BaseResponseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

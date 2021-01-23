@@ -2,7 +2,7 @@ package com.example.william.my.open.activity;
 
 import android.util.Log;
 
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +34,7 @@ import io.reactivex.rxjava3.functions.Supplier;
  * <p>
  * https://github.com/trello/RxLifecycle
  */
-public class RxJavaActivity extends ResponseActivity {
+public class RxJavaActivity extends BaseResponseActivity {
 
     /*
      * io.reactivex.rxjava3.core.Flowable: 0..N flows, supporting Reactive-Streams and backpressure, 支持反应式流 背压

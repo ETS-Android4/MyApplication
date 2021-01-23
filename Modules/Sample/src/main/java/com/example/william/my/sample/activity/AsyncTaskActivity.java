@@ -3,7 +3,7 @@ package com.example.william.my.sample.activity;
 import android.os.AsyncTask;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.lang.ref.WeakReference;
@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
  */
 @SuppressWarnings("deprecation")
 @Route(path = ARouterPath.Sample.Sample_AsyncTask)
-public class AsyncTaskActivity extends ResponseActivity {
+public class AsyncTaskActivity extends BaseResponseActivity {
 
     private MyAsyncTask mAsyncTask;
 

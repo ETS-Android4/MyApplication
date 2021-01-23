@@ -1,7 +1,7 @@
 package com.example.william.my.open;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ARouterActivity;
+import com.example.william.my.module.activity.BaseListActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
@@ -19,7 +19,7 @@ import com.example.william.my.module.router.ARouterPath;
  * https://github.com/KingJA/LoadSir
  */
 @Route(path = ARouterPath.OpenSource.OpenSource)
-public class OpenSourceActivity extends ARouterActivity {
+public class OpenSourceActivity extends BaseListActivity {
 
     @Override
     protected void initData() {

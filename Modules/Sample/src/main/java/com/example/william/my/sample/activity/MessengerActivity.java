@@ -14,14 +14,14 @@ import android.os.RemoteException;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.sample.service.MessageService;
 
 import java.lang.ref.WeakReference;
 
 @Route(path = ARouterPath.Sample.Sample_Messenger)
-public class MessengerActivity extends ResponseActivity {
+public class MessengerActivity extends BaseResponseActivity {
 
     private Messenger mClientMessenger;
 

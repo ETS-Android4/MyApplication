@@ -4,7 +4,7 @@ import android.text.util.Linkify;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.utils.NetworkUtils;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.network.nano.HttpServer;
 import com.example.william.my.network.nano.HttpService;
@@ -13,7 +13,7 @@ import com.example.william.my.network.nano.HttpService;
  * https://github.com/NanoHttpd/nanohttpd
  */
 @Route(path = ARouterPath.NetWork.NetWork_NanoHttpD)
-public class NanoHttpDActivity extends ResponseActivity {
+public class NanoHttpDActivity extends BaseResponseActivity {
 
     @Override
     public void initView() {

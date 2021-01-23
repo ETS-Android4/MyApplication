@@ -7,28 +7,27 @@ import androidx.fragment.app.FragmentManager;
 import java.util.List;
 
 /**
- *   1. 在Activity中覆盖onBackPressed()方法
- *   @Override
- *    public void onBackPressed() {
- *        if (!BackHandlerHelper.handleBackPress(this)) {
- *            super.onBackPressed();
- *        }
- *    }
- *   2. 实现实现 FragmentBackHandler
- *   @Override
- *   public boolean onBackPressed() {
- *       if (handleBackPressed) {
- *           //外理返回键
- *           return true;
- *       } else {
- *           // 如果不包含子Fragment
- *           // 或子Fragment没有外理back需求
- *           // 可如直接 return false;
- *           // 注：如果Fragment/Activity 中可以使用ViewPager 代替 this
- *           //
- *           return BackHandlerHelper.handleBackPress(this);
- *       }
- *   }
+ * 1. 在Activity中覆盖onBackPressed()方法
+ *
+ * @Override public void onBackPressed() {
+ * if (!BackHandlerHelper.handleBackPress(this)) {
+ * super.onBackPressed();
+ * }
+ * }
+ * 2. 实现实现 FragmentBackHandler
+ * @Override public boolean onBackPressed() {
+ * if (handleBackPressed) {
+ * //外理返回键
+ * return true;
+ * } else {
+ * // 如果不包含子Fragment
+ * // 或子Fragment没有外理back需求
+ * // 可如直接 return false;
+ * // 注：如果Fragment/Activity 中可以使用ViewPager 代替 this
+ * //
+ * return BackHandlerHelper.handleBackPress(this);
+ * }
+ * }
  */
 public class FragmentBackHelper {
 

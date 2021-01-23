@@ -5,7 +5,7 @@ import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RxRetrofit;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.router.ARouterPath;
@@ -17,7 +17,7 @@ import java.util.List;
  * {@link RxRetrofit}
  */
 @Route(path = ARouterPath.NetWork.NetWork_RxRetrofit)
-public class RxRetrofitActivity extends ResponseActivity {
+public class RxRetrofitActivity extends BaseResponseActivity {
 
     @Override
     public void setOnClick() {

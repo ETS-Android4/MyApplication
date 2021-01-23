@@ -4,14 +4,14 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.jet.database.AppDataBase;
 import com.example.william.my.jet.database.dao.OAuthDao;
 import com.example.william.my.jet.database.table.OAuth;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
  * https://developer.android.google.cn/topic/libraries/architecture/room
  */
 @Route(path = ARouterPath.JetPack.JetPack_Room)
-public class RoomActivity extends ResponseActivity {
+public class RoomActivity extends BaseResponseActivity {
 
     private OAuthDao mOAuthDao;
 

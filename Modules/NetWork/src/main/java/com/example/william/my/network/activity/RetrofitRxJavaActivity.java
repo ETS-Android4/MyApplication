@@ -3,7 +3,7 @@ package com.example.william.my.network.activity;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.converter.RetrofitConverterFactory;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannersBean;
@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 @Route(path = ARouterPath.NetWork.NetWork_RetrofitRxJava)
-public class RetrofitRxJavaActivity extends ResponseActivity {
+public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
     private boolean b;
 

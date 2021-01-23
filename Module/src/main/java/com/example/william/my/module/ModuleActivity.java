@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ARouterActivity;
+import com.example.william.my.module.activity.BaseListActivity;
 import com.example.william.my.module.event.DefaultSmartEventBus;
 import com.example.william.my.module.event.MessageEvent;
 import com.example.william.my.module.event.SmartMessageEvent;
@@ -60,7 +60,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * mipmap会自动选择更加合适的图片仅在launcher中有效
  */
 @Route(path = ARouterPath.Module)
-public class ModuleActivity extends ARouterActivity {
+public class ModuleActivity extends BaseListActivity {
 
     @Autowired(name = "param_key")
     public String mModuleParam;

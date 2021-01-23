@@ -4,14 +4,14 @@ import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.CrashUtils;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
  * Thread.UncaughtExceptionHandler
  */
 @Route(path = ARouterPath.Util.Util_Crash)
-public class CrashUtilsActivity extends ResponseActivity {
+public class CrashUtilsActivity extends BaseResponseActivity {
 
     @Override
     public void initView() {

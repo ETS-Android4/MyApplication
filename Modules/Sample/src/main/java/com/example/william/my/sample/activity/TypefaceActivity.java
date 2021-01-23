@@ -4,11 +4,11 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.Sample.Sample_Typeface)
-public class TypefaceActivity extends ResponseActivity {
+public class TypefaceActivity extends BaseResponseActivity {
 
     @Override
     public void initView() {

@@ -7,7 +7,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.sample.IMyAidlInterface;
 import com.example.william.my.sample.service.AIDLService;
@@ -17,7 +17,7 @@ import com.example.william.my.sample.service.ForegroundService;
  * Service
  */
 @Route(path = ARouterPath.Sample.Sample_Service)
-public class ServiceActivity extends ResponseActivity {
+public class ServiceActivity extends BaseResponseActivity {
 
     private ServiceConnection mServiceConnection;
 

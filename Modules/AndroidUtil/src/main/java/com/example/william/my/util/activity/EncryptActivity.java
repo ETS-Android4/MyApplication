@@ -6,7 +6,7 @@ import android.util.Log;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.EncryptUtils;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.nio.charset.StandardCharsets;
@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  * https://www.ssleye.com/
  */
 @Route(path = ARouterPath.Util.Util_Encrypt)
-public class EncryptActivity extends ResponseActivity {
+public class EncryptActivity extends BaseResponseActivity {
 
     private static final String ALGORITHM_AES = "AES/ECB/PKCS5Padding";
 

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.william.my.module.R;
 
-public class ResponseActivity extends AppCompatActivity implements View.OnClickListener {
+public class BaseResponseActivity extends AppCompatActivity implements View.OnClickListener {
 
     public final String TAG = this.getClass().getSimpleName();
 

@@ -6,7 +6,7 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.open.R;
 
@@ -17,7 +17,7 @@ import q.rorbin.badgeview.QBadgeView;
  * https://github.com/qstumn/BadgeView
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_BadgeView)
-public class BadgeViewActivity extends ResponseActivity {
+public class BadgeViewActivity extends BaseResponseActivity {
 
     @Override
     public void initView() {

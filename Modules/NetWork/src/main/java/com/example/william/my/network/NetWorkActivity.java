@@ -1,11 +1,11 @@
 package com.example.william.my.network;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ARouterActivity;
+import com.example.william.my.module.activity.BaseListActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.NetWork.NetWork)
-public class NetWorkActivity extends ARouterActivity {
+public class NetWorkActivity extends BaseListActivity {
 
     @Override
     public void initData() {

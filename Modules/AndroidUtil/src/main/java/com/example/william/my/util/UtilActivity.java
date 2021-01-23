@@ -1,7 +1,7 @@
 package com.example.william.my.util;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.activity.ARouterActivity;
+import com.example.william.my.module.activity.BaseListActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
@@ -9,7 +9,7 @@ import com.example.william.my.module.router.ARouterPath;
  * https://github.com/Blankj/AndroidUtilCode
  */
 @Route(path = ARouterPath.Util.Util)
-public class UtilActivity extends ARouterActivity {
+public class UtilActivity extends BaseListActivity {
 
     @Override
     protected void initData() {

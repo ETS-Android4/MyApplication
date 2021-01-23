@@ -8,7 +8,7 @@ import com.example.william.my.core.network.retrofit.body.CountingRequestBody;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitRequestListener;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.FileIOUtilsService;
@@ -30,7 +30,7 @@ import okhttp3.Response;
  * https://github.com/square/okhttp
  */
 @Route(path = ARouterPath.NetWork.NetWork_OkHttp)
-public class OkHttpActivity extends ResponseActivity {
+public class OkHttpActivity extends BaseResponseActivity {
 
     @Override
     public void setOnClick() {

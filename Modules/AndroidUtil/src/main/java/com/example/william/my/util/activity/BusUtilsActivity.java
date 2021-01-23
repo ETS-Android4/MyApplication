@@ -2,14 +2,14 @@ package com.example.william.my.util.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.BusUtils;
-import com.example.william.my.module.activity.ResponseActivity;
+import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
  * https://github.com/Blankj/AndroidUtilCode/tree/master/plugin/bus-gradle-plugin
  */
 @Route(path = ARouterPath.Util.Util_BusUtils)
-public class BusUtilsActivity extends ResponseActivity {
+public class BusUtilsActivity extends BaseResponseActivity {
 
     public static final String TAG_NO_PARAM = "TagNoParam";
     public static final String TAG_ONE_PARAM = "TagOneParam";
