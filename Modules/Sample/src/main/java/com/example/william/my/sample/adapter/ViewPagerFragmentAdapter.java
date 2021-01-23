@@ -20,14 +20,14 @@ public class ViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
      * 那么只有当前选中的 Fragment 在 {@link Lifecycle.State#RESUMED} 状态 ，其他不可见的 Fragment 会被限制在 {@link Lifecycle.State#STARTED} 状态。
      */
     public ViewPagerFragmentAdapter(@NonNull FragmentManager fm, List<Fragment> mFragments) {
-        //super(fm, BEHAVIOR_SET_USER_VISIBLE_HINT);//兼容旧方式懒加载
-        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);//使Fragment生命周期降级到onStart
+        super(fm, BEHAVIOR_SET_USER_VISIBLE_HINT);//兼容旧方式懒加载
+        //super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);//使Fragment生命周期降级到onStart
         this.mFragments = mFragments;
     }
 
     public ViewPagerFragmentAdapter(@NonNull FragmentManager fm, List<Fragment> fragments, List<String> titles) {
-        //super(fm, BEHAVIOR_SET_USER_VISIBLE_HINT);//兼容旧方式懒加载
-        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);//使Fragment生命周期降级到onStart
+        super(fm, BEHAVIOR_SET_USER_VISIBLE_HINT);//兼容旧方式懒加载
+        //super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);//使Fragment生命周期降级到onStart
         this.mFragments = fragments;
         this.mTitles = titles;
     }

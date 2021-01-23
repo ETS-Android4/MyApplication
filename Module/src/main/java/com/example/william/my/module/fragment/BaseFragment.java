@@ -27,7 +27,7 @@ public class BaseFragment extends LazyFragment {
     @Override
     public void onResume() {
         super.onResume();
-        // FragmentStatePagerAdapter 使用新版本适配时，当Fragment显示执行onResume
+        // 使用新版本适配时，当 Fragment 显示执行 onResume()
         Log.e(TAG, "onResume");
     }
 }
