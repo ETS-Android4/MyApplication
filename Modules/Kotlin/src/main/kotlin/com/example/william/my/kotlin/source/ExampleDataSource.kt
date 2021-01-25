@@ -1,22 +1,48 @@
-package com.example.william.my.kotlin.repository
+package com.example.william.my.kotlin.source
 
 import com.example.william.my.kotlin.bean.LoginData
+import com.example.william.my.kotlin.service.KotlinApi
 import com.example.william.my.kotlin.utils.NetworkResult
+import com.example.william.my.kotlin.utils.ThreadUtils
 import com.example.william.my.module.base.Urls
+import com.example.william.my.module.bean.ArticlesBean
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-class LoginRepository {
+class ExampleDataSource {
 
-    // 将 协程执行到 I/O 调度
+    val getArticles: Flow<ArticlesBean> = flow {
+        //打印线程
+        ThreadUtils.isMainThread()
+
+        emit(buildApi().getArticles(0)) // Emits the result of the request to the flow 向数据流发送请求结果
+        delay(3000) // Suspends the coroutine for some time 挂起一段时间
+    }
+
+    private fun buildApi(): KotlinApi {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Urls.baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(KotlinApi::class.java)
+    }
+
+    // 将 协程 切换到 I/O 调度
     // Move the execution of the coroutine to the I/O dispatcher
     suspend fun login(jsonBody: String): NetworkResult<LoginData> = withContext(Dispatchers.IO) {
+        //打印线程
+        ThreadUtils.isMainThread()
         // 阻塞网络请求
         // Blocking network request code
         makeLoginRequest(jsonBody)
@@ -25,6 +51,9 @@ class LoginRepository {
     // 发出网络请求，阻塞当前线程
     // Function that makes the network request, blocking the current thread
     private fun makeLoginRequest(jsonBody: String): NetworkResult<LoginData> {
+        //打印线程
+        ThreadUtils.isMainThread()
+
         val url = URL(Urls.login)
         (url.openConnection() as? HttpURLConnection)?.run {
             requestMethod = "POST"
@@ -50,3 +79,5 @@ class LoginRepository {
         return Gson().fromJson(response, LoginData::class.java)
     }
 }
+
+

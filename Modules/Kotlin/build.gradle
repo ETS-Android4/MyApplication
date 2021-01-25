@@ -58,6 +58,7 @@ dependencies {
     implementation Deps.arouter
     kapt Deps.arouter_compiler
     //Kotlin
+    implementation Deps.core_ktx
     implementation Deps.livedata_ktx//LiveDataScope
     implementation Deps.viewmodel_ktx//ViewModelScope
     implementation Deps.kotlin_coroutines

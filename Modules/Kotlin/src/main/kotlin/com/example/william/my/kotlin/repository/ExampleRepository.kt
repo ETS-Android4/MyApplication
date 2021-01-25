@@ -1,7 +1,7 @@
 package com.example.william.my.kotlin.repository
 
 import android.util.Log
-import com.example.william.my.kotlin.source.ArticlesDataSource
+import com.example.william.my.kotlin.source.ExampleDataSource
 import com.example.william.my.module.bean.ArticlesBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -9,10 +9,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
-/**
- * 修改数据流
- */
-class ArticlesRepository {
+class ExampleRepository {
 
     /**
      * 返回流上的数据转换。
@@ -22,7 +19,7 @@ class ArticlesRepository {
      * the current value emitted by the flow at that point in time.
      */
     val getArticles: Flow<ArticlesBean> =
-        ArticlesDataSource().getArticles
+        ExampleDataSource().getArticles
             // 中间运算符 map 转换数据
             .map { articles ->
                 articlesTakeOne(articles)
