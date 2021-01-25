@@ -1,11 +1,10 @@
 package com.example.william.my.kotlin.repository
 
-import android.util.Log
 import com.example.william.my.kotlin.source.ExampleDataSource
+import com.example.william.my.kotlin.utils.ThreadUtils
 import com.example.william.my.module.bean.ArticlesBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
@@ -27,13 +26,16 @@ class ExampleRepository {
             // flowOn 只影响上游
             // flowOn affects the upstream flow ↑
             .flowOn(Dispatchers.IO)
-            // 下游不受影响
-            // the downstream flow ↓ is not affected
-            .catch { exception ->
-                Log.e("TAG", "exception : " + exception.message.toString())
-            }
+    // 下游不受影响
+    // the downstream flow ↓ is not affected
+    //.catch { exception ->
+    //    Log.e("TAG", "exception : " + exception.message.toString())
+    //}
 
     private fun articlesTakeOne(articles: ArticlesBean): ArticlesBean {
+        //打印线程
+        ThreadUtils.isMainThread("articlesTakeOne")
+
         articles.data.datas = articles.data.datas.take(1)
         return articles
     }

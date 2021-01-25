@@ -30,12 +30,20 @@ class CoroutinesActivity : AppCompatActivity() {
 
         viewModel = ExampleViewModel()
 
-        viewModel.login.observe(this, Observer {
+        //viewModel.login.observe(this, Observer {
+        //    binding.kotlinTextView.text = it
+        //})
+
+        //binding.kotlinTextView.setOnClickListener {
+        //    viewModel.login("17778060027", "ww123456")
+        //}
+
+        viewModel.articles.observe(this, Observer {
             binding.kotlinTextView.text = it
         })
 
         binding.kotlinTextView.setOnClickListener {
-            viewModel.login("17778060027", "ww123456")
+            viewModel.getArticles()
         }
     }
 }

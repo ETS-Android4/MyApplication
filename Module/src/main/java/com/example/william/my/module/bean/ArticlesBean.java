@@ -75,7 +75,7 @@ public class ArticlesBean {
         public static class ArticleBean {
 
             @SerializedName("id")
-            private int id;
+            private long id;
             @SerializedName("title")
             private String title;
             @SerializedName("desc")
@@ -84,9 +84,9 @@ public class ArticlesBean {
             private String link;
 
             @SerializedName("author")
-            private long author;
+            private String author;
             @SerializedName("chapterId")
-            private int chapterId;
+            private long chapterId;
             @SerializedName("chapterName")
             private String chapterName;
 
@@ -95,15 +95,15 @@ public class ArticlesBean {
             @SerializedName("shareUser")
             private String shareUser;
             @SerializedName("superChapterId")
-            private int superChapterId;
+            private long superChapterId;
             @SerializedName("superChapterName")
             private String superChapterName;
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
@@ -131,19 +131,19 @@ public class ArticlesBean {
                 this.link = link;
             }
 
-            public long getAuthor() {
+            public String getAuthor() {
                 return author;
             }
 
-            public void setAuthor(long author) {
+            public void setAuthor(String author) {
                 this.author = author;
             }
 
-            public int getChapterId() {
+            public long getChapterId() {
                 return chapterId;
             }
 
-            public void setChapterId(int chapterId) {
+            public void setChapterId(long chapterId) {
                 this.chapterId = chapterId;
             }
 
@@ -171,11 +171,11 @@ public class ArticlesBean {
                 this.shareUser = shareUser;
             }
 
-            public int getSuperChapterId() {
+            public long getSuperChapterId() {
                 return superChapterId;
             }
 
-            public void setSuperChapterId(int superChapterId) {
+            public void setSuperChapterId(long superChapterId) {
                 this.superChapterId = superChapterId;
             }
 

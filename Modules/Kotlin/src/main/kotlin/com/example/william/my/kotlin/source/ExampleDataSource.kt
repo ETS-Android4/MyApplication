@@ -24,9 +24,10 @@ class ExampleDataSource {
 
     val getArticles: Flow<ArticlesBean> = flow {
         //打印线程
-        ThreadUtils.isMainThread()
+        ThreadUtils.isMainThread("flow")
 
-        emit(buildApi().getArticles(0)) // Emits the result of the request to the flow 向数据流发送请求结果
+        val articles = buildApi().getArticles(0)
+        emit(articles) // Emits the result of the request to the flow 向数据流发送请求结果
         delay(3000) // Suspends the coroutine for some time 挂起一段时间
     }
 
@@ -42,7 +43,7 @@ class ExampleDataSource {
     // Move the execution of the coroutine to the I/O dispatcher
     suspend fun login(jsonBody: String): NetworkResult<LoginData> = withContext(Dispatchers.IO) {
         //打印线程
-        ThreadUtils.isMainThread()
+        ThreadUtils.isMainThread("login")
         // 阻塞网络请求
         // Blocking network request code
         makeLoginRequest(jsonBody)
@@ -52,7 +53,7 @@ class ExampleDataSource {
     // Function that makes the network request, blocking the current thread
     private fun makeLoginRequest(jsonBody: String): NetworkResult<LoginData> {
         //打印线程
-        ThreadUtils.isMainThread()
+        ThreadUtils.isMainThread("makeLoginRequest")
 
         val url = URL(Urls.login)
         (url.openConnection() as? HttpURLConnection)?.run {
