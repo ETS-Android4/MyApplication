@@ -48,14 +48,14 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
      * setMaxLifecycle 限制生命周期
      */
     private void initFragment(Bundle savedInstanceState) {
+        mTransaction = getSupportFragmentManager().beginTransaction();
+
         if (savedInstanceState != null) {
             for (int i = 0; i < mFragments.length; i++) {
                 mFragments[i] = getSupportFragmentManager().findFragmentByTag(mTitle[i]);
             }
         } else {
             removeAllFragments();
-
-            mTransaction = getSupportFragmentManager().beginTransaction();
             for (int i = 0; i < mFragments.length; i++) {
                 mTransaction.add(R.id.fragment_frameLayout, mFragments[i], mTitle[i]);
                 if (i == 0) {
@@ -69,7 +69,9 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
     }
 
     private void removeAllFragments() {
-
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            mTransaction.remove(fragment).commit();
+        }
     }
 
     private void initRadioButtons() {
