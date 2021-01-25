@@ -1,7 +1,5 @@
 package com.example.william.my.sample.activity;
 
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -43,18 +41,7 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
 
         initFragment(savedInstanceState);
 
-        RadioGroup mRadioGroup = findViewById(R.id.fragment_navigate);
-        mRadioGroup.setOnCheckedChangeListener(this);
-        //mRadioGroup.check(R.id.fragment_button1);
-
-        RadioButton mRadioButton = findViewById(mButtons[0]);
-        mRadioButton.setChecked(true);
-
-        for (int i = 0; i < mButtons.length; i++) {
-            RadioButton radioButton = findViewById(mButtons[i]);
-            radioButton.setText(mTitle[i]);
-        }
-        //initRadioButtons();
+        initRadioButtons();
     }
 
     /**
@@ -85,6 +72,17 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
 
     }
 
+    private void initRadioButtons() {
+        RadioGroup mRadioGroup = findViewById(R.id.fragment_navigate);
+        mRadioGroup.setOnCheckedChangeListener(this);
+        mRadioGroup.check(mButtons[0]);
+
+        for (int i = 0; i < mButtons.length; i++) {
+            RadioButton radioButton = findViewById(mButtons[i]);
+            radioButton.setText(mTitle[i]);
+        }
+    }
+
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         for (int i = 0; i < mFragments.length; i++) {
@@ -110,19 +108,5 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
         }
 
         mTransaction.commitAllowingStateLoss();
-    }
-
-    private void initRadioButtons() {
-        for (int radioButton : mButtons) {
-            RadioButton mRadioButton = findViewById(radioButton);
-            //获得每个drawable对象
-            Drawable[] drawables = mRadioButton.getCompoundDrawables();
-            // 获得一个矩阵大小，图片宽高的 1/4
-            Rect rect = new Rect(0, 0, drawables[1].getMinimumWidth() / 5, drawables[1].getMinimumHeight() / 5);
-            //给图片设置矩阵大小
-            drawables[1].setBounds(rect);
-            // 设置给按钮的图片
-            mRadioButton.setCompoundDrawables(null, drawables[1], null, null);
-        }
     }
 }

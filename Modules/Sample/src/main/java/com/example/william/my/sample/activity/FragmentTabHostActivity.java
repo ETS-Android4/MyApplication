@@ -45,21 +45,11 @@ public class FragmentTabHostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_activity_fragment_tabhost);
+
         mTabs = findViewById(android.R.id.tabs);
         mTabHost = findViewById(android.R.id.tabhost);
 
-        mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
-        for (int i = 0; i < mFragmentArray.length; i++) {
-            // 给每个Tab按钮设置图标、文字和内容
-            TabHost.TabSpec tabSpec = mTabHost.newTabSpec(mTextArray[i]).setIndicator(getTabView(mImageArray, mTextArray, i));
-            // 将Tab按钮添加进Tab选项卡中
-            mTabHost.addTab(tabSpec, mFragmentArray[i], null);
-
-            // 设置Tab按钮的背景
-            mTabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.WHITE);
-        }
-        //updateTabView();
-        //mTabHost.setCurrentTab(0);
+        initTabHost();
 
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -77,6 +67,21 @@ public class FragmentTabHostActivity extends AppCompatActivity {
         TextView textView = view.findViewById(R.id.item_tab_textView);
         textView.setText(textArray[i]);
         return view;
+    }
+
+    private void initTabHost() {
+        mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
+        for (int i = 0; i < mFragmentArray.length; i++) {
+            // 给每个Tab按钮设置图标、文字和内容
+            TabHost.TabSpec tabSpec = mTabHost.newTabSpec(mTextArray[i]).setIndicator(getTabView(mImageArray, mTextArray, i));
+            // 将Tab按钮添加进Tab选项卡中
+            mTabHost.addTab(tabSpec, mFragmentArray[i], null);
+
+            // 设置Tab按钮的背景
+            mTabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.WHITE);
+        }
+        //updateTabView();
+        //mTabHost.setCurrentTab(0);
     }
 
     private void updateTabView() {
