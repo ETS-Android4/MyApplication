@@ -12,9 +12,14 @@ class Deps {
     static coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:${AndroidVersions.coordinatorlayout_version}"
     static flexbox = "com.google.android:flexbox:${AndroidVersions.flexbox_version}"
 
+    static kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Config.kotlinVersion}"
+
     static core_ktx = "androidx.core:core-ktx:${AndroidVersions.core_version}"
     static livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:${AndroidVersions.lifecycle_version}"
     static viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${AndroidVersions.lifecycle_version}"
+
+    static activity_ktx = "androidx.activity:activity-ktx:${AndroidVersions.activity_version}"
+    static fragment_ktx = "androidx.fragment:fragment-ktx:${AndroidVersions.fragment_version}"
 
     static room = "androidx.room:room-runtime:${AndroidVersions.room_version}"
     static room_rxjava = "androidx.room:room-rxjava3:${AndroidVersions.room_version}"

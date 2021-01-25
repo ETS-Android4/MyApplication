@@ -1,9 +1,13 @@
 package com.example.william.my.kotlin.model
 
 import androidx.lifecycle.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.example.william.my.kotlin.bean.LoginData
 import com.example.william.my.kotlin.repository.ExampleRepository
 import com.example.william.my.kotlin.source.ExampleDataSource
+import com.example.william.my.kotlin.source.ExamplePagingSource
 import com.example.william.my.kotlin.utils.NetworkResult
 import com.example.william.my.kotlin.utils.ThreadUtils
 import com.google.gson.Gson
@@ -94,4 +98,10 @@ class ExampleViewModel : ViewModel() {
                 emit(Gson().toJson(article))
             }
     }
+
+    val articlesFlow = Pager(PagingConfig(pageSize = 20)) {
+        ExamplePagingSource()
+    }.flow
+        .cachedIn(viewModelScope)
+
 }

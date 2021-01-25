@@ -14,7 +14,6 @@ buildscript {
         maven { url "https://maven.aliyun.com/repository/public" }
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         for (def entrySet : ConfigUtils.getApplyPlugins().entrySet()) {
             classpath entrySet.value.dep
         }

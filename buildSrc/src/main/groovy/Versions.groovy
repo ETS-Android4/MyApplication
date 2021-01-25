@@ -24,6 +24,12 @@ class AndroidVersions {
     static core_version = "1.3.2"
     //https://developer.android.google.cn/jetpack/androidx/releases/core
 
+    static activity_version = "1.1.0"
+    //https://developer.android.google.cn/jetpack/androidx/releases/activity
+
+    static fragment_version = "1.2.4"
+    //https://developer.android.google.cn/jetpack/androidx/releases/fragment
+
     static lifecycle_version = "2.2.0"
     //https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
 
