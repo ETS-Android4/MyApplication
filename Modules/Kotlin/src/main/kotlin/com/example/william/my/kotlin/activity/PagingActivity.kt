@@ -58,7 +58,8 @@ class PagingActivity : AppCompatActivity() {
         }
 
         //呈现加载状态
-        pagingAdapter.withLoadStateHeaderAndFooter(
+        //需要把withLoadStateFooter返回的adapter设置给recyclerview
+        recycleView.adapter = pagingAdapter.withLoadStateHeaderAndFooter(
             header = ExampleLoadStateAdapter(pagingAdapter::retry),
             footer = ExampleLoadStateAdapter(pagingAdapter::retry)
         )

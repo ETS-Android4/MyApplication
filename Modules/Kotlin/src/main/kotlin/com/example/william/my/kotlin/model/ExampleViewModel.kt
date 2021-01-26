@@ -99,6 +99,9 @@ class ExampleViewModel : ViewModel() {
             }
     }
 
+    /**
+     * pageSize 一次加载的数目
+     */
     val articlesFlow = Pager(PagingConfig(pageSize = 20)) {
         ExamplePagingSource()
     }.flow

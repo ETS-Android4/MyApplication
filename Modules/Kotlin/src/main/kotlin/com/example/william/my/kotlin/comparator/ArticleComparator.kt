@@ -17,6 +17,6 @@ class ArticleComparator : DiffUtil.ItemCallback<ArticlesBean.DataBean.ArticleBea
         oldItem: ArticlesBean.DataBean.ArticleBean,
         newItem: ArticlesBean.DataBean.ArticleBean
     ): Boolean {
-        return newItem == oldItem
+        return newItem.id == oldItem.id
     }
 }

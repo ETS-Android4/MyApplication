@@ -3,6 +3,7 @@ package com.example.william.my.kotlin.hodder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ class LoadStateViewHolder(parent: ViewGroup, retry: () -> Unit) :
         LayoutInflater.from(parent.context).inflate(R.layout.kotlin_item_recycle, parent, false)
     ) {
 
+    private val context = parent.context
     private val binding = KotlinItemRecycleBinding.bind(itemView)
 
     private val mTextView: TextView = binding.itemRecycleTextView.also {
@@ -23,10 +25,16 @@ class LoadStateViewHolder(parent: ViewGroup, retry: () -> Unit) :
     }
 
     fun bind(loadState: LoadState) {
-        if (loadState is LoadState.Error) {
-            mTextView.text = loadState.error.localizedMessage
+        when (loadState) {
+            is LoadState.Loading ->
+                mTextView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            is LoadState.NotLoading ->
+                mTextView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+            is LoadState.Error -> {
+                mTextView.text = loadState.error.localizedMessage
+                mTextView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryLight))
+            }
         }
-        mTextView.text = "LoadState"
     }
 }
 
