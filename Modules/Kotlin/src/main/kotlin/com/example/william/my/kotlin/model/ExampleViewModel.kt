@@ -4,10 +4,13 @@ import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import androidx.paging.rxjava3.cachedIn
+import androidx.paging.rxjava3.flowable
 import com.example.william.my.kotlin.bean.LoginData
 import com.example.william.my.kotlin.repository.ExampleRepository
 import com.example.william.my.kotlin.source.ExampleDataSource
 import com.example.william.my.kotlin.source.ExamplePagingSource
+import com.example.william.my.kotlin.source.ExampleRxPagingSource
 import com.example.william.my.kotlin.utils.NetworkResult
 import com.example.william.my.kotlin.utils.ThreadUtils
 import com.google.gson.Gson
@@ -16,6 +19,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
 
 class ExampleViewModel : ViewModel() {
 
@@ -105,6 +109,14 @@ class ExampleViewModel : ViewModel() {
     val articlesFlow = Pager(PagingConfig(pageSize = 20)) {
         ExamplePagingSource()
     }.flow
+        .cachedIn(viewModelScope)
+
+    /**
+     * RxJava
+     */
+    val articlesFlowable = Pager(PagingConfig(pageSize = 20)) {
+        ExampleRxPagingSource()
+    }.flowable
         .cachedIn(viewModelScope)
 
 }

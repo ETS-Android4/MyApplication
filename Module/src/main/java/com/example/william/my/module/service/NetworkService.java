@@ -43,7 +43,7 @@ public interface NetworkService {
     /**
      * Repository
      */
-    @POST(Urls.article)
+    @GET(Urls.article)
     Single<ArticlesBean> getArticle(@Path("page") int page);
 
     /**

@@ -30,7 +30,7 @@ public class PagingAdapter extends PagingDataAdapter<ArticlesBean.DataBean.Artic
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ArticlesBean.DataBean.ArticleBean articleBean = getItem(position);
-        ((ViewHolder) holder).mTextView.setText(articleBean.getTitle());
+        ((ViewHolder) holder).mTextView.setText(articleBean == null ? "" : position + ". " + articleBean.getTitle());
     }
 
     private static class ViewHolder extends RecyclerView.ViewHolder {

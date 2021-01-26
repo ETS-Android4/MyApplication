@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation project(path: ':Module')
+    implementation project(path: ':Libraries:lib_network')
     //Android
     implementation Deps.appcompat
     implementation Deps.constraintlayout
@@ -54,14 +55,14 @@ dependencies {
     //Kotlin
     implementation Deps.kotlin
     implementation Deps.core_ktx
+    //Kotlin
     implementation Deps.livedata_ktx//LiveDataScope
     implementation Deps.viewmodel_ktx//ViewModelScope
-    implementation Deps.activity_ktx
-    implementation Deps.fragment_ktx
     //Coroutines
     implementation Deps.kotlin_coroutines
     //Paging3
     implementation Deps.paging
+    implementation Deps.paging_rxjava
     //Retrofit
     implementation Deps.retrofit
     implementation Deps.retrofit_gson

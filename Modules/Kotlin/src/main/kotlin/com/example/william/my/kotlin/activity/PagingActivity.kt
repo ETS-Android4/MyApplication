@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.kotlin.adapter.ArticlesAdapter
 import com.example.william.my.kotlin.comparator.ArticleComparator
 import com.example.william.my.kotlin.databinding.KotlinActivityPagingBinding
-import com.example.william.my.kotlin.hodder.ExampleLoadStateAdapter
+import com.example.william.my.kotlin.holder.ExampleLoadStateAdapter
 import com.example.william.my.kotlin.model.ExampleViewModel
+import com.example.william.my.module.bean.ArticlesBean
 import com.example.william.my.module.router.ARouterPath
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import org.reactivestreams.Subscriber
+import org.reactivestreams.Subscription
 
 
 /**
@@ -38,15 +39,35 @@ class PagingActivity : AppCompatActivity() {
         recycleView.layoutManager = LinearLayoutManager(this)
         recycleView.adapter = pagingAdapter
 
-        // Activity 可以直接使用 lifecycleScope
-        // Fragment 需要使用 viewLifecycleOwner.lifecycleScope
+        // activity_ktx 可以使用 lifecycleScope
+        // fragment_ktx 需要使用 viewLifecycleOwner.lifecycleScope
         // Activities can use lifecycleScope directly, but Fragments should instead use
         // viewLifecycleOwner.lifecycleScope.
-        lifecycleScope.launch {
-            viewModel.articlesFlow.collectLatest { pagingData ->
-                pagingAdapter.submitData(pagingData)
-            }
-        }
+        //lifecycleScope.launch {
+        //    viewModel.articlesFlow.collectLatest { pagingData ->
+        //        pagingAdapter.submitData(pagingData)
+        //    }
+        //}
+
+        viewModel.articlesFlowable
+            .subscribe(object :
+                Subscriber<PagingData<ArticlesBean.DataBean.ArticleBean>> {
+                override fun onSubscribe(s: Subscription?) {
+
+                }
+
+                override fun onNext(t: PagingData<ArticlesBean.DataBean.ArticleBean>) {
+                    pagingAdapter.submitData(lifecycle, t)
+                }
+
+                override fun onError(t: Throwable?) {
+
+                }
+
+                override fun onComplete() {
+
+                }
+            })
 
         //获取加载状态
         pagingAdapter.addLoadStateListener {

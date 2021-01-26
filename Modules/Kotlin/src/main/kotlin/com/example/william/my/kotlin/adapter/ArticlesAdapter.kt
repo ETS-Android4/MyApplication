@@ -17,7 +17,8 @@ class ArticlesAdapter(diffCallback: DiffUtil.ItemCallback<ArticlesBean.DataBean.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val bind = KotlinItemRecycleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val bind =
+            KotlinItemRecycleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(bind)
     }
 

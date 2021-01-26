@@ -1,4 +1,4 @@
-package com.example.william.my.kotlin.hodder
+package com.example.william.my.kotlin.holder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,12 +27,27 @@ class LoadStateViewHolder(parent: ViewGroup, retry: () -> Unit) :
     fun bind(loadState: LoadState) {
         when (loadState) {
             is LoadState.Loading ->
-                mTextView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                mTextView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.colorPrimary
+                    )
+                )
             is LoadState.NotLoading ->
-                mTextView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+                mTextView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.colorPrimaryDark
+                    )
+                )
             is LoadState.Error -> {
                 mTextView.text = loadState.error.localizedMessage
-                mTextView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryLight))
+                mTextView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.colorPrimaryLight
+                    )
+                )
             }
         }
     }

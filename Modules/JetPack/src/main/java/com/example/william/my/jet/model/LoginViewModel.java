@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelKt;
 import androidx.paging.Pager;
 import androidx.paging.PagingConfig;
 import androidx.paging.PagingData;
+import androidx.paging.PagingLiveData;
 import androidx.paging.PagingSource;
 import androidx.paging.rxjava3.PagingRx;
 
@@ -50,6 +51,8 @@ public class LoginViewModel extends ViewModel {
     private final LiveData<RetrofitResponse<List<BannerBean>>> bannersBean;
     private final LiveData<RetrofitResponse<List<BannerData>>> bannersData;
 
+    //private final Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> articleFlowable;
+
     public LoginViewModel() {
 
         repository = Repository.getInstance();
@@ -70,6 +73,8 @@ public class LoginViewModel extends ViewModel {
                 return repository.bannerData();
             }
         });
+
+
     }
 
     public LiveData<RetrofitResponse<List<BannerBean>>> getBannersBean() {
@@ -80,27 +85,38 @@ public class LoginViewModel extends ViewModel {
         return bannersData;
     }
 
-    private Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> flowable;
-
-    public Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> getFlowable() {
-        return flowable;
-    }
-
-    public void getArticles() {
+    public LiveData<PagingData<ArticlesBean.DataBean.ArticleBean>> getArticleLiveData() {
         // CoroutineScope 由 lifecycle-viewmodel-ktx 提供
         // CoroutineScope helper provided by the lifecycle-viewmodel-ktx artifact.
         CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
+
         Pager<Integer, ArticlesBean.DataBean.ArticleBean> pager = new Pager<>(
-                new PagingConfig(0),
+                new PagingConfig(20),//一次加载的数目
                 new Function0<PagingSource<Integer, ArticlesBean.DataBean.ArticleBean>>() {
                     @Override
                     public PagingSource<Integer, ArticlesBean.DataBean.ArticleBean> invoke() {
                         return new DataPagingSource();
                     }
                 });
-        Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> flowable = PagingRx.getFlowable(pager);
         // cachedIn() 运算符使数据流可共享
-        PagingRx.cachedIn(flowable, viewModelScope);
+        return PagingLiveData.cachedIn(PagingLiveData.getLiveData(pager), viewModelScope);
+    }
+
+    public Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> getArticleFlowable() {
+        // CoroutineScope 由 lifecycle-viewmodel-ktx 提供
+        // CoroutineScope helper provided by the lifecycle-viewmodel-ktx artifact.
+        CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
+
+        Pager<Integer, ArticlesBean.DataBean.ArticleBean> pager = new Pager<>(
+                new PagingConfig(20),//一次加载的数目
+                new Function0<PagingSource<Integer, ArticlesBean.DataBean.ArticleBean>>() {
+                    @Override
+                    public PagingSource<Integer, ArticlesBean.DataBean.ArticleBean> invoke() {
+                        return new DataPagingSource();
+                    }
+                });
+        // cachedIn() 运算符使数据流可共享
+        return PagingRx.cachedIn(PagingRx.getFlowable(pager), viewModelScope);
     }
 
     public void request() {

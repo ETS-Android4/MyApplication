@@ -3,6 +3,7 @@ package com.example.william.my.jet.source;
 import androidx.paging.rxjava3.RxPagingSource;
 
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
+import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.service.NetworkService;
 
@@ -11,6 +12,9 @@ import org.jetbrains.annotations.NotNull;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataBean.ArticleBean> {
 
@@ -24,27 +28,31 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
             page = 0;
         }
 
-        return RetrofitUtils.buildApi(NetworkService.class)
+        return buildApi()
                 .getArticle(page)
                 .subscribeOn(Schedulers.io())
-                .map(new toLoadResult(page))
+                .map(new toLoadResult())
                 .onErrorReturn(new toErrorResult());
     }
 
+    private NetworkService buildApi() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build();
+        //return retrofit.create(NetworkService.class);
+        return RetrofitUtils.buildApi(NetworkService.class);
+    }
+
     private static class toLoadResult implements Function<ArticlesBean, LoadResult<Integer, ArticlesBean.DataBean.ArticleBean>> {
-
-        private final Integer page;
-
-        public toLoadResult(Integer page) {
-            this.page = page;
-        }
 
         @Override
         public LoadResult<Integer, ArticlesBean.DataBean.ArticleBean> apply(ArticlesBean articlesBean) throws Throwable {
             return new LoadResult.Page<>(
                     articlesBean.getData().getDatas(),
                     null,// Only paging forward.
-                    page + 1);
+                    articlesBean.getData().getCurPage());
         }
     }
 
