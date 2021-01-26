@@ -1,11 +1,14 @@
 package com.example.william.my.jet.source;
 
+import android.util.Log;
+
 import androidx.paging.rxjava3.RxPagingSource;
 
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.service.NetworkService;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -27,28 +30,20 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
         if (page == null) {
             page = 0;
         }
+        Log.e("TAG", page + "");
 
-        return buildApi()
+        return RetrofitUtils.buildApi(NetworkService.class)
                 .getArticle(page)
                 .subscribeOn(Schedulers.io())
                 .map(new toLoadResult())
                 .onErrorReturn(new toErrorResult());
     }
 
-    private NetworkService buildApi() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Urls.baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
-        //return retrofit.create(NetworkService.class);
-        return RetrofitUtils.buildApi(NetworkService.class);
-    }
-
     private static class toLoadResult implements Function<ArticlesBean, LoadResult<Integer, ArticlesBean.DataBean.ArticleBean>> {
 
         @Override
         public LoadResult<Integer, ArticlesBean.DataBean.ArticleBean> apply(ArticlesBean articlesBean) throws Throwable {
+            Log.e("TAG", new Gson().toJson(articlesBean));
             return new LoadResult.Page<>(
                     articlesBean.getData().getDatas(),
                     null,// Only paging forward.
@@ -60,6 +55,7 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
 
         @Override
         public LoadResult<Integer, ArticlesBean.DataBean.ArticleBean> apply(Throwable throwable) throws Throwable {
+            Log.e("TAG", throwable.getMessage());
             return new LoadResult.Error<>(throwable);
         }
     }

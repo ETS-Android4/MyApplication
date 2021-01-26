@@ -69,7 +69,7 @@ public class PagingActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable t) {
-
+                        Log.e("TAG", t.getMessage());
                     }
 
                     @Override
