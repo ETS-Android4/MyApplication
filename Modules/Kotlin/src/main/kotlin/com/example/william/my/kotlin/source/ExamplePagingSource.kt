@@ -1,7 +1,6 @@
 package com.example.william.my.kotlin.source
 
 import androidx.paging.PagingSource
-import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
 import com.example.william.my.kotlin.service.KotlinApi
 import com.example.william.my.module.base.Urls
 import com.example.william.my.module.bean.ArticlesBean
@@ -34,7 +33,6 @@ class ExamplePagingSource : PagingSource<Int, ArticlesBean.DataBean.ArticleBean>
             .baseUrl(Urls.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        //return retrofit.create(KotlinApi::class.java)
-        return RetrofitUtils.buildApi(KotlinApi::class.java)
+        return retrofit.create(KotlinApi::class.java)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.william.my.kotlin.utils
+package com.example.william.my.kotlin.result
 
 sealed class NetworkResult<out R> {
 

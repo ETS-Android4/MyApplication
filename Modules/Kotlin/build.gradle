@@ -43,7 +43,6 @@ android {
 
 dependencies {
     implementation project(path: ':Module')
-    implementation project(path: ':Libraries:lib_network')
     //Android
     implementation Deps.appcompat
     implementation Deps.constraintlayout
@@ -66,4 +65,5 @@ dependencies {
     //Retrofit
     implementation Deps.retrofit
     implementation Deps.retrofit_gson
+    implementation Deps.retrofit_rxjava
 }

@@ -21,8 +21,11 @@ import com.example.william.my.module.router.ARouterPath;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+
+import static autodispose2.AutoDispose.autoDisposable;
 
 /**
  * https://developer.android.google.cn/topic/libraries/architecture/paging/v3-overview
@@ -52,6 +55,7 @@ public class PagingActivity extends AppCompatActivity {
         //});
 
         mViewModel.getArticleFlowable()
+                .to(autoDisposable(AndroidLifecycleScopeProvider.from(this)))
                 .subscribe(new Subscriber<PagingData<ArticlesBean.DataBean.ArticleBean>>() {
                     @Override
                     public void onSubscribe(Subscription s) {

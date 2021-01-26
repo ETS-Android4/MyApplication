@@ -22,6 +22,8 @@ dependencies {
     //Paging3
     implementation Deps.paging
     implementation Deps.paging_rxjava
+    //AutoDispose
+    implementation Deps.autodispose
     //CoroutineScope
     implementation Deps.viewmodel_ktx
     //Room

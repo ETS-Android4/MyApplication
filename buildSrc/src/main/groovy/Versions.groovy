@@ -77,6 +77,9 @@ class DepsVersions {
     //https://github.com/trello/RxLifecycle/releases
     static rxlifecycle_version = "4.0.2"
 
+    //https://github.com/uber/AutoDispose/releases
+    static autodispose_version = "2.0.0"
+
     //https://github.com/greenrobot/EventBus
     static eventbus_version = "3.2.0"
 

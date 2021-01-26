@@ -52,6 +52,8 @@ class Deps {
     static rxandroid = "io.reactivex.rxjava3:rxandroid:${DepsVersions.rxandroid_version}"
     static rxlifecycle = "com.trello.rxlifecycle4:rxlifecycle-android-lifecycle:${DepsVersions.rxlifecycle_version}"
 
+    static autodispose = "com.uber.autodispose2:autodispose-androidx-lifecycle:${DepsVersions.autodispose_version}"
+
     static eventbus = "org.greenrobot:eventbus:${DepsVersions.eventbus_version}"
     static eventbus_processor = "org.greenrobot:eventbus-annotation-processor:${DepsVersions.eventbus_version}"
 
