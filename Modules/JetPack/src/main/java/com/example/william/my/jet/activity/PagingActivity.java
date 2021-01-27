@@ -18,10 +18,9 @@ import com.example.william.my.jet.model.LoginViewModel;
 import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.router.ARouterPath;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
 import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.functions.Consumer;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
@@ -34,6 +33,8 @@ import static autodispose2.AutoDispose.autoDisposable;
 public class PagingActivity extends AppCompatActivity {
 
     private PagingAdapter mPagingAdapter;
+
+    private final CompositeDisposable mDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,29 +55,14 @@ public class PagingActivity extends AppCompatActivity {
         //    }
         //});
 
-        mViewModel.getArticleFlowable()
+        mDisposable.add(mViewModel.getArticleFlowable()
                 .to(autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-                .subscribe(new Subscriber<PagingData<ArticlesBean.DataBean.ArticleBean>>() {
+                .subscribe(new Consumer<PagingData<ArticlesBean.DataBean.ArticleBean>>() {
                     @Override
-                    public void onSubscribe(Subscription s) {
-
-                    }
-
-                    @Override
-                    public void onNext(PagingData<ArticlesBean.DataBean.ArticleBean> pagingData) {
+                    public void accept(PagingData<ArticlesBean.DataBean.ArticleBean> pagingData) throws Throwable {
                         mPagingAdapter.submitData(getLifecycle(), pagingData);
                     }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        Log.e("TAG", t.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                }));
 
         mPagingAdapter.addLoadStateListener(new Function1<CombinedLoadStates, Unit>() {
             @Override
@@ -85,5 +71,12 @@ public class PagingActivity extends AppCompatActivity {
                 return null;
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // clear all the subscriptions
+        mDisposable.clear();
     }
 }

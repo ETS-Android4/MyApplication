@@ -46,7 +46,7 @@ dependencies {
     //Android
     implementation Deps.appcompat
     implementation Deps.constraintlayout
-    //
+    //Gson
     implementation Deps.gson
     //ARouter
     implementation Deps.arouter

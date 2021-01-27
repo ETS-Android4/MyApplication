@@ -15,14 +15,16 @@ import com.example.william.my.kotlin.holder.ExampleLoadStateAdapter
 import com.example.william.my.kotlin.model.ExampleViewModel
 import com.example.william.my.module.bean.ArticlesBean
 import com.example.william.my.module.router.ARouterPath
-import org.reactivestreams.Subscriber
-import org.reactivestreams.Subscription
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.functions.Consumer
 
 /**
  * https://developer.android.google.cn/topic/libraries/architecture/paging/v3-overview
  */
 @Route(path = ARouterPath.Kotlin.Kotlin_Paging)
 class PagingActivity : AppCompatActivity() {
+
+    private val mDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,25 +50,12 @@ class PagingActivity : AppCompatActivity() {
         //    }
         //}
 
-        viewModel.articlesFlowable
-            .subscribe(object :
-                Subscriber<PagingData<ArticlesBean.DataBean.ArticleBean>> {
-                override fun onSubscribe(s: Subscription?) {
-
-                }
-
-                override fun onNext(t: PagingData<ArticlesBean.DataBean.ArticleBean>) {
-                    pagingAdapter.submitData(lifecycle, t)
-                }
-
-                override fun onError(t: Throwable?) {
-
-                }
-
-                override fun onComplete() {
-
-                }
-            })
+        mDisposable.add(
+            viewModel.articlesFlowable
+                .subscribe(Consumer<PagingData<ArticlesBean.DataBean.ArticleBean>> {
+                    pagingAdapter.submitData(lifecycle, it)
+                })
+        )
 
         //获取加载状态
         pagingAdapter.addLoadStateListener {
@@ -83,5 +72,11 @@ class PagingActivity : AppCompatActivity() {
             header = ExampleLoadStateAdapter(pagingAdapter::retry),
             footer = ExampleLoadStateAdapter(pagingAdapter::retry)
         )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // clear all the subscriptions
+        mDisposable.clear()
     }
 }

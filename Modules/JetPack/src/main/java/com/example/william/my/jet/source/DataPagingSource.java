@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.paging.rxjava3.RxPagingSource;
 
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
-import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.service.NetworkService;
 import com.google.gson.Gson;
@@ -15,9 +14,6 @@ import org.jetbrains.annotations.NotNull;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataBean.ArticleBean> {
 

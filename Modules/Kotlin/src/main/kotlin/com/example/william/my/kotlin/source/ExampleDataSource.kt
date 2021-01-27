@@ -1,8 +1,8 @@
 package com.example.william.my.kotlin.source
 
 import com.example.william.my.kotlin.bean.LoginData
-import com.example.william.my.kotlin.service.KotlinApi
 import com.example.william.my.kotlin.result.NetworkResult
+import com.example.william.my.kotlin.service.KotlinApi
 import com.example.william.my.kotlin.utils.ThreadUtils
 import com.example.william.my.module.base.Urls
 import com.example.william.my.module.bean.ArticlesBean
