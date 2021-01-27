@@ -26,7 +26,6 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
         if (page == null) {
             page = 0;
         }
-        Log.e("TAG", page + "");
 
         return RetrofitUtils.buildApi(NetworkService.class)
                 .getArticle(page)
@@ -39,7 +38,6 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
 
         @Override
         public LoadResult<Integer, ArticlesBean.DataBean.ArticleBean> apply(ArticlesBean articlesBean) throws Throwable {
-            Log.e("TAG", new Gson().toJson(articlesBean));
             return new LoadResult.Page<>(
                     articlesBean.getData().getDatas(),
                     null,// Only paging forward.
@@ -51,7 +49,6 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
 
         @Override
         public LoadResult<Integer, ArticlesBean.DataBean.ArticleBean> apply(Throwable throwable) throws Throwable {
-            Log.e("TAG", throwable.getMessage());
             return new LoadResult.Error<>(throwable);
         }
     }

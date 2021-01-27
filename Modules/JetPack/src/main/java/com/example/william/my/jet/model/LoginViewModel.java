@@ -112,7 +112,6 @@ public class LoginViewModel extends ViewModel {
                 new Function0<PagingSource<Integer, ArticlesBean.DataBean.ArticleBean>>() {
                     @Override
                     public PagingSource<Integer, ArticlesBean.DataBean.ArticleBean> invoke() {
-                        Log.e("TAG", "invoke");
                         return new DataPagingSource();
                     }
                 });
