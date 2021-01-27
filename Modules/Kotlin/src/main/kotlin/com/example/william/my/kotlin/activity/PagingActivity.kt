@@ -15,8 +15,10 @@ import com.example.william.my.kotlin.holder.ExampleLoadStateAdapter
 import com.example.william.my.kotlin.model.ExampleViewModel
 import com.example.william.my.module.bean.ArticlesBean
 import com.example.william.my.module.router.ARouterPath
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.functions.Consumer
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 /**
  * https://developer.android.google.cn/topic/libraries/architecture/paging/v3-overview
@@ -52,6 +54,8 @@ class PagingActivity : AppCompatActivity() {
 
         mDisposable.add(
             viewModel.articlesFlowable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer<PagingData<ArticlesBean.DataBean.ArticleBean>> {
                     pagingAdapter.submitData(lifecycle, it)
                 })
