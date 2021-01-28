@@ -13,6 +13,7 @@ import io.reactivex.rxjava3.functions.Function;
  */
 public class ServerResultFunction<T> implements Function<RetrofitResponse<JsonElement>, RetrofitResponse<T>> {
 
+    @SuppressWarnings("unchecked")
     @Override
     public RetrofitResponse<T> apply(RetrofitResponse<JsonElement> response) throws Exception {
         //抛出服务器返回自定义异常
@@ -20,7 +21,6 @@ public class ServerResultFunction<T> implements Function<RetrofitResponse<JsonEl
             Log.e("ServerResult", new Gson().toJson(response));
             //throw new ServerResultException(response.getStatus(), response.getMessage());
         }
-        //noinspection unchecked
         return (RetrofitResponse<T>) response;
     }
 }

@@ -154,7 +154,7 @@ public class PickerViewActivity extends BaseResponseActivity {
         return detail;
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({"rawtypes","unchecked"})
     private void showOptionsPickerView() {
         OptionsPickerView pickerView = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
@@ -172,7 +172,6 @@ public class PickerViewActivity extends BaseResponseActivity {
                 .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
                 .setContentTextSize(20)
                 .build();
-        //noinspection unchecked
         pickerView.setPicker(options1Items, options2Items, options3Items);//三级选择器
         pickerView.show();
     }

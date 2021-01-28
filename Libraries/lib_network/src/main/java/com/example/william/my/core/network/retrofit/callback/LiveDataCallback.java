@@ -27,10 +27,10 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
         this.convert = convert;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onResponse(RetrofitResponse<Bean> data) {
         try {
-            //noinspection unchecked
             liveData.postValue(convert == null ? (RetrofitResponse<Data>) data : convert.convert(data));
         } catch (Exception e) {
             e.printStackTrace();

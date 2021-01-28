@@ -31,6 +31,8 @@
         <activity android:name=".activity.TurntableActivity" />
         <activity android:name=".activity.TypefaceActivity" />
 
+        <activity android:name=".activity.OptionalBeanActivity" />
+
         <service android:name=".service.AIDLService" />
         <service android:name=".service.ForegroundService" />
         <service android:name=".service.MessageService" />

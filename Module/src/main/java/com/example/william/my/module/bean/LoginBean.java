@@ -1,22 +1,21 @@
 package com.example.william.my.module.bean;
 
-import com.example.william.my.core.network.base.BaseBean;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginBean extends BaseBean {
+public class LoginBean {
 
     @SerializedName("data")
-    private DataBean data;
+    private UserBean data;
 
-    public DataBean getData() {
+    public UserBean getUserData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    public void setUserData(UserBean data) {
         this.data = data;
     }
 
-    public static class DataBean extends BaseBean {
+    public static class UserBean {
 
         @SerializedName("id")
         private String id;
@@ -27,8 +26,16 @@ public class LoginBean extends BaseBean {
             return id;
         }
 
+        public void setId(String id) {
+            this.id = id;
+        }
+
         public String getNickname() {
             return nickname == null ? "" : nickname;
+        }
+
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
         }
     }
 }
