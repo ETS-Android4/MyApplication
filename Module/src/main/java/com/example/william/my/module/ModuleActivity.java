@@ -77,7 +77,9 @@ public class ModuleActivity extends BaseListActivity {
         mMap.put("OpenSourceActivity", ARouterPath.OpenSource.OpenSource);
         mMap.put("SampleActivity", ARouterPath.Sample.Sample);
 
-        mMap.put("KotlinActivity", ARouterPath.Kotlin.Kotlin);
+        //Kotlin
+        mMap.put("KotlinCoroutinesActivity", ARouterPath.Kotlin.Kotlin_Coroutines);
+        mMap.put("KotlinPagingActivity", ARouterPath.Kotlin.Kotlin_Paging);
 
         LiveEventBus
                 .get("some_key", String.class)

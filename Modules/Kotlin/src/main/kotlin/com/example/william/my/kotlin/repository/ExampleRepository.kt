@@ -34,9 +34,11 @@ class ExampleRepository {
 
     private fun articlesTakeOne(articles: ArticlesBean): ArticlesBean {
         //打印线程
-        ThreadUtils.isMainThread("articlesTakeOne")
+        ThreadUtils.isMainThread("ExampleRepository articlesTakeOne")
 
         articles.data.datas = articles.data.datas.take(1)
         return articles
     }
+
+
 }

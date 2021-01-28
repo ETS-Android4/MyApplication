@@ -12,7 +12,7 @@ import com.example.william.my.kotlin.adapter.ArticlesAdapter
 import com.example.william.my.kotlin.comparator.ArticleComparator
 import com.example.william.my.kotlin.databinding.KotlinActivityPagingBinding
 import com.example.william.my.kotlin.holder.ExampleLoadStateAdapter
-import com.example.william.my.kotlin.model.ExampleViewModel
+import com.example.william.my.kotlin.model.PagingViewModel
 import com.example.william.my.module.bean.ArticlesBean
 import com.example.william.my.module.router.ARouterPath
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -35,7 +35,7 @@ class PagingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //val viewModel by viewModels<ExampleViewModel>()
-        val viewModel = ViewModelProvider(this).get(ExampleViewModel::class.java)
+        val viewModel = ViewModelProvider(this).get(PagingViewModel::class.java)
 
         val pagingAdapter = ArticlesAdapter(ArticleComparator())
         val recycleView = binding.pagingRecycleView

@@ -54,11 +54,10 @@ dependencies {
     //Kotlin
     implementation Deps.kotlin
     implementation Deps.core_ktx
-    //Kotlin
-    implementation Deps.livedata_ktx//LiveDataScope
-    implementation Deps.viewmodel_ktx//ViewModelScope
     //Coroutines
     implementation Deps.kotlin_coroutines
+    implementation Deps.livedata_ktx//LiveDataScope
+    implementation Deps.viewmodel_ktx//ViewModelScope
     //Paging3
     implementation Deps.paging
     implementation Deps.paging_rxjava

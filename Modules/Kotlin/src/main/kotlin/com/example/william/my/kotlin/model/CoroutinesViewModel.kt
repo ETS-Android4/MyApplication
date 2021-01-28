@@ -1,17 +1,10 @@
 package com.example.william.my.kotlin.model
 
 import androidx.lifecycle.*
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import androidx.paging.rxjava3.cachedIn
-import androidx.paging.rxjava3.flowable
 import com.example.william.my.kotlin.bean.LoginData
 import com.example.william.my.kotlin.repository.ExampleRepository
+import com.example.william.my.kotlin.repository.LoginRepository
 import com.example.william.my.kotlin.result.NetworkResult
-import com.example.william.my.kotlin.source.ExampleDataSource
-import com.example.william.my.kotlin.source.ExamplePagingSource
-import com.example.william.my.kotlin.source.ExampleRxPagingSource
 import com.example.william.my.kotlin.utils.ThreadUtils
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class ExampleViewModel : ViewModel() {
+class CoroutinesViewModel : ViewModel() {
 
     private val _login = MutableLiveData<String>()
 
@@ -35,14 +28,14 @@ class ExampleViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
 
             //打印线程
-            ThreadUtils.isMainThread("login")
+            ThreadUtils.isMainThread("CoroutinesViewModel login")
 
             val bodyJson = "username=$username&password=$password"
 
             // 执行网络请求 并 挂起，直至请求完成
             // Make the network call and suspend execution until it finishes
             val result = try {
-                ExampleDataSource().login(bodyJson)
+                LoginRepository().login(bodyJson)
             } catch (e: Exception) {
                 NetworkResult.NetworkError(Exception("Network request failed"))
             }
@@ -73,7 +66,7 @@ class ExampleViewModel : ViewModel() {
         // Trigger the flow and consume its elements using collect
         viewModelScope.launch {
             //打印线程
-            ThreadUtils.isMainThread("getArticles")
+            ThreadUtils.isMainThread("CoroutinesViewModel getArticles")
 
             // 使用 collect 触发流并消耗其元素
             // Trigger the flow and consume its elements using collect
@@ -96,27 +89,13 @@ class ExampleViewModel : ViewModel() {
      * 使用 LiveData 协程构造方法
      */
     fun getArticles2() = liveData<String> {
+        //打印线程
+        ThreadUtils.isMainThread("CoroutinesViewModel getArticles2")
+
         ExampleRepository().getArticles
             // 在一段时间内发送多次数据，只会接受最新的一次发射过来的数据
             .collectLatest { article ->
                 emit(Gson().toJson(article))
             }
     }
-
-    /**
-     * pageSize 一次加载的数目
-     */
-    val articlesFlow = Pager(PagingConfig(pageSize = 20)) {
-        ExamplePagingSource()
-    }.flow
-        .cachedIn(viewModelScope)
-
-    /**
-     * RxJava
-     */
-    val articlesFlowable = Pager(PagingConfig(pageSize = 20)) {
-        ExampleRxPagingSource()
-    }.flowable
-        .cachedIn(viewModelScope)
-
 }
