@@ -45,8 +45,14 @@ class CoroutinesActivity : AppCompatActivity() {
         //    viewModel.getArticles()
         //}
 
+        //binding.kotlinTextView.setOnClickListener {
+        //    viewModel.getArticles2().observe(this, Observer {
+        //        binding.kotlinTextView.text = it
+        //    })
+        //}
+
         binding.kotlinTextView.setOnClickListener {
-            viewModel.getArticles2().observe(this, Observer {
+            viewModel.getArticles3().observe(this, Observer {
                 binding.kotlinTextView.text = it
             })
         }
@@ -54,7 +60,7 @@ class CoroutinesActivity : AppCompatActivity() {
 
     fun flowOperator() {
         /**
-        普通操作符
+         *1. 普通操作符
 
         map
         转换操作符，将 A 变成 B
@@ -64,7 +70,7 @@ class CoroutinesActivity : AppCompatActivity() {
         过滤操作符
 
 
-        特殊的操作符
+        2. 特殊的操作符
         总会有一些特殊的情况，比如我只需要取前几个，我只要最新的数据等，不过在这些情况下，数据的发射就是并发执行的。
 
         buffer
@@ -76,7 +82,7 @@ class CoroutinesActivity : AppCompatActivity() {
         collectLatest
         接收处理太慢，只处理最新接收的
 
-        组合操作符
+        3. 组合操作符
 
         zip
         组合两个流，双方都有新数据才会发射处理
@@ -85,7 +91,7 @@ class CoroutinesActivity : AppCompatActivity() {
         组合两个流，在经过第一次发射以后，任意方有新数据来的时候就可以发射，另一方有可能是已经发射过的数据
 
 
-        展平流操作符
+        4. 展平流操作符
         展平流有点类似于 RxJava 中的 flatmap，将你发射出去的数据源转变为另一种数据源。
 
         flatMapConcat
@@ -97,7 +103,7 @@ class CoroutinesActivity : AppCompatActivity() {
         flatMapLatest
         在每次 emit 新的数据以后，会取消先前的 collect
 
-        末端操作符
+        5. 末端操作符
         顾名思义，就是帮你做 collect 处理，collect 是最基础的末端操作符。
 
         collect

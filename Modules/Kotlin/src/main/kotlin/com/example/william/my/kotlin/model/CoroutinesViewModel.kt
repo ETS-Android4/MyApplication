@@ -8,9 +8,7 @@ import com.example.william.my.kotlin.result.NetworkResult
 import com.example.william.my.kotlin.utils.ThreadUtils
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 
@@ -62,8 +60,6 @@ class CoroutinesViewModel : ViewModel() {
         get() = _articles
 
     fun getArticles() {
-        // 使用collect触发流并消耗其元素
-        // Trigger the flow and consume its elements using collect
         viewModelScope.launch {
             //打印线程
             ThreadUtils.isMainThread("CoroutinesViewModel getArticles")
@@ -71,15 +67,19 @@ class CoroutinesViewModel : ViewModel() {
             // 使用 collect 触发流并消耗其元素
             // Trigger the flow and consume its elements using collect
             ExampleRepository().getArticles
-                // 如果抛出异常，捕获并更新UI
-                // Intermediate catch operator. If an exception is thrown,
-                // catch and update the UI
+                .onStart {
+                    // 在调用 flow 请求数据之前，做一些准备工作，例如显示正在加载数据的进度条
+                }
                 .catch { exception ->
+                    // 捕获上游出现的异常
                     _articles.postValue(exception.message.toString())
                 }
-                // 更新视图
-                // Update View with the latest favorite news
+                .onCompletion {
+                    // 请求完成
+                }
                 .collect { article ->
+                    // 更新视图
+                    // Update View with the latest favorite news
                     _articles.postValue(Gson().toJson(article))
                 }
         }
@@ -93,9 +93,16 @@ class CoroutinesViewModel : ViewModel() {
         ThreadUtils.isMainThread("CoroutinesViewModel getArticles2")
 
         ExampleRepository().getArticles
-            // 在一段时间内发送多次数据，只会接受最新的一次发射过来的数据
             .collectLatest { article ->
+                // 在一段时间内发送多次数据，只会接受最新的一次发射过来的数据
                 emit(Gson().toJson(article))
             }
     }
+
+    fun getArticles3() =
+        ExampleRepository().getArticles
+            .map {
+                Gson().toJson(it)
+            }
+            .asLiveData()//返回一个不可变的 LiveData
 }

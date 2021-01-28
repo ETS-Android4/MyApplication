@@ -49,7 +49,10 @@ public class LoginViewModel extends ViewModel {
 
     private final Repository repository;
 
+    // 私有的 MutableLiveData 可变的，对内访问
     private final MutableLiveData<Object> mutableLiveData;
+
+    // 对外暴露 不可变的 LiveData，只能查询
     private final LiveData<RetrofitResponse<List<BannerBean>>> bannersBean;
     private final LiveData<RetrofitResponse<List<BannerData>>> bannersData;
 
