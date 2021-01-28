@@ -166,7 +166,7 @@ public class PickerViewActivity extends BaseResponseActivity {
                 showResponse(options);
             }
         })
-                .setDecorView(getWindow().getDecorView().findViewById(android.R.id.content))//防止被虚拟按键遮挡
+                .setDecorView((ViewGroup) getWindow().getDecorView().findViewById(android.R.id.content))//防止被虚拟按键遮挡
                 .setTitleText("城市选择")
                 .setDividerColor(Color.BLACK)
                 .setTextColorCenter(Color.BLACK) //设置选中项文字颜色

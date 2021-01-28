@@ -23,7 +23,7 @@ public class CacheActivity extends BaseResponseActivity {
 
         // 内存缓存
         CacheMemoryStaticUtils.put("ic_launcher", drawable);
-        mResponse.setBackground(CacheMemoryStaticUtils.get("ic_launcher"));
+        mResponse.setBackground((Drawable) CacheMemoryStaticUtils.get("ic_launcher"));
 
         // 磁盘缓存
         CacheDiskStaticUtils.put("ic_launcher", drawable);
