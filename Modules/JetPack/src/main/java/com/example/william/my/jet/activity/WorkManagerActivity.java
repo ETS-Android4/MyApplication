@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
@@ -39,11 +40,11 @@ public class WorkManagerActivity extends BaseResponseActivity {
     private void initWork() {
         // 工作约束
         Constraints constraints = new Constraints.Builder()
-                // .setRequiredNetworkType(NetworkType.CONNECTED) //网络状态
+                .setRequiredNetworkType(NetworkType.CONNECTED) //网络状态
                 //.setRequiresBatteryNotLow(true) //非低电量
                 //.setRequiresDeviceIdle(true)//设备待机空闲
                 //.setRequiresStorageNotLow(true)//内存不紧张
-                .setRequiresCharging(true) //充电状态
+                //.setRequiresCharging(true) //充电状态
                 .build();
 
         // 定义任务的输入/输出
@@ -51,7 +52,8 @@ public class WorkManagerActivity extends BaseResponseActivity {
                 .putString("key", "inputData")
                 .build();
 
-        // 配置运行任务的方式和时间。OneTimeWorkRequest 只执行一次的任务请求，支持任务链
+        // 配置运行任务的方式和时间。
+        // OneTimeWorkRequest 只执行一次的任务请求，支持任务链
         oneTimeWorkRequest = new OneTimeWorkRequest.Builder(UploadWorker.class)
                 .setInitialDelay(3, TimeUnit.SECONDS)//初始延迟
                 .setConstraints(constraints)//工作约束
@@ -59,7 +61,7 @@ public class WorkManagerActivity extends BaseResponseActivity {
                 .addTag("upload")//标记工作
                 .build();
 
-        // 多次、定时执行的任务请求，不支持任务链。可以定义的最短重复间隔是 15 分钟
+        // PeriodicWorkRequest 可以多次、定时执行的任务请求，不支持任务链。可以定义的最短重复间隔是 15 分钟
         periodicWorkRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 15, TimeUnit.MINUTES)
                 .setConstraints(constraints)
                 .build();

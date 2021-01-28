@@ -31,8 +31,11 @@ public class UploadWorker extends Worker {
         // Create the output of the work
         // Data 对象的大小上限为 10KB。
         Data outputData = new Data.Builder()
-                .putString("ket", "outData")
+                .putString("key", "outData")
                 .build();
+
+        //更新进度
+        setProgressAsync(outputData);
 
         // Indicate whether the task finished successfully with the Result
         return Result.success(outputData);
