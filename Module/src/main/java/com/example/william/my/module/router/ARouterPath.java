@@ -67,11 +67,12 @@ public class ARouterPath {
     public static class JetPack {
         public static final String JetPack = "/module_jet/jet";
         public static final String JetPack_Bind = "/module_jet/bing";
+        public static final String JetPack_DataStore = "/module_jet/datastore";
+        public static final String JetPack_Room = "/module_jet/room";
         public static final String JetPack_ViewModel = "/module_jet/view_model";
         public static final String JetPack_Paging = "/module_jet/paging";
-        public static final String JetPack_Room = "/module_jet/room";
-        public static final String JetPack_Navigation = "/module_jet/navigation";
         public static final String JetPack_WorkManager = "/module_jet/work_manager";
+        public static final String JetPack_Navigation = "/module_jet/navigation";
     }
 
     public static class OpenSource {
@@ -130,6 +131,7 @@ public class ARouterPath {
     public static class Kotlin {
         public static final String Kotlin = "/module_k/kotlin";
         public static final String Kotlin_Coroutines = "/module_kotlin/coroutines";
+        public static final String Kotlin_DataStore = "/module_kotlin/dataStore";
         public static final String Kotlin_Paging = "/module_kotlin/paging";
     }
 }

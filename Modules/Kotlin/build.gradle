@@ -58,6 +58,14 @@ dependencies {
     implementation Deps.kotlin_coroutines
     implementation Deps.livedata_ktx//LiveDataScope
     implementation Deps.viewmodel_ktx//ViewModelScope
+    //DataStore
+    //implementation Deps.datastore
+    //protobuf
+    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
+    //Proto DataStore
+    implementation "androidx.datastore:datastore:1.0.0-alpha05"
+    //Preferences DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha05"
     //Paging3
     implementation Deps.paging
     implementation Deps.paging_rxjava

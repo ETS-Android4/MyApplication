@@ -78,7 +78,9 @@ public class ModuleActivity extends BaseListActivity {
         mMap.put("SampleActivity", ARouterPath.Sample.Sample);
 
         //Kotlin
+        mMap.put("KotlinActivity", ARouterPath.Kotlin.Kotlin);
         mMap.put("KotlinCoroutinesActivity", ARouterPath.Kotlin.Kotlin_Coroutines);
+        mMap.put("KotlinDataStoreActivity", ARouterPath.Kotlin.Kotlin_DataStore);
         mMap.put("KotlinPagingActivity", ARouterPath.Kotlin.Kotlin_Paging);
 
         LiveEventBus

@@ -21,6 +21,8 @@ class Deps {
     static activity_ktx = "androidx.activity:activity-ktx:${AndroidVersions.activity_version}"
     static fragment_ktx = "androidx.fragment:fragment-ktx:${AndroidVersions.fragment_version}"
 
+    static datastore = ":${AndroidVersions.datastore_version}"
+
     static room = "androidx.room:room-runtime:${AndroidVersions.room_version}"
     static room_rxjava = "androidx.room:room-rxjava3:${AndroidVersions.room_version}"
     static room_compiler = "androidx.room:room-compiler:${AndroidVersions.room_version}"

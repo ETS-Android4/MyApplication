@@ -33,6 +33,9 @@ class AndroidVersions {
     static lifecycle_version = "2.2.0"
     //https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
 
+    static datastore_version = "1.0.0-alpha05"
+    //https://developer.android.google.cn/topic/libraries/architecture/datastore
+
     static paging_version = "3.0.0-alpha11"
     //https://developer.android.google.cn/jetpack/androidx/releases/paging
 

@@ -16,9 +16,16 @@ android {
 
 dependencies {
     implementation project(path: ':Libraries:lib_network')
-    //Retrofit
-    implementation Deps.retrofit_gson
-    implementation Deps.retrofit_rxjava
+    //DataStore
+    //implementation Deps.datastore
+    implementation "androidx.datastore:datastore:1.0.0-alpha05"
+    implementation "androidx.datastore:datastore-core:1.0.0-alpha05"
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha05"
+    implementation "androidx.datastore:datastore-preferences-core:1.0.0-alpha05"
+    //Room
+    implementation Deps.room
+    implementation Deps.room_rxjava
+    annotationProcessor Deps.room_compiler
     //Paging3
     implementation Deps.paging
     implementation Deps.paging_rxjava
@@ -26,13 +33,12 @@ dependencies {
     implementation Deps.viewmodel_ktx
     //AutoDispose
     implementation Deps.autodispose
-    //Room
-    implementation Deps.room
-    implementation Deps.room_rxjava
-    annotationProcessor Deps.room_compiler
     //Navigation
     implementation Deps.navigation
     implementation Deps.navigation_ui
     //Work
     implementation Deps.work
+    //Retrofit
+    implementation Deps.retrofit_gson
+    implementation Deps.retrofit_rxjava
 }

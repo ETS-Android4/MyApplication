@@ -22,7 +22,6 @@
         <activity android:name=".activity.AudioPlayerActivity" />
         <activity android:name=".activity.BroadcastActivity" />
         <activity android:name=".activity.MessengerActivity" />
-        <activity android:name=".activity.NetworkStatusActivity" />
         <activity android:name=".activity.PermissionActivity" />
         <activity android:name=".activity.PicCropActivity" />
         <activity android:name=".activity.ServiceActivity" />
@@ -31,6 +30,7 @@
         <activity android:name=".activity.TurntableActivity" />
         <activity android:name=".activity.TypefaceActivity" />
 
+        <activity android:name=".activity.NetworkStatusActivity" />
         <activity android:name=".activity.OptionalBeanActivity" />
 
         <service android:name=".service.AIDLService" />

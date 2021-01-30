@@ -15,10 +15,11 @@ public class JetPackActivity extends BaseListActivity {
     protected void initData() {
         super.initData();
         mMap.put("BindActivity", ARouterPath.JetPack.JetPack_Bind);
-        mMap.put("NavigationActivity", ARouterPath.JetPack.JetPack_Navigation);
-        mMap.put("PagingActivity", ARouterPath.JetPack.JetPack_Paging);
+        mMap.put("DataStoreActivity", ARouterPath.JetPack.JetPack_DataStore);
         mMap.put("RoomActivity", ARouterPath.JetPack.JetPack_Room);
+        mMap.put("PagingActivity", ARouterPath.JetPack.JetPack_Paging);
         mMap.put("ViewModelActivity", ARouterPath.JetPack.JetPack_ViewModel);
         mMap.put("WorkManagerActivity", ARouterPath.JetPack.JetPack_WorkManager);
+        mMap.put("NavigationActivity", ARouterPath.JetPack.JetPack_Navigation);
     }
 }
