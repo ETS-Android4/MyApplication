@@ -73,7 +73,7 @@ class CoroutinesActivity : AppCompatActivity() {
         }
     }
 
-    fun blocking() {
+    private fun blocking() {
         ThreadUtils.isMainThread("启动阻塞")
         runBlocking {
             delay()
