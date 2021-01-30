@@ -1,11 +1,13 @@
 package com.example.william.my.kotlin.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.kotlin.databinding.KotlinActivityKotlinBinding
 import com.example.william.my.kotlin.datastore.ExamplePreferenceDataStore
 import com.example.william.my.kotlin.datastore.ExampleProtoDataStore
+import com.example.william.my.kotlin.utils.DataStoreUtils
 import com.example.william.my.module.router.ARouterPath
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -63,6 +65,11 @@ class DataStoreActivity : AppCompatActivity() {
             preferenceDataStore.incrementCounter()
             protoDataStore.incrementCounter()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        DataStoreUtils.clearSync()
     }
 }
 

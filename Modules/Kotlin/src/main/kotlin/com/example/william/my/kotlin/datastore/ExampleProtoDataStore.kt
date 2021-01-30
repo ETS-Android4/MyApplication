@@ -37,6 +37,14 @@ class ExampleProtoDataStore(context: Context) {
         }
     }
 
+    suspend fun clear() {
+        dataStore.updateData {
+            it.toBuilder()
+                .clear()
+                .build()
+        }
+    }
+
     object SettingsSerializer : Serializer<Settings> {
 
         override val defaultValue: Settings = Settings.getDefaultInstance()
