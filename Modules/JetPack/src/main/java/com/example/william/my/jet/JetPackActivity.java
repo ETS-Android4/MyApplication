@@ -15,7 +15,6 @@ public class JetPackActivity extends BaseListActivity {
     protected void initData() {
         super.initData();
         mMap.put("BindActivity", ARouterPath.JetPack.JetPack_Bind);
-        mMap.put("DataStoreActivity", ARouterPath.JetPack.JetPack_DataStore);
         mMap.put("RoomActivity", ARouterPath.JetPack.JetPack_Room);
         mMap.put("PagingActivity", ARouterPath.JetPack.JetPack_Paging);
         mMap.put("ViewModelActivity", ARouterPath.JetPack.JetPack_ViewModel);

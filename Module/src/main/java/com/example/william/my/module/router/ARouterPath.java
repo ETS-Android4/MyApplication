@@ -67,7 +67,6 @@ public class ARouterPath {
     public static class JetPack {
         public static final String JetPack = "/module_jet/jet";
         public static final String JetPack_Bind = "/module_jet/bing";
-        public static final String JetPack_DataStore = "/module_jet/datastore";
         public static final String JetPack_Room = "/module_jet/room";
         public static final String JetPack_ViewModel = "/module_jet/view_model";
         public static final String JetPack_Paging = "/module_jet/paging";
