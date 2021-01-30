@@ -24,11 +24,15 @@ class Config {
     static busVersion = '2.6'
     //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
 
+    static protobufVersion = '0.8.14'
+    //https://github.com/google/protobuf-gradle-plugin
+
     static depConfig = [
             plugin_gradle  : new DepConfig(pluginPath: "com.android.tools.build:gradle:$gradleVersion"),
             plugin_kotlin  : new DepConfig(pluginPath: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"),
             plugin_arouter : new DepConfig(pluginPath: "com.alibaba:arouter-register:$routerVersion"),
             plugin_bus     : new DepConfig(pluginPath: "com.blankj:bus-gradle-plugin:$busVersion"),
+            plugin_protobuf: new DepConfig(pluginPath: "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"),
 
             Module         : new DepConfig(true, ":Module"),
 

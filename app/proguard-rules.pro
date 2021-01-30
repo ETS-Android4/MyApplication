@@ -75,6 +75,12 @@
 }
 
 
+## protobuf
+# https://github.com/google/protobuf-gradle-plugin
+# ==================================================================================================
+-keep class * extends com.google.protobuf.** {*;}
+
+
 ## okio
 # https://github.com/square/okio/blob/master/okio/src/jvmMain/resources/META-INF/proguard/okio.pro
 # ==================================================================================================

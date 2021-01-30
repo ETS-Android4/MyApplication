@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-parcelize'
     //kotlin('android')
     //kotlin('kapt')
+    id 'com.google.protobuf'
 }
 
 
@@ -32,8 +33,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    //自定义源文件
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        //main.java.srcDirs += 'src/main/kotlin'
+        main {
+            proto {
+                srcDir 'src/main/proto'
+            }
+            java {
+                srcDir 'src/main/kotlin'
+            }
+        }
     }
     buildFeatures {
         viewBinding = true
@@ -58,14 +68,12 @@ dependencies {
     implementation Deps.kotlin_coroutines
     implementation Deps.livedata_ktx//LiveDataScope
     implementation Deps.viewmodel_ktx//ViewModelScope
-    //DataStore
-    //implementation Deps.datastore
-    //protobuf
-    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
     //Proto DataStore
-    implementation "androidx.datastore:datastore:1.0.0-alpha05"
+    implementation Deps.datastore
+    //protobuf
+    implementation 'com.google.protobuf:protobuf-javalite:3.10.0'
     //Preferences DataStore
-    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha05"
+    implementation Deps.datastore_pre
     //Paging3
     implementation Deps.paging
     implementation Deps.paging_rxjava
@@ -75,4 +83,27 @@ dependencies {
     implementation Deps.retrofit
     implementation Deps.retrofit_gson
     implementation Deps.retrofit_rxjava
+}
+
+protobuf {
+    // 配置protoc可执行文件
+    // Configure the protoc executable
+    protoc {
+        // Download from repositories
+        artifact = 'com.google.protobuf:protoc:3.8.0'
+    }
+    plugins {
+        javalite {
+            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option "lite"
+                }
+            }
+        }
+    }
 }

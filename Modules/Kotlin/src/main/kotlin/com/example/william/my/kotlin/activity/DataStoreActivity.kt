@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.kotlin.databinding.KotlinActivityKotlinBinding
 import com.example.william.my.kotlin.datastore.ExamplePreferenceDataStore
+import com.example.william.my.kotlin.datastore.ExampleProtoDataStore
 import com.example.william.my.module.router.ARouterPath
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -19,29 +20,48 @@ import kotlinx.coroutines.launch
 @Route(path = ARouterPath.Kotlin.Kotlin_DataStore)
 class DataStoreActivity : AppCompatActivity() {
 
-    private val dataStore = ExamplePreferenceDataStore(this)
+    private val preferenceDataStore = ExamplePreferenceDataStore(this)
+
+    private val protoDataStore = ExampleProtoDataStore(this)
+
+    private lateinit var binding: KotlinActivityKotlinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = KotlinActivityKotlinBinding.inflate(layoutInflater)
+        binding = KotlinActivityKotlinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        GlobalScope.launch(Dispatchers.Main) {
-            dataStore.getUsername()
-                .collect {
-                    binding.kotlinTextView.text = it.toString()
-                }
-        }
+        initCounter()
 
         binding.kotlinTextView.setOnClickListener {
             incrementCounter()
         }
     }
 
+    /**
+     * 从 DataStore 读取内容
+     */
+    private fun initCounter() {
+        GlobalScope.launch(Dispatchers.Main) {
+            preferenceDataStore.getCounter()
+                .collect {
+                    binding.kotlinTextView.text = it.toString()
+                }
+            protoDataStore.getCounter()
+                .collect {
+                    binding.kotlinTextView.text = it.toString()
+                }
+        }
+    }
+
+    /**
+     * 将内容写入 DataStore
+     */
     private fun incrementCounter() {
         GlobalScope.launch(Dispatchers.Main) {
-            dataStore.incrementCounter()
+            preferenceDataStore.incrementCounter()
+            protoDataStore.incrementCounter()
         }
     }
 }
