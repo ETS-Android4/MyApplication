@@ -47,6 +47,7 @@ public class ARouterPath {
         public static final String NetWork_RetrofitUtils = "/module_net/retrofit_utils";
         public static final String NetWork_RetrofitDownload = "/module_net/retrofit_download";
         public static final String NetWork_WebSocket = "/module_net/web_socket";
+        public static final String NetWork_Netty = "/module_net/netty";
         public static final String NetWork_Glide = "/module_net/glide";
         public static final String NetWork_NanoHttpD = "/module_net/nano_http_d";
         public static final String NetWork_WebServer = "/module_net/web_server";

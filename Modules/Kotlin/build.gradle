@@ -105,6 +105,5 @@ protobuf {
                 }
             }
         }
-        generatedFilesBaseDir = "$projectDir/src/main/java"
     }
 }

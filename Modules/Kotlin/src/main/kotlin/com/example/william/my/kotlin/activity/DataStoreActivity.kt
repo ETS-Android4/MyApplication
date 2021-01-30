@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * Preferences DataStore：不需要预先定义，但是不支持类型安全
@@ -70,6 +71,10 @@ class DataStoreActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         DataStoreUtils.clearSync()
+        
+        runBlocking {
+            protoDataStore.clear()
+        }
     }
 }
 
