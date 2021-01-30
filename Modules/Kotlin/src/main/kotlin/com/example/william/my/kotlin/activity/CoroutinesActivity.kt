@@ -68,14 +68,17 @@ class CoroutinesActivity : AppCompatActivity() {
         }
         ThreadUtils.isMainThread("主线程执行结束")
         if (job.isCompleted) {
-            ThreadUtils.isMainThread("协程执行结束")
+            ThreadUtils.isMainThread("协程执行完成")
             job.cancel()
         }
     }
 
-    private suspend fun delay() {
-        delay(3000)
-        ThreadUtils.isMainThread("协程执行结束")
+    fun blocking() {
+        ThreadUtils.isMainThread("启动阻塞")
+        runBlocking {
+            delay()
+        }
+        ThreadUtils.isMainThread("主线程执行结束")
     }
 
     private fun await() {
@@ -94,6 +97,11 @@ class CoroutinesActivity : AppCompatActivity() {
         }
         ThreadUtils.isMainThread("主线程执行结束")
         return async
+    }
+
+    private suspend fun delay() {
+        delay(3000)
+        ThreadUtils.isMainThread("协程执行结束")
     }
 
     private suspend fun delayResult(timeMillis: Long, result: Int): Int {
