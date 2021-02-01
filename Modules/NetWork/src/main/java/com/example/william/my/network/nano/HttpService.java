@@ -4,12 +4,15 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import java.io.IOException;
 
 public class HttpService extends Service {
+
+    private static final String TAG = "HttpService";
 
     private HttpServer httpServer;
 
@@ -25,7 +28,9 @@ public class HttpService extends Service {
         try {
             httpServer = new HttpServer();
             httpServer.start(30000);
+            Log.e(TAG, "Start HttpService Success...");
         } catch (IOException e) {
+            Log.e(TAG, "Start HttpService Failed...");
             e.printStackTrace();
         }
     }
@@ -34,7 +39,13 @@ public class HttpService extends Service {
     public void onDestroy() {
         super.onDestroy();
         if (httpServer != null) {
-            httpServer.stop();
+            try {
+                httpServer.stop();
+                Log.e(TAG, "Stop HttpService Success...");
+            } catch (Exception e) {
+                Log.e(TAG, "Stop HttpService Failed...");
+                e.printStackTrace();
+            }
         }
     }
 

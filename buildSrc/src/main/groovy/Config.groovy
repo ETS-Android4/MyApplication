@@ -25,7 +25,7 @@ class Config {
     //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
 
     static protobufVersion = '0.8.14'
-    //https://github.com/google/protobuf-gradle-plugin
+    //https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
 
     static depConfig = [
             plugin_gradle  : new DepConfig(pluginPath: "com.android.tools.build:gradle:$gradleVersion"),

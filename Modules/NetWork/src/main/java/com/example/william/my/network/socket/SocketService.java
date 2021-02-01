@@ -24,15 +24,12 @@ public class SocketService extends Service {
     public void onCreate() {
         super.onCreate();
         try {
-            /*
-             * 1024以下的端口非root无法使用
-             */
             socketServer = new SocketServer(SocketServer.DEFAULT_SERVER_PORT);
             socketServer.setReuseAddr(true);
             socketServer.start();
-            Log.i(TAG, "Start ServerSocket Success...");
+            Log.e(TAG, "Start ServerSocket Success...");
         } catch (Exception e) {
-            Log.i(TAG, "Start Failed...");
+            Log.e(TAG, "Start ServerSocket Failed...");
             e.printStackTrace();
         }
     }
@@ -43,9 +40,9 @@ public class SocketService extends Service {
         if (socketServer != null) {
             try {
                 socketServer.stop();
-                Log.i(TAG, "Stop ServerSocket Success...");
+                Log.e(TAG, "Stop ServerSocket Success...");
             } catch (Exception e) {
-                Log.i(TAG, "Stop ServerSocket Failed...");
+                Log.e(TAG, "Stop ServerSocket Failed...");
                 e.printStackTrace();
             }
         }

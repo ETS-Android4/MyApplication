@@ -71,6 +71,7 @@ dependencies {
     //Proto DataStore
     implementation Deps.datastore
     //protobuf
+    //You need to depend on the lite runtime library, not protobuf-java
     implementation 'com.google.protobuf:protobuf-javalite:3.10.0'
     //Preferences DataStore
     implementation Deps.datastore_pre
@@ -85,15 +86,17 @@ dependencies {
     implementation Deps.retrofit_rxjava
 }
 
+//https://github.com/google/protobuf-gradle-plugin
 protobuf {
     // 配置protoc可执行文件
     // Configure the protoc executable
     protoc {
-        // Download from repositories
+        // You still need protoc like in the non-Android case
         artifact = 'com.google.protobuf:protoc:3.8.0'
     }
     plugins {
         javalite {
+            // The codegen for lite comes as a separate artifact
             artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
         }
     }
@@ -106,4 +109,5 @@ protobuf {
             }
         }
     }
+    generatedFilesBaseDir = "$projectDir/src/generated"
 }

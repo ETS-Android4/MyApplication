@@ -22,7 +22,11 @@ public class NanoHttpDActivity extends BaseResponseActivity {
         String IpAddress = "http://" + NetworkUtils.getIPAddress(true) + ":" + HttpServer.DEFAULT_SERVER_PORT;
         mResponse.setAutoLinkMask(Linkify.WEB_URLS);
         mResponse.setText(IpAddress);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         HttpService.startService(this);
     }
 

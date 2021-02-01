@@ -20,8 +20,8 @@ public class NetWorkActivity extends BaseListActivity {
         mMap.put("RetrofitDownloadActivity", ARouterPath.NetWork.NetWork_RetrofitDownload);
         mMap.put("RxRetrofitActivity", ARouterPath.NetWork.NetWork_RxRetrofit);
         mMap.put("WebSocketActivity", ARouterPath.NetWork.NetWork_WebSocket);
-        mMap.put("NettyActivity", ARouterPath.NetWork.NetWork_Netty);
         mMap.put("NanoHttpDActivity", ARouterPath.NetWork.NetWork_NanoHttpD);
         mMap.put("WebServerActivity", ARouterPath.NetWork.NetWork_WebServer);
+        mMap.put("NettyActivity", ARouterPath.NetWork.NetWork_Netty);
     }
 }

@@ -53,7 +53,7 @@ android {
             //applicationIdSuffix ".mock"
             signingConfig signingConfigs.sample//签名配置
 
-            minifyEnabled true// 混淆
+            minifyEnabled false// 混淆
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
