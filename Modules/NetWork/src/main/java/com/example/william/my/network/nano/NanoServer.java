@@ -25,13 +25,13 @@ import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
 
-public class HttpServer extends NanoHTTPD {
+public class NanoServer extends NanoHTTPD {
 
-    private static final String TAG = "HttpServer";
+    private static final String TAG = "Nano";
 
     public static final int DEFAULT_SERVER_PORT = 5566;
 
-    public HttpServer() throws IOException {
+    public NanoServer() throws IOException {
         super(DEFAULT_SERVER_PORT);
         Log.e(TAG, "Running! Point your browsers to " +
                 "http://" + NetworkUtils.getIPAddress(true) + ":" + DEFAULT_SERVER_PORT);

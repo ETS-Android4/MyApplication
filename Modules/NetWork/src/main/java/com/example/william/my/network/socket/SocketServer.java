@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 
 public class SocketServer extends WebSocketServer {
 
-    private static final String TAG = "ServerSocket";
+    private static final String TAG = "Socket";
 
     public static final int DEFAULT_SERVER_PORT = 5567;
 

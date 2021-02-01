@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class NettyService extends Service {
 
-    private static final String TAG = "NettyService";
+    private static final String TAG = "Netty";
 
     private NettyServer nettyServer;
 
@@ -27,12 +27,14 @@ public class NettyService extends Service {
             @Override
             public void run() {
                 try {
+                    Log.e(TAG, "Start NettyService Success...");
                     nettyServer = new NettyServer(NettyServer.DEFAULT_SERVER_PORT);
                     nettyServer.start();
-                    Log.e(TAG, "Start NettyService Success...");
                 } catch (Exception e) {
                     Log.e(TAG, "Start NettyService Failed...");
                     e.printStackTrace();
+                } finally {
+                    Log.e(TAG, "Start NettyService Failed...");
                 }
             }
         }).start();

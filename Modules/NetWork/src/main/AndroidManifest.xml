@@ -18,7 +18,7 @@
         <activity android:name=".activity.WebServerActivity" />
         <activity android:name=".activity.NettyActivity" />
 
-        <service android:name=".nano.HttpService" />
+        <service android:name=".nano.NanoService" />
         <service android:name=".socket.SocketService" />
         <service android:name=".netty.server.NettyService" />
     </application>

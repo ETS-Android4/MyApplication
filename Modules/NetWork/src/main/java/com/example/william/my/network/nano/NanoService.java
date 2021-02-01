@@ -10,11 +10,11 @@ import androidx.annotation.Nullable;
 
 import java.io.IOException;
 
-public class HttpService extends Service {
+public class NanoService extends Service {
 
-    private static final String TAG = "HttpService";
+    private static final String TAG = "NanoService";
 
-    private HttpServer httpServer;
+    private NanoServer nanoServer;
 
     @Nullable
     @Override
@@ -26,8 +26,8 @@ public class HttpService extends Service {
     public void onCreate() {
         super.onCreate();
         try {
-            httpServer = new HttpServer();
-            httpServer.start(30000);
+            nanoServer = new NanoServer();
+            nanoServer.start(30000);
             Log.e(TAG, "Start HttpService Success...");
         } catch (IOException e) {
             Log.e(TAG, "Start HttpService Failed...");
@@ -38,9 +38,9 @@ public class HttpService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (httpServer != null) {
+        if (nanoServer != null) {
             try {
-                httpServer.stop();
+                nanoServer.stop();
                 Log.e(TAG, "Stop HttpService Success...");
             } catch (Exception e) {
                 Log.e(TAG, "Stop HttpService Failed...");
@@ -55,12 +55,12 @@ public class HttpService extends Service {
     }
 
     public static void startService(Context context) {
-        Intent intent = new Intent(context, HttpService.class);
+        Intent intent = new Intent(context, NanoService.class);
         context.startService(intent);
     }
 
     public static void stopService(Context context) {
-        Intent intent = new Intent(context, HttpService.class);
+        Intent intent = new Intent(context, NanoService.class);
         context.stopService(intent);
     }
 }

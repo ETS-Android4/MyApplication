@@ -7,6 +7,7 @@ public class NettyInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
-        ch.pipeline().addLast(new TimeServerHandler());
+        ch.pipeline()
+                .addLast("handler", new NettyServerHandler());
     }
 }
