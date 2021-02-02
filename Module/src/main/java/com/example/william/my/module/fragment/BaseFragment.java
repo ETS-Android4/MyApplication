@@ -45,15 +45,6 @@ public class BaseFragment extends LazyFragment {
     }
 
     /**
-     * 当使用新方式适配时，只有当前Fragment执行onResume()，其他Fragment声明周期限制在onStart()
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.e(TAG, "onResume");
-    }
-
-    /**
      * add show hide
      * 当使用旧方式适配时，执行此方法
      * 当使用新方式适配时，也执行此方法
@@ -64,5 +55,15 @@ public class BaseFragment extends LazyFragment {
         if (!hidden) {
             Log.e(TAG, "onHiddenChanged");
         }
+    }
+
+    /**
+     * ViewPager / add show hide
+     * 当使用新方式适配时，只有当前Fragment执行onResume()，其他Fragment声明周期限制在onStart()
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume");
     }
 }
