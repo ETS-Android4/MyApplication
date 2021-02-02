@@ -12,7 +12,7 @@ class Config {
     static versionCode = 1_000_000
     static versionName = '1.0.0'
 
-    static gradleVersion = '4.1.1'
+    static gradleVersion = '4.1.2'
     //static gradleVersion = '7.0.0-alpha03'
 
     static kotlinVersion = '1.4.21'

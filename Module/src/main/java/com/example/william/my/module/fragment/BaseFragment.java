@@ -32,6 +32,8 @@ public class BaseFragment extends LazyFragment {
     }
 
     /**
+     * ViewPager
+     * 当使用旧方式时，执行此方法
      * 当使用新方式适配时，不执行此方法
      */
     @Override
@@ -49,5 +51,18 @@ public class BaseFragment extends LazyFragment {
     public void onResume() {
         super.onResume();
         Log.e(TAG, "onResume");
+    }
+
+    /**
+     * add show hide
+     * 当使用旧方式适配时，执行此方法
+     * 当使用新方式适配时，也执行此方法
+     */
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            Log.e(TAG, "onHiddenChanged");
+        }
     }
 }

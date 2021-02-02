@@ -34,6 +34,8 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
     private final int[] mButtons = new int[]{R.id.fragment_button1, R.id.fragment_button2, R.id.fragment_button3};
     private final Fragment[] mFragments = new Fragment[]{new PrimaryFragment(), new PrimaryDarkFragment(), new PrimaryLightFragment()};
 
+    private final boolean isNew = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +60,12 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
             removeAllFragments();
             for (int i = 0; i < mFragments.length; i++) {
                 mTransaction.add(R.id.fragment_frameLayout, mFragments[i], mTitle[i]);
-                if (i == 0) {
-                    mTransaction.setMaxLifecycle(mFragments[i], Lifecycle.State.RESUMED);
-                } else {
-                    mTransaction.setMaxLifecycle(mFragments[i], Lifecycle.State.STARTED);
+                if (isNew) {
+                    if (i == 0) {
+                        mTransaction.setMaxLifecycle(mFragments[i], Lifecycle.State.RESUMED);
+                    } else {
+                        mTransaction.setMaxLifecycle(mFragments[i], Lifecycle.State.STARTED);
+                    }
                 }
             }
             mTransaction.commit();
@@ -100,12 +104,16 @@ public class FragmentGroupActivity extends AppCompatActivity implements RadioGro
     private void switchTo(int position) {
         mTransaction = getSupportFragmentManager().beginTransaction();
         mTransaction.show(mFragments[position]);
-        mTransaction.setMaxLifecycle(mFragments[position], Lifecycle.State.RESUMED);
+        if (isNew) {
+            mTransaction.setMaxLifecycle(mFragments[position], Lifecycle.State.RESUMED);
+        }
 
         for (Fragment fragment : mFragments) {
             if (fragment != mFragments[position]) {
                 mTransaction.hide(fragment);
-                mTransaction.setMaxLifecycle(fragment, Lifecycle.State.STARTED);
+                if (isNew) {
+                    mTransaction.setMaxLifecycle(fragment, Lifecycle.State.STARTED);
+                }
             }
         }
 
