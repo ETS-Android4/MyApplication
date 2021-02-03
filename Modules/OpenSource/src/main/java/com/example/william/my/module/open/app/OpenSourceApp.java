@@ -22,8 +22,6 @@ public class OpenSourceApp extends IComponentApplication {
         super.init(application);
         //初始化SmartRefreshLayout
         initSmartRefreshLayout();
-        //初始化X5浏览器
-        initX5(application);
     }
 
     private void initSmartRefreshLayout() {
@@ -45,9 +43,5 @@ public class OpenSourceApp extends IComponentApplication {
                 return new ClassicsFooter(context);
             }
         });
-    }
-
-    private void initX5(Application application) {
-
     }
 }
