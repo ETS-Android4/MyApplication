@@ -3,7 +3,6 @@ package com.example.william.my.module.jetpack.activity;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.paging.CombinedLoadStates;
 import androidx.paging.PagingData;
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.jetpack.R;
 import com.example.william.my.module.jetpack.adapter.PagingAdapter;
@@ -30,7 +30,7 @@ import static autodispose2.AutoDispose.autoDisposable;
  * https://developer.android.google.cn/topic/libraries/architecture/paging/v3-overview
  */
 @Route(path = ARouterPath.JetPack.JetPack_Paging)
-public class PagingActivity extends AppCompatActivity {
+public class PagingActivity extends BaseActivity {
 
     private PagingAdapter mPagingAdapter;
 

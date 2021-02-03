@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.decoration.RItemDecorationDivider;
 import com.example.william.my.core.widget.decoration.RItemDecorationTop;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.RAdapter;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = ARouterPath.Sample.Sample_RecyclerView)
-public class RecyclerViewActivity extends AppCompatActivity {
+public class RecyclerViewActivity extends BaseActivity {
 
     private List<String> mData;
 

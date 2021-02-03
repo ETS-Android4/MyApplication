@@ -8,11 +8,11 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTabHost;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryLightFragment;
@@ -24,7 +24,7 @@ import com.example.william.my.module.sample.R;
  */
 @SuppressWarnings("deprecation")
 @Route(path = ARouterPath.Sample.Sample_FragmentTabHost)
-public class FragmentTabHostActivity extends AppCompatActivity {
+public class FragmentTabHostActivity extends BaseActivity {
 
     //TabWidget
     private TabWidget mTabs;

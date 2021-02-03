@@ -2,9 +2,8 @@ package com.example.william.my.module.open.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.router.ARouterPath;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -13,7 +12,7 @@ import com.github.chrisbanes.photoview.PhotoView;
  * https://github.com/chrisbanes/PhotoView
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_PhotoView)
-public class PhotoViewActivity extends AppCompatActivity {
+public class PhotoViewActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

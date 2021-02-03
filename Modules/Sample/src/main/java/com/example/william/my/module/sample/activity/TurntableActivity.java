@@ -6,10 +6,10 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 
@@ -19,7 +19,7 @@ import java.util.Random;
  * 图片旋转动画之转盘功能
  */
 @Route(path = ARouterPath.Sample.Sample_Turntable)
-public class TurntableActivity extends AppCompatActivity {
+public class TurntableActivity extends BaseActivity {
 
     private int startDegree = 0;//初始角度
 

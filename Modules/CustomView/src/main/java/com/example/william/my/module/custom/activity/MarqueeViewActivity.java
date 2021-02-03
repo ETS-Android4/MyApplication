@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.marqueeView.MarqueeView;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = ARouterPath.CustomView.CustomView_MarqueeView)
-public class MarqueeViewActivity extends AppCompatActivity {
+public class MarqueeViewActivity extends BaseActivity {
 
     private final String[] mData = new String[]{"第一条数据", "第二条数据", "第三条数据", "第四条数据"};
 

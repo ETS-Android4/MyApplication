@@ -2,13 +2,13 @@ package com.example.william.my.module.sample.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryLightFragment;
@@ -21,7 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.Arrays;
 
 @Route(path = ARouterPath.Sample.Sample_AppBar)
-public class AppBarActivity extends AppCompatActivity {
+public class AppBarActivity extends BaseActivity {
 
     private ViewPager app_bar_viewPager;
 

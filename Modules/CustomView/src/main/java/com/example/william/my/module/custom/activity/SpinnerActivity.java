@@ -4,18 +4,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.spinner.Spinner;
 import com.example.william.my.core.widget.spinner.SpinnerAdapter;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.util.Arrays;
 
 @Route(path = ARouterPath.CustomView.CustomView_Spinner)
-public class SpinnerActivity extends AppCompatActivity {
+public class SpinnerActivity extends BaseActivity {
 
     private Button mButton;
     private Spinner mSpinner;

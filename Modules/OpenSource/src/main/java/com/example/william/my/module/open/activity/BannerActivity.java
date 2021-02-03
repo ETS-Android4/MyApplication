@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bumptech.glide.Glide;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -26,7 +25,7 @@ import java.util.Arrays;
  * https://github.com/saiwu-bigkoo/Android-ConvenientBanner
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_Banner)
-public class BannerActivity extends AppCompatActivity {
+public class BannerActivity extends BaseActivity {
 
     //顶部广告栏控件，加载本地图片
     private ConvenientBanner<Integer> mConvenientBannerLocal;

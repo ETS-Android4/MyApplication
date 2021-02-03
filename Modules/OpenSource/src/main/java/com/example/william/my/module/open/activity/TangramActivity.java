@@ -6,12 +6,12 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.open.tangram.cell.CustomCell;
 import com.example.william.my.module.open.tangram.cell.CustomHolderCell;
@@ -37,7 +37,7 @@ import org.json.JSONException;
  * http://tangram.pingguohe.net/docs/android/access-tangram
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_Tangram)
-public class TangramActivity extends AppCompatActivity {
+public class TangramActivity extends BaseActivity {
 
     TangramEngine engine;
     RecyclerView recyclerView;

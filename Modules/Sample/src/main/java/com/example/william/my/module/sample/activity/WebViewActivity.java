@@ -10,9 +10,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 
@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Route(path = ARouterPath.Sample.Sample_WebView)
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends BaseActivity {
 
     private WebView mWebView;
 

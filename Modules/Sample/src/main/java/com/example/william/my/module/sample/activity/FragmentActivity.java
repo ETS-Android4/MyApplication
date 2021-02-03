@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryLightFragment;
@@ -22,7 +22,7 @@ import com.example.william.my.module.sample.R;
  * onAttach -> onCreate -> onActivityCreated -> onStart -> onResume
  */
 @Route(path = ARouterPath.Sample.Sample_Fragment)
-public class FragmentActivity extends AppCompatActivity implements View.OnClickListener {
+public class FragmentActivity extends BaseActivity implements View.OnClickListener {
 
     private final String[] mTitles = new String[]{"首页", "列表", "消息"};
     private final int[] mButtons = new int[]{R.id.fragment_button1, R.id.fragment_button2, R.id.fragment_button3};

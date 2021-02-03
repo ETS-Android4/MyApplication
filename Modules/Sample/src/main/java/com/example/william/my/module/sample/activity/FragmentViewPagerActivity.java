@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryLightFragment;
@@ -19,7 +19,7 @@ import com.example.william.my.module.sample.adapter.ViewPagerFragmentAdapter;
 import java.util.Arrays;
 
 @Route(path = ARouterPath.Sample.Sample_FragmentViewPager)
-public class FragmentViewPagerActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class FragmentViewPagerActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
     private ViewPager mViewPager;
     private final String[] mTitle = new String[]{"首页", "列表", "消息"};

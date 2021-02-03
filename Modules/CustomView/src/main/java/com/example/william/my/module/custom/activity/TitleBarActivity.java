@@ -4,15 +4,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.toolBar.TitleBar;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.CustomView.CustomView_TitleBar)
-public class TitleBarActivity extends AppCompatActivity {
+public class TitleBarActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

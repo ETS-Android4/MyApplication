@@ -3,10 +3,9 @@ package com.example.william.my.module.custom.activity;
 import android.os.Bundle;
 import android.widget.SeekBar;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.blurView.BlurView;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -14,7 +13,7 @@ import com.example.william.my.module.router.ARouterPath;
  * 高斯模糊
  */
 @Route(path = ARouterPath.CustomView.CustomView_BlurView)
-public class BlurViewActivity extends AppCompatActivity {
+public class BlurViewActivity extends BaseActivity {
 
     private BlurView mBlurView;
 

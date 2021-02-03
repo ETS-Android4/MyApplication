@@ -2,11 +2,11 @@ package com.example.william.my.module.open.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryLightFragment;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * https://github.com/H07000223/FlycoTabLayout
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_FlycoTabLayout)
-public class FlycoTabLayoutActivity extends AppCompatActivity implements OnTabSelectListener {
+public class FlycoTabLayoutActivity extends BaseActivity implements OnTabSelectListener {
 
     private final String[] mTitles = {"热门", "iOS", "Android"};
 

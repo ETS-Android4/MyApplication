@@ -3,10 +3,9 @@ package com.example.william.my.module.util.activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.AdaptScreenUtils;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.util.R;
 
@@ -17,7 +16,7 @@ import com.example.william.my.module.util.R;
  * AdaptScreenUtils 选择操控 pt (屏幕的物理尺寸)进行适配。
  */
 @Route(path = ARouterPath.Util.Util_AdaptScreen)
-public class AdaptScreenActivity extends AppCompatActivity {
+public class AdaptScreenActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

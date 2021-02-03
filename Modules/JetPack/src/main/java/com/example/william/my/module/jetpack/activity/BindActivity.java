@@ -2,11 +2,11 @@ package com.example.william.my.module.jetpack.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.jetpack.R;
 import com.example.william.my.module.jetpack.databinding.JetActivityBindObsBinding;
 import com.example.william.my.module.jetpack.model.ObservableViewModel;
@@ -21,7 +21,7 @@ import com.example.william.my.module.router.ARouterPath;
  * https://developer.android.google.cn/topic/libraries/data-binding
  */
 @Route(path = ARouterPath.JetPack.JetPack_Bind)
-public class BindActivity extends AppCompatActivity {
+public class BindActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

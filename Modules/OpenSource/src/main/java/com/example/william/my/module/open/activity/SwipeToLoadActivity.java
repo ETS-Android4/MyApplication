@@ -2,14 +2,13 @@ package com.example.william.my.module.open.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeLoadMoreFooterLayout;
 import com.aspsine.swipetoloadlayout.SwipeRefreshHeaderLayout;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -17,7 +16,7 @@ import com.example.william.my.module.router.ARouterPath;
  * https://github.com/Aspsine/SwipeToLoadLayout
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_SwipeToLoad)
-public class SwipeToLoadActivity extends AppCompatActivity {
+public class SwipeToLoadActivity extends BaseActivity {
 
     private SwipeToLoadLayout mSwipeToLoadLayout;
 

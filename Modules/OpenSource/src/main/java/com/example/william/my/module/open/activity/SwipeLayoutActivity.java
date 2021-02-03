@@ -2,11 +2,11 @@ package com.example.william.my.module.open.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.open.adapter.SwipeRecyclerAdapter;
 import com.example.william.my.module.router.ARouterPath;
@@ -18,7 +18,7 @@ import java.util.List;
  * https://github.com/daimajia/AndroidSwipeLayout
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_SwipeLayout)
-public class SwipeLayoutActivity extends AppCompatActivity {
+public class SwipeLayoutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

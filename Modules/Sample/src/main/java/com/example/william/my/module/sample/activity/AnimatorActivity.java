@@ -15,15 +15,15 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 
 @Route(path = ARouterPath.Sample.Sample_Animator)
-public class AnimatorActivity extends AppCompatActivity implements View.OnClickListener {
+public class AnimatorActivity extends BaseActivity implements View.OnClickListener {
 
     private int index = -1;
 

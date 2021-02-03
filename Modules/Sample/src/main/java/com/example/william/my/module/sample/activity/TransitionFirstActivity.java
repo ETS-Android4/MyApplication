@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 
@@ -17,7 +17,7 @@ import com.example.william.my.module.sample.R;
  * 视图过度动画
  */
 @Route(path = ARouterPath.Sample.Sample_Transition)
-public class TransitionFirstActivity extends AppCompatActivity implements View.OnClickListener {
+public class TransitionFirstActivity extends BaseActivity implements View.OnClickListener {
 
     private Intent mIntent;
 

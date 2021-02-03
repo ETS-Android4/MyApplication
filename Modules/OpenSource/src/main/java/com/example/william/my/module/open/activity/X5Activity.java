@@ -2,9 +2,8 @@ package com.example.william.my.module.open.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.router.ARouterPath;
 import com.tencent.smtt.export.external.TbsCoreSettings;
@@ -17,7 +16,7 @@ import java.util.HashMap;
  * https://x5.tencent.com/
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_X5)
-public class X5Activity extends AppCompatActivity {
+public class X5Activity extends BaseActivity {
 
     private WebView mWebView;
 

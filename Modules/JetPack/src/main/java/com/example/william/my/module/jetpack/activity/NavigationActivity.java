@@ -2,12 +2,12 @@ package com.example.william.my.module.jetpack.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.jetpack.R;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,7 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  * https://developer.android.google.cn/guide/navigation
  */
 @Route(path = ARouterPath.JetPack.JetPack_Navigation)
-public class NavigationActivity extends AppCompatActivity {
+public class NavigationActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

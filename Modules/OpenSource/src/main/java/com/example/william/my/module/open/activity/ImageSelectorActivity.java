@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.open.matisse.GifSizeFilter;
 import com.example.william.my.module.open.matisse.Glide4Engine;
@@ -29,7 +28,7 @@ import java.util.List;
  * https://github.com/zhihu/Matisse
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_ImageSelector)
-public class ImageSelectorActivity extends AppCompatActivity {
+public class ImageSelectorActivity extends BaseActivity {
 
     private ImageView mImageView;
 

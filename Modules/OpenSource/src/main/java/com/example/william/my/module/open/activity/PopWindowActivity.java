@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.zhouwei.library.CustomPopWindow;
@@ -18,7 +18,7 @@ import com.example.zhouwei.library.CustomPopWindow;
  * https://github.com/pinguo-zhouwei/CustomPopwindow
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_PopWindow)
-public class PopWindowActivity extends AppCompatActivity implements View.OnClickListener {
+public class PopWindowActivity extends BaseActivity implements View.OnClickListener {
 
     private Button mButton;
 

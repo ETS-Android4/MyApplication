@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.transformer.ScaleInTransformer;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -22,7 +22,7 @@ import com.example.william.my.module.router.ARouterPath;
  * https://github.com/hongyangAndroid/MagicViewPager
  */
 @Route(path = ARouterPath.CustomView.CustomView_Gallery)
-public class GalleryActivity extends AppCompatActivity {
+public class GalleryActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

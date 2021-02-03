@@ -13,10 +13,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.LAdapter;
@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 @Route(path = ARouterPath.Sample.Sample_Dialog)
-public class DialogActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class DialogActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private final String[] mData = new String[]{"普通对话框", "列表对话框", "单选对话框", "日期对话框", "自定义对话框"};
 

@@ -6,18 +6,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ImageUtils;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.util.R;
 
 import java.io.File;
 
 @Route(path = ARouterPath.Util.Util_ImageUtils)
-public class ImageUtilsActivity extends AppCompatActivity {
+public class ImageUtilsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

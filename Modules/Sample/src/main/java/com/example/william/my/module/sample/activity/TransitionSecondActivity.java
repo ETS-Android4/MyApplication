@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.Window;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.sample.R;
 
 import java.util.Objects;
 
-public class TransitionSecondActivity extends AppCompatActivity {
+public class TransitionSecondActivity extends BaseActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override

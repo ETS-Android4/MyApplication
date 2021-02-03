@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Lifecycle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryLightFragment;
@@ -27,7 +27,7 @@ import com.example.william.my.module.sample.R;
  * 之后的切换只执行 onHiddenChanged方法
  */
 @Route(path = ARouterPath.Sample.Sample_FragmentGroup)
-public class FragmentGroupActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class FragmentGroupActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
     private FragmentTransaction mTransaction;
     private final String[] mTitle = new String[]{"首页", "列表", "消息"};

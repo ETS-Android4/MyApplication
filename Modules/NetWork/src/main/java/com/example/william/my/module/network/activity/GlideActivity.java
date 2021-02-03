@@ -7,11 +7,11 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.network.R;
 import com.example.william.my.module.network.base.GlideApp;
 import com.example.william.my.module.network.base.MyAppGlideModule;
@@ -22,7 +22,7 @@ import com.example.william.my.module.router.ARouterPath;
  * {@link MyAppGlideModule}
  */
 @Route(path = ARouterPath.NetWork.NetWork_Glide)
-public class GlideActivity extends AppCompatActivity {
+public class GlideActivity extends BaseActivity {
 
     private ImageView mImageView;
     private static final String url = "https://www.baidu.com/img/baidu_jgylogo1.gif";

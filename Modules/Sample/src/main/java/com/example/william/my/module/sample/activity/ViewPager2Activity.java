@@ -2,11 +2,11 @@ package com.example.william.my.module.sample.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryLightFragment;
@@ -22,7 +22,7 @@ import java.util.Arrays;
  * ViewPager2内的view布局必须是math_parent，否则会报错
  */
 @Route(path = ARouterPath.Sample.Sample_ViewPager2)
-public class ViewPager2Activity extends AppCompatActivity {
+public class ViewPager2Activity extends BaseActivity {
 
     private final String[] mData = new String[]{"fragment_primary", "fragment_primary_dark", "fragment_primary_light"};
     private final Fragment[] mFragments = new Fragment[]{new PrimaryFragment(), new PrimaryDarkFragment(), new PrimaryLightFragment()};

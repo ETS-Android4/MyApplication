@@ -2,10 +2,9 @@ package com.example.william.my.module.custom.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.gestureLock.GestureLock;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -13,7 +12,7 @@ import com.example.william.my.module.router.ARouterPath;
  * 手势密码
  */
 @Route(path = ARouterPath.CustomView.CustomView_GestureLock)
-public class GestureLockActivity extends AppCompatActivity {
+public class GestureLockActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -13,11 +13,11 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.ImageUtilsService;
 import com.example.william.my.module.sample.R;
@@ -25,7 +25,7 @@ import com.example.william.my.module.sample.R;
 import java.io.File;
 
 @Route(path = ARouterPath.Sample.Sample_PicCrop)
-public class PicCropActivity extends AppCompatActivity implements View.OnClickListener {
+public class PicCropActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int TO_ALBUM = 0;
     private static final int TO_CAMERA = 1;
