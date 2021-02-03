@@ -25,8 +25,6 @@ import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
  */
 public class AddMoreActivity extends BaseActivity {
 
-    private static final String TAG = AddMoreActivity.class.getSimpleName();
-
     private EditText mUserID;
     private EditText mAddWording;
     private boolean mIsGroup;

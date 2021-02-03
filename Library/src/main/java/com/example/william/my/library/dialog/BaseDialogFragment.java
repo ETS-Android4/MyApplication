@@ -10,8 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class BaseDialogFragment extends DialogFragment {
 
-    protected String TAG = this.getClass().getSimpleName();
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

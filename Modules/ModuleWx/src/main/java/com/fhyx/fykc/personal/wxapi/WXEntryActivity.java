@@ -6,8 +6,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.william.my.wx.R;
-import com.example.william.my.wx.base.Config;
+import com.example.william.my.module.wx.R;
+import com.example.william.my.module.wx.base.Config;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;

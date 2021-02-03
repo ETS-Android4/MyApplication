@@ -17,8 +17,6 @@ import com.tencent.qcloud.tim.uikit.utils.FileUtil;
 
 public class MainActivity extends BaseActivity implements ConversationManagerKit.MessageUnreadWatcher {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-
     private TextView mConversationBtn;
     private TextView mContactBtn;
     private TextView mProfileBtn;

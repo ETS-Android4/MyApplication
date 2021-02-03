@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tencent.qcloud.tim.demo.R;
@@ -13,12 +14,10 @@ import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
 public class CustomHelloTIMUIController {
 
-    private static final String TAG = CustomHelloTIMUIController.class.getSimpleName();
-
     public static void onDraw(ICustomMessageViewGroup parent, final CustomHelloMessage data) {
 
         // 把自定义消息view添加到TUIKit内部的父容器里
-        View view = LayoutInflater.from(DemoApplication.instance()).inflate(R.layout.im_layout_message, null, false);
+        View view = LayoutInflater.from(DemoApplication.instance()).inflate(R.layout.im_layout_message, (ViewGroup) parent, false);
         parent.addMessageContentView(view);
 
         // 自定义消息view的实现，这里仅仅展示文本信息，并且实现超链接跳转

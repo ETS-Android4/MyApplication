@@ -48,4 +48,5 @@ static def addRepos(RepositoryHandler handler) {
     handler.maven { url "https://maven.google.com" }
     handler.maven { url "https://maven.aliyun.com/repository/public" }
 }
+
 ext.addRepos = this.&addRepos

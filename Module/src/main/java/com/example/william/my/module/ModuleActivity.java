@@ -58,6 +58,8 @@ import org.greenrobot.eventbus.ThreadMode;
  * 9. Activity 内api调用方法以 Api 结尾 ：loadingAppListApi
  * <p>
  * mipmap会自动选择更加合适的图片仅在launcher中有效
+ * <p>
+ * Typo: In word -> application-level
  */
 @Route(path = ARouterPath.Module)
 public class ModuleActivity extends BaseListActivity {

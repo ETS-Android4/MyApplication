@@ -9,8 +9,6 @@ import com.tencent.qcloud.tim.uikit.TUIKit;
 
 public class DemoApplication extends Application {
 
-    private static final String TAG = DemoApplication.class.getSimpleName();
-
     private static DemoApplication instance;
 
     public static DemoApplication instance() {

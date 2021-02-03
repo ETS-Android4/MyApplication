@@ -1,15 +1,13 @@
 package com.example.william.my.module.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.R;
 
 import java.util.ArrayList;
@@ -17,9 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BaseListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
-    public final String TAG = this.getClass().getSimpleName();
+public class BaseListActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     public ListView mListView;
 
@@ -29,9 +25,7 @@ public class BaseListActivity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, getClass().getSimpleName());
         setContentView(R.layout.basics_layout_router);
-
 
         findView();
         initData();

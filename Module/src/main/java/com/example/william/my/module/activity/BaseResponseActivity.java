@@ -1,24 +1,19 @@
 package com.example.william.my.module.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.R;
 
-public class BaseResponseActivity extends AppCompatActivity implements View.OnClickListener {
-
-    public final String TAG = this.getClass().getSimpleName();
+public class BaseResponseActivity extends BaseActivity implements View.OnClickListener {
 
     public TextView mResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, getClass().getSimpleName());
         setContentView(R.layout.basics_layout_response);
 
         findView();

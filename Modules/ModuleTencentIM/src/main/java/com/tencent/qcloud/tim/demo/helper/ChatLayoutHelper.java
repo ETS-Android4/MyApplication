@@ -29,8 +29,6 @@ import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
  */
 public class ChatLayoutHelper {
 
-    private static final String TAG = ChatLayoutHelper.class.getSimpleName();
-
     public static void customizeChatLayout(final ChatLayout layout) {
 
 //        //====== NoticeLayout使用范例 ======//

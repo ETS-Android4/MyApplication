@@ -11,8 +11,6 @@ import com.example.william.my.module.utils.Crash;
 
 public class ModuleApp extends BaseApp implements IComponentApplication {
 
-    public final String TAG = this.getClass().getSimpleName();
-
     @Override
     public void init(Application application) {
         initCrash();

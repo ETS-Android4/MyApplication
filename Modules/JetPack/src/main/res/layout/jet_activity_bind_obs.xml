@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.william.my.jet.model.ObservableViewModel" />
+            type="com.example.william.my.module.jetpack.model.ObservableViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

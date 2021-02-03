@@ -3,7 +3,6 @@ package com.tencent.qcloud.tim.demo.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +21,6 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    private static final String TAG = BaseActivity.class.getSimpleName();
-
     // 监听做成静态可以让每个子类重写时都注册相同的一份。
     private static final IMEventListener mIMEventListener = new IMEventListener() {
         @Override
@@ -37,8 +34,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.e("TAG", getClass().getSimpleName());
 
         TUIKit.addIMEventListener(mIMEventListener);
     }

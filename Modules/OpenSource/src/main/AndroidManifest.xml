@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.william.my.open">
+    package="com.example.william.my.module.open">
 
     <application>
         <activity android:name=".OpenSourceActivity" />
@@ -24,6 +24,11 @@
         <activity android:name=".activity.SwipeToLoadActivity" />
         <activity android:name=".activity.TangramActivity" />
         <activity android:name=".activity.X5Activity" />
+
+        <service
+            android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
+            android:label="dexopt"
+            android:process=":dexopt" />
     </application>
 
 </manifest>

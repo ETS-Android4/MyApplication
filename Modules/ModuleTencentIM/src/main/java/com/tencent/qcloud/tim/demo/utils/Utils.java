@@ -14,8 +14,6 @@ import java.util.List;
 
 public class Utils {
 
-    private static final String TAG = Utils.class.getSimpleName();
-
     public static final int REQ_PERMISSION_CODE = 0x100;
 
     //权限检查

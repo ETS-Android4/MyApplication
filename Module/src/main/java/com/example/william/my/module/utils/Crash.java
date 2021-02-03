@@ -11,6 +11,8 @@ import java.util.Locale;
 
 public final class Crash {
 
+    private static final String TAG = Crash.class.getSimpleName();
+
     private static final Thread.UncaughtExceptionHandler DEFAULT_UNCAUGHT_EXCEPTION_HANDLER = Thread.getDefaultUncaughtExceptionHandler();
 
     private Crash() {
@@ -40,7 +42,7 @@ public final class Crash {
                 if (onCrashListener != null) {
                     onCrashListener.onCrash(crashInfo, e);
                 } else {
-                    Log.e(getClass().getSimpleName(), crashInfo);
+                    Log.e(TAG, crashInfo);
                 }
 
                 if (DEFAULT_UNCAUGHT_EXCEPTION_HANDLER != null) {

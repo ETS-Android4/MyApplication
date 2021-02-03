@@ -179,3 +179,12 @@
 -keep class com.jeremyliao.liveeventbus.** { *; }
 -keep class androidx.lifecycle.** { *; }
 -keep class androidx.arch.core.** { *; }
+
+
+# X5
+# https://x5.tencent.com
+# ==================================================================================================
+-dontwarn dalvik.**
+-dontwarn com.tencent.smtt.**
+-keep class com.tencent.smtt.** { *; }
+-keep class com.tencent.tbs.** { *; }

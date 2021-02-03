@@ -2,13 +2,13 @@
   "BusUtilsClass": "com.blankj.utilcode.util.BusUtils",
   "rightBus": {
     "TagNoParam": [
-      "{ desc: com.example.william.my.util.activity.BusUtilsActivity#noParamFun() }"
+      "{ desc: com.example.william.my.module.util.activity.BusUtilsActivity#noParamFun() }"
     ],
     "TagOneParam": [
-      "{ desc: com.example.william.my.util.activity.BusUtilsActivity#oneParamFun(java.lang.String param) }"
+      "{ desc: com.example.william.my.module.util.activity.BusUtilsActivity#oneParamFun(java.lang.String param) }"
     ],
     "TagNoParamSticky": [
-      "{ desc: com.example.william.my.util.activity.BusUtilsActivity#noParamStickyFun(), sticky: true, threadMode: MAIN }"
+      "{ desc: com.example.william.my.module.util.activity.BusUtilsActivity#noParamStickyFun(), sticky: true, threadMode: MAIN }"
     ]
   },
   "wrongBus": {}

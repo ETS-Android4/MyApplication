@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.william.my.jiguang">
+    package="com.example.william.my.module.jiguang">
+
     <!-- 极光认证 -->
     <!-- android 6.0 以后需要添加 READ_PHONE_STATE WRITE_EXTERNAL_STORAGE 动态权限申请 -->
     <!-- Required -->
@@ -26,7 +27,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
-        android:name=".base.JApp"
+        android:name=".app.JApp"
         android:allowBackup="false"
         android:icon="@drawable/im_ic_launcher"
         android:label="@string/j_app_name"

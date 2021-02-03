@@ -96,6 +96,7 @@ public class ARouterPath {
         public static final String OpenSource_SwipeLayout = "/module_open/swipe_layout";
         public static final String OpenSource_SwipeToLoad = "/module_open/swipe_to_load";
         public static final String OpenSource_Tangram = "/module_open/tangram";
+        public static final String OpenSource_X5 = "/module_open/x5";
     }
 
     public static class Sample {

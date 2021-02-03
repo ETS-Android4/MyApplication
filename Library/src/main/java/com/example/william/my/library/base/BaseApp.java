@@ -12,6 +12,8 @@ import com.example.william.my.library.interfaces.IComponentApplication;
 public class BaseApp extends Application {
     //public class BaseApp extends MultiDexApplication {
 
+    protected final String TAG = this.getClass().getSimpleName();
+
     private static BaseApp instance;
 
     /**
@@ -25,10 +27,10 @@ public class BaseApp extends Application {
     }
 
     private static final String[] modulesList = {
-            "com.example.william.my.module.base.ModuleApp",
-            "com.example.william.my.open.base.NetWorkApp",
-            "com.example.william.my.open.base.JetPackApp",
-            "com.example.william.my.open.base.OpenSourceApp"
+            "com.example.william.my.module.app.ModuleApp",
+            "com.example.william.my.module.network.app.NetWorkApp",
+            "com.example.william.my.module.jetpack.app.JetPackApp",
+            "com.example.william.my.module.open.app.OpenSourceApp"
     };
 
     @Override

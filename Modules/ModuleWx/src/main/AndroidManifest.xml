@@ -1,21 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?><!--suppress AndroidDomInspection -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.william.my.wx">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- for mta statistics, not necessary-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <application>
-        <activity android:name=".WeChatActivity" />
-        <activity
-            android:name="${applicationId}.wxapi.WXEntryActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:taskAffinity="net.sourceforge.simcpux" />
-    </application>
+<manifest package="com.example.william.my.module.wx">
 
 </manifest>

@@ -3,7 +3,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable",
-                             "eventBusIndex"    : 'com.example.william.my.open.MyModuleOpenEventBusIndex']
+                             "eventBusIndex"    : 'com.example.william.my.module.open.MyModuleOpenEventBusIndex']
             }
         }
     }
@@ -66,6 +66,7 @@ dependencies {
     implementation(Deps.ultraviewpager) {
         transitive = true
     }
+    implementation Deps.x5
     //https://github.com/guolindev/Glance
     //debugImplementation Dependencies.glance
 }

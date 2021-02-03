@@ -5,7 +5,7 @@ import com.example.william.my.library.MyEventBusIndex;
 import com.example.william.my.library.base.BaseApp;
 import com.example.william.my.module.BuildConfig;
 import com.example.william.my.module.MyModuleEventBusIndex;
-import com.example.william.my.open.MyModuleOpenEventBusIndex;
+import com.example.william.my.module.open.MyModuleOpenEventBusIndex;
 
 import org.greenrobot.eventbus.EventBus;
 

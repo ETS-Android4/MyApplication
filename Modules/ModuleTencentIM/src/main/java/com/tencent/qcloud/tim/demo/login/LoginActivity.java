@@ -30,8 +30,6 @@ import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
 public class LoginActivity extends Activity {
 
-    private static final String TAG = LoginActivity.class.getSimpleName();
-
     private Button mLoginView;
     private EditText mUserAccount;
 
