@@ -1,13 +1,18 @@
 package com.example.william.my.library.interfaces;
 
 import android.app.Application;
+import android.util.Log;
 
 /**
  * 合并多个Application
  */
-public interface IComponentApplication {
+public abstract class IComponentApplication {
 
-    void init(Application application);
+    public void init(Application application) {
+        Log.e("TAG", getClass().getSimpleName() + " : init()");
+    }
 
-    void initAsync(Application application);
+    public void initAsync(Application application) {
+
+    }
 }
