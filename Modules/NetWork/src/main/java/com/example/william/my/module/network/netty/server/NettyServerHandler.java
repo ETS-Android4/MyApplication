@@ -32,9 +32,6 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
 
         channels.writeAndFlush("[Server]: " + channel.remoteAddress() + " 在线\n");
         channels.add(channel);
-
-        //final ByteBuf time = ctx.alloc().buffer(4); // (2)
-        //time.writeInt((int) (System.currentTimeMillis() / 1000L + 2208988800L));
     }
 
     @Override

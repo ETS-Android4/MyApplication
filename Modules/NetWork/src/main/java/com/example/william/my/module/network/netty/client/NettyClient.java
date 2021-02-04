@@ -1,6 +1,9 @@
 package com.example.william.my.module.network.netty.client;
 
+import android.util.Log;
+
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
@@ -8,6 +11,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class NettyClient {
+
+    private final String TAG = getClass().getSimpleName();
 
     private static NettyClient instance;
 
@@ -21,6 +26,8 @@ public class NettyClient {
         }
         return instance;
     }
+
+    private Channel channel;
 
     private NettyClient() {
     }
@@ -49,11 +56,49 @@ public class NettyClient {
             ChannelFuture f = b.connect(host, port).sync();
 
             // Wait until the connection is closed.
-            f.channel().closeFuture().sync();
+            channel = f.channel();
+            channel.closeFuture().sync();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             workerGroup.shutdownGracefully();
+        }
+    }
+
+    public boolean sendMessage(String msg) {
+        if (channel == null) {
+            Log.e(TAG, "聊天通道为空");
+            return false;
+        }
+        if (channel.isActive() && channel.isWritable()) {
+            channel.writeAndFlush(msg + "\n");
+            return true;
+        } else if (!channel.isActive()) {
+            Log.i(TAG, "聊天通道未连接");
+        } else if (!channel.isWritable()) {
+            Log.i(TAG, "聊天通道连接，但不可写");
+        }
+        return false;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public String getAddress() {
+        return channel.remoteAddress().toString();
+    }
+
+    public void disconnect() {
+        try {
+            if (channel != null) {
+                channel.disconnect();
+                channel.close();
+                channel = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

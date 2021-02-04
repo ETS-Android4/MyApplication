@@ -5,6 +5,8 @@ import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.network.netty.client.NettyClient;
 import com.example.william.my.module.router.ARouterPath;
 
+import java.util.concurrent.Executors;
+
 /**
  * https://github.com/netty/netty/
  */
@@ -12,14 +14,25 @@ import com.example.william.my.module.router.ARouterPath;
 public class NettyActivity extends BaseResponseActivity {
 
     @Override
-    public void initView() {
-        super.initView();
+    public void setOnClick() {
+        super.setOnClick();
+        NettyClient.getInstance().sendMessage(NettyClient.getInstance().getAddress());
+    }
 
-        new Thread(new Runnable() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 NettyClient.getInstance().connect("192.168.40.89", 8080);
             }
-        }).start();
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        NettyClient.getInstance().disconnect();
     }
 }
