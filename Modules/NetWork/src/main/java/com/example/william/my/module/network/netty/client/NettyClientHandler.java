@@ -1,28 +1,21 @@
 package com.example.william.my.module.network.netty.client;
 
-import java.util.Date;
+import android.util.Log;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 
-public class NettyClientHandler extends ChannelInboundHandlerAdapter {
+public class NettyClientHandler extends SimpleChannelInboundHandler<String> {
 
+    private final String TAG = getClass().getSimpleName();
+
+    /**
+     * 观察接收到的数据
+     */
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        ByteBuf m = (ByteBuf) msg;
-        try {
-            long currentTimeMillis = (m.readUnsignedInt() - 2208988800L) * 1000L;
-            System.out.println(new Date(currentTimeMillis));
-            ctx.close();
-        } finally {
-            m.release();
-        }
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        ctx.close();
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        Log.e(TAG, msg);
+        ctx.channel().writeAndFlush("[Client]: " + msg + " \n");
     }
 }

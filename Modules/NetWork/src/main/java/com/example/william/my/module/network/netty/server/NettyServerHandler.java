@@ -2,12 +2,12 @@ package com.example.william.my.module.network.netty.server;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
-public class NettyServerHandler extends ChannelInboundHandlerAdapter {
+public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
 
     /**
      * A thread-safe Set  Using ChannelGroup, you can categorize Channels into a meaningful group.
@@ -16,9 +16,25 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        super.handlerAdded(ctx);
+        Channel channel = ctx.channel();
+        System.out.println(channel.remoteAddress() + "加入");
+    }
+
+    /**
+     * 将会在连接被建立并且准备进行通信时被调用
+     */
+    @Override
     public void channelActive(final ChannelHandlerContext ctx) {
         Channel channel = ctx.channel();
         System.out.println(channel.remoteAddress() + "在线");
+
+        channels.writeAndFlush("[Server]: " + channel.remoteAddress() + " 在线\n");
+        channels.add(channel);
+
+        //final ByteBuf time = ctx.alloc().buffer(4); // (2)
+        //time.writeInt((int) (System.currentTimeMillis() / 1000L + 2208988800L));
     }
 
     @Override
@@ -26,24 +42,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         super.channelInactive(ctx);
         Channel channel = ctx.channel();
         System.out.println(channel.remoteAddress() + "离线");
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        Channel channel = ctx.channel();
-        System.out.println(channel.remoteAddress() + "异常");
-        cause.printStackTrace();
-        ctx.close();
-    }
-
-    @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        super.handlerAdded(ctx);
-        Channel channel = ctx.channel();
-        System.out.println(channel.remoteAddress() + "加入");
-
-        channels.writeAndFlush("[Server]: " + channel.remoteAddress() + " 加入\n");
-        channels.add(channel);
     }
 
     @Override
@@ -60,9 +58,18 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        super.channelRead(ctx, msg);
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        Channel channel = ctx.channel();
+        System.out.println(channel.remoteAddress() + "异常");
+        cause.printStackTrace();
+        ctx.close();
+    }
 
+    /**
+     * 观察接收到的数据
+     */
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         Channel inComing = ctx.channel();
         for (Channel channel : channels) {
             if (channel != inComing) {
@@ -71,6 +78,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
                 channel.writeAndFlush("[localhost]:  " + msg + "\n");
             }
         }
-        System.out.println("Msg : " + msg.toString());
+        System.out.println("Msg : " + msg);
     }
 }

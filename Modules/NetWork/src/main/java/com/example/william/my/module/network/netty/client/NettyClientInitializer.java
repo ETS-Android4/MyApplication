@@ -1,19 +1,26 @@
 package com.example.william.my.module.network.netty.client;
 
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.Delimiters;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 
 public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
-        ch.pipeline()
-                //.addLast("handler", new NettyClientHandler())
-                //自定义长度帧解码器
-                .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 2, -2, 2));
-                //.addLast(new MessageBinaryDecoder())
-                //.addLast(new MessageEncoder())
-                //.addLast(new ChatClientHandler(mHandler));
+        ChannelPipeline pipeline = ch.pipeline();
+
+        // 以("\n")为结尾分割的 解码器
+        pipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
+
+        // 字符串解码 和 编码
+        pipeline.addLast("decoder", new StringDecoder());
+        pipeline.addLast("encoder", new StringEncoder());
+
+        pipeline.addLast("handler", new NettyClientHandler());
     }
 }
