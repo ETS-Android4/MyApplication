@@ -1,7 +1,5 @@
 package com.example.william.my.module.network.netty.server;
 
-import android.util.Log;
-
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -10,8 +8,6 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
-
-    private static final String TAG = "ServerHandler";
 
     /**
      * A thread-safe Set  Using ChannelGroup, you can categorize Channels into a meaningful group.
@@ -22,20 +18,20 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
         Channel channel = ctx.channel();
-        Log.e(TAG, channel.remoteAddress() + "在线");
+        System.out.println(channel.remoteAddress() + "在线");
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
         Channel channel = ctx.channel();
-        Log.e(TAG, channel.remoteAddress() + "离线");
+        System.out.println(channel.remoteAddress() + "离线");
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         Channel channel = ctx.channel();
-        Log.e(TAG, channel.remoteAddress() + "异常");
+        System.out.println(channel.remoteAddress() + "异常");
         cause.printStackTrace();
         ctx.close();
     }
@@ -44,7 +40,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         super.handlerAdded(ctx);
         Channel channel = ctx.channel();
-        Log.e(TAG, channel.remoteAddress() + "加入");
+        System.out.println(channel.remoteAddress() + "加入");
 
         channels.writeAndFlush("[Server]: " + channel.remoteAddress() + " 加入\n");
         channels.add(channel);
@@ -55,7 +51,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         super.handlerRemoved(ctx);
 
         Channel channel = ctx.channel();
-        Log.e(TAG, channel.remoteAddress() + "离开");
+        System.out.println(channel.remoteAddress() + "离开");
 
         channels.writeAndFlush("[Server]: " + channel.remoteAddress() + " 离开\n");
         // A closed Channel is automatically removed from ChannelGroup,
@@ -75,6 +71,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
                 channel.writeAndFlush("[localhost]:  " + msg + "\n");
             }
         }
-        Log.e(TAG, msg.toString());
+        System.out.println("Msg : " + msg.toString());
     }
 }

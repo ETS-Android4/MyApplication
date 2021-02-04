@@ -43,7 +43,7 @@ public class NettyClient {
             b.option(ChannelOption.SO_RCVBUF, 8192);//接收缓冲区
             b.option(ChannelOption.SO_TIMEOUT, 5000);//等待超时时间
             b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 15000);//链接超时时间
-            b.handler(new NettyClientHandler());
+            b.handler(new NettyClientInitializer());
 
             // Start the client.
             ChannelFuture f = b.connect(host, port).sync();

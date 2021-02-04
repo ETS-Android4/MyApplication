@@ -35,6 +35,7 @@ public class ViewPager2Activity extends BaseActivity {
         ViewPager2 mPageView = findViewById(R.id.page2_view);
         ViewPager2 mPageFragment = findViewById(R.id.page2_fragment);
 
+        //mPageView.setUserInputEnabled(false);//禁止滑动
         mPageView.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         mPageView.setAdapter(new ViewPager2Adapter(Arrays.asList(mData)));
 

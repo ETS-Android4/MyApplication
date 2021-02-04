@@ -4,12 +4,20 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.william.my.library.fragment.LazyFragment;
+import com.example.william.my.library.fragment.NewLazyFragment;
 
 /**
- * 当使用旧方式适配时，Fragment显示通过setUserVisibleHint()方法
- * 当使用新方式适配时，Fragment显示通过onResume()方法
+ * add show hide
+ * 当使用旧方式适配时，Fragment通过onHiddenChanged()方法
+ * 当使用新方式适配时，Fragment通过onHiddenChanged()方法或者onResume()方法()
+ * ViewPager
+ * 当使用旧方式适配时，Fragment通过setUserVisibleHint()方法
+ * 当使用新方式适配时，Fragment通过setUserVisibleHint()方法
+ * ViewPager2
+ * 当使用旧方式适配时，Fragment通过onResume()，onPause()方法
+ * 当使用新方式适配时，Fragment通过onResume()，onPause()方法
  */
-public class BaseFragment extends LazyFragment {
+public class BaseFragment extends NewLazyFragment {
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -32,19 +40,6 @@ public class BaseFragment extends LazyFragment {
     }
 
     /**
-     * ViewPager
-     * 当使用旧方式时，执行此方法
-     * 当使用新方式适配时，不执行此方法
-     */
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            Log.e(TAG, "setUserVisibleHint");
-        }
-    }
-
-    /**
      * add show hide
      * 当使用旧方式适配时，执行此方法
      * 当使用新方式适配时，也执行此方法
@@ -58,9 +53,19 @@ public class BaseFragment extends LazyFragment {
     }
 
     /**
-     * ViewPager / add show hide
-     * 当使用新方式适配时，只有当前Fragment执行onResume()，其他Fragment声明周期限制在onStart()
+     * ViewPager
+     * 执行此方法
+     * ViewPager2
+     * 不执行此方法
      */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            Log.e(TAG, "setUserVisibleHint");
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();

@@ -1,5 +1,7 @@
 package com.example.william.my.module.network.netty.server;
 
+import java.net.InetAddress;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -43,5 +45,15 @@ public class NettyServer {
 
     public void stop() throws Exception {
 
+    }
+
+    public static void main(String[] args) throws Exception {
+        int port = 8080;
+        //if (args.length > 0) {
+        //    port = Integer.parseInt(args[0]);
+        //}
+        InetAddress adds = InetAddress.getLocalHost();
+        System.out.println("Local HostAddress: " + adds.getHostAddress() + ":" + port);
+        new NettyServer(port).start();
     }
 }

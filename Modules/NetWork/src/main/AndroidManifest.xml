@@ -20,7 +20,6 @@
 
         <service android:name=".nano.NanoService" />
         <service android:name=".socket.SocketService" />
-        <service android:name=".netty.server.NettyService" />
     </application>
 
 </manifest>

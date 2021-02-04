@@ -1,10 +1,7 @@
 package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.network.utils.NetworkUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.network.netty.server.NettyServer;
-import com.example.william.my.module.network.netty.server.NettyService;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
@@ -17,19 +14,19 @@ public class NettyActivity extends BaseResponseActivity {
     public void initView() {
         super.initView();
 
-        String IpAddress = "ws://" + NetworkUtils.getIPAddress(true) + ":" + NettyServer.DEFAULT_SERVER_PORT;
-        mResponse.setText(IpAddress);
+        //String IpAddress = "ws://" + NetworkUtils.getIPAddress(true) + ":" + NettyServer.DEFAULT_SERVER_PORT;
+        //mResponse.setText(IpAddress);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        NettyService.startService(this);
+        //NettyService.startService(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        NettyService.stopService(this);
+        //NettyService.stopService(this);
     }
 }
