@@ -10,9 +10,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class NettyServer {
-
-    public static final int DEFAULT_SERVER_PORT = 5568;
-
+    
     private final int port;
 
     public NettyServer(int port) {
