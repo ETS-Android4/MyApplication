@@ -16,7 +16,7 @@ public class NettyActivity extends BaseResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        NettyClient.getInstance().sendMessage(NettyClient.getInstance().getAddress());
+        boolean b = NettyClient.getInstance().sendMessage(NettyClient.getInstance().getAddress());
     }
 
     @Override

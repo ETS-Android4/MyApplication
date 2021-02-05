@@ -30,7 +30,6 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
         Channel channel = ctx.channel();
         System.out.println(channel.remoteAddress() + "在线");
 
-        channels.writeAndFlush("[Server]: " + channel.remoteAddress() + " 在线\n");
         channels.add(channel);
     }
 
@@ -48,18 +47,20 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
         Channel channel = ctx.channel();
         System.out.println(channel.remoteAddress() + "离开");
 
-        channels.writeAndFlush("[Server]: " + channel.remoteAddress() + " 离开\n");
         // A closed Channel is automatically removed from ChannelGroup,
         // so there is no need to do "channels.remove(ctx.channel());"
         channels.remove(channel);
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        //super.exceptionCaught(ctx, cause);
         Channel channel = ctx.channel();
         System.out.println(channel.remoteAddress() + "异常");
+
+        // Close the connection when an exception is raised.
         cause.printStackTrace();
-        ctx.close();
+        channel.close();
     }
 
     /**
