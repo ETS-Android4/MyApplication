@@ -28,7 +28,7 @@ import static android.view.Gravity.BOTTOM;
  */
 public class IosItemAlertDialog {
 
-    private Dialog dialog;
+    private AlertDialog dialog;
     private final Activity context;
 
     private List<AlertItem> alertItems;

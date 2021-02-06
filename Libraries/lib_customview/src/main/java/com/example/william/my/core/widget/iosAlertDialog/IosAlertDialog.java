@@ -23,7 +23,7 @@ import static android.view.Gravity.CENTER;
  */
 public class IosAlertDialog {
 
-    private Dialog dialog;
+    private AlertDialog dialog;
     private final Activity context;
 
     private View ios_dialog_iv_line;
