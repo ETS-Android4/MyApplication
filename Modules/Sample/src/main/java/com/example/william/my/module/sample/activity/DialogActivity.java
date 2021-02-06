@@ -30,7 +30,7 @@ import java.util.Calendar;
 public class DialogActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private final String[] mData = new String[]{"普通对话框", "列表对话框", "单选对话框", "日期对话框",
-            "自定义对话框", "自定义对话框2", "DialogFragment1", "DialogFragment2", "DialogFragment3"};
+            "自定义对话框", "自定义对话框2", "DialogFragment1", "DialogFragment2"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
