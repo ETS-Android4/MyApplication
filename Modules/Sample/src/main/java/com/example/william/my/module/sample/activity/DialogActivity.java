@@ -17,13 +17,11 @@ import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.library.dialog.BaseDialogFragment;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.LAdapter;
 import com.example.william.my.module.sample.dialog.MyDialog;
 import com.example.william.my.module.sample.dialog.MyDialog2;
-import com.example.william.my.module.sample.dialog.MyDialog3;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -150,10 +148,6 @@ public class DialogActivity extends BaseActivity implements AdapterView.OnItemCl
             case 7:
                 MyDialog2 dialogFragment2 = new MyDialog2();
                 dialogFragment2.show(getSupportFragmentManager(), "dialog");
-                break;
-            case 8:
-                MyDialog3.Builder builder = new MyDialog3.Builder(this);
-                builder.show();
                 break;
         }
     }
