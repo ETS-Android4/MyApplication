@@ -26,11 +26,11 @@ public class ImageUtilsActivity extends BaseActivity {
 
         ImageView mImageView = findViewById(R.id.basics_imageView);
 
-        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.im_ic_launcher);
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_launcher);
         //mImageView.setImageDrawable(drawable);
         Bitmap drawable2Bitmap = ImageUtils.drawable2Bitmap(drawable);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.im_ic_launcher);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
         //mImageView.setImageBitmap(bitmap);
         Drawable bitmap2Drawable = ImageUtils.bitmap2Drawable(bitmap);
 

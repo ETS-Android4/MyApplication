@@ -34,9 +34,9 @@ public class BannerActivity extends BaseActivity {
 
     //本地图片
     private final Integer[] mImagesLocal = new Integer[]{
-            R.drawable.im_ic_launcher,
-            R.drawable.im_ic_launcher,
-            R.drawable.im_ic_launcher};
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher,
+            R.drawable.ic_launcher};
 
     //网络图片
     private final String[] mImagesNet = new String[]{

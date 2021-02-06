@@ -42,7 +42,7 @@ public class NotificationActivity extends BaseResponseActivity {
                 //.setContentIntent(pendIntent)
                 //.setPriority(NotificationManager.IMPORTANCE_HIGH)//设置优先级//@RequiresApi(api = Build.VERSION_CODES.N)
                 //.setWhen(System.currentTimeMillis())//设置通知时间，默认为系统发出通知的时间，通常不用设置
-                .setSmallIcon(R.drawable.im_ic_launcher)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle("通知标题")//通知标题
                 .setContentText("通知内容")//通知内容
                 .setAutoCancel(true)

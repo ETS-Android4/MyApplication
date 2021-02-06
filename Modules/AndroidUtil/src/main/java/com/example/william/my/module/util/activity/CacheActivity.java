@@ -19,7 +19,7 @@ public class CacheActivity extends BaseResponseActivity {
         super.initView();
 
         mResponse.setText("");
-        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.im_ic_launcher);
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_launcher);
 
         // 内存缓存
         CacheMemoryStaticUtils.put("ic_launcher", drawable);

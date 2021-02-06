@@ -30,7 +30,7 @@ public class TurntableActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basics_layout_image);
         mImageView = findViewById(R.id.basics_imageView);
-        mImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.im_ic_launcher));
+        mImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_launcher));
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

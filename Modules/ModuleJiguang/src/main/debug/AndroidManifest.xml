@@ -29,7 +29,7 @@
     <application
         android:name=".app.JApp"
         android:allowBackup="false"
-        android:icon="@drawable/im_ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/j_app_name"
         android:theme="@style/basics_AppTheme">
         <!-- 极光认证 -->

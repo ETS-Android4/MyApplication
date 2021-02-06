@@ -23,7 +23,7 @@ public class BlurViewActivity extends BaseActivity {
         setContentView(R.layout.custom_activity_blur);
 
         mBlurView = findViewById(R.id.blur_blurView);
-        mBlurView.setImageView(R.drawable.im_ic_launcher);
+        mBlurView.setImageView(R.drawable.ic_launcher);
 
         SeekBar blur_seekBar = findViewById(R.id.blur_seekBar);
         blur_seekBar.setMax(100);
