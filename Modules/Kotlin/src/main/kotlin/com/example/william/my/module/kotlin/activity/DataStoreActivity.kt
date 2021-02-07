@@ -3,6 +3,7 @@ package com.example.william.my.module.kotlin.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.kotlin.databinding.KotlinActivityKotlinBinding
 import com.example.william.my.module.kotlin.datastore.ExamplePreferenceDataStore
 import com.example.william.my.module.kotlin.datastore.ExampleProtoDataStore
@@ -20,7 +21,7 @@ import kotlinx.coroutines.runBlocking
  * https://developer.android.google.cn/topic/libraries/architecture/datastore
  */
 @Route(path = ARouterPath.Kotlin.Kotlin_DataStore)
-class DataStoreActivity : AppCompatActivity() {
+class DataStoreActivity : BaseActivity() {
 
     private val preferenceDataStore = ExamplePreferenceDataStore(this)
 

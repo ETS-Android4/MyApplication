@@ -113,6 +113,9 @@
     <!-- 震动 -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <!--悬浮窗-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:fullBackupContent="@xml/backup_paths"
         android:networkSecurityConfig="@xml/network_config"

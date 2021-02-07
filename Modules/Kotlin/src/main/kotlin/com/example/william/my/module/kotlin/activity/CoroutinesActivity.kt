@@ -2,10 +2,11 @@ package com.example.william.my.module.kotlin.activity
 
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.kotlin.databinding.KotlinActivityKotlinBinding
 import com.example.william.my.module.kotlin.model.CoroutinesViewModel
 import com.example.william.my.module.kotlin.utils.ThreadUtils
@@ -22,7 +23,7 @@ import kotlinx.coroutines.*
  * withContext：不启动新协程，在原来的协程中切换线程，需要传入一个CoroutineContext对象
  */
 @Route(path = ARouterPath.Kotlin.Kotlin_Coroutines)
-class CoroutinesActivity : AppCompatActivity() {
+class CoroutinesActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +59,18 @@ class CoroutinesActivity : AppCompatActivity() {
             viewModel.getArticles3().observe(this, Observer {
                 binding.kotlinTextView.text = it
             })
+        }
+
+        lifecycleScope.launchWhenCreated {
+            Log.e(TAG, "launchWhenCreated")
+        }
+
+        lifecycleScope.launchWhenStarted {
+            Log.e(TAG, "launchWhenStarted")
+        }
+
+        lifecycleScope.launchWhenResumed {
+            Log.e(TAG, "launchWhenResumed")
         }
     }
 

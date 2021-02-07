@@ -8,6 +8,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.bean.ArticlesBean
 import com.example.william.my.module.kotlin.adapter.ArticlesAdapter
 import com.example.william.my.module.kotlin.comparator.ArticleComparator
@@ -24,7 +25,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  * https://developer.android.google.cn/topic/libraries/architecture/paging/v3-overview
  */
 @Route(path = ARouterPath.Kotlin.Kotlin_Paging)
-class PagingActivity : AppCompatActivity() {
+class PagingActivity : BaseActivity() {
 
     private val mDisposable = CompositeDisposable()
 

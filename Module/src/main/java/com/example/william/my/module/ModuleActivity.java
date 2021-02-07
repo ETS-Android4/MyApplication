@@ -80,6 +80,7 @@ public class ModuleActivity extends BaseListActivity {
         mMap.put("SampleActivity", ARouterPath.Sample.Sample);
 
         //Kotlin
+        mMap.put(" ", " ");
         mMap.put("KotlinActivity", ARouterPath.Kotlin.Kotlin);
         mMap.put("KotlinCoroutinesActivity", ARouterPath.Kotlin.Kotlin_Coroutines);
         mMap.put("KotlinDataStoreActivity", ARouterPath.Kotlin.Kotlin_DataStore);

@@ -6,6 +6,7 @@
         <activity android:name=".SampleActivity" />
         <activity android:name=".activity.AppBarActivity" />
         <activity android:name=".activity.DialogActivity" />
+        <activity android:name=".activity.FloatWindowActivity"/>
         <activity android:name=".activity.FragmentActivity" />
         <activity android:name=".activity.FragmentGroupActivity" />
         <activity android:name=".activity.FragmentTabHostActivity" />
@@ -15,7 +16,6 @@
         <activity android:name=".activity.ViewPagerActivity" />
         <activity android:name=".activity.ViewPager2Activity" />
         <activity android:name=".activity.WebViewActivity" />
-
         <activity android:name=".activity.AnimatorActivity" />
         <activity android:name=".activity.AsyncTaskActivity" />
         <activity android:name=".activity.AudioPlayerActivity" />
@@ -28,7 +28,6 @@
         <activity android:name=".activity.TransitionSecondActivity" />
         <activity android:name=".activity.TurntableActivity" />
         <activity android:name=".activity.TypefaceActivity" />
-
         <activity android:name=".activity.NetworkStatusActivity" />
         <activity android:name=".activity.OptionalBeanActivity" />
 
