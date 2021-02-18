@@ -13,6 +13,7 @@
         <activity android:name=".activity.BannerActivity" />
         <activity android:name=".activity.CityPickerActivity" />
         <activity android:name=".activity.CountdownActivity" />
+        <activity android:name=".activity.FloatActivity" />
         <activity android:name=".activity.FlycoTabLayoutActivity" />
         <activity android:name=".activity.GSYPlayerActivity" />
         <activity android:name=".activity.ImageSelectorActivity" />

@@ -86,6 +86,7 @@ public class ARouterPath {
         public static final String OpenSource_Banner = "/module_open/banner";
         public static final String OpenSource_CityPicker = "/module_open/city_picker";
         public static final String OpenSource_Countdown = "/module_open/countdown";
+        public static final String OpenSource_EasyFloat = "/module_open/float";
         public static final String OpenSource_FlycoTabLayout = "/module_open/flyco_tab_layout";
         public static final String OpenSource_GSYPlayer = "/module_open/gsy_player";
         public static final String OpenSource_ImageSelector = "/module_open/image_picker";

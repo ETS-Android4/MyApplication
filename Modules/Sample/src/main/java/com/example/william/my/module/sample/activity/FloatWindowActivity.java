@@ -81,14 +81,13 @@ public class FloatWindowActivity extends BaseResponseActivity {
         }
         //添加视图
         mView = LayoutInflater.from(this).inflate(R.layout.sample_layout_float, (ViewGroup) getWindow().getDecorView(), false);
-        ImageView mImageView = mView.findViewById(R.id.icon_float);
 
-        //mImageView.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        Toast.makeText(FloatWindowActivity.this, "您点击了悬浮窗", Toast.LENGTH_SHORT).show();
-        //    }
-        //});
+        mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FloatWindowActivity.this, "您点击了悬浮窗", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mView.setOnTouchListener(new View.OnTouchListener() {
 

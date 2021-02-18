@@ -32,6 +32,7 @@ public class OpenSourceActivity extends BaseListActivity {
         mMap.put("BannerActivity", ARouterPath.OpenSource.OpenSource_Banner);
         mMap.put("CityPickerActivity", ARouterPath.OpenSource.OpenSource_CityPicker);
         mMap.put("CountdownActivity", ARouterPath.OpenSource.OpenSource_Countdown);
+        mMap.put("EasyFloatActivity", ARouterPath.OpenSource.OpenSource_EasyFloat);
         mMap.put("FlycoTabLayoutActivity", ARouterPath.OpenSource.OpenSource_FlycoTabLayout);
         mMap.put("GSYPlayerActivity", ARouterPath.OpenSource.OpenSource_GSYPlayer);
         mMap.put("ImageSelectorActivity", ARouterPath.OpenSource.OpenSource_ImageSelector);

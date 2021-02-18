@@ -22,6 +22,7 @@ dependencies {
     implementation Deps.smartbus
     annotationProcessor Deps.smartbus_compiler
     //https://github.com/JavaNoober/BackgroundLibrary
+    //
     implementation Deps.background
     //https://github.com/CymChad/BaseRecyclerViewAdapterHelper
     implementation Deps.brvah
@@ -33,8 +34,8 @@ dependencies {
     implementation Deps.citypicker
     //https://github.com/iwgang/CountdownView
     implementation Deps.countdown
-    //https://github.com/Yalantis/uCrop
-    implementation Deps.crop
+    //https://github.com/princekin-f/EasyFloat
+    implementation Deps.easyfloat
     //https://github.com/H07000223/FlycoTabLayout
     implementation Deps.tablayout
     //https://github.com/zhihu/Matisse

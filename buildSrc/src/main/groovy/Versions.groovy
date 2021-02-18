@@ -133,8 +133,8 @@ class DepsVersions {
     //https://github.com/iwgang/CountdownView/releases
     static countdown_version = "2.1.6"
 
-    //https://github.com/Yalantis/uCrop/releases
-    static crop_version = "2.2.6"
+    //https://github.com/princekin-f/EasyFloat/releases
+    static easyfloat_version = "1.3.4"
 
     //https://github.com/H07000223/FlycoTabLayout/releases
     static tablayout_version = "2.1.2@aar"
