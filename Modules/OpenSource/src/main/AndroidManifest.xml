@@ -4,6 +4,7 @@
 
     <application>
         <activity android:name=".OpenSourceActivity" />
+        <activity android:name=".activity.MMKVActivity" />
         <activity android:name=".activity.RxJavaActivity" />
         <activity android:name=".activity.EventBusActivity" />
         <activity android:name=".activity.LiveEventBusActivity" />

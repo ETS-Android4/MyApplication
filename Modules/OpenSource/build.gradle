@@ -10,6 +10,8 @@ android {
     resourcePrefix "open_"
 }
 dependencies {
+    //https://github.com/Tencent/MMKV/wiki/home_cn
+    implementation 'com.tencent:mmkv-static:1.2.7'
     //https://github.com/ReactiveX/RxJava
     //https://github.com/ReactiveX/RxAndroid
     implementation Deps.rxandroid
