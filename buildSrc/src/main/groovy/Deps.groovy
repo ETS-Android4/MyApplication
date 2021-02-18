@@ -97,7 +97,7 @@ class Deps {
 
     static countdown = "com.github.iwgang:countdownview:${DepsVersions.countdown_version}"
 
-    static easyfloat = "com.github.iwgang:countdownview:${DepsVersions.easyfloat_version}"
+    static easyfloat = "com.github.princekin-f:EasyFloat:${DepsVersions.easyfloat_version}"
 
     static tablayout = "com.flyco.tablayout:FlycoTabLayout_Lib:${DepsVersions.tablayout_version}"
 
