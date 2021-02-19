@@ -65,6 +65,8 @@ class Deps {
     static smartbus = "com.jeremyliao:smart-event-bus-base:${DepsVersions.smartbus_version}"
     static smartbus_compiler = "com.jeremyliao:smart-event-bus-compiler:${DepsVersions.smartbus_compiler_version}"
 
+    static greendao = "org.greenrobot:greendao:${DepsVersions.greendao_version}"
+
     //Network
 
     static glide = "com.github.bumptech.glide:glide:${DepsVersions.glide_version}"

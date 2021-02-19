@@ -8,6 +8,15 @@ import androidx.lifecycle.Lifecycle;
 
 import java.util.List;
 
+/**
+ * FragmentPagerAdapter通过setAdapter做不到整体刷新。
+ * FragmentPagerAdapter在调用destroy的时候，采用的是detach的方式，并未真正的销毁Fragment，仅仅是销毁了View，导致FragmentManager中仍旧保留正Fragment的缓存
+ * FragmentStatePagerAdapter可以通过setAdapter做到整体刷新。
+ * FragmentStatePagerAdapter在destroyItem的时候调用的是remove，这种对于没有添加到回退栈的Fragment操作来说，不仅会销毁view，还会销毁Fragment
+ * <p>
+ * Fragment no longer exists for key f0: index 0
+ * https://blog.csdn.net/eydwyz/article/details/78624907
+ */
 public class ViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
 
     private List<String> mTitles;

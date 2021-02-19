@@ -21,6 +21,9 @@ class Config {
     static routerVersion = '1.0.2'
     //https://mvnrepository.com/artifact/com.alibaba/arouter-register
 
+    static greendaoVersion = '3.3.0'
+    //https://search.maven.org/search?q=g:org.greenrobot%20AND%20a:greendao-gradle-plugin
+
     static busVersion = '2.6'
     //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
 
@@ -31,6 +34,7 @@ class Config {
             plugin_gradle  : new DepConfig(pluginPath: "com.android.tools.build:gradle:$gradleVersion"),
             plugin_kotlin  : new DepConfig(pluginPath: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"),
             plugin_arouter : new DepConfig(pluginPath: "com.alibaba:arouter-register:$routerVersion"),
+            plugin_greendao: new DepConfig(pluginPath: "org.greenrobot:greendao-gradle-plugin:$greendaoVersion"),
             plugin_bus     : new DepConfig(pluginPath: "com.blankj:bus-gradle-plugin:$busVersion"),
             plugin_protobuf: new DepConfig(pluginPath: "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"),
 

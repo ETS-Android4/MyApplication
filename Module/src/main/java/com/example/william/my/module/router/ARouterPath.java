@@ -78,6 +78,7 @@ public class ARouterPath {
     public static class OpenSource {
         public static final String OpenSource = "/module_open/open";
         public static final String OpenSource_RxJava = "/module_open/rx_java";
+        public static final String OpenSource_GreenDao = "/module_open/green_dao";
         public static final String OpenSource_EventBus = "/module_open/event_bus";
         public static final String OpenSource_LiveEventBus = "/module_open/live_event_bus";
         public static final String OpenSource_SmartEventBus = "/module_open/smart_event_bus";

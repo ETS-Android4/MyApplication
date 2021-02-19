@@ -1,3 +1,4 @@
+apply plugin: 'org.greenrobot.greendao'
 android {
     defaultConfig {
         javaCompileOptions {
@@ -7,11 +8,18 @@ android {
             }
         }
     }
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.example.william.my.module.open.greendao.generated'
+        targetGenDir 'src/main/java'
+    }
     resourcePrefix "open_"
 }
 dependencies {
     //https://github.com/Tencent/MMKV/wiki/home_cn
     implementation 'com.tencent:mmkv-static:1.2.7'
+    //https://github.com/greenrobot/greenDAO
+    implementation Deps.greendao
     //https://github.com/ReactiveX/RxJava
     //https://github.com/ReactiveX/RxAndroid
     implementation Deps.rxandroid

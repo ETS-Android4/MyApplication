@@ -93,6 +93,9 @@ class DepsVersions {
     static smartbus_version = "0.0.1"
     static smartbus_compiler_version = "0.0.2"
 
+    //https://github.com/greenrobot/greenDAO
+    static greendao_version = "3.3.0"
+
     //Network
 
     //https://github.com/bumptech/glide/releases
