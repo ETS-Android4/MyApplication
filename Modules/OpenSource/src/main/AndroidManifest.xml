@@ -17,7 +17,10 @@
         <activity android:name=".activity.CountdownActivity" />
         <activity android:name=".activity.FloatActivity" />
         <activity android:name=".activity.FlycoTabLayoutActivity" />
-        <activity android:name=".activity.GSYPlayerActivity" />
+        <activity
+            android:name=".activity.GSYPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.ImageSelectorActivity" />
         <activity android:name=".activity.PhotoViewActivity" />
         <activity android:name=".activity.PickerViewActivity" />

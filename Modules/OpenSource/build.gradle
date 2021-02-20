@@ -46,6 +46,8 @@ dependencies {
     implementation Deps.countdown
     //https://github.com/princekin-f/EasyFloat
     implementation Deps.easyfloat
+    //https://github.com/CarGuo/GSYVideoPlayer
+    implementation Deps.gsyplayer
     //https://github.com/H07000223/FlycoTabLayout
     implementation Deps.tablayout
     //https://github.com/zhihu/Matisse

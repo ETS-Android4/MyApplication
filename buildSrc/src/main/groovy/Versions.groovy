@@ -139,6 +139,9 @@ class DepsVersions {
     //https://github.com/princekin-f/EasyFloat/releases
     static easyfloat_version = "1.3.4"
 
+    //https://github.com/CarGuo/GSYVideoPlayer
+    static gsyplayer_version = "8.1.0"
+
     //https://github.com/H07000223/FlycoTabLayout/releases
     static tablayout_version = "2.1.2@aar"
 

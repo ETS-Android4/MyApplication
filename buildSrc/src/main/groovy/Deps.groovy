@@ -101,6 +101,8 @@ class Deps {
 
     static easyfloat = "com.github.princekin-f:EasyFloat:${DepsVersions.easyfloat_version}"
 
+    static gsyplayer = "com.shuyu:GSYVideoPlayer:${DepsVersions.gsyplayer_version}"
+
     static tablayout = "com.flyco.tablayout:FlycoTabLayout_Lib:${DepsVersions.tablayout_version}"
 
     static matisse = "com.zhihu.android:matisse:${DepsVersions.matisse_version}"
