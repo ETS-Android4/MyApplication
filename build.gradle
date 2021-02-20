@@ -15,6 +15,7 @@ buildscript {
     }
     addRepos(repositories)
     dependencies {
+        classpath "com.tencent.bugly:tinker-support:1.2.0"
         for (def entrySet : ConfigUtils.getApplyPlugins().entrySet()) {
             classpath entrySet.value.dep
         }

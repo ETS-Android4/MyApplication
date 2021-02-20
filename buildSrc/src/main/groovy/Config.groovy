@@ -50,6 +50,7 @@ class Config {
             Sample         : new DepConfig(true, ":Modules:Sample"),
 
             ModuleWx       : new DepConfig(false, ":Modules:ModuleWx"),
+            ModuleBugly    : new DepConfig(false, ":Modules:ModuleBugly"),
             ModuleJiguang  : new DepConfig(false, ":Modules:ModuleJiguang"),
             ModuleTencentIM: new DepConfig(false, ":Modules:ModuleTencentIM"),
 
