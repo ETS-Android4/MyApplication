@@ -57,7 +57,10 @@ class DepsVersions {
     //Base
 
     //https://github.com/Blankj/AndroidUtilCode/releases
-    static util_version = "1.30.5"
+    static util_version = "1.30.6"
+
+    //https://github.com/didi/DoraemonKit
+    static dokit_version = "3.3.5"
 
     //https://github.com/google/gson/releases
     static gson_version = "2.8.6"

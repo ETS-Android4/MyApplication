@@ -42,6 +42,9 @@ class Deps {
 
     static util = "com.blankj:utilcode:${DepsVersions.util_version}"
 
+    static dokit = "com.didichuxing.doraemonkit:dokitx:${DepsVersions.dokit_version}"
+    static dokit_no_op = "com.didichuxing.doraemonkit:dokitx-no-op:${DepsVersions.dokit_version}"
+
     static gson = "com.google.code.gson:gson:${DepsVersions.gson_version}"
 
     static fastjson = "com.alibaba:fastjson:${DepsVersions.fastjson_version}"

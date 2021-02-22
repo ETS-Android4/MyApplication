@@ -1,6 +1,7 @@
 package com.example.william.my.application.base;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.didichuxing.doraemonkit.DoraemonKit;
 import com.example.william.my.library.MyEventBusIndex;
 import com.example.william.my.library.base.BaseApp;
 import com.example.william.my.module.BuildConfig;
@@ -15,9 +16,18 @@ public class App extends BaseApp {
     public void onCreate() {
         super.onCreate();
 
+        initDoKit();
+
         initARouter();
 
         initEventBus();
+    }
+
+    /**
+     * http://xingyun.xiaojukeji.com/docs/dokit/#/intro
+     */
+    private void initDoKit() {
+        DoraemonKit.install(this, "e7fc111f414979edcc27b6251e72ab7d");
     }
 
     private void initARouter() {

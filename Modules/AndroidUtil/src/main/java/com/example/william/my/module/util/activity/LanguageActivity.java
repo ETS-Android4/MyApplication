@@ -22,7 +22,7 @@ public class LanguageActivity extends BaseResponseActivity {
     public void setOnClick() {
         super.setOnClick();
         LanguageUtils.applyLanguage(
-                LanguageUtils.getContextLanguage(LanguageActivity.this)
-                        .equals(Locale.CHINA) ? Locale.US : Locale.CHINA, false);
+                LanguageUtils.getContextLanguage(LanguageActivity.this).equals(Locale.CHINA) ? Locale.US : Locale.CHINA, false
+        );
     }
 }

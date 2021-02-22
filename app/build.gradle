@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat
 plugins {
     id 'com.android.application'
     id 'com.blankj.bus'
+    id 'com.didi.dokit'
 }
 
 android {
@@ -106,8 +107,11 @@ dependencies {
     annotationProcessor Deps.arouter_compiler
     //EventBus
     implementation Deps.eventbus
+    //DoKit
+    debugImplementation Deps.dokit
+    releaseImplementation Deps.dokit_no_op
     //AndroidTest
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
