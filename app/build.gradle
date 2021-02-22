@@ -108,7 +108,9 @@ dependencies {
     //EventBus
     implementation Deps.eventbus
     //DoKit
-    debugImplementation Deps.dokit
+    debugImplementation (Deps.dokit){
+        exclude group:'com.blankj'
+    }
     releaseImplementation Deps.dokit_no_op
     //AndroidTest
     testImplementation 'junit:junit:4.13.2'

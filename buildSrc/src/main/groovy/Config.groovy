@@ -44,7 +44,7 @@ class Config {
 
             Module         : new DepConfig(true, ":Module"),
 
-            AndroidUtil    : new DepConfig(false, ":Modules:AndroidUtil"),
+            AndroidUtil    : new DepConfig(true, ":Modules:AndroidUtil"),
 
             NetWork        : new DepConfig(true, ":Modules:NetWork"),
             CustomView     : new DepConfig(true, ":Modules:CustomView"),
