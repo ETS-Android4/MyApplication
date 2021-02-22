@@ -3,7 +3,6 @@ import java.text.SimpleDateFormat
 plugins {
     id 'com.android.application'
     id 'com.blankj.bus'
-    id 'com.didi.dokit'
 }
 
 android {
