@@ -40,7 +40,7 @@ class Deps {
 
     //Base
 
-    static util = "com.blankj:utilcode:${DepsVersions.util_version}"
+    static util = "com.blankj:utilcodex:${DepsVersions.util_version}"
 
     static dokit = "com.didichuxing.doraemonkit:dokitx:${DepsVersions.dokit_version}"
     static dokit_no_op = "com.didichuxing.doraemonkit:dokitx-no-op:${DepsVersions.dokit_version}"
