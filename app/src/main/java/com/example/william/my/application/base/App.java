@@ -10,6 +10,9 @@ import com.example.william.my.module.open.MyModuleOpenEventBusIndex;
 
 import org.greenrobot.eventbus.EventBus;
 
+/**
+ * gradlew :app:dependencies 查询app依赖
+ */
 public class App extends BaseApp {
 
     @Override

@@ -21,8 +21,11 @@ public class LanguageActivity extends BaseResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
+        //LanguageUtils.applyLanguage(
+        //        LanguageUtils.getContextLanguage(LanguageActivity.this).equals(Locale.CHINA) ? Locale.US : Locale.CHINA, false
+        //);
         LanguageUtils.applyLanguage(
-                LanguageUtils.getContextLanguage(LanguageActivity.this).equals(Locale.CHINA) ? Locale.US : Locale.CHINA, false
+                LanguageUtils.getCurrentLocale().equals(Locale.CHINA) ? Locale.US : Locale.CHINA
         );
     }
 }
