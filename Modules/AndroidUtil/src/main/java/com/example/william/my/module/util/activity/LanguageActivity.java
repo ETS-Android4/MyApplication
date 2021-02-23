@@ -1,6 +1,9 @@
 package com.example.william.my.module.util.activity;
 
+import android.util.Log;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LanguageUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
@@ -25,7 +28,8 @@ public class LanguageActivity extends BaseResponseActivity {
         //        LanguageUtils.getContextLanguage(LanguageActivity.this).equals(Locale.CHINA) ? Locale.US : Locale.CHINA, false
         //);
         LanguageUtils.applyLanguage(
-                LanguageUtils.getCurrentLocale().equals(Locale.CHINA) ? Locale.US : Locale.CHINA
+                LanguageUtils.isAppliedLanguage(Locale.SIMPLIFIED_CHINESE) ? Locale.US : Locale.SIMPLIFIED_CHINESE
         );
+        AppUtils.relaunchApp();
     }
 }

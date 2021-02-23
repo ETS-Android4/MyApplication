@@ -112,6 +112,7 @@ public class ARouterPath {
         public static final String Sample_FragmentViewPager = "/module_sample/fragment_view_pager";
         public static final String Sample_Notification = "/module_sample/notification";
         public static final String Sample_RecyclerView = "/module_sample/recycler_view";
+        public static final String Sample_ViewFlipper = "/module_sample/view_flipper";
         public static final String Sample_ViewPager = "/module_sample/view_pager";
         public static final String Sample_ViewPager2 = "/module_sample/view_pager_2";
         public static final String Sample_WebView = "/module_sample/web_view";

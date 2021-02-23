@@ -27,7 +27,7 @@ public class CrashUtilsActivity extends BaseResponseActivity {
         CrashUtils.init(new CrashUtils.OnCrashListener() {
             @Override
             public void onCrash(String crashInfo, Throwable e) {
-                Log.e(TAG, crashInfo.toString());
+                Log.e(TAG, crashInfo);
             }
         });
     }
