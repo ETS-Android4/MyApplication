@@ -7,15 +7,15 @@ buildscript {
     }
     ConfigUtils.init(gradle)
     repositories {
-        google()
-        jcenter()
-        maven { url "https://jitpack.io" }
-        maven { url "https://maven.google.com" }
+        //google()
+        //jcenter()
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url 'https://maven.aliyun.com/repository/google' }
     }
     addRepos(repositories)
     dependencies {
-        classpath "com.tencent.bugly:tinker-support:1.2.0"
         for (def entrySet : ConfigUtils.getApplyPlugins().entrySet()) {
             classpath entrySet.value.dep
         }
@@ -29,12 +29,12 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-        //mavenCentral()
-        maven { url "https://jitpack.io" }
-        maven { url "https://maven.google.com" }
+        //google()
+        //jcenter()
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url 'https://maven.aliyun.com/repository/google' }
     }
     addRepos(repositories)
 }
