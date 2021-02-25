@@ -184,6 +184,9 @@ class DepsVersions {
     //https://github.com/guolindev/Glance/releases
     static glance_version = "1.0.0-alpha02"
 
+    //https://mvnrepository.com/artifact/com.tencent.bugly/crashreport_upgrade
+    static upgrade_version = "1.5.0"
+
     //https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta
     static wechat_version = "6.6.4"
 }

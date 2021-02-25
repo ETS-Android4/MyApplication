@@ -2,7 +2,6 @@ package com.example.william.my.module.network.netty.client;
 
 import android.util.Log;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 

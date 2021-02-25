@@ -13,7 +13,7 @@ class Config {
     static versionName = '1.0.0'
 
     static gradleVersion = '4.1.2'
-    //static gradleVersion = '7.0.0-alpha03'
+    //static gradleVersion = '7.0.0-alpha07'
 
     static kotlinVersion = '1.4.21'
     //https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib

@@ -3,7 +3,6 @@ package com.example.william.my.module.fragment;
 import android.util.Log;
 import android.view.View;
 
-import com.example.william.my.library.fragment.LazyFragment;
 import com.example.william.my.library.fragment.NewLazyFragment;
 
 /**

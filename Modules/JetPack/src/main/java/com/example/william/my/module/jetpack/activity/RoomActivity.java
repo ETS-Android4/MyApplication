@@ -1,7 +1,6 @@
 package com.example.william.my.module.jetpack.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.library.helper.AppExecutorsHelper;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.jetpack.database.AppDataBase;
 import com.example.william.my.module.jetpack.database.dao.OAuthDao;

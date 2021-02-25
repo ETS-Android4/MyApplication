@@ -27,7 +27,6 @@ import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
  * https://github.com/tencentyun/TIMSDK/tree/master/Android
  * <p>
  */
-
 public class LoginActivity extends Activity {
 
     private Button mLoginView;

@@ -1,7 +1,5 @@
 package com.example.william.my.module.util.activity;
 
-import android.util.Log;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LanguageUtils;

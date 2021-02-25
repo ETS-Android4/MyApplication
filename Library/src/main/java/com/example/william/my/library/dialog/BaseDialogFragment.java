@@ -1,9 +1,7 @@
 package com.example.william.my.library.dialog;
 
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Window;
-import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;

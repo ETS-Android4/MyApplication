@@ -1,7 +1,6 @@
 package com.example.william.my.module.kotlin.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.kotlin.databinding.KotlinActivityKotlinBinding

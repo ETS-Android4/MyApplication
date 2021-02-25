@@ -1,7 +1,6 @@
 package com.example.william.my.core.widget.iosAlertDialog;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;

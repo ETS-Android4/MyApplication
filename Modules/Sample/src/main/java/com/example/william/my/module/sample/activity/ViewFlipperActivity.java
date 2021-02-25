@@ -1,10 +1,9 @@
 package com.example.william.my.module.sample.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.animation.AnimationUtils;
 import android.widget.ViewFlipper;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.router.ARouterPath;

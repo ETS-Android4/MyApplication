@@ -133,5 +133,7 @@ class Deps {
 
     static glance = "com.glance.guolindev:glance:${DepsVersions.glance_version}"
 
+    static upgrade = "com.tencent.bugly:crashreport_upgrade:${DepsVersions.upgrade_version}"
+
     static wechat = "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:${DepsVersions.wechat_version}"
 }
