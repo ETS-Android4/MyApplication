@@ -1,5 +1,9 @@
 package com.example.william.my.module.sample;
 
+import android.os.Looper;
+import android.os.MessageQueue;
+import android.util.Log;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseListActivity;
 import com.example.william.my.module.router.ARouterPath;
@@ -37,5 +41,13 @@ public class SampleActivity extends BaseListActivity {
         mMap.put("TransitionActivity", ARouterPath.Sample.Sample_Transition);
         mMap.put("TurntableActivity", ARouterPath.Sample.Sample_Turntable);
         mMap.put("TypefaceActivity", ARouterPath.Sample.Sample_Typeface);
+
+        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+            @Override
+            public boolean queueIdle() {
+                Log.e("addIdleHandler", "queueIdle:" + Thread.currentThread().getName());
+                return false;
+            }
+        });
     }
 }

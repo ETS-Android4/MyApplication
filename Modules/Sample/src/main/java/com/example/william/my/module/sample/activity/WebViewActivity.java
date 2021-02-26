@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.webkit.JavascriptInterface;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -24,7 +25,7 @@ public class WebViewActivity extends BaseActivity {
 
     private WebView mWebView;
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "JavascriptInterface"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +86,36 @@ public class WebViewActivity extends BaseActivity {
                 super.onPageFinished(view, url);
             }
         });
+        mWebView.addJavascriptInterface(new WebViewInterface(new WebViewJsCallback() {
+            @Override
+            public void closeWebViewPage() {
+
+            }
+        }) {
+
+        }, "interfaceName");
+    }
+
+    public static class WebViewInterface {
+
+        private final WebViewJsCallback webViewJsCallback;
+
+        public WebViewInterface(WebViewJsCallback webViewJsCallback) {
+            this.webViewJsCallback = webViewJsCallback;
+        }
+
+        @JavascriptInterface
+        public void closeWebViewPage() {
+            if (webViewJsCallback != null) {
+                webViewJsCallback.closeWebViewPage();
+            }
+        }
+    }
+
+    public static abstract class WebViewJsCallback {
+
+        public abstract void closeWebViewPage();
+
     }
 
     @Override
