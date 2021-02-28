@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
         //ARouter.getInstance()
         //        .inject(this);//BaseActivity
 
-        //ARouter.getInstance()
-        //        .build(ARouterPath.Module)
-        //        //.withTransition(R.anim.basics_slide_in, R.anim.basics_slide_out)
-        //        .withString("param_key", "param_value")
-        //        .navigation(this, new LoginNavigationImpl());
+        ARouter.getInstance()
+                .build(ARouterPath.Module)
+                //.withTransition(R.anim.basics_slide_in, R.anim.basics_slide_out)
+                .withString("param_key", "param_value")
+                .navigation(this, new LoginNavigationImpl());
         //.greenChannel()//使用绿色通道(跳过所有的拦截器)
         //.navigation();
-        startActivity(new Intent(this, MainFlutterActivity.class));
+        //startActivity(new Intent(this, MainFlutterActivity.class));
         finish();
     }
 

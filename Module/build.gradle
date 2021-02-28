@@ -27,8 +27,8 @@ android {
 }
 
 dependencies {
-    api project(path: ':Library')
-    implementation project(path: ':Libraries:lib_network')
+    api project(path: ':library')
+    implementation project(path: ':libraries:lib_network')
     //Android
     implementation Deps.appcompat
     implementation Deps.constraintlayout

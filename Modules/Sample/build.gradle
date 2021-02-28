@@ -3,6 +3,6 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':Libraries:lib_customview')
+    implementation project(path: ':libraries:lib_customview')
     implementation Deps.gson
 }
