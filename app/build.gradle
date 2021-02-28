@@ -104,6 +104,7 @@ dependencies {
     implementation Deps.constraintlayout
     //ARouter
     implementation Deps.arouter
+    implementation project(path: ':flutter')
     annotationProcessor Deps.arouter_compiler
     //EventBus
     implementation Deps.eventbus
