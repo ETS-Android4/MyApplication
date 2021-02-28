@@ -46,7 +46,10 @@ static def addRepos(RepositoryHandler handler) {
     handler.jcenter()
     handler.maven { url "https://jitpack.io" }
     handler.maven { url "https://maven.google.com" }
+    handler.maven { url "https://maven.aliyun.com/repository/central" }
+    handler.maven { url "https://maven.aliyun.com/repository/jcenter" }
     handler.maven { url "https://maven.aliyun.com/repository/public" }
+    handler.maven { url "https://maven.aliyun.com/repository/google" }
 }
 
 ext.addRepos = this.&addRepos

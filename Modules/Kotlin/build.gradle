@@ -45,8 +45,10 @@ android {
             }
         }
     }
+    //gradle:4.1.0+
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
     resourcePrefix "kotlin_"
 }
