@@ -1,22 +1,16 @@
 package com.example.william.my.application;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.widget.FrameLayout;
+import android.util.Log;
 
-import io.flutter.Log;
-import io.flutter.embedding.android.FlutterActivity;
-import io.flutter.embedding.android.FlutterFragment;
-import io.flutter.embedding.android.FlutterView;
-import io.flutter.embedding.engine.FlutterEngine;
-import io.flutter.embedding.engine.FlutterEngineCache;
-import io.flutter.embedding.engine.dart.DartExecutor;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * https://github.com/flutter/flutter/wiki/Experimental:-Add-Flutter-View
  * https://github.com/flutter/flutter/wiki/Experimental:-Add-Flutter-Fragment
  */
-public class MainFlutterActivity extends FlutterActivity {
+public class MainFlutterActivity extends AppCompatActivity {
+//public class MainFlutterActivity extends FlutterActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +47,9 @@ public class MainFlutterActivity extends FlutterActivity {
 //                .withCachedEngine("main")
 //                .build();
 
-        FlutterActivity
-                .withNewEngine()
-                .initialRoute("/main")
-                .build(this);
+//        FlutterActivity
+//                .withNewEngine()
+//                .initialRoute("/main")
+//                .build(this);
     }
-
 }

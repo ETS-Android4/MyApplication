@@ -54,7 +54,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':Module')
+    implementation project(path: ':module')
     //Android
     implementation Deps.appcompat
     implementation Deps.constraintlayout

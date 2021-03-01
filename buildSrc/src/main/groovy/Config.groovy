@@ -44,23 +44,23 @@ class Config {
             plugin_protobuf: new DepConfig(pluginPath: "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"),
             plugin_dokit   : new DepConfig(pluginPath: "com.didichuxing.doraemonkit:dokitx-plugin:$dokitVersion"),
 
-            Module         : new DepConfig(true, ":Module"),
+            Module         : new DepConfig(true, ":module"),
 
-            AndroidUtil    : new DepConfig(true, ":Modules:AndroidUtil"),
+            AndroidUtil    : new DepConfig(true, ":modules:module_android_util"),
 
-            NetWork        : new DepConfig(true, ":Modules:NetWork"),
-            CustomView     : new DepConfig(true, ":Modules:CustomView"),
+            NetWork        : new DepConfig(true, ":modules:module_network"),
+            CustomView     : new DepConfig(true, ":modules:module_custom_view"),
 
-            JetPack        : new DepConfig(true, ":Modules:JetPack"),
-            OpenSource     : new DepConfig(true, ":Modules:OpenSource"),
-            Sample         : new DepConfig(true, ":Modules:Sample"),
+            JetPack        : new DepConfig(true, ":modules:module_jetpack"),
+            OpenSource     : new DepConfig(true, ":modules:module_open_source"),
+            Sample         : new DepConfig(true, ":modules:module_sample"),
 
-            ModuleWx       : new DepConfig(false, ":Modules:ModuleWx"),
-            ModuleBugly    : new DepConfig(false, ":Modules:ModuleBugly"),
-            ModuleJiguang  : new DepConfig(false, ":Modules:ModuleJiguang"),
-            ModuleTencentIM: new DepConfig(false, ":Modules:ModuleTencentIM"),
+            ModuleWx       : new DepConfig(false, ":modules:module_wx"),
+            ModuleBugly    : new DepConfig(false, ":modules:module_bugly"),
+            ModuleJiguang  : new DepConfig(false, ":modules:module_jiguang"),
+            ModuleTencentIM: new DepConfig(false, ":modules:module_tencent_im"),
 
-            Kotlin         : new DepConfig(true, ":Modules:Kotlin"),
+            Kotlin         : new DepConfig(true, ":modules:module_kotlin"),
             //ModuleTV      : new DepConfig(false, ":Modules:ModuleTV"),
     ]
 }

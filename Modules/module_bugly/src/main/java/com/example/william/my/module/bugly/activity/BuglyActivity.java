@@ -1,10 +1,10 @@
 package com.example.william.my.module.bugly.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.william.my.module.bugly.R;
 import com.tencent.bugly.beta.Beta;
