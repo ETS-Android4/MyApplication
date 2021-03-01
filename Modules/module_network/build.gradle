@@ -2,7 +2,7 @@ android {
     resourcePrefix "net_"
 }
 dependencies {
-    implementation project(path: ':libraries:lib_network')
+    implementation project(path: ':librarys:lib_network')
     //Glide
     implementation Deps.glide
     annotationProcessor Deps.glide_compiler

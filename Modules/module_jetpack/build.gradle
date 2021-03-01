@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':libraries:lib_network')
+    implementation project(path: ':librarys:lib_network')
     //Room
     implementation Deps.room
     implementation Deps.room_rxjava
