@@ -2,12 +2,15 @@ package com.example.william.my.module.open.activity;
 
 import android.util.Log;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
+import com.example.william.my.module.router.ARouterPath;
 import com.tencent.mmkv.MMKV;
 
 /**
  * https://github.com/Tencent/MMKV/wiki/android_tutorial_cn
  */
+@Route(path = ARouterPath.OpenSource.OpenSource_MMKV)
 public class MMKVActivity extends BaseResponseActivity {
 
     @Override

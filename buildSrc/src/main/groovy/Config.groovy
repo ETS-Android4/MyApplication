@@ -48,10 +48,10 @@ class Config {
 
             AndroidUtil    : new DepConfig(true, ":modules:module_android_util"),
 
-            NetWork        : new DepConfig(true, ":modules:module_network"),
+            Network        : new DepConfig(true, ":modules:module_network"),
             CustomView     : new DepConfig(true, ":modules:module_custom_view"),
 
-            JetPack        : new DepConfig(true, ":modules:module_jetpack"),
+            Jetpack        : new DepConfig(true, ":modules:module_jetpack"),
             OpenSource     : new DepConfig(true, ":modules:module_open_source"),
             Sample         : new DepConfig(true, ":modules:module_sample"),
 

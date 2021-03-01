@@ -22,6 +22,6 @@ android {
     resourcePrefix "j_"
 }
 dependencies {
-    implementation 'cn.jiguang.sdk:jcore:2.3.4'
-    implementation 'cn.jiguang.sdk:jverification:2.6.4'
+    implementation Deps.jcore
+    implementation Deps.jverification
 }

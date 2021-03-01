@@ -68,6 +68,8 @@ class Deps {
     static smartbus = "com.jeremyliao:smart-event-bus-base:${DepsVersions.smartbus_version}"
     static smartbus_compiler = "com.jeremyliao:smart-event-bus-compiler:${DepsVersions.smartbus_compiler_version}"
 
+    static mmkv = "com.tencent:mmkv-static:${DepsVersions.mmkv_version}"
+
     static greendao = "org.greenrobot:greendao:${DepsVersions.greendao_version}"
 
     //Network
@@ -136,4 +138,10 @@ class Deps {
     static upgrade = "com.tencent.bugly:crashreport_upgrade:${DepsVersions.upgrade_version}"
 
     static wechat = "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:${DepsVersions.wechat_version}"
+
+    static jcore = "cn.jiguang.sdk:jcore:${DepsVersions.jcore_version}"
+    static jverification = "cn.jiguang.sdk:jverification:${DepsVersions.jverification_version}"
+
+    static imsdk = "com.tencent.imsdk:imsdk:${DepsVersions.imsdk_version}"
+    static imsdk_tuikit = "com.tencent.imsdk:tuikit:${DepsVersions.imsdk_tuikit_version}"
 }

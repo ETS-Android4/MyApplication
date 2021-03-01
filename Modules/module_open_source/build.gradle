@@ -16,8 +16,8 @@ android {
     resourcePrefix "open_"
 }
 dependencies {
-    //https://github.com/Tencent/MMKV/wiki/home_cn
-    implementation 'com.tencent:mmkv-static:1.2.7'
+    //https://github.com/Tencent/MMKV
+    implementation Deps.mmkv
     //https://github.com/greenrobot/greenDAO
     implementation Deps.greendao
     //https://github.com/ReactiveX/RxJava

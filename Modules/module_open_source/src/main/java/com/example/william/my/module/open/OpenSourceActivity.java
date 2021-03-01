@@ -24,6 +24,7 @@ public class OpenSourceActivity extends BaseListActivity {
     @Override
     protected void initData() {
         super.initData();
+        mMap.put("MMKVActivity", ARouterPath.OpenSource.OpenSource_MMKV);
         mMap.put("GreenDaoActivity", ARouterPath.OpenSource.OpenSource_GreenDao);
         mMap.put("EventBusActivity", ARouterPath.OpenSource.OpenSource_EventBus);
         mMap.put("LiveEventBusActivity", ARouterPath.OpenSource.OpenSource_LiveEventBus);

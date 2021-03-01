@@ -15,6 +15,9 @@ import com.tencent.qcloud.tim.uikit.modules.chat.GroupChatManagerKit;
 import com.tencent.qcloud.tim.uikit.modules.conversation.ConversationManagerKit;
 import com.tencent.qcloud.tim.uikit.utils.FileUtil;
 
+/**
+ * https://cloud.tencent.com/document/product/269
+ */
 public class MainActivity extends BaseActivity implements ConversationManagerKit.MessageUnreadWatcher {
 
     private TextView mConversationBtn;

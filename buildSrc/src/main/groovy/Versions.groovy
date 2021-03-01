@@ -96,6 +96,9 @@ class DepsVersions {
     static smartbus_version = "0.0.1"
     static smartbus_compiler_version = "0.0.2"
 
+    //https://github.com/Tencent/MMKV
+    static mmkv_version = "1.2.7"
+
     //https://github.com/greenrobot/greenDAO
     static greendao_version = "3.3.0"
 
@@ -189,4 +192,16 @@ class DepsVersions {
 
     //https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta
     static wechat_version = "6.6.4"
+
+    //https://mvnrepository.com/artifact/cn.jiguang.sdk/jcore
+    static jcore_version = "2.3.4"
+
+    //https://mvnrepository.com/artifact/cn.jiguang.sdk/jverification
+    static jverification_version = "2.6.4"
+
+    //https://mvnrepository.com/artifact/com.tencent.imsdk/imsdk
+    static imsdk_version = "5.1.20"
+
+    //https://mvnrepository.com/artifact/com.tencent.imsdk/tuikit
+    static imsdk_tuikit_version = "5.1.20"
 }

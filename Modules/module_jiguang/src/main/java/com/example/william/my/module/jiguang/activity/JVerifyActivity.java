@@ -16,6 +16,9 @@ import com.example.william.my.module.jiguang.common.JVerifyUIConfigUtil;
 import cn.jiguang.verifysdk.api.JVerificationInterface;
 import cn.jiguang.verifysdk.api.VerifyListener;
 
+/**
+ * https://docs.jiguang.cn/jverification/client/android_sdk/
+ */
 public class JVerifyActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "JVerify";
