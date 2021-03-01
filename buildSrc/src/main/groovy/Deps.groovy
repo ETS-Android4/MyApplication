@@ -90,6 +90,8 @@ class Deps {
 
     static websocket = "org.java-websocket:Java-WebSocket:${DepsVersions.websocket_version}"
 
+    static netty = "io.netty:netty-all:${DepsVersions.netty_version}"
+
     //Widget
 
     static background = "com.noober.background:core:${DepsVersions.background_version}"

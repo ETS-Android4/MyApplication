@@ -72,9 +72,6 @@ dependencies {
     implementation Deps.viewmodel_ktx//ViewModelScope
     //Proto DataStore
     implementation Deps.datastore
-    //protobuf
-    //You need to depend on the lite runtime library, not protobuf-java
-    implementation 'com.google.protobuf:protobuf-javalite:3.10.0'
     //Preferences DataStore
     implementation Deps.datastore_pre
     //Paging3
@@ -86,6 +83,9 @@ dependencies {
     implementation Deps.retrofit
     implementation Deps.retrofit_gson
     implementation Deps.retrofit_rxjava
+    //protobuf
+    //You need to depend on the lite runtime library, not protobuf-java
+    implementation 'com.google.protobuf:protobuf-javalite:3.10.0'
 }
 
 //https://github.com/google/protobuf-gradle-plugin

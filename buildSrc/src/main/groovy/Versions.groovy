@@ -122,6 +122,9 @@ class DepsVersions {
     //https://github.com/TooTallNate/Java-WebSocket/releases
     static websocket_version = "1.5.1"
 
+    //https://github.com/netty/netty/releases
+    static netty_version = "4.1.58.Final"
+
     //Widget
 
     //https://github.com/JavaNoober/BackgroundLibrary
