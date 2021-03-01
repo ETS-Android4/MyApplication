@@ -66,6 +66,9 @@ android {
     buildFeatures {
         dataBinding = true
     }
+    //dataBinding {
+    //    enabled = true
+    //}
     //多渠道支持
     //flavorDimensions "api", "appStore"
     //productFlavors {//多版本打包
