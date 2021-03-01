@@ -6,50 +6,52 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * https://github.com/flutter/flutter/wiki/Experimental:-Add-Flutter-View
- * https://github.com/flutter/flutter/wiki/Experimental:-Add-Flutter-Fragment
+ * https://flutter.dev/docs/development/add-to-app/android/add-flutter-screen
+ * https://flutter.dev/docs/development/add-to-app/android/add-flutter-fragment
  */
 public class MainFlutterActivity extends AppCompatActivity {
-//public class MainFlutterActivity extends FlutterActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flutter);
 
-        Log.e("TAG", "ModuleActivity");
+        Log.e("TAG", "MainFlutterActivity");
 
-//        // Instantiate a new FlutterView.
-//        FlutterView flutterView = new FlutterView(this);
-//        //flutterView.attachToFlutterEngine(flutterEngine);
+//        //Step 1: Add FlutterActivity to AndroidManifest.xml
+//        startActivity(
+//                FlutterActivity.createDefaultIntent(this)
+//        );
 //
-//        // Add your FlutterView wherever you'd like. In this case we add
-//        // the FlutterView to a FrameLayout.
-//        FrameLayout frameLayout = findViewById(R.id.frameLayout);
-//        frameLayout.addView(flutterView);
+//        //Step 2: Launch FlutterActivity
+//        startActivity(
+//                FlutterActivity
+//                        .withNewEngine()
+//                        .initialRoute("/main")
+//                        .build(this)
+//        );
 //
-//
-//        // Instantiate your FlutterEngine.
+//        //Step 3: (Optional) Use a cached FlutterEngine
+//        // Instantiate a FlutterEngine.
 //        FlutterEngine flutterEngine = new FlutterEngine(this);
 //
-//        // Pre-warm your FlutterEngine by starting Dart execution.
-//        flutterEngine
-//                .getDartExecutor()
-//                .executeDartEntrypoint(
-//                        DartExecutor.DartEntrypoint.createDefault()
-//                );
+//        // Configure an initial route.
+//        flutterEngine.getNavigationChannel().setInitialRoute("main");
 //
+//        // Start executing Dart code to pre-warm the FlutterEngine.
+//        flutterEngine.getDartExecutor().executeDartEntrypoint(
+//                DartExecutor.DartEntrypoint.createDefault()
+//        );
+//
+//        // Cache the FlutterEngine to be used by FlutterActivity.
 //        FlutterEngineCache
 //                .getInstance()
 //                .put("main", flutterEngine);
 //
-//        FlutterFragment flutterFragment = FlutterFragment
-//                .withCachedEngine("main")
-//                .build();
-
-//        FlutterActivity
-//                .withNewEngine()
-//                .initialRoute("/main")
-//                .build(this);
+//        startActivity(
+//                FlutterActivity
+//                        .withCachedEngine("main")
+//                        .build(this)
+//        );
     }
 }
