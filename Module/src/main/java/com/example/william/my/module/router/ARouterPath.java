@@ -96,6 +96,7 @@ public class ARouterPath {
         public static final String OpenSource_PickerView = "/module_open/picker_view";
         public static final String OpenSource_PopWindow = "/module_open/pop_window";
         public static final String OpenSource_SmartRefresh = "/module_open/smart_refresh";
+        public static final String OpenSource_SVGA = "/module_open/svga";
         public static final String OpenSource_SwipeLayout = "/module_open/swipe_layout";
         public static final String OpenSource_SwipeToLoad = "/module_open/swipe_to_load";
         public static final String OpenSource_Tangram = "/module_open/tangram";

@@ -43,6 +43,7 @@ public class OpenSourceActivity extends BaseListActivity {
         mMap.put("PopWindowActivity", ARouterPath.OpenSource.OpenSource_PopWindow);
         mMap.put("SmartRefreshActivity", ARouterPath.OpenSource.OpenSource_SmartRefresh);
         mMap.put("SwipeLayoutActivity", ARouterPath.OpenSource.OpenSource_SwipeLayout);
+        mMap.put("SVGAActivity", ARouterPath.OpenSource.OpenSource_SVGA);
         mMap.put("SwipeToLoadActivity", ARouterPath.OpenSource.OpenSource_SwipeToLoad);
         mMap.put("TangramActivity", ARouterPath.OpenSource.OpenSource_Tangram);
         mMap.put("X5Activity", ARouterPath.OpenSource.OpenSource_X5);

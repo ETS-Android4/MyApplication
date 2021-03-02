@@ -126,6 +126,8 @@ class Deps {
 
     static swipelayout = "com.daimajia.swipelayout:library:${DepsVersions.swipelayout_version}"
 
+    static svga = "com.github.yyued:SVGAPlayer-Android:${DepsVersions.svga_version}"
+
     static swipetoload = "com.github.Aspsine:SwipeToLoadLayout:${DepsVersions.swipetoload_version}"
 
     static tangram = "com.alibaba.android:tangram:${DepsVersions.tangram_version}"

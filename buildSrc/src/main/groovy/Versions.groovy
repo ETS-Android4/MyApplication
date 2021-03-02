@@ -172,6 +172,9 @@ class DepsVersions {
     //https://github.com/daimajia/AndroidSwipeLayout/releases
     static swipelayout_version = "1.2.0@aar"
 
+    //https://github.com/svga/SVGAPlayer-Android
+    static svga_version =  "2.5.13"
+
     //https://github.com/Aspsine/SwipeToLoadLayout/releases
     static swipetoload_version = "1.0.4"
 

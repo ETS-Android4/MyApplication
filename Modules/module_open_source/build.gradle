@@ -66,6 +66,8 @@ dependencies {
     implementation Deps.refresh_classics_footer
     //https://github.com/daimajia/AndroidSwipeLayout
     implementation Deps.swipelayout
+    //https://github.com/svga/SVGAPlayer-Android
+    implementation Deps.svga
     //https://github.com/Aspsine/SwipeToLoadLayout
     implementation Deps.swipetoload
     //https://github.com/alibaba/Tangram-Android
