@@ -8,8 +8,11 @@ import com.example.william.my.core.network.retrofit.helper.RetrofitHelper;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.google.gson.JsonElement;
 
+import java.util.concurrent.Executors;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -77,7 +80,9 @@ public class RxRetrofit<T> {
 
         observable = observable.onErrorResumeNext(new HttpResultFunction<RetrofitResponse<T>>());
 
-        return observable.subscribeOn(Schedulers.io())//请求数据的事件发生在io线程
+        return observable
+                .subscribeOn(Schedulers.io())//请求数据的事件发生在io线程
+                //.subscribeOn(Schedulers.from(Executors.newFixedThreadPool(3)))//指定线程池
                 .observeOn(AndroidSchedulers.mainThread());//请求完成后在主线程更显UI
     }
 }

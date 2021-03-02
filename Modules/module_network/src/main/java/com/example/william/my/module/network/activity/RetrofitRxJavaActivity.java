@@ -24,6 +24,9 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+/**
+ * Schedulers.io() io线程池为一个无边界线程池
+ */
 @Route(path = ARouterPath.NetWork.NetWork_RetrofitRxJava)
 public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
