@@ -1,7 +1,11 @@
 package com.example.william.my.module.fragment;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.william.my.library.fragment.NewLazyFragment;
 
@@ -23,6 +27,16 @@ public class BaseFragment extends NewLazyFragment {
     @Override
     protected int createView() {
         return 0;
+    }
+
+    /**
+     * 在此方法内初始化控件
+     * @param view
+     * @param savedInstanceState
+     */
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
