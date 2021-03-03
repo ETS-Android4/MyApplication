@@ -3,7 +3,7 @@ android {
         sample {
             keyAlias 'key'
             keyPassword 'password'
-            storeFile file('app.keystore')
+            storeFile file('../app.keystore')
             storePassword 'password'
         }
     }
