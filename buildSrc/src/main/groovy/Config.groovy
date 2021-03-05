@@ -12,8 +12,7 @@ class Config {
     static versionCode = 1_000_000
     static versionName = '1.0.0'
 
-    static gradleVersion = '4.1.2'
-    //can't find tinkerProcessDebugManifest, you must init tinker plugin first!
+    static gradleVersion = '3.6.0'//'4.1.2'
     //static gradleVersion = '7.0.0-alpha07'
     //https://developer.android.google.cn/studio/releases/gradle-plugin
 

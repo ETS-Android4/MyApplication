@@ -11,7 +11,7 @@ public class BindingAdapters {
 
     @BindingAdapter(value = "setBackground")
     public static void setBackgroundColor(View view, String likes) {
-        if (Integer.parseInt(likes) >= 3) {
+        if (Integer.parseInt(likes) >= 10) {
             view.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary));
         }
     }

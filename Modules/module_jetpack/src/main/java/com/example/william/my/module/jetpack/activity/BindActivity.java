@@ -40,7 +40,7 @@ public class BindActivity extends BaseActivity {
 
         // DataBinding -> LiveDataViewModel
 //        // Obtain ViewModel from ViewModelProviders
-//        LiveDataViewModel mViewModel = ActivityDataBus.getData(this, LiveDataViewModel.class);
+//        LiveDataViewModel mViewModel = new ViewModelProvider(this).get(LiveDataViewModel.class);
 //
 //        // Inflate view and obtain an instance of the binding class.
 //        JetActivityBindBinding mDataBinding = DataBindingUtil.setContentView(this, R.layout.jet_activity_bind);

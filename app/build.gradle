@@ -15,7 +15,7 @@ android {
         versionCode Config.versionCode
         versionName Config.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true//minSdkVersion小于21时，需启用多dex文件支持
+        multiDexEnabled true//minSdkVersion小于21时，需启用dex分包支持
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
@@ -62,13 +62,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    //gradle:4.1.0+
-    buildFeatures {
-        dataBinding = true
+    if (Config.gradleVersion == "3.6.0") {
+        dataBinding {
+            enabled = true
+        }
+    } else {
+        //gradle:4.1.0+
+        buildFeatures {
+            dataBinding = true
+        }
     }
-    //dataBinding {
-    //    enabled = true
-    //}
     //多渠道支持
     //flavorDimensions "api", "appStore"
     //productFlavors {//多版本打包

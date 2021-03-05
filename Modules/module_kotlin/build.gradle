@@ -45,17 +45,16 @@ android {
             }
         }
     }
-    //gradle:4.1.0+
-    buildFeatures {
-        viewBinding = true
-        dataBinding = true
+    if (Config.gradleVersion == "3.6.0"){
+        viewBinding {
+            enabled = true
+        }
+    }else {
+        //gradle:4.1.0+
+        buildFeatures {
+            viewBinding = true
+        }
     }
-    //viewBinding {
-    //    enabled = true
-    //}
-    //dataBinding {
-    //    enabled = true
-    //}
     resourcePrefix "kotlin_"
 }
 
