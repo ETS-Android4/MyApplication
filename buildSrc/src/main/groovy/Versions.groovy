@@ -1,5 +1,8 @@
 class AndroidVersions {
 
+    static multidex_version = "2.0.1"
+    //https://developer.android.google.cn/jetpack/androidx/releases/multidex
+
     static appcompat_version = "1.2.0"
     //https://developer.android.google.cn/jetpack/androidx/releases/appcompat
 
@@ -193,21 +196,27 @@ class DepsVersions {
     //https://github.com/guolindev/Glance/releases
     static glance_version = "1.0.0-alpha02"
 
+    //https://mvnrepository.com/artifact/com.tencent.tinker/tinker-android-lib
+    static tinker_version = "1.9.14.10"
+
     //https://mvnrepository.com/artifact/com.tencent.bugly/crashreport_upgrade
     static upgrade_version = "1.5.0"
+
+    //https://mvnrepository.com/artifact/com.tencent.bugly/crashreport
+    static crash_version = "3.3.3"
+    //https://mvnrepository.com/artifact/com.tencent.bugly/nativecrashreport
+    static crashnative_version = "3.8.0"
 
     //https://mvnrepository.com/artifact/com.tencent.mm.opensdk/wechat-sdk-android-without-mta
     static wechat_version = "6.6.4"
 
     //https://mvnrepository.com/artifact/cn.jiguang.sdk/jcore
     static jcore_version = "2.3.4"
-
     //https://mvnrepository.com/artifact/cn.jiguang.sdk/jverification
     static jverification_version = "2.6.4"
 
     //https://mvnrepository.com/artifact/com.tencent.imsdk/imsdk
     static imsdk_version = "5.1.20"
-
     //https://mvnrepository.com/artifact/com.tencent.imsdk/tuikit
     static imsdk_tuikit_version = "5.1.20"
 }

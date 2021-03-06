@@ -1,3 +1,4 @@
+apply from: 'tinker-support.gradle'
 apply from: '../signing.gradle'
 android {
     if (!ConfigUtils.isApply(project)) {
@@ -5,12 +6,16 @@ android {
             applicationId "com.example.william.my.module.bugly"
             versionCode 1
             versionName "1.0"
+            multiDexEnabled true
             ndk {
                 //设置支持的SO库架构
                 abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
             }
         }
         buildTypes {
+            release {
+                signingConfig signingConfigs.sample
+            }
             debug {
                 signingConfig signingConfigs.sample
             }
@@ -20,5 +25,9 @@ android {
 }
 
 dependencies {
+    implementation Deps.multidex
     implementation Deps.upgrade
+    implementation Deps.tinker
+    implementation Deps.tinker_anno
+    implementation Deps.crashnative
 }

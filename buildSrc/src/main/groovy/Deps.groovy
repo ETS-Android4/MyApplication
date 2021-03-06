@@ -3,6 +3,8 @@ class Deps {
     //Android
     static material = "com.google.android.material:material:1.2.1"
 
+    static multidex = "androidx.multidex:multidex:${AndroidVersions.multidex_version}"
+
     static appcompat = "androidx.appcompat:appcompat:${AndroidVersions.appcompat_version}"
     static constraintlayout = "androidx.constraintlayout:constraintlayout:${AndroidVersions.constraintlayout_version}"
 
@@ -139,7 +141,13 @@ class Deps {
 
     static glance = "com.glance.guolindev:glance:${DepsVersions.glance_version}"
 
+    static tinker = "com.tencent.tinker:tinker-android-lib:${DepsVersions.tinker_version}"
+    static tinker_anno = "com.tencent.tinker:tinker-android-anno-support:${DepsVersions.tinker_version}"
+
     static upgrade = "com.tencent.bugly:crashreport_upgrade:${DepsVersions.upgrade_version}"
+
+    static crash = "com.tencent.bugly:crashreport:${DepsVersions.crash_version}"
+    static crashnative = "com.tencent.bugly:nativecrashreport:${DepsVersions.crashnative_version}"
 
     static wechat = "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:${DepsVersions.wechat_version}"
 

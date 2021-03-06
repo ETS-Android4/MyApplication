@@ -12,6 +12,10 @@ import com.tencent.bugly.beta.UpgradeInfo;
 
 /**
  * https://bugly.qq.com/docs/user-guide/instruction-manual-android-upgrade
+ * https://bugly.qq.com/docs/user-guide/instruction-manual-android-hotfix
+ * <p>
+ * assembleRelease -> 生成基准包 -> app\build\bakApk
+ * buildTinkerPatchRelease -> 生成补丁包 -> app\build\outputs\patch\release\patch_signed_7zip.apk
  */
 public class BuglyActivity extends AppCompatActivity {
 

@@ -16,7 +16,7 @@ class Config {
     //static gradleVersion = '7.0.0-alpha07'
     //https://developer.android.google.cn/studio/releases/gradle-plugin
 
-    static kotlinVersion = '1.4.21'
+    static kotlinVersion = '1.4.31'
     //https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib
 
     static routerVersion = '1.0.2'
@@ -26,6 +26,9 @@ class Config {
     //https://search.maven.org/search?q=g:org.greenrobot%20AND%20a:greendao-gradle-plugin
 
     static busVersion = '2.6'
+    //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
+
+    static tinkerVersion = '1.2.2'
     //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
 
     static protobufVersion = '0.8.14'
@@ -40,6 +43,7 @@ class Config {
             plugin_arouter : new DepConfig(pluginPath: "com.alibaba:arouter-register:$routerVersion"),
             plugin_greendao: new DepConfig(pluginPath: "org.greenrobot:greendao-gradle-plugin:$greendaoVersion"),
             plugin_bus     : new DepConfig(pluginPath: "com.blankj:bus-gradle-plugin:$busVersion"),
+            plugin_tinker  : new DepConfig(pluginPath: "com.tencent.bugly:tinker-support:$tinkerVersion"),
             plugin_protobuf: new DepConfig(pluginPath: "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"),
             plugin_dokit   : new DepConfig(pluginPath: "com.didichuxing.doraemonkit:dokitx-plugin:$dokitVersion"),
 
