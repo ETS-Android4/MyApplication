@@ -1,4 +1,4 @@
-apply from: 'tinker-support.gradle'
+//apply from: 'tinker-support.gradle'
 apply from: '../signing.gradle'
 android {
     if (!ConfigUtils.isApply(project)) {
