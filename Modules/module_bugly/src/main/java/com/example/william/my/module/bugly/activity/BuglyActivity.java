@@ -11,6 +11,8 @@ import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;
 
 /**
+ * https://github.com/Tencent/tinker/wiki
+ * <p>
  * https://bugly.qq.com/docs/user-guide/instruction-manual-android-upgrade
  * https://bugly.qq.com/docs/user-guide/instruction-manual-android-hotfix
  * <p>
