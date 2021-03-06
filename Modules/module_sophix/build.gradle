@@ -1,0 +1,29 @@
+apply from: '../signing.gradle'
+android {
+    if (!ConfigUtils.isApply(project)) {
+        defaultConfig {
+            applicationId "com.example.william.my.module.sophix"
+            versionCode 1
+            versionName "1.0"
+            multiDexEnabled true
+            ndk {
+                //选择要添加的对应cpu类型的.so库。
+                //热修复支持五种
+                abiFilters 'arm64-v8a', 'armeabi', 'armeabi-v7a', 'x86', 'x86_64'
+            }
+        }
+        buildTypes {
+            release {
+                signingConfig signingConfigs.sample
+            }
+            debug {
+                signingConfig signingConfigs.sample
+            }
+        }
+    }
+    resourcePrefix "sophix_"
+}
+
+dependencies {
+    implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.17'
+}

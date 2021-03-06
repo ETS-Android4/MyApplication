@@ -60,6 +60,7 @@ class Config {
 
             ModuleWx       : new DepConfig(false, ":modules:module_wx"),
             ModuleBugly    : new DepConfig(false, ":modules:module_bugly"),
+            ModuleSophix   : new DepConfig(false, ":modules:module_sophix"),
             ModuleJiguang  : new DepConfig(false, ":modules:module_jiguang"),
             ModuleTencentIM: new DepConfig(false, ":modules:module_tencent_im"),
 

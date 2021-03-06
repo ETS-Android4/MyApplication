@@ -15,6 +15,7 @@ include ':modules:module_wx'
 include ':modules:module_jiguang'
 include ':modules:module_tencent_im'
 include ':modules:module_bugly'
+include ':modules:module_sophix'
 
 //setBinding(new Binding([gradle: this]))
 //evaluate(new File(
