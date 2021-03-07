@@ -1,5 +1,6 @@
 rootProject.name = "My Application"
 include ':app'
+
 include ':library'
 include ':librarys:lib_customview'
 include ':librarys:lib_network'
@@ -18,3 +19,9 @@ include ':modules:module_jiguang'
 include ':modules:module_tencent_im'
 include ':modules:module_bugly'
 include ':modules:module_sophix'
+
+//setBinding(new Binding([gradle: this]))
+//evaluate(new File(
+//        settingsDir,
+//        'flutter_module/.android/include_flutter.groovy'
+//))
