@@ -20,16 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="com.taobao.android.hotfix.IDSECRET"
-            android:value="App ID" />
-        <meta-data
-            android:name="com.taobao.android.hotfix.APPSECRET"
-            android:value="App Secret" />
-        <meta-data
-            android:name="com.taobao.android.hotfix.RSASECRET"
-            android:value="RSA密钥" />
     </application>
 
 </manifest>

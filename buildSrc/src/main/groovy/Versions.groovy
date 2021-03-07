@@ -196,6 +196,8 @@ class DepsVersions {
     //https://github.com/guolindev/Glance/releases
     static glance_version = "1.0.0-alpha02"
 
+    static sophix_version = "3.2.17"
+
     //https://mvnrepository.com/artifact/com.tencent.tinker/tinker-android-lib
     static tinker_version = "1.9.14.10"
 

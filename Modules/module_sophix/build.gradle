@@ -25,5 +25,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.17'
+    implementation Deps.sophix
 }

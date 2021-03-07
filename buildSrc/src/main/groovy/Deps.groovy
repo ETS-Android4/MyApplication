@@ -141,6 +141,8 @@ class Deps {
 
     static glance = "com.glance.guolindev:glance:${DepsVersions.glance_version}"
 
+    static sophix = "com.aliyun.ams:alicloud-android-hotfix:${DepsVersions.sophix_version}"
+
     static tinker = "com.tencent.tinker:tinker-android-lib:${DepsVersions.tinker_version}"
     static tinker_anno = "com.tencent.tinker:tinker-android-anno-support:${DepsVersions.tinker_version}"
 
