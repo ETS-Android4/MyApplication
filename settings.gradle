@@ -11,15 +11,10 @@ include ':modules:module_jetpack'
 include ':modules:module_open_source'
 include ':modules:module_sample'
 include ':modules:module_kotlin'
+include ':modules:module_flutter'
+
 include ':modules:module_wx'
 include ':modules:module_jiguang'
 include ':modules:module_tencent_im'
 include ':modules:module_bugly'
 include ':modules:module_sophix'
-
-//setBinding(new Binding([gradle: this]))
-//evaluate(new File(
-//        settingsDir,
-//        'module_flutter/.android/include_flutter.groovy'
-//))
-//include ':module_flutter'

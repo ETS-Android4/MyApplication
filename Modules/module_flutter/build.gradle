@@ -1,0 +1,6 @@
+android {
+    resourcePrefix "flutter_"
+}
+dependencies {
+    //implementation project(path: ':flutter')
+}

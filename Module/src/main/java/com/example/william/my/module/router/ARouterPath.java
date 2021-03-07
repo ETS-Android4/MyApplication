@@ -12,7 +12,6 @@ public class ARouterPath {
     public static final String Module_WeChat = "/module_wx/main";
 
     public static class Service {
-        public static final String ModuleService = "/service/module";
         public static final String FileIOUtilsService = "/service/file_io";
         public static final String ImageUtilsService = "/service/image";
         public static final String ResourceUtilsService = "/service/resource";
@@ -77,7 +76,6 @@ public class ARouterPath {
 
     public static class OpenSource {
         public static final String OpenSource = "/module_open/open";
-        public static final String OpenSource_RxJava = "/module_open/rx_java";
         public static final String OpenSource_MMKV = "/module_open/mmkv";
         public static final String OpenSource_GreenDao = "/module_open/green_dao";
         public static final String OpenSource_EventBus = "/module_open/event_bus";
@@ -136,9 +134,13 @@ public class ARouterPath {
     }
 
     public static class Kotlin {
-        public static final String Kotlin = "/module_k/kotlin";
+        public static final String Kotlin = "/module_kotlin/kotlin";
         public static final String Kotlin_Coroutines = "/module_kotlin/coroutines";
         public static final String Kotlin_DataStore = "/module_kotlin/dataStore";
         public static final String Kotlin_Paging = "/module_kotlin/paging";
+    }
+
+    public static class Flutter {
+        public static final String Flutter = "/module_flutter/flutter";
     }
 }

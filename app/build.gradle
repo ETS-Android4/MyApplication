@@ -101,7 +101,6 @@ android {
 }
 
 dependencies {
-    //implementation project(path: ':flutter')
     for (def entrySet : ConfigUtils.getApplyModules().entrySet()) {
         api entrySet.value.dep
     }

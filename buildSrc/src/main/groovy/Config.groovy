@@ -65,6 +65,7 @@ class Config {
             ModuleTencentIM: new DepConfig(false, ":modules:module_tencent_im"),
 
             Kotlin         : new DepConfig(true, ":modules:module_kotlin"),
+            ModuleFlutter  : new DepConfig(true, ":modules:module_flutter"),
             //ModuleTV      : new DepConfig(false, ":Modules:ModuleTV"),
     ]
 }

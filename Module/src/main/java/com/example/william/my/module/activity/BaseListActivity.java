@@ -6,6 +6,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.alibaba.android.arouter.exception.HandlerException;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.R;
@@ -50,6 +51,10 @@ public class BaseListActivity extends BaseActivity implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        ARouter.getInstance().build(mMap.get(mData.get(i))).navigation();
+        try {
+            ARouter.getInstance().build(mMap.get(mData.get(i))).navigation();
+        } catch (HandlerException e) {
+            e.printStackTrace();
+        }
     }
 }
