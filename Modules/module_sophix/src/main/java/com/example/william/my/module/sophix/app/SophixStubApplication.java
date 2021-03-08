@@ -49,7 +49,7 @@ public class SophixStubApplication extends SophixApplication {
         instance.setContext(this)
                 .setAppVersion(BuildConfig.VERSION_NAME)
                 .setSecretMetaData(appKey, appSecret, rsa)
-                .setEnableDebug(true)
+                .setEnableDebug(true)//正式发布该参数必须为false, false会对补丁做签名校验, 否则就可能存在安全漏洞风险
                 .setEnableFullLog()
                 .setPatchLoadStatusStub(new PatchLoadStatusListener() {
                     @Override
