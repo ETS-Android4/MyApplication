@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.Keep;
+import androidx.multidex.MultiDex;
 
 import com.example.william.my.module.sophix.BuildConfig;
 import com.taobao.sophix.PatchStatus;
@@ -24,11 +25,11 @@ public class SophixStubApplication extends SophixApplication {
 
     private final String TAG = "SophixStubApplication";
 
-    private static final String appKey = "333389330";
+    private static final String appKey = "333389975";
 
-    private static final String appSecret = "9c1ea737f5e14863879f5d9cd60bda76";
+    private static final String appSecret = "a11e251ffdc24882a7006f6cdb758426";
 
-    private static final String rsa = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCBPXWdu69j33CSO6QJKL7qamk055AtV9ge1yXzS4OrZz1LVDlilzq4jwpRrMVblh+62RhVvz4XXl2WsZpAdUTlq9yongY+iuPu+S9/rYdg99WPE51NDzfwAldgNdRTVG9QAfk6GgLhDXOBHSmdSE6n2NK6pgFEBhTdcIDbPbpmEloJQ0xLXztInuBytaNaxE0zBtzwFAy5J+I+qWnVKpYwzfXPvtEcl5ptgNP0aQd0ugWMuPu0Yd7Mj3FJKHvt3DyT+doyHXmn/5hWGJIwo244Eey8h1ZBx4XYSnfuDd+e1Td7DaRnD+/j995riw9OGAgPjEFLep/KAiag64PZy6G/AgMBAAECggEARPmpKRq/G51nthPwkxbU9cT/C0Y+84Q7ixImZfe6eSMrWmXEDrNJmrB0wGxmFGBF5PHyg+kCWXR6nG+DNL2hnLYhmThlesGjrqn9SLYzV3RN3QOJ41Oo9gY53dY80JByrA+xlOnG+Ze1OoZ27ENn/zrAFO9+I3Dfd+OQUfJa5hhIp27lg1SKPwuIyBfNrliI1mP7jatoN5Wh2RsLfnTrHlMxO4/uATeBnQ8aw6+xne5aPM69yRVHMYCw8i5ftKPSmWdVQEkpKF23QJmf6ZspqQlsSavLWzeKw31qv2fv5AcKxOepo14S/LB0gPePXcMxCnzR9TG8QjWkVT6tVMseKQKBgQDC+MJwuOXrJstSG121JaxnHfHtTIPHfEXMuy7yaTlrY90LmW9iyNc4PwwjxB4KhOMKmkIiAprZXrUBad+aBNFSS3+HfFvYronmKvsurGWEkcvcsXCuhlUfB16bukE6/xmexU5vZU3nSG6IIXkrltDf3UuJFwzRjY8eZ7QoK/cmAwKBgQCpsZIWVeSxzvnQb3LDkpQd+pSlu7WkgNPQ4mSolJE9KZG7uRnwWY1CySWfEED+yLZMnMeem9HWOPlBIiZM8dYZTKDU1OdGZZQO8WW2WFdjdbI8jM/BQtnT8Y5MZeahiRpHH9dip+VtGbjFTWKNAvXsfy1x8t3hLah+gDu88GTWlQKBgFo48QlmloatqhKxtThZWaFSGxy7dpO+bzJhQEVO6hJG4Qg4FXI6DFXr3vtCCsDFY6cJYScJ24xRJiOkUaOdLRwO8dHJe1sW0ZtgMmITxtqE+TiEJ+erJAK6z03y77KUT8/H8BbeYyFuxC9chgzkun2NkyG6N+VUw3DHfnfEeJbvAoGAPa/fe18eE8U56xuYjJ/sWDmPb/AcyABM/9JM5Tuc0K8b2zIey9DCGVUl5/zwo64zFwanSnE6hrWPZq4TXkVLn0bL8JK0wFKM0CHQ58iVfAJ9GKXXoFm89d8J65vfizlb5B8fHS4LqO2Azbij6r74x1A0JQg0wHbomZPkI3sALUECgYANWw6pC9YGXwKbSDycgtepHFVx+eWdecasVUZAvQ38p6DuZM1IhWF0xWiujclBj2UswhIrGjwPtOQ+nw3MUlIQea6+06dOZLjQInC4/3NyDwYX/pxkCT42wAbKWdS0Ix1iDHUMkkJGioER3zn5nrefcL93N6iJEyXeWC38zAXAwA==";
+    private static final String rsa = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9wrTx6mdOuDBASbIqRHsyM6noWYGR8XGcadO1xtw0TiGLkXME82oOGAhyl70i5zwIo1nZYZUbnuJJtvKXzhGZde92oaer/KYMzUvNTqekECTFNfbKvBnJOpuw+wfaPmymGPN9gECSRbomZ05kF9BBldqxqNdh9nlYjFakIsABnXjkTvabL1w+Of77HFNyPs8XTnWxbTigTtmTksqw37G9OQRV6tNe8vOLZrHfMaRr7dTCmPj75VnHDqiwqK/vCSDzF1MAvgA3XbEG9b6XhKOqK6QcPfOSBOLBJoLTMUsmwwaEk5Z6tGYcm46tFebvu/RuqICQi7iU+bVwdhipXrDXAgMBAAECggEBAJSkWCjHfHTlQqaZE76YNgh0/7rJof04K85h9zyEsSknqo8xN+/A3Gp92OAqjDUy/IunqVHmZm5kXs1vSUgwWwjioNlEd5r5JPkSNzZzTk3td2AjjVXxUiGWjy5q9RO3olPZZ6H/PJVXmSFL+tPc83zsbYqMv2o1L4h1Jckcj1qzLZMRz+Zdv5W7R8fxTrCBbQMYhj7JF3javCXHLJ2WoRvJrQe0IXf2puePKZQcl55pGVaxntf457EWSRzx9Ja8blYNJqAFkgPrx2vOSmRzirSoYal7zHixwEwLHBxcsjLTeLEwAujD/CEuHJFdcPgAFOaRrIJ8hfqi+LsX5qzOy8ECgYEA6Pf2k3y1tdtEHwioelJGosi7DwU3ZGCb38/hj4rarBMRTAT7pCwnij8PxijYedYeT2NcziNY7T3xLairqLbd0SuxeYLZ96Z/Vv8wS1BLttTs3qTAJD2r2nlHx/UMQU26dssdJ0aVBil/p8SUrAAq+dbAckjC7gNony/Lqhm6EKMCgYEA0IU45V9GWz+uCb1tjTzFuDFYgsL0Azv6XGt4VImJ/tSrFkJ8pIvWY0h6vWs8qdUKAcM8D1nYqcNUpJ/jukzefYZkoSK2Q80UZDSVbUfKiuRjuLs0S53r1mJh8M6fM3/hxFJLDJTpNtVB0AL8Ay08vPa931giwAA6YWH5X5PN/j0CgYA9Kcys0BMM2bI6y5Uf+DXfSwABY4c1bT+/NN6tRvE+OAtUgAJpCcafvwqvJc4fvp1ajmWxIQqZzqdhK2VV+Byoa+Y+VqJPKIFKH9lYDI60Q5akpXBkk2RpCWpVDvrWskeAJLdUtm0tnvuK2kuGFM0zprQDzSKQRojTMkMwN2zoLQKBgGL0ZfzMCvpwrOnoYF3fUkFIAaYEWIJUa0qCodcUck1hpVNp9/aqefIhykWr51z9QcN2YEE0tRJTJQ7+5bZalldheM3TSEXCxAONxL/YivEA06YuCPI9nlbd13bMx1ZMQNrG5uCwpkAkUhgh4nCrfiB6w76C9/K/6PSf5xUJcn9NAoGAJelAuzBKnnh4jfTJ/VZXCghgkxk3H8ND9aHcLsTEfQQYg4id/KVp9jpWkZKDtBRpbNN8Cl89LUFG4Y/JS5mB4mtBGn5JBgCuWaqoBZur8nl6ashzgAilVfPSU8YfV0QOY7RtMGwJ+vlhje+RnfHS7feRsVQp/lOyqoT3S9F53WE=";
 
     // 此处SophixEntry应指定真正的Application，并且保证RealApplicationStub类名不被混淆。
     @Keep
@@ -40,7 +41,7 @@ public class SophixStubApplication extends SophixApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         //如果需要使用MultiDex，需要在此处调用。
-        //MultiDex.install(this);
+        MultiDex.install(this);
         initSophix();
     }
 
@@ -62,5 +63,11 @@ public class SophixStubApplication extends SophixApplication {
                         }
                     }
                 }).initialize();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        SophixManager.getInstance().queryAndLoadNewPatch();
     }
 }
