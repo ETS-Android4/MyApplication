@@ -31,7 +31,7 @@ public class WebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_activity_webview);
 
-        mWebView = findViewById(R.id.webView_webView);
+        mWebView = findViewById(R.id.webView);
         //启用JavaScript
         mWebView.getSettings().setJavaScriptEnabled(true);
         //隐藏滚动条

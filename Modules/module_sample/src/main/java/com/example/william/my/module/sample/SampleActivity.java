@@ -16,6 +16,7 @@ public class SampleActivity extends BaseListActivity {
         super.initData();
 
         mMap.put("AppBarActivity", ARouterPath.Sample.Sample_AppBar);
+        mMap.put("BehaviorActivity", ARouterPath.Sample.Sample_Behavior);
         mMap.put("DialogActivity", ARouterPath.Sample.Sample_Dialog);
         mMap.put("FragmentActivity", ARouterPath.Sample.Sample_Fragment);
         mMap.put("FragmentGroupActivity", ARouterPath.Sample.Sample_FragmentGroup);
@@ -23,6 +24,7 @@ public class SampleActivity extends BaseListActivity {
         mMap.put("FragmentViewPagerActivity", ARouterPath.Sample.Sample_FragmentViewPager);
         mMap.put("NotificationActivity", ARouterPath.Sample.Sample_Notification);
         mMap.put("RecyclerViewActivity", ARouterPath.Sample.Sample_RecyclerView);
+        mMap.put("RecyclerView2Activity", ARouterPath.Sample.Sample_RecyclerView2);
         mMap.put("ViewFlipperActivity", ARouterPath.Sample.Sample_ViewFlipper);
         mMap.put("ViewPagerActivity", ARouterPath.Sample.Sample_ViewPager);
         mMap.put("ViewPager2Activity", ARouterPath.Sample.Sample_ViewPager2);

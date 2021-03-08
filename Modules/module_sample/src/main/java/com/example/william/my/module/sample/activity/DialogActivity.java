@@ -38,7 +38,7 @@ public class DialogActivity extends BaseActivity implements AdapterView.OnItemCl
         setContentView(R.layout.sample_activity_dialog);
 
         ListView mListView = findViewById(R.id.dialog_listView);
-        LAdapter<String> mAdapter = new LAdapter<String>(Arrays.asList(mData), R.layout.sample_item_recycler) {
+        LAdapter<String> mAdapter = new LAdapter<String>(Arrays.asList(mData), R.layout.sample_item_dialog) {
             @Override
             public void convert(ViewHolder holder, String data) {
                 ((TextView) holder.findView(R.id.item_textView)).setText(data);

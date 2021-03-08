@@ -105,6 +105,7 @@ public class ARouterPath {
         public static final String Sample = "/module_sample/sample";
 
         public static final String Sample_AppBar = "/module_sample/app_bar";
+        public static final String Sample_Behavior = "/module_sample/behavior";
         public static final String Sample_Dialog = "/module_sample/dialog";
         public static final String Sample_Fragment = "/module_sample/fragment";
         public static final String Sample_FragmentGroup = "/module_sample/fragment_group";
@@ -112,6 +113,7 @@ public class ARouterPath {
         public static final String Sample_FragmentViewPager = "/module_sample/fragment_view_pager";
         public static final String Sample_Notification = "/module_sample/notification";
         public static final String Sample_RecyclerView = "/module_sample/recycler_view";
+        public static final String Sample_RecyclerView2 = "/module_sample/recycler_view2";
         public static final String Sample_ViewFlipper = "/module_sample/view_flipper";
         public static final String Sample_ViewPager = "/module_sample/view_pager";
         public static final String Sample_ViewPager2 = "/module_sample/view_pager_2";

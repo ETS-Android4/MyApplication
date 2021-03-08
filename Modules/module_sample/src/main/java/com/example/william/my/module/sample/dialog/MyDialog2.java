@@ -1,42 +1,24 @@
 package com.example.william.my.module.sample.dialog;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import com.example.william.my.library.dialog.BaseDialogFragment;
 import com.example.william.my.module.sample.R;
 
-import java.util.Objects;
-
 public class MyDialog2 extends BaseDialogFragment {
 
     /**
-     * 重新onCreateDialog方法， 返回一个创建的dialog对象
+     * 通过onCreateView返回一个view
      */
-    @NonNull
+    @Nullable
     @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
-                .setIcon(R.drawable.ic_launcher)
-                .setTitle("标题")
-                .setMessage("内容")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .create();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.basics_layout_response, container);
     }
 }

@@ -3,9 +3,9 @@
     package="com.example.william.my.module.sample">
 
     <application>
-
         <activity android:name=".SampleActivity" />
         <activity android:name=".activity.AppBarActivity" />
+        <activity android:name=".activity.BehaviorActivity" />
         <activity android:name=".activity.DialogActivity" />
         <activity android:name=".activity.FloatWindowActivity" />
         <activity android:name=".activity.FragmentActivity" />
@@ -14,6 +14,7 @@
         <activity android:name=".activity.FragmentViewPagerActivity" />
         <activity android:name=".activity.NotificationActivity" />
         <activity android:name=".activity.RecyclerViewActivity" />
+        <activity android:name=".activity.RecyclerViewActivity2" />
         <activity android:name=".activity.ViewFlipperActivity" />
         <activity android:name=".activity.ViewPagerActivity" />
         <activity android:name=".activity.ViewPager2Activity" />

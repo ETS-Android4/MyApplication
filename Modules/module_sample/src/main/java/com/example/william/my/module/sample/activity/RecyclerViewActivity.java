@@ -25,13 +25,11 @@ import java.util.List;
 @Route(path = ARouterPath.Sample.Sample_RecyclerView)
 public class RecyclerViewActivity extends BaseActivity {
 
-    private List<String> mData;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_activity_recycler);
-        RecyclerView mRecyclerView = findViewById(R.id.widget_recycleView);
+        RecyclerView mRecyclerView = findViewById(R.id.recycleView);
 
         //保持固定的大小，提高性能
         mRecyclerView.setHasFixedSize(true);
@@ -60,7 +58,7 @@ public class RecyclerViewActivity extends BaseActivity {
         mController.setDelay(0.2f);//显示间隔
         mRecyclerView.setLayoutAnimation(mController);
 
-        mData = new ArrayList<>();
+        List<String> mData = new ArrayList<>();
         for (int i = 1; i < 61; i++) {
             mData.add("POSITION " + i);
         }
