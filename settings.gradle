@@ -20,6 +20,7 @@ include ':modules:module_tencent_im'
 include ':modules:module_bugly'
 include ':modules:module_sophix'
 
+//include ':flutter_module'
 //setBinding(new Binding([gradle: this]))
 //evaluate(new File(
 //        settingsDir,
