@@ -2,6 +2,7 @@ package com.example.william.my.module.bugly.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,18 +23,21 @@ import com.tencent.bugly.beta.UpgradeInfo;
 public class BuglyActivity extends AppCompatActivity {
 
     private TextView mTextView;
+    private ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bugly_activity_main);
         mTextView = findViewById(R.id.textView);
+        mImageView = findViewById(R.id.imageView);
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadUpgradeInfo();
             }
         });
+        mImageView.setVisibility(View.GONE);
     }
 
     /**

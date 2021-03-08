@@ -4,8 +4,6 @@ android {
     if (!ConfigUtils.isApply(project)) {
         defaultConfig {
             applicationId "com.example.william.my.module.bugly"
-            versionCode 1
-            versionName "1.0"
             multiDexEnabled true
             ndk {
                 //设置支持的SO库架构
