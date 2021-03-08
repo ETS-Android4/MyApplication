@@ -1,3 +1,8 @@
+apply plugin: 'bugly'
+bugly {
+    appId = "f3c3164a42"
+    appKey = "f8ec862c-b9e8-4584-a798-654317db7de4"
+}
 //apply from: 'tinker-support.gradle'
 apply from: '../signing.gradle'
 android {

@@ -28,6 +28,9 @@ class Config {
     static busVersion = '2.6'
     //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
 
+    static buglyVersion = '2.2.1'
+    //https://mvnrepository.com/artifact/com.tencent.bugly/symtabfileuploader
+
     static tinkerVersion = '1.2.2'
     //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
 
@@ -43,6 +46,7 @@ class Config {
             plugin_arouter : new DepConfig(pluginPath: "com.alibaba:arouter-register:$routerVersion"),
             plugin_greendao: new DepConfig(pluginPath: "org.greenrobot:greendao-gradle-plugin:$greendaoVersion"),
             plugin_bus     : new DepConfig(pluginPath: "com.blankj:bus-gradle-plugin:$busVersion"),
+            plugin_bugly   : new DepConfig(pluginPath: "com.tencent.bugly:symtabfileuploader:$buglyVersion"),
             plugin_tinker  : new DepConfig(pluginPath: "com.tencent.bugly:tinker-support:$tinkerVersion"),
             plugin_protobuf: new DepConfig(pluginPath: "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"),
             plugin_dokit   : new DepConfig(pluginPath: "com.didichuxing.doraemonkit:dokitx-plugin:$dokitVersion"),
