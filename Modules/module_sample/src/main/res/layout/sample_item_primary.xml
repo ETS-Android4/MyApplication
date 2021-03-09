@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/item_primary_textView"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/basics_btn_height"
         android:background="@color/colorPrimary"
         android:gravity="center_vertical" />
 

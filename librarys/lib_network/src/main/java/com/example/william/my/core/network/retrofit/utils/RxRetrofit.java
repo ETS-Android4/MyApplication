@@ -8,11 +8,8 @@ import com.example.william.my.core.network.retrofit.helper.RetrofitHelper;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.google.gson.JsonElement;
 
-import java.util.concurrent.Executors;
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;

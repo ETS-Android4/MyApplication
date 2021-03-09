@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <merge>
+
         <TextView
             android:id="@+id/merge_textView"
             android:layout_width="match_parent"

@@ -31,6 +31,7 @@ public class BaseFragment extends NewLazyFragment {
 
     /**
      * 在此方法内初始化控件
+     *
      * @param view
      * @param savedInstanceState
      */

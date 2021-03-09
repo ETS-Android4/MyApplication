@@ -32,7 +32,7 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(mContext);
-        mLinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        mLinearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         ((RecyclerAdapter2.ViewHolder) holder).recyclerView.setLayoutManager(mLinearLayoutManager);
         ((RecyclerAdapter2.ViewHolder) holder).recyclerView.setAdapter(new RecyclerAdapter(mData));
     }
