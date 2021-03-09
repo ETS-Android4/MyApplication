@@ -3,7 +3,7 @@
     package="com.example.william.my.module.flutter">
 
     <application>
-        <activity android:name=".FlutterMainActivity" />
+        <activity android:name=".activity.FlutterMainActivity" />
         <activity
             android:name="io.flutter.embedding.android.FlutterActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
