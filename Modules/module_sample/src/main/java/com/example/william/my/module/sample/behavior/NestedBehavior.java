@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.behavior;
+package com.example.william.my.module.sample.behavior;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -14,9 +14,7 @@ import com.example.william.my.core.widget.utils.SizeUtils;
 
 public class NestedBehavior extends CoordinatorLayout.Behavior<View> {
 
-    private int targetId;
-
-    private final int offsetTotal = SizeUtils.dp2px(200);
+    private final int offsetTotal = SizeUtils.dp2px(240);
 
     public NestedBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,12 +37,35 @@ public class NestedBehavior extends CoordinatorLayout.Behavior<View> {
     }
 
     /**
+     * 当被依赖的View移除时回调
+     */
+    @Override
+    public void onDependentViewRemoved(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
+        super.onDependentViewRemoved(parent, child, dependency);
+    }
+
+    /**
      * 嵌套滑动开始（ACTION_DOWN），确定Behavior是否要监听此次事件
      */
     @Override
     public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) {
-        //return super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, axes, type);
-        return target.getId() == targetId;
+        return super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, axes, type);
+    }
+
+    /**
+     * 嵌套滑动结束（ACTION_UP或ACTION_CANCEL）
+     */
+    @Override
+    public void onStopNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int type) {
+        super.onStopNestedScroll(coordinatorLayout, child, target, type);
+    }
+
+    /**
+     * 嵌套滑动进行中，要监听的子 View的滑动事件已经被消费
+     */
+    @Override
+    public void onNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, @NonNull int[] consumed) {
+        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, consumed);
     }
 
     /**
@@ -59,6 +80,21 @@ public class NestedBehavior extends CoordinatorLayout.Behavior<View> {
         stopNestedScrollIfNeeded(dy, scrollY, target, type);
     }
 
+    /**
+     * 要监听的子 View在快速滑动中
+     */
+    @Override
+    public boolean onNestedFling(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, float velocityX, float velocityY, boolean consumed) {
+        return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
+    }
+
+    /**
+     * 要监听的子View即将快速滑动
+     */
+    @Override
+    public boolean onNestedPreFling(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, float velocityX, float velocityY) {
+        return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
+    }
 
     private int getDistance(RecyclerView target) {
         LinearLayoutManager layoutManager = (LinearLayoutManager) target.getLayoutManager();
