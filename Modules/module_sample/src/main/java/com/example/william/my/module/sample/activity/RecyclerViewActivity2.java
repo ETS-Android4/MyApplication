@@ -28,7 +28,7 @@ public class RecyclerViewActivity2 extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         List<String> mData = new ArrayList<>();
-        for (int i = 1; i < 61; i++) {
+        for (int i = 1; i < 21; i++) {
             mData.add("POSITION " + i);
         }
 

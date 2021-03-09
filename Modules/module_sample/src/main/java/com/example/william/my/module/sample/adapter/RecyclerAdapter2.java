@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.william.my.core.widget.recyclerView.NestedRecyclerView;
 import com.example.william.my.module.sample.R;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final RecyclerView recyclerView;
+        private final NestedRecyclerView recyclerView;
 
         private ViewHolder(View itemView) {
             super(itemView);
