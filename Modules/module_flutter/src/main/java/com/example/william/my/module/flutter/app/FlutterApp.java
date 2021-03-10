@@ -4,10 +4,6 @@ import android.app.Application;
 
 import com.example.william.my.library.interfaces.IComponentApplication;
 
-import io.flutter.embedding.engine.FlutterEngine;
-import io.flutter.embedding.engine.FlutterEngineCache;
-import io.flutter.embedding.engine.dart.DartExecutor;
-
 public class FlutterApp extends IComponentApplication {
 
     @Override
@@ -15,20 +11,20 @@ public class FlutterApp extends IComponentApplication {
         super.init(application);
 
         //Step 3: (Optional) Use a cached FlutterEngine
-        // Instantiate a FlutterEngine.
-        FlutterEngine flutterEngine = new FlutterEngine(application);
-
-        // Configure an initial route.
-        flutterEngine.getNavigationChannel().setInitialRoute("main");
-
-        // Start executing Dart code to pre-warm the FlutterEngine.
-        flutterEngine.getDartExecutor().executeDartEntrypoint(
-                DartExecutor.DartEntrypoint.createDefault()
-        );
-
-        // Cache the FlutterEngine to be used by FlutterActivity.
-        FlutterEngineCache
-                .getInstance()
-                .put("main", flutterEngine);
+//        // Instantiate a FlutterEngine.
+//        FlutterEngine flutterEngine = new FlutterEngine(application);
+//
+//        // Configure an initial route.
+//        flutterEngine.getNavigationChannel().setInitialRoute("main");
+//
+//        // Start executing Dart code to pre-warm the FlutterEngine.
+//        flutterEngine.getDartExecutor().executeDartEntrypoint(
+//                DartExecutor.DartEntrypoint.createDefault()
+//        );
+//
+//        // Cache the FlutterEngine to be used by FlutterActivity.
+//        FlutterEngineCache
+//                .getInstance()
+//                .put("main", flutterEngine);
     }
 }

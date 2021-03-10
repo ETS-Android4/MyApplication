@@ -27,7 +27,7 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         this.mContext = parent.getContext();
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.sample_item_recycler, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.sample_item_recycler_nested, parent, false));
     }
 
     @Override

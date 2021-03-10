@@ -9,8 +9,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.flutter.R;
 import com.example.william.my.module.router.ARouterPath;
 
-import io.flutter.embedding.android.FlutterActivity;
-
 /**
  * https://flutter.dev/docs/development/add-to-app/android/add-flutter-screen
  * https://flutter.dev/docs/development/add-to-app/android/add-flutter-fragment

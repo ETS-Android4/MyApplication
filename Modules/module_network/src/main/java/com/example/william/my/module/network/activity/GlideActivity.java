@@ -73,12 +73,17 @@ public class GlideActivity extends BaseActivity {
                 .asBitmap()//.asBitmap()在.load()之前调用
                 .load(url)
                 .centerCrop()
-                .into(new BitmapImageViewTarget(mImageView) {
+                .into(new CustomTarget<Bitmap>() {
                     @Override
-                    protected void setResource(Bitmap resource) {
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(getResources(), resource);
                         drawable.setCircular(true);
                         mImageView.setImageDrawable(drawable);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
                     }
                 });
     }

@@ -1,7 +1,9 @@
 package com.example.william.my.module.sample.behavior;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.william.my.core.widget.utils.SizeUtils;
+import com.example.william.my.module.sample.R;
 
 public class NestedBehavior extends CoordinatorLayout.Behavior<View> {
 
@@ -49,7 +52,8 @@ public class NestedBehavior extends CoordinatorLayout.Behavior<View> {
      */
     @Override
     public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) {
-        return super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, axes, type);
+        //return super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, axes, type);
+        return target.getId() == R.id.behavior_textView;
     }
 
     /**
@@ -112,7 +116,10 @@ public class NestedBehavior extends CoordinatorLayout.Behavior<View> {
         } else {
             alpha = (int) (scrollY * 255f / offsetTotal);
         }
-        child.getBackground().setAlpha(alpha);
+        Drawable drawable = child.getBackground();
+        if (drawable != null) {
+            drawable.setAlpha(alpha);
+        }
     }
 
     private void stopNestedScrollIfNeeded(int dy, int currOffset, View target, int type) {
