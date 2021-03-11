@@ -20,14 +20,12 @@ import java.util.List;
 @Route(path = ARouterPath.Sample.Sample_Behavior)
 public class BehaviorActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_activity_behavior);
 
-        mRecyclerView = findViewById(R.id.behavior_recycleView);
+        RecyclerView mRecyclerView = findViewById(R.id.behavior_recycleView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<String> mData = new ArrayList<>();
