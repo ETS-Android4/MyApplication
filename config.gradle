@@ -18,27 +18,25 @@
  * https://github.com/wuyr/GoogleLibraryVersionQuerier
  * Shared file between builds so that they can all use the same dependencies and maven repositories.
  **/
-ext.deps = [:]
+ext {
+    android = [
+            min_sdk    : 19,
+            compile_sdk: 30,
+            target_sdk : 30,
+            build_tools: "30.0.3"
+    ]
 
-def build_versions = [:]
-build_versions.min_sdk = 19
-build_versions.compile_sdk = 30
-build_versions.target_sdk = 30
-build_versions.build_tools = "30.0.3"
-ext.build_versions = build_versions
+    deps = [
 
-def versions = [:]
-versions.appcompat = "1.2.0"
-versions.constraintlayout = "2.0.4"
-ext.versions = versions
+    ]
+}
 
-
-def androidx = [:]
-androidx.appcompat = "androidx.appcompat:appcompat:1.2.0"
-androidx.constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
-deps.androidx = androidx
-
-ext.deps = deps
+//自动添加gradle插件
+//project.buildscript.configurations.each { configuration ->
+//    if (configuration.name == "classpath") {
+//        configuration.dependencies.add(getProject().dependencies.create('com.android.tools.build:4.1.2'))
+//    }
+//}
 
 static def addRepos(RepositoryHandler handler) {
     handler.google()

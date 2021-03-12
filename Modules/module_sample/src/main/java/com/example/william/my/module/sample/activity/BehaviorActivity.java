@@ -1,8 +1,6 @@
 package com.example.william.my.module.sample.activity;
 
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +10,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.RecyclerAdapter;
-import com.example.william.my.module.sample.adapter.RecyclerAdapter2;
 
 import java.util.ArrayList;
 import java.util.List;
