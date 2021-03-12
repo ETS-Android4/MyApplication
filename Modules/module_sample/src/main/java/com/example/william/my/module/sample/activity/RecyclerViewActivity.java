@@ -7,6 +7,7 @@ import android.view.animation.LayoutAnimationController;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -49,6 +50,8 @@ public class RecyclerViewActivity extends BaseActivity {
         //设置分割线
         mRecyclerView.addItemDecoration(new RItemDecorationTop());
         mRecyclerView.addItemDecoration(new RItemDecorationDivider(this));
+
+        //new PagerSnapHelper().attachToRecyclerView(mRecyclerView);
 
 
         LayoutAnimationController mController = new LayoutAnimationController(
