@@ -8,7 +8,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSONObject;
 import com.example.william.my.core.network.base.RxRetrofitConfig;
 import com.example.william.my.core.network.utils.NetworkUtils;
 import com.example.william.my.library.base.BaseApp;
@@ -118,13 +117,11 @@ public class NanoServer extends NanoHTTPD {
                     try {
                         session.parseBody(files);
                         //{"file":"/data/user/0/com.example.william.my.module.network/cache/NanoHTTPD-8068393393718306101"}
-                        Log.e(TAG, JSONObject.toJSONString(files));
                     } catch (IOException | ResponseException e) {
                         e.printStackTrace();
                     }
                     Map<String, List<String>> params = session.getParameters();
                     //{"file":["debug.txt"]}
-                    Log.e(TAG, JSONObject.toJSONString(params));
                     for (Map.Entry<String, List<String>> entry : params.entrySet()) {
                         final String key = entry.getKey();
                         final String fileName = entry.getValue().get(0);

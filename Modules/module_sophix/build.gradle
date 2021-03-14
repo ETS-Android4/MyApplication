@@ -25,5 +25,5 @@ android {
 }
 
 dependencies {
-    implementation Deps.sophix
+    implementation deps.sophix
 }

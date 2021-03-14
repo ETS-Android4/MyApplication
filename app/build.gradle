@@ -105,17 +105,16 @@ dependencies {
         api entrySet.value.dep
     }
     //Android
-    implementation Deps.material
-    implementation Deps.appcompat
-    implementation Deps.constraintlayout
+    implementation deps.appcompat
+    implementation deps.constraintlayout
     //ARouter
-    implementation Deps.arouter
-    annotationProcessor Deps.arouter_compiler
+    implementation deps.arouter
+    annotationProcessor deps.arouter_compiler
     //EventBus
-    implementation Deps.eventbus
+    implementation deps.eventbus
     //DoKit
-    debugImplementation Deps.dokit
-    releaseImplementation Deps.dokit_no_op
+    debugImplementation deps.dokit
+    releaseImplementation deps.dokit_no_op
     //AndroidTest
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -13,5 +13,5 @@ android {
 }
 dependencies {
     //微信登录
-    implementation Deps.wechat
+    implementation deps.wechat
 }

@@ -24,7 +24,7 @@ import java.net.URL;
 /**
  * https://github.com/svga/SVGAPlayer-Android
  */
-@Route(path = ARouterPath.OpenSource.OpenSource_SVGA)
+@Route(path = ARouterPath.OpenSource.OpenSource_SvagPlayer)
 public class SVGAPlayerActivity extends AppCompatActivity {
 
     private SVGAImageView mSVGAImageView;

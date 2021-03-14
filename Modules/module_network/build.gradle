@@ -4,21 +4,19 @@ android {
 dependencies {
     implementation project(path: ':librarys:lib_network')
     //Glide
-    implementation Deps.glide
-    annotationProcessor Deps.glide_compiler
+    implementation deps.glide
+    annotationProcessor deps.glide_compiler
     //RxAndroid
-    implementation Deps.rxandroid
+    implementation deps.rxandroid
     //Retrofit
-    implementation Deps.retrofit
-    implementation Deps.retrofit_gson
-    implementation Deps.retrofit_scalars
-    implementation Deps.retrofit_rxjava
-    //FastJson
-    implementation Deps.fastjson
-    //NanoHttpD
-    implementation Deps.nanohttpd
-    //WebSocket
-    implementation Deps.websocket
+    implementation deps.retrofit
+    implementation deps.retrofit_gson
+    implementation deps.retrofit_scalars
+    implementation deps.retrofit_rxjava3
     //Netty
-    implementation Deps.netty
+    implementation deps.netty
+    //NanoHttpD
+    implementation deps.nanohttpd
+    //WebSocket
+    implementation deps.websocket
 }

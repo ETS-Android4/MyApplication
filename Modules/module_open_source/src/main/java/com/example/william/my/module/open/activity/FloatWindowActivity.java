@@ -11,12 +11,17 @@ import com.lzf.easyfloat.EasyFloat;
 /**
  * https://github.com/princekin-f/EasyFloat
  */
-@Route(path = ARouterPath.OpenSource.OpenSource_EasyFloat)
-public class FloatActivity extends BaseResponseActivity {
+@Route(path = ARouterPath.OpenSource.OpenSource_FloatWindow)
+public class FloatWindowActivity extends BaseResponseActivity {
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
+
+        easyFloat();
+    }
+
+    private void easyFloat() {
         EasyFloat.with(this)
                 .setLayout(R.layout.open_layout_float)
                 .show();

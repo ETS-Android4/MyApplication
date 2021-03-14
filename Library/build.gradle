@@ -31,8 +31,8 @@ android {
 
 dependencies {
     //Android
-    implementation Deps.appcompat
+    implementation deps.appcompat
     //EventBus
-    implementation Deps.eventbus
-    annotationProcessor Deps.eventbus_processor
+    implementation deps.eventbus
+    annotationProcessor deps.eventbus_processor
 }

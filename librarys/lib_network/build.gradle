@@ -27,18 +27,18 @@ android {
 
 dependencies {
     //Android
-    implementation Deps.constraintlayout
+    implementation deps.constraintlayout
     //Volley
-    implementation Deps.volley
+    implementation deps.volley
     //Retrofit
-    implementation Deps.retrofit
-    implementation Deps.retrofit_gson
-    implementation Deps.retrofit_scalars
-    implementation Deps.retrofit_rxjava
+    implementation deps.retrofit
+    implementation deps.retrofit_gson
+    implementation deps.retrofit_scalars
+    implementation deps.retrofit_rxjava3
     //RxAndroid
-    implementation Deps.rxandroid
+    implementation deps.rxandroid
     //RxLifecycle
-    implementation Deps.rxlifecycle
+    implementation deps.rxlifecycle
     //Room
     implementation Deps.room
     annotationProcessor Deps.room_compiler

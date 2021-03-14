@@ -26,23 +26,21 @@ android {
 
 dependencies {
     implementation project(path: ':librarys:lib_network')
-    //Room
-    implementation Deps.room
-    implementation Deps.room_rxjava
-    annotationProcessor Deps.room_compiler
-    //Paging3
-    implementation Deps.paging
-    implementation Deps.paging_rxjava
-    //CoroutineScope
-    implementation Deps.viewmodel_ktx
-    //AutoDispose
-    implementation Deps.autodispose
-    //Navigation
-    implementation Deps.navigation
-    implementation Deps.navigation_ui
-    //Work
-    implementation Deps.work
     //Retrofit
-    implementation Deps.retrofit_gson
-    implementation Deps.retrofit_rxjava
+    implementation deps.retrofit_gson
+    implementation deps.retrofit_rxjava3
+    //Paging3
+    implementation deps.autodispose
+    implementation deps.viewmodel_ktx
+    implementation deps.paging
+    implementation deps.paging_rxjava3
+    //WorkManager
+    implementation deps.work
+    //Navigation
+    implementation deps.navigation
+    implementation deps.navigation_ui
+    //Room
+    implementation deps.room
+    implementation deps.room_rxjava3
+    annotationProcessor deps.room_compiler
 }

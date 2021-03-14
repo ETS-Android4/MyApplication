@@ -2,5 +2,5 @@ android {
     resourcePrefix "util_"
 }
 dependencies {
-    implementation Deps.util
+    implementation deps.utils
 }

@@ -43,10 +43,10 @@ android {
 dependencies {
     implementation project(path: ':module')
     //Android
-    implementation Deps.material
-    implementation Deps.appcompat
-    implementation Deps.constraintlayout
+    implementation deps.material
+    implementation deps.appcompat
+    implementation deps.constraintlayout
     //ARouter
-    implementation Deps.arouter
-    annotationProcessor Deps.arouter_compiler
+    implementation deps.arouter
+    annotationProcessor deps.arouter_compiler
 }

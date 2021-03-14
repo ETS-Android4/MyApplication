@@ -30,21 +30,21 @@ dependencies {
     api project(path: ':library')
     implementation project(path: ':librarys:lib_network')
     //Android
-    implementation Deps.appcompat
-    implementation Deps.constraintlayout
-    implementation Deps.recyclerview
+    implementation deps.appcompat
+    implementation deps.constraintlayout
+    implementation deps.recyclerview
     //ARouter
-    implementation Deps.arouter
-    annotationProcessor Deps.arouter_compiler
+    implementation deps.arouter
+    annotationProcessor deps.arouter_compiler
     //Retrofit
-    implementation Deps.retrofit_gson
-    implementation Deps.retrofit_rxjava
+    implementation deps.retrofit_gson
+    implementation deps.retrofit_rxjava3
     //EventBus
-    implementation Deps.eventbus
-    annotationProcessor Deps.eventbus_processor
+    implementation deps.eventbus
+    annotationProcessor deps.eventbus_processor
     //LiveBus
-    implementation Deps.livebus
+    implementation deps.livebus
     //SmartEventBus
-    implementation Deps.smartbus
-    annotationProcessor Deps.smartbus_compiler
+    implementation deps.smartbus
+    annotationProcessor deps.smartbus_compiler
 }

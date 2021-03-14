@@ -1,9 +1,8 @@
 package com.example.william.my.module.kotlin.datastore
 
 import android.content.Context
-import androidx.datastore.preferences.core.clear
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.createDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -50,6 +49,6 @@ class ExamplePreferenceDataStore(context: Context) {
     }
 
     companion object {
-        val EXAMPLE_COUNTER = preferencesKey<Int>("example_counter")
+        val EXAMPLE_COUNTER = intPreferencesKey("example_counter")
     }
 }

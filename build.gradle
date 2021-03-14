@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 apply plugin: 'com.alibaba.arouter'
 buildscript {
-    apply from: 'versions.gradle'
+    apply from: 'config.gradle'
     ext {
         kotlin_version = '1.4.21'
     }

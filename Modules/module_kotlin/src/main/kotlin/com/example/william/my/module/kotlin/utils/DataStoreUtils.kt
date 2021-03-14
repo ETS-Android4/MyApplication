@@ -1,9 +1,6 @@
 package com.example.william.my.module.kotlin.utils
 
-import androidx.datastore.preferences.core.clear
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.createDataStore
 import com.example.william.my.library.base.BaseApp
 import kotlinx.coroutines.flow.Flow
@@ -82,14 +79,14 @@ object DataStoreUtils {
                     throw it
                 }
             }.map {
-                it[preferencesKey(key)] ?: default
+                it[booleanPreferencesKey(key)] ?: default
             }
 
     private fun readBooleanData(key: String, default: Boolean = false): Boolean {
         var value = false
         runBlocking {
             dataStore.data.first {
-                value = it[preferencesKey(key)] ?: default
+                value = it[booleanPreferencesKey(key)] ?: default
                 true
             }
         }
@@ -106,14 +103,14 @@ object DataStoreUtils {
                     throw it
                 }
             }.map {
-                it[preferencesKey(key)] ?: default
+                it[intPreferencesKey(key)] ?: default
             }
 
     private fun readIntData(key: String, default: Int = 0): Int {
         var value = 0
         runBlocking {
             dataStore.data.first {
-                value = it[preferencesKey(key)] ?: default
+                value = it[intPreferencesKey(key)] ?: default
                 true
             }
         }
@@ -130,14 +127,14 @@ object DataStoreUtils {
                     throw it
                 }
             }.map {
-                it[preferencesKey(key)] ?: default
+                it[stringPreferencesKey(key)] ?: default
             }
 
     private fun readStringData(key: String, default: String = ""): String {
         var value = ""
         runBlocking {
             dataStore.data.first {
-                value = it[preferencesKey(key)] ?: default
+                value = it[stringPreferencesKey(key)] ?: default
                 true
             }
         }
@@ -154,14 +151,14 @@ object DataStoreUtils {
                     throw it
                 }
             }.map {
-                it[preferencesKey(key)] ?: default
+                it[floatPreferencesKey(key)] ?: default
             }
 
     private fun readFloatData(key: String, default: Float = 0f): Float {
         var value = 0f
         runBlocking {
             dataStore.data.first {
-                value = it[preferencesKey(key)] ?: default
+                value = it[floatPreferencesKey(key)] ?: default
                 true
             }
         }
@@ -178,14 +175,14 @@ object DataStoreUtils {
                     throw it
                 }
             }.map {
-                it[preferencesKey(key)] ?: default
+                it[longPreferencesKey(key)] ?: default
             }
 
     private fun readLongData(key: String, default: Long = 0L): Long {
         var value = 0L
         runBlocking {
             dataStore.data.first {
-                value = it[preferencesKey(key)] ?: default
+                value = it[longPreferencesKey(key)] ?: default
                 true
             }
         }
@@ -194,7 +191,7 @@ object DataStoreUtils {
 
     private suspend fun saveBooleanData(key: String, value: Boolean) {
         dataStore.edit { mutablePreferences ->
-            mutablePreferences[preferencesKey(key)] = value
+            mutablePreferences[booleanPreferencesKey(key)] = value
         }
     }
 
@@ -203,7 +200,7 @@ object DataStoreUtils {
 
     private suspend fun saveIntData(key: String, value: Int) {
         dataStore.edit { mutablePreferences ->
-            mutablePreferences[preferencesKey(key)] = value
+            mutablePreferences[intPreferencesKey(key)] = value
         }
     }
 
@@ -211,7 +208,7 @@ object DataStoreUtils {
 
     private suspend fun saveStringData(key: String, value: String) {
         dataStore.edit { mutablePreferences ->
-            mutablePreferences[preferencesKey(key)] = value
+            mutablePreferences[stringPreferencesKey(key)] = value
         }
     }
 
@@ -220,7 +217,7 @@ object DataStoreUtils {
 
     private suspend fun saveFloatData(key: String, value: Float) {
         dataStore.edit { mutablePreferences ->
-            mutablePreferences[preferencesKey(key)] = value
+            mutablePreferences[floatPreferencesKey(key)] = value
         }
     }
 
@@ -229,7 +226,7 @@ object DataStoreUtils {
 
     private suspend fun saveLongData(key: String, value: Long) {
         dataStore.edit { mutablePreferences ->
-            mutablePreferences[preferencesKey(key)] = value
+            mutablePreferences[longPreferencesKey(key)] = value
         }
     }
 

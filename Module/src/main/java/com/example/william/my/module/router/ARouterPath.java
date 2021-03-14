@@ -86,7 +86,7 @@ public class ARouterPath {
         public static final String OpenSource_Banner = "/module_open/banner";
         public static final String OpenSource_CityPicker = "/module_open/city_picker";
         public static final String OpenSource_Countdown = "/module_open/countdown";
-        public static final String OpenSource_EasyFloat = "/module_open/float";
+        public static final String OpenSource_FloatWindow = "/module_open/float_window";
         public static final String OpenSource_FlycoTabLayout = "/module_open/flyco_tab_layout";
         public static final String OpenSource_GSYPlayer = "/module_open/gsy_player";
         public static final String OpenSource_ImageSelector = "/module_open/image_picker";
@@ -94,7 +94,7 @@ public class ARouterPath {
         public static final String OpenSource_PickerView = "/module_open/picker_view";
         public static final String OpenSource_PopWindow = "/module_open/pop_window";
         public static final String OpenSource_SmartRefresh = "/module_open/smart_refresh";
-        public static final String OpenSource_SVGA = "/module_open/svga";
+        public static final String OpenSource_SvagPlayer = "/module_open/svga_player";
         public static final String OpenSource_SwipeLayout = "/module_open/swipe_layout";
         public static final String OpenSource_SwipeToLoad = "/module_open/swipe_to_load";
         public static final String OpenSource_Tangram = "/module_open/tangram";

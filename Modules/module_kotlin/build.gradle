@@ -8,7 +8,6 @@ plugins {
     id 'com.google.protobuf'
 }
 
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -69,33 +68,32 @@ android {
 dependencies {
     implementation project(path: ':module')
     //Android
-    implementation Deps.appcompat
-    implementation Deps.constraintlayout
-    //Gson
-    implementation Deps.gson
+    implementation deps.appcompat
+    implementation deps.constraintlayout
     //ARouter
-    implementation Deps.arouter
-    kapt Deps.arouter_compiler
+    implementation deps.arouter
+    kapt deps.arouter_compiler
     //Kotlin
-    implementation Deps.kotlin
-    implementation Deps.core_ktx
+    //implementation Deps.kotlin
+    //implementation Deps.core_ktx
     //Coroutines
-    implementation Deps.kotlin_coroutines
-    implementation Deps.livedata_ktx//LiveDataScope
-    implementation Deps.viewmodel_ktx//ViewModelScope
-    //Proto DataStore
-    implementation Deps.datastore
-    //Preferences DataStore
-    implementation Deps.datastore_pre
-    //Paging3
-    implementation Deps.paging
-    implementation Deps.paging_rxjava
+    implementation deps.coroutines
+    //implementation deps.livedata_ktx//LiveDataScope
+    implementation deps.viewmodel_ktx//ViewModelScope
     //RxJava
-    implementation Deps.rxandroid
+    implementation deps.rxandroid
     //Retrofit
-    implementation Deps.retrofit
-    implementation Deps.retrofit_gson
-    implementation Deps.retrofit_rxjava
+    implementation deps.retrofit
+    implementation deps.retrofit_gson
+    implementation deps.retrofit_rxjava3
+    //Proto DataStore
+    implementation deps.datastore
+    //Preferences DataStore
+    implementation deps.datastore_pre
+    //Paging3
+    implementation deps.paging
+    implementation deps.paging_rxjava3
+
     //protobuf
     //You need to depend on the lite runtime library, not protobuf-java
     implementation 'com.google.protobuf:protobuf-javalite:3.10.0'

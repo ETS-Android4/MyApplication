@@ -1,4 +1,4 @@
-package com.fhyx.fykc.personal.wxapi;
+package com.example.william.my.module.wxapi;
 
 import android.os.Bundle;
 import android.util.Log;

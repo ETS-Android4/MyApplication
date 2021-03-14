@@ -7,7 +7,6 @@ import android.view.animation.LayoutAnimationController;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -41,7 +40,7 @@ public class RecyclerViewActivity extends BaseActivity {
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(this, 1);
         mGridLayoutManager.setOrientation(RecyclerView.VERTICAL);
         //瀑布流布局管理七七
-        StaggeredGridLayoutManager mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mStaggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         //设置布局管理器
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
@@ -51,7 +50,8 @@ public class RecyclerViewActivity extends BaseActivity {
         mRecyclerView.addItemDecoration(new RItemDecorationTop());
         mRecyclerView.addItemDecoration(new RItemDecorationDivider(this));
 
-        //new PagerSnapHelper().attachToRecyclerView(mRecyclerView);
+        //PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        //pagerSnapHelper.attachToRecyclerView(mRecyclerView);
 
 
         LayoutAnimationController mController = new LayoutAnimationController(

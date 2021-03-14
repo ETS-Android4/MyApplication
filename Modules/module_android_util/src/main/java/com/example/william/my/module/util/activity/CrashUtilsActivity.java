@@ -18,16 +18,10 @@ public class CrashUtilsActivity extends BaseResponseActivity {
         super.initView();
 
         //CrashUtils.init();//默认getExternalFilesDir目录
-        //CrashUtils.init(new CrashUtils.OnCrashListener() {
-        //    @Override
-        //    public void onCrash(CrashUtils.CrashInfo crashInfo) {
-        //        Log.e(TAG, crashInfo.toString());
-        //    }
-        //});
         CrashUtils.init(new CrashUtils.OnCrashListener() {
             @Override
-            public void onCrash(String crashInfo, Throwable e) {
-                Log.e(TAG, crashInfo);
+            public void onCrash(CrashUtils.CrashInfo crashInfo) {
+                Log.e(TAG, crashInfo.toString());
             }
         });
     }

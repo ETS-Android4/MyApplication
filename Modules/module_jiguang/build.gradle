@@ -1,7 +1,7 @@
 android {
     if (!ConfigUtils.isApply(project)) {
         defaultConfig {
-            applicationId "com.example.sample"
+            applicationId "com.example.william.my.module.jiguang"
             ndk {
                 //选择要添加的对应 cpu 类型的 .so 库
                 abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
@@ -22,6 +22,6 @@ android {
     resourcePrefix "j_"
 }
 dependencies {
-    implementation Deps.jcore
-    implementation Deps.jverification
+    implementation deps.jcore
+    implementation deps.jverification
 }

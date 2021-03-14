@@ -28,9 +28,12 @@ android {
 }
 
 dependencies {
-    implementation Deps.multidex
-    implementation Deps.upgrade
-    implementation Deps.tinker
-    implementation Deps.tinker_anno
-    implementation Deps.crashnative
+    implementation deps.multidex
+    //
+    implementation deps.upgrade
+    //
+    implementation deps.tinker
+    implementation deps.tinker_anno
+    //
+    implementation deps.bugly_nativecrash
 }

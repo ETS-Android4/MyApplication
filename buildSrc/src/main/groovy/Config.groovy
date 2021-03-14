@@ -62,7 +62,7 @@ class Config {
             OpenSource     : new DepConfig(true, ":modules:module_open_source"),
             Sample         : new DepConfig(true, ":modules:module_sample"),
 
-            ModuleWx       : new DepConfig(false, ":modules:module_wx"),
+            ModuleWeChat   : new DepConfig(false, ":modules:module_wechat"),
             ModuleBugly    : new DepConfig(false, ":modules:module_bugly"),
             ModuleSophix   : new DepConfig(false, ":modules:module_sophix"),
             ModuleJiguang  : new DepConfig(false, ":modules:module_jiguang"),
@@ -70,6 +70,5 @@ class Config {
 
             Kotlin         : new DepConfig(true, ":modules:module_kotlin"),
             ModuleFlutter  : new DepConfig(true, ":modules:module_flutter"),
-            //ModuleTV      : new DepConfig(false, ":Modules:ModuleTV"),
     ]
 }
