@@ -17,7 +17,6 @@ public class FloatWindowActivity extends BaseResponseActivity {
     @Override
     public void onClick(View v) {
         super.onClick(v);
-
         easyFloat();
     }
 
@@ -25,5 +24,6 @@ public class FloatWindowActivity extends BaseResponseActivity {
         EasyFloat.with(this)
                 .setLayout(R.layout.open_layout_float)
                 .show();
+
     }
 }

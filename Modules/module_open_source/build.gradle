@@ -47,8 +47,6 @@ dependencies {
     implementation deps.countdown
     //https://github.com/princekin-f/EasyFloat
     implementation deps.floatwindow
-    //https://github.com/yhaolpz/FloatWindow
-    implementation "com.github.yhaolpz:FloatWindow:1.0.9"
     //https://github.com/CarGuo/GSYVideoPlayer
     implementation deps.gsyplayer
     //https://github.com/H07000223/FlycoTabLayout
