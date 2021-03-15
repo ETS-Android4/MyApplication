@@ -6,14 +6,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion Config.buildToolsVersion
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
     defaultConfig {
-        applicationId Config.applicationId
-        minSdkVersion Config.minSdkVersion
-        targetSdkVersion Config.targetSdkVersion
-        versionCode Config.versionCode
-        versionName Config.versionName
+        applicationId config.applicationId
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true//minSdkVersion小于21时，需启用dex分包支持
         javaCompileOptions {
@@ -62,7 +62,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    if (Config.gradleVersion == "3.6.0") {
+    if (deps.gradle == "3.6.0") {
         dataBinding {
             enabled = true
         }

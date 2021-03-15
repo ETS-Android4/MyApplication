@@ -19,7 +19,7 @@
  * Shared file between builds so that they can all use the same dependencies and maven repositories.
  **/
 ext {
-    android = [
+    config = [
             minSdkVersion    : 19,
             targetSdkVersion : 30,
 
@@ -32,6 +32,8 @@ ext {
             applicationId    : 'com.example.william.my.application'
     ]
     deps = [
+            gradle              : "4.1.2",//"3.6.0",
+
             material            : "com.google.android.material:material:1.2.1",
 
             multidex            : "androidx.multidex:multidex:2.0.1",

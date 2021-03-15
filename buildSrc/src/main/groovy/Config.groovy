@@ -1,17 +1,5 @@
 class Config {
 
-    static applicationId = 'com.example.william.my.application'
-    static appName = 'MyApplication'
-
-    static minSdkVersion = 19
-    static targetSdkVersion = 30
-
-    static compileSdkVersion = 30
-    static buildToolsVersion = '30.0.3'
-
-    static versionCode = 1_000_000
-    static versionName = '1.0.0'
-
     static gradleVersion = '4.1.2'//'3.6.0'
     //static gradleVersion = '7.0.0-alpha07'
     //https://developer.android.google.cn/studio/releases/gradle-plugin

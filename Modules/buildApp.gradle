@@ -4,13 +4,11 @@ if (ConfigUtils.isApply(project)) {
     apply plugin: 'com.android.application'
 }
 android {
-    compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion Config.buildToolsVersion
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
     defaultConfig {
-        minSdkVersion Config.minSdkVersion
-        targetSdkVersion Config.targetSdkVersion
-        versionCode Config.versionCode
-        versionName Config.versionName
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             // 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
