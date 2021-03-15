@@ -20,10 +20,16 @@
  **/
 ext {
     android = [
-            min_sdk    : 19,
-            compile_sdk: 30,
-            target_sdk : 30,
-            build_tools: "30.0.3"
+            minSdkVersion    : 19,
+            targetSdkVersion : 30,
+
+            compileSdkVersion: 30,
+            buildToolsVersion: "30.0.3",
+
+            versionCode      : 1_000_000,
+            versionName      : "1.0.0",
+
+            applicationId    : 'com.example.william.my.application'
     ]
     deps = [
             material            : "com.google.android.material:material:1.2.1",
@@ -66,7 +72,9 @@ ext {
             viewmodel_ktx       : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0",
 
             gson                : "com.google.code.gson:gson:2.8.6",
-            protobuf            : "com.google.protobuf:protobuf-javalite:3.10.0",
+            protobuf            : "com.google.protobuf:protobuf-javalite:3.15.6",
+            protobuf_protoc     : "com.google.protobuf:protoc:3.15.6",
+            protobuf_javalite   : "com.google.protobuf:protoc-gen-javalite:3.0.0",
 
             volley              : "com.android.volley:volley:1.2.0",
 
@@ -229,11 +237,19 @@ ext {
 }
 
 //自动添加gradle插件
-//project.buildscript.configurations.each { configuration ->
-//    if (configuration.name == "classpath") {
-//        configuration.dependencies.add(getProject().dependencies.create('com.android.tools.build:4.1.2'))
-//    }
-//}
+project.buildscript.configurations.each { configuration ->
+    if (configuration.name == "classpath") {
+        configuration.dependencies.add(getProject().dependencies.create('com.android.tools.build:gradle:4.1.2'))
+        configuration.dependencies.add(getProject().dependencies.create('org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31'))
+        configuration.dependencies.add(getProject().dependencies.create('com.alibaba:arouter-register:1.0.2'))
+        configuration.dependencies.add(getProject().dependencies.create('org.greenrobot:greendao-gradle-plugin:3.3.0'))
+        configuration.dependencies.add(getProject().dependencies.create('com.blankj:bus-gradle-plugin:2.6'))
+        configuration.dependencies.add(getProject().dependencies.create('com.tencent.bugly:symtabfileuploader:2.2.1'))
+        configuration.dependencies.add(getProject().dependencies.create('com.tencent.bugly:tinker-support:1.2.2'))
+        configuration.dependencies.add(getProject().dependencies.create('com.google.protobuf:protobuf-gradle-plugin:0.8.15'))
+        configuration.dependencies.add(getProject().dependencies.create('com.didichuxing.doraemonkit:dokitx-plugin:3.3.5'))
+    }
+}
 
 static def addRepos(RepositoryHandler handler) {
     handler.google()

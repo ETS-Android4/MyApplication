@@ -3,10 +3,9 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
-    //kotlin('android')
-    //kotlin('kapt')
     id 'com.google.protobuf'
 }
+apply from: '../../protobuf.gradle'
 
 android {
     compileSdkVersion 30
@@ -73,9 +72,6 @@ dependencies {
     //ARouter
     implementation deps.arouter
     kapt deps.arouter_compiler
-    //Kotlin
-    //implementation Deps.kotlin
-    //implementation Deps.core_ktx
     //Coroutines
     implementation deps.coroutines
     //implementation deps.livedata_ktx//LiveDataScope
@@ -93,34 +89,8 @@ dependencies {
     //Paging3
     implementation deps.paging
     implementation deps.paging_rxjava3
-
     //protobuf
     //You need to depend on the lite runtime library, not protobuf-java
-    implementation 'com.google.protobuf:protobuf-javalite:3.10.0'
+    implementation deps.protobuf
 }
 
-//https://github.com/google/protobuf-gradle-plugin
-protobuf {
-    // 配置protoc可执行文件
-    // Configure the protoc executable
-    protoc {
-        // You still need protoc like in the non-Android case
-        artifact = 'com.google.protobuf:protoc:3.8.0'
-    }
-    plugins {
-        javalite {
-            // The codegen for lite comes as a separate artifact
-            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
-        }
-    }
-    generateProtoTasks {
-        all().each { task ->
-            task.builtins {
-                java {
-                    option "lite"
-                }
-            }
-        }
-    }
-    generatedFilesBaseDir = "$projectDir/src/generated"
-}

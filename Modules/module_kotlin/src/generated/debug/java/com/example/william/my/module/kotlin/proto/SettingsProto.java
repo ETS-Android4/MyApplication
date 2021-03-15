@@ -14,6 +14,7 @@ public final class SettingsProto {
 
     /**
      * <code>int32 example_counter = 1;</code>
+     * @return The exampleCounter.
      */
     int getExampleCounter();
   }
@@ -31,6 +32,7 @@ public final class SettingsProto {
     private int exampleCounter_;
     /**
      * <code>int32 example_counter = 1;</code>
+     * @return The exampleCounter.
      */
     @java.lang.Override
     public int getExampleCounter() {
@@ -38,6 +40,7 @@ public final class SettingsProto {
     }
     /**
      * <code>int32 example_counter = 1;</code>
+     * @param value The exampleCounter to set.
      */
     private void setExampleCounter(int value) {
       
@@ -148,6 +151,7 @@ public final class SettingsProto {
 
       /**
        * <code>int32 example_counter = 1;</code>
+       * @return The exampleCounter.
        */
       @java.lang.Override
       public int getExampleCounter() {
@@ -155,6 +159,8 @@ public final class SettingsProto {
       }
       /**
        * <code>int32 example_counter = 1;</code>
+       * @param value The exampleCounter to set.
+       * @return This builder for chaining.
        */
       public Builder setExampleCounter(int value) {
         copyOnWrite();
@@ -163,6 +169,7 @@ public final class SettingsProto {
       }
       /**
        * <code>int32 example_counter = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearExampleCounter() {
         copyOnWrite();
@@ -202,7 +209,9 @@ public final class SettingsProto {
             synchronized (com.example.william.my.module.kotlin.proto.SettingsProto.Settings.class) {
               parser = PARSER;
               if (parser == null) {
-                parser = new DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                parser =
+                    new DefaultInstanceBasedParser<com.example.william.my.module.kotlin.proto.SettingsProto.Settings>(
+                        DEFAULT_INSTANCE);
                 PARSER = parser;
               }
             }
@@ -223,15 +232,14 @@ public final class SettingsProto {
     // @@protoc_insertion_point(class_scope:Settings)
     private static final com.example.william.my.module.kotlin.proto.SettingsProto.Settings DEFAULT_INSTANCE;
     static {
+      Settings defaultInstance = new Settings();
       // New instances are implicitly immutable so no need to make
       // immutable.
-      DEFAULT_INSTANCE = new Settings();
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        Settings.class, defaultInstance);
     }
 
-    static {
-      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
-        Settings.class, DEFAULT_INSTANCE);
-    }
     public static com.example.william.my.module.kotlin.proto.SettingsProto.Settings getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }

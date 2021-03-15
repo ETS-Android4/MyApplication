@@ -1,0 +1,25 @@
+//https://github.com/google/protobuf-gradle-plugin
+protobuf {
+    // 配置protoc可执行文件
+    // Configure the protoc executable
+    protoc {
+        // You still need protoc like in the non-Android case
+        artifact = deps.protobuf_protoc
+    }
+    plugins {
+        javalite {
+            // The codegen for lite comes as a separate artifact
+            artifact = deps.protobuf_javalite
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option "lite"
+                }
+            }
+        }
+    }
+    generatedFilesBaseDir = "$projectDir/src/generated"
+}

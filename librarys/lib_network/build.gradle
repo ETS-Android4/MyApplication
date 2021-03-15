@@ -40,6 +40,6 @@ dependencies {
     //RxLifecycle
     implementation deps.rxlifecycle
     //Room
-    implementation Deps.room
-    annotationProcessor Deps.room_compiler
+    implementation deps.room
+    annotationProcessor deps.room_compiler
 }

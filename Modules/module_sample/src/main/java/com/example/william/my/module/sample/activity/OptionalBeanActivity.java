@@ -8,7 +8,6 @@ import androidx.annotation.RequiresApi;
 import com.example.william.my.library.utils.OptionalBean;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.bean.LoginBean;
-import com.google.gson.Gson;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -27,8 +26,6 @@ public class OptionalBeanActivity extends BaseResponseActivity {
         userBean.setNickname("nick name");
         LoginBean loginBean = new LoginBean();
         loginBean.setUserData(userBean);
-
-        Log.e("TAG", new Gson().toJson(loginBean));
 
         // 1. 基本调用
         String nickName = OptionalBean.ofNullable(loginBean)

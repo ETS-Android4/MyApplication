@@ -16,40 +16,8 @@ class Config {
     //static gradleVersion = '7.0.0-alpha07'
     //https://developer.android.google.cn/studio/releases/gradle-plugin
 
-    static kotlinVersion = '1.4.31'
-    //https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib
-
-    static routerVersion = '1.0.2'
-    //https://mvnrepository.com/artifact/com.alibaba/arouter-register
-
-    static greendaoVersion = '3.3.0'
-    //https://search.maven.org/search?q=g:org.greenrobot%20AND%20a:greendao-gradle-plugin
-
-    static busVersion = '2.6'
-    //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
-
-    static buglyVersion = '2.2.1'
-    //https://mvnrepository.com/artifact/com.tencent.bugly/symtabfileuploader
-
-    static tinkerVersion = '1.2.2'
-    //https://mvnrepository.com/artifact/com.blankj/bus-gradle-plugin
-
-    static protobufVersion = '0.8.14'
-    //https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
-
-    static dokitVersion = '3.3.5'
-    //https://mvnrepository.com/artifact/com.didichuxing.doraemonkit/dokitx-plugin
-
     static depConfig = [
             plugin_gradle  : new DepConfig(pluginPath: "com.android.tools.build:gradle:$gradleVersion"),
-            plugin_kotlin  : new DepConfig(pluginPath: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"),
-            plugin_arouter : new DepConfig(pluginPath: "com.alibaba:arouter-register:$routerVersion"),
-            plugin_greendao: new DepConfig(pluginPath: "org.greenrobot:greendao-gradle-plugin:$greendaoVersion"),
-            plugin_bus     : new DepConfig(pluginPath: "com.blankj:bus-gradle-plugin:$busVersion"),
-            plugin_bugly   : new DepConfig(pluginPath: "com.tencent.bugly:symtabfileuploader:$buglyVersion"),
-            plugin_tinker  : new DepConfig(pluginPath: "com.tencent.bugly:tinker-support:$tinkerVersion"),
-            plugin_protobuf: new DepConfig(pluginPath: "com.google.protobuf:protobuf-gradle-plugin:$protobufVersion"),
-            plugin_dokit   : new DepConfig(pluginPath: "com.didichuxing.doraemonkit:dokitx-plugin:$dokitVersion"),
 
             Module         : new DepConfig(true, ":module"),
 
