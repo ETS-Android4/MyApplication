@@ -25,15 +25,6 @@ class ExamplePreferenceDataStore(context: Context) {
             }
     }
 
-//    fun getCounterFirst(): Flow<Int> {
-//        return dataStore.data.first
-//            .map { preferences ->
-//                // No type safety.
-//                preferences[EXAMPLE_COUNTER] ?: 0
-//                true
-//            }
-//    }
-
     suspend fun incrementCounter() {
         dataStore.edit {
             //it[EXAMPLE_COUNTER] = counter

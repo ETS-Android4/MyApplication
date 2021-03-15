@@ -46,6 +46,10 @@ class DataStoreActivity : BaseActivity() {
      */
     private fun initCounter() {
         GlobalScope.launch(Dispatchers.Main) {
+            DataStoreUtils.getData("String", "default")
+                .collect {
+                    binding.kotlinTextView.text = it
+                }
             preferenceDataStore.getCounter()
                 .collect {
                     binding.kotlinTextView.text = it.toString()
@@ -62,6 +66,7 @@ class DataStoreActivity : BaseActivity() {
      */
     private fun incrementCounter() {
         GlobalScope.launch(Dispatchers.Main) {
+            DataStoreUtils.putData("String", "String")
             preferenceDataStore.incrementCounter()
             protoDataStore.incrementCounter()
         }
