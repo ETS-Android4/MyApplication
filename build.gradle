@@ -1,19 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'com.didiglobal.booster'
 apply plugin: 'com.alibaba.arouter'
 buildscript {
     apply from: 'config.gradle'
-    ext {
-        kotlin_version = '1.4.21'
-    }
     ConfigUtils.init(gradle)
-    repositories {
-        google()
-        jcenter()
-        maven { url 'https://maven.aliyun.com/repository/central' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url "https://maven.aliyun.com/repository/public" }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-    }
     addRepos(repositories)
     dependencies {
         //for (def entrySet : ConfigUtils.getApplyPlugins().entrySet()) {
@@ -28,14 +18,6 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-        maven { url 'https://maven.aliyun.com/repository/central' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url "https://maven.aliyun.com/repository/public" }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-    }
     addRepos(repositories)
 }
 

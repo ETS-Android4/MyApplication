@@ -243,17 +243,37 @@ project.buildscript.configurations.each { configuration ->
     if (configuration.name == "classpath") {
         configuration.dependencies.add(getProject().dependencies.create('com.android.tools.build:gradle:4.1.2'))
         configuration.dependencies.add(getProject().dependencies.create('org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31'))
+        //booster
+        configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-gradle-plugin:3.1.0'))
+        //静态分析工具
+        configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-task-analyser:3.1.0'))
+        //多线程优化
+        //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-transform-thread:3.1.0'))
+        //WebView 预加载
+        //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-transform-webview:3.1.0'))
+        //SharedPreferences 优化
+        //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-transform-shared-preferences:3.1.0'))
+        //PNG 图片压缩
+        configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-task-compression-pngquant:3.1.0'))
+        //ARouter
         configuration.dependencies.add(getProject().dependencies.create('com.alibaba:arouter-register:1.0.2'))
+        //greenDao
         configuration.dependencies.add(getProject().dependencies.create('org.greenrobot:greendao-gradle-plugin:3.3.0'))
+        //bus
         configuration.dependencies.add(getProject().dependencies.create('com.blankj:bus-gradle-plugin:2.6'))
+        //Bugly
         configuration.dependencies.add(getProject().dependencies.create('com.tencent.bugly:symtabfileuploader:2.2.1'))
+        //Bugly Tinker
         configuration.dependencies.add(getProject().dependencies.create('com.tencent.bugly:tinker-support:1.2.2'))
+        //protobuf
         configuration.dependencies.add(getProject().dependencies.create('com.google.protobuf:protobuf-gradle-plugin:0.8.15'))
+        //dokitx
         configuration.dependencies.add(getProject().dependencies.create('com.didichuxing.doraemonkit:dokitx-plugin:3.3.5'))
     }
 }
 
 static def addRepos(RepositoryHandler handler) {
+    handler.maven { url "https://oss.sonatype.org/content/repositories/public" }
     handler.google()
     handler.jcenter()
     handler.maven { url "https://jitpack.io" }
@@ -263,5 +283,4 @@ static def addRepos(RepositoryHandler handler) {
     handler.maven { url "https://maven.aliyun.com/repository/public" }
     handler.maven { url "https://maven.aliyun.com/repository/google" }
 }
-
 ext.addRepos = this.&addRepos

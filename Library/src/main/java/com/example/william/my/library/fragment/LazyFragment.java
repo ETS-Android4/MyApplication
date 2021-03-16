@@ -70,15 +70,18 @@ public abstract class LazyFragment extends Fragment {
         return inflater.inflate(createView(), container, false);
     }
 
+    /**
+     * 在此方法内初始化控件
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView(view);
+        initView(view, savedInstanceState);
     }
 
     protected abstract int createView();
 
-    protected abstract void initView(View view);
+    protected abstract void initView(View view, Bundle state);
 
     protected abstract void lazyInit();
 

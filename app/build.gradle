@@ -2,6 +2,7 @@ import java.text.SimpleDateFormat
 
 plugins {
     id 'com.android.application'
+    id 'com.didiglobal.booster'
     id 'com.blankj.bus'
 }
 

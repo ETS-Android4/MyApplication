@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.william.my.library.fragment.NewLazyFragment;
 
 /**
@@ -31,17 +28,9 @@ public class BaseFragment extends NewLazyFragment {
 
     /**
      * 在此方法内初始化控件
-     *
-     * @param view
-     * @param savedInstanceState
      */
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    protected void initView(View view) {
+    protected void initView(View view, Bundle state) {
 
     }
 

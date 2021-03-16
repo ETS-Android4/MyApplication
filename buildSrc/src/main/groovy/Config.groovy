@@ -5,7 +5,7 @@ class Config {
     //https://developer.android.google.cn/studio/releases/gradle-plugin
 
     static depConfig = [
-            plugin_gradle  : new DepConfig(pluginPath: "com.android.tools.build:gradle:$gradleVersion"),
+            //plugin_gradle  : new DepConfig(pluginPath: "com.android.tools.build:gradle:$gradleVersion"),
 
             Module         : new DepConfig(true, ":module"),
 
