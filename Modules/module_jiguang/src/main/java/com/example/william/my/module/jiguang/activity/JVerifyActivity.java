@@ -14,10 +14,13 @@ import com.example.william.my.module.jiguang.common.Constants;
 import com.example.william.my.module.jiguang.common.JVerifyUIConfigUtil;
 
 import cn.jiguang.verifysdk.api.JVerificationInterface;
+import cn.jiguang.verifysdk.api.PreLoginListener;
 import cn.jiguang.verifysdk.api.VerifyListener;
 
 /**
  * https://docs.jiguang.cn/jverification/client/android_sdk/
+ * CtLoginActivity（电信和联通的认证页面）
+ * LoginAuthActivity（移动的认证页面）
  */
 public class JVerifyActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -48,7 +51,14 @@ public class JVerifyActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.btn_login) {
+        if (id == R.id.btn_preLogin) {
+            JVerificationInterface.preLogin(this, 5000, new PreLoginListener() {
+                @Override
+                public void onResult(final int code, final String content) {
+                    Log.d(TAG, "[" + code + "]message=" + content);
+                }
+            });
+        } else if (id == R.id.btn_login) {
             JVerificationInterface.setCustomUIWithConfig(
                     JVerifyUIConfigUtil.getConfig(this, JVerifyUIConfigUtil.Direction.portrait),
                     JVerifyUIConfigUtil.getConfig(this, JVerifyUIConfigUtil.Direction.landscape));
@@ -91,5 +101,9 @@ public class JVerifyActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        JVerificationInterface.clearPreLoginCache();
+    }
 }

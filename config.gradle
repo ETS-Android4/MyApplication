@@ -246,7 +246,7 @@ project.buildscript.configurations.each { configuration ->
         //booster
         configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-gradle-plugin:3.1.0'))
         //静态分析工具
-        configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-task-analyser:3.1.0'))
+        //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-task-analyser:3.1.0'))
         //多线程优化
         //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-transform-thread:3.1.0'))
         //WebView 预加载
@@ -254,7 +254,7 @@ project.buildscript.configurations.each { configuration ->
         //SharedPreferences 优化
         //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-transform-shared-preferences:3.1.0'))
         //PNG 图片压缩
-        configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-task-compression-pngquant:3.1.0'))
+        //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-task-compression-pngquant:3.1.0'))
         //ARouter
         configuration.dependencies.add(getProject().dependencies.create('com.alibaba:arouter-register:1.0.2'))
         //greenDao

@@ -1,5 +1,12 @@
 package com.example.william.my.application.base;
 
+import android.app.Activity;
+import android.app.Application;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.didichuxing.doraemonkit.DoraemonKit;
 import com.example.william.my.library.MyEventBusIndex;
@@ -24,6 +31,8 @@ public class App extends BaseApp {
         initARouter();
 
         initEventBus();
+
+        initActivityLifecycleCallbacks();
     }
 
     /**
@@ -47,5 +56,44 @@ public class App extends BaseApp {
                 .addIndex(new MyModuleEventBusIndex())
                 .addIndex(new MyModuleOpenEventBusIndex())
                 .build();
+    }
+
+    private void initActivityLifecycleCallbacks() {
+        registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+
+            }
+
+            @Override
+            public void onActivityStarted(@NonNull Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityResumed(@NonNull Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(@NonNull Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(@NonNull Activity activity) {
+
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(@NonNull Activity activity) {
+
+            }
+        });
     }
 }

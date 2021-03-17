@@ -7,6 +7,18 @@
     tools:context=".activity.JVerifyActivity">
 
     <Button
+        android:id="@+id/btn_preLogin"
+        android:layout_width="@dimen/basics_btn_width"
+        android:layout_height="@dimen/basics_btn_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="预取号"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
         android:id="@+id/btn_login"
         android:layout_width="@dimen/basics_btn_width"
         android:layout_height="@dimen/basics_btn_height"
@@ -15,7 +27,7 @@
         android:text="一键登录/全屏"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_preLogin"
         tools:ignore="HardcodedText" />
 
     <Button
