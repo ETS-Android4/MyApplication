@@ -10,6 +10,8 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.open.adapter.BRVAHAdapter;
+import com.example.william.my.module.open.adapter.BRVAHAdapter2;
+import com.example.william.my.module.open.bean.SectionBean;
 import com.example.william.my.module.router.ARouterPath;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
@@ -29,6 +31,9 @@ public class SmartRefreshActivity extends BaseActivity {
     private List<String> mRefreshData;
     private BRVAHAdapter mRefreshAdapter;
 
+    private List<SectionBean> mRefreshData2;
+    private BRVAHAdapter2 mRefreshAdapter2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,13 @@ public class SmartRefreshActivity extends BaseActivity {
         mRefreshData = new ArrayList<>();
         mRefreshAdapter = new BRVAHAdapter(mRefreshData);
         mRefreshRecyclerView.setAdapter(mRefreshAdapter);
+
+        //mRefreshData2 = new ArrayList<>();
+        //for (int i = 0; i <= 30; i++) {
+        //    mRefreshData2.add(new Section(i));
+        //}
+        //mRefreshAdapter2 = new BRVAHAdapter2(mRefreshData2);
+        //mRefreshRecyclerView.setAdapter(mRefreshAdapter2);
 
         mRefreshRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
