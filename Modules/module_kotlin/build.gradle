@@ -72,6 +72,7 @@ dependencies {
     //ARouter
     implementation deps.arouter
     kapt deps.arouter_compiler
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.3.0"
     //Coroutines
     implementation deps.coroutines
     //implementation deps.livedata_ktx//LiveDataScope
