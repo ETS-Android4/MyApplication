@@ -56,16 +56,26 @@ internal class BindViewBinding<out V : ViewBinding>(viewBindingClass: Class<V>) 
 internal abstract class InflateViewBindingAbs<out V : ViewBinding> {
 
     @Suppress("UNCHECKED_CAST")
-    abstract fun inflate(layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean): V
+    abstract fun inflate(
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup?,
+        attachToParent: Boolean
+    ): V
 }
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 internal fun <V : ViewBinding> inflateViewBinding(viewBindingClass: Class<V>): InflateViewBindingAbs<V> {
     return try {
-        val method = viewBindingClass.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
+        val method = viewBindingClass.getMethod(
+            "inflate",
+            LayoutInflater::class.java,
+            ViewGroup::class.java,
+            Boolean::class.java
+        )
         FullInflateViewBinding(method)
     } catch (e: NoSuchMethodException) {
-        val method = viewBindingClass.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java)
+        val method =
+            viewBindingClass.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java)
         MergeInflateViewBinding(method)
     }
 }
@@ -76,7 +86,11 @@ internal class FullInflateViewBinding<out V : ViewBinding>(
 ) : InflateViewBindingAbs<V>() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun inflate(layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean): V {
+    override fun inflate(
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup?,
+        attachToParent: Boolean
+    ): V {
         return inflateViewBinding(null, layoutInflater, parent, attachToParent) as V
     }
 }
@@ -87,7 +101,11 @@ internal class MergeInflateViewBinding<out V : ViewBinding>(
 ) : InflateViewBindingAbs<V>() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun inflate(layoutInflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean): V {
+    override fun inflate(
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup?,
+        attachToParent: Boolean
+    ): V {
         require(attachToParent) {
             "${InflateViewBindingAbs::class.java.simpleName} supports inflate only with attachToParent=true"
         }

@@ -3,7 +3,7 @@ package com.example.william.my.module.kotlin.activity
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.module.kotlin.databinding.KotlinActivityKotlinBinding
+import com.example.william.my.module.kotlin.databinding.KotlinContentKotlinBinding
 import com.example.william.my.module.kotlin.datastore.ExamplePreferenceDataStore
 import com.example.william.my.module.kotlin.datastore.ExampleProtoDataStore
 import com.example.william.my.module.kotlin.utils.DataStoreUtils
@@ -26,17 +26,17 @@ class DataStoreActivity : BaseActivity() {
 
     private val protoDataStore = ExampleProtoDataStore(this)
 
-    private lateinit var binding: KotlinActivityKotlinBinding
+    private var binding: KotlinContentKotlinBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KotlinActivityKotlinBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = KotlinContentKotlinBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
 
         initCounter()
 
-        binding.kotlinTextView.setOnClickListener {
+        binding?.contentTextView?.setOnClickListener {
             incrementCounter()
         }
     }
@@ -48,15 +48,15 @@ class DataStoreActivity : BaseActivity() {
         GlobalScope.launch(Dispatchers.Main) {
             DataStoreUtils.getData("String", "default")
                 .collect {
-                    binding.kotlinTextView.text = it
+                    binding?.contentTextView?.text = it
                 }
             preferenceDataStore.getCounter()
                 .collect {
-                    binding.kotlinTextView.text = it.toString()
+                    binding?.contentTextView?.text = it.toString()
                 }
             protoDataStore.getCounter()
                 .collect {
-                    binding.kotlinTextView.text = it.toString()
+                    binding?.contentTextView?.text = it.toString()
                 }
         }
     }

@@ -25,6 +25,25 @@ inline fun <reified T : ViewBinding> Fragment.viewBinding(
 /**
  * Create new [ViewBinding] associated with the [Fragment]
  *
+ * @param viewBindingClass Class of expected [ViewBinding] result class
+ */
+@JvmName("viewBindingFragment")
+fun <T : ViewBinding> Fragment.viewBinding(
+    viewBindingClass: Class<T>,
+    createMethod: CreateMethod = CreateMethod.BIND
+): ViewBindingProperty<Fragment, T> = when (createMethod) {
+    CreateMethod.BIND -> viewBinding {
+        ViewBindingCache.getBind(viewBindingClass).bind(requireView())
+    }
+    CreateMethod.INFLATE -> viewBinding {
+        ViewBindingCache.getInflate(viewBindingClass)
+            .inflate(layoutInflater, null, false)
+    }
+}
+
+/**
+ * Create new [ViewBinding] associated with the [Fragment]
+ *
  * @param vbFactory Function that create new instance of [ViewBinding]. `MyViewBinding::bind` can be used
  * @param viewProvider Provide a [View] from the Fragment. By default call [Fragment.requireView]
  */
@@ -47,24 +66,5 @@ fun <F : Fragment, T : ViewBinding> Fragment.viewBinding(
     return when (this) {
         is DialogFragment -> DialogViewBindingProperty(viewBinder) as ViewBindingProperty<F, T>
         else -> FragmentViewBindingProperty(viewBinder)
-    }
-}
-
-/**
- * Create new [ViewBinding] associated with the [Fragment]
- *
- * @param viewBindingClass Class of expected [ViewBinding] result class
- */
-@JvmName("viewBindingFragment")
-fun <T : ViewBinding> Fragment.viewBinding(
-    viewBindingClass: Class<T>,
-    createMethod: CreateMethod = CreateMethod.BIND
-): ViewBindingProperty<Fragment, T> = when (createMethod) {
-    CreateMethod.BIND -> viewBinding {
-        ViewBindingCache.getBind(viewBindingClass).bind(requireView())
-    }
-    CreateMethod.INFLATE -> viewBinding {
-        ViewBindingCache.getInflate(viewBindingClass)
-            .inflate(layoutInflater, null, false)
     }
 }

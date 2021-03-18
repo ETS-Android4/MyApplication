@@ -7,7 +7,6 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.kotlin.bind.method.CreateMethod
 import com.example.william.my.module.kotlin.bind.viewbinding.viewBinding
 import com.example.william.my.module.kotlin.databinding.KotlinActivityKotlinBinding
-import com.example.william.my.module.kotlin.utils.Singleton
 import com.example.william.my.module.router.ARouterPath
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
@@ -20,6 +19,12 @@ class KotlinActivity : AppCompatActivity() {
 
     private var binding: KotlinActivityKotlinBinding? = null
 
+    private val viewBinding1: KotlinActivityKotlinBinding by viewBinding()
+
+    private val viewBinding2: KotlinActivityKotlinBinding by viewBinding(CreateMethod.INFLATE)
+
+    private val viewBinding3: KotlinActivityKotlinBinding by viewBinding(KotlinActivityKotlinBinding::bind)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,20 +32,20 @@ class KotlinActivity : AppCompatActivity() {
         setContentView(binding!!.root)
         //setContentView(R.layout.kotlin_activity_kotlin)
 
-        binding!!.kotlinTextView.setOnClickListener {
-
-            Derived(BaseImpl("Derived")).print()
-            DerivedCode().toPrint()
-
-            val example = Example()
-            Log.e("TAG", example.delegate)
-
-            val observable = ObservableExample()
-            observable.delegates = "第一次赋值"
-            observable.delegates = "第二次赋值"
-
-            Singleton.getInstance(application).showToast("Singleton")
-        }
+//        binding!!.activityTextView.setOnClickListener {
+//
+//            Derived(BaseImpl("Derived")).print()
+//            DerivedCode().toPrint()
+//
+//            val example = Example()
+//            Log.e("TAG", example.delegate)
+//
+//            val observable = ObservableExample()
+//            observable.delegates = "第一次赋值"
+//            observable.delegates = "第二次赋值"
+//
+//            Singleton.getInstance(application).showToast("Singleton")
+//        }
     }
 }
 

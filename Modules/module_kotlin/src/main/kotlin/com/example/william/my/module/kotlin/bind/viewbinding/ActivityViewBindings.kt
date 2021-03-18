@@ -13,14 +13,26 @@ import com.example.william.my.module.kotlin.bind.utils.findRootView
 import com.example.william.my.module.kotlin.bind.utils.requireViewByIdCompat
 
 /**
- * Create new [ViewBinding] associated with the [Activity][ComponentActivity] and allow customize how
- * a [View] will be bounded to the view binding.
+ * Create new [ViewBinding] associated with the [Activity][ComponentActivity].
+ * You need to set [ViewBinding.getRoot] as content view using [Activity.setContentView].
+ *
+ * @param T Class of expected [ViewBinding] result class
  */
-@JvmName("viewBindingActivity")
- fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.viewBinding(
-    viewBinder: (A) -> T
-): ViewBindingProperty<A, T> {
-    return ActivityViewBindingProperty(viewBinder)
+@JvmName("inflateViewBindingActivity")
+inline fun <reified T : ViewBinding> ComponentActivity.viewBinding(
+    createMethod: CreateMethod = CreateMethod.BIND
+) = viewBinding(T::class.java, createMethod)
+
+@JvmName("inflateViewBindingActivity")
+fun <T : ViewBinding> ComponentActivity.viewBinding(
+    viewBindingClass: Class<T>,
+    createMethod: CreateMethod = CreateMethod.BIND
+): ViewBindingProperty<ComponentActivity, T> = when (createMethod) {
+    CreateMethod.BIND -> viewBinding(viewBindingClass, ::findRootView)
+    CreateMethod.INFLATE -> viewBinding {
+        ViewBindingCache.getInflate(viewBindingClass)
+            .inflate(layoutInflater, null, false)
+    }
 }
 
 /**
@@ -28,7 +40,7 @@ import com.example.william.my.module.kotlin.bind.utils.requireViewByIdCompat
  * a [View] will be bounded to the view binding.
  */
 @JvmName("viewBindingActivity")
- inline fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.viewBinding(
+inline fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.viewBinding(
     crossinline vbFactory: (View) -> T,
     crossinline viewProvider: (A) -> View = ::findRootView
 ): ViewBindingProperty<A, T> {
@@ -44,34 +56,11 @@ import com.example.william.my.module.kotlin.bind.utils.requireViewByIdCompat
  */
 @Suppress("unused")
 @JvmName("viewBindingActivity")
- inline fun <T : ViewBinding> ComponentActivity.viewBinding(
+inline fun <T : ViewBinding> ComponentActivity.viewBinding(
     crossinline vbFactory: (View) -> T,
     @IdRes viewBindingRootId: Int
 ): ViewBindingProperty<ComponentActivity, T> {
     return viewBinding { activity -> vbFactory(activity.requireViewByIdCompat(viewBindingRootId)) }
-}
-
-/**
- * Create new [ViewBinding] associated with the [Activity][ComponentActivity].
- * You need to set [ViewBinding.getRoot] as content view using [Activity.setContentView].
- *
- * @param T Class of expected [ViewBinding] result class
- */
-@JvmName("inflateViewBindingActivity")
- inline fun <reified T : ViewBinding> ComponentActivity.viewBinding(
-    createMethod: CreateMethod = CreateMethod.BIND
-) = viewBinding(T::class.java, createMethod)
-
-@JvmName("inflateViewBindingActivity")
- fun <T : ViewBinding> ComponentActivity.viewBinding(
-    viewBindingClass: Class<T>,
-    createMethod: CreateMethod = CreateMethod.BIND
-): ViewBindingProperty<ComponentActivity, T> = when (createMethod) {
-    CreateMethod.BIND -> viewBinding(viewBindingClass, ::findRootView)
-    CreateMethod.INFLATE -> viewBinding {
-        ViewBindingCache.getInflate(viewBindingClass)
-            .inflate(layoutInflater, null, false)
-    }
 }
 
 /**
@@ -81,11 +70,22 @@ import com.example.william.my.module.kotlin.bind.utils.requireViewByIdCompat
  * @param rootViewProvider Provider of root view for the [ViewBinding] from the [Activity][this]
  */
 @JvmName("viewBindingActivity")
- fun <T : ViewBinding> ComponentActivity.viewBinding(
+fun <T : ViewBinding> ComponentActivity.viewBinding(
     viewBindingClass: Class<T>,
     rootViewProvider: (ComponentActivity) -> View
 ): ViewBindingProperty<ComponentActivity, T> {
     return viewBinding { activity ->
         ViewBindingCache.getBind(viewBindingClass).bind(rootViewProvider(activity))
     }
+}
+
+/**
+ * Create new [ViewBinding] associated with the [Activity][ComponentActivity] and allow customize how
+ * a [View] will be bounded to the view binding.
+ */
+@JvmName("viewBindingActivity")
+fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.viewBinding(
+    viewBinder: (A) -> T
+): ViewBindingProperty<A, T> {
+    return ActivityViewBindingProperty(viewBinder)
 }

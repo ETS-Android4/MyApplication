@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.module.kotlin.databinding.KotlinActivityKotlinBinding
+import com.example.william.my.module.kotlin.databinding.KotlinContentKotlinBinding
 import com.example.william.my.module.kotlin.model.CoroutinesViewModel
 import com.example.william.my.module.kotlin.utils.ThreadUtils
 import com.example.william.my.module.router.ARouterPath
@@ -28,7 +28,7 @@ class CoroutinesActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = KotlinActivityKotlinBinding.inflate(layoutInflater)
+        val binding = KotlinContentKotlinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val viewModel = ViewModelProvider(this).get(CoroutinesViewModel::class.java)
@@ -55,9 +55,9 @@ class CoroutinesActivity : BaseActivity() {
         //    })
         //}
 
-        binding.kotlinTextView.setOnClickListener {
+        binding.contentTextView.setOnClickListener {
             viewModel.getArticles3().observe(this, Observer {
-                binding.kotlinTextView.text = it
+                binding.contentTextView.text = it
             })
         }
 

@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".KotlinActivity">
 
-    <fragment
-        android:id="@+id/activity_textView"
-        android:name="com.example.william.my.module.kotlin.fragment.BindFragment"
+    <TextView
+        android:id="@+id/content_textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
