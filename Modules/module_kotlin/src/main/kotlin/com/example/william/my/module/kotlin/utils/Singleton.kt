@@ -1,16 +1,15 @@
 package com.example.william.my.module.kotlin.utils
 
-import android.content.Context
+import android.app.Application
 import android.widget.Toast
 
-class Singleton private constructor(private var context: Context) {
+class Singleton private constructor(private var context: Application) {
 
     companion object {
 
-        @Volatile
         private var instance: Singleton? = null
 
-        fun getInstance(context: Context) =
+        fun getInstance(context: Application) =
             instance ?: synchronized(this) {
                 instance ?: Singleton(context).also {
                     instance = it
@@ -18,7 +17,7 @@ class Singleton private constructor(private var context: Context) {
             }
     }
 
-    fun showToast() {
-        Toast.makeText(context, "Singleton", Toast.LENGTH_SHORT).show()
+    fun showToast(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.william.my.module.kotlin.property
+package com.example.william.my.module.kotlin.bind.property
 
 import androidx.annotation.MainThread
 import androidx.viewbinding.ViewBinding

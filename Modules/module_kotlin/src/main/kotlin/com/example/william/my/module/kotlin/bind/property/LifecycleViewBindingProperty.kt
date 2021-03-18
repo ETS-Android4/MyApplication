@@ -1,4 +1,4 @@
-package com.example.william.my.module.kotlin.property
+package com.example.william.my.module.kotlin.bind.property
 
 import android.os.Handler
 import android.os.Looper
