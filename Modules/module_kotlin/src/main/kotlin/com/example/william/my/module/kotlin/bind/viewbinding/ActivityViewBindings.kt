@@ -5,8 +5,8 @@ import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.annotation.IdRes
 import androidx.viewbinding.ViewBinding
-import com.example.william.my.module.kotlin.bind.method.CreateMethod
 import com.example.william.my.module.kotlin.bind.cache.ViewBindingCache
+import com.example.william.my.module.kotlin.bind.method.CreateMethod
 import com.example.william.my.module.kotlin.bind.property.ActivityViewBindingProperty
 import com.example.william.my.module.kotlin.bind.property.ViewBindingProperty
 import com.example.william.my.module.kotlin.bind.utils.findRootView
@@ -17,7 +17,7 @@ import com.example.william.my.module.kotlin.bind.utils.requireViewByIdCompat
  * a [View] will be bounded to the view binding.
  */
 @JvmName("viewBindingActivity")
-public fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.viewBinding(
+ fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.viewBinding(
     viewBinder: (A) -> T
 ): ViewBindingProperty<A, T> {
     return ActivityViewBindingProperty(viewBinder)
@@ -28,7 +28,7 @@ public fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.viewBindin
  * a [View] will be bounded to the view binding.
  */
 @JvmName("viewBindingActivity")
-public inline fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.viewBinding(
+ inline fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.viewBinding(
     crossinline vbFactory: (View) -> T,
     crossinline viewProvider: (A) -> View = ::findRootView
 ): ViewBindingProperty<A, T> {
@@ -44,7 +44,7 @@ public inline fun <A : ComponentActivity, T : ViewBinding> ComponentActivity.vie
  */
 @Suppress("unused")
 @JvmName("viewBindingActivity")
-public inline fun <T : ViewBinding> ComponentActivity.viewBinding(
+ inline fun <T : ViewBinding> ComponentActivity.viewBinding(
     crossinline vbFactory: (View) -> T,
     @IdRes viewBindingRootId: Int
 ): ViewBindingProperty<ComponentActivity, T> {
@@ -58,18 +58,18 @@ public inline fun <T : ViewBinding> ComponentActivity.viewBinding(
  * @param T Class of expected [ViewBinding] result class
  */
 @JvmName("inflateViewBindingActivity")
-public inline fun <reified T : ViewBinding> ComponentActivity.viewBinding(
+ inline fun <reified T : ViewBinding> ComponentActivity.viewBinding(
     createMethod: CreateMethod = CreateMethod.BIND
 ) = viewBinding(T::class.java, createMethod)
 
 @JvmName("inflateViewBindingActivity")
-public fun <T : ViewBinding> ComponentActivity.viewBinding(
+ fun <T : ViewBinding> ComponentActivity.viewBinding(
     viewBindingClass: Class<T>,
     createMethod: CreateMethod = CreateMethod.BIND
 ): ViewBindingProperty<ComponentActivity, T> = when (createMethod) {
     CreateMethod.BIND -> viewBinding(viewBindingClass, ::findRootView)
     CreateMethod.INFLATE -> viewBinding {
-        ViewBindingCache.getInflateWithLayoutInflater(viewBindingClass)
+        ViewBindingCache.getInflate(viewBindingClass)
             .inflate(layoutInflater, null, false)
     }
 }
@@ -81,7 +81,7 @@ public fun <T : ViewBinding> ComponentActivity.viewBinding(
  * @param rootViewProvider Provider of root view for the [ViewBinding] from the [Activity][this]
  */
 @JvmName("viewBindingActivity")
-public fun <T : ViewBinding> ComponentActivity.viewBinding(
+ fun <T : ViewBinding> ComponentActivity.viewBinding(
     viewBindingClass: Class<T>,
     rootViewProvider: (ComponentActivity) -> View
 ): ViewBindingProperty<ComponentActivity, T> {

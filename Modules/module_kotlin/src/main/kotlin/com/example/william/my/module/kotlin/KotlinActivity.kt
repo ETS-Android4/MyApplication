@@ -20,12 +20,6 @@ class KotlinActivity : AppCompatActivity() {
 
     private var binding: KotlinActivityKotlinBinding? = null
 
-    private val viewBinding1: KotlinActivityKotlinBinding by viewBinding()
-
-    private val viewBinding2: KotlinActivityKotlinBinding by viewBinding(CreateMethod.INFLATE)
-
-    private val viewBinding3: KotlinActivityKotlinBinding by viewBinding(KotlinActivityKotlinBinding::bind)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

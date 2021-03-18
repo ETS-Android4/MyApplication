@@ -12,7 +12,7 @@ import androidx.viewbinding.ViewBinding
 import kotlin.reflect.KProperty
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-public abstract class LifecycleViewBindingProperty<in R : Any, out T : ViewBinding>(
+ abstract class LifecycleViewBindingProperty<in R : Any, out T : ViewBinding>(
     private val viewBinder: (R) -> T
 ) : ViewBindingProperty<R, T> {
 
@@ -21,7 +21,7 @@ public abstract class LifecycleViewBindingProperty<in R : Any, out T : ViewBindi
     protected abstract fun getLifecycleOwner(thisRef: R): LifecycleOwner
 
     @MainThread
-    public override fun getValue(thisRef: R, property: KProperty<*>): T {
+     override fun getValue(thisRef: R, property: KProperty<*>): T {
         viewBinding?.let { return it }
 
         val lifecycle = getLifecycleOwner(thisRef).lifecycle
@@ -41,7 +41,7 @@ public abstract class LifecycleViewBindingProperty<in R : Any, out T : ViewBindi
     }
 
     @MainThread
-    public override fun clear() {
+     override fun clear() {
         mainHandler.post { viewBinding = null }
     }
 
