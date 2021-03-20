@@ -77,6 +77,7 @@ class DataStoreActivity : BaseActivity() {
         DataStoreUtils.clearSync()
 
         runBlocking {
+            preferenceDataStore.clear()
             protoDataStore.clear()
         }
     }
