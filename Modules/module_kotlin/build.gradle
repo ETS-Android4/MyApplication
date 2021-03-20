@@ -61,7 +61,7 @@ android {
             dataBinding = true
         }
     }
-    resourcePrefix "kotlin_"
+    resourcePrefix "k_"
 }
 
 dependencies {

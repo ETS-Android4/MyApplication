@@ -6,16 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".KotlinActivity">
 
-    <fragment
-        android:id="@+id/activity_textView"
-        android:name="com.example.william.my.module.kotlin.fragment.BindFragment"
+    <TextView
+        android:id="@+id/kotlin_textView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/basics_btn_height"
         android:gravity="center"
         android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/kotlin_fragment"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <fragment
+        android:id="@+id/kotlin_fragment"
+        android:name="com.example.william.my.module.kotlin.fragment.BindFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kotlin_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

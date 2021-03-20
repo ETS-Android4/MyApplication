@@ -3,7 +3,7 @@ package com.example.william.my.module.kotlin.activity
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.module.kotlin.databinding.KotlinContentKotlinBinding
+import com.example.william.my.module.kotlin.databinding.KLayoutResponseBinding
 import com.example.william.my.module.kotlin.datastore.ExamplePreferenceDataStore
 import com.example.william.my.module.kotlin.datastore.ExampleProtoDataStore
 import com.example.william.my.module.kotlin.utils.DataStoreUtils
@@ -26,17 +26,17 @@ class DataStoreActivity : BaseActivity() {
 
     private val protoDataStore = ExampleProtoDataStore(this)
 
-    private var binding: KotlinContentKotlinBinding? = null
+    private var binding: KLayoutResponseBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KotlinContentKotlinBinding.inflate(layoutInflater)
+        binding = KLayoutResponseBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
         initCounter()
 
-        binding?.contentTextView?.setOnClickListener {
+        binding!!.contentTextView.setOnClickListener {
             incrementCounter()
         }
     }
@@ -48,15 +48,15 @@ class DataStoreActivity : BaseActivity() {
         GlobalScope.launch(Dispatchers.Main) {
             DataStoreUtils.getData("String", "default")
                 .collect {
-                    binding?.contentTextView?.text = it
+                    binding!!.contentTextView.text = it
                 }
             preferenceDataStore.getCounter()
                 .collect {
-                    binding?.contentTextView?.text = it.toString()
+                    binding!!.contentTextView.text = it.toString()
                 }
             protoDataStore.getCounter()
                 .collect {
-                    binding?.contentTextView?.text = it.toString()
+                    binding!!.contentTextView.text = it.toString()
                 }
         }
     }

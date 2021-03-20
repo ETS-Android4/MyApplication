@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.william.my.module.bean.ArticlesBean
-import com.example.william.my.module.kotlin.databinding.KotlinItemRecycleBinding
+import com.example.william.my.module.kotlin.databinding.KItemRecycleBinding
 
 class ArticlesAdapter(diffCallback: DiffUtil.ItemCallback<ArticlesBean.DataBean.ArticleBean>) :
     PagingDataAdapter<ArticlesBean.DataBean.ArticleBean, ArticlesAdapter.ViewHolder>(diffCallback) {
@@ -18,11 +18,11 @@ class ArticlesAdapter(diffCallback: DiffUtil.ItemCallback<ArticlesBean.DataBean.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val bind =
-            KotlinItemRecycleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            KItemRecycleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(bind)
     }
 
-    class ViewHolder(bind: KotlinItemRecycleBinding) : RecyclerView.ViewHolder(bind.root) {
-        var itemBind: KotlinItemRecycleBinding = bind
+    class ViewHolder(bind: KItemRecycleBinding) : RecyclerView.ViewHolder(bind.root) {
+        var itemBind: KItemRecycleBinding = bind
     }
 }

@@ -8,15 +8,15 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.william.my.module.kotlin.R
-import com.example.william.my.module.kotlin.databinding.KotlinItemRecycleBinding
+import com.example.william.my.module.kotlin.databinding.KItemRecycleBinding
 
 class LoadStateViewHolder(parent: ViewGroup, retry: () -> Unit) :
     RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.kotlin_item_recycle, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.k_item_recycle, parent, false)
     ) {
 
     private val context = parent.context
-    private val binding = KotlinItemRecycleBinding.bind(itemView)
+    private val binding = KItemRecycleBinding.bind(itemView)
 
     private val mTextView: TextView = binding.itemRecycleTextView.also {
         it.setOnClickListener {

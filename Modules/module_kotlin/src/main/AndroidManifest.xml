@@ -3,8 +3,10 @@
     package="com.example.william.my.module.kotlin">
 
     <application>
+        <activity android:name=".activity.CoroutinesActivity"></activity>
+        <activity android:name=".activity.DelegatesActivity" />
         <activity android:name=".KotlinActivity" />
-        <activity android:name=".activity.CoroutinesActivity" />
+        <activity android:name=".activity.FlowActivity" />
         <activity android:name=".activity.DataStoreActivity" />
         <activity android:name=".activity.PagingActivity" />
     </application>

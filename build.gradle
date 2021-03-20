@@ -3,9 +3,14 @@ apply plugin: 'com.didiglobal.booster'
 apply plugin: 'com.alibaba.arouter'
 buildscript {
     apply from: 'config.gradle'
+    ext {
+        kotlin_version = '1.4.31'
+    }
     ConfigUtils.init(gradle)
     addRepos(repositories)
     dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
         //for (def entrySet : ConfigUtils.getApplyPlugins().entrySet()) {
         //    classpath entrySet.value.dep
         //}

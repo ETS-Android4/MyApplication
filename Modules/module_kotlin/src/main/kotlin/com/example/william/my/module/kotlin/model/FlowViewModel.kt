@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 
-class CoroutinesViewModel : ViewModel() {
+class FlowViewModel : ViewModel() {
 
     private val _login = MutableLiveData<String>()
 

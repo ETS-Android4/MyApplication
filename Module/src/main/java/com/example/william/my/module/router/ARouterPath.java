@@ -137,7 +137,7 @@ public class ARouterPath {
 
     public static class Kotlin {
         public static final String Kotlin = "/module_kotlin/kotlin";
-        public static final String Kotlin_Coroutines = "/module_kotlin/coroutines";
+        public static final String Kotlin_FLow = "/module_kotlin/flow";
         public static final String Kotlin_DataStore = "/module_kotlin/dataStore";
         public static final String Kotlin_Paging = "/module_kotlin/paging";
     }

@@ -11,7 +11,7 @@ import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.bean.ArticlesBean
 import com.example.william.my.module.kotlin.adapter.ArticlesAdapter
 import com.example.william.my.module.kotlin.comparator.ArticleComparator
-import com.example.william.my.module.kotlin.databinding.KotlinActivityPagingBinding
+import com.example.william.my.module.kotlin.databinding.KActivityPagingBinding
 import com.example.william.my.module.kotlin.holder.ExampleLoadStateAdapter
 import com.example.william.my.module.kotlin.model.PagingViewModel
 import com.example.william.my.module.router.ARouterPath
@@ -31,7 +31,7 @@ class PagingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = KotlinActivityPagingBinding.inflate(layoutInflater)
+        val binding = KActivityPagingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //val viewModel by viewModels<ExampleViewModel>()
