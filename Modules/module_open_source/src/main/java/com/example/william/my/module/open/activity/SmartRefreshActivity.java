@@ -63,7 +63,8 @@ public class SmartRefreshActivity extends BaseActivity {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
                 i = 0;
-                mRefreshData.clear();
+                //mRefreshData.clear();
+                mRefreshAdapter.setNewInstance(new ArrayList<>());
                 mRefreshAdapter.notifyDataSetChanged();
                 refreshlayout.finishRefresh(1000);//传入false表示刷新失败
             }
@@ -72,7 +73,8 @@ public class SmartRefreshActivity extends BaseActivity {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
                 i++;
-                mRefreshData.add("item : " + i);
+                //mRefreshData.add("item : " + i);
+                mRefreshAdapter.addData("item : " + i);
                 mRefreshAdapter.notifyDataSetChanged();
                 refreshlayout.finishLoadMore(1000);//传入false表示加载失败
             }
