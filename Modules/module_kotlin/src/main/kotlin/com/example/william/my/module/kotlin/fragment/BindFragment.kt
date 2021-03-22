@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.william.my.module.kotlin.R
 import com.example.william.my.module.kotlin.databinding.KLayoutResponseBinding
 
 class BindFragment : Fragment() {
@@ -22,8 +23,7 @@ class BindFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding!!.contentTextView.text =
-            context!!.packageManager.getPackageInfo(context!!.packageName, 0).packageName
+        binding!!.contentTextView.text = resources.getString(R.string.k_app_name)
     }
 
     override fun onDestroyView() {

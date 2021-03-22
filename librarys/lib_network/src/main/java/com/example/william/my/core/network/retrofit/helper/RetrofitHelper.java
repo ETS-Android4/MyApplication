@@ -11,6 +11,7 @@ import com.example.william.my.core.network.retrofit.listener.RetrofitResponseLis
 import com.example.william.my.core.network.retrofit.ssl.SSLSocketClient;
 
 import java.io.File;
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +63,9 @@ public class RetrofitHelper {
     }
 
     public OkHttpClient.Builder okHttpClient() {
+        //设置连接使用的HTTP代理。该方法优先于proxySelector，默认代理为空，完全禁用代理使用NO_PROXY
+        //okHttpClient.proxy(Proxy.NO_PROXY);
+
         okHttpClient.retryOnConnectionFailure(true);//允许失败重试
 
         okHttpClient.connectTimeout(RxRetrofitConfig.connectTimeout, TimeUnit.SECONDS);//设置连接超时时间
