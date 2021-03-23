@@ -7,7 +7,6 @@ import com.example.william.my.module.kotlin.databinding.KActivityKotlinBinding
 import com.example.william.my.module.kotlin.utils.Singleton
 import com.example.william.my.module.router.ARouterPath
 
-
 /**
  * https://developer.android.google.cn/kotlin/ktx
  */
