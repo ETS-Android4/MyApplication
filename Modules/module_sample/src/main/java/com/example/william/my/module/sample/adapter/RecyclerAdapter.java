@@ -8,7 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.william.my.core.widget.utils.SizeUtils;
 import com.example.william.my.module.sample.R;
+import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.util.List;
 
@@ -28,7 +30,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).textView.setText(mData.get(position));
+        TextView textView = ((ViewHolder) holder).textView;
+        textView.setText(mData.get(position));
+
+        ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
+        if (layoutParams instanceof FlexboxLayoutManager.LayoutParams) {
+            FlexboxLayoutManager.LayoutParams flexParams = (FlexboxLayoutManager.LayoutParams) layoutParams;
+            layoutParams.width = SizeUtils.dp2px(60);
+            flexParams.setFlexGrow(1.0f);
+        }
     }
 
     @Override

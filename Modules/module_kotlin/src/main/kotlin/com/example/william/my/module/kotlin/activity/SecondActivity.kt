@@ -19,7 +19,7 @@ class SecondActivity : BaseActivity() {
 
         binding.contentTextView.setOnClickListener {
             val intent = Intent().apply {
-                putExtra("result", "Hello，依然范特西，我是回传的数据！")
+                putExtra("result", "Hello，我是回传的数据！")
             }
             setResult(Activity.RESULT_OK, intent)
             finish()

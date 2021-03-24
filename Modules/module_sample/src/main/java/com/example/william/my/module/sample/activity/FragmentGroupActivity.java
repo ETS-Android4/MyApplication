@@ -116,7 +116,6 @@ public class FragmentGroupActivity extends BaseActivity implements RadioGroup.On
                 }
             }
         }
-
         mTransaction.commitAllowingStateLoss();
     }
 }

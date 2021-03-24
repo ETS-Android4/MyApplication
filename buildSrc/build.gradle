@@ -2,6 +2,7 @@ apply {
     plugin 'groovy'
     plugin 'java-gradle-plugin'
 }
+
 repositories {
     google()
     jcenter()
@@ -11,6 +12,7 @@ repositories {
 //    maven { url "https://maven.aliyun.com/repository/google" }
 //    maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
 }
+
 sourceSets {
     main {
         groovy {

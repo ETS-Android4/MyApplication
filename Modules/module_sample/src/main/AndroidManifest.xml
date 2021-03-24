@@ -7,6 +7,7 @@
         <activity android:name=".activity.AppBarActivity" />
         <activity android:name=".activity.BehaviorActivity" />
         <activity android:name=".activity.DialogActivity" />
+        <activity android:name=".activity.FlexBoxActivity" />
         <activity android:name=".activity.FloatWindowActivity" />
         <activity android:name=".activity.FragmentActivity" />
         <activity android:name=".activity.FragmentGroupActivity" />

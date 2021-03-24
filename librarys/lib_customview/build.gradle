@@ -25,6 +25,4 @@ dependencies {
     //Android
     implementation deps.constraintlayout
     implementation deps.recyclerview
-    implementation deps.viewpager2
-    implementation deps.coordinatorlayout
 }

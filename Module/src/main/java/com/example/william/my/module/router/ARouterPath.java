@@ -107,6 +107,7 @@ public class ARouterPath {
         public static final String Sample_AppBar = "/module_sample/app_bar";
         public static final String Sample_Behavior = "/module_sample/behavior";
         public static final String Sample_Dialog = "/module_sample/dialog";
+        public static final String Sample_FlexBox = "/module_sample/flex_box";
         public static final String Sample_Fragment = "/module_sample/fragment";
         public static final String Sample_FragmentGroup = "/module_sample/fragment_group";
         public static final String Sample_FragmentTabHost = "/module_sample/fragment_tab_host";

@@ -1,9 +1,9 @@
 package com.example.william.my.library.dialog;
 
-import android.os.Bundle;
+import android.content.Context;
 import android.view.Window;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 public class BaseDialogFragment extends DialogFragment {
@@ -22,8 +22,8 @@ public class BaseDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
         if (getDialog() != null) {
             try {
                 // 解决Dialog内存泄漏
