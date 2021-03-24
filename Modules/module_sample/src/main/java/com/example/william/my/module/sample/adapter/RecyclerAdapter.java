@@ -30,15 +30,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
-        TextView textView = ((ViewHolder) holder).textView;
-        textView.setText(mData.get(position));
-
-        ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
-        if (layoutParams instanceof FlexboxLayoutManager.LayoutParams) {
-            FlexboxLayoutManager.LayoutParams flexParams = (FlexboxLayoutManager.LayoutParams) layoutParams;
-            layoutParams.width = SizeUtils.dp2px(60);
-            flexParams.setFlexGrow(1.0f);
-        }
+        ((ViewHolder) holder).textView.setText(mData.get(position));
     }
 
     @Override
