@@ -14,6 +14,9 @@ class SecondActivity : BaseActivity() {
         val binding = KLayoutResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val data = intent?.getStringExtra("input")
+        binding.contentTextView.text = data
+
         binding.contentTextView.setOnClickListener {
             val intent = Intent().apply {
                 putExtra("result", "Hello，依然范特西，我是回传的数据！")
