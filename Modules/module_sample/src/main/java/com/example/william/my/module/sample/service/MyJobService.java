@@ -45,14 +45,10 @@ public class MyJobService extends JobService {
 
     @Override
     public boolean onStartJob(final JobParameters params) {
-        // The work that this service "does" is simply wait for a certain duration and finish
-        // the job (on another thread).
-
         sendMessage(JobSchedulerActivity.MSG_COLOR_START, params.getJobId());
 
         long duration = params.getExtras().getLong(JobSchedulerActivity.WORK_DURATION_KEY);
 
-        // Uses a handler to delay the execution of jobFinished().
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -61,7 +57,7 @@ public class MyJobService extends JobService {
                 jobFinished(params, false);
             }
         }, duration);
-        Log.i(TAG, "on start job: " + params.getJobId());
+        Log.e(TAG, "on start job: " + params.getJobId());
 
         // Return true as there's more work to be done with this job.
         return true;
@@ -69,17 +65,14 @@ public class MyJobService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        // Stop tracking these job parameters, as we've 'finished' executing.
         sendMessage(JobSchedulerActivity.MSG_COLOR_STOP, params.getJobId());
-        Log.i(TAG, "on stop job: " + params.getJobId());
+        Log.e(TAG, "on stop job: " + params.getJobId());
 
         // Return false to drop the job.
         return false;
     }
 
     private void sendMessage(int messageID, Object params) {
-        // If this service is launched by the JobScheduler, there's no callback Messenger. It
-        // only exists when the MainActivity calls startService() with the callback in the Intent.
         if (mActivityMessenger == null) {
             Log.d(TAG, "Service is bound, not started. There's no callback to send a message to.");
             return;

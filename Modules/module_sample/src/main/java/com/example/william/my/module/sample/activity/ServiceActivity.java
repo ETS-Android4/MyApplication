@@ -24,7 +24,7 @@ public class ServiceActivity extends BaseResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        startService(new Intent(this, ForegroundService.class));
+        //startService(new Intent(this, ForegroundService.class));
     }
 
     @Override

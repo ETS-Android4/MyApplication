@@ -60,114 +60,6 @@ public class JobSchedulerActivity extends AppCompatActivity {
     // Handler for incoming messages from the service.
     private JobSchedulerMessageHandler mHandler;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.sample_main);
-
-        // Set up UI.
-        mDelayEditText = (EditText) findViewById(R.id.delay_time);
-        mDurationTimeEditText = (EditText) findViewById(R.id.duration_time);
-        mDeadlineEditText = (EditText) findViewById(R.id.deadline_time);
-        mWiFiConnectivityRadioButton = (RadioButton) findViewById(R.id.checkbox_unmetered);
-        mAnyConnectivityRadioButton = (RadioButton) findViewById(R.id.checkbox_any);
-        mRequiresChargingCheckBox = (CheckBox) findViewById(R.id.checkbox_charging);
-        mRequiresIdleCheckbox = (CheckBox) findViewById(R.id.checkbox_idle);
-
-        mServiceComponent = new ComponentName(this, MyJobService.class);
-
-        mHandler = new JobSchedulerMessageHandler(this);
-    }
-
-    @Override
-    protected void onStop() {
-        stopService(new Intent(this, MyJobService.class));
-        super.onStop();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Intent intent = new Intent(this, MyJobService.class);
-        intent.putExtra(MESSENGER_INTENT_KEY, new Messenger(mHandler));
-        startService(intent);
-    }
-
-    /**
-     * Executed when user clicks on SCHEDULE JOB.
-     */
-    public void scheduleJob(View v) {
-        /*
-         * Builder构造方法接收两个参数
-         * 第一个参数是jobId，每个app或者说uid下不同的Job,它的jobId必须是不同的
-         * 第二个参数是我们自定义的JobService,系统会回调我们自定义的JobService中的onStartJob和onStopJob方法
-         */
-        JobInfo.Builder builder = new JobInfo.Builder(mJobId++, mServiceComponent);
-
-        String delay = mDelayEditText.getText().toString();
-        if (!TextUtils.isEmpty(delay)) {
-            builder.setMinimumLatency(Long.valueOf(delay) * 1000);
-        }
-        String deadline = mDeadlineEditText.getText().toString();
-        if (!TextUtils.isEmpty(deadline)) {
-            builder.setOverrideDeadline(Long.valueOf(deadline) * 1000);
-        }
-        boolean requiresUnmetered = mWiFiConnectivityRadioButton.isChecked();
-        boolean requiresAnyConnectivity = mAnyConnectivityRadioButton.isChecked();
-        if (requiresUnmetered) {
-            builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
-        } else if (requiresAnyConnectivity) {
-            builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
-        }
-        builder.setRequiresDeviceIdle(mRequiresIdleCheckbox.isChecked());
-        builder.setRequiresCharging(mRequiresChargingCheckBox.isChecked());
-
-        // Extras, work duration.
-        PersistableBundle extras = new PersistableBundle();
-        String workDuration = mDurationTimeEditText.getText().toString();
-        if (TextUtils.isEmpty(workDuration)) {
-            workDuration = "1";
-        }
-        extras.putLong(WORK_DURATION_KEY, Long.valueOf(workDuration) * 1000);
-
-        builder.setExtras(extras);
-
-        // Schedule job
-        Log.d(TAG, "Scheduling job");
-        JobScheduler tm = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        tm.schedule(builder.build());
-    }
-
-    /**
-     * Executed when user clicks on CANCEL ALL.
-     */
-    public void cancelAllJobs(View v) {
-        JobScheduler tm = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        tm.cancelAll();
-        Toast.makeText(JobSchedulerActivity.this, "All jobs cancelled", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Executed when user clicks on FINISH LAST TASK.
-     */
-    public void finishJob(View v) {
-        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        List<JobInfo> allPendingJobs = jobScheduler.getAllPendingJobs();
-        if (allPendingJobs.size() > 0) {
-            // Finish the last one
-            int jobId = allPendingJobs.get(0).getId();
-            jobScheduler.cancel(jobId);
-            Toast.makeText(
-                    JobSchedulerActivity.this, "取消 : " + jobId,
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(
-                    JobSchedulerActivity.this, "No jobs to cancel",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
     /**
      * A {@link Handler} allows you to send messages associated with a thread. A {@link Messenger}
      * uses this handler to communicate from {@link MyJobService}. It's also used to make
@@ -187,7 +79,6 @@ public class JobSchedulerActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             JobSchedulerActivity mainActivity = mActivity.get();
             if (mainActivity == null) {
-                // Activity is no longer available, exit.
                 return;
             }
             View showStartView = mainActivity.findViewById(R.id.onstart_textview);
@@ -245,6 +136,109 @@ public class JobSchedulerActivity extends AppCompatActivity {
 
         private int getColor(int color) {
             return mActivity.get().getResources().getColor(color);
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.sample_main);
+
+        // Set up UI.
+        mDelayEditText = (EditText) findViewById(R.id.delay_time);
+        mDurationTimeEditText = (EditText) findViewById(R.id.duration_time);
+        mDeadlineEditText = (EditText) findViewById(R.id.deadline_time);
+        mWiFiConnectivityRadioButton = (RadioButton) findViewById(R.id.checkbox_unmetered);
+        mAnyConnectivityRadioButton = (RadioButton) findViewById(R.id.checkbox_any);
+        mRequiresChargingCheckBox = (CheckBox) findViewById(R.id.checkbox_charging);
+        mRequiresIdleCheckbox = (CheckBox) findViewById(R.id.checkbox_idle);
+
+        mServiceComponent = new ComponentName(this, MyJobService.class);
+
+        mHandler = new JobSchedulerMessageHandler(this);
+    }
+
+    @Override
+    protected void onStop() {
+        stopService(new Intent(this, MyJobService.class));
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Intent intent = new Intent(this, MyJobService.class);
+        intent.putExtra(MESSENGER_INTENT_KEY, new Messenger(mHandler));
+        startService(intent);
+    }
+
+    /**
+     * 执行 JobScheduler
+     */
+    public void scheduleJob(View v) {
+        /*
+         * Builder构造方法接收两个参数
+         * 第一个参数是jobId，每个app或者说uid下不同的Job,它的jobId必须是不同的
+         * 第二个参数是我们自定义的JobService,系统会回调我们自定义的JobService中的onStartJob和onStopJob方法
+         */
+        JobInfo.Builder builder = new JobInfo.Builder(mJobId++, mServiceComponent);
+
+        String delay = mDelayEditText.getText().toString();
+        if (!TextUtils.isEmpty(delay)) {
+            builder.setMinimumLatency(Long.valueOf(delay) * 1000);
+        }
+        String deadline = mDeadlineEditText.getText().toString();
+        if (!TextUtils.isEmpty(deadline)) {
+            builder.setOverrideDeadline(Long.valueOf(deadline) * 1000);
+        }
+        boolean requiresUnmetered = mWiFiConnectivityRadioButton.isChecked();
+        boolean requiresAnyConnectivity = mAnyConnectivityRadioButton.isChecked();
+        if (requiresUnmetered) {
+            builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
+        } else if (requiresAnyConnectivity) {
+            builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+        }
+        builder.setRequiresDeviceIdle(mRequiresIdleCheckbox.isChecked());
+        builder.setRequiresCharging(mRequiresChargingCheckBox.isChecked());
+
+        // Extras, work duration.
+        PersistableBundle extras = new PersistableBundle();
+        String workDuration = mDurationTimeEditText.getText().toString();
+        if (TextUtils.isEmpty(workDuration)) {
+            workDuration = "1";
+        }
+        extras.putLong(WORK_DURATION_KEY, Long.valueOf(workDuration) * 1000);
+
+        builder.setExtras(extras);
+
+        // Schedule job
+        Log.e(TAG, "Scheduling job");
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        jobScheduler.schedule(builder.build());
+    }
+
+    /**
+     * 取消 JobScheduler
+     */
+    public void cancelAllJobs(View v) {
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        jobScheduler.cancelAll();
+        Toast.makeText(JobSchedulerActivity.this, "All jobs cancelled", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 完成 JobScheduler
+     */
+    public void finishJob(View v) {
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        List<JobInfo> jobs = jobScheduler.getAllPendingJobs();
+        if (jobs.size() > 0) {
+            int jobId = jobs.get(0).getId();
+            jobScheduler.cancel(jobId);
+            Toast.makeText(JobSchedulerActivity.this, "取消 : " + jobId, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(JobSchedulerActivity.this, "No jobs to cancel", Toast.LENGTH_SHORT).show();
         }
     }
 }

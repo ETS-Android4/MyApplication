@@ -67,7 +67,7 @@ limitations under the License.
             android:layout_marginBottom="5dp"
             android:onClick="finishJob"
             android:padding="20dp"
-            android:text="finish_job_button_text" />
+            android:text="完成 JobScheduler" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -224,7 +224,7 @@ limitations under the License.
             android:layout_marginTop="20dp"
             android:layout_marginRight="40dp"
             android:onClick="scheduleJob"
-            android:text="schedule_job_button_text" />
+            android:text="执行 JobScheduler" />
 
         <Button
             android:id="@+id/cancel_button"
@@ -233,6 +233,6 @@ limitations under the License.
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:onClick="cancelAllJobs"
-            android:text="cancel_all_jobs_button_text" />
+            android:text="取消 JobScheduler" />
     </LinearLayout>
 </ScrollView>
