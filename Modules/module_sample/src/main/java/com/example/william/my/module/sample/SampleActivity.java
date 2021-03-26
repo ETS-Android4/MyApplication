@@ -36,6 +36,7 @@ public class SampleActivity extends BaseListActivity {
         mMap.put("AsyncTaskActivity", ARouterPath.Sample.Sample_AsyncTask);
         mMap.put("BroadcastActivity", ARouterPath.Sample.Sample_Broadcast);
         mMap.put("FloatWindowActivity", ARouterPath.Sample.Sample_FloatWindow);
+        mMap.put("JobSchedulerActivity", ARouterPath.Sample.Sample_JobScheduler);
         mMap.put("MessengerActivity", ARouterPath.Sample.Sample_Messenger);
         mMap.put("NetworkStatusActivity", ARouterPath.Sample.Sample_NetworkStatus);
         mMap.put("PermissionActivity", ARouterPath.Sample.Sample_Permission);

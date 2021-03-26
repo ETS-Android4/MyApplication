@@ -36,7 +36,6 @@ public class OkHttpActivity extends BaseResponseActivity {
     public void setOnClick() {
         super.setOnClick();
         login();
-        //download();
     }
 
     private void login() {

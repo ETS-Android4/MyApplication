@@ -8,9 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.core.widget.utils.SizeUtils;
 import com.example.william.my.module.sample.R;
-import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.util.List;
 
@@ -36,6 +34,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemCount() {
         return mData == null ? 0 : mData.size();
+    }
+
+    /**
+     * 刷新闪烁
+     * setHasStableId(true)
+     */
+    @Override
+    public long getItemId(int position) {
+        return (long) position;
     }
 
     private static class ViewHolder extends RecyclerView.ViewHolder {

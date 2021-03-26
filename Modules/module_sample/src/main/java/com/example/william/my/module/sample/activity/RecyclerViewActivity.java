@@ -83,6 +83,7 @@ public class RecyclerViewActivity extends BaseActivity {
             }
         });
         RecyclerAdapter mRecyclerAdapter = new RecyclerAdapter(mData);
+        mRecyclerAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mRecyclerAdapter);
     }
 }

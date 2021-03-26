@@ -3,6 +3,7 @@
     package="com.example.william.my.module.sample">
 
     <application>
+
         <activity android:name=".SampleActivity" />
         <activity android:name=".activity.AppBarActivity" />
         <activity android:name=".activity.BehaviorActivity" />
@@ -24,6 +25,7 @@
         <activity android:name=".activity.AsyncTaskActivity" />
         <activity android:name=".activity.AudioPlayerActivity" />
         <activity android:name=".activity.BroadcastActivity" />
+        <activity android:name=".activity.JobSchedulerActivity" />
         <activity android:name=".activity.MessengerActivity" />
         <activity android:name=".activity.PermissionActivity" />
         <activity android:name=".activity.PicCropActivity" />
@@ -38,6 +40,9 @@
         <service android:name=".service.AIDLService" />
         <service android:name=".service.ForegroundService" />
         <service android:name=".service.MessageService" />
+        <service
+            android:name=".service.MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

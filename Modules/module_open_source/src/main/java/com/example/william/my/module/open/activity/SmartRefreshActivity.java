@@ -28,7 +28,6 @@ public class SmartRefreshActivity extends BaseActivity {
 
     private int i = 0;
 
-    private List<String> mRefreshData;
     private BRVAHAdapter mRefreshAdapter;
 
     private List<SectionBean> mRefreshData2;
@@ -48,10 +47,10 @@ public class SmartRefreshActivity extends BaseActivity {
         //设置布局管理器
         mRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mRefreshData = new ArrayList<>();
-        mRefreshAdapter = new BRVAHAdapter(mRefreshData);
+        mRefreshAdapter = new BRVAHAdapter(new ArrayList<>());
         mRefreshRecyclerView.setAdapter(mRefreshAdapter);
 
+        //分组功能
         //mRefreshData2 = new ArrayList<>();
         //for (int i = 0; i <= 30; i++) {
         //    mRefreshData2.add(new Section(i));

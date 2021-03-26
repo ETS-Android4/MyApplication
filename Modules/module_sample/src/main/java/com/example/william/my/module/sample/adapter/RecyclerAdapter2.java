@@ -14,6 +14,9 @@ import com.example.william.my.module.sample.R;
 
 import java.util.List;
 
+/**
+ * RecyclerView 嵌套 RecyclerView
+ */
 public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;

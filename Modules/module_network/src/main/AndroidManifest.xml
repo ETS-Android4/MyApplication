@@ -9,7 +9,7 @@
         <activity android:name=".activity.OkHttpActivity" />
         <activity android:name=".activity.RetrofitActivity" />
         <activity android:name=".activity.RetrofitRxJavaActivity" />
-        <activity android:name=".activity.RetrofitUtilsActivity" />
+        <activity android:name=".activity.RetrofitRxJavaUtilsActivity" />
         <activity android:name=".activity.RetrofitDownloadActivity" />
         <activity android:name=".activity.RxRetrofitActivity" />
         <activity android:name=".activity.VolleyActivity" />

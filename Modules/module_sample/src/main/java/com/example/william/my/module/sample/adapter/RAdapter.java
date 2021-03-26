@@ -20,7 +20,6 @@ import java.util.List;
  */
 public abstract class RAdapter<T> extends RecyclerView.Adapter<RAdapter.ViewHolder> {
 
-
     private List<T> mData;
     private final int[] mLayoutResID;
 

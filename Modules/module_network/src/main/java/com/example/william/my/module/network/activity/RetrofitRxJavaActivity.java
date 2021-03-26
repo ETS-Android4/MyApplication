@@ -43,6 +43,9 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
         }
     }
 
+    /**
+     * GsonConverterFactory Gson 解析
+     */
     private void getBanner() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.baseUrl)//baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
@@ -83,7 +86,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
     }
 
     /**
-     * RetrofitConverterFactory
+     * RetrofitConverterFactory 自定义解析
      */
     private void getBannerResponse() {
         Retrofit retrofit = new Retrofit.Builder()

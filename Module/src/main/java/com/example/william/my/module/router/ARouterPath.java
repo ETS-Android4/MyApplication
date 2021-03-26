@@ -42,8 +42,8 @@ public class ARouterPath {
         public static final String NetWork_OkHttp = "/module_net/ok_http";
         public static final String NetWork_Retrofit = "/module_net/retrofit";
         public static final String NetWork_RetrofitRxJava = "/module_net/retrofit_rx_java";
+        public static final String NetWork_RetrofitRxJavaUtils = "/module_net/retrofit_rx_java_utils";
         public static final String NetWork_RxRetrofit = "/module_net/rx_retrofit";
-        public static final String NetWork_RetrofitUtils = "/module_net/retrofit_utils";
         public static final String NetWork_RetrofitDownload = "/module_net/retrofit_download";
         public static final String NetWork_WebSocket = "/module_net/web_socket";
         public static final String NetWork_Glide = "/module_net/glide";
@@ -126,6 +126,7 @@ public class ARouterPath {
         public static final String Sample_AudioPlayer = "/module_sample/audio_player";
         public static final String Sample_Broadcast = "/module_sample/broadcast";
         public static final String Sample_FloatWindow = "/module_sample/float_window";
+        public static final String Sample_JobScheduler = "/module_sample/job_scheduler";
         public static final String Sample_Messenger = "/module_sample/messenger";
         public static final String Sample_NetworkStatus = "/module_sample/net_status";
         public static final String Sample_Permission = "/module_sample/permission";

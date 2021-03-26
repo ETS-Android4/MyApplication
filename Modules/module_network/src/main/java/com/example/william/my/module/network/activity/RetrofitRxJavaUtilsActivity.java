@@ -19,8 +19,8 @@ import io.reactivex.rxjava3.core.Observable;
 /**
  * {@link RetrofitUtils}
  */
-@Route(path = ARouterPath.NetWork.NetWork_RetrofitUtils)
-public class RetrofitUtilsActivity extends BaseResponseActivity {
+@Route(path = ARouterPath.NetWork.NetWork_RetrofitRxJavaUtils)
+public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
 
     private boolean b;
 
@@ -37,6 +37,9 @@ public class RetrofitUtilsActivity extends BaseResponseActivity {
         }
     }
 
+    /**
+     * GsonConverterFactory Gson 解析
+     */
     private void getBanners() {
         Observable<BannersBean> obs = RetrofitUtils.buildObs(service.getBanners());
 
@@ -55,6 +58,9 @@ public class RetrofitUtilsActivity extends BaseResponseActivity {
         });
     }
 
+    /**
+     * RetrofitConverterFactory 自定义解析
+     */
     private void getBannerList() {
         Observable<RetrofitResponse<List<BannerBean>>> responseObs = RetrofitUtils.buildObs(service.getBannersResponse());
 
