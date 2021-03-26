@@ -31,19 +31,6 @@ import com.example.william.my.module.sample.service.MyJobService;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-/**
- * mJobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
- * //Builder构造方法接收两个参数，第一个参数是jobId，每个app或者说uid下不同的Job,它的jobId必须是不同的
- * //第二个参数是我们自定义的JobService,系统会回调我们自定义的JobService中的onStartJob和onStopJob方法
- * builder = new JobInfo.Builder(1, new ComponentName(getPackageName(), JobSchedulerService.class.getName()));
- * //指定每三秒钟重复执行一次
- * builder.setPeriodic(3000);
- * <p>
- * if (mJobScheduler.schedule(builder.build()) <= 0) {
- * //If something goes wrong
- * mJobScheduler.schedule(builder.build());
- * }
- */
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 @Route(path = ARouterPath.Sample.Sample_JobScheduler)
 public class JobSchedulerActivity extends AppCompatActivity {
@@ -71,7 +58,7 @@ public class JobSchedulerActivity extends AppCompatActivity {
     private int mJobId = 0;
 
     // Handler for incoming messages from the service.
-    private IncomingMessageHandler mHandler;
+    private JobSchedulerMessageHandler mHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,17 +73,14 @@ public class JobSchedulerActivity extends AppCompatActivity {
         mAnyConnectivityRadioButton = (RadioButton) findViewById(R.id.checkbox_any);
         mRequiresChargingCheckBox = (CheckBox) findViewById(R.id.checkbox_charging);
         mRequiresIdleCheckbox = (CheckBox) findViewById(R.id.checkbox_idle);
+
         mServiceComponent = new ComponentName(this, MyJobService.class);
 
-        mHandler = new IncomingMessageHandler(this);
+        mHandler = new JobSchedulerMessageHandler(this);
     }
 
     @Override
     protected void onStop() {
-        // A service can be "started" and/or "bound". In this case, it's "started" by this Activity
-        // and "bound" to the JobScheduler (also called "Scheduled" by the JobScheduler). This call
-        // to stopService() won't prevent scheduled jobs to be processed. However, failing
-        // to call stopService() would keep it alive indefinitely.
         stopService(new Intent(this, MyJobService.class));
         super.onStop();
     }
@@ -104,17 +88,21 @@ public class JobSchedulerActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Start service and provide it a way to communicate with this class.
-        Intent startServiceIntent = new Intent(this, MyJobService.class);
-        Messenger messengerIncoming = new Messenger(mHandler);
-        startServiceIntent.putExtra(MESSENGER_INTENT_KEY, messengerIncoming);
-        startService(startServiceIntent);
+
+        Intent intent = new Intent(this, MyJobService.class);
+        intent.putExtra(MESSENGER_INTENT_KEY, new Messenger(mHandler));
+        startService(intent);
     }
 
     /**
      * Executed when user clicks on SCHEDULE JOB.
      */
     public void scheduleJob(View v) {
+        /*
+         * Builder构造方法接收两个参数
+         * 第一个参数是jobId，每个app或者说uid下不同的Job,它的jobId必须是不同的
+         * 第二个参数是我们自定义的JobService,系统会回调我们自定义的JobService中的onStartJob和onStopJob方法
+         */
         JobInfo.Builder builder = new JobInfo.Builder(mJobId++, mServiceComponent);
 
         String delay = mDelayEditText.getText().toString();
@@ -185,12 +173,12 @@ public class JobSchedulerActivity extends AppCompatActivity {
      * uses this handler to communicate from {@link MyJobService}. It's also used to make
      * the start and stop views blink for a short period of time.
      */
-    private static class IncomingMessageHandler extends Handler {
+    private static class JobSchedulerMessageHandler extends Handler {
 
         // Prevent possible leaks with a weak reference.
         private WeakReference<JobSchedulerActivity> mActivity;
 
-        IncomingMessageHandler(JobSchedulerActivity activity) {
+        JobSchedulerMessageHandler(JobSchedulerActivity activity) {
             super(/* default looper */);
             this.mActivity = new WeakReference<>(activity);
         }

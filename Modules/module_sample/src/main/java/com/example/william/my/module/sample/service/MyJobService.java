@@ -30,12 +30,6 @@ import androidx.annotation.RequiresApi;
 
 import com.example.william.my.module.sample.activity.JobSchedulerActivity;
 
-
-/**
- * Service to handle callbacks from the JobScheduler. Requests scheduled with the JobScheduler
- * ultimately land on this service's "onStartJob" method. It runs jobs for a specific amount of time
- * and finishes them. It keeps the activity updated with changes via a Messenger.
- */
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MyJobService extends JobService {
 
@@ -43,22 +37,6 @@ public class MyJobService extends JobService {
 
     private Messenger mActivityMessenger;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Log.i(TAG, "Service created");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "Service destroyed");
-    }
-
-    /**
-     * When the app's MainActivity is created, it starts this service. This is so that the
-     * activity and this service can communicate back and forth. See "setUiCallback()"
-     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mActivityMessenger = intent.getParcelableExtra(JobSchedulerActivity.MESSENGER_INTENT_KEY);
