@@ -20,26 +20,6 @@ public class BroadcastActivity extends BaseResponseActivity {
 
     private MessageReceiver mMessageReceiver;
 
-    /**
-     * 消息监听器
-     */
-    public static class MessageReceiver extends BroadcastReceiver {
-
-        private final WeakReference<BroadcastActivity> softReference;
-
-        //声明一个操作常量字符串
-        public static final String ACTION_UPDATE = "com.example.broadcast";
-
-        public MessageReceiver(BroadcastActivity activity) {
-            this.softReference = new WeakReference<>(activity);
-        }
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            softReference.get().mResponse.setText(intent.getStringExtra("message"));
-        }
-    }
-
     @Override
     public void setOnClick() {
         super.setOnClick();
@@ -51,8 +31,6 @@ public class BroadcastActivity extends BaseResponseActivity {
         intent.putExtras(bundle);
         intent.setAction(MessageReceiver.ACTION_UPDATE);
         sendBroadcast(intent);
-
-        //LocalBroadcastManager.getInstance(BroadcastActivity.this).sendBroadcast(intent);
     }
 
     @Override
@@ -71,7 +49,25 @@ public class BroadcastActivity extends BaseResponseActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mMessageReceiver);
+    }
 
-        //LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+    /**
+     * 消息监听器
+     */
+    public static class MessageReceiver extends BroadcastReceiver {
+
+        private final WeakReference<BroadcastActivity> softReference;
+
+        //声明一个操作常量字符串
+        public static final String ACTION_UPDATE = "com.example.broadcast";
+
+        public MessageReceiver(BroadcastActivity activity) {
+            this.softReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            softReference.get().mResponse.setText(intent.getStringExtra("message"));
+        }
     }
 }

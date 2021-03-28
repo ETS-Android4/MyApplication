@@ -5,5 +5,4 @@ android {
 dependencies {
     implementation project(path: ':librarys:lib_customview')
     implementation deps.flexbox
-    implementation deps.localbroadcast
 }

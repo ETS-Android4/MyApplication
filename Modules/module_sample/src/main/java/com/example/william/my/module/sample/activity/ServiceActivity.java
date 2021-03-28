@@ -11,6 +11,7 @@ import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.IMyAidlInterface;
 import com.example.william.my.module.sample.service.AIDLService;
+import com.example.william.my.module.sample.service.ForegroundService;
 
 /**
  * Service
@@ -23,7 +24,6 @@ public class ServiceActivity extends BaseResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        // 前台服务
         //startService(new Intent(this, ForegroundService.class));
     }
 
@@ -43,12 +43,12 @@ public class ServiceActivity extends BaseResponseActivity {
                 }
 
                 //AIDLService
-                //IMyAidlInterface serviceInterface = IMyAidlInterface.Stub.asInterface(iBinder);
-                //try {
-                //    serviceInterface.showToast("服务已启动");
-                //} catch (RemoteException e) {
-                //    e.printStackTrace();
-                //}
+                IMyAidlInterface serviceInterface = IMyAidlInterface.Stub.asInterface(iBinder);
+                try {
+                    serviceInterface.showToast("服务已启动");
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
 
             /**
