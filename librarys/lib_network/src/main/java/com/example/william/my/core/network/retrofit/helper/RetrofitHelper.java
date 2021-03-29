@@ -11,7 +11,6 @@ import com.example.william.my.core.network.retrofit.listener.RetrofitResponseLis
 import com.example.william.my.core.network.retrofit.ssl.SSLSocketClient;
 
 import java.io.File;
-import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

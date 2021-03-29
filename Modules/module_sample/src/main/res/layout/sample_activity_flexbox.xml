@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.FlexBoxActivity">
+    tools:context=".activity.widget.FlexBoxActivity">
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/flex_flexBox"

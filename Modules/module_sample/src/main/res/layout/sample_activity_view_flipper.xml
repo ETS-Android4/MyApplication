@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ViewFlipperActivity">
+    tools:context=".activity.widget.ViewFlipperActivity">
 
     <ViewFlipper
         android:id="@+id/viewFlipper"

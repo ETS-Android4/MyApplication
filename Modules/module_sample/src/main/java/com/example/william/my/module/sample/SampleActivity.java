@@ -15,6 +15,7 @@ public class SampleActivity extends BaseListActivity {
     protected void initData() {
         super.initData();
 
+        mMap.put("AnimatorActivity", ARouterPath.Sample.Sample_Animator);
         mMap.put("AppBarActivity", ARouterPath.Sample.Sample_AppBar);
         mMap.put("BehaviorActivity", ARouterPath.Sample.Sample_Behavior);
         mMap.put("DialogActivity", ARouterPath.Sample.Sample_Dialog);
@@ -32,7 +33,6 @@ public class SampleActivity extends BaseListActivity {
         mMap.put("WebViewActivity", ARouterPath.Sample.Sample_WebView);
 
         mMap.put(" ", " ");
-        mMap.put("AnimatorActivity", ARouterPath.Sample.Sample_Animator);
         mMap.put("AsyncTaskActivity", ARouterPath.Sample.Sample_AsyncTask);
         mMap.put("BroadcastActivity", ARouterPath.Sample.Sample_Broadcast);
         mMap.put("FloatWindowActivity", ARouterPath.Sample.Sample_FloatWindow);
