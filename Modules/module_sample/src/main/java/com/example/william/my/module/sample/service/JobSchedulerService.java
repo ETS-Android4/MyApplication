@@ -74,7 +74,6 @@ public class JobSchedulerService extends JobService {
 
     private void sendMessage(int messageID, Object params) {
         if (mActivityMessenger == null) {
-            Log.e(TAG, "Service is bound, not started. There's no callback to send a message to.");
             return;
         }
         Message message = Message.obtain();
@@ -83,7 +82,7 @@ public class JobSchedulerService extends JobService {
         try {
             mActivityMessenger.send(message);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error passing service object back to activity.");
+            e.printStackTrace();
         }
     }
 }

@@ -24,10 +24,10 @@ public class AsyncTaskActivity extends BaseResponseActivity {
      */
     private static class MyAsyncTask extends AsyncTask<Integer, Integer, Void> {
 
-        private final WeakReference<AsyncTaskActivity> mActivity;
+        private final WeakReference<AsyncTaskActivity> weakReference;
 
         MyAsyncTask(AsyncTaskActivity activity) {
-            this.mActivity = new WeakReference<>(activity);
+            this.weakReference = new WeakReference<>(activity);
         }
 
         /**
@@ -36,7 +36,7 @@ public class AsyncTaskActivity extends BaseResponseActivity {
          */
         @Override
         protected void onPreExecute() {
-            mActivity.get().showResponse("onPreExecute");
+            weakReference.get().showResponse("onPreExecute");
         }
 
         /**
@@ -63,7 +63,7 @@ public class AsyncTaskActivity extends BaseResponseActivity {
          */
         @Override
         protected void onProgressUpdate(Integer... values) {
-            mActivity.get().showResponse("Progress : " + values[0]);
+            weakReference.get().showResponse("Progress : " + values[0]);
         }
 
         /**
@@ -72,7 +72,7 @@ public class AsyncTaskActivity extends BaseResponseActivity {
          */
         @Override
         protected void onPostExecute(Void aVoid) {
-            mActivity.get().showResponse("onPostExecute");
+            weakReference.get().showResponse("onPostExecute");
         }
     }
 

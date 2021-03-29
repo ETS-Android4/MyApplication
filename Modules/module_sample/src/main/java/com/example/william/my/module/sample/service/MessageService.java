@@ -9,10 +9,11 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.william.my.module.sample.activity.MessengerActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -32,43 +33,50 @@ public class MessageService extends Service {
      */
     private static class ServiceHandler extends Handler {
 
-        private final WeakReference<MessageService> mService;
+        private final WeakReference<MessageService> weakReference;
 
         ServiceHandler(@NonNull Looper looper, MessageService service) {
             super(looper);
-            this.mService = new WeakReference<>(service);
+            this.weakReference = new WeakReference<>(service);
         }
 
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            MessageService messageService = mService.get();
-            if (messageService == null) {
+            MessageService mService = weakReference.get();
+            if (mService == null) {
                 return;
             }
-            //通过Message的replyTo获取到客户端自身的Messenger，
-            //Service可以通过它向客户端发送消息
-            mService.get().mClientMessenger = msg.replyTo;
-            if (mService.get().mClientMessenger != null) {
-                Message message = Message.obtain();
+            if (msg.what == MessengerActivity.MSG_CODE_SEND_TO_SERVICE) {
+                //通过Message的replyTo获取到客户端自身的Messenger，
+                //Service可以通过它向客户端发送消息
+                weakReference.get().mClientMessenger = msg.replyTo;
 
-                //此处跨进程Message通信不能将msg.obj设置为non-Parcelable的对象，应该使用Bundle
-                Bundle bundle = new Bundle();
-                String value = msg.getData().getString("KEY");
-                Log.e("TAG", value);
-                bundle.putString("KEY", "收到客户端信息：" + value);
+                String value = msg.getData().getString(MessengerActivity.MSG_SEND_KEY);
 
-                //发送消息到客户端
-                message.setData(bundle);
-
-                try {
-                    //向客户端发送消息
-                    mService.get().mClientMessenger.send(message);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
+                sendMessage(MessengerActivity.MSG_CODE_SEND_TO_ACTIVITY, MessengerActivity.MSG_SEND_KEY, value);
             }
+        }
 
+        private void sendMessage(int messageID, String key, String params) {
+            if (weakReference.get().mClientMessenger == null) {
+                return;
+            }
+            Message message = Message.obtain();
+            message.what = messageID;
+
+            //此处跨进程Message通信不能将msg.obj设置为non-Parcelable的对象，应该使用Bundle
+            //message.obj = params;
+            Bundle bundle = new Bundle();
+            bundle.putString(key, params);
+            message.setData(bundle);
+
+            try {
+                //向客户端发送消息
+                weakReference.get().mClientMessenger.send(message);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -84,9 +92,5 @@ public class MessageService extends Service {
         super.onCreate();
         ServiceHandler serviceHandler = new ServiceHandler(Looper.getMainLooper(), this);
         mServiceMessenger = new Messenger(serviceHandler);
-    }
-
-    private void sendMessage(Messenger messenger, int messageID, Object params) {
-
     }
 }

@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,8 +27,6 @@ import java.util.List;
 @Route(path = ARouterPath.Sample.Sample_JobScheduler)
 public class JobSchedulerActivity extends BaseResponseActivity {
 
-    private static final String TAG = JobSchedulerActivity.class.getSimpleName();
-
     public static final int MSG_COLOR_START = 0;
     public static final int MSG_COLOR_STOP = 1;
 
@@ -40,31 +37,29 @@ public class JobSchedulerActivity extends BaseResponseActivity {
 
     private int mJobId = 0;
 
-    private JobSchedulerMessageHandler mHandler;
+    private static class JobSchedulerHandler extends Handler {
 
-    private static class JobSchedulerMessageHandler extends Handler {
+        private final WeakReference<JobSchedulerActivity> weakReference;
 
-        private final WeakReference<JobSchedulerActivity> mActivity;
-
-        private JobSchedulerMessageHandler(JobSchedulerActivity activity) {
+        private JobSchedulerHandler(JobSchedulerActivity activity) {
             super();
-            this.mActivity = new WeakReference<>(activity);
+            this.weakReference = new WeakReference<>(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            JobSchedulerActivity jobActivity = mActivity.get();
-            if (jobActivity == null) {
+            JobSchedulerActivity mActivity = weakReference.get();
+            if (mActivity == null) {
                 return;
             }
             switch (msg.what) {
                 case MSG_COLOR_START:
                     // Start received, turn on the indicator and show text.
-                    jobActivity.showResponse(String.format("Job ID %s %s", msg.obj, "started"));
+                    mActivity.showResponse(String.format("Job ID %s %s", msg.obj, "started"));
                     break;
                 case MSG_COLOR_STOP:
                     // Stop received, turn on the indicator and show text.
-                    jobActivity.showResponse(String.format("Job ID %s %s", msg.obj, "stopped"));
+                    mActivity.showResponse(String.format("Job ID %s %s", msg.obj, "stopped"));
                     break;
             }
         }
@@ -74,8 +69,6 @@ public class JobSchedulerActivity extends BaseResponseActivity {
     public void initView() {
         super.initView();
         mServiceComponent = new ComponentName(this, JobSchedulerService.class);
-
-        mHandler = new JobSchedulerMessageHandler(this);
     }
 
     @Override
@@ -87,8 +80,10 @@ public class JobSchedulerActivity extends BaseResponseActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        JobSchedulerHandler jobHandler = new JobSchedulerHandler(this);
+        Messenger jobMessenger = new Messenger(jobHandler);
         Intent intent = new Intent(this, JobSchedulerService.class);
-        intent.putExtra(KEY_MESSENGER, new Messenger(mHandler));
+        intent.putExtra(KEY_MESSENGER, jobMessenger);
         startService(intent);
     }
 
@@ -134,11 +129,11 @@ public class JobSchedulerActivity extends BaseResponseActivity {
 
         // Extras, work duration.
         PersistableBundle extras = new PersistableBundle();
-        extras.putLong(KEY_WORK_DURATION, (long) 1000);
+        extras.putLong(KEY_WORK_DURATION, 1000);
         builder.setExtras(extras);
 
         // Schedule job
-        Log.e(TAG, "Scheduling job");
+        showResponse("Scheduling job");
         JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         jobScheduler.schedule(builder.build());
     }
