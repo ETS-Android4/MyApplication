@@ -31,15 +31,15 @@ import androidx.annotation.RequiresApi;
 import com.example.william.my.module.sample.activity.JobSchedulerActivity;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class MyJobService extends JobService {
+public class JobSchedulerService extends JobService {
 
-    private static final String TAG = MyJobService.class.getSimpleName();
+    private static final String TAG = JobSchedulerService.class.getSimpleName();
 
     private Messenger mActivityMessenger;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mActivityMessenger = intent.getParcelableExtra(JobSchedulerActivity.MESSENGER_INTENT_KEY);
+        mActivityMessenger = intent.getParcelableExtra(JobSchedulerActivity.KEY_MESSENGER);
         return START_NOT_STICKY;
     }
 
@@ -47,7 +47,7 @@ public class MyJobService extends JobService {
     public boolean onStartJob(final JobParameters params) {
         sendMessage(JobSchedulerActivity.MSG_COLOR_START, params.getJobId());
 
-        long duration = params.getExtras().getLong(JobSchedulerActivity.WORK_DURATION_KEY);
+        long duration = params.getExtras().getLong(JobSchedulerActivity.KEY_WORK_DURATION);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -74,14 +74,14 @@ public class MyJobService extends JobService {
 
     private void sendMessage(int messageID, Object params) {
         if (mActivityMessenger == null) {
-            Log.d(TAG, "Service is bound, not started. There's no callback to send a message to.");
+            Log.e(TAG, "Service is bound, not started. There's no callback to send a message to.");
             return;
         }
-        Message m = Message.obtain();
-        m.what = messageID;
-        m.obj = params;
+        Message message = Message.obtain();
+        message.what = messageID;
+        message.obj = params;
         try {
-            mActivityMessenger.send(m);
+            mActivityMessenger.send(message);
         } catch (RemoteException e) {
             Log.e(TAG, "Error passing service object back to activity.");
         }
