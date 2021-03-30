@@ -16,11 +16,13 @@ import com.example.william.my.module.router.ARouterPath
 @Route(path = ARouterPath.Kotlin.Kotlin_FLow)
 class FlowActivity : BaseActivity() {
 
+    var binding: KLayoutResponseBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = KLayoutResponseBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = KLayoutResponseBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
 
         val viewModel = ViewModelProvider(this).get(FlowViewModel::class.java)
 
@@ -46,9 +48,9 @@ class FlowActivity : BaseActivity() {
         //    })
         //}
 
-        binding.contentTextView.setOnClickListener {
+        binding!!.contentTextView.setOnClickListener {
             viewModel.getArticles3().observe(this, Observer {
-                binding.contentTextView.text = it
+                binding!!.contentTextView.text = it
             })
         }
     }

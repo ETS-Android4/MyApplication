@@ -74,6 +74,8 @@ class DataStoreActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        binding = null
+
         DataStoreUtils.clearSync()
 
         runBlocking {

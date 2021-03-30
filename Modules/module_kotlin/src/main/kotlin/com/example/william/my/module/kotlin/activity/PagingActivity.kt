@@ -28,17 +28,19 @@ class PagingActivity : BaseActivity() {
 
     private val mDisposable = CompositeDisposable()
 
+    var binding: KActivityPagingBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = KActivityPagingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = KActivityPagingBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
 
         //val viewModel by viewModels<ExampleViewModel>()
         val viewModel = ViewModelProvider(this).get(PagingViewModel::class.java)
 
         val pagingAdapter = ArticlesAdapter(ArticleComparator())
-        val recycleView = binding.pagingRecycleView
+        val recycleView = binding!!.pagingRecycleView
         recycleView.layoutManager = LinearLayoutManager(this)
         recycleView.adapter = pagingAdapter
 
@@ -80,6 +82,8 @@ class PagingActivity : BaseActivity() {
 
     override fun onStop() {
         super.onStop()
+        binding = null
+
         // clear all the subscriptions
         mDisposable.clear()
     }

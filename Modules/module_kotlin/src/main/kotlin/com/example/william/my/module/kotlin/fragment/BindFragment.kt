@@ -10,7 +10,7 @@ import com.example.william.my.module.kotlin.databinding.KLayoutResponseBinding
 
 class BindFragment : Fragment() {
 
-    private var binding: KLayoutResponseBinding? = null
+    var binding: KLayoutResponseBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +27,7 @@ class BindFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        binding = null
         super.onDestroyView()
+        binding = null
     }
 }

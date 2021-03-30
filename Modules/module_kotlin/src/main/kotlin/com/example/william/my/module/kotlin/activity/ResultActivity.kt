@@ -35,6 +35,11 @@ class ResultActivity : ComponentActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
+
     private val myActivityLauncher =
         registerForActivityResult(ResultContract()) {
             binding!!.contentTextView.text = "result value is :${it}"

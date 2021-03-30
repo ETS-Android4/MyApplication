@@ -15,12 +15,18 @@ class KotlinActivity : AppCompatActivity() {
 
     private var binding: KActivityKotlinBinding? = null
 
+    var string: String? = null
+    var arrayList: ArrayList<String>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = KActivityKotlinBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         //setContentView(R.layout.k_activity_kotlin)
+
+        string.isNullOrEmpty()
+        arrayList.isNullOrEmpty()
 
         binding!!.kotlinTextView.setOnClickListener {
             Singleton.getInstance(application).showToast("Singleton")
