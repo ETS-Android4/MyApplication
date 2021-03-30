@@ -32,6 +32,6 @@ public class ViewPagerActivity extends BaseActivity {
         ViewPager mPageFragment = findViewById(R.id.page_fragment);
 
         mPageView.setAdapter(new ViewPagerAdapter(Arrays.asList(mData)));
-        mPageFragment.setAdapter(new ViewPagerFragmentAdapter(getSupportFragmentManager(), Arrays.asList(mFragments)));
+        mPageFragment.setAdapter(new ViewPagerFragmentAdapter(getSupportFragmentManager(), Arrays.asList(mFragments), false));
     }
 }

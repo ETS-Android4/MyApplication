@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.william.my.library.fragment.NewLazyFragment;
+import com.example.william.my.library.fragment.LazyFragment;
 
 /**
  * add show hide
@@ -17,7 +17,7 @@ import com.example.william.my.library.fragment.NewLazyFragment;
  * 当使用旧方式适配时，Fragment通过onResume()，onPause()方法
  * 当使用新方式适配时，Fragment通过onResume()，onPause()方法
  */
-public class BaseFragment extends NewLazyFragment {
+public class BaseFragment extends LazyFragment {
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -50,9 +50,7 @@ public class BaseFragment extends NewLazyFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden) {
-            Log.e(TAG, "onHiddenChanged");
-        }
+        Log.e(TAG, "onHiddenChanged : hidden : " + hidden);
     }
 
     /**
@@ -64,9 +62,7 @@ public class BaseFragment extends NewLazyFragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            Log.e(TAG, "setUserVisibleHint");
-        }
+        Log.e(TAG, "setUserVisibleHint : isVisibleToUser : " + isVisibleToUser);
     }
 
     @Override

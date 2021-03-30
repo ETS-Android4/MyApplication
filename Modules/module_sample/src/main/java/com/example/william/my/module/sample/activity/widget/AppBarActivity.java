@@ -41,7 +41,7 @@ public class AppBarActivity extends BaseActivity {
 
         TabLayout app_bar_tabs = findViewById(R.id.appbar_tabs);
         app_bar_viewPager = findViewById(R.id.appbar_viewPager);
-        app_bar_viewPager.setAdapter(new ViewPagerFragmentAdapter(getSupportFragmentManager(), Arrays.asList(mFragments), Arrays.asList(mTitles)));
+        app_bar_viewPager.setAdapter(new ViewPagerFragmentAdapter(getSupportFragmentManager(), Arrays.asList(mFragments), Arrays.asList(mTitles), true));
 
         //设置TabLayout可滚动，保证Tab数量过多时也可正常显示
         app_bar_tabs.setTabMode(TabLayout.MODE_SCROLLABLE);

@@ -34,7 +34,7 @@ public class FragmentGroupActivity extends BaseActivity implements RadioGroup.On
     private final int[] mButtons = new int[]{R.id.fragment_button1, R.id.fragment_button2, R.id.fragment_button3};
     private final Fragment[] mFragments = new Fragment[]{new PrimaryFragment(), new PrimaryDarkFragment(), new PrimaryLightFragment()};
 
-    private final boolean isNew = true;
+    private final boolean isNew = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

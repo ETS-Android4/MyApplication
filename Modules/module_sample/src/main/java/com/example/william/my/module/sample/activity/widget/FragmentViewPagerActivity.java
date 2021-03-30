@@ -39,7 +39,7 @@ public class FragmentViewPagerActivity extends BaseActivity implements RadioGrou
     private void initFragment() {
         mViewPager = findViewById(R.id.fragment_viewPager);
         mViewPager.setOffscreenPageLimit(4);
-        mViewPager.setAdapter(new ViewPagerFragmentAdapter(getSupportFragmentManager(), Arrays.asList(mFragments)));
+        mViewPager.setAdapter(new ViewPagerFragmentAdapter(getSupportFragmentManager(), Arrays.asList(mFragments), true));
     }
 
     private void initRadioButtons() {
