@@ -12,15 +12,15 @@ import kotlin.reflect.KProperty
  */
 class DelegatesActivity : BaseActivity() {
 
-    var binding: KLayoutResponseBinding? = null
+    lateinit var binding: KLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = KLayoutResponseBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
 
-        binding!!.contentTextView.setOnClickListener {
+        binding.contentTextView.setOnClickListener {
 
             Derived(BaseImpl("Derived")).print()
             DerivedCode().toPrint()
@@ -32,11 +32,6 @@ class DelegatesActivity : BaseActivity() {
             observable.delegates = "第一次赋值"
             observable.delegates = "第二次赋值"
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
     }
 
     //可观察属性委托

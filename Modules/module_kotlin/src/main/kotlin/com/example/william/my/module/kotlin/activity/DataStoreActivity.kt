@@ -26,17 +26,17 @@ class DataStoreActivity : BaseActivity() {
 
     private val protoDataStore = ExampleProtoDataStore(this)
 
-    private var binding: KLayoutResponseBinding? = null
+    private lateinit var binding: KLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = KLayoutResponseBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
 
         initCounter()
 
-        binding!!.contentTextView.setOnClickListener {
+        binding.contentTextView.setOnClickListener {
             incrementCounter()
         }
     }
@@ -48,15 +48,15 @@ class DataStoreActivity : BaseActivity() {
         GlobalScope.launch(Dispatchers.Main) {
             DataStoreUtils.getData("String", "default")
                 .collect {
-                    binding!!.contentTextView.text = it
+                    binding.contentTextView.text = it
                 }
             preferenceDataStore.getCounter()
                 .collect {
-                    binding!!.contentTextView.text = it.toString()
+                    binding.contentTextView.text = it.toString()
                 }
             protoDataStore.getCounter()
                 .collect {
-                    binding!!.contentTextView.text = it.toString()
+                    binding.contentTextView.text = it.toString()
                 }
         }
     }
@@ -74,7 +74,6 @@ class DataStoreActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding = null
 
         DataStoreUtils.clearSync()
 

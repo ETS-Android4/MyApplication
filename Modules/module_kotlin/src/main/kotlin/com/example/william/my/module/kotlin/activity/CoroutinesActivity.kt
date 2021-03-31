@@ -17,13 +17,13 @@ import kotlinx.coroutines.*
  */
 class CoroutinesActivity : BaseActivity() {
 
-    var binding: KLayoutResponseBinding? = null
+    lateinit var binding: KLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = KLayoutResponseBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
 
         lifecycleScope.launchWhenCreated {
             Log.e(TAG, "launchWhenCreated")
@@ -36,11 +36,6 @@ class CoroutinesActivity : BaseActivity() {
         lifecycleScope.launchWhenResumed {
             Log.e(TAG, "launchWhenResumed")
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
     }
 
     private fun launch() {

@@ -13,7 +13,7 @@ import com.example.william.my.module.router.ARouterPath
 @Route(path = ARouterPath.Kotlin.Kotlin)
 class KotlinActivity : AppCompatActivity() {
 
-    private var binding: KActivityKotlinBinding? = null
+    private lateinit var binding: KActivityKotlinBinding
 
     var string: String? = null
     var arrayList: ArrayList<String>? = null
@@ -22,13 +22,13 @@ class KotlinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = KActivityKotlinBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
         //setContentView(R.layout.k_activity_kotlin)
 
         string.isNullOrEmpty()
         arrayList.isNullOrEmpty()
 
-        binding!!.kotlinTextView.setOnClickListener {
+        binding.kotlinTextView.setOnClickListener {
             Singleton.getInstance(application).showToast("Singleton")
         }
     }

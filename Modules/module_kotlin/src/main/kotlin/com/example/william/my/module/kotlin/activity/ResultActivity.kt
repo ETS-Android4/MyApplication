@@ -18,26 +18,21 @@ import com.example.william.my.module.router.ARouterPath
 @Route(path = ARouterPath.Kotlin.Kotlin_Result)
 class ResultActivity : ComponentActivity() {
 
-    var binding: KLayoutResponseBinding? = null
+    lateinit var binding: KLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = KLayoutResponseBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
+        setContentView(binding.root)
 
-        binding!!.contentTextView.setOnClickListener {
+        binding.contentTextView.setOnClickListener {
             //myActivityLauncher.launch("input")
             val intent = Intent(this, SecondActivity::class.java).apply {
                 putExtra("input", "input")
             }
             startActivityForResult.launch(intent)
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
     }
 
     private val myActivityLauncher =
