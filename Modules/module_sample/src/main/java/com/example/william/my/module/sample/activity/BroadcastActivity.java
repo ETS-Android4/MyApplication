@@ -20,37 +20,6 @@ public class BroadcastActivity extends BaseResponseActivity {
 
     private MessageReceiver mMessageReceiver;
 
-    @Override
-    public void setOnClick() {
-        super.setOnClick();
-
-        Bundle bundle = new Bundle();
-        bundle.putString("message", MessageReceiver.ACTION_UPDATE);
-
-        Intent intent = new Intent();
-        intent.putExtras(bundle);
-        intent.setAction(MessageReceiver.ACTION_UPDATE);
-        sendBroadcast(intent);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mMessageReceiver = new MessageReceiver(this);
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(MessageReceiver.ACTION_UPDATE);
-        registerReceiver(mMessageReceiver, intentFilter);
-
-        //LocalBroadcastManager.getInstance(BroadcastActivity.this).registerReceiver(mMessageReceiver, intentFilter);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mMessageReceiver);
-    }
-
     /**
      * 消息监听器
      */
@@ -69,5 +38,40 @@ public class BroadcastActivity extends BaseResponseActivity {
         public void onReceive(Context context, Intent intent) {
             softReference.get().mResponse.setText(intent.getStringExtra("message"));
         }
+    }
+
+    @Override
+    public void setOnClick() {
+        super.setOnClick();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("message", MessageReceiver.ACTION_UPDATE);
+
+        Intent intent = new Intent();
+        intent.putExtras(bundle);
+        intent.setAction(MessageReceiver.ACTION_UPDATE);
+        sendBroadcast(intent);
+
+        //LocalBroadcastManager.getInstance(BroadcastActivity.this).sendBroadcast(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mMessageReceiver = new MessageReceiver(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(MessageReceiver.ACTION_UPDATE);
+        registerReceiver(mMessageReceiver, intentFilter);
+
+        //LocalBroadcastManager.getInstance(BroadcastActivity.this).registerReceiver(mMessageReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mMessageReceiver);
+
+        //LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
     }
 }

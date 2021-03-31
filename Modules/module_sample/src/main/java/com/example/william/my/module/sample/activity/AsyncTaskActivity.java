@@ -17,19 +17,6 @@ public class AsyncTaskActivity extends BaseResponseActivity {
 
     private MyAsyncTask mAsyncTask;
 
-    @Override
-    public void initView() {
-        super.initView();
-
-        mAsyncTask = new MyAsyncTask(AsyncTaskActivity.this);
-    }
-
-    @Override
-    public void setOnClick() {
-        super.setOnClick();
-        mAsyncTask.execute();
-    }
-
     /**
      * 第一个参数是doInBackground回调中传入的参数
      * 第二个参数是进度，onProgressUpdate的参数类型
@@ -37,11 +24,10 @@ public class AsyncTaskActivity extends BaseResponseActivity {
      */
     private static class MyAsyncTask extends AsyncTask<Integer, Integer, Void> {
 
-        private final WeakReference<AsyncTaskActivity> softReference;
-
+        private final WeakReference<AsyncTaskActivity> mActivity;
 
         MyAsyncTask(AsyncTaskActivity activity) {
-            this.softReference = new WeakReference<>(activity);
+            this.mActivity = new WeakReference<>(activity);
         }
 
         /**
@@ -50,7 +36,7 @@ public class AsyncTaskActivity extends BaseResponseActivity {
          */
         @Override
         protected void onPreExecute() {
-            softReference.get().mResponse.setText("onPreExecute");
+            mActivity.get().showResponse("onPreExecute");
         }
 
         /**
@@ -77,7 +63,7 @@ public class AsyncTaskActivity extends BaseResponseActivity {
          */
         @Override
         protected void onProgressUpdate(Integer... values) {
-            softReference.get().mResponse.setText("Progress : " + values[0]);
+            mActivity.get().showResponse("Progress : " + values[0]);
         }
 
         /**
@@ -86,15 +72,28 @@ public class AsyncTaskActivity extends BaseResponseActivity {
          */
         @Override
         protected void onPostExecute(Void aVoid) {
-            softReference.get().mResponse.setText("onPostExecute");
+            mActivity.get().showResponse("onPostExecute");
         }
     }
 
     @Override
+    public void initView() {
+        super.initView();
+
+        mAsyncTask = new MyAsyncTask(AsyncTaskActivity.this);
+    }
+
+    @Override
+    public void setOnClick() {
+        super.setOnClick();
+        mAsyncTask.execute();
+    }
+
+    @Override
     protected void onDestroy() {
+        super.onDestroy();
         if (mAsyncTask != null && mAsyncTask.isCancelled()
                 && mAsyncTask.getStatus() == AsyncTask.Status.RUNNING)
             mAsyncTask.cancel(true);
-        super.onDestroy();
     }
 }
