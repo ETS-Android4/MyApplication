@@ -77,7 +77,7 @@ public class RetrofitHelper {
             LogCompat.setLogBasic(okHttpClient);
 
         //携带cookie
-        CookieJarCompat.cookieJar(okHttpClient);
+        CookieJarCompat.cookieJar(RxRetrofitConfig.getApp(), okHttpClient);
 
         //忽略https证书
         HttpsSSLCompat.ignoreSSLForOkHttp(okHttpClient);

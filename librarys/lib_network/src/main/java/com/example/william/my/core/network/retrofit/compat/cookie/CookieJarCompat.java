@@ -1,40 +1,20 @@
 package com.example.william.my.core.network.retrofit.compat.cookie;
 
-import androidx.annotation.NonNull;
+import android.content.Context;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import com.example.william.my.core.network.retrofit.cookiejar.ClearableCookieJar;
+import com.example.william.my.core.network.retrofit.cookiejar.PersistentCookieJar;
+import com.example.william.my.core.network.retrofit.cookiejar.cache.SetCookieCache;
+import com.example.william.my.core.network.retrofit.cookiejar.persist.SharedPrefsCookiePersist;
 
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
 public class CookieJarCompat {
 
-    public static void cookieJar(OkHttpClient.Builder builder) {
-        builder.cookieJar(buildCookieJar());
-
+    public static void cookieJar(Context context, OkHttpClient.Builder builder) {
         //builder.addInterceptor(new RetrofitInterceptorCookie());
-    }
-
-    private static CookieJar buildCookieJar() {
-        return new CookieJar() {
-
-            private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
-
-            @Override
-            public void saveFromResponse(@NonNull HttpUrl url, @NonNull List<Cookie> cookies) {
-                cookieStore.put(url.host(), cookies);
-            }
-
-            @NonNull
-            @Override
-            public List<Cookie> loadForRequest(@NonNull HttpUrl url) {
-                List<Cookie> cookies = cookieStore.get(url.host());
-                return cookies != null ? cookies : new ArrayList<Cookie>();
-            }
-        };
+        ClearableCookieJar cookieJar = new PersistentCookieJar(
+                new SetCookieCache(), new SharedPrefsCookiePersist(context));
+        builder.cookieJar(cookieJar);
     }
 }
