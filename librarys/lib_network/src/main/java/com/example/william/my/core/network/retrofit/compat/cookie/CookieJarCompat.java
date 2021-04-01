@@ -1,8 +1,6 @@
-package com.example.william.my.core.network.retrofit.cookie;
+package com.example.william.my.core.network.retrofit.compat.cookie;
 
 import androidx.annotation.NonNull;
-
-import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorCookie;
 
 import java.util.ArrayList;
 import java.util.HashMap;

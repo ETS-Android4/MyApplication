@@ -30,6 +30,8 @@ dependencies {
     implementation deps.constraintlayout
     //Volley
     implementation deps.volley
+    //OkHttp
+    implementation deps.okhttp_logging_3_9_0
     //Retrofit
     implementation deps.retrofit
     implementation deps.retrofit_gson

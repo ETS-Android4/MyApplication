@@ -1,13 +1,13 @@
 package com.example.william.my.core.network.retrofit.helper;
 
 import com.example.william.my.core.network.base.RxRetrofitConfig;
+import com.example.william.my.core.network.retrofit.compat.cookie.CookieJarCompat;
+import com.example.william.my.core.network.retrofit.compat.log.LogCompat;
+import com.example.william.my.core.network.retrofit.compat.ssl.HttpsSSLCompat;
 import com.example.william.my.core.network.retrofit.converter.RetrofitConverterFactory;
-import com.example.william.my.core.network.retrofit.cookie.CookieJarCompat;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorCache;
-import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorLogging;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
-import com.example.william.my.core.network.retrofit.ssl.HttpsSSLCompat;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -65,13 +65,15 @@ public class RetrofitHelper {
         okHttpClient.readTimeout(RxRetrofitConfig.readTimeout, TimeUnit.SECONDS);//设置读取超时时间
         okHttpClient.callTimeout(RxRetrofitConfig.callTimeout, TimeUnit.SECONDS);//设置调用超时时间
 
-        setLog(RxRetrofitConfig.showLog);
 
         setCache(RxRetrofitConfig.setCache, RxRetrofitConfig.cacheSize);
 
         if (downloadListener != null) {
             okHttpClient.addInterceptor(new RetrofitInterceptorProgress(downloadListener));
         }
+
+        //显示log
+        LogCompat.setLog(okHttpClient);
 
         //携带cookie
         CookieJarCompat.cookieJar(okHttpClient);
@@ -81,23 +83,6 @@ public class RetrofitHelper {
         HttpsSSLCompat.ignoreSSLForHttpsURLConnection();
 
         return okHttpClient;
-    }
-
-    private void setLog(boolean show) {
-        if (show) {
-            /*
-             * 添加拦截器
-             * addInterceptor,在response被调用一次
-             * addNetworkInterceptor,在request和response是分别被调用一次
-             */
-            //retrofit.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            //    @Override
-            //    public void log(String message) {
-            //        Log.e("OkHttp", message);
-            //    }
-            //}).setLevel(HttpLoggingInterceptor.Level.BODY));
-            okHttpClient.addInterceptor(new RetrofitInterceptorLogging());
-        }
     }
 
     private void setCache(boolean setCache, int cacheSize) {
