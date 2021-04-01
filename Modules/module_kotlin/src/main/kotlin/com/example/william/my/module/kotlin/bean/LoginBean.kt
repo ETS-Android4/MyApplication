@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Keep
 @Parcelize
-class LoginData(val data: User) : Parcelable {
+class LoginBean(val data: User) : Parcelable {
 
     @Keep
     @Parcelize

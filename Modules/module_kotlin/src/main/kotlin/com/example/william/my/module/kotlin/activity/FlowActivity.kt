@@ -56,7 +56,7 @@ class FlowActivity : BaseActivity() {
     }
 
     fun flowOperator() {
-        /**
+        /*
          *
         1. 普通操作符
 

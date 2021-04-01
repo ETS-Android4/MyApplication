@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.william.my.module.base.Urls
 import com.example.william.my.module.bean.ArticlesBean
-import com.example.william.my.module.kotlin.service.KotlinApi
+import com.example.william.my.module.kotlin.api.KotlinApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
