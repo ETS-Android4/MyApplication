@@ -73,7 +73,8 @@ public class RetrofitHelper {
         }
 
         //显示log
-        LogCompat.setLog(okHttpClient);
+        if (RxRetrofitConfig.showLog)
+            LogCompat.setLogBasic(okHttpClient);
 
         //携带cookie
         CookieJarCompat.cookieJar(okHttpClient);

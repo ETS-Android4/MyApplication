@@ -2,7 +2,7 @@ package com.example.william.my.core.network.retrofit.compat.ssl;
 
 import android.annotation.SuppressLint;
 
-import java.util.Arrays;
+import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -10,7 +10,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
@@ -19,7 +18,7 @@ public class HttpsSSLCompat {
 
     public static void ignoreSSLForOkHttp(OkHttpClient.Builder builder) {
         builder.hostnameVerifier(getIgnoreHostnameVerifier())
-                .sslSocketFactory(getIgnoreSSLSocketFactory(), getDefaultTrustManager());
+                .sslSocketFactory(getIgnoreSSLSocketFactory(), getTrustManager());
     }
 
     public static void ignoreSSLForHttpsURLConnection() {
@@ -48,7 +47,7 @@ public class HttpsSSLCompat {
     private static SSLSocketFactory getIgnoreSSLSocketFactory() {
         try {
             SSLContext sslContext = SSLContext.getInstance("TLS");
-            X509TrustManager trustManager = getDefaultTrustManager();
+            X509TrustManager trustManager = getTrustManager();
             sslContext.init(null, new TrustManager[]{trustManager}, null);
             return sslContext.getSocketFactory();
         } catch (Exception e) {
@@ -56,16 +55,22 @@ public class HttpsSSLCompat {
         }
     }
 
-    private static X509TrustManager getDefaultTrustManager() {
-        try {
-            TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-            TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
-            if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
-                throw new IllegalStateException("Unexpected default trust managers:" + Arrays.toString(trustManagers));
+    private static X509TrustManager getTrustManager() {
+        return new X509TrustManager() {
+            @SuppressLint("TrustAllX509TrustManager")
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) {
             }
-            return (X509TrustManager) trustManagers[0];
-        } catch (Exception e) {
-            return null;
-        }
+
+            @SuppressLint("TrustAllX509TrustManager")
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) {
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        };
     }
 }

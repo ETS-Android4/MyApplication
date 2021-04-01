@@ -12,7 +12,6 @@ import com.example.william.my.core.network.retrofit.download.observer.DownloadOb
 import com.example.william.my.core.network.retrofit.download.state.DownloadState;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.utils.BaseUrlUtils;
-import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;

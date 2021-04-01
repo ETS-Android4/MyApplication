@@ -18,6 +18,9 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * Cookie拦截器
+ */
 public class RetrofitInterceptorCookie implements Interceptor {
 
     @NonNull
