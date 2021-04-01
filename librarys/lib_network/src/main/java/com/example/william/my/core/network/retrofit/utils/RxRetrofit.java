@@ -32,7 +32,7 @@ public class RxRetrofit<T> {
     private Api buildApi() {
         return RetrofitHelper
                 .getInstance()
-                .baseUrl(RetrofitUtils.getBasUrl(builder.getApi()))
+                .baseUrl(BaseUrlUtils.getBaseUrl(builder.getApi()))
                 .build()
                 .create(Api.class);
     }

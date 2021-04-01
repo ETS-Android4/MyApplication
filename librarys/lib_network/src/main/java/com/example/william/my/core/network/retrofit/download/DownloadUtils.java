@@ -11,6 +11,7 @@ import com.example.william.my.core.network.retrofit.download.function.DownloadFu
 import com.example.william.my.core.network.retrofit.download.observer.DownloadObserver;
 import com.example.william.my.core.network.retrofit.download.state.DownloadState;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
+import com.example.william.my.core.network.retrofit.utils.BaseUrlUtils;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 
 import java.util.HashMap;
@@ -78,7 +79,7 @@ public class DownloadUtils {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(RetrofitUtils.getBasUrl(downloadTask.getDownloadUrl()))
+                .baseUrl(BaseUrlUtils.getBaseUrl(downloadTask.getDownloadUrl()))
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(okHttpClient).build();

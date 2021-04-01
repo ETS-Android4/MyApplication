@@ -13,8 +13,6 @@ public class RxRetrofitConfig {
 
     public static final boolean showLog = true;
 
-    public static final boolean setCookie = false;
-
     //是否设置缓存
     public static final boolean setCache = false;
     //设置缓存大小

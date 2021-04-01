@@ -75,36 +75,36 @@ android {
         }
     }
     //多渠道支持
-    flavorDimensions "majiabao" //, "api", "appStore"
-    productFlavors {//多版本打包
-        majiabao {
-            dimension = 'majiabao'
-            applicationIdSuffix ".mock" // 修改马甲包的applicationId
-            manifestPlaceholders = [APP_NAME: '马甲包'] // 配置马甲包的应用名称
-        }
-        //minApi19 {
-        //    dimension = 'api'
-        //    //applicationIdSuffix = '.minApi19'
-        //    //versionNameSuffix = "-minApi19"
-        //}
-        //minApi24 {
-        //    dimension = 'api'
-        //    //applicationIdSuffix = '.minApi24'
-        //    //versionNameSuffix = "-minApi24"
-        //}
-        //wandoujia {
-        //    dimension = 'appStore'
-        //    //applicationIdSuffix = '.wandoujia'
-        //    //versionNameSuffix = "-wandoujia"
-        //    //manifestPlaceholders = [CHANNEL_VALUE: "wandoujia"]
-        //}
-        //yingyongbao {
-        //    dimension = 'appStore'
-        //    //applicationIdSuffix = ".yingyongbao"
-        //    //versionNameSuffix = "-yingyongbao"
-        //    //manifestPlaceholders = [CHANNEL_VALUE: "yingyongbao"]
-        //}
-    }
+    //flavorDimensions "majiabao" //, "api", "appStore"
+    //productFlavors {//多版本打包
+    //    majiabao {
+    //        dimension = 'majiabao'
+    //        applicationIdSuffix ".mock" // 修改马甲包的applicationId
+    //        manifestPlaceholders = [APP_NAME: '马甲包'] // 配置马甲包的应用名称
+    //    }
+    //    //minApi19 {
+    //    //    dimension = 'api'
+    //    //    //applicationIdSuffix = '.minApi19'
+    //    //    //versionNameSuffix = "-minApi19"
+    //    //}
+    //    //minApi24 {
+    //    //    dimension = 'api'
+    //    //    //applicationIdSuffix = '.minApi24'
+    //    //    //versionNameSuffix = "-minApi24"
+    //    //}
+    //    //wandoujia {
+    //    //    dimension = 'appStore'
+    //    //    //applicationIdSuffix = '.wandoujia'
+    //    //    //versionNameSuffix = "-wandoujia"
+    //    //    //manifestPlaceholders = [CHANNEL_VALUE: "wandoujia"]
+    //    //}
+    //    //yingyongbao {
+    //    //    dimension = 'appStore'
+    //    //    //applicationIdSuffix = ".yingyongbao"
+    //    //    //versionNameSuffix = "-yingyongbao"
+    //    //    //manifestPlaceholders = [CHANNEL_VALUE: "yingyongbao"]
+    //    //}
+    //}
 }
 
 dependencies {

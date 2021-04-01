@@ -20,20 +20,6 @@ import okhttp3.RequestBody;
 
 public class RetrofitUtils {
 
-    public static String getBasUrl(String url) {
-        String head = "";
-        int index = url.indexOf("://");
-        if (index != -1) {
-            head = url.substring(0, index + 3);
-            url = url.substring(index + 3);
-        }
-        index = url.indexOf("/");
-        if (index != -1) {
-            url = url.substring(0, index + 1);
-        }
-        return head + url;
-    }
-
     public static <T> T buildApi(Class<T> service) {
         return RetrofitHelper
                 .getInstance()

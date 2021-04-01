@@ -1,25 +1,18 @@
 package com.example.william.my.core.network.retrofit.helper;
 
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.network.base.RxRetrofitConfig;
 import com.example.william.my.core.network.retrofit.converter.RetrofitConverterFactory;
+import com.example.william.my.core.network.retrofit.cookie.CookieJarCompat;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorCache;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorLogging;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
-import com.example.william.my.core.network.retrofit.ssl.SSLSocketClient;
+import com.example.william.my.core.network.retrofit.ssl.HttpsSSLCompat;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -73,7 +66,6 @@ public class RetrofitHelper {
         okHttpClient.callTimeout(RxRetrofitConfig.callTimeout, TimeUnit.SECONDS);//设置调用超时时间
 
         setLog(RxRetrofitConfig.showLog);
-        setCookie(RxRetrofitConfig.setCookie);
 
         setCache(RxRetrofitConfig.setCache, RxRetrofitConfig.cacheSize);
 
@@ -81,9 +73,13 @@ public class RetrofitHelper {
             okHttpClient.addInterceptor(new RetrofitInterceptorProgress(downloadListener));
         }
 
+        //携带cookie
+        CookieJarCompat.cookieJar(okHttpClient);
+
         //忽略https证书
-        okHttpClient.sslSocketFactory(SSLSocketClient.createSSLSocketFactory(), new SSLSocketClient.TrustAllManager());//证书验证
-        okHttpClient.hostnameVerifier(new SSLSocketClient.TrustAllHostnameVerifier());//主机验证
+        HttpsSSLCompat.ignoreSSLForOkHttp(okHttpClient);
+        HttpsSSLCompat.ignoreSSLForHttpsURLConnection();
+
         return okHttpClient;
     }
 
@@ -101,32 +97,6 @@ public class RetrofitHelper {
             //    }
             //}).setLevel(HttpLoggingInterceptor.Level.BODY));
             okHttpClient.addInterceptor(new RetrofitInterceptorLogging());
-        }
-    }
-
-    private void setCookie(boolean cookie) {
-        if (cookie) {
-            /*
-             * 携带cookie
-             */
-            okHttpClient.cookieJar(new CookieJar() {
-
-                private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
-
-                @Override
-                public void saveFromResponse(@NonNull HttpUrl url, @NonNull List<Cookie> cookies) {
-                    cookieStore.put(url.host(), cookies);
-                }
-
-                @NonNull
-                @Override
-                public List<Cookie> loadForRequest(@NonNull HttpUrl url) {
-                    List<Cookie> cookies = cookieStore.get(url.host());
-                    return cookies != null ? cookies : new ArrayList<Cookie>();
-                }
-
-            });
-            //builder.addInterceptor(new RetrofitInterceptorCookie());
         }
     }
 
