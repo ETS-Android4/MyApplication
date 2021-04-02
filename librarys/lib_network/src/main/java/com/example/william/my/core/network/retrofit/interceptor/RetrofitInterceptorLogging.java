@@ -25,9 +25,13 @@ import okio.BufferedSource;
  */
 public class RetrofitInterceptorLogging implements Interceptor {
 
-    private static final String TAG = "LoggingInterceptor";
+    private static String TAG = "LoggingInterceptor";
 
     private volatile Level level = Level.BASIC;
+
+    public RetrofitInterceptorLogging(String tag) {
+        TAG = tag;
+    }
 
     public enum Level {
         BASIC,

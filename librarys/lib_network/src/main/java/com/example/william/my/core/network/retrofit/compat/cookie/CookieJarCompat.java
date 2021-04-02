@@ -1,7 +1,5 @@
 package com.example.william.my.core.network.retrofit.compat.cookie;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -15,7 +13,7 @@ import okhttp3.OkHttpClient;
 
 public class CookieJarCompat {
 
-    public static void cookieJar(Context context, OkHttpClient.Builder builder) {
+    public static void cookieJar(OkHttpClient.Builder builder) {
         builder.cookieJar(buildCookieJar());
 
         //builder.addInterceptor(new RetrofitInterceptorCookie());

@@ -1,4 +1,4 @@
-package com.example.william.my.core.network.retrofit.compat.log;
+package com.example.william.my.core.network.retrofit.compat.logging;
 
 import android.util.Log;
 
@@ -11,9 +11,15 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * HttpLoggingInterceptor
  * implementation "com.squareup.okhttp3:logging-interceptor:3.9.0"
  */
-public class LogCompat {
+public class LoggingCompat {
+
+    private static final String TAG = "OkHttp";
 
     public static void setLog(OkHttpClient.Builder builder) {
+        setLog(builder, TAG);
+    }
+
+    public static void setLog(OkHttpClient.Builder builder, String tag) {
         /*
          * 添加拦截器
          * addInterceptor,在response被调用一次
@@ -22,17 +28,25 @@ public class LogCompat {
         builder.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Log.e("OkHttp", message);
+                Log.e(TAG, message);
             }
         }).setLevel(HttpLoggingInterceptor.Level.BODY));
     }
 
     public static void setLogBasic(OkHttpClient.Builder builder) {
-        builder.addInterceptor(new RetrofitInterceptorLogging());
+        setLogBasic(builder, TAG);
+    }
+
+    public static void setLogBasic(OkHttpClient.Builder builder, String tag) {
+        builder.addInterceptor(new RetrofitInterceptorLogging(tag));
     }
 
     public static void setLogBody(OkHttpClient.Builder builder) {
-        builder.addInterceptor(new RetrofitInterceptorLogging()
+        setLogBody(builder, TAG);
+    }
+
+    public static void setLogBody(OkHttpClient.Builder builder, String tag) {
+        builder.addInterceptor(new RetrofitInterceptorLogging(tag)
                 .setLevel(RetrofitInterceptorLogging.Level.BODY));
     }
 

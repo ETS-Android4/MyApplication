@@ -1,18 +1,16 @@
 package com.example.william.my.core.network.retrofit.helper;
 
 import com.example.william.my.core.network.base.RxRetrofitConfig;
+import com.example.william.my.core.network.retrofit.compat.cache.CacheCompat;
 import com.example.william.my.core.network.retrofit.compat.cookie.CookieJarCompat;
-import com.example.william.my.core.network.retrofit.compat.log.LogCompat;
+import com.example.william.my.core.network.retrofit.compat.logging.LoggingCompat;
 import com.example.william.my.core.network.retrofit.compat.ssl.HttpsSSLCompat;
 import com.example.william.my.core.network.retrofit.converter.RetrofitConverterFactory;
-import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorCache;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -65,32 +63,26 @@ public class RetrofitHelper {
         okHttpClient.readTimeout(RxRetrofitConfig.readTimeout, TimeUnit.SECONDS);//设置读取超时时间
         okHttpClient.callTimeout(RxRetrofitConfig.callTimeout, TimeUnit.SECONDS);//设置调用超时时间
 
-
-        setCache(RxRetrofitConfig.setCache, RxRetrofitConfig.cacheSize);
-
-        if (downloadListener != null) {
-            okHttpClient.addInterceptor(new RetrofitInterceptorProgress(downloadListener));
-        }
+        //设置缓存
+        if (RxRetrofitConfig.setCache)
+            CacheCompat.cache(RxRetrofitConfig.getApp(), okHttpClient, RxRetrofitConfig.cacheDir, RxRetrofitConfig.cacheSize);
 
         //显示log
-        if (RxRetrofitConfig.showLog)
-            LogCompat.setLogBasic(okHttpClient);
+        if (RxRetrofitConfig.showLogging)
+            LoggingCompat.setLog(okHttpClient, RxRetrofitConfig.loggingTag);
 
         //携带cookie
-        CookieJarCompat.cookieJar(RxRetrofitConfig.getApp(), okHttpClient);
+        CookieJarCompat.cookieJar(okHttpClient);
 
         //忽略https证书
         HttpsSSLCompat.ignoreSSLForOkHttp(okHttpClient);
         HttpsSSLCompat.ignoreSSLForHttpsURLConnection();
 
-        return okHttpClient;
-    }
-
-    private void setCache(boolean setCache, int cacheSize) {
-        if (setCache && RxRetrofitConfig.getApp() != null) {
-            okHttpClient.cache(new Cache(new File(RxRetrofitConfig.getApp().getCacheDir(), "cache"), cacheSize));
-            okHttpClient.addNetworkInterceptor(new RetrofitInterceptorCache());
+        if (downloadListener != null) {
+            okHttpClient.addInterceptor(new RetrofitInterceptorProgress(downloadListener));
         }
+
+        return okHttpClient;
     }
 
     public Retrofit build() {
