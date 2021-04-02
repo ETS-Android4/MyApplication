@@ -37,20 +37,20 @@ class ResultActivity : ComponentActivity() {
 
     private val myActivityLauncher =
         registerForActivityResult(ResultContract()) {
-            binding!!.contentTextView.text = "result value is :${it}"
+            binding.contentTextView.text = "result value is :${it}"
         }
 
     private val startActivityForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
                 val result = it.data?.getStringExtra("result")
-                binding!!.contentTextView.text = "result value is :${result}"
+                binding.contentTextView.text = "result value is :${result}"
             }
         }
 
     private val takePicturePreview =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
-            binding!!.contentTextView.background = BitmapDrawable(resources, it)
+            binding.contentTextView.background = BitmapDrawable(resources, it)
         }
 
     private var requestPermission =

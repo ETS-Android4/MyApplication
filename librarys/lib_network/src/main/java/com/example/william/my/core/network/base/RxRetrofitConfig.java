@@ -16,7 +16,7 @@ public class RxRetrofitConfig {
     //是否设置缓存
     public static final boolean setCache = false;
     //设置缓存大小
-    public static final int cacheSize = 100 * 1024 * 1024;//100M
+    public static final int cacheSize = 10 * 1024 * 1024;//10M
 
     public static void init(Application context) {
         instance = context;

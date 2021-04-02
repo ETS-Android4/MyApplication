@@ -1,7 +1,7 @@
 package com.example.william.my.module.kotlin.model
 
 import androidx.lifecycle.*
-import com.example.william.my.module.kotlin.bean.LoginBean
+import com.example.william.my.module.kotlin.data.LoginData
 import com.example.william.my.module.kotlin.repository.ExampleRepository
 import com.example.william.my.module.kotlin.repository.LoginRepository
 import com.example.william.my.module.kotlin.result.NetworkResult
@@ -44,7 +44,7 @@ class FlowViewModel : ViewModel() {
                 is NetworkResult.Loading -> {
                     _login.postValue("加载中……")
                 }
-                is NetworkResult.OK<LoginBean> -> {
+                is NetworkResult.OK<LoginData> -> {
                     _login.postValue(Gson().toJson(result.data))
                 }
                 is NetworkResult.NetworkError -> {

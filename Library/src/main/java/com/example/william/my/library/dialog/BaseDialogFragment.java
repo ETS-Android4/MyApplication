@@ -17,6 +17,7 @@ public class BaseDialogFragment extends DialogFragment {
             //params.width = WindowManager.LayoutParams.MATCH_PARENT;
             //window.setAttributes(params);
             //Android 5.0以上自定义Dialog时发现无法横向铺满屏幕
+            //window.getDecorView().setPadding(0, 0, 0, 0);
             //window.setBackgroundDrawableResource(android.R.color.white);
         }
     }

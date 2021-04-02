@@ -1,7 +1,7 @@
 package com.example.william.my.module.kotlin.repository
 
 import com.example.william.my.module.base.Urls
-import com.example.william.my.module.kotlin.bean.LoginBean
+import com.example.william.my.module.kotlin.data.LoginData
 import com.example.william.my.module.kotlin.result.NetworkResult
 import com.example.william.my.module.kotlin.utils.ThreadUtils
 import com.google.gson.Gson
@@ -17,7 +17,7 @@ class LoginRepository {
 
     // 将 协程 切换到 I/O 调度
     // Move the execution of the coroutine to the I/O dispatcher
-    suspend fun login(jsonBody: String): NetworkResult<LoginBean> = withContext(Dispatchers.IO) {
+    suspend fun login(jsonBody: String): NetworkResult<LoginData> = withContext(Dispatchers.IO) {
         //打印线程
         ThreadUtils.isMainThread("login")
         // 阻塞网络请求
@@ -27,7 +27,7 @@ class LoginRepository {
 
     // 发出网络请求，阻塞当前线程
     // Function that makes the network request, blocking the current thread
-    private fun makeLoginRequest(jsonBody: String): NetworkResult<LoginBean> {
+    private fun makeLoginRequest(jsonBody: String): NetworkResult<LoginData> {
         //打印线程
         ThreadUtils.isMainThread("makeLoginRequest")
 
@@ -44,7 +44,7 @@ class LoginRepository {
         return NetworkResult.NetworkError(Exception("Cannot open HttpURLConnection"))
     }
 
-    private fun parse(input: InputStream): LoginBean {
+    private fun parse(input: InputStream): LoginData {
         val msg = StringBuilder()
         val reader = BufferedReader(InputStreamReader(input))
         var line: String?
@@ -53,6 +53,6 @@ class LoginRepository {
         }
         reader.close()
         val response = msg.toString()
-        return Gson().fromJson(response, LoginBean::class.java)
+        return Gson().fromJson(response, LoginData::class.java)
     }
 }
