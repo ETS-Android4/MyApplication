@@ -13,13 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 public class LoggingCompat {
 
-    private static final String TAG = "OkHttp";
-
-    public static void setLog(OkHttpClient.Builder builder) {
-        setLog(builder, TAG);
-    }
-
-    public static void setLog(OkHttpClient.Builder builder, String tag) {
+    public static void setLog(OkHttpClient.Builder builder, final String tag) {
         /*
          * 添加拦截器
          * addInterceptor,在response被调用一次
@@ -28,21 +22,13 @@ public class LoggingCompat {
         builder.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Log.e(TAG, message);
+                Log.e(tag, message);
             }
         }).setLevel(HttpLoggingInterceptor.Level.BODY));
     }
 
-    public static void setLogBasic(OkHttpClient.Builder builder) {
-        setLogBasic(builder, TAG);
-    }
-
     public static void setLogBasic(OkHttpClient.Builder builder, String tag) {
         builder.addInterceptor(new RetrofitInterceptorLogging(tag));
-    }
-
-    public static void setLogBody(OkHttpClient.Builder builder) {
-        setLogBody(builder, TAG);
     }
 
     public static void setLogBody(OkHttpClient.Builder builder, String tag) {

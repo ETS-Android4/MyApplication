@@ -12,18 +12,6 @@ import okhttp3.OkHttpClient;
 
 public class CacheCompat {
 
-    private static final String cacheDir = "cache";
-
-    private static final long cacheSize = 10 * 1024 * 1024;//10M
-
-    public static void cache(Context context, OkHttpClient.Builder builder) {
-        cache(context, builder, cacheSize);
-    }
-
-    public static void cache(Context context, OkHttpClient.Builder builder, long cacheSize) {
-        cache(context, builder, cacheDir, cacheSize);
-    }
-
     public static void cache(Context context, OkHttpClient.Builder builder, String cacheDir, long cacheSize) {
         if (context != null) {
             builder.cache(new Cache(new File(getCacheDir(context), cacheDir), cacheSize));
