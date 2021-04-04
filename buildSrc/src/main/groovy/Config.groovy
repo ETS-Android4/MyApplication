@@ -18,13 +18,15 @@ class Config {
             OpenSource     : new DepConfig(true, ":modules:module_open_source"),
             Sample         : new DepConfig(true, ":modules:module_sample"),
 
+            ModuleDemo     : new DepConfig(false, ":modules:module_demo"),
+
             ModuleWeChat   : new DepConfig(false, ":modules:module_wechat"),
             ModuleBugly    : new DepConfig(false, ":modules:module_bugly"),
             ModuleSophix   : new DepConfig(false, ":modules:module_sophix"),
             ModuleJiguang  : new DepConfig(false, ":modules:module_jiguang"),
             ModuleTencentIM: new DepConfig(false, ":modules:module_tencent_im"),
 
-            Kotlin         : new DepConfig(true, ":modules:module_kotlin"),
+            ModuleKotlin   : new DepConfig(true, ":modules:module_kotlin"),
             ModuleFlutter  : new DepConfig(true, ":modules:module_flutter"),
     ]
 }

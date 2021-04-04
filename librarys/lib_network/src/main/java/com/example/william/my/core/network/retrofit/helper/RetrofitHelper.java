@@ -64,8 +64,8 @@ public class RetrofitHelper {
         okHttpClient.callTimeout(RxRetrofitConfig.callTimeout, TimeUnit.SECONDS);//设置调用超时时间
 
         //设置缓存
-        if (RxRetrofitConfig.setCache)
-            CacheCompat.cache(RxRetrofitConfig.getApp(), okHttpClient, RxRetrofitConfig.cacheDir, RxRetrofitConfig.cacheSize);
+        //if (RxRetrofitConfig.setCache)
+        //    CacheCompat.cache(RxRetrofitConfig.getApp(), okHttpClient, RxRetrofitConfig.cacheDir, RxRetrofitConfig.cacheSize);
 
         //显示log
         if (RxRetrofitConfig.showLogging)

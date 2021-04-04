@@ -27,7 +27,7 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
         }
 
         return RetrofitUtils.buildApi(NetworkService.class)
-                .getArticle(page)
+                .getArticleList(page)
                 .subscribeOn(Schedulers.io())
                 .map(new toLoadResult())
                 .onErrorReturn(new toErrorResult());

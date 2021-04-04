@@ -44,7 +44,7 @@ public interface NetworkService {
      * Repository
      */
     @GET(Urls.article)
-    Single<ArticlesBean> getArticle(@Path("page") int page);
+    Single<ArticlesBean> getArticleList(@Path("page") int page);
 
     /**
      * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository

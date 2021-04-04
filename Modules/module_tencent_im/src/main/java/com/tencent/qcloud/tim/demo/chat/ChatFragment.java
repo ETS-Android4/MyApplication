@@ -56,7 +56,7 @@ public class ChatFragment extends BaseFragment {
         //单聊组件的默认UI和交互初始化
         mChatLayout.initDefault();
 
-        // TODO 通过api设置ChatLayout各种属性的样例
+        //通过api设置ChatLayout各种属性的样例
         ChatLayoutHelper.customizeChatLayout(mChatLayout);
 
         /*

@@ -41,7 +41,4 @@ dependencies {
     implementation deps.rxandroid
     //RxLifecycle
     implementation deps.rxlifecycle
-    //Room
-    implementation deps.room
-    annotationProcessor deps.room_compiler
 }

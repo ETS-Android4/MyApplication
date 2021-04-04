@@ -44,11 +44,11 @@ public class SmartRefreshActivity extends BaseActivity {
         //mRefreshRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
         //mRefreshRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
 
+        mRefreshAdapter = new BRVAHAdapter();
+        mRefreshRecyclerView.setAdapter(mRefreshAdapter);
+
         //设置布局管理器
         mRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mRefreshAdapter = new BRVAHAdapter(new ArrayList<>());
-        mRefreshRecyclerView.setAdapter(mRefreshAdapter);
 
         //分组功能
         //mRefreshData2 = new ArrayList<>();

@@ -137,13 +137,13 @@ public class ChatLayoutHelper {
         //====== InputLayout使用范例 ======//
         final InputLayout inputLayout = layout.getInputLayout();
 
-//        // TODO 隐藏音频输入的入口，可以打开下面代码测试
+//        // 隐藏音频输入的入口，可以打开下面代码测试
 //        inputLayout.disableAudioInput(true);
-//        // TODO 隐藏表情输入的入口，可以打开下面代码测试
+//        // 隐藏表情输入的入口，可以打开下面代码测试
 //        inputLayout.disableEmojiInput(true);
-//        // TODO 隐藏更多功能的入口，可以打开下面代码测试
+//        // 隐藏更多功能的入口，可以打开下面代码测试
 //        inputLayout.disableMoreInput(true);
-//        // TODO 可以用自定义的事件来替换更多功能的入口，可以打开下面代码测试
+//        // 可以用自定义的事件来替换更多功能的入口，可以打开下面代码测试
 //        inputLayout.replaceMoreInput(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -153,16 +153,16 @@ public class ChatLayoutHelper {
 //            }
 //        });
 //
-//        // TODO 可以用自定义的fragment来替换更多功能，可以打开下面代码测试
+//        // 可以用自定义的fragment来替换更多功能，可以打开下面代码测试
 //        inputLayout.replaceMoreInput(new CustomInputFragment().setChatLayout(layout));
 //
-//        // TODO 可以disable更多面板上的各个功能，可以打开下面代码测试
+//        // 可以disable更多面板上的各个功能，可以打开下面代码测试
 //        inputLayout.disableCaptureAction(true);
 //        inputLayout.disableSendFileAction(true);
 //        inputLayout.disableSendPhotoAction(true);
 //        inputLayout.disableVideoRecordAction(true);
 
-        // TODO 可以自己增加一些功能，可以打开下面代码测试
+        // 可以自己增加一些功能，可以打开下面代码测试
         // 增加一个欢迎提示富文本
         InputMoreActionUnit unit = new InputMoreActionUnit();
         unit.setIconResId(R.drawable.im_custom);

@@ -117,7 +117,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
-        android:fullBackupContent="@xml/backup_paths"
+        android:allowBackup="false"
         android:networkSecurityConfig="@xml/network_config"
         tools:targetApi="n">
         <!--FileProvider-->
