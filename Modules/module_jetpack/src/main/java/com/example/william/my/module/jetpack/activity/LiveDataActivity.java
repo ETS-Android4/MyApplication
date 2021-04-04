@@ -17,8 +17,8 @@ import java.util.List;
  * https://developer.android.google.cn/topic/libraries/architecture/livedata
  * https://developer.android.google.cn/topic/libraries/architecture/viewmodel
  */
-@Route(path = ARouterPath.JetPack.JetPack_ViewModel)
-public class ViewModelActivity extends BaseResponseActivity implements LoadingTip.LoadingTipListener {
+@Route(path = ARouterPath.JetPack.JetPack_LiveData)
+public class LiveDataActivity extends BaseResponseActivity implements LoadingTip.LoadingTipListener {
 
     private LoadingTip mLoadingTip;
     private LoginViewModel mViewModel;
