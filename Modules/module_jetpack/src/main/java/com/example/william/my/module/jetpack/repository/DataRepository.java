@@ -20,18 +20,22 @@ import java.util.List;
  * 1. 它不支持线程切换，其次不支持背压，也就是在一段时间内发送数据的速度 > 接受数据的速度，LiveData 无法正确的处理这些请求
  * 2. 使用 LiveData 的最大问题是所有数据转换都将在主线程上完成
  */
-public class Repository {
+public class DataRepository {
 
-    private static Repository repository;
+    private static DataRepository sInstance;
 
-    public static Repository getInstance() {
-        if (repository == null) {
-            repository = new Repository();
+    public static DataRepository getInstance() {
+        if (sInstance == null) {
+            synchronized (DataRepository.class) {
+                if (sInstance == null) {
+                    sInstance = new DataRepository();
+                }
+            }
         }
-        return repository;
+        return sInstance;
     }
 
-    private Repository() {
+    private DataRepository() {
 
     }
 

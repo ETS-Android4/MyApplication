@@ -18,7 +18,11 @@ public class ArticleRepository implements ArticleDataSource {
 
     public static ArticleRepository getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new ArticleRepository();
+            synchronized (ArticleRepository.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new ArticleRepository();
+                }
+            }
         }
         return INSTANCE;
     }

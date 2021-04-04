@@ -17,7 +17,7 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.bean.ArticlesBean;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerData;
-import com.example.william.my.module.jetpack.repository.Repository;
+import com.example.william.my.module.jetpack.repository.DataRepository;
 import com.example.william.my.module.jetpack.source.DataPagingSource;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class LoginViewModel extends ViewModel {
     //    super(application);
     //}
 
-    private final Repository repository;
+    private final DataRepository dataRepository;
 
     // 私有的 MutableLiveData 可变的，对内访问
     private final MutableLiveData<Object> mutableLiveData;
@@ -58,7 +58,7 @@ public class LoginViewModel extends ViewModel {
 
     public LoginViewModel() {
 
-        repository = Repository.getInstance();
+        dataRepository = DataRepository.getInstance();
 
         mutableLiveData = new MutableLiveData<>();
 
@@ -66,14 +66,14 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public LiveData<RetrofitResponse<List<BannerBean>>> apply(Object input) {
-                return repository.bannerBean();
+                return dataRepository.bannerBean();
             }
         });
         bannersData = Transformations.switchMap(mutableLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerData>>>>() {
 
             @Override
             public LiveData<RetrofitResponse<List<BannerData>>> apply(Object input) {
-                return repository.bannerData();
+                return dataRepository.bannerData();
             }
         });
     }
