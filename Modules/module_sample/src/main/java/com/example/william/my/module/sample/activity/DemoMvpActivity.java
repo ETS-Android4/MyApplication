@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.FragmentUtils;
 import com.example.william.my.module.sample.R;
-import com.example.william.my.module.sample.repo.ArticlesRepository;
 import com.example.william.my.module.sample.fragment.MvpFragment;
 import com.example.william.my.module.sample.presenter.ArticlesPresenter;
+import com.example.william.my.module.sample.repo.ArticlesRepository;
 
 public class DemoMvpActivity extends AppCompatActivity {
 

@@ -63,6 +63,9 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
         return false;
     }
 
+    /**
+     * State.SUCCESS 时，返回 response
+     */
     protected abstract void callback(T response);
 
     /**

@@ -1,18 +1,23 @@
 package com.example.william.my.module.sample.fragment;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.CollectionUtils;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
+import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.ArticleAdapter;
 import com.example.william.my.module.sample.bean.ArticleDetailBean;
@@ -56,37 +61,46 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
         mSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
 
-        mViewModel = new ViewModelProvider(this).get(ArticlesViewModel.class);
-        subscribeToModel(mViewModel);
+        subscribeToModel();
     }
 
-    private void subscribeToModel(final ArticlesViewModel viewModel) {
+    private void subscribeToModel() {
+
+        mViewModel = new ViewModelProvider(this).get(ArticlesViewModel.class);
+
         // Observe comments
-//        viewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<List<ArticleDetailBean>>>() {
-//            @Override
-//            public void onChanged(RetrofitResponse<List<ArticleDetailBean>> listRetrofitResponse) {
-//                if (CollectionUtils.isNotEmpty(listRetrofitResponse.getData())) {
-//                    if (viewModel.isFirst()) {
-//                        mAdapter.setNewInstance(listRetrofitResponse.getData());
-//                    } else {
-//                        mAdapter.addData(listRetrofitResponse.getData());
-//                    }
-//                    mAdapter.notifyDataSetChanged();
-//                }
-//            }
-//        });
-        viewModel.getArticleList().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<List<ArticleDetailBean>>() {
+        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<List<ArticleDetailBean>>>() {
             @Override
-            protected void callback(List<ArticleDetailBean> response) {
-                if (viewModel.isFirst()) {
-                    mAdapter.setNewInstance(response);
-                } else {
-                    mAdapter.addData(response);
+            public void onChanged(RetrofitResponse<List<ArticleDetailBean>> response) {
+                if (response.getCode() == 0) {
+                    showArticleList(response.getData());
                 }
-                mAdapter.notifyDataSetChanged();
             }
         });
-        viewModel.queryArticleList();
+        // WithLoadingTipObserver
+        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<List<ArticleDetailBean>>() {
+            @Override
+            protected void callback(List<ArticleDetailBean> response) {
+                showArticleList(response);
+            }
+        });
+        mViewModel.queryArticleList();
+    }
+
+    private void showArticleList(List<ArticleDetailBean> response) {
+        if (mViewModel.isFirst()) {
+            if (CollectionUtils.isNotEmpty(response)) {
+                mAdapter.setNewInstance(response);
+            } else {
+                TextView textView = new TextView(getActivity());
+                textView.setGravity(Gravity.CENTER);
+                textView.setText("无数据");
+                mAdapter.setEmptyView(textView);
+            }
+        } else {
+            mAdapter.addData(response);
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
