@@ -1,0 +1,20 @@
+//apply from: '../buildApp.gradle'
+android {
+    //resourcePrefix "sample_"
+}
+dependencies {
+    implementation project(path: ':librarys:lib_network')
+    //Retrofit
+    implementation deps.retrofit
+    implementation deps.retrofit_gson
+    implementation deps.retrofit_scalars
+    implementation deps.retrofit_rxjava3
+    //https://github.com/Blankj/AndroidUtilCode
+    implementation deps.utils
+    //https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    implementation deps.brvah
+    //https://github.com/scwang90/SmartRefreshLayout
+    implementation deps.smartrefresh
+    implementation deps.smartrefresh_header
+    implementation deps.smartrefresh_footer
+}

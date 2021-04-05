@@ -1,4 +1,4 @@
-include ':modules:module_demo'
+include ':modules:module_sample'
 rootProject.name = "My Application"
 include ':app'
 

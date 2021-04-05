@@ -14,11 +14,10 @@ class Config {
             Network        : new DepConfig(true, ":modules:module_network"),
             CustomView     : new DepConfig(true, ":modules:module_custom_view"),
 
+            Sample         : new DepConfig(false, ":modules:module_sample"),
             Jetpack        : new DepConfig(true, ":modules:module_jetpack"),
             OpenSource     : new DepConfig(true, ":modules:module_open_source"),
             Widget         : new DepConfig(true, ":modules:module_widget"),
-
-            ModuleDemo     : new DepConfig(false, ":modules:module_demo"),
 
             ModuleWeChat   : new DepConfig(false, ":modules:module_wechat"),
             ModuleBugly    : new DepConfig(false, ":modules:module_bugly"),
