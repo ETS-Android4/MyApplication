@@ -20,6 +20,7 @@ import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObser
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.ArticleAdapter;
+import com.example.william.my.module.sample.bean.ArticleBean;
 import com.example.william.my.module.sample.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.model.ArticlesViewModel;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -84,7 +85,23 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
                 showArticleList(response);
             }
         });
-        mViewModel.queryArticleList();
+        //mViewModel.queryArticleList();
+
+        mViewModel.getArticle().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<ArticleBean>>() {
+            @Override
+            public void onChanged(RetrofitResponse<ArticleBean> response) {
+                if (response.getCode() == 0) {
+                    showArticle(response.getData());
+                }
+            }
+        });
+        mViewModel.getArticle().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<ArticleBean>() {
+            @Override
+            protected void callback(ArticleBean response) {
+                showArticle(response);
+            }
+        });
+        //mViewModel.queryArticle();
     }
 
     private void showArticleList(List<ArticleDetailBean> response) {
@@ -99,6 +116,22 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
             }
         } else {
             mAdapter.addData(response);
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private void showArticle(ArticleBean response) {
+        if (response.getCurPage() == 0) {
+            if (CollectionUtils.isNotEmpty(response.getDatas())) {
+                mAdapter.setNewInstance(response.getDatas());
+            } else {
+                TextView textView = new TextView(getActivity());
+                textView.setGravity(Gravity.CENTER);
+                textView.setText("无数据");
+                mAdapter.setEmptyView(textView);
+            }
+        } else {
+            mAdapter.addData(response.getDatas());
         }
         mAdapter.notifyDataSetChanged();
     }

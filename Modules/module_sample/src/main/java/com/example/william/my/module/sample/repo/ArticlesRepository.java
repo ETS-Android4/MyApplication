@@ -86,4 +86,17 @@ public class ArticlesRepository implements ArticlesDataSource {
 
         return liveData;
     }
+
+    /**
+     * ArticleBean
+     */
+    public LiveData<RetrofitResponse<ArticleBean>> getArticle(int page) {
+        final MutableLiveData<RetrofitResponse<ArticleBean>> liveData = new MutableLiveData<>();
+
+        RetrofitUtils.buildLiveData(
+                service.getArticleList(page),
+                new LiveDataCallback<>(liveData));
+
+        return liveData;
+    }
 }
