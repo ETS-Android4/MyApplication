@@ -77,7 +77,7 @@ public class ModuleActivity extends BaseListActivity {
 
         mMap.put("JetPackActivity", ARouterPath.JetPack.JetPack);
         mMap.put("OpenSourceActivity", ARouterPath.OpenSource.OpenSource);
-        mMap.put("SampleActivity", ARouterPath.Sample.Sample);
+        mMap.put("WidgetActivity", ARouterPath.Widget.Widget);
 
         //Kotlin
         //mMap.put("kotlin", "kotlin");

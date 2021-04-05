@@ -11,7 +11,7 @@ include ':modules:module_network'
 include ':modules:module_custom_view'
 include ':modules:module_jetpack'
 include ':modules:module_open_source'
-include ':modules:module_sample'
+include ':modules:module_widget'
 include ':modules:module_kotlin'
 include ':modules:module_flutter'
 
