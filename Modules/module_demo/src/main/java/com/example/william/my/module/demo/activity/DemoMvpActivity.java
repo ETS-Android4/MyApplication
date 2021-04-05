@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.FragmentUtils;
 import com.example.william.my.module.demo.R;
-import com.example.william.my.module.demo.data.ArticleRepository;
-import com.example.william.my.module.demo.fragment.ArticleFragment;
-import com.example.william.my.module.demo.presenter.ArticlePresenter;
+import com.example.william.my.module.demo.repo.ArticlesRepository;
+import com.example.william.my.module.demo.fragment.MvpFragment;
+import com.example.william.my.module.demo.presenter.ArticlesPresenter;
 
 public class DemoMvpActivity extends AppCompatActivity {
 
@@ -17,15 +17,15 @@ public class DemoMvpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_layout_fragment);
 
-        ArticleFragment articleFragment = (ArticleFragment) getSupportFragmentManager()
+        MvpFragment mvpFragment = (MvpFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.contentFrame);
 
-        if (articleFragment == null) {
-            articleFragment = ArticleFragment.newInstance();
-            FragmentUtils.add(getSupportFragmentManager(), articleFragment, R.id.contentFrame);
+        if (mvpFragment == null) {
+            mvpFragment = MvpFragment.newInstance();
+            FragmentUtils.add(getSupportFragmentManager(), mvpFragment, R.id.contentFrame);
         }
 
         // Create the presenter
-        new ArticlePresenter(ArticleRepository.getInstance(), articleFragment);
+        new ArticlesPresenter(ArticlesRepository.getInstance(), mvpFragment);
     }
 }

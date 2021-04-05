@@ -1,10 +1,10 @@
-package com.example.william.my.module.demo.data;
+package com.example.william.my.module.demo.repo;
 
 import com.example.william.my.module.demo.bean.ArticleDetailBean;
 
 import java.util.List;
 
-public interface ArticleDataSource {
+public interface ArticlesDataSource {
 
     interface LoadArticleCallback {
 

@@ -8,14 +8,14 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/demo_app_name"
         android:theme="@style/basics_AppTheme">
-        <activity android:name=".activity.DemoMvpActivity">
+        <activity android:name=".activity.DemoMvpActivity" />
+        <activity android:name=".activity.DemoMvvmActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DemoMvvmActivity" />
     </application>
 
 </manifest>

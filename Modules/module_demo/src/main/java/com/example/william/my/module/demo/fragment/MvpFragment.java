@@ -18,14 +18,13 @@ import com.example.william.my.module.demo.R;
 import com.example.william.my.module.demo.adapter.ArticleAdapter;
 import com.example.william.my.module.demo.bean.ArticleDetailBean;
 import com.example.william.my.module.demo.contract.ArticleContract;
-import com.example.william.my.module.demo.utils.CheckUtils;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.List;
 
-public class ArticleFragment extends Fragment implements ArticleContract.View, OnRefreshLoadMoreListener {
+public class MvpFragment extends Fragment implements ArticleContract.View, OnRefreshLoadMoreListener {
 
     private ArticleAdapter mAdapter;
     private RecyclerView mRecyclerView;
@@ -33,10 +32,10 @@ public class ArticleFragment extends Fragment implements ArticleContract.View, O
 
     private ArticleContract.Presenter mPresenter;
 
-    public static ArticleFragment newInstance() {
-        ArticleFragment fragment = new ArticleFragment();
-        Bundle arguments = new Bundle();
-        fragment.setArguments(arguments);
+    public static MvpFragment newInstance() {
+        MvpFragment fragment = new MvpFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -61,7 +60,7 @@ public class ArticleFragment extends Fragment implements ArticleContract.View, O
 
     @Override
     public void setPresenter(@NonNull ArticleContract.Presenter presenter) {
-        mPresenter = CheckUtils.checkNotNull(presenter);
+        mPresenter = presenter;
     }
 
     @Override

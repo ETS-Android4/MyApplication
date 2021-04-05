@@ -8,6 +8,9 @@ import com.example.william.my.core.network.retrofit.status.State;
 
 import java.util.Collection;
 
+/**
+ * androidx.lifecycle.Observer
+ */
 public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResponse<T>> {
 
     private final String mMessage;

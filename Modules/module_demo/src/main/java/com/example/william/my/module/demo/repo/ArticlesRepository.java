@@ -1,33 +1,41 @@
-package com.example.william.my.module.demo.data;
+package com.example.william.my.module.demo.repo;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.example.william.my.core.network.retrofit.callback.LiveDataCallback;
 import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.demo.bean.ArticleBean;
+import com.example.william.my.module.demo.bean.ArticleDetailBean;
 import com.example.william.my.module.demo.service.ArticleService;
-import com.example.william.my.module.demo.utils.CheckUtils;
 
-public class ArticleRepository implements ArticleDataSource {
+import java.util.List;
+
+public class ArticlesRepository implements ArticlesDataSource {
 
     private final ArticleService service;
 
-    private static ArticleRepository INSTANCE;
+    private static ArticlesRepository INSTANCE;
 
-    public static ArticleRepository getInstance() {
+    private MutableLiveData<List<ArticleDetailBean>> mObservableArticles;
+
+    public static ArticlesRepository getInstance() {
         if (INSTANCE == null) {
-            synchronized (ArticleRepository.class) {
+            synchronized (ArticlesRepository.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new ArticleRepository();
+                    INSTANCE = new ArticlesRepository();
                 }
             }
         }
         return INSTANCE;
     }
 
-    private ArticleRepository() {
+    private ArticlesRepository() {
         service = RetrofitUtils.buildApi(ArticleService.class);
     }
 
@@ -37,8 +45,6 @@ public class ArticleRepository implements ArticleDataSource {
 
     @Override
     public void getArticleList(int page, LoadArticleCallback callback) {
-
-        CheckUtils.checkNotNull(callback);
 
         RetrofitUtils.buildObs(
                 service.getArticleList(page))
@@ -58,5 +64,26 @@ public class ArticleRepository implements ArticleDataSource {
                         callback.onFailure(e.getMessage());
                     }
                 });
+    }
+
+    /**
+     * List<ArticleDetailBean>
+     */
+    public LiveData<RetrofitResponse<List<ArticleDetailBean>>> getArticleList(int page) {
+        final MutableLiveData<RetrofitResponse<List<ArticleDetailBean>>> liveData = new MutableLiveData<>();
+
+        LiveDataCallback.LiveDataConvert<ArticleBean, List<ArticleDetailBean>> convert = new LiveDataCallback.LiveDataConvert<ArticleBean, List<ArticleDetailBean>>() {
+            @Override
+            public RetrofitResponse<List<ArticleDetailBean>> convert(RetrofitResponse<ArticleBean> data) throws Exception {
+                List<ArticleDetailBean> articleList = data.getData().getDatas();
+                return RetrofitResponse.success(articleList);
+            }
+        };
+
+        RetrofitUtils.buildLiveData(
+                service.getArticleList(page),
+                new LiveDataCallback<>(liveData, convert));
+
+        return liveData;
     }
 }

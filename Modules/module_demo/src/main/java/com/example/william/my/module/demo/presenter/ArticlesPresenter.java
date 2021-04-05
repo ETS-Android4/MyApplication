@@ -2,25 +2,22 @@ package com.example.william.my.module.demo.presenter;
 
 import com.example.william.my.module.demo.bean.ArticleDetailBean;
 import com.example.william.my.module.demo.contract.ArticleContract;
-import com.example.william.my.module.demo.data.ArticleDataSource;
-import com.example.william.my.module.demo.data.ArticleRepository;
-import com.example.william.my.module.demo.utils.CheckUtils;
+import com.example.william.my.module.demo.repo.ArticlesDataSource;
+import com.example.william.my.module.demo.repo.ArticlesRepository;
 
 import java.util.List;
 
-public class ArticlePresenter implements ArticleContract.Presenter {
-
-    private final ArticleRepository mArticleRepository;
-
-    private final ArticleContract.View mArticleView;
+public class ArticlesPresenter implements ArticleContract.Presenter {
 
     private int mPage;
 
-    public ArticlePresenter(ArticleRepository articleRepository, ArticleContract.View view) {
-        mArticleRepository =
-                CheckUtils.checkNotNull(articleRepository, "ArticleRepository cannot be null!");
-        mArticleView =
-                CheckUtils.checkNotNull(view, "ArticleView cannot be null!");
+    private final ArticlesRepository mArticleRepository;
+
+    private final ArticleContract.View mArticleView;
+
+    public ArticlesPresenter(ArticlesRepository articleRepository, ArticleContract.View view) {
+        mArticleRepository = articleRepository;
+        mArticleView = view;
 
         this.mArticleView.setPresenter(this);
     }
@@ -38,7 +35,7 @@ public class ArticlePresenter implements ArticleContract.Presenter {
     }
 
     private void queryArticleList(int page) {
-        mArticleRepository.getArticleList(page, new ArticleDataSource.LoadArticleCallback() {
+        mArticleRepository.getArticleList(page, new ArticlesDataSource.LoadArticleCallback() {
             @Override
             public void onArticleLoaded(List<ArticleDetailBean> articles) {
                 mArticleView.showArticles(mPage == 0, articles);

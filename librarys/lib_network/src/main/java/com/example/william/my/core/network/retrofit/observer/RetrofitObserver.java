@@ -11,6 +11,8 @@ import io.reactivex.rxjava3.disposables.Disposable;
 /**
  * 处理基本逻辑
  * onErrorResumeNext -> ApiException
+ * <p>
+ * io.reactivex.rxjava3.core.Observer
  */
 public abstract class RetrofitObserver<T> implements Observer<T>, RetrofitCallback<T> {
 
