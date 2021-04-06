@@ -8,13 +8,17 @@ import com.example.william.my.library.interfaces.IComponentApplication;
 import com.example.william.my.module.BuildConfig;
 import com.example.william.my.module.utils.Crash;
 
-public class ModuleApp extends IComponentApplication {
+public class ModuleApp implements IComponentApplication {
 
     @Override
     public void init(Application application) {
-        super.init(application);
         initCrash();
         initARouter(application);
+    }
+
+    @Override
+    public void initAsync(Application application) {
+
     }
 
     private void initCrash() {

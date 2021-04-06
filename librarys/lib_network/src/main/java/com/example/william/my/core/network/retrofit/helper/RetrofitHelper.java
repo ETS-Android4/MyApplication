@@ -1,15 +1,14 @@
 package com.example.william.my.core.network.retrofit.helper;
 
 import com.example.william.my.core.network.base.RxRetrofitConfig;
-import com.example.william.my.core.network.retrofit.compat.cache.CacheCompat;
-import com.example.william.my.core.network.retrofit.compat.cookie.CookieJarCompat;
-import com.example.william.my.core.network.retrofit.compat.logging.LoggingCompat;
-import com.example.william.my.core.network.retrofit.compat.ssl.HttpsSSLCompat;
 import com.example.william.my.core.network.retrofit.converter.RetrofitConverterFactory;
+import com.example.william.my.core.network.retrofit.helper.compat.cache.CacheCompat;
+import com.example.william.my.core.network.retrofit.helper.compat.cookie.CookieJarCompat;
+import com.example.william.my.core.network.retrofit.helper.compat.logging.LoggingCompat;
+import com.example.william.my.core.network.retrofit.helper.compat.ssl.HttpsSSLCompat;
+import com.example.william.my.core.network.retrofit.helper.compat.timeout.TimeoutCompat;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
-
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Converter;
@@ -56,12 +55,8 @@ public class RetrofitHelper {
         //设置连接使用的HTTP代理。该方法优先于proxySelector，默认代理为空，完全禁用代理使用NO_PROXY
         //okHttpClient.proxy(Proxy.NO_PROXY);
 
-        okHttpClient.retryOnConnectionFailure(true);//允许失败重试
-
-        okHttpClient.connectTimeout(RxRetrofitConfig.connectTimeout, TimeUnit.SECONDS);//设置连接超时时间
-        okHttpClient.writeTimeout(RxRetrofitConfig.writeTimeout, TimeUnit.SECONDS);//设置写的超时时间
-        okHttpClient.readTimeout(RxRetrofitConfig.readTimeout, TimeUnit.SECONDS);//设置读取超时时间
-        okHttpClient.callTimeout(RxRetrofitConfig.callTimeout, TimeUnit.SECONDS);//设置调用超时时间
+        //设置超时时间
+        TimeoutCompat.setTimeOut(okHttpClient);
 
         //设置缓存
         if (RxRetrofitConfig.setCache)

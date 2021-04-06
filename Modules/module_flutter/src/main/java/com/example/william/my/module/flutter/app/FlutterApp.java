@@ -4,12 +4,19 @@ import android.app.Application;
 
 import com.example.william.my.library.interfaces.IComponentApplication;
 
-public class FlutterApp extends IComponentApplication {
+public class FlutterApp implements IComponentApplication {
 
     @Override
     public void init(Application application) {
-        super.init(application);
+        initFlutter();
+    }
 
+    @Override
+    public void initAsync(Application application) {
+
+    }
+
+    private void initFlutter() {
         //Step 3: (Optional) Use a cached FlutterEngine
 //        // Instantiate a FlutterEngine.
 //        FlutterEngine flutterEngine = new FlutterEngine(application);

@@ -15,13 +15,17 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 
-public class OpenSourceApp extends IComponentApplication {
+public class OpenSourceApp implements IComponentApplication {
 
     @Override
     public void init(Application application) {
-        super.init(application);
         //初始化SmartRefreshLayout
         initSmartRefreshLayout();
+    }
+
+    @Override
+    public void initAsync(Application application) {
+
     }
 
     private void initSmartRefreshLayout() {

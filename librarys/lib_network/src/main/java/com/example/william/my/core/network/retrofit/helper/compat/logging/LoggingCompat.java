@@ -1,4 +1,4 @@
-package com.example.william.my.core.network.retrofit.compat.logging;
+package com.example.william.my.core.network.retrofit.helper.compat.logging;
 
 import android.util.Log;
 

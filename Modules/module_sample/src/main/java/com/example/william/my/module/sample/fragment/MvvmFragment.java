@@ -10,14 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.CollectionUtils;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
-import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.ArticleAdapter;
 import com.example.william.my.module.sample.bean.ArticleBean;

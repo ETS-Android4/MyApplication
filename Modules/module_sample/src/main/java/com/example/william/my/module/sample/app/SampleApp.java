@@ -5,7 +5,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.example.william.my.library.base.BaseApp;
+import com.example.william.my.core.network.base.RxRetrofitConfig;
 import com.example.william.my.library.interfaces.IComponentApplication;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
@@ -16,12 +16,17 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 
-public class SampleApp extends IComponentApplication {
+public class SampleApp implements IComponentApplication {
+
+    @Override
+    public void init(Application application) {
+        RxRetrofitConfig.init(application);
+        initSmartRefreshLayout();
+    }
 
     @Override
     public void initAsync(Application application) {
-        super.initAsync(application);
-        initSmartRefreshLayout();
+
     }
 
     private void initSmartRefreshLayout() {

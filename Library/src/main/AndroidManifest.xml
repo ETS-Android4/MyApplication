@@ -117,8 +117,10 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
+        android:name=".base.BaseApp"
         android:allowBackup="false"
         android:networkSecurityConfig="@xml/network_config"
+        tools:replace="android:name"
         tools:targetApi="n">
         <!--FileProvider-->
         <provider

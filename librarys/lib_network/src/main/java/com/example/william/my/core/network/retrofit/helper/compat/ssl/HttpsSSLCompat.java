@@ -1,4 +1,4 @@
-package com.example.william.my.core.network.retrofit.compat.ssl;
+package com.example.william.my.core.network.retrofit.helper.compat.ssl;
 
 import android.annotation.SuppressLint;
 

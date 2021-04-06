@@ -1,13 +1,10 @@
 package com.example.william.my.module.open.adapter;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.module.open.R;
-
-import java.util.List;
 
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper

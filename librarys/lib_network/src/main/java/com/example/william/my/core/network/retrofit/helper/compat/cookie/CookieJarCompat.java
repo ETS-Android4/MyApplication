@@ -1,4 +1,4 @@
-package com.example.william.my.core.network.retrofit.compat.cookie;
+package com.example.william.my.core.network.retrofit.helper.compat.cookie;
 
 import androidx.annotation.NonNull;
 
