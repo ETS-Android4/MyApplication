@@ -30,7 +30,8 @@ public class BaseApp extends Application {
             "com.example.william.my.module.app.ModuleApp",
             "com.example.william.my.module.network.app.NetWorkApp",
             "com.example.william.my.module.jetpack.app.JetPackApp",
-            "com.example.william.my.module.open.app.OpenSourceApp"
+            "com.example.william.my.module.open.app.OpenSourceApp",
+            "com.example.william.my.module.sample.app.SampleApp"
     };
 
     @Override

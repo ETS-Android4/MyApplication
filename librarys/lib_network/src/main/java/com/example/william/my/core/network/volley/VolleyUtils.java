@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -85,7 +87,7 @@ public class VolleyUtils {
                 sharedPreferences = context.getSharedPreferences("cookie", Context.MODE_PRIVATE);
         }
 
-        public void enqueue(VolleyListener<T> listener) {
+        public void enqueue(@NonNull VolleyListener<T> listener) {
             volleyQueue.add(new JsonRequest<T>(Request.Method.POST, url, clazz, context,
                     listener.responseListener(), listener.errorListener()) {
                 @Override
@@ -129,7 +131,7 @@ public class VolleyUtils {
             }
         }
 
-        protected Response<T> parseNetworkResponse(NetworkResponse response) {
+        protected Response<T> parseNetworkResponse(@NonNull NetworkResponse response) {
             try {
                 String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
                 String temp_cookie = response.headers.get("Set-Cookie");

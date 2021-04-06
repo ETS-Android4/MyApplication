@@ -64,6 +64,7 @@ public class RxWebSocketUtils {
         }
     }
 
+    @NonNull
     private Observable<RxWebSocketInfo> createWebSocket(String url, Request request) {
         return createWebSocket(url, request, new OkHttpClient());
     }
@@ -80,6 +81,7 @@ public class RxWebSocketUtils {
         }
     }
 
+    @NonNull
     private Observable<RxWebSocketInfo> createWebSocket(final String url, final Request request, OkHttpClient okHttpClient) {
         Observable<RxWebSocketInfo> observable = observableMap.get(url);
         if (observable == null) {

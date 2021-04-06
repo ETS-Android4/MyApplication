@@ -12,7 +12,7 @@ public class RetrofitInterceptorOAuth implements Interceptor {
 
     @NonNull
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request()
                 .newBuilder()
                 .addHeader("Authorization", "token")

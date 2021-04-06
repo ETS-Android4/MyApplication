@@ -1,5 +1,6 @@
 package com.example.william.my.core.network.retrofit.callback;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.william.my.core.network.retrofit.exception.ApiException;
@@ -39,7 +40,7 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
     }
 
     @Override
-    public void onFailure(ApiException e) {
+    public void onFailure(@NonNull ApiException e) {
         liveData.postValue(RetrofitResponse.<Data>error(e.getMessage()));
     }
 

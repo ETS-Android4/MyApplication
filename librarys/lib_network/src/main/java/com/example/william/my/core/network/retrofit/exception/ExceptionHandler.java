@@ -3,6 +3,8 @@ package com.example.william.my.core.network.retrofit.exception;
 import android.net.ParseException;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.william.my.core.network.base.BaseBean;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
@@ -32,6 +34,7 @@ public class ExceptionHandler {
     private static final int SERVICE_UNAVAILABLE = 503;// 服务不可用
     private static final int GATEWAY_TIMEOUT = 504;// 网关超时
 
+    @NonNull
     public static ApiException handleException(Throwable e) {
         ApiException ex;
         if (e instanceof HttpException) {//HTTP错误

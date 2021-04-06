@@ -1,5 +1,7 @@
 package com.example.william.my.core.network.retrofit.utils;
 
+import androidx.annotation.NonNull;
+
 import com.example.william.my.core.network.retrofit.body.CountingRequestBody;
 import com.example.william.my.core.network.retrofit.callback.RetrofitCallback;
 import com.example.william.my.core.network.retrofit.exception.ApiException;
@@ -20,6 +22,7 @@ import okhttp3.RequestBody;
 
 public class RetrofitUtils {
 
+    @NonNull
     public static <T> T buildApi(Class<T> service) {
         return RetrofitHelper
                 .getInstance()
@@ -28,6 +31,7 @@ public class RetrofitUtils {
                 .create(service);
     }
 
+    @NonNull
     public static <T> T buildApi(String baseUrl, Class<T> service) {
         return RetrofitHelper
                 .getInstance()
@@ -36,12 +40,14 @@ public class RetrofitUtils {
                 .create(service);
     }
 
+    @NonNull
     public static MultipartBody.Part buildMultipart(String key, File file, RetrofitRequestListener listener) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), Objects.requireNonNull(file));
         CountingRequestBody countingRequestBody = new CountingRequestBody(requestBody, listener);
         return MultipartBody.Part.createFormData(key, file.getName(), countingRequestBody);
     }
 
+    @NonNull
     public static <T> Observable<T> buildObs(Observable<T> observable) {
         return observable
                 //.map(new ServerResultFunction<T>())
@@ -55,7 +61,7 @@ public class RetrofitUtils {
      *
      * @param callback LiveDataCallback(需要RetrofitResponse<Bean>格式数据)
      */
-    public static <T> void buildLiveData(Observable<T> observable, final RetrofitCallback<T> callback) {
+    public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitCallback<T> callback) {
         observable
                 .onErrorResumeNext(new HttpResultFunction<T>())
                 .subscribeOn(Schedulers.io())

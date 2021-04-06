@@ -25,7 +25,7 @@ public class RxRetrofitConfig {
     public static final String loggingTag = "TAG";
 
     //是否设置缓存
-    public static final boolean setCache = false;
+    public static final boolean setCache = true;
     //设置缓存名
     public static final String cacheDir = "cache";
     //设置缓存大小

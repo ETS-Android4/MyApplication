@@ -1,7 +1,10 @@
 package com.example.william.my.core.network.retrofit.utils;
 
+import androidx.annotation.NonNull;
+
 public class BaseUrlUtils {
 
+    @NonNull
     public static String getBaseUrl(String url) {
         String head = "";
         int index = url.indexOf("://");

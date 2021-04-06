@@ -2,6 +2,8 @@ package com.example.william.my.core.network.retrofit.function;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -15,7 +17,7 @@ public class ServerResultFunction<T> implements Function<RetrofitResponse<JsonEl
 
     @SuppressWarnings("unchecked")
     @Override
-    public RetrofitResponse<T> apply(RetrofitResponse<JsonElement> response) throws Exception {
+    public RetrofitResponse<T> apply(@NonNull RetrofitResponse<JsonElement> response) throws Exception {
         //抛出服务器返回自定义异常
         if (!response.isSuccess()) {
             Log.e("ServerResult", new Gson().toJson(response));

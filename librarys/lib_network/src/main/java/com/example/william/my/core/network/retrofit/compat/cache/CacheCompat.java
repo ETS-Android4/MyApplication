@@ -2,6 +2,9 @@ package com.example.william.my.core.network.retrofit.compat.cache;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorCache;
 
@@ -16,9 +19,12 @@ public class CacheCompat {
         if (context != null) {
             builder.cache(new Cache(new File(getCacheDir(context), cacheDir), cacheSize));
             builder.addNetworkInterceptor(new RetrofitInterceptorCache());
+        } else {
+            Log.e("CacheCompat", "context == null. 缓存未启用.");
         }
     }
 
+    @NonNull
     public static String getCacheDir(Context context) {
         String cachePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())

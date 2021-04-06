@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient;
 
 public class CookieJarCompat {
 
-    public static void cookieJar(OkHttpClient.Builder builder) {
+    public static void cookieJar(@NonNull OkHttpClient.Builder builder) {
         builder.cookieJar(buildCookieJar());
 
         //builder.addInterceptor(new RetrofitInterceptorCookie());

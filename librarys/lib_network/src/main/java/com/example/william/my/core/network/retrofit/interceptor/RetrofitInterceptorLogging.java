@@ -46,7 +46,7 @@ public class RetrofitInterceptorLogging implements Interceptor {
 
     @NonNull
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
         Connection connection = chain.connection();
         Log.i(TAG, "--> "

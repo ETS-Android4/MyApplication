@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
 
 import com.example.william.my.core.network.base.RxRetrofitConfig;
@@ -33,6 +34,7 @@ public class NetworkUtils {
         return cm.getActiveNetworkInfo();
     }
 
+    @NonNull
     public static String getIPAddress(final boolean useIPv4) {
         try {
             Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();

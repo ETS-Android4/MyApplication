@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.william.my.core.network.R;
@@ -62,7 +63,7 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
         mTextView.setText(message);
     }
 
-    public void setLoadingTip(Status status) {
+    public void setLoadingTip(@NonNull Status status) {
         switch (status) {
             case loading:
                 setVisibility(View.VISIBLE);
@@ -96,6 +97,7 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
     /**
      * 全屏LoadingTip
      */
+    @NonNull
     public static LoadingTip addLoadingTipFullScreen(Activity context) {
         LoadingTip loadingTip = new LoadingTip(context);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -107,6 +109,7 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
     /**
      * 带标题栏LoadingTip
      */
+    @NonNull
     public static LoadingTip addLoadingTipWithTopBar(Activity context) {
         LoadingTip loadingTip = new LoadingTip(context);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

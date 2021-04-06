@@ -2,6 +2,8 @@ package com.example.william.my.core.network.retrofit.compat.ssl;
 
 import android.annotation.SuppressLint;
 
+import androidx.annotation.NonNull;
+
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HostnameVerifier;
@@ -16,7 +18,7 @@ import okhttp3.OkHttpClient;
 
 public class HttpsSSLCompat {
 
-    public static void ignoreSSLForOkHttp(OkHttpClient.Builder builder) {
+    public static void ignoreSSLForOkHttp(@NonNull OkHttpClient.Builder builder) {
         builder.hostnameVerifier(getIgnoreHostnameVerifier())
                 .sslSocketFactory(getIgnoreSSLSocketFactory(), getTrustManager());
     }

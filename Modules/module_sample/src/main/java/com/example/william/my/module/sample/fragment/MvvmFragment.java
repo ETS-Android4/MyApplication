@@ -70,38 +70,41 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
         mViewModel = new ViewModelProvider(this).get(ArticlesViewModel.class);
 
         // Observe comments
-        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<List<ArticleDetailBean>>>() {
-            @Override
-            public void onChanged(RetrofitResponse<List<ArticleDetailBean>> response) {
-                if (response.getCode() == 0) {
-                    showArticleList(response.getData());
-                }
-            }
-        });
-        // WithLoadingTipObserver
-        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<List<ArticleDetailBean>>() {
-            @Override
-            protected void callback(List<ArticleDetailBean> response) {
-                showArticleList(response);
-            }
-        });
+//        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<List<ArticleDetailBean>>>() {
+//            @Override
+//            public void onChanged(RetrofitResponse<List<ArticleDetailBean>> response) {
+//                if (response.getCode() == 0) {
+//                    showArticleList(response.getData());
+//                }
+//            }
+//        });
+        // WithLoadingTipObserver comments
+//        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<List<ArticleDetailBean>>() {
+//            @Override
+//            protected void callback(List<ArticleDetailBean> response) {
+//                showArticleList(response);
+//            }
+//        });
         //mViewModel.queryArticleList();
 
-        mViewModel.getArticle().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<ArticleBean>>() {
-            @Override
-            public void onChanged(RetrofitResponse<ArticleBean> response) {
-                if (response.getCode() == 0) {
-                    showArticle(response.getData());
-                }
-            }
-        });
+        // Article
+        // Observe comments
+//        mViewModel.getArticle().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<ArticleBean>>() {
+//            @Override
+//            public void onChanged(RetrofitResponse<ArticleBean> response) {
+//                if (response.getCode() == 0) {
+//                    showArticle(response.getData());
+//                }
+//            }
+//        });
+        // WithLoadingTipObserver comments
         mViewModel.getArticle().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<ArticleBean>() {
             @Override
             protected void callback(ArticleBean response) {
                 showArticle(response);
             }
         });
-        //mViewModel.queryArticle();
+        mViewModel.queryArticle();
     }
 
     private void showArticleList(List<ArticleDetailBean> response) {
@@ -121,7 +124,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
     }
 
     private void showArticle(ArticleBean response) {
-        if (response.getCurPage() == 0) {
+        if (response.getCurPage() == 1) {
             if (CollectionUtils.isNotEmpty(response.getDatas())) {
                 mAdapter.setNewInstance(response.getDatas());
             } else {
@@ -138,13 +141,15 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        mViewModel.loadArticleList();
+        //mViewModel.loadArticleList();
+        mViewModel.loadArticle();
         mSmartRefreshLayout.finishLoadMore(1000);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mViewModel.queryArticleList();
+        //mViewModel.queryArticleList();
+        mViewModel.queryArticle();
         mSmartRefreshLayout.finishRefresh(1000);
     }
 }

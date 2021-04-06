@@ -13,6 +13,6 @@ public abstract class IComponentApplication {
     }
 
     public void initAsync(Application application) {
-
+        Log.e("TAG", getClass().getSimpleName() + " : init()");
     }
 }

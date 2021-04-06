@@ -25,7 +25,7 @@ public class RetrofitInterceptorCookie implements Interceptor {
 
     @NonNull
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
         Request.Builder builder = request.newBuilder();
         String cookie = getCookie(request.url().toString(), request.url().host());
@@ -49,7 +49,8 @@ public class RetrofitInterceptorCookie implements Interceptor {
     /**
      * 整合cookie为唯一字符串
      */
-    private String encodeCookie(List<String> cookies) {
+    @NonNull
+    private String encodeCookie(@NonNull List<String> cookies) {
         StringBuilder sb = new StringBuilder();
         Set<String> set = new HashSet<>();
         for (String cookie : cookies) {
