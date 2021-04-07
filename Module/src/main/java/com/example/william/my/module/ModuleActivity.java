@@ -60,6 +60,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * mipmap会自动选择更加合适的图片仅在launcher中有效
  * <p>
  * Typo: In word -> application-level
+ * 查询依赖树 -> gradlew app:dependencies
  */
 @Route(path = ARouterPath.Module)
 public class ModuleActivity extends BaseListActivity {

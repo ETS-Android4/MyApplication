@@ -31,7 +31,8 @@ dependencies {
     //Volley
     implementation deps.volley
     //OkHttp
-    implementation deps.okhttp_logging_3_9_0
+    implementation "com.squareup.okhttp3:okhttp:3.14.9"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.14.9"
     //Retrofit
     implementation deps.retrofit
     implementation deps.retrofit_gson
