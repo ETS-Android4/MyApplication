@@ -72,19 +72,36 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 //        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<List<ArticleDetailBean>>>() {
 //            @Override
 //            public void onChanged(RetrofitResponse<List<ArticleDetailBean>> response) {
-//                if (response.getCode() == 0) {
-//                    showArticleList(response.getData());
+//                if (response.getCode() == State.LOADING) {
+//                    showLoading();
+//                } else if (response.getCode() == State.SUCCESS) {
+//                    if (CollectionUtils.isEmpty(response.getData())) {
+//                        onDataNotAvailable(mViewModel.isFirst());
+//                    } else {
+//                        showArticles(mViewModel.isFirst(), response.getData());
+//                    }
+//                } else if (response.getCode() == State.ERROR) {
+//                    showToast(response.getMessage());
 //                }
 //            }
 //        });
         // WithLoadingTipObserver comments
-//        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<List<ArticleDetailBean>>() {
-//            @Override
-//            protected void callback(List<ArticleDetailBean> response) {
-//                showArticleList(response);
-//            }
-//        });
-        //mViewModel.queryArticleList();
+        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<List<ArticleDetailBean>>() {
+            @Override
+            protected void onResponse(@NonNull List<ArticleDetailBean> response) {
+                if (CollectionUtils.isEmpty(response)) {
+                    onDataNotAvailable(mViewModel.isFirst());
+                } else {
+                    showArticles(mViewModel.isFirst(), response);
+                }
+            }
+
+            @Override
+            protected boolean onFailure(String msg) {
+                showToast(msg);
+                return super.onFailure(msg);
+            }
+        });
 
         // Article
         // Observe comments
@@ -95,7 +112,11 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 //                    showLoading();
 //                } else if (response.getCode() == State.SUCCESS) {
 //                    if (ObjectUtils.isNotEmpty(response.getData())) {
-//                        showArticle(response.getData().getCurPage() == 1, response.getData().getDatas());
+//                        if (CollectionUtils.isEmpty(response.getData().getDatas())) {
+//                            onDataNotAvailable(response.getData().getCurPage() == 1);
+//                        } else {
+//                            showArticles(response.getData().getCurPage() == 1, response.getData().getDatas());
+//                        }
 //                    } else {
 //                        showToast(response.getMessage());
 //                    }
@@ -107,12 +128,16 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
         // WithLoadingTipObserver comments
         mViewModel.getArticle().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<ArticleBean>() {
             @Override
-            public void onResponse(ArticleBean response) {
-                showArticle(response.getCurPage() == 1, response.getDatas());
+            protected void onResponse(@NonNull ArticleBean response) {
+                if (CollectionUtils.isEmpty(response.getDatas())) {
+                    onDataNotAvailable(response.getCurPage() == 1);
+                } else {
+                    showArticles(response.getCurPage() == 1, response.getDatas());
+                }
             }
 
             @Override
-            public boolean onFailure(String msg) {
+            protected boolean onFailure(String msg) {
                 showToast(msg);
                 return super.onFailure(msg);
             }
@@ -122,7 +147,8 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
     @Override
     public void onResume() {
         super.onResume();
-        mViewModel.queryArticle();
+        mViewModel.queryArticleList();
+        //mViewModel.queryArticle();
     }
 
     private void showLoading() {
@@ -134,6 +160,14 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
         ToastUtils.showShort(message);
     }
 
+    private void onDataNotAvailable(boolean isFirst) {
+        if (isFirst) {
+            showEmptyView();
+        } else {
+            onDataNoMore();
+        }
+    }
+
     public void showEmptyView() {
         TextView textView = new TextView(getActivity());
         textView.setGravity(Gravity.CENTER);
@@ -143,25 +177,17 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
         mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
-    private void showArticle(boolean isFirst, List<ArticleDetailBean> article) {
-        if (CollectionUtils.isEmpty(article)) {
-            if (isFirst) {
-                showEmptyView();
-            } else {
-                onDataNoMore();
-            }
-        } else {
-            if (isFirst) {
-                mAdapter.setNewInstance(article);
-            } else {
-                mAdapter.addData(article);
-            }
-        }
-        mAdapter.notifyDataSetChanged();
-    }
-
     public void onDataNoMore() {
         ToastUtils.showShort("无更多数据");
+    }
+
+    private void showArticles(boolean isFirst, List<ArticleDetailBean> article) {
+        if (isFirst) {
+            mAdapter.setNewInstance(article);
+        } else {
+            mAdapter.addData(article);
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

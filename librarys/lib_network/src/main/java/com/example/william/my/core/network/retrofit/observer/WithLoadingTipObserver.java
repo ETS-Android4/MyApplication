@@ -1,5 +1,6 @@
 package com.example.william.my.core.network.retrofit.observer;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 
 import com.example.william.my.core.network.retrofit.loading.LoadingTip;
@@ -32,7 +33,7 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
     }
 
     @Override
-    public void onChanged(RetrofitResponse<T> tRetrofitResponse) {
+    public void onChanged(@NonNull RetrofitResponse<T> tRetrofitResponse) {
         switch (tRetrofitResponse.getCode()) {
             case State.LOADING:
                 break;
@@ -66,7 +67,7 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
     /**
      * State.SUCCESS 时，返回 response
      */
-    public abstract void onResponse(T response);
+    protected abstract void onResponse(@NonNull T response);
 
     /**
      * State.ERROR 时，返回 错误信息
@@ -74,7 +75,7 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
      * @return false 显示默认提示
      */
     @SuppressWarnings("SameReturnValue")
-    public boolean onFailure(String msg) {
+    protected boolean onFailure(String msg) {
         return false;
     }
 }

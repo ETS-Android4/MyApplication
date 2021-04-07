@@ -40,8 +40,7 @@ public class ArticlesRepository implements ArticlesDataSource {
     @Override
     public void getArticleList(int page, LoadArticleCallback callback) {
 
-        RetrofitUtils.buildObs(
-                service.getArticleListCache(page))
+        RetrofitUtils.buildObs(service.getArticleListCache(page))
                 .subscribe(new RetrofitObserver<RetrofitResponse<ArticleBean>>() {
                     @Override
                     public void onResponse(RetrofitResponse<ArticleBean> response) {
@@ -69,8 +68,12 @@ public class ArticlesRepository implements ArticlesDataSource {
         LiveDataCallback.LiveDataConvert<ArticleBean, List<ArticleDetailBean>> convert = new LiveDataCallback.LiveDataConvert<ArticleBean, List<ArticleDetailBean>>() {
             @Override
             public RetrofitResponse<List<ArticleDetailBean>> convert(RetrofitResponse<ArticleBean> data) throws Exception {
-                List<ArticleDetailBean> articleList = data.getData().getDatas();
-                return RetrofitResponse.success(articleList);
+                if (ObjectUtils.isNotEmpty(data.getData()) &&
+                        CollectionUtils.isNotEmpty(data.getData().getDatas())) {
+                    return RetrofitResponse.success(data.getData().getDatas());
+                } else {
+                    return RetrofitResponse.error(data.getMessage());
+                }
             }
         };
 

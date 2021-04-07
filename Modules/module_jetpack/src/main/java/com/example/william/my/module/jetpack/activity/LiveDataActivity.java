@@ -1,5 +1,6 @@
 package com.example.william.my.module.jetpack.activity;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -39,7 +40,7 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
         // List<MovieBean>
         //mViewModel.getBannersBean().observe(this, new WithLoadingTipObserver<List<BannerBean>>(mLoadingTip) {
         //    @Override
-        //    protected void callback(List<BannerBean> response) {
+        //    protected void onResponse(List<BannerBean> response) {
         //        showResponse(new Gson().toJson(response));
         //    }
         //});
@@ -47,7 +48,7 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
         // List<MovieData>
         mViewModel.getBannersData().observe(this, new WithLoadingTipObserver<List<BannerData>>(mLoadingTip) {
             @Override
-            protected void callback(List<BannerData> response) {
+            protected void onResponse(@NonNull List<BannerData> response) {
                 showResponse(new Gson().toJson(response));
             }
         });
