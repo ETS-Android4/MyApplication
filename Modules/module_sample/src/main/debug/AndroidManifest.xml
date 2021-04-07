@@ -7,8 +7,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/demo_app_name"
         android:theme="@style/basics_AppTheme">
-        <activity android:name=".activity.DemoMvpActivity" />
-        <activity android:name=".activity.DemoMvvmActivity">
+        <activity android:name=".activity.DemoMvvmActivity" />
+        <activity android:name=".activity.DemoMvpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

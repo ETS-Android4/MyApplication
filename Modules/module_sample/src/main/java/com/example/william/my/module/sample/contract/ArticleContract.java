@@ -14,6 +14,8 @@ public interface ArticleContract {
 
         void showArticles(boolean isFirst, List<ArticleDetailBean> article);
 
+        void onDataNoMore();
+
     }
 
     interface Presenter extends BasePresenter {

@@ -22,8 +22,6 @@ public class ArticlesRepository implements ArticlesDataSource {
 
     private static ArticlesRepository INSTANCE;
 
-    private MutableLiveData<List<ArticleDetailBean>> mObservableArticles;
-
     public static ArticlesRepository getInstance() {
         if (INSTANCE == null) {
             synchronized (ArticlesRepository.class) {
@@ -39,15 +37,11 @@ public class ArticlesRepository implements ArticlesDataSource {
         service = RetrofitUtils.buildApi(ArticleService.class);
     }
 
-    public static void destroyInstance() {
-        INSTANCE = null;
-    }
-
     @Override
     public void getArticleList(int page, LoadArticleCallback callback) {
 
         RetrofitUtils.buildObs(
-                service.getArticleList(page))
+                service.getArticleListCache(page))
                 .subscribe(new RetrofitObserver<RetrofitResponse<ArticleBean>>() {
                     @Override
                     public void onResponse(RetrofitResponse<ArticleBean> response) {

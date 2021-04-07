@@ -45,12 +45,18 @@ public class ArticlesPresenter implements ArticleContract.Presenter {
             public void onDataNotAvailable() {
                 if (mPage == 0) {
                     mArticleView.showEmptyView();
+                } else {
+                    mArticleView.onDataNoMore();
                 }
             }
 
             @Override
             public void onFailure(String msg) {
-                mArticleView.showToast(msg);
+                if (mPage == 0) {
+                    mArticleView.showEmptyView();
+                } else {
+                    mArticleView.showToast(msg);
+                }
             }
         });
     }

@@ -22,6 +22,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MvpFragment extends Fragment implements ArticleContract.View, OnRefreshLoadMoreListener {
@@ -79,8 +80,10 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
         TextView textView = new TextView(getActivity());
         textView.setGravity(Gravity.CENTER);
         textView.setText("无数据");
+        mAdapter.setNewInstance(new ArrayList<>());
         mAdapter.setEmptyView(textView);
         mAdapter.notifyDataSetChanged();
+        mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
     @Override
@@ -91,6 +94,12 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
             mAdapter.addData(article);
         }
         mAdapter.notifyDataSetChanged();
+        mSmartRefreshLayout.setEnableLoadMore(true);
+    }
+
+    @Override
+    public void onDataNoMore() {
+        ToastUtils.showShort("无更多数据");
     }
 
     @Override

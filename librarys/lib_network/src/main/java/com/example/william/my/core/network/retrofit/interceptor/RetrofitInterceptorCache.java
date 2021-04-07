@@ -1,13 +1,15 @@
 package com.example.william.my.core.network.retrofit.interceptor;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.william.my.core.network.retrofit.api.Header;
 import com.example.william.my.core.network.utils.NetworkUtils;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -23,34 +25,75 @@ public class RetrofitInterceptorCache implements Interceptor {
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
-        Request.Builder builder = request.newBuilder();
 
-        String cacheControl = request.cacheControl().toString();
-        Log.e("CacheInterceptor", "cacheControl " + cacheControl);
-        if (!NetworkUtils.isConnected()) {
-            //根据cacheControl设置由缓存还是网络请求
-            builder.cacheControl(TextUtils.isEmpty(cacheControl) ? CacheControl.FORCE_CACHE : CacheControl.FORCE_NETWORK);
+        if (!TextUtils.equals(request.method(), "GET")) {
+            return chain.proceed(request);
         }
 
-        Response response = chain.proceed(builder.build());
-        /*
-         * max-age=，缓存时长 60秒
-         * max-stale，响应时长，缓存时长 = max-age + ax-stale
-         * only-if-cached，仅使用缓存
-         * 移除pragma消息头，因为pragma也是控制缓存的一个消息头属性
-         */
+        List<String> headers = request.headers(Header.RETROFIT_CACHE_ALIVE_SECOND);
+        if (headers.size() == 0) {
+            return chain.proceed(request);
+        }
+
+        int age = Integer.parseInt(headers.get(0));
+
+        Request requestCached = buildRequest(request, age);
+
+        return buildResponse(chain.proceed(requestCached), age);
+    }
+
+    /**
+     * 设置由缓存还是网络请求
+     */
+    @NonNull
+    private Request buildRequest(@NonNull Request request, int age) {
+        Request.Builder builder = request.newBuilder();
         if (NetworkUtils.isConnected()) {
-            return response.newBuilder()
-                    .removeHeader("Pragma")
-                    .removeHeader("Cache-Control")
-                    .header("Cache-Control", "public, max-age=" + 60)
-                    .build();
+            if (age <= 0) {
+                return builder
+                        .cacheControl(CacheControl.FORCE_NETWORK)
+                        .build();
+            } else {
+                return builder
+                        .cacheControl(new CacheControl.Builder().maxAge(age, TimeUnit.SECONDS).build())
+                        .build();
+            }
         } else {
-            return response.newBuilder()
-                    .removeHeader("Pragma")
-                    .removeHeader("Cache-Control")
-                    .header("Cache-Control", "public, only-if-cached, max-stale=" + 60)
+            return builder
+                    .cacheControl(CacheControl.FORCE_CACHE)
                     .build();
         }
     }
+
+    /*
+     * max-age=，缓存时长 60秒
+     * max-stale，响应时长，缓存时长 = max-age + max-stale
+     * only-if-cached，仅使用缓存
+     * 移除pragma消息头，因为pragma也是控制缓存的一个消息头属性
+     */
+    @NonNull
+    private Response buildResponse(@NonNull Response response, int age) {
+        Response.Builder builder = response.newBuilder();
+        if (NetworkUtils.isConnected()) {
+            if (age <= 0) {
+                return builder
+                        .removeHeader("Pragma")
+                        .removeHeader("Cache-Control")
+                        .build();
+            } else {
+                return builder
+                        .removeHeader("Pragma")
+                        .removeHeader("Cache-Control")
+                        .header("Cache-Control", "public, max-age=" + age)
+                        .build();
+            }
+        } else {
+            return builder
+                    .removeHeader("Pragma")
+                    .removeHeader("Cache-Control")
+                    .header("Cache-Control", "public, only-if-cached, max-stale=" + Integer.MAX_VALUE)
+                    .build();
+        }
+    }
+
 }

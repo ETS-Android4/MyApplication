@@ -15,7 +15,6 @@ public interface ArticlesDataSource {
         void onFailure(String msg);
     }
 
-
     void getArticleList(int page, LoadArticleCallback callback);
 
 }
