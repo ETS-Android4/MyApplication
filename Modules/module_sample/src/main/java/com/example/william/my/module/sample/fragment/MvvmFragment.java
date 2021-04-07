@@ -10,14 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.CollectionUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
-import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.ArticleAdapter;
 import com.example.william.my.module.sample.bean.ArticleBean;
@@ -92,51 +91,77 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 //        mViewModel.getArticle().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<ArticleBean>>() {
 //            @Override
 //            public void onChanged(RetrofitResponse<ArticleBean> response) {
-//                if (response.getCode() == 0) {
-//                    showArticle(response.getData());
+//                if (response.getCode() == State.LOADING) {
+//                    showLoading();
+//                } else if (response.getCode() == State.SUCCESS) {
+//                    if (ObjectUtils.isNotEmpty(response.getData())) {
+//                        showArticle(response.getData().getCurPage() == 1, response.getData().getDatas());
+//                    } else {
+//                        showToast(response.getMessage());
+//                    }
+//                } else if (response.getCode() == State.ERROR) {
+//                    showToast(response.getMessage());
 //                }
 //            }
 //        });
         // WithLoadingTipObserver comments
         mViewModel.getArticle().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<ArticleBean>() {
             @Override
-            protected void callback(ArticleBean response) {
-                showArticle(response);
+            public void onResponse(ArticleBean response) {
+                showArticle(response.getCurPage() == 1, response.getDatas());
+            }
+
+            @Override
+            public boolean onFailure(String msg) {
+                showToast(msg);
+                return super.onFailure(msg);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mViewModel.queryArticle();
     }
 
-    private void showArticleList(List<ArticleDetailBean> response) {
-        if (mViewModel.isFirst()) {
-            if (CollectionUtils.isNotEmpty(response)) {
-                mAdapter.setNewInstance(response);
+    private void showLoading() {
+        ToastUtils.showShort("正在请求数据…");
+    }
+
+    public void showToast(String message) {
+        showEmptyView();
+        ToastUtils.showShort(message);
+    }
+
+    public void showEmptyView() {
+        TextView textView = new TextView(getActivity());
+        textView.setGravity(Gravity.CENTER);
+        textView.setText("无数据");
+        mAdapter.setEmptyView(textView);
+        mAdapter.notifyDataSetChanged();
+        mSmartRefreshLayout.setEnableLoadMore(false);
+    }
+
+    private void showArticle(boolean isFirst, List<ArticleDetailBean> article) {
+        if (CollectionUtils.isEmpty(article)) {
+            if (isFirst) {
+                showEmptyView();
             } else {
-                TextView textView = new TextView(getActivity());
-                textView.setGravity(Gravity.CENTER);
-                textView.setText("无数据");
-                mAdapter.setEmptyView(textView);
+                onDataNoMore();
             }
         } else {
-            mAdapter.addData(response);
+            if (isFirst) {
+                mAdapter.setNewInstance(article);
+            } else {
+                mAdapter.addData(article);
+            }
         }
         mAdapter.notifyDataSetChanged();
     }
 
-    private void showArticle(ArticleBean response) {
-        if (response.getCurPage() == 1) {
-            if (CollectionUtils.isNotEmpty(response.getDatas())) {
-                mAdapter.setNewInstance(response.getDatas());
-            } else {
-                TextView textView = new TextView(getActivity());
-                textView.setGravity(Gravity.CENTER);
-                textView.setText("无数据");
-                mAdapter.setEmptyView(textView);
-            }
-        } else {
-            mAdapter.addData(response.getDatas());
-        }
-        mAdapter.notifyDataSetChanged();
+    public void onDataNoMore() {
+        ToastUtils.showShort("无更多数据");
     }
 
     @Override

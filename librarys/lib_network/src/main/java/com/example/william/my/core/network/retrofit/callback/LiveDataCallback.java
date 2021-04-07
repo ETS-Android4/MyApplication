@@ -5,7 +5,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
+import com.example.william.my.core.network.retrofit.status.State;
 
+/**
+ * 携带状态 {@link State} 的 LiveData
+ */
 public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitResponse<Bean>> {
 
     public LiveDataConvert<Bean, Data> convert;

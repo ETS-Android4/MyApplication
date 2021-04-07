@@ -40,10 +40,10 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
                 if (mLoadingTip != null) {
                     mLoadingTip.setLoadingTip(isEmpty(tRetrofitResponse.getData()) ? LoadingTip.Status.empty : LoadingTip.Status.finish);
                 }
-                callback(tRetrofitResponse.getData());
+                onResponse(tRetrofitResponse.getData());
                 break;
             default:
-                if (!onFail(tRetrofitResponse.getMessage())) {
+                if (!onFailure(tRetrofitResponse.getMessage())) {
                     if (mLoadingTip != null) {
                         mLoadingTip.setLoadingTip(LoadingTip.Status.error);
                     }
@@ -66,13 +66,15 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
     /**
      * State.SUCCESS 时，返回 response
      */
-    protected abstract void callback(T response);
+    public abstract void onResponse(T response);
 
     /**
+     * State.ERROR 时，返回 错误信息
+     *
      * @return false 显示默认提示
      */
     @SuppressWarnings("SameReturnValue")
-    public boolean onFail(String msg) {
+    public boolean onFailure(String msg) {
         return false;
     }
 }

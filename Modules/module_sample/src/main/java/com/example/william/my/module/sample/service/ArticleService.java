@@ -15,7 +15,7 @@ public interface ArticleService {
     @GET(Urls.article)
     Observable<RetrofitResponse<ArticleBean>> getArticleList(@Path("page") int page);
 
-    @Headers({Header.RETROFIT_CACHE_ALIVE_SECOND + ":" + 60})
+    @Headers({Header.RETROFIT_CACHE_ALIVE_SECOND + ":" + 10})
     @GET(Urls.article)
     Observable<RetrofitResponse<ArticleBean>> getArticleListCache(@Path("page") int page);
 }
