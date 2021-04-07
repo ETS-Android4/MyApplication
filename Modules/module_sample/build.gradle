@@ -1,6 +1,6 @@
 //apply from: '../buildApp.gradle'
 android {
-    //resourcePrefix "sample_"
+    resourcePrefix "sample_"
 }
 dependencies {
     implementation project(path: ':librarys:lib_network')

@@ -10,7 +10,7 @@ import com.example.william.my.module.sample.bean.ArticleDetailBean;
 public class ArticleAdapter extends BaseQuickAdapter<ArticleDetailBean, BaseViewHolder> {
 
     public ArticleAdapter() {
-        super(R.layout.demo_item_recycler);
+        super(R.layout.sample_item_recycler);
     }
 
     @Override

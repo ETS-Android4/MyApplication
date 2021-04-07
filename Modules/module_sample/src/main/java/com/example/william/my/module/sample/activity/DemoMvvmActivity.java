@@ -12,7 +12,7 @@ public class DemoMvvmActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_layout_fragment);
+        setContentView(R.layout.sample_layout_fragment);
 
         // Add product list fragment if this is first creation
         MvvmFragment mvvmFragment = (MvvmFragment) getSupportFragmentManager()

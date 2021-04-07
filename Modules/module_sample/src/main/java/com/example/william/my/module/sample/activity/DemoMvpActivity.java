@@ -14,7 +14,7 @@ public class DemoMvpActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_layout_fragment);
+        setContentView(R.layout.sample_layout_fragment);
 
         MvpFragment mvpFragment = (MvpFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.contentFrame);
