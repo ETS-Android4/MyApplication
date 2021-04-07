@@ -23,12 +23,12 @@ dependencies {
     implementation deps.rxandroid
     //https://github.com/greenrobot/EventBus
     implementation deps.eventbus
-    annotationProcessor deps.eventbus_processor
+    kapt deps.eventbus_processor
     //https://github.com/JeremyLiao/LiveEventBus
     implementation deps.livebus
     //https://github.com/JeremyLiao/SmartEventBus
     implementation deps.smartbus
-    annotationProcessor deps.smartbus_compiler
+    kapt deps.smartbus_compiler
     //
     //https://github.com/Tencent/MMKV
     implementation deps.mmkv

@@ -3,6 +3,9 @@ if (ConfigUtils.isApply(project)) {
 } else {
     apply plugin: 'com.android.application'
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
 android {
     compileSdkVersion config.compileSdkVersion
     buildToolsVersion config.buildToolsVersion
@@ -11,11 +14,17 @@ android {
         targetSdkVersion config.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        javaCompileOptions {
-            // 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
-            // 生成的文档路径 : build/generated/source/apt/(debug or release)/com/alibaba/android/arouter/docs/arouter-map-of-${moduleName}.json
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+        //javaCompileOptions {
+        //    // 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
+        //    // 生成的文档路径 : build/generated/source/apt/(debug or release)/com/alibaba/android/arouter/docs/arouter-map-of-${moduleName}.json
+        //    annotationProcessorOptions {
+        //        arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+        //    }
+        //}
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+                arg("AROUTER_GENERATE_DOC": "enable")
             }
         }
     }
@@ -24,6 +33,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

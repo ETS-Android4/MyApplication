@@ -42,5 +42,5 @@ dependencies {
     //Room
     implementation deps.room
     implementation deps.room_rxjava3
-    annotationProcessor deps.room_compiler
+    kapt deps.room_compiler
 }

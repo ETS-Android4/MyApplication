@@ -5,7 +5,7 @@ dependencies {
     implementation project(path: ':librarys:lib_network')
     //Glide
     implementation deps.glide
-    annotationProcessor deps.glide_compiler
+    kapt deps.glide_compiler
     //RxAndroid
     implementation deps.rxandroid
     //Retrofit

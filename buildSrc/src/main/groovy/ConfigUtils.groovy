@@ -37,12 +37,10 @@ class ConfigUtils {
                         return
                     }
                     if (project.path.startsWith(":modules")) {
-                        if (project.path != ":modules:module_kotlin") {
-                            GLog.d(project.toString() + " applies buildApp.gradle")
-                            project.apply {
-                                from "${project.rootDir.path}/modules/buildApp.gradle"
-                            }
+                        project.apply {
+                            from "${project.rootDir.path}/modules/buildApp.gradle"
                         }
+                        GLog.d(project.toString() + " applies buildApp.gradle")
                     }
                 }
             }
