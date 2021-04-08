@@ -13,8 +13,6 @@ import androidx.annotation.RequiresApi;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.widget.R;
 
-import java.util.Objects;
-
 public class TransitionSecondActivity extends BaseActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
