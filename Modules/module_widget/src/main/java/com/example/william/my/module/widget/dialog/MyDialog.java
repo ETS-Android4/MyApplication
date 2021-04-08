@@ -11,8 +11,6 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.william.my.library.dialog.BaseDialogFragment;
 import com.example.william.my.module.widget.R;
 
-import java.util.Objects;
-
 public class MyDialog extends BaseDialogFragment {
 
     /**
@@ -21,7 +19,7 @@ public class MyDialog extends BaseDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
+        return new AlertDialog.Builder(requireActivity())
                 .setIcon(R.drawable.ic_launcher)
                 .setTitle("标题")
                 .setMessage("内容")

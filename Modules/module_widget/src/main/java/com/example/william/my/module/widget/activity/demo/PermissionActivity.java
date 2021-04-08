@@ -1,4 +1,4 @@
-package com.example.william.my.module.widget.activity.function;
+package com.example.william.my.module.widget.activity.demo;
 
 import android.Manifest;
 import android.content.pm.PackageManager;

@@ -1,4 +1,4 @@
-package com.example.william.my.module.widget.activity.function;
+package com.example.william.my.module.widget.activity.demo;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.helper.NetworkChangeHelper;

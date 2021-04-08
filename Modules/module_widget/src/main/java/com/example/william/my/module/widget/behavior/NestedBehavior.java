@@ -1,6 +1,7 @@
 package com.example.william.my.module.widget.behavior;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -11,11 +12,9 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.core.widget.utils.SizeUtils;
-
 public class NestedBehavior extends CoordinatorLayout.Behavior<View> {
 
-    private final int offsetTotal = SizeUtils.dp2px(240);
+    private final int offsetTotal = dp2px(240);
 
     public NestedBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -128,5 +127,10 @@ public class NestedBehavior extends CoordinatorLayout.Behavior<View> {
                 ViewCompat.stopNestedScroll(target, ViewCompat.TYPE_NON_TOUCH);
             }
         }
+    }
+
+    public static int dp2px(final float dpValue) {
+        final float scale = Resources.getSystem().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

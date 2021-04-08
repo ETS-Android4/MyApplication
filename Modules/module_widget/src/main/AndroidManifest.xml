@@ -5,9 +5,9 @@
     <application>
 
         <activity android:name=".WidgetActivity" />
-        <activity android:name=".activity.widget.AnimatorActivity" />
+        <activity android:name=".activity.demo.AnimatorActivity" />
         <activity android:name=".activity.widget.AppBarActivity" />
-        <activity android:name=".activity.widget.BehaviorActivity" />
+        <activity android:name=".activity.demo.BehaviorActivity" />
         <activity android:name=".activity.widget.DialogActivity" />
         <activity android:name=".activity.widget.FlexBoxActivity" />
         <activity android:name=".activity.widget.FloatWindowActivity" />
@@ -22,20 +22,20 @@
         <activity android:name=".activity.widget.ViewPagerActivity" />
         <activity android:name=".activity.widget.ViewPager2Activity" />
         <activity android:name=".activity.widget.WebViewActivity" />
-        <activity android:name=".activity.function.AsyncTaskActivity" />
-        <activity android:name=".activity.function.AudioPlayerActivity" />
-        <activity android:name=".activity.function.BroadcastActivity" />
-        <activity android:name=".activity.function.JobSchedulerActivity" />
-        <activity android:name=".activity.function.MessengerActivity" />
-        <activity android:name=".activity.function.PermissionActivity" />
-        <activity android:name=".activity.function.PicCropActivity" />
-        <activity android:name=".activity.function.ServiceActivity" />
-        <activity android:name=".activity.function.TransitionFirstActivity" />
-        <activity android:name=".activity.function.TransitionSecondActivity" />
-        <activity android:name=".activity.function.TurntableActivity" />
-        <activity android:name=".activity.function.TypefaceActivity" />
-        <activity android:name=".activity.function.NetworkStatusActivity" />
-        <activity android:name=".activity.function.OptionalBeanActivity" />
+        <activity android:name=".activity.demo.AsyncTaskActivity" />
+        <activity android:name=".activity.demo.AudioPlayerActivity" />
+        <activity android:name=".activity.demo.BroadcastActivity" />
+        <activity android:name=".activity.demo.JobSchedulerActivity" />
+        <activity android:name=".activity.demo.MessengerActivity" />
+        <activity android:name=".activity.demo.PermissionActivity" />
+        <activity android:name=".activity.demo.PicCropActivity" />
+        <activity android:name=".activity.demo.ServiceActivity" />
+        <activity android:name=".activity.demo.TransitionFirstActivity" />
+        <activity android:name=".activity.demo.TransitionSecondActivity" />
+        <activity android:name=".activity.demo.TurntableActivity" />
+        <activity android:name=".activity.demo.TypefaceActivity" />
+        <activity android:name=".activity.demo.NetworkStatusActivity" />
+        <activity android:name=".activity.demo.OptionalBeanActivity" />
 
         <service android:name=".service.AIDLService" />
         <service android:name=".service.ForegroundService" />

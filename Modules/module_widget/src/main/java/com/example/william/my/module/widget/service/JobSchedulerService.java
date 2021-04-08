@@ -28,7 +28,7 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.william.my.module.widget.activity.function.JobSchedulerActivity;
+import com.example.william.my.module.widget.activity.demo.JobSchedulerActivity;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class JobSchedulerService extends JobService {
