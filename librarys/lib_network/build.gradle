@@ -19,10 +19,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    //compileOptions {
-    //    sourceCompatibility JavaVersion.VERSION_1_8
-    //    targetCompatibility JavaVersion.VERSION_1_8
-    //}
+    // OkHttp
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -31,8 +32,8 @@ dependencies {
     //Volley
     implementation deps.volley
     //OkHttp
-    implementation "com.squareup.okhttp3:okhttp:3.14.9"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.14.9"
+    implementation deps.okhttp
+    implementation deps.okhttp_logging
     //Retrofit
     implementation deps.retrofit
     implementation deps.retrofit_gson

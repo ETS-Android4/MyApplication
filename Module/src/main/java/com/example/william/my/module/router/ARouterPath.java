@@ -145,6 +145,10 @@ public class ARouterPath {
         public static final String Kotlin_Result = "/module_kotlin/resule";
     }
 
+    public static class Sample {
+        public static final String Sample = "/module_sample/sample";
+    }
+
     public static class Flutter {
         public static final String Flutter = "/module_flutter/flutter";
     }

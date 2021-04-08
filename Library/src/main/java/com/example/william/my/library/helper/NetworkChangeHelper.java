@@ -42,7 +42,6 @@ public class NetworkChangeHelper {
 
     }
 
-    @SuppressWarnings("deprecation")
     public void register(Context context, NetworkChangeListener networkChangeListener) {
 
         mNetworkChangeListener = networkChangeListener;
@@ -66,7 +65,6 @@ public class NetworkChangeHelper {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public static class NetworkChangeReceiver extends BroadcastReceiver {
 
         private static final String TAG = "NetworkChangeReceiver";

@@ -123,10 +123,6 @@ ext {
             okhttp               : "com.squareup.okhttp3:okhttp:4.9.1",
             okhttp_logging       : "com.squareup.okhttp3:logging-interceptor:4.9.1",
 
-            okhttp_logging_3_9_0 : "com.squareup.okhttp3:logging-interceptor:3.9.0",
-
-            okhttp_logging_3_14_9: "com.squareup.okhttp3:logging-interceptor:3.14.9",
-
             //https://github.com/square/retrofit
             retrofit             : "com.squareup.retrofit2:retrofit:2.9.0",
             retrofit_gson        : "com.squareup.retrofit2:converter-gson:2.9.0",

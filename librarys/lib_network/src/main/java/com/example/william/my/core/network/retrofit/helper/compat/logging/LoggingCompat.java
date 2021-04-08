@@ -23,7 +23,7 @@ public class LoggingCompat {
          */
         builder.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
-            public void log(String message) {
+            public void log(@NonNull String message) {
                 showLog(tag, message);
             }
         }).setLevel(HttpLoggingInterceptor.Level.BODY));
