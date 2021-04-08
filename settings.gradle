@@ -1,4 +1,3 @@
-include ':modules:module_demo'
 rootProject.name = "My Application"
 include ':app'
 
@@ -10,6 +9,7 @@ include ':librarys:lib_network'
 
 include ':modules:module_custom_view'
 include ':modules:module_widget'
+include ':modules:module_demo'
 
 include ':modules:module_android_util'
 include ':modules:module_open_source'

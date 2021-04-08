@@ -103,9 +103,7 @@ public class ARouterPath {
 
     public static class Widget {
         public static final String Widget = "/module_widget/widget";
-
         public static final String Widget_AppBar = "/module_widget/app_bar";
-        public static final String Widget_Behavior = "/module_widget/behavior";
         public static final String Widget_Dialog = "/module_widget/dialog";
         public static final String Widget_FlexBox = "/module_widget/flex_box";
         public static final String Widget_Fragment = "/module_widget/fragment";
@@ -114,27 +112,30 @@ public class ARouterPath {
         public static final String Widget_FragmentViewPager = "/module_widget/fragment_view_pager";
         public static final String Widget_Notification = "/module_widget/notification";
         public static final String Widget_RecyclerView = "/module_widget/recycler_view";
-        public static final String Widget_RecyclerView2 = "/module_widget/recycler_view2";
+        public static final String Widget_RecyclerViewNested = "/module_widget/recycler_view_nested";
         public static final String Widget_ViewFlipper = "/module_widget/view_flipper";
         public static final String Widget_ViewPager = "/module_widget/view_pager";
         public static final String Widget_ViewPager2 = "/module_widget/view_pager_2";
         public static final String Widget_WebView = "/module_widget/web_view";
+    }
 
-
-        public static final String Widget_Animator = "/module_widget/animator";
-        public static final String Widget_AsyncTask = "/module_widget/async";
-        public static final String Widget_AudioPlayer = "/module_widget/audio_player";
-        public static final String Widget_Broadcast = "/module_widget/broadcast";
-        public static final String Widget_FloatWindow = "/module_widget/float_window";
-        public static final String Widget_JobScheduler = "/module_widget/job_scheduler";
-        public static final String Widget_Messenger = "/module_widget/messenger";
-        public static final String Widget_NetworkStatus = "/module_widget/net_status";
-        public static final String Widget_Permission = "/module_widget/permission";
-        public static final String Widget_PicCrop = "/module_widget/pic_crop";
-        public static final String Widget_Service = "/module_widget/service";
-        public static final String Widget_Transition = "/module_widget/transition";
-        public static final String Widget_Turntable = "/module_widget/turntable";
-        public static final String Widget_Typeface = "/module_widget/typeface";
+    public static class Demo {
+        public static final String Demo = "/module_demo/demo";
+        public static final String Demo_Animator = "/module_demo/animator";
+        public static final String Demo_AsyncTask = "/module_demo/async";
+        public static final String Demo_AudioPlayer = "/module_demo/audio_player";
+        public static final String Demo_Behavior = "/module_demo/behavior";
+        public static final String Demo_Broadcast = "/module_demo/broadcast";
+        public static final String Demo_FloatWindow = "/module_demo/float_window";
+        public static final String Demo_JobScheduler = "/module_demo/job_scheduler";
+        public static final String Demo_Messenger = "/module_demo/messenger";
+        public static final String Demo_NetworkStatus = "/module_demo/net_status";
+        public static final String Demo_Permission = "/module_demo/permission";
+        public static final String Demo_PicCrop = "/module_demo/pic_crop";
+        public static final String Demo_Service = "/module_demo/service";
+        public static final String Demo_Transition = "/module_demo/transition";
+        public static final String Demo_Turntable = "/module_demo/turntable";
+        public static final String Demo_Typeface = "/module_demo/typeface";
     }
 
     public static class Kotlin {

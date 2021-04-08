@@ -3,46 +3,21 @@
     package="com.example.william.my.module.widget">
 
     <application>
-
         <activity android:name=".WidgetActivity" />
-        <activity android:name=".activity.demo.AnimatorActivity" />
-        <activity android:name=".activity.widget.AppBarActivity" />
-        <activity android:name=".activity.demo.BehaviorActivity" />
-        <activity android:name=".activity.widget.DialogActivity" />
-        <activity android:name=".activity.widget.FlexBoxActivity" />
-        <activity android:name=".activity.demo.FloatWindowActivity" />
-        <activity android:name=".activity.widget.FragmentActivity" />
-        <activity android:name=".activity.widget.FragmentGroupActivity" />
-        <activity android:name=".activity.widget.FragmentTabHostActivity" />
-        <activity android:name=".activity.widget.FragmentViewPagerActivity" />
-        <activity android:name=".activity.widget.NotificationActivity" />
-        <activity android:name=".activity.widget.RecyclerViewActivity" />
-        <activity android:name=".activity.demo.NestedRecyclerViewActivity" />
-        <activity android:name=".activity.widget.ViewFlipperActivity" />
-        <activity android:name=".activity.widget.ViewPagerActivity" />
-        <activity android:name=".activity.widget.ViewPager2Activity" />
-        <activity android:name=".activity.widget.WebViewActivity" />
-        <activity android:name=".activity.demo.AsyncTaskActivity" />
-        <activity android:name=".activity.demo.AudioPlayerActivity" />
-        <activity android:name=".activity.demo.BroadcastActivity" />
-        <activity android:name=".activity.demo.JobSchedulerActivity" />
-        <activity android:name=".activity.demo.MessengerActivity" />
-        <activity android:name=".activity.demo.PermissionActivity" />
-        <activity android:name=".activity.demo.PicCropActivity" />
-        <activity android:name=".activity.demo.ServiceActivity" />
-        <activity android:name=".activity.demo.TransitionFirstActivity" />
-        <activity android:name=".activity.demo.TransitionSecondActivity" />
-        <activity android:name=".activity.demo.TurntableActivity" />
-        <activity android:name=".activity.demo.TypefaceActivity" />
-        <activity android:name=".activity.demo.NetworkStatusActivity" />
-        <activity android:name=".activity.demo.OptionalBeanActivity" />
-
-        <service android:name=".service.AIDLService" />
-        <service android:name=".service.ForegroundService" />
-        <service android:name=".service.MessageService" />
-        <service
-            android:name=".service.JobSchedulerService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <activity android:name=".activity.AppBarActivity" />
+        <activity android:name=".activity.DialogActivity" />
+        <activity android:name=".activity.FlexBoxActivity" />
+        <activity android:name=".activity.FragmentActivity" />
+        <activity android:name=".activity.FragmentGroupActivity" />
+        <activity android:name=".activity.FragmentTabHostActivity" />
+        <activity android:name=".activity.FragmentViewPagerActivity" />
+        <activity android:name=".activity.NotificationActivity" />
+        <activity android:name=".activity.RecyclerViewActivity" />
+        <activity android:name=".activity.RecyclerViewNestedActivity" />
+        <activity android:name=".activity.ViewFlipperActivity" />
+        <activity android:name=".activity.ViewPagerActivity" />
+        <activity android:name=".activity.ViewPager2Activity" />
+        <activity android:name=".activity.WebViewActivity" />
     </application>
 
 </manifest>

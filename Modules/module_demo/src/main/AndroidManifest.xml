@@ -2,4 +2,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.william.my.module.demo">
 
+    <application>
+        <activity android:name=".DemoActivity" />
+        <activity android:name=".activity.AnimatorActivity" />
+        <activity android:name=".activity.AsyncTaskActivity" />
+        <activity android:name=".activity.AudioPlayerActivity" />
+        <activity android:name=".activity.BroadcastActivity" />
+        <activity android:name=".activity.BehaviorActivity" />
+        <activity android:name=".activity.FloatWindowActivity" />
+        <activity android:name=".activity.JobSchedulerActivity" />
+        <activity android:name=".activity.OptionalBeanActivity" />
+        <activity android:name=".activity.MessengerActivity" />
+        <activity android:name=".activity.NetworkStatusActivity" />
+        <activity android:name=".activity.PermissionActivity" />
+        <activity android:name=".activity.PicCropActivity" />
+        <activity android:name=".activity.ServiceActivity" />
+        <activity android:name=".activity.TransitionFirstActivity" />
+        <activity android:name=".activity.TransitionSecondActivity" />
+        <activity android:name=".activity.TurntableActivity" />
+        <activity android:name=".activity.TypefaceActivity" />
+
+        <service android:name=".service.AIDLService" />
+        <service android:name=".service.ForegroundService" />
+        <service android:name=".service.MessageService" />
+        <service
+            android:name=".service.JobSchedulerService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+    </application>
+
 </manifest>

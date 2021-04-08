@@ -17,6 +17,7 @@ class Config {
             Sample         : new DepConfig(false, ":modules:module_sample"),
             Jetpack        : new DepConfig(true, ":modules:module_jetpack"),
             OpenSource     : new DepConfig(true, ":modules:module_open_source"),
+
             Widget         : new DepConfig(true, ":modules:module_widget"),
             Demo           : new DepConfig(true, ":modules:module_demo"),
 

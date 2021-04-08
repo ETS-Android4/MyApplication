@@ -1,6 +1,9 @@
 package com.example.william.my.module;
 
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.MessageQueue;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -76,9 +79,12 @@ public class ModuleActivity extends BaseListActivity {
         mMap.put("NetWorkActivity", ARouterPath.NetWork.NetWork);
         mMap.put("CustomViewActivity", ARouterPath.CustomView.CustomView);
 
+        mMap.put("SampleActivity", ARouterPath.Sample.Sample);
         mMap.put("JetPackActivity", ARouterPath.JetPack.JetPack);
         mMap.put("OpenSourceActivity", ARouterPath.OpenSource.OpenSource);
+
         mMap.put("WidgetActivity", ARouterPath.Widget.Widget);
+        mMap.put("DemoActivity", ARouterPath.Demo.Demo);
 
         //Kotlin
         //mMap.put("kotlin", "kotlin");
@@ -109,6 +115,14 @@ public class ModuleActivity extends BaseListActivity {
                         Toast.makeText(ModuleActivity.this, event.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+            @Override
+            public boolean queueIdle() {
+                Log.e(TAG, "addIdleHandler: queueIdle " + Thread.currentThread().getName());
+                return false;
+            }
+        });
     }
 
     @Override
