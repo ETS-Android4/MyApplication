@@ -58,7 +58,7 @@ public class RxRetrofit<T> {
                         body = builder.getBodyForm().build();
                     } else {
                         String mediaType = builder.isJson() ? "application/json; charset=utf-8" : "text/plain;charset=utf-8";
-                        body = RequestBody.create(MediaType.parse(mediaType), builder.getBodyString());
+                        body = RequestBody.Companion.create(builder.getBodyString(), MediaType.parse(mediaType));
                     }
                     response = buildApi().post(builder.getApi(), builder.getHeader(), body);
                 }
@@ -72,13 +72,13 @@ public class RxRetrofit<T> {
         }
         if (response == null) return null;
 
-        Observable<RetrofitResponse<T>> observable = response.map(new ServerResultFunction<T>());
+        Observable<RetrofitResponse<T>> observable = response.map(new ServerResultFunction<>());
 
         if (builder.getTransformer() != null) {
             observable = observable.compose(builder.getTransformer());//compose 操作符 介于 map onErrorResumeNext 之间
         }
 
-        observable = observable.onErrorResumeNext(new HttpResultFunction<RetrofitResponse<T>>());
+        observable = observable.onErrorResumeNext(new HttpResultFunction<>());
 
         return observable
                 .subscribeOn(Schedulers.io())//请求数据的事件发生在io线程

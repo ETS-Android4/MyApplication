@@ -80,7 +80,7 @@ public class CountingRequestBody extends RequestBody {
             long totalBytesCount = 0L;
 
             @Override
-            public void write(Buffer source, long byteCount) throws IOException {
+            public void write(@NonNull Buffer source, long byteCount) throws IOException {
                 super.write(source, byteCount);
                 //Log.e(TAG, source.readString(contentType().charset()));
                 //增加当前写入的字节数

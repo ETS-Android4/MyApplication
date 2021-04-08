@@ -20,7 +20,7 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
      */
     public LiveDataCallback(MutableLiveData<RetrofitResponse<Data>> liveData) {
         this.liveData = liveData;
-        this.liveData.postValue(RetrofitResponse.<Data>loading());
+        this.liveData.postValue(RetrofitResponse.loading());
     }
 
     /**
@@ -28,7 +28,7 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
      */
     public LiveDataCallback(MutableLiveData<RetrofitResponse<Data>> liveData, LiveDataConvert<Bean, Data> convert) {
         this.liveData = liveData;
-        this.liveData.postValue(RetrofitResponse.<Data>loading());
+        this.liveData.postValue(RetrofitResponse.loading());
         this.convert = convert;
     }
 
@@ -39,13 +39,13 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
             liveData.postValue(convert == null ? (RetrofitResponse<Data>) data : convert.convert(data));
         } catch (Exception e) {
             e.printStackTrace();
-            liveData.postValue(RetrofitResponse.<Data>error("数据异常"));
+            liveData.postValue(RetrofitResponse.error("数据异常"));
         }
     }
 
     @Override
     public void onFailure(@NonNull ApiException e) {
-        liveData.postValue(RetrofitResponse.<Data>error(e.getMessage()));
+        liveData.postValue(RetrofitResponse.error(e.getMessage()));
     }
 
     public interface LiveDataConvert<Bean, Data> {

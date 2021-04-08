@@ -25,7 +25,7 @@ public class TransitionSecondActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         String transition = getIntent().getStringExtra("transition");
-        switch (Objects.requireNonNull(transition)) {
+        switch (transition) {
             case "explode":
                 // 设置进入时进入动画
                 Explode explode = new Explode();

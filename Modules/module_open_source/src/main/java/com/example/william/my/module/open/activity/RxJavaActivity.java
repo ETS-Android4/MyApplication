@@ -898,7 +898,7 @@ public class RxJavaActivity extends BaseResponseActivity {
          */
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
-            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+            public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
                 // 不发送任何有效事件，仅发送Complete事件
                 e.onComplete();
             }

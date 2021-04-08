@@ -67,7 +67,7 @@ public class ProgressResponseBody extends ResponseBody {
         }
 
         @Override
-        public long read(Buffer sink, long byteCount) throws IOException {
+        public long read(@NonNull Buffer sink, long byteCount) throws IOException {
             long count = super.read(sink, byteCount);
             long contentLength = body.contentLength();
             if (count == -1) { // this source is exhausted

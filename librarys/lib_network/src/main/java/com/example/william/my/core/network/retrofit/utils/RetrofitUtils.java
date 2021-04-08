@@ -11,7 +11,6 @@ import com.example.william.my.core.network.retrofit.listener.RetrofitRequestList
 import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
 
 import java.io.File;
-import java.util.Objects;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -42,7 +41,7 @@ public class RetrofitUtils {
 
     @NonNull
     public static MultipartBody.Part buildMultipart(String key, File file, RetrofitRequestListener listener) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), Objects.requireNonNull(file));
+        RequestBody requestBody = RequestBody.Companion.create(file, MediaType.parse("multipart/form-data"));
         CountingRequestBody countingRequestBody = new CountingRequestBody(requestBody, listener);
         return MultipartBody.Part.createFormData(key, file.getName(), countingRequestBody);
     }
@@ -51,7 +50,7 @@ public class RetrofitUtils {
     public static <T> Observable<T> buildObs(Observable<T> observable) {
         return observable
                 //.map(new ServerResultFunction<T>())
-                .onErrorResumeNext(new HttpResultFunction<T>())
+                .onErrorResumeNext(new HttpResultFunction<>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -63,7 +62,7 @@ public class RetrofitUtils {
      */
     public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitCallback<T> callback) {
         observable
-                .onErrorResumeNext(new HttpResultFunction<T>())
+                .onErrorResumeNext(new HttpResultFunction<>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RetrofitObserver<T>() {

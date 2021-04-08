@@ -26,8 +26,6 @@ import io.reactivex.rxjava3.core.Flowable;
 import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.CoroutineScope;
 
-;
-
 /**
  * 如果需要Context则使用AndroidViewModel
  * <p>

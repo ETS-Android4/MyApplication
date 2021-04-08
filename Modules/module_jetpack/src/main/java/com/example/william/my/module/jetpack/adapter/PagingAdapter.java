@@ -35,7 +35,7 @@ public class PagingAdapter extends PagingDataAdapter<ArticlesBean.DataBean.Artic
 
     private static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mTextView;
+        public final TextView mTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);

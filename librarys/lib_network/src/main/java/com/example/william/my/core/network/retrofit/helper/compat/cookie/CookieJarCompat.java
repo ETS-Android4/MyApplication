@@ -33,7 +33,7 @@ public class CookieJarCompat {
             @Override
             public List<Cookie> loadForRequest(@NonNull HttpUrl url) {
                 List<Cookie> cookies = cookieStore.get(url.host());
-                return cookies != null ? cookies : new ArrayList<Cookie>();
+                return cookies != null ? cookies : new ArrayList<>();
             }
         };
     }

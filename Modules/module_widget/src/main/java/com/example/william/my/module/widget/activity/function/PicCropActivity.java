@@ -48,6 +48,7 @@ public class PicCropActivity extends BaseActivity implements View.OnClickListene
         mImageView.setOnClickListener(this);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(PicCropActivity.this);

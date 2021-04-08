@@ -9,13 +9,13 @@ import java.util.List;
 /**
  * 1. 在Activity中覆盖onBackPressed()方法
  *
- * @Override public void onBackPressed() {
+ * public void onBackPressed() {
  * if (!BackHandlerHelper.handleBackPress(this)) {
  * super.onBackPressed();
  * }
  * }
  * 2. 实现实现 FragmentBackHandler
- * @Override public boolean onBackPressed() {
+ * public boolean onBackPressed() {
  * if (handleBackPressed) {
  * //外理返回键
  * return true;

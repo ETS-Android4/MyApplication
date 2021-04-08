@@ -17,6 +17,7 @@ import java.util.List;
  * Fragment no longer exists for key f0: index 0
  * https://blog.csdn.net/eydwyz/article/details/78624907
  */
+@SuppressWarnings("deprecation")
 public class ViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
 
     private List<String> mTitles;

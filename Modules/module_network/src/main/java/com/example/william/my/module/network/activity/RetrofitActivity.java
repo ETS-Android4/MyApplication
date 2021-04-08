@@ -123,7 +123,7 @@ public class RetrofitActivity extends BaseResponseActivity {
         //创建表单
         MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         RequestBody multipartBody = multipartBuilder
-                .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file))
+                .addFormDataPart("file", file.getName(), RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")))
                 .build();
         //监听上传进度
         RequestBody requestBody = new CountingRequestBody(multipartBody, new RetrofitRequestListener() {
