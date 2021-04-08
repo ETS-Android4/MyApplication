@@ -18,8 +18,8 @@ class KotlinActivity : BaseActivity() {
 
     private lateinit var binding: KActivityKotlinBinding
 
-    var string: String? = null
-    var arrayList: ArrayList<String>? = null
+    private var string: String? = null
+    private var arrayList: ArrayList<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

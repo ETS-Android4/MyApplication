@@ -34,7 +34,7 @@ class LoginRepository {
         val url = URL(Urls.login)
         (url.openConnection() as? HttpURLConnection)?.run {
             requestMethod = "POST"
-            setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
             //setRequestProperty("Content-Type", "application/json; utf-8")
             //setRequestProperty("Accept", "application/json")
             doOutput = true
