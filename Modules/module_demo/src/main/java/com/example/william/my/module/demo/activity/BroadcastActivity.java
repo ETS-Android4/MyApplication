@@ -25,18 +25,18 @@ public class BroadcastActivity extends BaseResponseActivity {
      */
     public static class MessageReceiver extends BroadcastReceiver {
 
-        private final WeakReference<BroadcastActivity> softReference;
+        private final WeakReference<BroadcastActivity> weakReference;
 
         //声明一个操作常量字符串
         public static final String ACTION_UPDATE = "com.example.broadcast";
 
         public MessageReceiver(BroadcastActivity activity) {
-            this.softReference = new WeakReference<>(activity);
+            this.weakReference = new WeakReference<>(activity);
         }
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            softReference.get().mResponse.setText(intent.getStringExtra("message"));
+            weakReference.get().mResponse.setText(intent.getStringExtra("message"));
         }
     }
 
