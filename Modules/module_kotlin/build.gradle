@@ -14,20 +14,6 @@ android {
             }
         }
     }
-    if (deps.gradle == "3.6.0") {
-        viewBinding {
-            enabled = true
-        }
-        dataBinding {
-            enabled = true
-        }
-    } else {
-        //gradle:4.1.0+
-        buildFeatures {
-            viewBinding = true
-            dataBinding = true
-        }
-    }
     resourcePrefix "k_"
 }
 

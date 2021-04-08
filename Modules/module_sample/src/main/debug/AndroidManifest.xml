@@ -14,8 +14,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DemoMvvmActivity" />
-        <activity android:name=".activity.DemoMvpActivity" />
+        <activity android:name=".activity.MvvmActivity" />
+        <activity android:name=".activity.MvpActivity" />
     </application>
 
 </manifest>

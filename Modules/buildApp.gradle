@@ -6,6 +6,7 @@ if (ConfigUtils.isApply(project)) {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
+
 android {
     compileSdkVersion config.compileSdkVersion
     buildToolsVersion config.buildToolsVersion
@@ -40,6 +41,20 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    if (deps.gradle == "3.6.0") {
+        viewBinding {
+            enabled = true
+        }
+        dataBinding {
+            enabled = true
+        }
+    } else {
+        //gradle:4.1.0+
+        buildFeatures {
+            viewBinding = true
+            dataBinding = true
+        }
     }
     sourceSets {
         main {

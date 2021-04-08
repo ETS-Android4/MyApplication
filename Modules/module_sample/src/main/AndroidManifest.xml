@@ -3,8 +3,9 @@
     package="com.example.william.my.module.sample">
 
     <application>
-        <activity android:name=".activity.DemoMvpActivity" />
-        <activity android:name=".activity.DemoMvvmActivity" />
+        <activity android:name=".SampleActivity" />
+        <activity android:name=".activity.MvpActivity" />
+        <activity android:name=".activity.MvvmActivity" />
     </application>
 
 </manifest>

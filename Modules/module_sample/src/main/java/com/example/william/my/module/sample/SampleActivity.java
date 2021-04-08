@@ -10,5 +10,7 @@ public class SampleActivity extends BaseListActivity {
     @Override
     protected void initData() {
         super.initData();
+        mMap.put("MvpActivity", ARouterPath.Sample.Sample_MVP);
+        mMap.put("MvvmActivity", ARouterPath.Sample.Sample_MVVM);
     }
 }

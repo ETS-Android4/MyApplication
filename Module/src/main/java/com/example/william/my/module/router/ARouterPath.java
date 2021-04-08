@@ -148,6 +148,8 @@ public class ARouterPath {
 
     public static class Sample {
         public static final String Sample = "/module_sample/sample";
+        public static final String Sample_MVP = "/module_sample/sample_mvp";
+        public static final String Sample_MVVM = "/module_sample/sample_mvvm";
     }
 
     public static class Flutter {

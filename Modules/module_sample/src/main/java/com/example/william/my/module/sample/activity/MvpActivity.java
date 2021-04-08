@@ -2,14 +2,17 @@ package com.example.william.my.module.sample.activity;
 
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.FragmentUtils;
 import com.example.william.my.library.base.BaseActivity;
+import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.fragment.MvpFragment;
 import com.example.william.my.module.sample.presenter.ArticlesPresenter;
 import com.example.william.my.module.sample.repo.ArticlesRepository;
 
-public class DemoMvpActivity extends BaseActivity {
+@Route(path = ARouterPath.Sample.Sample_MVP)
+public class MvpActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
