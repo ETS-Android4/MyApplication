@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.william.my.library.dialog.BaseDialogFragment;
 import com.example.william.my.module.widget.R;
 
-public class MyDialog extends BaseDialogFragment {
+public class MyCreateDialogDialog extends BaseDialogFragment {
 
     /**
      * 重新onCreateDialog方法， 返回一个创建的dialog对象

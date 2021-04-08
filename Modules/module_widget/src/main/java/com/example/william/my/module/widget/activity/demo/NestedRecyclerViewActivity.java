@@ -1,4 +1,4 @@
-package com.example.william.my.module.widget.activity.widget;
+package com.example.william.my.module.widget.activity.demo;
 
 import android.os.Bundle;
 
@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.widget.R;
-import com.example.william.my.module.widget.adapter.RecyclerAdapter2;
+import com.example.william.my.module.widget.adapter.NestedRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = ARouterPath.Widget.Widget_RecyclerView2)
-public class RecyclerViewActivity2 extends AppCompatActivity {
+public class NestedRecyclerViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class RecyclerViewActivity2 extends AppCompatActivity {
             mData.add("POSITION " + i);
         }
 
-        RecyclerAdapter2 mRecyclerAdapter = new RecyclerAdapter2(mData);
+        NestedRecyclerAdapter mRecyclerAdapter = new NestedRecyclerAdapter(mData);
         mRecyclerView.setAdapter(mRecyclerAdapter);
     }
 }

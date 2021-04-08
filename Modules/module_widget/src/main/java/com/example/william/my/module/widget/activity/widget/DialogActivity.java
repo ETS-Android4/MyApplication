@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,11 +20,9 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.widget.R;
-import com.example.william.my.module.widget.adapter.LAdapter;
-import com.example.william.my.module.widget.dialog.MyDialog;
-import com.example.william.my.module.widget.dialog.MyDialog2;
+import com.example.william.my.module.widget.dialog.MyCreateDialogDialog;
+import com.example.william.my.module.widget.dialog.MyCreateViewDialog;
 
-import java.util.Arrays;
 import java.util.Calendar;
 
 @Route(path = ARouterPath.Widget.Widget_Dialog)
@@ -38,13 +37,7 @@ public class DialogActivity extends BaseActivity implements AdapterView.OnItemCl
         setContentView(R.layout.widget_activity_dialog);
 
         ListView mListView = findViewById(R.id.dialog_listView);
-        LAdapter<String> mAdapter = new LAdapter<String>(Arrays.asList(mData), R.layout.widget_item_dialog) {
-            @Override
-            public void convert(ViewHolder holder, String data) {
-                ((TextView) holder.findView(R.id.item_textView)).setText(data);
-            }
-        };
-        mListView.setAdapter(mAdapter);
+        mListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mData));
         mListView.setOnItemClickListener(this);
     }
 
@@ -142,11 +135,11 @@ public class DialogActivity extends BaseActivity implements AdapterView.OnItemCl
                 dialog2.getWindow().setAttributes(params2);
                 break;
             case 6:
-                MyDialog dialogFragment = new MyDialog();
+                MyCreateDialogDialog dialogFragment = new MyCreateDialogDialog();
                 dialogFragment.show(getSupportFragmentManager(), "dialog");
                 break;
             case 7:
-                MyDialog2 dialogFragment2 = new MyDialog2();
+                MyCreateViewDialog dialogFragment2 = new MyCreateViewDialog();
                 dialogFragment2.show(getSupportFragmentManager(), "dialog");
                 break;
         }

@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import com.example.william.my.library.dialog.BaseDialogFragment;
 import com.example.william.my.module.widget.R;
 
-public class MyDialog2 extends BaseDialogFragment {
+public class MyCreateViewDialog extends BaseDialogFragment {
 
     /**
      * 通过onCreateView返回一个view

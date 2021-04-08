@@ -17,12 +17,12 @@ import java.util.List;
 /**
  * RecyclerView 嵌套 RecyclerView
  */
-public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NestedRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private List<String> mData;
 
-    public RecyclerAdapter2(List<String> data) {
+    public NestedRecyclerAdapter(List<String> data) {
         this.mData = data;
     }
 
@@ -37,8 +37,8 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(mContext);
         mLinearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        ((RecyclerAdapter2.ViewHolder) holder).recyclerView.setLayoutManager(mLinearLayoutManager);
-        ((RecyclerAdapter2.ViewHolder) holder).recyclerView.setAdapter(new RecyclerAdapter(mData));
+        ((NestedRecyclerAdapter.ViewHolder) holder).recyclerView.setLayoutManager(mLinearLayoutManager);
+        ((NestedRecyclerAdapter.ViewHolder) holder).recyclerView.setAdapter(new RecyclerAdapter(mData));
     }
 
     @Override

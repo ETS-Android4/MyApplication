@@ -1,9 +1,14 @@
 android {
     defaultConfig {
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME  : project.getName(), AROUTER_GENERATE_DOC: "enable",
-                             "room.schemaLocation": "$projectDir/schemas".toString()]
+        //javaCompileOptions {
+        //    annotationProcessorOptions {
+        //        arguments = [AROUTER_MODULE_NAME  : project.getName(), AROUTER_GENERATE_DOC: "enable",
+        //                     "room.schemaLocation": "$projectDir/schemas".toString()]
+        //    }
+        //}
+        kapt {
+            arguments {
+                arg("room.schemaLocation": "$projectDir/schemas".toString())
             }
         }
     }

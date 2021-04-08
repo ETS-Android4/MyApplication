@@ -10,14 +10,14 @@
         <activity android:name=".activity.demo.BehaviorActivity" />
         <activity android:name=".activity.widget.DialogActivity" />
         <activity android:name=".activity.widget.FlexBoxActivity" />
-        <activity android:name=".activity.widget.FloatWindowActivity" />
+        <activity android:name=".activity.demo.FloatWindowActivity" />
         <activity android:name=".activity.widget.FragmentActivity" />
         <activity android:name=".activity.widget.FragmentGroupActivity" />
         <activity android:name=".activity.widget.FragmentTabHostActivity" />
         <activity android:name=".activity.widget.FragmentViewPagerActivity" />
         <activity android:name=".activity.widget.NotificationActivity" />
         <activity android:name=".activity.widget.RecyclerViewActivity" />
-        <activity android:name=".activity.widget.RecyclerViewActivity2" />
+        <activity android:name=".activity.demo.NestedRecyclerViewActivity" />
         <activity android:name=".activity.widget.ViewFlipperActivity" />
         <activity android:name=".activity.widget.ViewPagerActivity" />
         <activity android:name=".activity.widget.ViewPager2Activity" />

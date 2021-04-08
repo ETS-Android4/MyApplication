@@ -16,7 +16,6 @@ import com.example.william.my.core.widget.decoration.RItemDecorationTop;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.widget.R;
-import com.example.william.my.module.widget.adapter.RAdapter;
 import com.example.william.my.module.widget.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;
@@ -65,23 +64,7 @@ public class RecyclerViewActivity extends BaseActivity {
         for (int i = 1; i < 61; i++) {
             mData.add("POSITION " + i);
         }
-        mRecyclerView.setAdapter(new RAdapter<String>(mData,
-                R.layout.widget_item_primary, R.layout.widget_item_primary_dark) {
-            @Override
-            public int setItemViewType(int position, String data) {
-                if (position % 2 == 0) {
-                    return R.layout.widget_item_primary;
-                } else if (position % 2 == 1) {
-                    return R.layout.widget_item_primary_dark;
-                }
-                return 0;
-            }
 
-            @Override
-            public void convert(ViewHolder holder, String data, int position, boolean payloadsIsEmpty) {
-
-            }
-        });
         RecyclerAdapter mRecyclerAdapter = new RecyclerAdapter(mData);
         mRecyclerAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mRecyclerAdapter);
