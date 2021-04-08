@@ -1,0 +1,7 @@
+android {
+    resourcePrefix "demo_"
+}
+
+dependencies {
+    implementation deps.localbroadcast
+}
