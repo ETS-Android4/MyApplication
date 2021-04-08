@@ -36,7 +36,9 @@ public class BroadcastActivity extends BaseResponseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            weakReference.get().mResponse.setText(intent.getStringExtra("message"));
+            if (weakReference.get() != null) {
+                weakReference.get().mResponse.setText(intent.getStringExtra("message"));
+            }
         }
     }
 

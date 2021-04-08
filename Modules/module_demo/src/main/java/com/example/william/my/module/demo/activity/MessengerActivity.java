@@ -54,7 +54,7 @@ public class MessengerActivity extends BaseResponseActivity {
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            MessengerActivity mActivity = this.weakReference.get();
+            MessengerActivity mActivity = weakReference.get();
             if (mActivity == null) {
                 return;
             }

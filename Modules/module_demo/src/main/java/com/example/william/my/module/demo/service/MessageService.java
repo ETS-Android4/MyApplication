@@ -50,16 +50,16 @@ public class MessageService extends Service {
             if (msg.what == MessengerActivity.MSG_CODE_SEND_TO_SERVICE) {
                 //通过Message的replyTo获取到客户端自身的Messenger，
                 //Service可以通过它向客户端发送消息
-                weakReference.get().mClientMessenger = msg.replyTo;
+                mService.mClientMessenger = msg.replyTo;
 
                 String value = msg.getData().getString(MessengerActivity.MSG_SEND_KEY);
 
-                sendMessage(MessengerActivity.MSG_CODE_SEND_TO_ACTIVITY, MessengerActivity.MSG_SEND_KEY, value);
+                sendMessage(mService, MessengerActivity.MSG_CODE_SEND_TO_ACTIVITY, MessengerActivity.MSG_SEND_KEY, value);
             }
         }
 
-        private void sendMessage(int messageID, String key, String params) {
-            if (weakReference.get().mClientMessenger == null) {
+        private void sendMessage(MessageService service, int messageID, String key, String params) {
+            if (service.mClientMessenger == null) {
                 return;
             }
             Message message = Message.obtain();
@@ -73,7 +73,7 @@ public class MessageService extends Service {
 
             try {
                 //向客户端发送消息
-                weakReference.get().mClientMessenger.send(message);
+                service.mClientMessenger.send(message);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
