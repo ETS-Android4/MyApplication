@@ -150,6 +150,7 @@ public class ARouterPath {
         public static final String Sample = "/module_sample/sample";
         public static final String Sample_MVP = "/module_sample/sample_mvp";
         public static final String Sample_MVVM = "/module_sample/sample_mvvm";
+        public static final String Sample_Kotlin_Flow = "/module_sample/sample_kotlin_flow";
     }
 
     public static class Flutter {
