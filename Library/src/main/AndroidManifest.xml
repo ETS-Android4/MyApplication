@@ -119,6 +119,7 @@
     <application
         android:allowBackup="false"
         android:networkSecurityConfig="@xml/network_config"
+        android:supportsRtl="true"
         tools:targetApi="n">
         <!--FileProvider-->
         <provider
