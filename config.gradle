@@ -275,7 +275,6 @@ project.buildscript.configurations.each { configuration ->
 }
 
 static def addRepos(RepositoryHandler handler) {
-    handler.maven { url "https://oss.sonatype.org/content/repositories/public" }
     handler.google()
     handler.jcenter()
     handler.maven { url "https://jitpack.io" }
@@ -284,6 +283,7 @@ static def addRepos(RepositoryHandler handler) {
     handler.maven { url "https://maven.aliyun.com/repository/jcenter" }
     handler.maven { url "https://maven.aliyun.com/repository/public" }
     handler.maven { url "https://maven.aliyun.com/repository/google" }
+    handler.maven { url "https://maven.aliyun.com/repository/releases" }
 }
 
 ext.addRepos = this.&addRepos
