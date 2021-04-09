@@ -21,6 +21,7 @@ import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 /**
+ * Paging
  * https://developer.android.google.cn/topic/libraries/architecture/paging/v3-overview
  */
 @Route(path = ARouterPath.Kotlin.Kotlin_Paging)

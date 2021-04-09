@@ -28,7 +28,7 @@ class ResultActivity : ComponentActivity() {
 
         binding.contentTextView.setOnClickListener {
             //myActivityLauncher.launch("input")
-            val intent = Intent(this, SecondActivity::class.java).apply {
+            val intent = Intent(this, ResultSecondActivity::class.java).apply {
                 putExtra("input", "input")
             }
             startActivityForResult.launch(intent)

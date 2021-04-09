@@ -143,7 +143,7 @@ public class ARouterPath {
         public static final String Kotlin_FLow = "/module_kotlin/flow";
         public static final String Kotlin_DataStore = "/module_kotlin/dataStore";
         public static final String Kotlin_Paging = "/module_kotlin/paging";
-        public static final String Kotlin_Result = "/module_kotlin/resule";
+        public static final String Kotlin_Result = "/module_kotlin/result";
     }
 
     public static class Sample {

@@ -87,12 +87,7 @@ public class ModuleActivity extends BaseListActivity {
         mMap.put("DemoActivity", ARouterPath.Demo.Demo);
 
         //Kotlin
-        //mMap.put("kotlin", "kotlin");
         mMap.put("KotlinActivity", ARouterPath.Kotlin.Kotlin);
-        mMap.put("KotlinFlowActivity", ARouterPath.Kotlin.Kotlin_FLow);
-        mMap.put("KotlinDataStoreActivity", ARouterPath.Kotlin.Kotlin_DataStore);
-        mMap.put("KotlinPagingActivity", ARouterPath.Kotlin.Kotlin_Paging);
-        mMap.put("KotlinResultActivity", ARouterPath.Kotlin.Kotlin_Result);
 
         //Flutter
         //mMap.put("Flutter", "Flutter");

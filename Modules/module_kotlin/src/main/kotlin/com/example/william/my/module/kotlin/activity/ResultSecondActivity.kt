@@ -6,7 +6,10 @@ import android.os.Bundle
 import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.kotlin.databinding.KLayoutResponseBinding
 
-class SecondActivity : BaseActivity() {
+/**
+ * ActivityResultContracts
+ */
+class ResultSecondActivity : BaseActivity() {
 
     lateinit var binding: KLayoutResponseBinding
 

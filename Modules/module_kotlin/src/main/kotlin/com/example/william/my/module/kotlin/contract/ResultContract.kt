@@ -5,12 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
 import androidx.activity.result.contract.ActivityResultContract
-import com.example.william.my.module.kotlin.activity.SecondActivity
+import com.example.william.my.module.kotlin.activity.ResultSecondActivity
 
 class ResultContract : ActivityResultContract<String, String?>() {
 
     override fun createIntent(context: Context, input: String?): Intent {
-        return Intent(context, SecondActivity::class.java).apply {
+        return Intent(context, ResultSecondActivity::class.java).apply {
             putExtra("input", input)
         }
     }
