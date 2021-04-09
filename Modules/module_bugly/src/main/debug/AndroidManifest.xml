@@ -13,7 +13,6 @@
 
     <application
         android:name=".app.SampleApplication"
-        android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/bugly_app_name"
         android:theme="@style/basics_AppTheme">
