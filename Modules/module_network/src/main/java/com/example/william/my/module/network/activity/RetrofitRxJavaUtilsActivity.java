@@ -37,7 +37,7 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
         super.setOnClick();
         b = !b;
         if (b) {
-            getBanners();
+            getBanner();
         } else {
             getBannerList();
         }
@@ -46,8 +46,8 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
     /**
      * GsonConverterFactory Gson 解析 -> BannerBean
      */
-    private void getBanners() {
-        Observable<BannerBean> obs = RetrofitUtils.buildObs(service.getBanners());
+    private void getBanner() {
+        Observable<BannerBean> obs = RetrofitUtils.buildObs(service.getBanner());
 
         obs.subscribe(new RetrofitObserver<BannerBean>() {
             @Override
@@ -68,7 +68,7 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      * RetrofitConverterFactory 自定义解析 -> List<BannerDetailBean>
      */
     private void getBannerList() {
-        Observable<RetrofitResponse<List<BannerDetailBean>>> responseObs = RetrofitUtils.buildObs(service.getBannersResponse());
+        Observable<RetrofitResponse<List<BannerDetailBean>>> responseObs = RetrofitUtils.buildObs(service.getBannerResponse());
 
         responseObs.subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
             @Override

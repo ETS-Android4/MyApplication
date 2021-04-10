@@ -56,7 +56,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
         NetworkService service = retrofit.create(NetworkService.class);
 
-        Observable<BannerBean> observable = service.getBanners();
+        Observable<BannerBean> observable = service.getBanner();
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -67,8 +67,8 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onNext(@NonNull BannerBean banners) {
-                        String net_success = "getBanner: " + new Gson().toJson(banners);
+                    public void onNext(@NonNull BannerBean banner) {
+                        String net_success = "getBanner: " + new Gson().toJson(banner);
                         showResponse(net_success);
                     }
 
@@ -98,7 +98,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
         NetworkService service = retrofit.create(NetworkService.class);
 
-        Observable<RetrofitResponse<List<BannerDetailBean>>> observable = service.getBannersResponse();
+        Observable<RetrofitResponse<List<BannerDetailBean>>> observable = service.getBannerResponse();
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

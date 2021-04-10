@@ -5,11 +5,11 @@ import androidx.databinding.ObservableField;
 
 import com.example.william.my.module.jetpack.BR;
 
-public class ObservableViewModel extends BaseObservable {
+public class BindObservableViewModel extends BaseObservable {
 
     private final ObservableField<Integer> likes;
 
-    public ObservableViewModel() {
+    public BindObservableViewModel() {
         likes = new ObservableField<>(0);
     }
 

@@ -50,13 +50,13 @@ public interface NetworkService {
      * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository
      */
     @GET(Urls.banner)
-    Observable<BannerBean> getBanners();
+    Observable<BannerBean> getBanner();
 
     /**
      * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository
      */
     @GET(Urls.banner)
-    Observable<RetrofitResponse<List<BannerDetailBean>>> getBannersResponse();
+    Observable<RetrofitResponse<List<BannerDetailBean>>> getBannerResponse();
 
     @Multipart
     @POST(Urls.upload)

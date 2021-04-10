@@ -6,13 +6,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-public class LiveDataViewModel extends ViewModel {
+public class BindLiveDataViewModel extends ViewModel {
 
     private final MutableLiveData<Integer> _likes;
 
     private final LiveData<String> likes;
 
-    public LiveDataViewModel() {
+    public BindLiveDataViewModel() {
         this._likes = new MutableLiveData<>(0);
         this.likes = Transformations.map(_likes, new Function<Integer, String>() {
             @Override

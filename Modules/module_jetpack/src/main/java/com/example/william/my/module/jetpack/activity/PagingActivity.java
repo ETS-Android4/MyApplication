@@ -3,6 +3,7 @@ package com.example.william.my.module.jetpack.activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.paging.CombinedLoadStates;
 import androidx.paging.PagingData;
@@ -15,7 +16,7 @@ import com.example.william.my.module.bean.ArticleBean;
 import com.example.william.my.module.jetpack.R;
 import com.example.william.my.module.jetpack.adapter.PagingAdapter;
 import com.example.william.my.module.jetpack.comparator.ArticleComparator;
-import com.example.william.my.module.jetpack.model.LoginViewModel;
+import com.example.william.my.module.jetpack.model.ArticleViewModel;
 import com.example.william.my.module.router.ARouterPath;
 
 import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider;
@@ -46,23 +47,11 @@ public class PagingActivity extends BaseActivity {
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
         mRecycleView.setAdapter(mPagingAdapter);
 
-        LoginViewModel mViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        ArticleViewModel mViewModel = new ViewModelProvider(this).get(ArticleViewModel.class);
 
-        //mViewModel.getArticleLiveData().observe(this, new Observer<PagingData<ArticlesBean.DataBean.ArticleBean>>() {
-        //    @Override
-        //    public void onChanged(PagingData<ArticlesBean.DataBean.ArticleBean> pagingData) {
-        //        mPagingAdapter.submitData(getLifecycle(), pagingData);
-        //    }
-        //});
+        //initArticleLiveData(mViewModel);
 
-        mDisposable.add(mViewModel.getArticleFlowable()
-                .to(autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-                .subscribe(new Consumer<PagingData<ArticleBean.DataBean.ArticleDetailBean>>() {
-                    @Override
-                    public void accept(PagingData<ArticleBean.DataBean.ArticleDetailBean> pagingData) throws Throwable {
-                        mPagingAdapter.submitData(getLifecycle(), pagingData);
-                    }
-                }));
+        initArticleFlowable(mViewModel);
 
         mPagingAdapter.addLoadStateListener(new Function1<CombinedLoadStates, Unit>() {
             @Override
@@ -71,6 +60,26 @@ public class PagingActivity extends BaseActivity {
                 return null;
             }
         });
+    }
+
+    private void initArticleLiveData(ArticleViewModel viewModel) {
+        viewModel.getArticleLiveData().observe(this, new Observer<PagingData<ArticleBean.DataBean.ArticleDetailBean>>() {
+            @Override
+            public void onChanged(PagingData<ArticleBean.DataBean.ArticleDetailBean> pagingData) {
+                mPagingAdapter.submitData(getLifecycle(), pagingData);
+            }
+        });
+    }
+
+    private void initArticleFlowable(ArticleViewModel viewModel) {
+        mDisposable.add(viewModel.getArticleFlowable()
+                .to(autoDisposable(AndroidLifecycleScopeProvider.from(this)))
+                .subscribe(new Consumer<PagingData<ArticleBean.DataBean.ArticleDetailBean>>() {
+                    @Override
+                    public void accept(PagingData<ArticleBean.DataBean.ArticleDetailBean> pagingData) throws Throwable {
+                        mPagingAdapter.submitData(getLifecycle(), pagingData);
+                    }
+                }));
     }
 
     @Override

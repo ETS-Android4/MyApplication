@@ -9,7 +9,9 @@ import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.kotlin.databinding.KItemRecycleBinding
 
 class ArticlesAdapter(diffCallback: DiffUtil.ItemCallback<ArticleBean.DataBean.ArticleDetailBean>) :
-    PagingDataAdapter<ArticleBean.DataBean.ArticleDetailBean, ArticlesAdapter.ViewHolder>(diffCallback) {
+    PagingDataAdapter<ArticleBean.DataBean.ArticleDetailBean, ArticlesAdapter.ViewHolder>(
+        diffCallback
+    ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = position.toString() + ". " + getItem(position)?.title

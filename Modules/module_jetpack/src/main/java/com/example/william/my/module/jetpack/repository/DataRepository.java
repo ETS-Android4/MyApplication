@@ -45,7 +45,7 @@ public class DataRepository {
         RetrofitUtils.buildLiveData(
                 RetrofitUtils
                         .buildApi(NetworkService.class)
-                        .getBannersResponse(),
+                        .getBannerResponse(),
                 new LiveDataCallback<>(liveData));
 
         return liveData;
@@ -68,7 +68,7 @@ public class DataRepository {
         RetrofitUtils.buildLiveData(
                 RetrofitUtils
                         .buildApi(NetworkService.class)
-                        .getBannersResponse(),
+                        .getBannerResponse(),
                 new LiveDataCallback<>(liveData, convert));
 
         return liveData;

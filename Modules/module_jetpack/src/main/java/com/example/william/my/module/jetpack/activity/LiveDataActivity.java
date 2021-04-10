@@ -7,10 +7,13 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.loading.LoadingTip;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.module.activity.BaseResponseActivity;
+import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.bean.BannerDetailData;
-import com.example.william.my.module.jetpack.model.LoginViewModel;
+import com.example.william.my.module.jetpack.model.BannerViewModel;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -22,7 +25,7 @@ import java.util.List;
 public class LiveDataActivity extends BaseResponseActivity implements LoadingTip.LoadingTipListener {
 
     private LoadingTip mLoadingTip;
-    private LoginViewModel mViewModel;
+    private BannerViewModel mViewModel;
 
     @Override
     public void initView() {
@@ -35,18 +38,30 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
         mLoadingTip = LoadingTip.addLoadingTipWithTopBar(this);
         mLoadingTip.setOnReloadListener(this);
 
-        mViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(BannerViewModel.class);
 
-        // List<MovieBean>
-        //mViewModel.getBannersBean().observe(this, new WithLoadingTipObserver<List<BannerBean>>(mLoadingTip) {
-        //    @Override
-        //    protected void onResponse(List<BannerBean> response) {
-        //        showResponse(new Gson().toJson(response));
-        //    }
-        //});
+        //initBannerBean();
 
-        // List<MovieData>
-        mViewModel.getBannersData().observe(this, new WithLoadingTipObserver<List<BannerDetailData>>(mLoadingTip) {
+        initBannerData();
+    }
+
+    /**
+     * List<BannerDetailBean>
+     */
+    private void initBannerBean() {
+        mViewModel.getBannerBean().observe(this, new WithLoadingTipObserver<List<BannerDetailBean>>(mLoadingTip) {
+            @Override
+            protected void onResponse(@NotNull List<BannerDetailBean> response) {
+                showResponse(new Gson().toJson(response));
+            }
+        });
+    }
+
+    /**
+     * List<BannerDetailData>
+     */
+    private void initBannerData() {
+        mViewModel.getBannerData().observe(this, new WithLoadingTipObserver<List<BannerDetailData>>(mLoadingTip) {
             @Override
             protected void onResponse(@NonNull List<BannerDetailData> response) {
                 showResponse(new Gson().toJson(response));
