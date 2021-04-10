@@ -7,7 +7,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.loading.LoadingTip;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.bean.BannerData;
+import com.example.william.my.module.bean.BannerDetailData;
 import com.example.william.my.module.jetpack.model.LoginViewModel;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
@@ -46,9 +46,9 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
         //});
 
         // List<MovieData>
-        mViewModel.getBannersData().observe(this, new WithLoadingTipObserver<List<BannerData>>(mLoadingTip) {
+        mViewModel.getBannersData().observe(this, new WithLoadingTipObserver<List<BannerDetailData>>(mLoadingTip) {
             @Override
-            protected void onResponse(@NonNull List<BannerData> response) {
+            protected void onResponse(@NonNull List<BannerDetailData> response) {
                 showResponse(new Gson().toJson(response));
             }
         });

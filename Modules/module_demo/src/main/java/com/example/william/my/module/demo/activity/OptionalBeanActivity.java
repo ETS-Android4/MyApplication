@@ -22,27 +22,27 @@ public class OptionalBeanActivity extends BaseResponseActivity {
     public void initView() {
         super.initView();
 
-        LoginBean.UserBean userBean = new LoginBean.UserBean();
-        userBean.setNickname("nick name");
+        LoginBean.LoginUserBean loginUserBean = new LoginBean.LoginUserBean();
+        loginUserBean.setNickname("nick name");
         LoginBean loginBean = new LoginBean();
-        loginBean.setUserData(userBean);
+        loginBean.setUserData(loginUserBean);
 
         // 1. 基本调用
         String nickName = OptionalBean.ofNullable(loginBean)
                 .getBean(LoginBean::getUserData)
-                .getBean(LoginBean.UserBean::getNickname).get();
+                .getBean(LoginBean.LoginUserBean::getNickname).get();
         Log.e("TAG", nickName);
 
         // 2. 扩展的 isPresent方法 用法与 Optional 一样
         boolean present = OptionalBean.ofNullable(loginBean)
                 .getBean(LoginBean::getUserData)
-                .getBean(LoginBean.UserBean::getNickname).isPresent();
+                .getBean(LoginBean.LoginUserBean::getNickname).isPresent();
         Log.e("TAG", String.valueOf(present));
 
         // 3. 扩展的 ifPresent 方法
         OptionalBean.ofNullable(loginBean)
                 .getBean(LoginBean::getUserData)
-                .getBean(LoginBean.UserBean::getNickname)
+                .getBean(LoginBean.LoginUserBean::getNickname)
                 .ifPresent(new Consumer<String>() {
                     @Override
                     public void accept(String nickName) {
@@ -53,14 +53,14 @@ public class OptionalBeanActivity extends BaseResponseActivity {
         // 4. 扩展的 orElse
         String nickName2 = OptionalBean.ofNullable(loginBean)
                 .getBean(LoginBean::getUserData)
-                .getBean(LoginBean.UserBean::getNickname).orElse("昵称");
+                .getBean(LoginBean.LoginUserBean::getNickname).orElse("昵称");
         System.out.println(nickName2);
 
         // 5. 扩展的 orElseThrow
         try {
             String nickName3 = OptionalBean.ofNullable(loginBean)
                     .getBean(LoginBean::getUserData)
-                    .getBean(LoginBean.UserBean::getNickname).orElseThrow(new Supplier<Throwable>() {
+                    .getBean(LoginBean.LoginUserBean::getNickname).orElseThrow(new Supplier<Throwable>() {
                         @Override
                         public Throwable get() {
                             return new RuntimeException("空指针");

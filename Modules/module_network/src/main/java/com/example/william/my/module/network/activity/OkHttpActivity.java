@@ -25,6 +25,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * https://github.com/square/okhttp
@@ -70,8 +71,9 @@ public class OkHttpActivity extends BaseResponseActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
-                if (response.body() != null) {
-                    String net_success = "Success: " + response.body().string();
+                ResponseBody body = response.body();
+                if (body != null) {
+                    String net_success = "Success: " + body.string();
                     showResponse(net_success);
                 }
             }
@@ -105,10 +107,11 @@ public class OkHttpActivity extends BaseResponseActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
-                if (response.isSuccessful() && response.body() != null) {
+                ResponseBody body = response.body();
+                if (response.isSuccessful() && body != null) {
                     FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
                     File file = new File(getExternalCacheDir() + File.separator + "ok_http_download.apk");
-                    boolean successful = fileIOUtils.writeFileFromIS(file, response.body().byteStream());
+                    boolean successful = fileIOUtils.writeFileFromIS(file, body.byteStream());
                 }
             }
         });
@@ -152,8 +155,9 @@ public class OkHttpActivity extends BaseResponseActivity {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
-                if (response.body() != null) {
-                    String net_success = "Success: " + response.body().string();
+                ResponseBody body = response.body();
+                if (body != null) {
+                    String net_success = "Success: " + body.string();
                     showResponse(net_success);
                 }
             }

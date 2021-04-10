@@ -10,14 +10,14 @@ import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.module.bean.ArticlesBean;
+import com.example.william.my.module.bean.ArticleBean;
 import com.example.william.my.module.jetpack.R;
 
 import org.jetbrains.annotations.NotNull;
 
-public class PagingAdapter extends PagingDataAdapter<ArticlesBean.DataBean.ArticleBean, RecyclerView.ViewHolder> {
+public class PagingAdapter extends PagingDataAdapter<ArticleBean.DataBean.ArticleDetailBean, RecyclerView.ViewHolder> {
 
-    public PagingAdapter(@NotNull DiffUtil.ItemCallback<ArticlesBean.DataBean.ArticleBean> diffCallback) {
+    public PagingAdapter(@NotNull DiffUtil.ItemCallback<ArticleBean.DataBean.ArticleDetailBean> diffCallback) {
         super(diffCallback);
     }
 
@@ -29,8 +29,8 @@ public class PagingAdapter extends PagingDataAdapter<ArticlesBean.DataBean.Artic
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ArticlesBean.DataBean.ArticleBean articleBean = getItem(position);
-        ((ViewHolder) holder).mTextView.setText(articleBean == null ? "" : position + ". " + articleBean.getTitle());
+        ArticleBean.DataBean.ArticleDetailBean articleDetailBean = getItem(position);
+        ((ViewHolder) holder).mTextView.setText(articleDetailBean == null ? "" : position + ". " + articleDetailBean.getTitle());
     }
 
     private static class ViewHolder extends RecyclerView.ViewHolder {

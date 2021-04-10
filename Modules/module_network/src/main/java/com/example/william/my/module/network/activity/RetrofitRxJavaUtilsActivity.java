@@ -7,7 +7,7 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.bean.BannerBean;
-import com.example.william.my.module.bean.BannersBean;
+import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.service.NetworkService;
 import com.google.gson.Gson;
@@ -24,7 +24,13 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
 
     private boolean b;
 
-    private final NetworkService service = RetrofitUtils.buildApi(NetworkService.class);
+    private NetworkService service;
+
+    @Override
+    public void initView() {
+        super.initView();
+        service = RetrofitUtils.buildApi(NetworkService.class);
+    }
 
     @Override
     public void setOnClick() {
@@ -38,14 +44,14 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
     }
 
     /**
-     * GsonConverterFactory Gson 解析
+     * GsonConverterFactory Gson 解析 -> BannerBean
      */
     private void getBanners() {
-        Observable<BannersBean> obs = RetrofitUtils.buildObs(service.getBanners());
+        Observable<BannerBean> obs = RetrofitUtils.buildObs(service.getBanners());
 
-        obs.subscribe(new RetrofitObserver<BannersBean>() {
+        obs.subscribe(new RetrofitObserver<BannerBean>() {
             @Override
-            public void onResponse(BannersBean response) {
+            public void onResponse(BannerBean response) {
                 String net_success = "Success: " + new Gson().toJson(response);
                 showResponse(net_success);
             }
@@ -59,14 +65,14 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
     }
 
     /**
-     * RetrofitConverterFactory 自定义解析
+     * RetrofitConverterFactory 自定义解析 -> List<BannerDetailBean>
      */
     private void getBannerList() {
-        Observable<RetrofitResponse<List<BannerBean>>> responseObs = RetrofitUtils.buildObs(service.getBannersResponse());
+        Observable<RetrofitResponse<List<BannerDetailBean>>> responseObs = RetrofitUtils.buildObs(service.getBannersResponse());
 
-        responseObs.subscribe(new RetrofitObserver<RetrofitResponse<List<BannerBean>>>() {
+        responseObs.subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
             @Override
-            public void onResponse(RetrofitResponse<List<BannerBean>> response) {
+            public void onResponse(RetrofitResponse<List<BannerDetailBean>> response) {
                 String net_success = "Success: " + new Gson().toJson(response);
                 showResponse(net_success);
             }

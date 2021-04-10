@@ -66,7 +66,7 @@ class FlowViewModel : ViewModel() {
 
             // 使用 collect 触发流并消耗其元素
             // Trigger the flow and consume its elements using collect
-            ExampleRepository().getArticles
+            ExampleRepository().getArticle
                 .onStart {
                     // 在调用 flow 请求数据之前，做一些准备工作，例如显示正在加载数据的进度条
                 }
@@ -92,7 +92,7 @@ class FlowViewModel : ViewModel() {
         //打印线程
         ThreadUtils.isMainThread("CoroutinesViewModel getArticles2")
 
-        ExampleRepository().getArticles
+        ExampleRepository().getArticle
             .collectLatest { article ->
                 // 在一段时间内发送多次数据，只会接受最新的一次发射过来的数据
                 emit(Gson().toJson(article))
@@ -100,7 +100,7 @@ class FlowViewModel : ViewModel() {
     }
 
     fun getArticles3() =
-        ExampleRepository().getArticles
+        ExampleRepository().getArticle
             .map {
                 Gson().toJson(it)
             }

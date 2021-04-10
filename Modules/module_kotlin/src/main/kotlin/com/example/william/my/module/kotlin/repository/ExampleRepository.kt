@@ -1,6 +1,6 @@
 package com.example.william.my.module.kotlin.repository
 
-import com.example.william.my.module.bean.ArticlesBean
+import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.kotlin.source.ExampleDataSource
 import com.example.william.my.module.kotlin.utils.ThreadUtils
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +17,8 @@ class ExampleRepository {
      * These operations are lazy and don't trigger the flow. They just transform
      * the current value emitted by the flow at that point in time.
      */
-    val getArticles: Flow<ArticlesBean> =
-        ExampleDataSource().getArticles
+    val getArticle: Flow<ArticleBean> =
+        ExampleDataSource().getArticle
             // 中间运算符 map 转换数据
             .map { articles ->
                 articlesTakeOne(articles)
@@ -32,12 +32,12 @@ class ExampleRepository {
     //    Log.e("TAG", "exception : " + exception.message.toString())
     //}
 
-    private fun articlesTakeOne(articles: ArticlesBean): ArticlesBean {
+    private fun articlesTakeOne(article: ArticleBean): ArticleBean {
         //打印线程
         ThreadUtils.isMainThread("ExampleRepository articlesTakeOne")
 
-        articles.data.datas = articles.data.datas.take(1)
-        return articles
+        article.data.datas = article.data.datas.take(1)
+        return article
     }
 
 

@@ -7,7 +7,7 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RxRetrofit;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
-import com.example.william.my.module.bean.BannerBean;
+import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
@@ -27,14 +27,14 @@ public class RxRetrofitActivity extends BaseResponseActivity {
 
     private void getBanner() {
         RxRetrofit
-                .<List<BannerBean>>Builder()
+                .<List<BannerDetailBean>>Builder()
                 .api(Urls.banner)
                 .get()
                 .build()
                 .createObservable()
-                .subscribe(new RetrofitObserver<RetrofitResponse<List<BannerBean>>>() {
+                .subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
                     @Override
-                    public void onResponse(RetrofitResponse<List<BannerBean>> response) {
+                    public void onResponse(RetrofitResponse<List<BannerDetailBean>> response) {
                         String net_success = "Success: " + new Gson().toJson(response);
                         showResponse(net_success);
                     }

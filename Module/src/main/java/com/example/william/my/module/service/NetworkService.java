@@ -2,9 +2,9 @@ package com.example.william.my.module.service;
 
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.base.Urls;
-import com.example.william.my.module.bean.ArticlesBean;
+import com.example.william.my.module.bean.ArticleBean;
 import com.example.william.my.module.bean.BannerBean;
-import com.example.william.my.module.bean.BannersBean;
+import com.example.william.my.module.bean.BannerDetailBean;
 
 import java.util.List;
 import java.util.Map;
@@ -44,19 +44,19 @@ public interface NetworkService {
      * Repository
      */
     @GET(Urls.article)
-    Single<ArticlesBean> getArticleList(@Path("page") int page);
+    Single<ArticleBean> getArticleList(@Path("page") int page);
 
     /**
      * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository
      */
     @GET(Urls.banner)
-    Observable<BannersBean> getBanners();
+    Observable<BannerBean> getBanners();
 
     /**
      * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository
      */
     @GET(Urls.banner)
-    Observable<RetrofitResponse<List<BannerBean>>> getBannersResponse();
+    Observable<RetrofitResponse<List<BannerDetailBean>>> getBannersResponse();
 
     @Multipart
     @POST(Urls.upload)

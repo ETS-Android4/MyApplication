@@ -3,7 +3,7 @@ package com.example.william.my.module.kotlin.source
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.example.william.my.module.base.Urls
-import com.example.william.my.module.bean.ArticlesBean
+import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.kotlin.api.KotlinApi
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.functions.Function
@@ -12,9 +12,9 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ExampleRxPagingSource : RxPagingSource<Int, ArticlesBean.DataBean.ArticleBean>() {
+class ExampleRxPagingSource : RxPagingSource<Int, ArticleBean.DataBean.ArticleDetailBean>() {
 
-    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, ArticlesBean.DataBean.ArticleBean>> {
+    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean>> {
 
         // 如果未定义，从0开始刷新
         // Start refresh at page 0 if undefined.
@@ -26,7 +26,7 @@ class ExampleRxPagingSource : RxPagingSource<Int, ArticlesBean.DataBean.ArticleB
             .onErrorReturn(ReturnError())
     }
 
-    override fun getRefreshKey(state: PagingState<Int, ArticlesBean.DataBean.ArticleBean>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, ArticleBean.DataBean.ArticleDetailBean>): Int? {
         // Try to find the page key of the closest page to anchorPosition, from
         // either the prevKey or the nextKey, but you need to handle nullability
         // here:
@@ -41,8 +41,8 @@ class ExampleRxPagingSource : RxPagingSource<Int, ArticlesBean.DataBean.ArticleB
     }
 
     private class ReturnLoadResult :
-        Function<ArticlesBean, LoadResult<Int, ArticlesBean.DataBean.ArticleBean>> {
-        override fun apply(t: ArticlesBean): LoadResult<Int, ArticlesBean.DataBean.ArticleBean> {
+        Function<ArticleBean, LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean>> {
+        override fun apply(t: ArticleBean): LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean> {
             return LoadResult.Page(
                 data = t.data.datas,
                 prevKey = null, // Only paging forward.
@@ -52,8 +52,8 @@ class ExampleRxPagingSource : RxPagingSource<Int, ArticlesBean.DataBean.ArticleB
     }
 
     private class ReturnError :
-        Function<Throwable, LoadResult<Int, ArticlesBean.DataBean.ArticleBean>> {
-        override fun apply(throwable: Throwable): LoadResult<Int, ArticlesBean.DataBean.ArticleBean> {
+        Function<Throwable, LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean>> {
+        override fun apply(throwable: Throwable): LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean> {
             return LoadResult.Error(throwable)
         }
     }

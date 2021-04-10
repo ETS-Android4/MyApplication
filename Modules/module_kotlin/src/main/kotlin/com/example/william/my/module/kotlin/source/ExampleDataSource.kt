@@ -1,7 +1,7 @@
 package com.example.william.my.module.kotlin.source
 
 import com.example.william.my.module.base.Urls
-import com.example.william.my.module.bean.ArticlesBean
+import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.kotlin.api.KotlinApi
 import com.example.william.my.module.kotlin.utils.ThreadUtils
 import kotlinx.coroutines.delay
@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ExampleDataSource {
 
-    val getArticles: Flow<ArticlesBean> = flow {
+    val getArticle: Flow<ArticleBean> = flow {
         //打印线程
         ThreadUtils.isMainThread("ExampleDataSource getArticles")
 

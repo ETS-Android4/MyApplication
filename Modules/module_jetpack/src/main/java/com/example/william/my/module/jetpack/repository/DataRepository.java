@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.william.my.core.network.retrofit.callback.LiveDataCallback;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
-import com.example.william.my.module.bean.BannerBean;
-import com.example.william.my.module.bean.BannerData;
+import com.example.william.my.module.bean.BannerDetailBean;
+import com.example.william.my.module.bean.BannerDetailData;
 import com.example.william.my.module.service.NetworkService;
 
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ public class DataRepository {
 
     }
 
-    public LiveData<RetrofitResponse<List<BannerBean>>> bannerBean() {
-        final MutableLiveData<RetrofitResponse<List<BannerBean>>> liveData = new MutableLiveData<>();
+    public LiveData<RetrofitResponse<List<BannerDetailBean>>> bannerBean() {
+        final MutableLiveData<RetrofitResponse<List<BannerDetailBean>>> liveData = new MutableLiveData<>();
 
         RetrofitUtils.buildLiveData(
                 RetrofitUtils
@@ -51,14 +51,14 @@ public class DataRepository {
         return liveData;
     }
 
-    public LiveData<RetrofitResponse<List<BannerData>>> bannerData() {
-        final MutableLiveData<RetrofitResponse<List<BannerData>>> liveData = new MutableLiveData<>();
+    public LiveData<RetrofitResponse<List<BannerDetailData>>> bannerData() {
+        final MutableLiveData<RetrofitResponse<List<BannerDetailData>>> liveData = new MutableLiveData<>();
 
-        LiveDataCallback.LiveDataConvert<List<BannerBean>, List<BannerData>> convert = new LiveDataCallback.LiveDataConvert<List<BannerBean>, List<BannerData>>() {
+        LiveDataCallback.LiveDataConvert<List<BannerDetailBean>, List<BannerDetailData>> convert = new LiveDataCallback.LiveDataConvert<List<BannerDetailBean>, List<BannerDetailData>>() {
             @Override
-            public RetrofitResponse<List<BannerData>> convert(RetrofitResponse<List<BannerBean>> data) throws Exception {
-                List<BannerData> movieData = new ArrayList<>();
-                for (BannerBean movieBean : data.getData()) {
+            public RetrofitResponse<List<BannerDetailData>> convert(RetrofitResponse<List<BannerDetailBean>> data) throws Exception {
+                List<BannerDetailData> movieData = new ArrayList<>();
+                for (BannerDetailBean movieBean : data.getData()) {
                     movieData.add(movieBean.convert());
                 }
                 return RetrofitResponse.success(movieData);

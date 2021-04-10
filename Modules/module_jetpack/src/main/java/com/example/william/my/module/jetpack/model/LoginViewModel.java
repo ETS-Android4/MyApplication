@@ -14,9 +14,9 @@ import androidx.paging.PagingSource;
 import androidx.paging.rxjava3.PagingRx;
 
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
-import com.example.william.my.module.bean.ArticlesBean;
-import com.example.william.my.module.bean.BannerBean;
-import com.example.william.my.module.bean.BannerData;
+import com.example.william.my.module.bean.ArticleBean;
+import com.example.william.my.module.bean.BannerDetailBean;
+import com.example.william.my.module.bean.BannerDetailData;
 import com.example.william.my.module.jetpack.repository.DataRepository;
 import com.example.william.my.module.jetpack.source.DataPagingSource;
 
@@ -49,8 +49,8 @@ public class LoginViewModel extends ViewModel {
     private final MutableLiveData<Object> mutableLiveData;
 
     // 对外暴露 不可变的 LiveData，只能查询
-    private final LiveData<RetrofitResponse<List<BannerBean>>> bannersBean;
-    private final LiveData<RetrofitResponse<List<BannerData>>> bannersData;
+    private final LiveData<RetrofitResponse<List<BannerDetailBean>>> bannersBean;
+    private final LiveData<RetrofitResponse<List<BannerDetailData>>> bannersData;
 
     //private final Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> articleFlowable;
 
@@ -60,40 +60,40 @@ public class LoginViewModel extends ViewModel {
 
         mutableLiveData = new MutableLiveData<>();
 
-        bannersBean = Transformations.switchMap(mutableLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerBean>>>>() {
+        bannersBean = Transformations.switchMap(mutableLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerDetailBean>>>>() {
 
             @Override
-            public LiveData<RetrofitResponse<List<BannerBean>>> apply(Object input) {
+            public LiveData<RetrofitResponse<List<BannerDetailBean>>> apply(Object input) {
                 return dataRepository.bannerBean();
             }
         });
-        bannersData = Transformations.switchMap(mutableLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerData>>>>() {
+        bannersData = Transformations.switchMap(mutableLiveData, new Function<Object, LiveData<RetrofitResponse<List<BannerDetailData>>>>() {
 
             @Override
-            public LiveData<RetrofitResponse<List<BannerData>>> apply(Object input) {
+            public LiveData<RetrofitResponse<List<BannerDetailData>>> apply(Object input) {
                 return dataRepository.bannerData();
             }
         });
     }
 
-    public LiveData<RetrofitResponse<List<BannerBean>>> getBannersBean() {
+    public LiveData<RetrofitResponse<List<BannerDetailBean>>> getBannersBean() {
         return bannersBean;
     }
 
-    public LiveData<RetrofitResponse<List<BannerData>>> getBannersData() {
+    public LiveData<RetrofitResponse<List<BannerDetailData>>> getBannersData() {
         return bannersData;
     }
 
-    public LiveData<PagingData<ArticlesBean.DataBean.ArticleBean>> getArticleLiveData() {
+    public LiveData<PagingData<ArticleBean.DataBean.ArticleDetailBean>> getArticleLiveData() {
         // CoroutineScope 由 lifecycle-viewmodel-ktx 提供
         // CoroutineScope helper provided by the lifecycle-viewmodel-ktx artifact.
         CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
 
-        Pager<Integer, ArticlesBean.DataBean.ArticleBean> pager = new Pager<>(
+        Pager<Integer, ArticleBean.DataBean.ArticleDetailBean> pager = new Pager<>(
                 new PagingConfig(20),//一次加载的数目
-                new Function0<PagingSource<Integer, ArticlesBean.DataBean.ArticleBean>>() {
+                new Function0<PagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean>>() {
                     @Override
-                    public PagingSource<Integer, ArticlesBean.DataBean.ArticleBean> invoke() {
+                    public PagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean> invoke() {
                         return new DataPagingSource();
                     }
                 });
@@ -101,21 +101,21 @@ public class LoginViewModel extends ViewModel {
         return PagingLiveData.cachedIn(PagingLiveData.getLiveData(pager), viewModelScope);
     }
 
-    public Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> getArticleFlowable() {
+    public Flowable<PagingData<ArticleBean.DataBean.ArticleDetailBean>> getArticleFlowable() {
         // CoroutineScope 由 lifecycle-viewmodel-ktx 提供
         // CoroutineScope helper provided by the lifecycle-viewmodel-ktx artifact.
         CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
 
-        Pager<Integer, ArticlesBean.DataBean.ArticleBean> pager = new Pager<>(
+        Pager<Integer, ArticleBean.DataBean.ArticleDetailBean> pager = new Pager<>(
                 new PagingConfig(20),//一次加载的数目
-                new Function0<PagingSource<Integer, ArticlesBean.DataBean.ArticleBean>>() {
+                new Function0<PagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean>>() {
                     @Override
-                    public PagingSource<Integer, ArticlesBean.DataBean.ArticleBean> invoke() {
+                    public PagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean> invoke() {
                         return new DataPagingSource();
                     }
                 });
 
-        Flowable<PagingData<ArticlesBean.DataBean.ArticleBean>> flowable = PagingRx.getFlowable(pager);
+        Flowable<PagingData<ArticleBean.DataBean.ArticleDetailBean>> flowable = PagingRx.getFlowable(pager);
         // cachedIn() 运算符使数据流可共享
         PagingRx.cachedIn(flowable, viewModelScope);
         return flowable;

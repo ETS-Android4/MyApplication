@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.module.bean.ArticlesBean;
+import com.example.william.my.module.bean.ArticleBean;
 import com.example.william.my.module.jetpack.R;
 import com.example.william.my.module.jetpack.adapter.PagingAdapter;
 import com.example.william.my.module.jetpack.comparator.ArticleComparator;
@@ -57,9 +57,9 @@ public class PagingActivity extends BaseActivity {
 
         mDisposable.add(mViewModel.getArticleFlowable()
                 .to(autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-                .subscribe(new Consumer<PagingData<ArticlesBean.DataBean.ArticleBean>>() {
+                .subscribe(new Consumer<PagingData<ArticleBean.DataBean.ArticleDetailBean>>() {
                     @Override
-                    public void accept(PagingData<ArticlesBean.DataBean.ArticleBean> pagingData) throws Throwable {
+                    public void accept(PagingData<ArticleBean.DataBean.ArticleDetailBean> pagingData) throws Throwable {
                         mPagingAdapter.submitData(getLifecycle(), pagingData);
                     }
                 }));

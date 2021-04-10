@@ -1,28 +1,17 @@
 package com.example.william.my.module.bean;
 
-import androidx.annotation.Keep;
-
 import com.example.william.my.core.network.base.BaseBean;
 import com.google.gson.annotations.SerializedName;
 
-@Keep
+import java.util.List;
+
 public class BannerBean extends BaseBean {
 
-    @SerializedName("id")
-    public int id;
-    @SerializedName("title")
-    public String title;
-    @SerializedName("desc")
-    public String desc;
-    @SerializedName("imagePath")
-    public String imagePath;
+    @SerializedName("errorCode")
+    public int errorCode;
+    @SerializedName("errorMsg")
+    public String errorMsg;
 
-    public BannerData convert() {
-        BannerData bannerData = new BannerData();
-        bannerData.id = id;
-        bannerData.title = title;
-        bannerData.desc = desc;
-        bannerData.image = imagePath;
-        return bannerData;
-    }
+    @SerializedName("data")
+    public List<BannerDetailBean> data;
 }

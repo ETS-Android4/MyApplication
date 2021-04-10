@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ArticlesBean {
+public class ArticleBean {
 
     @SerializedName("data")
     private DataBean data;
@@ -46,7 +46,7 @@ public class ArticlesBean {
         private int size;
 
         @SerializedName("datas")
-        private List<ArticleBean> datas;
+        private List<ArticleDetailBean> datas;
 
         public int getCurPage() {
             return curPage;
@@ -64,15 +64,15 @@ public class ArticlesBean {
             this.size = size;
         }
 
-        public List<ArticleBean> getDatas() {
+        public List<ArticleDetailBean> getDatas() {
             return datas;
         }
 
-        public void setDatas(List<ArticleBean> datas) {
+        public void setDatas(List<ArticleDetailBean> datas) {
             this.datas = datas;
         }
 
-        public static class ArticleBean {
+        public static class ArticleDetailBean {
 
             @SerializedName("id")
             private long id;

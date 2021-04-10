@@ -1,7 +1,7 @@
 package com.example.william.my.module.kotlin.api
 
 import com.example.william.my.module.base.Urls
-import com.example.william.my.module.bean.ArticlesBean
+import com.example.william.my.module.bean.ArticleBean
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,8 +16,8 @@ interface KotlinApi {
     // 提供挂起功能的网络请求接口
     // Interface that provides a way to make network requests with suspend functions
     @GET(Urls.article)
-    suspend fun getArticles(@Path("page") page: Int): ArticlesBean
+    suspend fun getArticles(@Path("page") page: Int): ArticleBean
 
     @GET(Urls.article)
-    fun getArticlesSingle(@Path("page") page: Int): Single<ArticlesBean>
+    fun getArticlesSingle(@Path("page") page: Int): Single<ArticleBean>
 }

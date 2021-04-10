@@ -4,7 +4,7 @@ import androidx.paging.PagingState;
 import androidx.paging.rxjava3.RxPagingSource;
 
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
-import com.example.william.my.module.bean.ArticlesBean;
+import com.example.william.my.module.bean.ArticleBean;
 import com.example.william.my.module.service.NetworkService;
 
 import org.jetbrains.annotations.NotNull;
@@ -14,11 +14,11 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataBean.ArticleBean> {
+public class DataPagingSource extends RxPagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean> {
 
     @NotNull
     @Override
-    public Single<LoadResult<Integer, ArticlesBean.DataBean.ArticleBean>> loadSingle(@NotNull LoadParams<Integer> loadParams) {
+    public Single<LoadResult<Integer, ArticleBean.DataBean.ArticleDetailBean>> loadSingle(@NotNull LoadParams<Integer> loadParams) {
 
         // Start refresh at page 0 if undefined.
         Integer page = loadParams.getKey();
@@ -35,7 +35,7 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
 
     @Nullable
     @Override
-    public Integer getRefreshKey(@NotNull PagingState<Integer, ArticlesBean.DataBean.ArticleBean> pagingState) {
+    public Integer getRefreshKey(@NotNull PagingState<Integer, ArticleBean.DataBean.ArticleDetailBean> pagingState) {
         // Try to find the page key of the closest page to anchorPosition, from
         // either the prevKey or the nextKey, but you need to handle nullability
         // here:
@@ -48,7 +48,7 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
             return null;
         }
 
-        LoadResult.Page<Integer, ArticlesBean.DataBean.ArticleBean> anchorPage = pagingState.closestPageToPosition(anchorPosition);
+        LoadResult.Page<Integer, ArticleBean.DataBean.ArticleDetailBean> anchorPage = pagingState.closestPageToPosition(anchorPosition);
         if (anchorPage == null) {
             return null;
         }
@@ -66,21 +66,21 @@ public class DataPagingSource extends RxPagingSource<Integer, ArticlesBean.DataB
         return null;
     }
 
-    private static class toLoadResult implements Function<ArticlesBean, LoadResult<Integer, ArticlesBean.DataBean.ArticleBean>> {
+    private static class toLoadResult implements Function<ArticleBean, LoadResult<Integer, ArticleBean.DataBean.ArticleDetailBean>> {
 
         @Override
-        public LoadResult<Integer, ArticlesBean.DataBean.ArticleBean> apply(ArticlesBean articlesBean) throws Throwable {
+        public LoadResult<Integer, ArticleBean.DataBean.ArticleDetailBean> apply(ArticleBean articleBean) throws Throwable {
             return new LoadResult.Page<>(
-                    articlesBean.getData().getDatas(),
+                    articleBean.getData().getDatas(),
                     null,// Only paging forward.
-                    articlesBean.getData().getCurPage());
+                    articleBean.getData().getCurPage());
         }
     }
 
-    private static class toErrorResult implements Function<Throwable, LoadResult<Integer, ArticlesBean.DataBean.ArticleBean>> {
+    private static class toErrorResult implements Function<Throwable, LoadResult<Integer, ArticleBean.DataBean.ArticleDetailBean>> {
 
         @Override
-        public LoadResult<Integer, ArticlesBean.DataBean.ArticleBean> apply(Throwable throwable) throws Throwable {
+        public LoadResult<Integer, ArticleBean.DataBean.ArticleDetailBean> apply(Throwable throwable) throws Throwable {
             return new LoadResult.Error<>(throwable);
         }
     }

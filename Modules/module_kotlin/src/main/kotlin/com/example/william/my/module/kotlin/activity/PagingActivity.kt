@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.module.bean.ArticlesBean
+import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.kotlin.adapter.ArticlesAdapter
 import com.example.william.my.module.kotlin.comparator.ArticleComparator
 import com.example.william.my.module.kotlin.databinding.KActivityPagingBinding
@@ -59,7 +59,7 @@ class PagingActivity : BaseActivity() {
             viewModel.articlesFlowable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Consumer<PagingData<ArticlesBean.DataBean.ArticleBean>> {
+                .subscribe(Consumer<PagingData<ArticleBean.DataBean.ArticleDetailBean>> {
                     pagingAdapter.submitData(lifecycle, it)
                 })
         )

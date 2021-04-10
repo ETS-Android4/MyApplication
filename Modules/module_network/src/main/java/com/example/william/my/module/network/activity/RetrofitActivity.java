@@ -38,7 +38,6 @@ public class RetrofitActivity extends BaseResponseActivity {
     public void setOnClick() {
         super.setOnClick();
         login();
-        //download();
     }
 
     private void login() {

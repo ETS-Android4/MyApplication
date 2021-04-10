@@ -3,14 +3,14 @@ package com.example.william.my.module.kotlin.source
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.william.my.module.base.Urls
-import com.example.william.my.module.bean.ArticlesBean
+import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.kotlin.api.KotlinApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ExamplePagingSource : PagingSource<Int, ArticlesBean.DataBean.ArticleBean>() {
+class ExamplePagingSource : PagingSource<Int, ArticleBean.DataBean.ArticleDetailBean>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticlesBean.DataBean.ArticleBean> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean> {
         return try {
             // 如果未定义，从0开始刷新
             // Start refresh at page 0 if undefined.
@@ -29,7 +29,7 @@ class ExamplePagingSource : PagingSource<Int, ArticlesBean.DataBean.ArticleBean>
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, ArticlesBean.DataBean.ArticleBean>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, ArticleBean.DataBean.ArticleDetailBean>): Int? {
         // Try to find the page key of the closest page to anchorPosition, from
         // either the prevKey or the nextKey, but you need to handle nullability
         // here:

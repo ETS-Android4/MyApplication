@@ -6,7 +6,7 @@ import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.bean.BannerBean;
-import com.example.william.my.module.bean.BannersBean;
+import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.service.NetworkService;
 import com.google.gson.Gson;
@@ -44,7 +44,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
     }
 
     /**
-     * GsonConverterFactory Gson 解析
+     * GsonConverterFactory Gson 解析 -> BannerBean
      */
     private void getBanner() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -56,18 +56,18 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
         NetworkService service = retrofit.create(NetworkService.class);
 
-        Observable<BannersBean> observable = service.getBanners();
+        Observable<BannerBean> observable = service.getBanners();
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BannersBean>() {
+                .subscribe(new Observer<BannerBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull BannersBean banners) {
+                    public void onNext(@NonNull BannerBean banners) {
                         String net_success = "getBanner: " + new Gson().toJson(banners);
                         showResponse(net_success);
                     }
@@ -86,7 +86,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
     }
 
     /**
-     * RetrofitConverterFactory 自定义解析
+     * RetrofitConverterFactory 自定义解析 -> List<BannerDetailBean>
      */
     private void getBannerResponse() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -98,18 +98,18 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
         NetworkService service = retrofit.create(NetworkService.class);
 
-        Observable<RetrofitResponse<List<BannerBean>>> observable = service.getBannersResponse();
+        Observable<RetrofitResponse<List<BannerDetailBean>>> observable = service.getBannersResponse();
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<RetrofitResponse<List<BannerBean>>>() {
+                .subscribe(new Observer<RetrofitResponse<List<BannerDetailBean>>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull RetrofitResponse<List<BannerBean>> banner) {
+                    public void onNext(@NonNull RetrofitResponse<List<BannerDetailBean>> banner) {
                         String net_success = "getBannerResponse: " + new Gson().toJson(banner);
                         showResponse(net_success);
                     }
