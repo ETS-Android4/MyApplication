@@ -2,20 +2,20 @@ package com.example.william.my.module.sample.presenter;
 
 import com.example.william.my.module.sample.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.contract.ArticleContract;
-import com.example.william.my.module.sample.repo.ArticlesDataSource;
-import com.example.william.my.module.sample.repo.ArticlesRepository;
+import com.example.william.my.module.sample.repo.ArticleDataSource;
+import com.example.william.my.module.sample.repo.ArticleRepository;
 
 import java.util.List;
 
-public class ArticlesPresenter implements ArticleContract.Presenter {
+public class ArticlePresenter implements ArticleContract.Presenter {
 
     private int mPage;
 
-    private final ArticlesRepository mArticleRepository;
+    private final ArticleRepository mArticleRepository;
 
     private final ArticleContract.View mArticleView;
 
-    public ArticlesPresenter(ArticlesRepository articleRepository, ArticleContract.View view) {
+    public ArticlePresenter(ArticleRepository articleRepository, ArticleContract.View view) {
         mArticleRepository = articleRepository;
         mArticleView = view;
 
@@ -35,7 +35,7 @@ public class ArticlesPresenter implements ArticleContract.Presenter {
     }
 
     private void queryArticleList(int page) {
-        mArticleRepository.getArticleList(page, new ArticlesDataSource.LoadArticleCallback() {
+        mArticleRepository.getArticleList(page, new ArticleDataSource.LoadArticleCallback() {
             @Override
             public void onArticleLoaded(List<ArticleDetailBean> articles) {
                 mArticleView.showArticles(mPage == 0, articles);

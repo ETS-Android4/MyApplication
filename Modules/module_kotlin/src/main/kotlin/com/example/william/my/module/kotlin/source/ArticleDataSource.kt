@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ExampleDataSource {
+class ArticleDataSource {
 
     val getArticle: Flow<ArticleBean> = flow {
         //打印线程
-        ThreadUtils.isMainThread("ExampleDataSource getArticles")
+        ThreadUtils.isMainThread("ArticleDataSource getArticle")
 
-        val articles = buildApi().getArticles(0)
-        emit(articles) // Emits the result of the request to the flow 向数据流发送请求结果
+        val article = buildApi().getArticle(0)
+        emit(article) // Emits the result of the request to the flow 向数据流发送请求结果
         delay(3000) // Suspends the coroutine for some time 挂起一段时间
     }
 

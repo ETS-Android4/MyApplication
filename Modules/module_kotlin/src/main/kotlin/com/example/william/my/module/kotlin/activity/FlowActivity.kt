@@ -26,30 +26,44 @@ class FlowActivity : BaseActivity() {
 
         val viewModel = ViewModelProvider(this).get(FlowViewModel::class.java)
 
-        //viewModel.login.observe(this, Observer {
-        //    binding.kotlinTextView.text = it
-        //})
+        login(viewModel)
 
-        //binding.kotlinTextView.setOnClickListener {
-        //    viewModel.login("17778060027", "ww123456")
-        //}
+        //getArticle(viewModel)
 
-        //viewModel.articles.observe(this, Observer {
-        //    binding.kotlinTextView.text = it
-        //})
+        //getArticleByFlow(viewModel)
 
-        //binding.kotlinTextView.setOnClickListener {
-        //    viewModel.getArticles()
-        //}
+        //getArticleByCoroutine(viewModel)
+    }
 
-        //binding.kotlinTextView.setOnClickListener {
-        //    viewModel.getArticles2().observe(this, Observer {
-        //        binding.kotlinTextView.text = it
-        //    })
-        //}
-
+    private fun login(viewModel: FlowViewModel) {
+        viewModel.login.observe(this, Observer {
+            binding.contentTextView.text = it
+        })
         binding.contentTextView.setOnClickListener {
-            viewModel.getArticles3().observe(this, Observer {
+            viewModel.login("17778060027", "ww123456")
+        }
+    }
+
+    private fun getArticle(viewModel: FlowViewModel) {
+        viewModel.article.observe(this, Observer {
+            binding.contentTextView.text = it
+        })
+        binding.contentTextView.setOnClickListener {
+            viewModel.getArticle()
+        }
+    }
+
+    private fun getArticleByFlow(viewModel: FlowViewModel) {
+        binding.contentTextView.setOnClickListener {
+            viewModel.getArticleByFlow().observe(this, Observer {
+                binding.contentTextView.text = it
+            })
+        }
+    }
+
+    private fun getArticleByCoroutine(viewModel: FlowViewModel) {
+        binding.contentTextView.setOnClickListener {
+            viewModel.getArticleByCoroutine().observe(this, Observer {
                 binding.contentTextView.text = it
             })
         }

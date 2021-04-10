@@ -21,7 +21,7 @@ import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.ArticleAdapter;
 import com.example.william.my.module.sample.bean.ArticleBean;
 import com.example.william.my.module.sample.bean.ArticleDetailBean;
-import com.example.william.my.module.sample.model.ArticlesViewModel;
+import com.example.william.my.module.sample.model.ArticleViewModel;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
@@ -34,7 +34,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
     private RecyclerView mRecyclerView;
     private SmartRefreshLayout mSmartRefreshLayout;
 
-    private ArticlesViewModel mViewModel;
+    private ArticleViewModel mViewModel;
 
     public static MvvmFragment newInstance() {
         MvvmFragment fragment = new MvvmFragment();
@@ -66,7 +66,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     private void subscribeToModel() {
 
-        mViewModel = new ViewModelProvider(this).get(ArticlesViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ArticleViewModel.class);
 
         // Observe comments
 //        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<List<ArticleDetailBean>>>() {
@@ -181,11 +181,11 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
         ToastUtils.showShort("无更多数据");
     }
 
-    private void showArticles(boolean isFirst, List<ArticleDetailBean> article) {
+    private void showArticles(boolean isFirst, List<ArticleDetailBean> articles) {
         if (isFirst) {
-            mAdapter.setNewInstance(article);
+            mAdapter.setNewInstance(articles);
         } else {
-            mAdapter.addData(article);
+            mAdapter.addData(articles);
         }
         mAdapter.notifyDataSetChanged();
     }

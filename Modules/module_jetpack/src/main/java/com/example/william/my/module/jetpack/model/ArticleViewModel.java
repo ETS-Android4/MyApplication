@@ -11,7 +11,7 @@ import androidx.paging.PagingSource;
 import androidx.paging.rxjava3.PagingRx;
 
 import com.example.william.my.module.bean.ArticleBean;
-import com.example.william.my.module.jetpack.source.DataPagingSource;
+import com.example.william.my.module.jetpack.source.ArticlePagingSource;
 
 import io.reactivex.rxjava3.core.Flowable;
 import kotlin.jvm.functions.Function0;
@@ -32,7 +32,7 @@ public class ArticleViewModel extends ViewModel {
                 new Function0<PagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean>>() {
                     @Override
                     public PagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean> invoke() {
-                        return new DataPagingSource();
+                        return new ArticlePagingSource();
                     }
                 });
         // cachedIn() 运算符使数据流可共享
@@ -52,7 +52,7 @@ public class ArticleViewModel extends ViewModel {
                 new Function0<PagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean>>() {
                     @Override
                     public PagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean> invoke() {
-                        return new DataPagingSource();
+                        return new ArticlePagingSource();
                     }
                 });
 

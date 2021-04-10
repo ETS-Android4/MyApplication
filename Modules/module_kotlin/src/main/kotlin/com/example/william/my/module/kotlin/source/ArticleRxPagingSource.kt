@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ExampleRxPagingSource : RxPagingSource<Int, ArticleBean.DataBean.ArticleDetailBean>() {
+class ArticleRxPagingSource : RxPagingSource<Int, ArticleBean.DataBean.ArticleDetailBean>() {
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean>> {
 

@@ -9,15 +9,15 @@ import androidx.lifecycle.ViewModel;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.sample.bean.ArticleBean;
 import com.example.william.my.module.sample.bean.ArticleDetailBean;
-import com.example.william.my.module.sample.repo.ArticlesRepository;
+import com.example.william.my.module.sample.repo.ArticleRepository;
 
 import java.util.List;
 
-public class ArticlesViewModel extends ViewModel {
+public class ArticleViewModel extends ViewModel {
 
     private int mPage;
 
-    private final ArticlesRepository articlesRepository;
+    private final ArticleRepository articleRepository;
 
     private final MutableLiveData<Integer> mutableArticleList;
 
@@ -27,16 +27,16 @@ public class ArticlesViewModel extends ViewModel {
 
     private final LiveData<RetrofitResponse<ArticleBean>> mObservableArticle;
 
-    public ArticlesViewModel() {
+    public ArticleViewModel() {
 
-        articlesRepository = ArticlesRepository.getInstance();
+        articleRepository = ArticleRepository.getInstance();
 
         mutableArticleList = new MutableLiveData<>();
 
         mObservableArticleList = Transformations.switchMap(mutableArticleList, new Function<Integer, LiveData<RetrofitResponse<List<ArticleDetailBean>>>>() {
             @Override
             public LiveData<RetrofitResponse<List<ArticleDetailBean>>> apply(Integer input) {
-                return articlesRepository.getArticleList(input);
+                return articleRepository.getArticleList(input);
             }
         });
 
@@ -45,7 +45,7 @@ public class ArticlesViewModel extends ViewModel {
         mObservableArticle = Transformations.switchMap(mutableArticle, new Function<Integer, LiveData<RetrofitResponse<ArticleBean>>>() {
             @Override
             public LiveData<RetrofitResponse<ArticleBean>> apply(Integer input) {
-                return articlesRepository.getArticle(input);
+                return articleRepository.getArticle(input);
             }
         });
     }

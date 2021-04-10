@@ -16,24 +16,24 @@ import com.example.william.my.module.sample.service.ArticleService;
 
 import java.util.List;
 
-public class ArticlesRepository implements ArticlesDataSource {
+public class ArticleRepository implements ArticleDataSource {
 
     private final ArticleService service;
 
-    private static ArticlesRepository INSTANCE;
+    private static ArticleRepository INSTANCE;
 
-    public static ArticlesRepository getInstance() {
+    public static ArticleRepository getInstance() {
         if (INSTANCE == null) {
-            synchronized (ArticlesRepository.class) {
+            synchronized (ArticleRepository.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new ArticlesRepository();
+                    INSTANCE = new ArticleRepository();
                 }
             }
         }
         return INSTANCE;
     }
 
-    private ArticlesRepository() {
+    private ArticleRepository() {
         service = RetrofitUtils.buildApi(ArticleService.class);
     }
 

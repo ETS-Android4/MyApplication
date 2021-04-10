@@ -8,14 +8,14 @@ import com.example.william.my.module.kotlin.api.KotlinApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ExamplePagingSource : PagingSource<Int, ArticleBean.DataBean.ArticleDetailBean>() {
+class ArticlePagingSource : PagingSource<Int, ArticleBean.DataBean.ArticleDetailBean>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean> {
         return try {
             // 如果未定义，从0开始刷新
             // Start refresh at page 0 if undefined.
             val nextPageNumber = params.key ?: 0
-            val response = buildApi().getArticles(nextPageNumber)
+            val response = buildApi().getArticle(nextPageNumber)
             LoadResult.Page(
                 data = response.data.datas,
                 prevKey = null, // Only paging forward.

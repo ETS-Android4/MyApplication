@@ -62,6 +62,9 @@ public class PagingActivity extends BaseActivity {
         });
     }
 
+    /**
+     * Paging Coroutines -> LiveData
+     */
     private void initArticleLiveData(ArticleViewModel viewModel) {
         viewModel.getArticleLiveData().observe(this, new Observer<PagingData<ArticleBean.DataBean.ArticleDetailBean>>() {
             @Override
@@ -71,6 +74,9 @@ public class PagingActivity extends BaseActivity {
         });
     }
 
+    /**
+     * Paging RxJava -> Flowable
+     */
     private void initArticleFlowable(ArticleViewModel viewModel) {
         mDisposable.add(viewModel.getArticleFlowable()
                 .to(autoDisposable(AndroidLifecycleScopeProvider.from(this)))

@@ -4,7 +4,7 @@ import com.example.william.my.module.sample.bean.ArticleDetailBean;
 
 import java.util.List;
 
-public interface ArticlesDataSource {
+public interface ArticleDataSource {
 
     interface LoadArticleCallback {
 

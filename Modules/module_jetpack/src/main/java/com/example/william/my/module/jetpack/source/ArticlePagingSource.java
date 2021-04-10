@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class DataPagingSource extends RxPagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean> {
+public class ArticlePagingSource extends RxPagingSource<Integer, ArticleBean.DataBean.ArticleDetailBean> {
 
     @NotNull
     @Override

@@ -8,8 +8,8 @@ import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.fragment.MvpFragment;
-import com.example.william.my.module.sample.presenter.ArticlesPresenter;
-import com.example.william.my.module.sample.repo.ArticlesRepository;
+import com.example.william.my.module.sample.presenter.ArticlePresenter;
+import com.example.william.my.module.sample.repo.ArticleRepository;
 
 @Route(path = ARouterPath.Sample.Sample_MVP)
 public class MvpActivity extends BaseActivity {
@@ -28,6 +28,6 @@ public class MvpActivity extends BaseActivity {
         }
 
         // Create the presenter
-        new ArticlesPresenter(ArticlesRepository.getInstance(), mvpFragment);
+        new ArticlePresenter(ArticleRepository.getInstance(), mvpFragment);
     }
 }
