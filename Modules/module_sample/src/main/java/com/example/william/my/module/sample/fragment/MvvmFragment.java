@@ -10,13 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.CollectionUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
+import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
+import com.example.william.my.core.network.retrofit.status.State;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.ArticleAdapter;
 import com.example.william.my.module.sample.bean.ArticleBean;
@@ -68,24 +72,39 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
         mViewModel = new ViewModelProvider(this).get(ArticleViewModel.class);
 
-        // Observe comments
-//        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<List<ArticleDetailBean>>>() {
-//            @Override
-//            public void onChanged(RetrofitResponse<List<ArticleDetailBean>> response) {
-//                if (response.getCode() == State.LOADING) {
-//                    showLoading();
-//                } else if (response.getCode() == State.SUCCESS) {
-//                    if (CollectionUtils.isEmpty(response.getData())) {
-//                        onDataNotAvailable(mViewModel.isFirst());
-//                    } else {
-//                        showArticles(mViewModel.isFirst(), response.getData());
-//                    }
-//                } else if (response.getCode() == State.ERROR) {
-//                    showToast(response.getMessage());
-//                }
-//            }
-//        });
-        // WithLoadingTipObserver comments
+        //getArticleListByObserver();
+        //getArticleListByWithLoadingTipObserver();
+
+        //getArticleByObserver();
+        getArticleByWithLoadingTipObserver();
+    }
+
+    /**
+     * getArticleList -> Observer
+     */
+    private void getArticleListByObserver() {
+        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<List<ArticleDetailBean>>>() {
+            @Override
+            public void onChanged(RetrofitResponse<List<ArticleDetailBean>> response) {
+                if (response.getCode() == State.LOADING) {
+                    showLoading();
+                } else if (response.getCode() == State.SUCCESS) {
+                    if (CollectionUtils.isEmpty(response.getData())) {
+                        onDataNotAvailable(mViewModel.isFirst());
+                    } else {
+                        showArticles(mViewModel.isFirst(), response.getData());
+                    }
+                } else if (response.getCode() == State.ERROR) {
+                    showToast(response.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * getArticleList -> WithLoadingTipObserver
+     */
+    private void getArticleListByWithLoadingTipObserver() {
         mViewModel.getArticleList().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<List<ArticleDetailBean>>() {
             @Override
             protected void onResponse(@NonNull List<ArticleDetailBean> response) {
@@ -102,30 +121,38 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
                 return super.onFailure(msg);
             }
         });
+    }
 
-        // Article
-        // Observe comments
-//        mViewModel.getArticle().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<ArticleBean>>() {
-//            @Override
-//            public void onChanged(RetrofitResponse<ArticleBean> response) {
-//                if (response.getCode() == State.LOADING) {
-//                    showLoading();
-//                } else if (response.getCode() == State.SUCCESS) {
-//                    if (ObjectUtils.isNotEmpty(response.getData())) {
-//                        if (CollectionUtils.isEmpty(response.getData().getDatas())) {
-//                            onDataNotAvailable(response.getData().getCurPage() == 1);
-//                        } else {
-//                            showArticles(response.getData().getCurPage() == 1, response.getData().getDatas());
-//                        }
-//                    } else {
-//                        showToast(response.getMessage());
-//                    }
-//                } else if (response.getCode() == State.ERROR) {
-//                    showToast(response.getMessage());
-//                }
-//            }
-//        });
-        // WithLoadingTipObserver comments
+    /**
+     * getArticle -> Observer
+     */
+    private void getArticleByObserver() {
+        mViewModel.getArticle().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<ArticleBean>>() {
+            @Override
+            public void onChanged(RetrofitResponse<ArticleBean> response) {
+                if (response.getCode() == State.LOADING) {
+                    showLoading();
+                } else if (response.getCode() == State.SUCCESS) {
+                    if (ObjectUtils.isNotEmpty(response.getData())) {
+                        if (CollectionUtils.isEmpty(response.getData().getDatas())) {
+                            onDataNotAvailable(response.getData().getCurPage() == 1);
+                        } else {
+                            showArticles(response.getData().getCurPage() == 1, response.getData().getDatas());
+                        }
+                    } else {
+                        showToast(response.getMessage());
+                    }
+                } else if (response.getCode() == State.ERROR) {
+                    showToast(response.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * getArticle -> WithLoadingTipObserver
+     */
+    private void getArticleByWithLoadingTipObserver() {
         mViewModel.getArticle().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<ArticleBean>() {
             @Override
             protected void onResponse(@NonNull ArticleBean response) {
