@@ -34,9 +34,9 @@ public class BindActivity extends BaseActivity {
 
         setViewBinding();
 
-        //setDataBinding();
+        //setDataBindingByLiveData();
 
-        //setDataBinding2();
+        //setDataBindingByObservable();
     }
 
     /**
@@ -56,7 +56,7 @@ public class BindActivity extends BaseActivity {
     /**
      * DataBinding -> BindLiveDataViewModel -> LiveData
      */
-    private void setDataBinding() {
+    private void setDataBindingByLiveData() {
         // Obtain ViewModel from ViewModelProviders
         BindLiveDataViewModel mViewModel = new ViewModelProvider(this).get(BindLiveDataViewModel.class);
 
@@ -71,9 +71,9 @@ public class BindActivity extends BaseActivity {
     }
 
     /**
-     * DataBinding -> BindObservableViewModel ->Observable
+     * DataBinding -> BindObservableViewModel -> Observable
      */
-    private void setDataBinding2() {
+    private void setDataBindingByObservable() {
         // An alternative ViewModel using Observable fields and @Bindable properties can be used:
         BindObservableViewModel mObsViewModel = new ViewModelProvider(this).get(BindObservableViewModel.class);
 
