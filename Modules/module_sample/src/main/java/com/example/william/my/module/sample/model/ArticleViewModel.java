@@ -71,6 +71,9 @@ public class ArticleViewModel extends ViewModel {
         return mPage == 0;
     }
 
+    /**
+     * Expose the LiveData Comments query so the UI can observe it.
+     */
     public LiveData<RetrofitResponse<ArticleBean>> getArticle() {
         return mObservableArticle;
     }

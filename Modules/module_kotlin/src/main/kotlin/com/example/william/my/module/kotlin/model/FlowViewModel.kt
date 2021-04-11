@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-
 class FlowViewModel : ViewModel() {
 
     private val _login = MutableLiveData<String>()
