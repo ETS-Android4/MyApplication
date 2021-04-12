@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.module.bean.ArticleBean;
+import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.jetpack.R;
 import com.example.william.my.module.jetpack.adapter.PagingAdapter;
 import com.example.william.my.module.jetpack.comparator.ArticleComparator;
@@ -66,9 +66,9 @@ public class PagingActivity extends BaseActivity {
      * Paging Coroutines -> LiveData
      */
     private void initArticleLiveData(ArticleViewModel viewModel) {
-        viewModel.getArticleLiveData().observe(this, new Observer<PagingData<ArticleBean.DataBean.ArticleDetailBean>>() {
+        viewModel.getArticleLiveData().observe(this, new Observer<PagingData<ArticleDetailBean>>() {
             @Override
-            public void onChanged(PagingData<ArticleBean.DataBean.ArticleDetailBean> pagingData) {
+            public void onChanged(PagingData<ArticleDetailBean> pagingData) {
                 mPagingAdapter.submitData(getLifecycle(), pagingData);
             }
         });
@@ -80,9 +80,9 @@ public class PagingActivity extends BaseActivity {
     private void initArticleFlowable(ArticleViewModel viewModel) {
         mDisposable.add(viewModel.getArticleFlowable()
                 .to(autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-                .subscribe(new Consumer<PagingData<ArticleBean.DataBean.ArticleDetailBean>>() {
+                .subscribe(new Consumer<PagingData<ArticleDetailBean>>() {
                     @Override
-                    public void accept(PagingData<ArticleBean.DataBean.ArticleDetailBean> pagingData) throws Throwable {
+                    public void accept(PagingData<ArticleDetailBean> pagingData) throws Throwable {
                         mPagingAdapter.submitData(getLifecycle(), pagingData);
                     }
                 }));

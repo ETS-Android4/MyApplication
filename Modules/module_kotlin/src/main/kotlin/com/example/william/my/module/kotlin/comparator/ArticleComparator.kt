@@ -1,21 +1,21 @@
 package com.example.william.my.module.kotlin.comparator
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.william.my.module.bean.ArticleBean
+import com.example.william.my.module.bean.ArticleDetailBean
 
-class ArticleComparator : DiffUtil.ItemCallback<ArticleBean.DataBean.ArticleDetailBean>() {
+class ArticleComparator : DiffUtil.ItemCallback<ArticleDetailBean>() {
 
     override fun areItemsTheSame(
-        oldItem: ArticleBean.DataBean.ArticleDetailBean,
-        newItem: ArticleBean.DataBean.ArticleDetailBean
+        oldItem: ArticleDetailBean,
+        newItem: ArticleDetailBean
     ): Boolean {
         // Id is unique.
         return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: ArticleBean.DataBean.ArticleDetailBean,
-        newItem: ArticleBean.DataBean.ArticleDetailBean
+        oldItem: ArticleDetailBean,
+        newItem: ArticleDetailBean
     ): Boolean {
         return newItem.id == oldItem.id
     }

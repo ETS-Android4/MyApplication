@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.william.my.module.bean.ArticleBean
+import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.kotlin.databinding.KtItemRecycleBinding
 
-class ArticleAdapter(diffCallback: DiffUtil.ItemCallback<ArticleBean.DataBean.ArticleDetailBean>) :
-    PagingDataAdapter<ArticleBean.DataBean.ArticleDetailBean, ArticleAdapter.ViewHolder>(
+class ArticleAdapter(diffCallback: DiffUtil.ItemCallback<ArticleDetailBean>) :
+    PagingDataAdapter<ArticleDetailBean, ArticleAdapter.ViewHolder>(
         diffCallback
     ) {
 

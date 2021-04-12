@@ -2,31 +2,31 @@ package com.example.william.my.module.kotlin.source
 
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
-import com.example.william.my.module.base.Urls
+import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.bean.ArticleBean
+import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.kotlin.api.KotlinApi
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.functions.Function
 import io.reactivex.rxjava3.schedulers.Schedulers
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
-class ArticleRxPagingSource : RxPagingSource<Int, ArticleBean.DataBean.ArticleDetailBean>() {
+class ArticleRxPagingSource : RxPagingSource<Int, ArticleDetailBean>() {
 
-    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean>> {
+    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, ArticleDetailBean>> {
 
         // 如果未定义，从0开始刷新
         // Start refresh at page 0 if undefined.
         val nextPageNumber = params.key ?: 0
 
-        return buildApi().getArticlesSingle(nextPageNumber)
+        val api = RetrofitUtils.buildApi(KotlinApi::class.java)
+
+        return api.getArticlesSingle(nextPageNumber)
             .subscribeOn(Schedulers.io())
             .map(ReturnLoadResult())
             .onErrorReturn(ReturnError())
     }
 
-    override fun getRefreshKey(state: PagingState<Int, ArticleBean.DataBean.ArticleDetailBean>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, ArticleDetailBean>): Int? {
         // Try to find the page key of the closest page to anchorPosition, from
         // either the prevKey or the nextKey, but you need to handle nullability
         // here:
@@ -41,8 +41,8 @@ class ArticleRxPagingSource : RxPagingSource<Int, ArticleBean.DataBean.ArticleDe
     }
 
     private class ReturnLoadResult :
-        Function<ArticleBean, LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean>> {
-        override fun apply(t: ArticleBean): LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean> {
+        Function<ArticleBean, LoadResult<Int, ArticleDetailBean>> {
+        override fun apply(t: ArticleBean): LoadResult<Int, ArticleDetailBean> {
             return LoadResult.Page(
                 data = t.data.datas,
                 prevKey = null, // Only paging forward.
@@ -52,18 +52,9 @@ class ArticleRxPagingSource : RxPagingSource<Int, ArticleBean.DataBean.ArticleDe
     }
 
     private class ReturnError :
-        Function<Throwable, LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean>> {
-        override fun apply(throwable: Throwable): LoadResult<Int, ArticleBean.DataBean.ArticleDetailBean> {
+        Function<Throwable, LoadResult<Int, ArticleDetailBean>> {
+        override fun apply(throwable: Throwable): LoadResult<Int, ArticleDetailBean> {
             return LoadResult.Error(throwable)
         }
-    }
-
-    private fun buildApi(): KotlinApi {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(Urls.baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .build()
-        return retrofit.create(KotlinApi::class.java)
     }
 }

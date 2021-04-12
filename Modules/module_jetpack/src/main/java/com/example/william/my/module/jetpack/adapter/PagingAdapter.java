@@ -10,14 +10,14 @@ import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.module.bean.ArticleBean;
+import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.jetpack.R;
 
 import org.jetbrains.annotations.NotNull;
 
-public class PagingAdapter extends PagingDataAdapter<ArticleBean.DataBean.ArticleDetailBean, RecyclerView.ViewHolder> {
+public class PagingAdapter extends PagingDataAdapter<ArticleDetailBean, RecyclerView.ViewHolder> {
 
-    public PagingAdapter(@NotNull DiffUtil.ItemCallback<ArticleBean.DataBean.ArticleDetailBean> diffCallback) {
+    public PagingAdapter(@NotNull DiffUtil.ItemCallback<ArticleDetailBean> diffCallback) {
         super(diffCallback);
     }
 
@@ -29,7 +29,7 @@ public class PagingAdapter extends PagingDataAdapter<ArticleBean.DataBean.Articl
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ArticleBean.DataBean.ArticleDetailBean articleDetailBean = getItem(position);
+        ArticleDetailBean articleDetailBean = getItem(position);
         ((ViewHolder) holder).mTextView.setText(articleDetailBean == null ? "" : position + ". " + articleDetailBean.getTitle());
     }
 

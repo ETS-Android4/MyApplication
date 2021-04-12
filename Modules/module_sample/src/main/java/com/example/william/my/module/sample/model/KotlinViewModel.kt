@@ -1,7 +1,7 @@
 package com.example.william.my.module.sample.model
 
 import androidx.lifecycle.*
-import com.example.william.my.module.sample.repo.KtArticleDataSource
+import com.example.william.my.module.sample.repo.KtArticleRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
@@ -9,9 +9,7 @@ import java.util.*
 /**
  * Showcases different patterns using the liveData coroutines builder.
  */
-class LiveDataViewModel(
-    private val articleDataSource: KtArticleDataSource
-) : ViewModel() {
+class LiveDataViewModel(private val articleDataSource: KtArticleRepository) : ViewModel() {
 
     // Exposed LiveData from a function that returns a LiveData generated with a liveData builder
     val currentTime = articleDataSource.getCurrentTime()
@@ -20,12 +18,6 @@ class LiveDataViewModel(
     val currentTimeTransformed = currentTime.switchMap {
         // timeStampToTime is a suspend function so we need to call it from a coroutine.
         liveData { emit(timeStampToTime(it)) }
-    }
-
-    // Exposed liveData that emits and single value and subsequent values from another source.
-    val currentWeather: LiveData<String> = liveData {
-        emit(LOADING_STRING)
-        emitSource(articleDataSource.fetchWeather())
     }
 
     // Exposed cached value in the data source that can be updated later on
@@ -59,7 +51,7 @@ class LiveDataViewModel(
  */
 object LiveDataVMFactory : ViewModelProvider.Factory {
 
-    private val dataSource = KtArticleDataSource()
+    private val dataSource = KtArticleRepository()
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

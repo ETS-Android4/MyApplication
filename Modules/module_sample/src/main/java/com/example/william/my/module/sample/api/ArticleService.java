@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.service;
+package com.example.william.my.module.sample.api;
 
 import com.example.william.my.core.network.retrofit.api.Header;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;

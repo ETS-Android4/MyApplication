@@ -10,9 +10,9 @@ import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
+import com.example.william.my.module.sample.api.ArticleService;
 import com.example.william.my.module.sample.bean.ArticleBean;
 import com.example.william.my.module.sample.bean.ArticleDetailBean;
-import com.example.william.my.module.sample.service.ArticleService;
 
 import java.util.List;
 
