@@ -11,8 +11,8 @@ import com.example.william.my.module.sample.databinding.SampleLayoutBindRecycler
 import com.example.william.my.module.sample.model.LiveDataVMFactory
 import com.example.william.my.module.sample.model.LiveDataViewModel
 
-@Route(path = ARouterPath.Sample.Sample_Kotlin_Flow)
-class KotlinFlowActivity : AppCompatActivity() {
+@Route(path = ARouterPath.Sample.Sample_Kotlin_Bind)
+class KtBindActivity : AppCompatActivity() {
 
     // Obtain ViewModel
     private val mViewModel: LiveDataViewModel by viewModels {

@@ -1,27 +1,20 @@
 package com.example.william.my.module.sample.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.viewModelScope
-import com.example.william.my.module.sample.repo.DataSource
-import com.example.william.my.module.sample.repo.DefaultDataSource
-import kotlinx.coroutines.Dispatchers
+import androidx.lifecycle.*
+import com.example.william.my.module.sample.repo.KtArticleDataSource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.Date
+import java.util.*
 
 /**
  * Showcases different patterns using the liveData coroutines builder.
  */
 class LiveDataViewModel(
-    private val dataSource: DataSource
+    private val articleDataSource: KtArticleDataSource
 ) : ViewModel() {
 
     // Exposed LiveData from a function that returns a LiveData generated with a liveData builder
-    val currentTime = dataSource.getCurrentTime()
+    val currentTime = articleDataSource.getCurrentTime()
 
     // Coroutines inside a transformation
     val currentTimeTransformed = currentTime.switchMap {
@@ -32,17 +25,17 @@ class LiveDataViewModel(
     // Exposed liveData that emits and single value and subsequent values from another source.
     val currentWeather: LiveData<String> = liveData {
         emit(LOADING_STRING)
-        emitSource(dataSource.fetchWeather())
+        emitSource(articleDataSource.fetchWeather())
     }
 
     // Exposed cached value in the data source that can be updated later on
-    val cachedValue = dataSource.cachedData
+    val cachedValue = articleDataSource.cachedData
 
     // Called when the user clicks on the "FETCH NEW DATA" button. Updates value in data source.
     fun onRefresh() {
         // Launch a coroutine that reads from a remote data source and updates cache
         viewModelScope.launch {
-            dataSource.fetchNewData()
+            articleDataSource.fetchNewData()
         }
     }
 
@@ -61,11 +54,12 @@ class LiveDataViewModel(
 
 
 /**
+ * 自定义实例，多参构造
  * Factory for [LiveDataViewModel].
  */
 object LiveDataVMFactory : ViewModelProvider.Factory {
 
-    private val dataSource = DefaultDataSource(Dispatchers.IO)
+    private val dataSource = KtArticleDataSource()
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

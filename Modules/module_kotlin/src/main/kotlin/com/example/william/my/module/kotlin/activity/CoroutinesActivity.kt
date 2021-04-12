@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.module.kotlin.databinding.KLayoutResponseBinding
+import com.example.william.my.module.kotlin.databinding.KtLayoutResponseBinding
 import com.example.william.my.module.kotlin.utils.ThreadUtils
 import kotlinx.coroutines.*
 
@@ -17,12 +17,12 @@ import kotlinx.coroutines.*
  */
 class CoroutinesActivity : BaseActivity() {
 
-    lateinit var binding: KLayoutResponseBinding
+    lateinit var binding: KtLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KLayoutResponseBinding.inflate(layoutInflater)
+        binding = KtLayoutResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         lifecycleScope.launchWhenCreated {

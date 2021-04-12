@@ -3,7 +3,7 @@ package com.example.william.my.module.kotlin.activity
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.module.kotlin.databinding.KLayoutResponseBinding
+import com.example.william.my.module.kotlin.databinding.KtLayoutResponseBinding
 import com.example.william.my.module.kotlin.datastore.ExamplePreferenceDataStore
 import com.example.william.my.module.kotlin.datastore.ExampleProtoDataStore
 import com.example.william.my.module.kotlin.utils.DataStoreUtils
@@ -28,12 +28,12 @@ class DataStoreActivity : BaseActivity() {
 
     private val protoDataStore = ExampleProtoDataStore(this)
 
-    private lateinit var binding: KLayoutResponseBinding
+    private lateinit var binding: KtLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KLayoutResponseBinding.inflate(layoutInflater)
+        binding = KtLayoutResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initCounter()

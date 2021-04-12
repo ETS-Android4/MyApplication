@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.module.kotlin.databinding.KLayoutResponseBinding
+import com.example.william.my.module.kotlin.databinding.KtLayoutResponseBinding
 import com.example.william.my.module.kotlin.model.FlowViewModel
 import com.example.william.my.module.router.ARouterPath
 
@@ -16,12 +16,12 @@ import com.example.william.my.module.router.ARouterPath
 @Route(path = ARouterPath.Kotlin.Kotlin_FLow)
 class FlowActivity : BaseActivity() {
 
-    lateinit var binding: KLayoutResponseBinding
+    lateinit var binding: KtLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KLayoutResponseBinding.inflate(layoutInflater)
+        binding = KtLayoutResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val viewModel = ViewModelProvider(this).get(FlowViewModel::class.java)

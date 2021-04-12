@@ -16,9 +16,7 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/basics_btn_height"
-            android:onClick="@{() -> viewModel.onRefresh()}"
-            android:text="@{Long.toString(viewModel.currentTime)}" />
+            android:layout_height="@dimen/basics_btn_height" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView"

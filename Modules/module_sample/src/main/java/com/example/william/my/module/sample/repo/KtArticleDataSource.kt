@@ -3,7 +3,6 @@ package com.example.william.my.module.sample.repo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -12,12 +11,12 @@ import kotlinx.coroutines.withContext
 /**
  * A source of data for [LiveDataViewModel], showcasing different LiveData + coroutines patterns.
  */
-class DefaultDataSource(private val ioDispatcher: CoroutineDispatcher) : DataSource {
+class KtArticleDataSource {
 
     /**
      * LiveData builder generating a value that will be transformed.
      */
-    override fun getCurrentTime(): LiveData<Long> =
+    fun getCurrentTime(): LiveData<Long> =
         liveData {
             while (true) {
                 emit(System.currentTimeMillis())
@@ -32,7 +31,7 @@ class DefaultDataSource(private val ioDispatcher: CoroutineDispatcher) : DataSou
     // Exposes a LiveData of changing weather conditions, every 2 seconds.
     private val weatherConditions = listOf("Sunny", "Cloudy", "Rainy", "Stormy", "Snowy")
 
-    override fun fetchWeather(): LiveData<String> = liveData {
+    fun fetchWeather(): LiveData<String> = liveData {
         var counter = 0
         while (true) {
             counter++
@@ -48,10 +47,10 @@ class DefaultDataSource(private val ioDispatcher: CoroutineDispatcher) : DataSou
 
     // Cache of a data point that is exposed to VM
     private val _cachedData = MutableLiveData("This is old data")
-    override val cachedData: LiveData<String> = _cachedData
+    val cachedData: LiveData<String> = _cachedData
 
     // Called when the cache needs to be refreshed. Must be called from coroutine.
-    override suspend fun fetchNewData() {
+    suspend fun fetchNewData() {
         // Force Main thread
         withContext(Dispatchers.Main) {
             _cachedData.value = "Fetching new data..."
@@ -61,8 +60,9 @@ class DefaultDataSource(private val ioDispatcher: CoroutineDispatcher) : DataSou
 
     // Fetches new data in the background. Must be called from coroutine so it's scoped correctly.
     private var counter = 0
+
     // Using ioDispatcher because the function simulates a long and expensive operation.
-    private suspend fun simulateNetworkDataFetch(): String = withContext(ioDispatcher) {
+    private suspend fun simulateNetworkDataFetch(): String = withContext(Dispatchers.IO) {
         delay(3000)
         counter++
         "New data from request #$counter"

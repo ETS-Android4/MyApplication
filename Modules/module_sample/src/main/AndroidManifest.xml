@@ -6,7 +6,8 @@
         <activity android:name=".SampleActivity" />
         <activity android:name=".activity.MvpActivity" />
         <activity android:name=".activity.MvvmActivity" />
-        <activity android:name=".activity.KotlinFlowActivity" />
+        <activity android:name=".activity.KtBindActivity" />
+        <activity android:name=".activity.KtFlowActivity" />
     </application>
 
 </manifest>

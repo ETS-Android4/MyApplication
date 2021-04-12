@@ -14,7 +14,7 @@ android {
             }
         }
     }
-    resourcePrefix "k_"
+    resourcePrefix "kt_"
 }
 
 dependencies {

@@ -12,7 +12,7 @@ import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.kotlin.adapter.ArticleAdapter
 import com.example.william.my.module.kotlin.comparator.ArticleComparator
-import com.example.william.my.module.kotlin.databinding.KActivityPagingBinding
+import com.example.william.my.module.kotlin.databinding.KtActivityPagingBinding
 import com.example.william.my.module.kotlin.holder.ExampleLoadStateAdapter
 import com.example.william.my.module.kotlin.model.PagingViewModel
 import com.example.william.my.module.router.ARouterPath
@@ -32,12 +32,12 @@ class PagingActivity : BaseActivity() {
 
     private val mDisposable = CompositeDisposable()
 
-    lateinit var binding: KActivityPagingBinding
+    lateinit var binding: KtActivityPagingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KActivityPagingBinding.inflate(layoutInflater)
+        binding = KtActivityPagingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //val viewModel by viewModels<ExampleViewModel>()

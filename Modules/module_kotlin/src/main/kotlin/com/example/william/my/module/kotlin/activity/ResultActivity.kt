@@ -9,7 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.kotlin.contract.ResultContract
-import com.example.william.my.module.kotlin.databinding.KLayoutResponseBinding
+import com.example.william.my.module.kotlin.databinding.KtLayoutResponseBinding
 import com.example.william.my.module.router.ARouterPath
 
 /**
@@ -18,12 +18,12 @@ import com.example.william.my.module.router.ARouterPath
 @Route(path = ARouterPath.Kotlin.Kotlin_Result)
 class ResultActivity : ComponentActivity() {
 
-    lateinit var binding: KLayoutResponseBinding
+    lateinit var binding: KtLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KLayoutResponseBinding.inflate(layoutInflater)
+        binding = KtLayoutResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.contentTextView.setOnClickListener {

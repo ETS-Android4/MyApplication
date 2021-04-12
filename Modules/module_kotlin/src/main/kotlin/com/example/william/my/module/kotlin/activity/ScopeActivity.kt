@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.kotlin.data.LoginData
-import com.example.william.my.module.kotlin.databinding.KActivityKotlinBinding
+import com.example.william.my.module.kotlin.databinding.KtActivityPagingBinding
 import com.google.gson.Gson
 
 /**
@@ -12,7 +12,7 @@ import com.google.gson.Gson
  */
 class ScopeActivity : BaseActivity() {
 
-    private lateinit var binding: KActivityKotlinBinding
+    private lateinit var binding: KtActivityPagingBinding
 
     private var string: String? = null
     private var arrayList: ArrayList<String>? = null
@@ -20,7 +20,7 @@ class ScopeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KActivityKotlinBinding.inflate(layoutInflater)
+        binding = KtActivityPagingBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 

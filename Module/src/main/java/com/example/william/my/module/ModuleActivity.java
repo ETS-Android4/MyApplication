@@ -79,7 +79,6 @@ public class ModuleActivity extends BaseListActivity {
         mMap.put("NetWorkActivity", ARouterPath.NetWork.NetWork);
         mMap.put("CustomViewActivity", ARouterPath.CustomView.CustomView);
 
-        mMap.put("SampleActivity", ARouterPath.Sample.Sample);
         mMap.put("JetPackActivity", ARouterPath.JetPack.JetPack);
         mMap.put("OpenSourceActivity", ARouterPath.OpenSource.OpenSource);
 
@@ -88,6 +87,7 @@ public class ModuleActivity extends BaseListActivity {
 
         //Kotlin
         mMap.put("KotlinActivity", ARouterPath.Kotlin.Kotlin);
+        mMap.put("SampleActivity", ARouterPath.Sample.Sample);
 
         //Flutter
         //mMap.put("Flutter", "Flutter");

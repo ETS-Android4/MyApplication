@@ -3,7 +3,7 @@ package com.example.william.my.module.kotlin.activity
 import android.os.Bundle
 import android.util.Log
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.module.kotlin.databinding.KLayoutResponseBinding
+import com.example.william.my.module.kotlin.databinding.KtLayoutResponseBinding
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
@@ -12,12 +12,12 @@ import kotlin.reflect.KProperty
  */
 class DelegatesActivity : BaseActivity() {
 
-    lateinit var binding: KLayoutResponseBinding
+    lateinit var binding: KtLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = KLayoutResponseBinding.inflate(layoutInflater)
+        binding = KtLayoutResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.contentTextView.setOnClickListener {
