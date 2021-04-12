@@ -21,10 +21,10 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.example.william.my.core.network.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.status.State;
+import com.example.william.my.module.bean.ArticleDataBean;
+import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.R;
 import com.example.william.my.module.sample.adapter.ArticleAdapter;
-import com.example.william.my.module.sample.bean.ArticleBean;
-import com.example.william.my.module.sample.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.model.ArticleViewModel;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -127,9 +127,9 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
      * getArticle -> Observer
      */
     private void getArticleByObserver() {
-        mViewModel.getArticle().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<ArticleBean>>() {
+        mViewModel.getArticle().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<ArticleDataBean>>() {
             @Override
-            public void onChanged(RetrofitResponse<ArticleBean> response) {
+            public void onChanged(RetrofitResponse<ArticleDataBean> response) {
                 if (response.getCode() == State.LOADING) {
                     showLoading();
                 } else if (response.getCode() == State.SUCCESS) {
@@ -153,9 +153,9 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
      * getArticle -> WithLoadingTipObserver
      */
     private void getArticleByWithLoadingTipObserver() {
-        mViewModel.getArticle().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<ArticleBean>() {
+        mViewModel.getArticle().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<ArticleDataBean>() {
             @Override
-            protected void onResponse(@NonNull ArticleBean response) {
+            protected void onResponse(@NonNull ArticleDataBean response) {
                 if (CollectionUtils.isEmpty(response.getDatas())) {
                     onDataNotAvailable(response.getCurPage() == 1);
                 } else {
@@ -174,8 +174,8 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
     @Override
     public void onResume() {
         super.onResume();
-        mViewModel.queryArticleList();
-        //mViewModel.queryArticle();
+        //mViewModel.queryArticleList();
+        mViewModel.queryArticle();
     }
 
     private void showLoading() {

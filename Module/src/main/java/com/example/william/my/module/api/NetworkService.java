@@ -1,4 +1,4 @@
-package com.example.william.my.module.service;
+package com.example.william.my.module.api;
 
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.base.Urls;

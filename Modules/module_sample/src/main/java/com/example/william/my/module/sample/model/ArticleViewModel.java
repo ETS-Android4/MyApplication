@@ -7,8 +7,8 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
-import com.example.william.my.module.sample.bean.ArticleBean;
-import com.example.william.my.module.sample.bean.ArticleDetailBean;
+import com.example.william.my.module.bean.ArticleDataBean;
+import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.repo.ArticleRepository;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class ArticleViewModel extends ViewModel {
 
     private final MutableLiveData<Integer> mutableArticle;
 
-    private final LiveData<RetrofitResponse<ArticleBean>> mObservableArticle;
+    private final LiveData<RetrofitResponse<ArticleDataBean>> mObservableArticle;
 
     public ArticleViewModel() {
 
@@ -42,9 +42,9 @@ public class ArticleViewModel extends ViewModel {
 
         mutableArticle = new MutableLiveData<>();
 
-        mObservableArticle = Transformations.switchMap(mutableArticle, new Function<Integer, LiveData<RetrofitResponse<ArticleBean>>>() {
+        mObservableArticle = Transformations.switchMap(mutableArticle, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
             @Override
-            public LiveData<RetrofitResponse<ArticleBean>> apply(Integer input) {
+            public LiveData<RetrofitResponse<ArticleDataBean>> apply(Integer input) {
                 return articleRepository.getArticle(input);
             }
         });
@@ -74,7 +74,7 @@ public class ArticleViewModel extends ViewModel {
     /**
      * Expose the LiveData Comments query so the UI can observe it.
      */
-    public LiveData<RetrofitResponse<ArticleBean>> getArticle() {
+    public LiveData<RetrofitResponse<ArticleDataBean>> getArticle() {
         return mObservableArticle;
     }
 

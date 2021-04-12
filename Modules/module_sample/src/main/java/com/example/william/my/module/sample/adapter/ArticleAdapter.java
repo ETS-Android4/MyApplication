@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.R;
-import com.example.william.my.module.sample.bean.ArticleDetailBean;
 
 public class ArticleAdapter extends BaseQuickAdapter<ArticleDetailBean, BaseViewHolder> {
 

@@ -4,11 +4,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.converter.RetrofitConverterFactory;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.activity.BaseResponseActivity;
+import com.example.william.my.module.api.NetworkService;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.service.NetworkService;
 import com.google.gson.Gson;
 
 import java.util.List;

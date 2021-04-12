@@ -10,9 +10,9 @@ import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
+import com.example.william.my.module.bean.ArticleDataBean;
+import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.api.ArticleService;
-import com.example.william.my.module.sample.bean.ArticleBean;
-import com.example.william.my.module.sample.bean.ArticleDetailBean;
 
 import java.util.List;
 
@@ -41,9 +41,9 @@ public class ArticleRepository implements ArticleDataSource {
     public void getArticleList(int page, LoadArticleCallback callback) {
 
         RetrofitUtils.buildObs(service.getArticleListCache(page))
-                .subscribe(new RetrofitObserver<RetrofitResponse<ArticleBean>>() {
+                .subscribe(new RetrofitObserver<RetrofitResponse<ArticleDataBean>>() {
                     @Override
-                    public void onResponse(RetrofitResponse<ArticleBean> response) {
+                    public void onResponse(RetrofitResponse<ArticleDataBean> response) {
                         if (ObjectUtils.isNotEmpty(response.getData()) &&
                                 CollectionUtils.isNotEmpty(response.getData().getDatas())) {
                             callback.onArticleLoaded(response.getData().getDatas());
@@ -65,9 +65,9 @@ public class ArticleRepository implements ArticleDataSource {
     public LiveData<RetrofitResponse<List<ArticleDetailBean>>> getArticleList(int page) {
         final MutableLiveData<RetrofitResponse<List<ArticleDetailBean>>> liveData = new MutableLiveData<>();
 
-        LiveDataCallback.LiveDataConvert<ArticleBean, List<ArticleDetailBean>> convert = new LiveDataCallback.LiveDataConvert<ArticleBean, List<ArticleDetailBean>>() {
+        LiveDataCallback.LiveDataConvert<ArticleDataBean, List<ArticleDetailBean>> convert = new LiveDataCallback.LiveDataConvert<ArticleDataBean, List<ArticleDetailBean>>() {
             @Override
-            public RetrofitResponse<List<ArticleDetailBean>> convert(RetrofitResponse<ArticleBean> data) throws Exception {
+            public RetrofitResponse<List<ArticleDetailBean>> convert(RetrofitResponse<ArticleDataBean> data) throws Exception {
                 if (ObjectUtils.isNotEmpty(data.getData()) &&
                         CollectionUtils.isNotEmpty(data.getData().getDatas())) {
                     return RetrofitResponse.success(data.getData().getDatas());
@@ -87,8 +87,8 @@ public class ArticleRepository implements ArticleDataSource {
     /**
      * ArticleBean
      */
-    public LiveData<RetrofitResponse<ArticleBean>> getArticle(int page) {
-        final MutableLiveData<RetrofitResponse<ArticleBean>> liveData = new MutableLiveData<>();
+    public LiveData<RetrofitResponse<ArticleDataBean>> getArticle(int page) {
+        final MutableLiveData<RetrofitResponse<ArticleDataBean>> liveData = new MutableLiveData<>();
 
         RetrofitUtils.buildLiveData(
                 service.getArticleList(page),

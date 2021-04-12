@@ -1,7 +1,7 @@
 package com.example.william.my.module.sample.repo
 
 import androidx.lifecycle.LiveData
-import com.example.william.my.module.sample.bean.ArticleBean
+import com.example.william.my.module.bean.ArticleBean
 import kotlinx.coroutines.flow.Flow
 
 interface KtArticleDataSource {

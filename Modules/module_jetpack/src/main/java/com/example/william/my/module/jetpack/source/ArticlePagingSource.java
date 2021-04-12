@@ -4,9 +4,9 @@ import androidx.paging.PagingState;
 import androidx.paging.rxjava3.RxPagingSource;
 
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
+import com.example.william.my.module.api.NetworkService;
 import com.example.william.my.module.bean.ArticleBean;
 import com.example.william.my.module.bean.ArticleDetailBean;
-import com.example.william.my.module.service.NetworkService;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

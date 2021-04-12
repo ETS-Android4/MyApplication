@@ -1,6 +1,6 @@
 package com.example.william.my.module.sample.presenter;
 
-import com.example.william.my.module.sample.bean.ArticleDetailBean;
+import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.contract.ArticleContract;
 import com.example.william.my.module.sample.repo.ArticleDataSource;
 import com.example.william.my.module.sample.repo.ArticleRepository;

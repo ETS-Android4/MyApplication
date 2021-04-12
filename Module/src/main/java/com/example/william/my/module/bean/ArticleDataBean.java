@@ -1,10 +1,10 @@
-package com.example.william.my.module.sample.bean;
+package com.example.william.my.module.bean;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ArticleBean {
+public class ArticleDataBean {
 
     @SerializedName("curPage")
     private int curPage;
@@ -37,5 +37,4 @@ public class ArticleBean {
     public void setDatas(List<ArticleDetailBean> datas) {
         this.datas = datas;
     }
-
 }

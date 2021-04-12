@@ -6,10 +6,10 @@ import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
+import com.example.william.my.module.api.NetworkService;
 import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.service.NetworkService;
 import com.google.gson.Gson;
 
 import java.util.List;

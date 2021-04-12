@@ -2,7 +2,7 @@ package com.example.william.my.module.sample.contract;
 
 import com.example.william.my.library.presenter.BasePresenter;
 import com.example.william.my.library.view.BaseView;
-import com.example.william.my.module.sample.bean.ArticleDetailBean;
+import com.example.william.my.module.bean.ArticleDetailBean;
 
 import java.util.List;
 

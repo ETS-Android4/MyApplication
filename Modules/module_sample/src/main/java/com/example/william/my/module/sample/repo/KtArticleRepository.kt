@@ -19,8 +19,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.example.william.my.module.base.Urls
+import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.sample.api.KtArticleService
-import com.example.william.my.module.sample.bean.ArticleBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

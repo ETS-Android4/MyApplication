@@ -9,10 +9,10 @@ import com.example.william.my.core.network.retrofit.interceptor.RetrofitIntercep
 import com.example.william.my.core.network.retrofit.listener.RetrofitRequestListener;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
 import com.example.william.my.module.activity.BaseResponseActivity;
+import com.example.william.my.module.api.NetworkService;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.FileIOUtilsService;
-import com.example.william.my.module.service.NetworkService;
 import com.google.gson.Gson;
 
 import java.io.File;
