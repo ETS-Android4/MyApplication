@@ -3,13 +3,12 @@ android {
     defaultConfig {
         //    javaCompileOptions {
         //        annotationProcessorOptions {
-        //            arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable",
-        //                         "eventBusIndex"    : 'com.example.william.my.module.open.MyModuleOpenEventBusIndex']
+        //            arguments += ["eventBusIndex"    : "com.example.william.my.module.open.MyModuleOpenEventBusIndex"]
         //        }
         //    }
         kapt {
             arguments {
-                arg("eventBusIndex", 'com.example.william.my.module.open.MyModuleOpenEventBusIndex')
+                arg("eventBusIndex", "com.example.william.my.module.open.MyModuleOpenEventBusIndex")
             }
         }
     }

@@ -2,15 +2,15 @@ android {
     defaultConfig {
         //javaCompileOptions {
         //    annotationProcessorOptions {
-        //        arguments = [AROUTER_MODULE_NAME  : project.getName(), AROUTER_GENERATE_DOC: "enable",
-        //                     "room.schemaLocation": "$projectDir/schemas".toString()]
+        //        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
         //    }
         //}
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas".toString())
-            }
-        }
+//        kapt {
+//            arguments {
+//                // 指定 schema 文件夹
+//                arg("room.schemaLocation", "$projectDir/schemas".toString())
+//            }
+//        }
     }
     resourcePrefix "jet_"
 }
