@@ -2,10 +2,11 @@ package com.example.william.my.module.bean;
 
 import androidx.annotation.Keep;
 
+import com.example.william.my.core.network.base.BaseBean;
 import com.google.gson.annotations.SerializedName;
 
 @Keep
-public class BannerDetailData {
+public class BannerDetailData extends BaseBean {
 
     @SerializedName("id")
     public int id;

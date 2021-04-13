@@ -1,8 +1,9 @@
 package com.example.william.my.module.bean;
 
+import com.example.william.my.core.network.base.BaseBean;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginUserBean {
+public class LoginUserBean extends BaseBean {
 
     @SerializedName("id")
     private String id;
