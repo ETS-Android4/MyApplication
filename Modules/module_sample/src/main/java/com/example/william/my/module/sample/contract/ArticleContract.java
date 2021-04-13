@@ -20,8 +20,8 @@ public interface ArticleContract {
 
     interface Presenter extends BasePresenter {
 
-        void queryArticleList();
+        void onRefreshArticleList();
 
-        void loadArticleList();
+        void onLoadMoreArticleList();
     }
 }

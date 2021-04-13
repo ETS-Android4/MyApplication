@@ -57,12 +57,12 @@ public class ArticleViewModel extends ViewModel {
         return mObservableArticleList;
     }
 
-    public void queryArticleList() {
+    public void onRefreshArticleList() {
         mPage = 0;
         mutableArticleList.postValue(mPage);
     }
 
-    public void loadArticleList() {
+    public void onLoadMoreArticleList() {
         mPage++;
         mutableArticleList.postValue(mPage);
     }
@@ -78,12 +78,12 @@ public class ArticleViewModel extends ViewModel {
         return mObservableArticle;
     }
 
-    public void queryArticle() {
+    public void onRefreshArticle() {
         mPage = 0;
         mutableArticle.postValue(mPage);
     }
 
-    public void loadArticle() {
+    public void onLoadMoreArticle() {
         mPage++;
         mutableArticle.postValue(mPage);
     }

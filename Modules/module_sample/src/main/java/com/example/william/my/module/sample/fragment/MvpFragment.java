@@ -66,7 +66,7 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.queryArticleList();
+        mPresenter.onRefreshArticleList();
     }
 
     @Override
@@ -103,13 +103,13 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        mPresenter.loadArticleList();
+        mPresenter.onLoadMoreArticleList();
         mSmartRefreshLayout.finishLoadMore(1000);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mPresenter.queryArticleList();
+        mPresenter.onRefreshArticleList();
         mSmartRefreshLayout.finishRefresh(1000);
     }
 }

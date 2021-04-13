@@ -23,13 +23,13 @@ public class ArticlePresenter implements ArticleContract.Presenter {
     }
 
     @Override
-    public void queryArticleList() {
+    public void onRefreshArticleList() {
         mPage = 0;
         queryArticleList(mPage);
     }
 
     @Override
-    public void loadArticleList() {
+    public void onLoadMoreArticleList() {
         mPage++;
         queryArticleList(mPage);
     }

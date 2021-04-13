@@ -175,7 +175,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
     public void onResume() {
         super.onResume();
         //mViewModel.queryArticleList();
-        mViewModel.queryArticle();
+        mViewModel.onRefreshArticle();
     }
 
     private void showLoading() {
@@ -219,15 +219,15 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        //mViewModel.loadArticleList();
-        mViewModel.loadArticle();
+        //mViewModel.onLoadMoreArticleList();
+        mViewModel.onLoadMoreArticle();
         mSmartRefreshLayout.finishLoadMore(1000);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        //mViewModel.queryArticleList();
-        mViewModel.queryArticle();
+        //mViewModel.onRefreshArticleList();
+        mViewModel.onRefreshArticle();
         mSmartRefreshLayout.finishRefresh(1000);
     }
 }
