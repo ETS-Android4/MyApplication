@@ -1,7 +1,6 @@
 android {
     resourcePrefix "demo_"
 }
-
 dependencies {
     implementation project(path: ':librarys:lib_customview')
     implementation deps.localbroadcast

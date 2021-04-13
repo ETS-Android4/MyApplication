@@ -60,13 +60,13 @@ class ScopeActivity : BaseActivity() {
         // 1. 用于仅使用非空值执行代码块
         // 2. 引入作用域受限的局部变量以提高代码的可读性。
         val let: Unit = loginData.let { login ->
-            login.user.id = "001"
-            login.user.nickname = "nickname"
+            login.data.id = "001"
+            login.data.nickname = "nickname"
         }
 
         val let2: String = loginData.let { login ->
-            login.user.id = "001"
-            login.user.nickname = "nickname"
+            login.data.id = "001"
+            login.data.nickname = "nickname"
             "let2"
         }
         Log.e(TAG, "let $let2")
@@ -74,20 +74,20 @@ class ScopeActivity : BaseActivity() {
         // with
         // 对于这个对象，执行以下操作
         val with: Unit = with(loginData) {
-            user.id = "004"
-            user.nickname = "nickname"
+            data.id = "004"
+            data.nickname = "nickname"
         }
 
         // run
         // 对于这个对象，执行以下操作
         val run: Unit = loginData.run {
-            user.id = "002"
-            user.nickname = "nickname"
+            data.id = "002"
+            data.nickname = "nickname"
         }
 
         val run2: String = loginData.run {
-            user.id = "003"
-            user.nickname = "nickname"
+            data.id = "003"
+            data.nickname = "nickname"
             "run2"
         }
         Log.e(TAG, "run $run2")
@@ -95,16 +95,16 @@ class ScopeActivity : BaseActivity() {
         // also
         // 上下文对象 作为 lambda 表达式参数（it）来访问。 返回值是上下文对象本身。
         val alsoData: LoginData = loginData.also { login ->
-            login.user.id = "005"
-            login.user.nickname = "nickname"
+            login.data.id = "005"
+            login.data.nickname = "nickname"
         }
         Log.e("TAG", Gson().toJson(alsoData))
 
         // apply
         // 上下文对象 作为接收者（this）来访问。 返回值 是上下文对象本身。
         val applyData: LoginData = loginData.apply {
-            user.id = "006"
-            user.nickname = "nickname"
+            data.id = "006"
+            data.nickname = "nickname"
         }
         Log.e("TAG", Gson().toJson(applyData))
     }

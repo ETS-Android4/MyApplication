@@ -5,16 +5,15 @@ android {
         //        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
         //    }
         //}
-//        kapt {
-//            arguments {
-//                // 指定 schema 文件夹
-//                arg("room.schemaLocation", "$projectDir/schemas".toString())
-//            }
-//        }
     }
     resourcePrefix "jet_"
 }
-
+kapt {
+    arguments {
+        // 指定 schema 文件夹
+        arg("room.schemaLocation", "$projectDir/schemas".toString())
+    }
+}
 dependencies {
     implementation project(path: ':librarys:lib_network')
     //Retrofit

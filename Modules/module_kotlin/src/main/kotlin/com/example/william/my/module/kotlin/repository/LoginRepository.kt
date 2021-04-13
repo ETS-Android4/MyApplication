@@ -1,5 +1,6 @@
 package com.example.william.my.module.kotlin.repository
 
+import android.util.Log
 import com.example.william.my.module.base.Urls
 import com.example.william.my.module.kotlin.data.LoginData
 import com.example.william.my.module.kotlin.result.NetworkResult
@@ -53,6 +54,7 @@ class LoginRepository {
         }
         reader.close()
         val response = msg.toString()
+        Log.e("LoginRepository", response)
         return Gson().fromJson(response, LoginData::class.java)
     }
 }
