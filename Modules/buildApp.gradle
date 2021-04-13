@@ -24,8 +24,11 @@ android {
         //}
         kapt {
             arguments {
+                // 路由框架译配置
+                // module名称
                 arg("AROUTER_MODULE_NAME", project.getName())
-                arg("AROUTER_GENERATE_DOC": "enable")
+                // 是否生成路由文档，"enable"：生成文档，其他字符串不生成路由文档
+                //arg("AROUTER_GENERATE_DOC", "enable")
             }
         }
     }

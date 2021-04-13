@@ -8,9 +8,11 @@ import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.databinding.SampleLayoutRecyclerBinding
 import com.example.william.my.module.sample.model.LiveDataVMFactory
 import com.example.william.my.module.sample.model.LiveDataViewModel
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
 @Route(path = ARouterPath.Sample.Sample_Kotlin_Flow)
-class KtFlowActivity : AppCompatActivity() {
+class KtFlowActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     // Obtain ViewModel
     private val mViewModel: LiveDataViewModel by viewModels {
@@ -24,5 +26,14 @@ class KtFlowActivity : AppCompatActivity() {
 
         val binding = SampleLayoutRecyclerBinding.inflate(layoutInflater)
 
+        binding.smartRefreshLayout.setOnRefreshLoadMoreListener(this)
+    }
+
+    override fun onRefresh(refreshLayout: RefreshLayout) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLoadMore(refreshLayout: RefreshLayout) {
+        TODO("Not yet implemented")
     }
 }

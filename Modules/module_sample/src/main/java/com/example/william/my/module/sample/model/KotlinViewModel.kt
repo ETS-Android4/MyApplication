@@ -12,16 +12,16 @@ import java.util.*
 class LiveDataViewModel(private val articleDataSource: KtArticleRepository) : ViewModel() {
 
     // Exposed LiveData from a function that returns a LiveData generated with a liveData builder
-    val currentTime = articleDataSource.getCurrentTime()
+//    val currentTime: LiveData<Long> = articleDataSource.getCurrentTime()
 
     // Coroutines inside a transformation
-    val currentTimeTransformed = currentTime.switchMap {
-        // timeStampToTime is a suspend function so we need to call it from a coroutine.
-        liveData { emit(timeStampToTime(it)) }
-    }
+//    val currentTimeTransformed: LiveData<String> = currentTime.switchMap {
+//        // timeStampToTime is a suspend function so we need to call it from a coroutine.
+//        liveData { emit(timeStampToTime(it)) }
+//    }
 
     // Exposed cached value in the data source that can be updated later on
-    val cachedValue = articleDataSource.cachedData
+    val cachedValue = articleDataSource.article
 
     // Called when the user clicks on the "FETCH NEW DATA" button. Updates value in data source.
     fun onRefresh() {
@@ -36,11 +36,6 @@ class LiveDataViewModel(private val articleDataSource: KtArticleRepository) : Vi
         delay(500)  // Simulate long operation
         val date = Date(timestamp)
         return date.toString()
-    }
-
-    companion object {
-        // Real apps would use a wrapper on the result type to handle this.
-        const val LOADING_STRING = "Loading..."
     }
 }
 

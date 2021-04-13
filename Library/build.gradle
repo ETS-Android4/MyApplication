@@ -13,7 +13,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = ["eventBusIndex": 'com.example.william.my.library.MyEventBusIndex']
+                arguments = ["eventBusIndex": "com.example.william.my.library.MyEventBusIndex"]
             }
         }
     }

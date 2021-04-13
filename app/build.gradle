@@ -19,7 +19,7 @@ android {
         multiDexEnabled true//minSdkVersion小于21时，需启用dex分包支持
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
             }
         }
         //resConfig 'xxhdpi'
