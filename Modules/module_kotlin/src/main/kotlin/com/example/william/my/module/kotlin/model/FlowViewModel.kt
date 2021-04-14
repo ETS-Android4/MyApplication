@@ -46,7 +46,7 @@ class FlowViewModel : ViewModel() {
                 is NetworkResult.Loading -> {
                     _login.postValue("加载中……")
                 }
-                is NetworkResult.OK<LoginData> -> {
+                is NetworkResult.NetworkSuccess<LoginData> -> {
                     _login.postValue(Gson().toJson(result.data))
                 }
                 is NetworkResult.NetworkError -> {

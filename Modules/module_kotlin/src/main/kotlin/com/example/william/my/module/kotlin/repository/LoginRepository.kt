@@ -40,7 +40,7 @@ class LoginRepository {
             //setRequestProperty("Accept", "application/json")
             doOutput = true
             outputStream.write(jsonBody.toByteArray())
-            return NetworkResult.OK(parse(inputStream))
+            return NetworkResult.NetworkSuccess(parse(inputStream))
         }
         return NetworkResult.NetworkError(Exception("Cannot open HttpURLConnection"))
     }

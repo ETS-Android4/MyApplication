@@ -108,4 +108,24 @@ class ScopeActivity : BaseActivity() {
         }
         Log.e("TAG", Gson().toJson(applyData))
     }
+
+    /**
+     * 数据类
+     */
+    data class User(
+        var id: String,
+        var nickname: String
+    )
+
+    /**
+     * 密封类
+     * 枚举的拓展，不能被实例化，可以有多个实例，子类都必须要内嵌在密封类中
+     * 一种专门用来配合 when 语句使用的类，在使用 when 表达式时，不需要 else
+     */
+    sealed class Expr {
+        object NotANumber : Expr()
+        data class Const(val number: Double) : Expr()
+        data class Sum(val e1: Expr, val e2: Expr) : Expr()
+    }
+
 }
