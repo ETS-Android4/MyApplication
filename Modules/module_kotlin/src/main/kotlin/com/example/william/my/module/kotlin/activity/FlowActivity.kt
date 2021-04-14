@@ -18,6 +18,8 @@ class FlowActivity : BaseActivity() {
 
     lateinit var binding: KtLayoutResponseBinding
 
+    var b: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,31 +28,34 @@ class FlowActivity : BaseActivity() {
 
         val viewModel = ViewModelProvider(this).get(FlowViewModel::class.java)
 
-        //login(viewModel)
+        login(viewModel)
 
         getArticle(viewModel)
 
         //getArticleByFlow(viewModel)
 
         //getArticleByCoroutine(viewModel)
+
+        binding.contentTextView.setOnClickListener {
+            b = !b
+            if (b) {
+                viewModel.login("17778060027", "ww123456")
+            } else {
+                viewModel.getArticle()
+            }
+        }
     }
 
     private fun login(viewModel: FlowViewModel) {
         viewModel.login.observe(this, Observer {
             binding.contentTextView.text = it
         })
-        binding.contentTextView.setOnClickListener {
-            viewModel.login("17778060027", "ww123456")
-        }
     }
 
     private fun getArticle(viewModel: FlowViewModel) {
         viewModel.article.observe(this, Observer {
             binding.contentTextView.text = it
         })
-        binding.contentTextView.setOnClickListener {
-            viewModel.getArticle()
-        }
     }
 
     private fun getArticleByFlow(viewModel: FlowViewModel) {
