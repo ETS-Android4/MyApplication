@@ -16,7 +16,7 @@ import java.net.URL
 
 class LoginRepository {
 
-    // 将 协程 切换到 I/O 调度
+    // 将 协程 切换到 I/O 调度，确保主线程安全
     // Move the execution of the coroutine to the I/O dispatcher
     suspend fun login(jsonBody: String): NetworkResult<LoginData> = withContext(Dispatchers.IO) {
         //打印线程
