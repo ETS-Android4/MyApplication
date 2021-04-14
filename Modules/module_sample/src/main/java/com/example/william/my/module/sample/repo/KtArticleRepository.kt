@@ -19,10 +19,23 @@ class KtArticleRepository : KtArticleDataSource {
         }
     }
 
+    override suspend fun loadMoreData() {
+        withContext(Dispatchers.Main) {
+            _article.value = loadMoreArticle()
+        }
+    }
+
     private var counter = 0
 
     private suspend fun getArticle(): ArticleBean = withContext(Dispatchers.IO) {
         val api = RetrofitUtils.buildApi(KtArticleService::class.java)
+        counter = 0
+        api.getArticle(counter)
+    }
+
+    private suspend fun loadMoreArticle(): ArticleBean = withContext(Dispatchers.IO) {
+        val api = RetrofitUtils.buildApi(KtArticleService::class.java)
+        counter++
         api.getArticle(counter)
     }
 }

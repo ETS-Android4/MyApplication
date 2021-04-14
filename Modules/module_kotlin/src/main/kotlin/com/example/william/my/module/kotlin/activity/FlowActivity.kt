@@ -26,9 +26,9 @@ class FlowActivity : BaseActivity() {
 
         val viewModel = ViewModelProvider(this).get(FlowViewModel::class.java)
 
-        login(viewModel)
+        //login(viewModel)
 
-        //getArticle(viewModel)
+        getArticle(viewModel)
 
         //getArticleByFlow(viewModel)
 

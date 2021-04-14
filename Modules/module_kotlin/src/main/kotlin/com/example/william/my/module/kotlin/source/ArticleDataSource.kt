@@ -18,7 +18,7 @@ class ArticleDataSource {
 
         val article = api.getArticle(0)
         emit(article) // Emits the result of the request to the flow 向数据流发送请求结果
-        delay(3000) // Suspends the coroutine for some time 挂起一段时间
+        //delay(3000) // Suspends the coroutine for some time 挂起一段时间
     }
 }
 

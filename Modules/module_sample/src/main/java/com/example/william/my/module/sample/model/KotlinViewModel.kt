@@ -25,7 +25,9 @@ class LiveDataViewModel(private val articleDataSource: KtArticleRepository) : Vi
     }
 
     fun onLoadMore() {
-
+        viewModelScope.launch {
+            articleDataSource.loadMoreData()
+        }
     }
 }
 
