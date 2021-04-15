@@ -9,16 +9,13 @@ import com.example.william.my.module.sample.repo.KtArticleRepository
 import kotlinx.coroutines.launch
 
 /**
- * Showcases different patterns using the liveData coroutines builder.
+ * ViewModel 应创建协程
  */
 class LiveDataViewModel(private val articleDataSource: KtArticleRepository) : ViewModel() {
 
-    // Exposed cached value in the data source that can be updated later on
     val article: LiveData<ArticleBean> = articleDataSource.article
 
-    // Called when the user clicks on the "FETCH NEW DATA" button. Updates value in data source.
     fun onRefresh() {
-        // Launch a coroutine that reads from a remote data source and updates cache
         viewModelScope.launch {
             articleDataSource.fetchNewData()
         }

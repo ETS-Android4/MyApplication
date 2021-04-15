@@ -1,4 +1,4 @@
-package com.example.william.my.module.kotlin.repository
+package com.example.william.my.module.kotlin.repo
 
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.kotlin.source.ArticleDataSource
@@ -39,6 +39,4 @@ class ArticleRepository {
         article.data.datas = article.data.datas.take(1)
         return article
     }
-
-
 }

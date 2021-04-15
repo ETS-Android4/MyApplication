@@ -1,4 +1,4 @@
-package com.example.william.my.module.kotlin.repository
+package com.example.william.my.module.kotlin.repo
 
 import android.util.Log
 import com.example.william.my.module.base.Urls
