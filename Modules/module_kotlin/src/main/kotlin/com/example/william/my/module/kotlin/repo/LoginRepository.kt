@@ -26,8 +26,8 @@ class LoginRepository {
         ThreadUtils.isMainThread("login")
         // 阻塞网络请求
         // Blocking network request code
-        makeLoginRequest(jsonBody)
-        //makeLoginRequestRetrofit()
+        //makeLoginRequest(jsonBody)
+        makeLoginRequestRetrofit()
     }
 
     private suspend fun makeLoginRequestRetrofit(): NetworkResult<LoginData> {

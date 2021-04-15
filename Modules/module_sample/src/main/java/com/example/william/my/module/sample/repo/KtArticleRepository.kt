@@ -17,12 +17,16 @@ class KtArticleRepository : KtArticleDataSource {
 
     override suspend fun fetchNewData() {
         withContext(Dispatchers.Main) {
+            counter = 0
             _article.value = getArticle(counter)
         }
     }
 
     override suspend fun loadMoreData() {
-
+        withContext(Dispatchers.Main) {
+            counter++
+            _article.value = getArticle(counter)
+        }
     }
 
     // 移动到IO调度程序以使其成为安全的
