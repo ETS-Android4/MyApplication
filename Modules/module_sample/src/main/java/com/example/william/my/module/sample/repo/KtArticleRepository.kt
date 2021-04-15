@@ -16,7 +16,9 @@ class KtArticleRepository : KtArticleDataSource {
     override val article: LiveData<ArticleBean> = _article
 
     override suspend fun fetchNewData() {
-
+        withContext(Dispatchers.Main) {
+            _article.value = getArticle(counter)
+        }
     }
 
     override suspend fun loadMoreData() {

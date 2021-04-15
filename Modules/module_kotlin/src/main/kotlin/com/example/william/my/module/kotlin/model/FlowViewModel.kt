@@ -7,11 +7,7 @@ import com.example.william.my.module.kotlin.repo.LoginRepository
 import com.example.william.my.module.kotlin.result.NetworkResult
 import com.example.william.my.module.kotlin.utils.ThreadUtils
 import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 /**
@@ -31,7 +27,7 @@ class FlowViewModel : ViewModel() {
 
         // 在UI线程上创建一个新的协同程序
         // Create a new coroutine on the UI thread
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
 
             //打印线程
             ThreadUtils.isMainThread("CoroutinesViewModel login")
@@ -74,7 +70,7 @@ class FlowViewModel : ViewModel() {
 
             // 使用 collect 触发流并消耗其元素
             // Trigger the flow and consume its elements using collect
-            ArticleRepository().getArticle
+            ArticleRepository().article
                 .onStart {
                     // 在调用 flow 请求数据之前，做一些准备工作，例如显示正在加载数据的进度条
                 }
@@ -97,7 +93,7 @@ class FlowViewModel : ViewModel() {
      * 使用 Flow 流构造方法 -> asLiveData()
      */
     fun getArticleByFlow() =
-        ArticleRepository().getArticle
+        ArticleRepository().article
             .map {
                 Gson().toJson(it)
             }
@@ -107,7 +103,7 @@ class FlowViewModel : ViewModel() {
      * 使用 Coroutine 协程构造方法 -> liveData<>
      */
     fun getArticleByCoroutine() = liveData<String> {
-        ArticleRepository().getArticle
+        ArticleRepository().article
             .collect {
                 emit(Gson().toJson(it))
             }

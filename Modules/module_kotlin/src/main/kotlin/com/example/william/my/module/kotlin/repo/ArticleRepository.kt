@@ -17,7 +17,7 @@ class ArticleRepository {
      * These operations are lazy and don't trigger the flow. They just transform
      * the current value emitted by the flow at that point in time.
      */
-    val getArticle: Flow<ArticleBean> =
+    val article: Flow<ArticleBean> =
         ArticleDataSource().getArticle
             // 中间运算符 map 转换数据
             .map { article ->
