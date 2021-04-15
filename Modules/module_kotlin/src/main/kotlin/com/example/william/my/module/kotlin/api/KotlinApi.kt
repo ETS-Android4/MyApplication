@@ -2,9 +2,12 @@ package com.example.william.my.module.kotlin.api
 
 import com.example.william.my.module.base.Urls
 import com.example.william.my.module.bean.ArticleBean
+import com.example.william.my.module.kotlin.data.LoginData
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * 只有被 suspend 修饰的方法，才可以在协程中调用。
@@ -12,6 +15,9 @@ import retrofit2.http.Path
  * 2. suspend方法的执行相当于执行了Call<T>对象的Call.enqueue(callback)
  */
 interface KotlinApi {
+
+    @POST(Urls.login)
+    suspend fun login(@Query("username") username: String, @Query("password") password: String): LoginData
 
     // 提供挂起功能的网络请求接口
     // Interface that provides a way to make network requests with suspend functions

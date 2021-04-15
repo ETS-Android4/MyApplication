@@ -1,7 +1,9 @@
 package com.example.william.my.module.kotlin.repo
 
 import android.util.Log
+import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.base.Urls
+import com.example.william.my.module.kotlin.api.KotlinApi
 import com.example.william.my.module.kotlin.data.LoginData
 import com.example.william.my.module.kotlin.result.NetworkResult
 import com.example.william.my.module.kotlin.utils.ThreadUtils
@@ -25,6 +27,13 @@ class LoginRepository {
         // 阻塞网络请求
         // Blocking network request code
         makeLoginRequest(jsonBody)
+        //makeLoginRequestRetrofit()
+    }
+
+    private suspend fun makeLoginRequestRetrofit(): NetworkResult<LoginData> {
+        val api = RetrofitUtils.buildApi(KotlinApi::class.java)
+        val article = api.login("17778060027", "wW123456")
+        return NetworkResult.Success(article)
     }
 
     // 1. 在后台线程中执行
