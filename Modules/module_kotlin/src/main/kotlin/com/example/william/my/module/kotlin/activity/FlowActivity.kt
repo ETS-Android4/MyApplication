@@ -18,8 +18,6 @@ class FlowActivity : BaseActivity() {
 
     lateinit var binding: KtLayoutResponseBinding
 
-    var b: Boolean = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,13 +35,8 @@ class FlowActivity : BaseActivity() {
         //getArticleByCoroutine(viewModel)
 
         binding.contentTextView.setOnClickListener {
-//            b = !b
-//            if (b) {
-//                viewModel.login("17778060027", "ww123456")
-//            } else {
-//                viewModel.getArticle()
-//            }
-            viewModel.login("17778060027", "ww123456")
+            viewModel.getArticle()
+            //viewModel.login("17778060027", "ww123456")
         }
     }
 
@@ -60,19 +53,19 @@ class FlowActivity : BaseActivity() {
     }
 
     private fun getArticleByFlow(viewModel: FlowViewModel) {
-//        binding.contentTextView.setOnClickListener {
-//            viewModel.getArticleByFlow().observe(this, Observer {
-//                binding.contentTextView.text = it
-//            })
-//        }
+        binding.contentTextView.setOnClickListener {
+            viewModel.getArticleByFlow().observe(this, Observer {
+                binding.contentTextView.text = it
+            })
+        }
     }
 
     private fun getArticleByCoroutine(viewModel: FlowViewModel) {
-//        binding.contentTextView.setOnClickListener {
-//            viewModel.getArticleByCoroutine().observe(this, Observer {
-//                binding.contentTextView.text = it
-//            })
-//        }
+        binding.contentTextView.setOnClickListener {
+            viewModel.getArticleByCoroutine().observe(this, Observer {
+                binding.contentTextView.text = it
+            })
+        }
     }
 
     fun flowOperator() {

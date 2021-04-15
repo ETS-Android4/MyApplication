@@ -6,8 +6,8 @@ sealed class NetworkResult<out R> {
     object Loading : NetworkResult<Nothing>()
 
     // Successful results are stored in data
-    data class NetworkSuccess<out T>(val data: T) : NetworkResult<T>()
+    data class Success<out T>(val data: T) : NetworkResult<T>()
 
     // By using Nothing as T, all NetworkError instances are a subtypes of all NetworkResults<T>
-    data class NetworkError(val exception: Throwable) : NetworkResult<Nothing>()
+    data class Error(val exception: Throwable) : NetworkResult<Nothing>()
 }

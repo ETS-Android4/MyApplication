@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 class KtArticleRepository : KtArticleDataSource {
 
     private var counter = 0
-    
+
     private val _article = MutableLiveData<ArticleBean>()
     override val article: LiveData<ArticleBean> = _article
 

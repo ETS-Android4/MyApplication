@@ -16,6 +16,7 @@ import java.net.URL
 
 class LoginRepository {
 
+    // 2. 使用协程确保主线程安全
     // 将 协程 切换到 I/O 调度，确保主线程安全
     // Move the execution of the coroutine to the I/O dispatcher
     suspend fun login(jsonBody: String): NetworkResult<LoginData> = withContext(Dispatchers.IO) {
@@ -26,6 +27,7 @@ class LoginRepository {
         makeLoginRequest(jsonBody)
     }
 
+    // 1. 在后台线程中执行
     // 发出网络请求，阻塞当前线程
     // Function that makes the network request, blocking the current thread
     private fun makeLoginRequest(jsonBody: String): NetworkResult<LoginData> {
@@ -40,9 +42,9 @@ class LoginRepository {
             //setRequestProperty("Accept", "application/json")
             doOutput = true
             outputStream.write(jsonBody.toByteArray())
-            return NetworkResult.NetworkSuccess(parse(inputStream))
+            return NetworkResult.Success(parse(inputStream))
         }
-        return NetworkResult.NetworkError(Exception("Cannot open HttpURLConnection"))
+        return NetworkResult.Error(Exception("Cannot open HttpURLConnection"))
     }
 
     private fun parse(input: InputStream): LoginData {
