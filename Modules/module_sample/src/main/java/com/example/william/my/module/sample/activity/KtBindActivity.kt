@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.R
@@ -55,6 +56,9 @@ class KtBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
     }
 
     private fun subscribeToModel() {
+        mViewModel.articleList.observe(this, Observer {
+            mAdapter.setList(it)
+        })
         mViewModel.onRefreshByFLow()
     }
 

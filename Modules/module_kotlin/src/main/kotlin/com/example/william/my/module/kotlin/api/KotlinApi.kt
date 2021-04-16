@@ -17,7 +17,10 @@ import retrofit2.http.Query
 interface KotlinApi {
 
     @POST(Urls.login)
-    suspend fun login(@Query("username") username: String, @Query("password") password: String): LoginData
+    suspend fun login(
+        @Query("username") username: String,
+        @Query("password") password: String
+    ): LoginData
 
     // 提供挂起功能的网络请求接口
     // Interface that provides a way to make network requests with suspend functions

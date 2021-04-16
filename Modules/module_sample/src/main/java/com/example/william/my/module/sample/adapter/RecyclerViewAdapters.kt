@@ -10,7 +10,7 @@ object RecyclerViewAdapters {
     fun setItems(view: RecyclerView, items: MutableList<ArticleDetailBean?>) {
         val adapter = view.adapter
         if (adapter is ArticleBindAdapter) {
-            adapter.setNewInstance(items)
+            adapter.setList(items)
             // tell RestaurantRecyclerViewAdapter to set new list of items
         } else {
             throw IllegalArgumentException("RecyclerView.Adapter is not ArticleBindAdapter")

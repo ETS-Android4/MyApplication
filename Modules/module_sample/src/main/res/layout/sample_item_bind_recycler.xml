@@ -16,8 +16,7 @@
             android:id="@+id/item_textView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/basics_btn_height"
-            android:gravity="center"
-            android:text="@{viewModel.articleList.size}" />
+            android:gravity="center" />
 
     </LinearLayout>
 </layout>

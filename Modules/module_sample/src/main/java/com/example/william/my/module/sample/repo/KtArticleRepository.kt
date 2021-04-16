@@ -8,8 +8,8 @@ import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.sample.api.KtArticleService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class KtArticleRepository : KtArticleDataSource {
@@ -36,10 +36,10 @@ class KtArticleRepository : KtArticleDataSource {
     private val _articleList = MutableLiveData<List<ArticleDetailBean>>()
     override val articleList: LiveData<List<ArticleDetailBean>> = _articleList
 
-    fun fetchNewDataByFlow() {
+    suspend fun fetchNewDataByFlow() {
         counter = 0
         getArticleFLow(counter)
-            .map {
+            .collect {
                 _articleList.value = it.data.datas
             }
     }

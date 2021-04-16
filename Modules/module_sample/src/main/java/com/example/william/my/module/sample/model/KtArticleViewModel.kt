@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.bean.ArticleDetailBean
-import com.example.william.my.module.sample.adapter.ArticleBindAdapter
 import com.example.william.my.module.sample.repo.KtArticleRepository
 import kotlinx.coroutines.launch
 
