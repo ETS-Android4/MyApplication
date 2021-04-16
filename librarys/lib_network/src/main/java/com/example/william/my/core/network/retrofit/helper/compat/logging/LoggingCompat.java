@@ -11,7 +11,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * HttpLoggingInterceptor
- * implementation "com.squareup.okhttp3:logging-interceptor:3.9.0"
  */
 public class LoggingCompat {
 

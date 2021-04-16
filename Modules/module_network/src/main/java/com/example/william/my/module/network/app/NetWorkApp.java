@@ -9,11 +9,15 @@ public class NetWorkApp implements IComponentApplication {
 
     @Override
     public void init(Application application) {
-        RxRetrofitConfig.init(application);
+        initRxRetrofit(application);
     }
 
     @Override
     public void initAsync(Application application) {
 
+    }
+
+    private void initRxRetrofit(Application application) {
+        RxRetrofitConfig.init(application);
     }
 }

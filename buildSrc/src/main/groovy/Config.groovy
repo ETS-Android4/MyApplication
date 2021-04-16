@@ -28,6 +28,7 @@ class Config {
 
             ModuleKotlin   : new DepConfig(true, ":modules:module_kotlin"),
             ModuleSample   : new DepConfig(true, ":modules:module_sample"),
+
             ModuleFlutter  : new DepConfig(false, ":modules:module_flutter"),
     ]
 }

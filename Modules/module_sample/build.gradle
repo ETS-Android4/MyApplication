@@ -5,6 +5,7 @@ android {
 dependencies {
     implementation project(path: ':librarys:lib_network')
     //OkHttp
+    implementation deps.okhttp
     implementation deps.okhttp_logging
     //Retrofit
     implementation deps.retrofit

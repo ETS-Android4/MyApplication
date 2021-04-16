@@ -12,7 +12,7 @@ public class TimeoutCompat {
 
     public static void setTimeOut(@NonNull OkHttpClient.Builder builder) {
         //不允许失败重试
-        builder.retryOnConnectionFailure(true);
+        builder.retryOnConnectionFailure(false);
         //设置连接超时时间
         builder.connectTimeout(RxRetrofitConfig.connectTimeout, TimeUnit.SECONDS);
         //设置写的超时时间

@@ -20,13 +20,17 @@ public class SampleApp implements IComponentApplication {
 
     @Override
     public void init(Application application) {
-        RxRetrofitConfig.init(application);
+        initRxRetrofit(application);
         initSmartRefreshLayout();
     }
 
     @Override
     public void initAsync(Application application) {
 
+    }
+
+    private void initRxRetrofit(Application application) {
+        RxRetrofitConfig.init(application);
     }
 
     private void initSmartRefreshLayout() {
