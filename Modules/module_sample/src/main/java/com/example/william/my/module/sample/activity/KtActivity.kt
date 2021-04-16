@@ -14,22 +14,22 @@ import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.adapter.ArticleAdapter
 import com.example.william.my.module.sample.databinding.SampleLayoutRecyclerBinding
+import com.example.william.my.module.sample.model.KtArticleViewModel
 import com.example.william.my.module.sample.model.LiveDataVMFactory
-import com.example.william.my.module.sample.model.LiveDataViewModel
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
-@Route(path = ARouterPath.Sample.Sample_Kotlin_Flow)
-class KtFlowActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
-
-    lateinit var mBinding: SampleLayoutRecyclerBinding
+@Route(path = ARouterPath.Sample.Sample_Kotlin)
+class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     // Obtain ViewModel
-    private val mViewModel: LiveDataViewModel by viewModels {
+    private val mViewModel: KtArticleViewModel by viewModels {
         LiveDataVMFactory
     }
 
-    private var mAdapter: ArticleAdapter? = null
+    private lateinit var mBinding: SampleLayoutRecyclerBinding
+
+    private lateinit var mAdapter: ArticleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +59,7 @@ class KtFlowActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
                 showArticles(it.data.curPage == 1, it.data.datas)
             }
         })
+        mViewModel.onRefresh()
     }
 
     private fun onDataNotAvailable(isFirst: Boolean) {
@@ -73,8 +74,8 @@ class KtFlowActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         val textView = TextView(this)
         textView.gravity = Gravity.CENTER
         textView.text = "无数据"
-        mAdapter!!.setEmptyView(textView)
-        mAdapter!!.notifyDataSetChanged()
+        mAdapter.setEmptyView(textView)
+        mAdapter.notifyDataSetChanged()
         mBinding.smartRefreshLayout.setEnableLoadMore(false)
     }
 
@@ -84,11 +85,11 @@ class KtFlowActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     private fun showArticles(isFirst: Boolean, articles: MutableList<ArticleDetailBean>) {
         if (isFirst) {
-            mAdapter!!.setNewInstance(articles)
+            mAdapter.setNewInstance(articles)
         } else {
-            mAdapter!!.addData(articles)
+            mAdapter.addData(articles)
         }
-        mAdapter!!.notifyDataSetChanged()
+        mAdapter.notifyDataSetChanged()
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {

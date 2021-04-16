@@ -7,9 +7,10 @@ import androidx.databinding.DataBindingUtil
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.R
+import com.example.william.my.module.sample.adapter.ArticleBindAdapter
 import com.example.william.my.module.sample.databinding.SampleLayoutBindRecyclerBinding
+import com.example.william.my.module.sample.model.KtArticleViewModel
 import com.example.william.my.module.sample.model.LiveDataVMFactory
-import com.example.william.my.module.sample.model.LiveDataViewModel
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
@@ -17,9 +18,13 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 class KtBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     // Obtain ViewModel
-    private val mViewModel: LiveDataViewModel by viewModels {
+    private val mViewModel: KtArticleViewModel by viewModels {
         LiveDataVMFactory
     }
+
+    private lateinit var mBinding: SampleLayoutBindRecyclerBinding
+
+    private lateinit var mAdapter: ArticleBindAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,24 +32,38 @@ class KtBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         //setContentView(R.layout.sample_layout_recycler)
 
         // Obtain binding object using the Data Binding library
-        val binding = DataBindingUtil.setContentView<SampleLayoutBindRecyclerBinding>(
+        mBinding = DataBindingUtil.setContentView<SampleLayoutBindRecyclerBinding>(
             this, R.layout.sample_layout_bind_recycler
         )
 
         // Set the LifecycleOwner to be able to observe LiveData objects
-        binding.lifecycleOwner = this
+        mBinding.lifecycleOwner = this
 
         // Bind ViewModel
-        binding.viewModel = mViewModel
+        mBinding.viewModel = mViewModel
 
-        binding.smartRefreshLayout.setOnRefreshLoadMoreListener(this)
+        initView()
+
+        subscribeToModel()
+    }
+
+    private fun initView() {
+        mAdapter = ArticleBindAdapter()
+        mBinding.recycleView.adapter = mAdapter
+
+        mBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(this)
+    }
+
+    private fun subscribeToModel() {
+        mViewModel.onRefreshByFLow()
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        TODO("Not yet implemented")
+        mViewModel.onRefreshByFLow()
+        mBinding.smartRefreshLayout.finishRefresh(1000)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
-        TODO("Not yet implemented")
+        mBinding.smartRefreshLayout.finishLoadMore(1000)
     }
 }

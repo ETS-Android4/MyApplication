@@ -10,11 +10,11 @@ import com.example.william.my.module.jetpack.databinding.JetItemRecycleBinding;
 
 import java.util.List;
 
-public class DataBindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ViewBindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<String> mData;
 
-    public DataBindAdapter(List<String> mData) {
+    public ViewBindAdapter(List<String> mData) {
         this.mData = mData;
     }
 

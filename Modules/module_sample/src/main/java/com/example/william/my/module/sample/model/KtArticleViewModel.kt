@@ -5,13 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.william.my.module.bean.ArticleBean
+import com.example.william.my.module.bean.ArticleDetailBean
+import com.example.william.my.module.sample.adapter.ArticleBindAdapter
 import com.example.william.my.module.sample.repo.KtArticleRepository
 import kotlinx.coroutines.launch
 
 /**
  * ViewModel 应创建协程
  */
-class LiveDataViewModel(private val articleDataSource: KtArticleRepository) : ViewModel() {
+class KtArticleViewModel(private val articleDataSource: KtArticleRepository) : ViewModel() {
 
     val article: LiveData<ArticleBean> = articleDataSource.article
 
@@ -26,11 +28,19 @@ class LiveDataViewModel(private val articleDataSource: KtArticleRepository) : Vi
             articleDataSource.loadMoreData()
         }
     }
+
+    val articleList: LiveData<List<ArticleDetailBean>> = articleDataSource.articleList
+
+    fun onRefreshByFLow() {
+        viewModelScope.launch {
+            articleDataSource.fetchNewDataByFlow()
+        }
+    }
 }
 
 /**
  * 自定义实例，多参构造
- * Factory for [LiveDataViewModel].
+ * Factory for [KtArticleViewModel].
  */
 object LiveDataVMFactory : ViewModelProvider.Factory {
 
@@ -38,6 +48,6 @@ object LiveDataVMFactory : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
-        return LiveDataViewModel(dataSource) as T
+        return KtArticleViewModel(dataSource) as T
     }
 }

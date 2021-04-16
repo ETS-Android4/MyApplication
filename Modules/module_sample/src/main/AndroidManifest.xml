@@ -7,7 +7,7 @@
         <activity android:name=".activity.MvpActivity" />
         <activity android:name=".activity.MvvmActivity" />
         <activity android:name=".activity.KtBindActivity" />
-        <activity android:name=".activity.KtFlowActivity" />
+        <activity android:name=".activity.KtActivity" />
     </application>
 
 </manifest>

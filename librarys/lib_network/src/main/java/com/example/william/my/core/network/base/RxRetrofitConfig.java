@@ -22,7 +22,7 @@ public class RxRetrofitConfig {
     //是否显示Log
     public static final boolean showLogging = true;
     //设置Log Tag
-    public static final String loggingTag = "TAG";
+    public static final String loggingTag = "MyApplication";
 
     //是否设置缓存
     public static final boolean setCache = true;

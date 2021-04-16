@@ -12,7 +12,7 @@ public class SampleActivity extends BaseListActivity {
         super.initData();
         mMap.put("MvpActivity", ARouterPath.Sample.Sample_MVP);
         mMap.put("MvvmActivity", ARouterPath.Sample.Sample_MVVM);
+        mMap.put("KotlinActivity", ARouterPath.Sample.Sample_Kotlin);
         mMap.put("KotlinBindActivity", ARouterPath.Sample.Sample_Kotlin_Bind);
-        mMap.put("KotlinFlowActivity", ARouterPath.Sample.Sample_Kotlin_Flow);
     }
 }

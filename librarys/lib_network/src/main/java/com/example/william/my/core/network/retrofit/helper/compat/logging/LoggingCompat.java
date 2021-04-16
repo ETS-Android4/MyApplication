@@ -43,6 +43,6 @@ public class LoggingCompat {
             Log.i(tag, msg.substring(0, maxLength));
             msg = msg.substring(maxLength);
         }
-        Log.e(tag, msg);
+        Log.i(tag, msg);
     }
 }
