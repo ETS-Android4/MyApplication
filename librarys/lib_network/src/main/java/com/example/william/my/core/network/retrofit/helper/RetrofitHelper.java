@@ -1,12 +1,6 @@
 package com.example.william.my.core.network.retrofit.helper;
 
-import com.example.william.my.core.network.base.RxRetrofitConfig;
 import com.example.william.my.core.network.retrofit.converter.RetrofitConverterFactory;
-import com.example.william.my.core.network.retrofit.helper.compat.cache.CacheCompat;
-import com.example.william.my.core.network.retrofit.helper.compat.cookie.CookieJarCompat;
-import com.example.william.my.core.network.retrofit.helper.compat.logging.LoggingCompat;
-import com.example.william.my.core.network.retrofit.helper.compat.ssl.HttpsSSLCompat;
-import com.example.william.my.core.network.retrofit.helper.compat.timeout.TimeoutCompat;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
 
@@ -21,9 +15,7 @@ public class RetrofitHelper {
     private static RetrofitHelper instance;
 
     private static Retrofit.Builder retrofit;
-    private static OkHttpClient.Builder okHttpClient;
-
-    private static RetrofitResponseListener downloadListener;
+    private static OkHttpClient.Builder okhttpClient;
 
     public static RetrofitHelper getInstance() {
         if (instance == null) {
@@ -38,7 +30,7 @@ public class RetrofitHelper {
 
     private RetrofitHelper() {
         retrofit = new Retrofit.Builder();
-        okHttpClient = new OkHttpClient.Builder();
+        okhttpClient = OkHttpHelper.getInstance();
     }
 
     public RetrofitHelper baseUrl(String baseUrl) {
@@ -46,42 +38,13 @@ public class RetrofitHelper {
         return this;
     }
 
-    public RetrofitHelper setDownloadListener(RetrofitResponseListener listener) {
-        downloadListener = listener;
+    public RetrofitHelper setDownloadListener(RetrofitResponseListener downloadListener) {
+        okhttpClient.addInterceptor(new RetrofitInterceptorProgress(downloadListener));
         return this;
     }
 
-    public OkHttpClient.Builder okHttpClient() {
-        //设置连接使用的HTTP代理。该方法优先于proxySelector，默认代理为空，完全禁用代理使用NO_PROXY
-        //okHttpClient.proxy(Proxy.NO_PROXY);
-
-        //设置超时时间
-        TimeoutCompat.setTimeOut(okHttpClient);
-
-        //设置缓存
-        if (RxRetrofitConfig.setCache)
-            CacheCompat.cache(RxRetrofitConfig.getApp(), okHttpClient, RxRetrofitConfig.cacheDir, RxRetrofitConfig.cacheSize);
-
-        //显示log
-        if (RxRetrofitConfig.showLogging)
-            LoggingCompat.setLog(okHttpClient, RxRetrofitConfig.loggingTag);
-
-        //携带cookie
-        CookieJarCompat.cookieJar(okHttpClient);
-
-        //忽略https证书
-        HttpsSSLCompat.ignoreSSLForOkHttp(okHttpClient);
-        HttpsSSLCompat.ignoreSSLForHttpsURLConnection();
-
-        if (downloadListener != null) {
-            okHttpClient.addInterceptor(new RetrofitInterceptorProgress(downloadListener));
-        }
-
-        return okHttpClient;
-    }
-
     public Retrofit build() {
-        return build(okHttpClient().build());
+        return build(okhttpClient.build());
     }
 
     /**

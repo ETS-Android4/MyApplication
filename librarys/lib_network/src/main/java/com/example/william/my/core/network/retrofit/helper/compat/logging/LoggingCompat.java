@@ -40,7 +40,7 @@ public class LoggingCompat {
     private static void showLog(String tag, @NonNull String msg) {
         int maxLength = 2 * 1024;
         while (msg.length() > maxLength) {
-            Log.e(tag, msg.substring(0, maxLength));
+            Log.i(tag, msg.substring(0, maxLength));
             msg = msg.substring(maxLength);
         }
         Log.e(tag, msg);

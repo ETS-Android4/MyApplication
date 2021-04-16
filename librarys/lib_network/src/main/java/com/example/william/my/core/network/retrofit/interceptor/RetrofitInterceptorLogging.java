@@ -104,7 +104,7 @@ public class RetrofitInterceptorLogging implements Interceptor {
             if (contentType != null) {
                 Charset charset = contentType.charset(StandardCharsets.UTF_8);
                 if (charset != null) {
-                    Log.e(TAG, buffer.clone().readString(charset));
+                    Log.i(TAG, buffer.clone().readString(charset));
                 }
             }
             if (level == Level.BODY) {
