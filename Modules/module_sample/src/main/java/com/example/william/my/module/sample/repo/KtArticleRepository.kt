@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.bean.ArticleBean
-import com.example.william.my.module.sample.KtRetrofit
 import com.example.william.my.module.sample.api.KtArticleService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

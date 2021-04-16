@@ -35,8 +35,8 @@ class FlowActivity : BaseActivity() {
         //getArticleByCoroutine(viewModel)
 
         binding.contentTextView.setOnClickListener {
-            //viewModel.getArticle()
-            viewModel.login("17778060027", "ww123456")
+            viewModel.getArticle()
+            //viewModel.login("17778060027", "ww123456")
         }
     }
 

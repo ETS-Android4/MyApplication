@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
-class ArticleRepository {
+class FLowRepository {
 
-    private val getArticle: Flow<ArticleBean> = flow {
+    private val getArticleFlow: Flow<ArticleBean> = flow {
 
         //打印线程
         ThreadUtils.isMainThread("ArticleDataSource getArticle")
@@ -33,7 +33,7 @@ class ArticleRepository {
      * the current value emitted by the flow at that point in time.
      */
     val article: Flow<ArticleBean> =
-        getArticle
+        getArticleFlow
             // 中间运算符 map 转换数据
             .map { article ->
                 articleTakeOne(article)
