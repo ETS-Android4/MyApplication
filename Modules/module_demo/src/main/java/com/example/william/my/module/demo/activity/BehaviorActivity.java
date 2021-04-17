@@ -10,9 +10,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.demo.R;
 import com.example.william.my.module.router.ARouterPath;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Route(path = ARouterPath.Demo.Demo_Behavior)
 public class BehaviorActivity extends AppCompatActivity {
 
@@ -24,10 +21,10 @@ public class BehaviorActivity extends AppCompatActivity {
         RecyclerView mRecyclerView = findViewById(R.id.behavior_recycleView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<String> mData = new ArrayList<>();
-        for (int i = 1; i < 61; i++) {
-            mData.add("POSITION " + i);
-        }
+//        List<String> mData = new ArrayList<>();
+//        for (int i = 1; i < 61; i++) {
+//            mData.add("POSITION " + i);
+//        }
 
         //RecyclerAdapter mRecyclerAdapter = new RecyclerAdapter(mData);
         //mRecyclerView.setAdapter(mRecyclerAdapter);

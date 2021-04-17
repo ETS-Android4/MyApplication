@@ -1,6 +1,5 @@
 package com.tencent.qcloud.tim.demo.main;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;

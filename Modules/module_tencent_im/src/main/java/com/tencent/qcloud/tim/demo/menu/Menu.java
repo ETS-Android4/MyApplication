@@ -92,7 +92,7 @@ public class Menu {
         };
 
         // 设置右上角+号显示PopAction
-        List<PopMenuAction> menuActions = new ArrayList<PopMenuAction>();
+        List<PopMenuAction> menuActions = new ArrayList<>();
 
         PopMenuAction action = new PopMenuAction();
 

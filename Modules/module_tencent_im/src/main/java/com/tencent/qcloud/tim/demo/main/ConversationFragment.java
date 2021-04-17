@@ -19,7 +19,6 @@ import com.tencent.qcloud.tim.demo.helper.ConversationLayoutHelper;
 import com.tencent.qcloud.tim.demo.menu.Menu;
 import com.tencent.qcloud.tim.demo.utils.Constants;
 import com.tencent.qcloud.tim.uikit.base.BaseFragment;
-import com.tencent.qcloud.tim.uikit.component.TitleBarLayout;
 import com.tencent.qcloud.tim.uikit.component.action.PopActionClickListener;
 import com.tencent.qcloud.tim.uikit.component.action.PopDialogAdapter;
 import com.tencent.qcloud.tim.uikit.component.action.PopMenuAction;
@@ -95,7 +94,7 @@ public class ConversationFragment extends BaseFragment {
 
     private void initPopMenuAction() {
         // 设置长按conversation显示PopAction
-        List<PopMenuAction> conversationPopActions = new ArrayList<PopMenuAction>();
+        List<PopMenuAction> conversationPopActions = new ArrayList<>();
         PopMenuAction action = new PopMenuAction();
         action.setActionName(getResources().getString(R.string.chat_top));
         action.setActionClickListener(new PopActionClickListener() {

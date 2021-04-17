@@ -25,7 +25,10 @@ public class RetrofitBuilder<T> {
     private boolean isJson = true;
     private String bodyString;
 
-    //public Map<String, File> fileMap;
+    //private Map<String, File> fileMap;
+    //private MultipartBody.Part bodyPart;
+    //private RetrofitRequestListener listener;
+
     private MultipartBody.Builder bodyForm;
 
     private LifecycleTransformer<RetrofitResponse<T>> transformer;
@@ -127,15 +130,15 @@ public class RetrofitBuilder<T> {
     //    //this.bodyPart = MultipartBody.Part.createFormData(
     //    //        key,
     //    //        file.getName(),
-    //    //        RequestBody.create(MediaType.parse("multipart/form-data"), file)
+    //    //        RequestBody.Companion.create(file, MediaType.parse("multipart/form-data"))
     //    //);
     //    //this.bodyPart = MultipartBody.Part.createFormData(
     //    //        key,
     //    //        file.getName(),
-    //    //        new CountingRequestBody(RequestBody.create(MediaType.parse("multipart/form-data"), file), listener));
-    //    if (this.fileMap == null) {
-    //        fileMap = new IdentityHashMap<>();
-    //    }
+    //    //        new CountingRequestBody(RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")), listener));
+    //    //if (this.fileMap == null) {
+    //    //    fileMap = new IdentityHashMap<>();
+    //    //}
     //    this.fileMap.put(key, file);
     //    return this;
     //}
