@@ -7,6 +7,8 @@ import com.example.william.my.module.bean.LoginBean;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
+import org.jetbrains.annotations.NotNull;
+
 import static com.example.william.my.module.base.Urls.login;
 
 /**
@@ -30,13 +32,13 @@ public class VolleyActivity extends BaseResponseActivity {
                 .build(VolleyActivity.this)
                 .enqueue(new VolleyUtils.VolleyListener<LoginBean>() {
                     @Override
-                    public void onMySuccess(LoginBean result) {
+                    public void onMySuccess(@NotNull LoginBean result) {
                         String net_success = "Success: " + new Gson().toJson(result);
                         showResponse(net_success);
                     }
 
                     @Override
-                    public void onMyError(String error) {
+                    public void onMyError(@NotNull String error) {
                         String net_error = "Error: " + error;
                         showResponse(net_error);
                     }

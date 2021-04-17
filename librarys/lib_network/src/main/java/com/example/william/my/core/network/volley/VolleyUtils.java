@@ -154,10 +154,10 @@ public class VolleyUtils {
         Response.ErrorListener mErrorListener;
 
         // 请求成功时的回调函数
-        public abstract void onMySuccess(T result);
+        public abstract void onMySuccess(@NonNull T result);
 
         // 请求失败时的回调函数
-        public abstract void onMyError(String error);
+        public abstract void onMyError(@NonNull String error);
 
         // 创建请求的事件监听
         Response.Listener<T> responseListener() {
