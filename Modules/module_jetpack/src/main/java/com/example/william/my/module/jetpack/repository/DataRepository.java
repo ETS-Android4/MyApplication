@@ -10,6 +10,8 @@ import com.example.william.my.module.api.NetworkService;
 import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.bean.BannerDetailData;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +58,7 @@ public class DataRepository {
 
         LiveDataCallback.LiveDataConvert<List<BannerDetailBean>, List<BannerDetailData>> convert = new LiveDataCallback.LiveDataConvert<List<BannerDetailBean>, List<BannerDetailData>>() {
             @Override
-            public RetrofitResponse<List<BannerDetailData>> convert(RetrofitResponse<List<BannerDetailBean>> data) throws Exception {
+            public RetrofitResponse<List<BannerDetailData>> convert(@NotNull RetrofitResponse<List<BannerDetailBean>> data) throws Exception {
                 List<BannerDetailData> movieData = new ArrayList<>();
                 for (BannerDetailBean movieBean : data.getData()) {
                     movieData.add(movieBean.convert());

@@ -15,7 +15,6 @@ class ArticleViewBindAdapter :
             itemTextView.text = item?.title
             executePendingBindings()//防止列表闪烁
         }
-
     }
 
     class DataBindingHolder(view: View) :

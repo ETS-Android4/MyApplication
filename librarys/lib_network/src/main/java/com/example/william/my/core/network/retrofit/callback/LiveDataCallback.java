@@ -49,6 +49,6 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
     }
 
     public interface LiveDataConvert<Bean, Data> {
-        RetrofitResponse<Data> convert(RetrofitResponse<Bean> data) throws Exception;
+        RetrofitResponse<Data> convert(@NonNull RetrofitResponse<Bean> data) throws Exception;
     }
 }
