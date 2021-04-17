@@ -4,11 +4,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.R
-import com.example.william.my.module.sample.adapter.ArticleBindAdapter
+import com.example.william.my.module.sample.adapter.ArticleViewBindAdapter
 import com.example.william.my.module.sample.databinding.SampleLayoutBindRecyclerBinding
 import com.example.william.my.module.sample.model.KtArticleViewModel
 import com.example.william.my.module.sample.model.LiveDataVMFactory
@@ -25,7 +24,7 @@ class KtBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     private lateinit var mBinding: SampleLayoutBindRecyclerBinding
 
-    private lateinit var mAdapter: ArticleBindAdapter
+    private lateinit var mAdapter: ArticleViewBindAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,25 +48,23 @@ class KtBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
     }
 
     private fun initView() {
-        mAdapter = ArticleBindAdapter()
+        mAdapter = ArticleViewBindAdapter()
         mBinding.recycleView.adapter = mAdapter
 
         mBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(this)
     }
 
     private fun subscribeToModel() {
-        mViewModel.articleList.observe(this, Observer {
-            mAdapter.setList(it)
-        })
-        mViewModel.onRefreshByFLow()
+        mViewModel.onRefresh()
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        mViewModel.onRefreshByFLow()
+        mViewModel.onRefresh()
         mBinding.smartRefreshLayout.finishRefresh(1000)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
+        mViewModel.onLoadMore()
         mBinding.smartRefreshLayout.finishLoadMore(1000)
     }
 }

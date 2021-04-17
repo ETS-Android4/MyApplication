@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.blankj.utilcode.util.CollectionUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.router.ARouterPath
@@ -53,7 +52,7 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     private fun subscribeToModel() {
         mViewModel.article.observe(this, Observer {
-            if (CollectionUtils.isEmpty(it.data.datas)) {
+            if (it.data.datas.isNullOrEmpty()) {
                 onDataNotAvailable(it.data.curPage == 1)
             } else {
                 showArticles(it.data.curPage == 1, it.data.datas)

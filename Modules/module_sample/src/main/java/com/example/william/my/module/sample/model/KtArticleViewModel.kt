@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.william.my.module.bean.ArticleBean
-import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.sample.repo.KtArticleRepository
 import kotlinx.coroutines.launch
 
@@ -25,14 +24,6 @@ class KtArticleViewModel(private val articleDataSource: KtArticleRepository) : V
     fun onLoadMore() {
         viewModelScope.launch {
             articleDataSource.loadMoreData()
-        }
-    }
-
-    val articleList: LiveData<List<ArticleDetailBean>> = articleDataSource.articleList
-
-    fun onRefreshByFLow() {
-        viewModelScope.launch {
-            articleDataSource.fetchNewDataByFlow()
         }
     }
 }

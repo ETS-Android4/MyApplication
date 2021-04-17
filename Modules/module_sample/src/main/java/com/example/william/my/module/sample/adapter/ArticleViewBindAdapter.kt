@@ -7,8 +7,8 @@ import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.sample.R
 import com.example.william.my.module.sample.databinding.SampleItemBindRecyclerBinding
 
-class ArticleBindAdapter :
-    BaseQuickAdapter<ArticleDetailBean?, ArticleBindAdapter.DataBindingHolder>(R.layout.sample_item_bind_recycler) {
+class ArticleViewBindAdapter :
+    BaseQuickAdapter<ArticleDetailBean?, ArticleViewBindAdapter.DataBindingHolder>(R.layout.sample_item_bind_recycler) {
 
     override fun convert(holder: DataBindingHolder, item: ArticleDetailBean?) {
         holder.itemBind?.run {
