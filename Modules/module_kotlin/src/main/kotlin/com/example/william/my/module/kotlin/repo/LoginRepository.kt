@@ -26,11 +26,15 @@ class LoginRepository {
         ThreadUtils.isMainThread("login")
         // 阻塞网络请求
         // Blocking network request code
-        //makeLoginRequest(jsonBody)
-        makeLoginRequestRetrofit()
+        makeLoginRequest(jsonBody)
+        //makeLoginRequestRetrofit()
     }
 
     private suspend fun makeLoginRequestRetrofit(): NetworkResult<LoginData> {
+
+        //打印线程
+        ThreadUtils.isMainThread("makeLoginRequestRetrofit")
+
         val api = RetrofitUtils.buildApi(KotlinApi::class.java)
         val article = api.login("17778060027", "wW123456")
         return NetworkResult.Success(article)
