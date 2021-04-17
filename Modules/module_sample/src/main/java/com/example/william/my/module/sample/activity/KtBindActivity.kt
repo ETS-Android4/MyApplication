@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.R
-import com.example.william.my.module.sample.adapter.ArticleViewBindAdapter
+import com.example.william.my.module.sample.adapter.ArticleDataBindAdapter
 import com.example.william.my.module.sample.databinding.SampleLayoutBindRecyclerBinding
 import com.example.william.my.module.sample.model.KtArticleViewModel
 import com.example.william.my.module.sample.model.LiveDataVMFactory
@@ -24,7 +24,7 @@ class KtBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     private lateinit var mBinding: SampleLayoutBindRecyclerBinding
 
-    private lateinit var mAdapter: ArticleViewBindAdapter
+    private lateinit var mAdapter: ArticleDataBindAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,7 @@ class KtBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
     }
 
     private fun initView() {
-        mAdapter = ArticleViewBindAdapter()
+        mAdapter = ArticleDataBindAdapter()
         mBinding.recycleView.adapter = mAdapter
 
         mBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(this)
