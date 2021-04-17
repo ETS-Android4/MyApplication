@@ -11,19 +11,23 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
-class FLowRepository {
+/**
+ *  flow {
+ *  }
+ */
+class ArticleRepository {
 
-    private val getArticleFlow: Flow<ArticleBean> = flow {
+    private val getArticleFlow: Flow<ArticleBean> =
+        flow {
+            //打印线程
+            ThreadUtils.isMainThread("ArticleRepository getArticle")
 
-        //打印线程
-        ThreadUtils.isMainThread("ArticleDataSource getArticle")
+            val api = RetrofitUtils.buildApi(KotlinApi::class.java)
 
-        val api = RetrofitUtils.buildApi(KotlinApi::class.java)
-
-        val article = api.getArticle(0)
-        emit(article) // Emits the result of the request to the flow 向数据流发送请求结果
-        delay(3000) // Suspends the coroutine for some time 挂起一段时间
-    }
+            val article = api.getArticle(0)
+            emit(article) // Emits the result of the request to the flow 向数据流发送请求结果
+            delay(3000) // Suspends the coroutine for some time 挂起一段时间
+        }
 
     /**
      * 返回流上的数据转换。

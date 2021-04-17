@@ -2,7 +2,7 @@ package com.example.william.my.module.kotlin.model
 
 import androidx.lifecycle.*
 import com.example.william.my.module.kotlin.data.LoginData
-import com.example.william.my.module.kotlin.repo.FLowRepository
+import com.example.william.my.module.kotlin.repo.ArticleRepository
 import com.example.william.my.module.kotlin.repo.LoginRepository
 import com.example.william.my.module.kotlin.result.NetworkResult
 import com.example.william.my.module.kotlin.utils.ThreadUtils
@@ -70,7 +70,7 @@ class FlowViewModel : ViewModel() {
 
             // 使用 collect 触发流并消耗其元素
             // Trigger the flow and consume its elements using collect
-            FLowRepository().article
+            ArticleRepository().article
                 .onStart {
                     // 在调用 flow 请求数据之前，做一些准备工作，例如显示正在加载数据的进度条
                 }
@@ -93,7 +93,7 @@ class FlowViewModel : ViewModel() {
      * 使用 Flow 流构造方法 -> asLiveData()
      */
     fun getArticleByFlow() =
-        FLowRepository().article
+        ArticleRepository().article
             .map {
                 Gson().toJson(it)
             }
@@ -103,7 +103,7 @@ class FlowViewModel : ViewModel() {
      * 使用 Coroutine 协程构造方法 -> liveData<>
      */
     fun getArticleByCoroutine() = liveData<String> {
-        FLowRepository().article
+        ArticleRepository().article
             .collect {
                 emit(Gson().toJson(it))
             }

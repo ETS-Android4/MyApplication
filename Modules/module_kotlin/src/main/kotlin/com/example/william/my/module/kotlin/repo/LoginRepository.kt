@@ -16,36 +16,32 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
+/**
+ * withContext(Dispatchers.IO) {
+ * }
+ */
 class LoginRepository {
 
     // 2. 使用协程确保主线程安全
     // 将 协程 切换到 I/O 调度，确保主线程安全
     // Move the execution of the coroutine to the I/O dispatcher
-    suspend fun login(jsonBody: String): NetworkResult<LoginData> = withContext(Dispatchers.IO) {
-        //打印线程
-        ThreadUtils.isMainThread("login")
-        // 阻塞网络请求
-        // Blocking network request code
-        makeLoginRequest(jsonBody)
-        //makeLoginRequestRetrofit()
-    }
+    suspend fun login(jsonBody: String): NetworkResult<LoginData> =
+        withContext(Dispatchers.IO) {
+            //打印线程
+            ThreadUtils.isMainThread("LoginRepository login")
 
-    private suspend fun makeLoginRequestRetrofit(): NetworkResult<LoginData> {
-
-        //打印线程
-        ThreadUtils.isMainThread("makeLoginRequestRetrofit")
-
-        val api = RetrofitUtils.buildApi(KotlinApi::class.java)
-        val article = api.login("17778060027", "wW123456")
-        return NetworkResult.Success(article)
-    }
+            // 阻塞网络请求
+            // Blocking network request code
+            makeLoginRequest(jsonBody)
+            //makeLoginRequestRetrofit()
+        }
 
     // 1. 在后台线程中执行
     // 发出网络请求，阻塞当前线程
     // Function that makes the network request, blocking the current thread
     private fun makeLoginRequest(jsonBody: String): NetworkResult<LoginData> {
         //打印线程
-        ThreadUtils.isMainThread("makeLoginRequest")
+        ThreadUtils.isMainThread("LoginRepository makeLoginRequest")
 
         val url = URL(Urls.login)
         (url.openConnection() as? HttpURLConnection)?.run {
@@ -71,5 +67,14 @@ class LoginRepository {
         val response = msg.toString()
         Log.e("LoginRepository", response)
         return Gson().fromJson(response, LoginData::class.java)
+    }
+
+    private suspend fun makeLoginRequestRetrofit(): NetworkResult<LoginData> {
+        //打印线程
+        ThreadUtils.isMainThread("LoginRepository makeLoginRequestRetrofit")
+
+        val api = RetrofitUtils.buildApi(KotlinApi::class.java)
+        val article = api.login("17778060027", "wW123456")
+        return NetworkResult.Success(article)
     }
 }

@@ -15,6 +15,11 @@ class ArticleViewBindAdapter :
             itemTextView.text = item?.title
             executePendingBindings()//防止列表闪烁
         }
+
+        item?.run {
+            holder.itemBind?.itemTextView?.text = title
+            holder.itemBind?.executePendingBindings()
+        }
     }
 
     class DataBindingHolder(view: View) :
