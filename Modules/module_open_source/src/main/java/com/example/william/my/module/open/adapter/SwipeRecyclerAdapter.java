@@ -32,7 +32,7 @@ public class SwipeRecyclerAdapter extends RecyclerSwipeAdapter<SwipeRecyclerAdap
     }
 
     @Override
-    public void onBindViewHolder(@NotNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         if (viewHolder.itemView instanceof SwipeLayout) {
             mItemManger.bindView(viewHolder.itemView, i);
         }

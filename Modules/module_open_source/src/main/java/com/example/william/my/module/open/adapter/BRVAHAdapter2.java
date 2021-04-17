@@ -1,11 +1,11 @@
 package com.example.william.my.module.open.adapter;
 
+import androidx.annotation.NonNull;
+
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.open.bean.SectionBean;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class BRVAHAdapter2 extends BaseSectionQuickAdapter<SectionBean, BaseView
      * 如果后期设置数据，不需要传入初始List，直接调用 super(layoutResId); 即可
      */
 
-    public BRVAHAdapter2(@NotNull List<SectionBean> data) {
+    public BRVAHAdapter2(@NonNull List<SectionBean> data) {
         super(R.layout.open_item_recycler, R.layout.open_item_recycler, data);
     }
 
@@ -27,7 +27,7 @@ public class BRVAHAdapter2 extends BaseSectionQuickAdapter<SectionBean, BaseView
      * 在此方法中设置head item数据
      */
     @Override
-    protected void convertHeader(@NotNull BaseViewHolder helper, @NotNull SectionBean sectionBean) {
+    protected void convertHeader(@NonNull BaseViewHolder helper, @NonNull SectionBean sectionBean) {
         helper.setText(R.id.item_textView, "Head : " + sectionBean.getPosition());
     }
 
@@ -35,7 +35,7 @@ public class BRVAHAdapter2 extends BaseSectionQuickAdapter<SectionBean, BaseView
      * 在此方法中设置item数据
      */
     @Override
-    protected void convert(@NotNull BaseViewHolder helper, SectionBean sectionBean) {
+    protected void convert(@NonNull BaseViewHolder helper, SectionBean sectionBean) {
         helper.setText(R.id.item_textView, "Content : " + sectionBean.getPosition());
     }
 }

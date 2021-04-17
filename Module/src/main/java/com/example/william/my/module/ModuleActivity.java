@@ -27,6 +27,8 @@ import org.greenrobot.eventbus.ThreadMode;
  * File => Settings => Editor => File and Code Templates
  * 开发规范：
  * Java文件命名：驼峰，资源命名：下划线
+ * NotNull 使用在Bean的字段注解中
+ * NonNull 使用在方法或构造函数的参数中
  * 命名规则：
  * 1. layout 文件的命名方
  * Activity 的 layout 以 module_activity 开头

@@ -42,7 +42,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     @Override
     public long getItemId(int position) {
-        return (long) position;
+        return position;
     }
 
     private static class ViewHolder extends RecyclerView.ViewHolder {

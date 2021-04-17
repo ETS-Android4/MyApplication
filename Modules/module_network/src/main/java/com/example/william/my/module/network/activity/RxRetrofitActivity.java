@@ -13,6 +13,8 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.annotations.NonNull;
+
 /**
  * {@link RxRetrofit}
  */
@@ -34,13 +36,13 @@ public class RxRetrofitActivity extends BaseResponseActivity {
                 .createObservable()
                 .subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
                     @Override
-                    public void onResponse(RetrofitResponse<List<BannerDetailBean>> response) {
+                    public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
                         String net_success = "Success: " + new Gson().toJson(response);
                         showResponse(net_success);
                     }
 
                     @Override
-                    public void onFailure(ApiException e) {
+                    public void onFailure(@NonNull ApiException e) {
                         String net_error = "Error: " + e.getMessage();
                         showResponse(net_error);
                     }

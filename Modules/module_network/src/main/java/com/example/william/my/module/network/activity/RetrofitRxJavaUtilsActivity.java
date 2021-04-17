@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 
 /**
@@ -51,13 +52,13 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
 
         obs.subscribe(new RetrofitObserver<BannerBean>() {
             @Override
-            public void onResponse(BannerBean response) {
+            public void onResponse(@NonNull BannerBean response) {
                 String net_success = "Success: " + new Gson().toJson(response);
                 showResponse(net_success);
             }
 
             @Override
-            public void onFailure(ApiException e) {
+            public void onFailure(@NonNull ApiException e) {
                 String net_error = "Error: " + e.getMessage();
                 showResponse(net_error);
             }
@@ -72,13 +73,13 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
 
         responseObs.subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
             @Override
-            public void onResponse(RetrofitResponse<List<BannerDetailBean>> response) {
+            public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
                 String net_success = "Success: " + new Gson().toJson(response);
                 showResponse(net_success);
             }
 
             @Override
-            public void onFailure(ApiException e) {
+            public void onFailure(@NonNull ApiException e) {
                 String net_error = "Error: " + e.getMessage();
                 showResponse(net_error);
             }

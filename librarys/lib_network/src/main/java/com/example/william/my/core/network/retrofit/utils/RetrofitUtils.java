@@ -68,12 +68,12 @@ public class RetrofitUtils {
                 .subscribe(new RetrofitObserver<T>() {
 
                     @Override
-                    public void onResponse(T response) {
+                    public void onResponse(@NonNull T response) {
                         callback.onResponse(response);
                     }
 
                     @Override
-                    public void onFailure(ApiException e) {
+                    public void onFailure(@NonNull ApiException e) {
                         callback.onFailure(e);
                     }
                 });

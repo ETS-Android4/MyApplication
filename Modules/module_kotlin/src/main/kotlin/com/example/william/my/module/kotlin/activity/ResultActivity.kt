@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -56,14 +57,18 @@ class ResultActivity : ComponentActivity() {
     private var requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if (it) {// 同意
+                Toast.makeText(this, "您同意了权限申请", Toast.LENGTH_SHORT).show()
             } else {// 拒绝
+                Toast.makeText(this, "您拒绝了权限申请", Toast.LENGTH_SHORT).show()
             }
         }
 
     private var requestMultiplePermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             if (it[Manifest.permission.CAMERA]!!) {// 同意
+                Toast.makeText(this, "您同意了权限申请", Toast.LENGTH_SHORT).show()
             } else {// 拒绝
+                Toast.makeText(this, "您拒绝了权限申请", Toast.LENGTH_SHORT).show()
             }
         }
 }

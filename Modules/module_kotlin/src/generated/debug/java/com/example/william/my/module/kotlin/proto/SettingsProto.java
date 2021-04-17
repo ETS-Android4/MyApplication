@@ -132,7 +132,7 @@ public final class SettingsProto {
       return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
     public static Builder newBuilder(com.example.william.my.module.kotlin.proto.SettingsProto.Settings prototype) {
-      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+      return DEFAULT_INSTANCE.createBuilder(prototype);
     }
 
     /**

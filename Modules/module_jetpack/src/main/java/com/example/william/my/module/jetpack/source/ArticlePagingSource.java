@@ -11,6 +11,7 @@ import com.example.william.my.module.bean.ArticleDetailBean;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -19,7 +20,7 @@ public class ArticlePagingSource extends RxPagingSource<Integer, ArticleDetailBe
 
     @NotNull
     @Override
-    public Single<LoadResult<Integer, ArticleDetailBean>> loadSingle(@NotNull LoadParams<Integer> loadParams) {
+    public Single<LoadResult<Integer, ArticleDetailBean>> loadSingle(@NonNull LoadParams<Integer> loadParams) {
 
         // Start refresh at page 0 if undefined.
         Integer page = loadParams.getKey();
@@ -36,7 +37,7 @@ public class ArticlePagingSource extends RxPagingSource<Integer, ArticleDetailBe
 
     @Nullable
     @Override
-    public Integer getRefreshKey(@NotNull PagingState<Integer, ArticleDetailBean> pagingState) {
+    public Integer getRefreshKey(@NonNull PagingState<Integer, ArticleDetailBean> pagingState) {
         // Try to find the page key of the closest page to anchorPosition, from
         // either the prevKey or the nextKey, but you need to handle nullability
         // here:

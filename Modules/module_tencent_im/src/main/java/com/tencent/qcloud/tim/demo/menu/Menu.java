@@ -35,9 +35,9 @@ public class Menu {
     private ListView mMenuList;
     private PopMenuAdapter mMenuAdapter;
     private PopupWindow mMenuWindow;
-    private List<PopMenuAction> mActions = new ArrayList<>();
-    private Activity mActivity;
-    private View mAttachView;
+    private final List<PopMenuAction> mActions = new ArrayList<>();
+    private final Activity mActivity;
+    private final View mAttachView;
 
     public Menu(Activity activity, View attach, int menuType) {
         mActivity = activity;

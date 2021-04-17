@@ -13,8 +13,6 @@ import com.example.william.my.module.jetpack.model.BannerViewModel;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 /**
@@ -51,7 +49,7 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
     private void initBannerBean() {
         mViewModel.getBannerBean().observe(this, new WithLoadingTipObserver<List<BannerDetailBean>>(mLoadingTip) {
             @Override
-            protected void onResponse(@NotNull List<BannerDetailBean> response) {
+            protected void onResponse(@NonNull List<BannerDetailBean> response) {
                 showResponse(new Gson().toJson(response));
             }
         });

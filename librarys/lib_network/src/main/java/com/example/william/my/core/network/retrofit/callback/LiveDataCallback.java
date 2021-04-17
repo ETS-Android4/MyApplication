@@ -34,7 +34,7 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onResponse(RetrofitResponse<Bean> data) {
+    public void onResponse(@NonNull RetrofitResponse<Bean> data) {
         try {
             liveData.postValue(convert == null ? (RetrofitResponse<Data>) data : convert.convert(data));
         } catch (Exception e) {

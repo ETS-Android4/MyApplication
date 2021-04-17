@@ -3,6 +3,7 @@ package com.example.william.my.module.open.activity;
 import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -13,8 +14,6 @@ import com.opensource.svgaplayer.SVGAImageView;
 import com.opensource.svgaplayer.SVGAParser;
 import com.opensource.svgaplayer.SVGAVideoEntity;
 import com.opensource.svgaplayer.utils.log.SVGALogger;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +54,7 @@ public class SVGAPlayerActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onComplete(@NotNull SVGAVideoEntity svgaVideoEntity) {
+                public void onComplete(@NonNull SVGAVideoEntity svgaVideoEntity) {
                     SVGADrawable drawable = new SVGADrawable(svgaVideoEntity);
                     mSVGAImageView.setImageDrawable(drawable);
                     mSVGAImageView.startAnimation();

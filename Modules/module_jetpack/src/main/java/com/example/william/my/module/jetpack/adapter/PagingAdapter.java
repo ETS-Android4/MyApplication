@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.jetpack.R;
 
-import org.jetbrains.annotations.NotNull;
-
 public class PagingAdapter extends PagingDataAdapter<ArticleDetailBean, RecyclerView.ViewHolder> {
 
-    public PagingAdapter(@NotNull DiffUtil.ItemCallback<ArticleDetailBean> diffCallback) {
+    public PagingAdapter(@NonNull DiffUtil.ItemCallback<ArticleDetailBean> diffCallback) {
         super(diffCallback);
     }
 

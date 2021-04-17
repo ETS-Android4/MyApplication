@@ -80,7 +80,7 @@ public class ConversationFragment extends BaseFragment {
     }
 
     private void initTitleAction() {
-        mMenu = new Menu(getActivity(), (TitleBarLayout) mConversationLayout.getTitleBar(), Menu.MENU_TYPE_CONVERSATION);
+        mMenu = new Menu(getActivity(), mConversationLayout.getTitleBar(), Menu.MENU_TYPE_CONVERSATION);
         mConversationLayout.getTitleBar().setOnRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

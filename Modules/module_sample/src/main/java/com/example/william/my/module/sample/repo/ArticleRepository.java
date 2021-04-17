@@ -16,6 +16,8 @@ import com.example.william.my.module.sample.api.ArticleService;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.annotations.NonNull;
+
 public class ArticleRepository implements ArticleDataSource {
 
     private final ArticleService service;
@@ -43,7 +45,7 @@ public class ArticleRepository implements ArticleDataSource {
         RetrofitUtils.buildObs(service.getArticleListCache(page))
                 .subscribe(new RetrofitObserver<RetrofitResponse<ArticleDataBean>>() {
                     @Override
-                    public void onResponse(RetrofitResponse<ArticleDataBean> response) {
+                    public void onResponse(@NonNull RetrofitResponse<ArticleDataBean> response) {
                         if (ObjectUtils.isNotEmpty(response.getData()) &&
                                 CollectionUtils.isNotEmpty(response.getData().getDatas())) {
                             callback.onArticleLoaded(response.getData().getDatas());
@@ -53,7 +55,7 @@ public class ArticleRepository implements ArticleDataSource {
                     }
 
                     @Override
-                    public void onFailure(ApiException e) {
+                    public void onFailure(@NonNull ApiException e) {
                         callback.onFailure(e.getMessage());
                     }
                 });

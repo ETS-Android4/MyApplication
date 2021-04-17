@@ -151,7 +151,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             bundle.putString(TUIKitConstants.Selection.TITLE, getResources().getString(R.string.modify_nick_name));
             bundle.putString(TUIKitConstants.Selection.INIT_CONTENT, mNickNameView.getContent());
             bundle.putInt(TUIKitConstants.Selection.LIMIT, 20);
-            SelectionActivity.startTextSelection((Activity) getContext(), bundle, new SelectionActivity.OnResultReturnListener() {
+            SelectionActivity.startTextSelection(getContext(), bundle, new SelectionActivity.OnResultReturnListener() {
                 @Override
                 public void onReturn(Object text) {
                     mNickNameView.setContent(text.toString());
@@ -163,7 +163,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             bundle.putString(TUIKitConstants.Selection.TITLE, getResources().getString(R.string.modify_signature));
             bundle.putString(TUIKitConstants.Selection.INIT_CONTENT, mSignatureView.getContent());
             bundle.putInt(TUIKitConstants.Selection.LIMIT, 20);
-            SelectionActivity.startTextSelection((Activity) getContext(), bundle, new SelectionActivity.OnResultReturnListener() {
+            SelectionActivity.startTextSelection(getContext(), bundle, new SelectionActivity.OnResultReturnListener() {
                 @Override
                 public void onReturn(Object text) {
                     mSignatureView.setContent(text.toString());
@@ -175,7 +175,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             bundle.putString(TUIKitConstants.Selection.TITLE, getResources().getString(R.string.add_rule));
             bundle.putStringArrayList(TUIKitConstants.Selection.LIST, mJoinTypeTextList);
             bundle.putInt(TUIKitConstants.Selection.DEFAULT_SELECT_ITEM_INDEX, mJoinTypeIndex);
-            SelectionActivity.startListSelection((Activity) getContext(), bundle, new SelectionActivity.OnResultReturnListener() {
+            SelectionActivity.startListSelection(getContext(), bundle, new SelectionActivity.OnResultReturnListener() {
                 @Override
                 public void onReturn(Object text) {
                     mModifyAllowTypeView.setContent(mJoinTypeTextList.get((Integer) text));

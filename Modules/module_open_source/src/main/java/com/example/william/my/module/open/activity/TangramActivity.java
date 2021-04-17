@@ -28,7 +28,6 @@ import com.tmall.wireless.tangram.TangramEngine;
 import com.tmall.wireless.tangram.structure.viewcreator.ViewHolderCreator;
 import com.tmall.wireless.tangram.util.IInnerImageSetter;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -93,7 +92,7 @@ public class TangramActivity extends BaseActivity {
         // 监听 recyclerView 的滚动事件
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 //在 scroll 事件中触发 engine 的 onScroll，内部会触发需要异步加载的卡片去提前加载数据
                 engine.onScrolled();
