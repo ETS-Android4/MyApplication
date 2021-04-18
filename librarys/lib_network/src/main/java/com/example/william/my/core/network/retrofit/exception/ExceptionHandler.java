@@ -1,7 +1,6 @@
 package com.example.william.my.core.network.retrofit.exception;
 
 import android.net.ParseException;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -13,7 +12,6 @@ import org.json.JSONException;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
-import java.util.Objects;
 
 import javax.net.ssl.SSLHandshakeException;
 
@@ -40,34 +38,20 @@ public class ExceptionHandler {
         if (e instanceof HttpException) {//HTTP错误
             HttpException httpException = (HttpException) e;
             ex = new ApiException(e, ERROR.HTTP_ERROR);
-            switch (httpException.code()) {
-                case UNAUTHORIZED:
-                case FORBIDDEN:
-                case NOT_FOUND:
-                case REQUEST_TIMEOUT:
-                case GATEWAY_TIMEOUT:
-                case INTERNAL_SERVER_ERROR:
-                case BAD_GATEWAY:
-                case SERVICE_UNAVAILABLE:
-                default:
-                    ex.setCode(httpException.code());
-                    ex.setMessage("网络出错，请稍后再试");
-                    break;
-            }
-
-            ResponseBody body = Objects.requireNonNull(((HttpException) e).response()).errorBody();
+            ex.setCode(httpException.code());
+            ex.setMessage("网络出错，请稍后再试");
             try {
+                ResponseBody body = ((HttpException) e).response().errorBody();
                 if (body != null) {
                     ErrorBean error = new Gson().fromJson(body.string(), ErrorBean.class);
                     ex.setMessage(error.getMessage() != null ? error.getMessage() : "请求网络失败，请检查您的网络设置或稍后重试！");
                 }
             } catch (Exception e1) {
-                Log.e("HttpException", ((HttpException) e).message());
                 ex.setMessage("请求网络失败，请检查您的网络设置或稍后重试！");
             }
             return ex;
-        } else if (e instanceof ServerResultException) {
-            ServerResultException resultException = (ServerResultException) e;
+        } else if (e instanceof ResultException) {
+            ResultException resultException = (ResultException) e;
             ex = new ApiException(resultException, resultException.getCode());
             ex.setMessage(resultException.getMessage());
             return ex;
@@ -100,7 +84,7 @@ public class ExceptionHandler {
         /**
          * 未知错误
          */
-        public static final int UNKNOWN = 1000;
+        private static final int UNKNOWN = 1000;
 
         /**
          * 协议出错
