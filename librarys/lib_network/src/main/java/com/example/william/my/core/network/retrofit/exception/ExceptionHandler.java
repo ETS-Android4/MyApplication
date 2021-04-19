@@ -85,7 +85,7 @@ public class ExceptionHandler {
         /**
          * 未知错误
          */
-        private static final int UNKNOWN = 1000;
+        public static final int UNKNOWN = 1000;
 
         /**
          * 协议出错
