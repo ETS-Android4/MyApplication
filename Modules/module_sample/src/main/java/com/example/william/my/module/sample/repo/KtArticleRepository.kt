@@ -63,7 +63,7 @@ class KtArticleRepository : KtArticleDataSource {
             counter = 0
             getArticleResponseFlow(counter)
                 .onStart {
-                    _articleData.postValue(KtRetrofitResponse.loading())
+                    //_articleData.postValue(KtRetrofitResponse.loading())
                 }
                 .catch { exception ->
                     // 捕获上游出现的异常
