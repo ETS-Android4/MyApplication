@@ -2,7 +2,7 @@ package com.example.william.my.module.sample.utils.response
 
 import com.example.william.my.module.sample.utils.state.KtState
 
-data class KtRetrofitResponse<T>(var code: Int, var message: String, val data: Any?) {
+data class KtRetrofitResponse<T>(var code: Int, var message: String, val data: T?) {
 
     constructor(code: Int) : this(code, "", null)
 
@@ -21,12 +21,12 @@ data class KtRetrofitResponse<T>(var code: Int, var message: String, val data: A
             return KtRetrofitResponse(KtState.LOADING)
         }
 
-        fun <T> success(data: T): KtRetrofitResponse<T> {
-            return KtRetrofitResponse(KtState.SUCCESS, data)
-        }
-
         fun <T> error(message: String): KtRetrofitResponse<T> {
             return KtRetrofitResponse(KtState.ERROR, message)
+        }
+
+        fun <T> success(data: T): KtRetrofitResponse<T> {
+            return KtRetrofitResponse(KtState.SUCCESS, data)
         }
     }
 }

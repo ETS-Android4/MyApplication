@@ -2,14 +2,15 @@ package com.example.william.my.module.sample.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.william.my.core.network.retrofit.response.RetrofitResponse
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.bean.ArticleBean
-import com.example.william.my.module.bean.ArticleDetailBean
+import com.example.william.my.module.bean.ArticleDataBean
 import com.example.william.my.module.sample.api.KtArticleService
+import com.example.william.my.module.sample.utils.exception.KtApiException
+import com.example.william.my.module.sample.utils.exception.KtExceptionHandler
+import com.example.william.my.module.sample.utils.response.KtRetrofitResponse
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 
 class KtArticleRepository : KtArticleDataSource {
@@ -41,16 +42,39 @@ class KtArticleRepository : KtArticleDataSource {
             api.getArticle(counter)
         }
 
-    private suspend fun getArticleResponse(counter: Int): RetrofitResponse<ArticleDetailBean> =
+    private suspend fun getArticleResponse(counter: Int): KtRetrofitResponse<ArticleDataBean> =
         withContext(Dispatchers.IO) {
             val api = RetrofitUtils.buildApi(KtArticleService::class.java)
             api.getArticleResponse(counter)
         }
 
-    private suspend fun getArticleResponseFlow(counter: Int): Flow<RetrofitResponse<ArticleDetailBean>> =
+    private suspend fun getArticleResponseFlow(counter: Int): Flow<KtRetrofitResponse<ArticleDataBean>> =
         flow {
             val api = RetrofitUtils.buildApi(KtArticleService::class.java)
             api.getArticleResponse(counter)
             emit(api.getArticleResponse(counter))
         }
+
+    private val _articleData = MutableLiveData<KtRetrofitResponse<ArticleDataBean>>()
+    override val articleData: LiveData<KtRetrofitResponse<ArticleDataBean>> = _articleData
+
+    override suspend fun fetchNewDataResponse() {
+        withContext(Dispatchers.Main) {
+            counter = 0
+            getArticleResponseFlow(counter)
+                .onStart {
+                    _articleData.postValue(KtRetrofitResponse.loading())
+                }
+                .catch { exception ->
+                    // 捕获上游出现的异常
+                    val e: KtApiException = KtExceptionHandler.handleException(exception)
+                    _articleData.postValue(KtRetrofitResponse.error(e.message))
+                }
+                .collect { article ->
+                    // 更新视图
+                    // Update View with the latest favorite news
+                    _articleData.postValue(article)
+                }
+        }
+    }
 }

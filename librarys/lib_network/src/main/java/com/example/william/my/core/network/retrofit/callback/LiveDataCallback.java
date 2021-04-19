@@ -36,9 +36,8 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
     @Override
     public void onResponse(@NonNull RetrofitResponse<Bean> data) {
         try {
-            liveData.postValue(convert == null ? (RetrofitResponse<Data>) data : convert.convert(data));
+            liveData.postValue(convert == null ? (RetrofitResponse<Data>) data : convert.onResponse(data));
         } catch (Exception e) {
-            e.printStackTrace();
             liveData.postValue(RetrofitResponse.error("数据异常"));
         }
     }
@@ -49,6 +48,6 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
     }
 
     public interface LiveDataConvert<Bean, Data> {
-        RetrofitResponse<Data> convert(@NonNull RetrofitResponse<Bean> data) throws Exception;
+        RetrofitResponse<Data> onResponse(@NonNull RetrofitResponse<Bean> data) throws Exception;
     }
 }

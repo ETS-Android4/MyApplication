@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.R
-import com.example.william.my.module.sample.adapter.ArticleDataBindAdapter
 import com.example.william.my.module.sample.adapter.ArticleViewBindAdapter
 import com.example.william.my.module.sample.databinding.SampleLayoutBindRecyclerBinding
 import com.example.william.my.module.sample.model.KtArticleViewModel

@@ -58,7 +58,7 @@ public class DataRepository {
 
         LiveDataCallback.LiveDataConvert<List<BannerDetailBean>, List<BannerDetailData>> convert = new LiveDataCallback.LiveDataConvert<List<BannerDetailBean>, List<BannerDetailData>>() {
             @Override
-            public RetrofitResponse<List<BannerDetailData>> convert(@NotNull RetrofitResponse<List<BannerDetailBean>> data) throws Exception {
+            public RetrofitResponse<List<BannerDetailData>> onResponse(@NotNull RetrofitResponse<List<BannerDetailBean>> data) throws Exception {
                 List<BannerDetailData> movieData = new ArrayList<>();
                 for (BannerDetailBean movieBean : data.getData()) {
                     movieData.add(movieBean.convert());

@@ -71,7 +71,7 @@ public class ArticleRepository implements ArticleDataSource {
 
         LiveDataCallback.LiveDataConvert<ArticleDataBean, List<ArticleDetailBean>> convert = new LiveDataCallback.LiveDataConvert<ArticleDataBean, List<ArticleDetailBean>>() {
             @Override
-            public RetrofitResponse<List<ArticleDetailBean>> convert(@NotNull RetrofitResponse<ArticleDataBean> data) throws Exception {
+            public RetrofitResponse<List<ArticleDetailBean>> onResponse(@NotNull RetrofitResponse<ArticleDataBean> data) throws Exception {
                 if (ObjectUtils.isNotEmpty(data.getData()) &&
                         CollectionUtils.isNotEmpty(data.getData().getDatas())) {
                     return RetrofitResponse.success(data.getData().getDatas());

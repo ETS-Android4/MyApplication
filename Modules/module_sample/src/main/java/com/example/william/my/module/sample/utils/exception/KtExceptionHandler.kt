@@ -43,7 +43,8 @@ object KtExceptionHandler {
             }
             is KtResultException -> {
                 ex = KtApiException(e, e.code)
-                ex.message = e.message
+                ex.message =
+                    if (!e.message.isNullOrEmpty()) e.message!! else "请求网络失败，请检查您的网络设置或稍后重试！"
             }
             is JsonParseException, is JSONException, is ParseException -> {
                 ex = KtApiException(e, ERROR.PARSE_ERROR)
