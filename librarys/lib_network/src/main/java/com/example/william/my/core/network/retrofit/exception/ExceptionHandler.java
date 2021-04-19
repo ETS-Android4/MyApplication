@@ -39,12 +39,13 @@ public class ExceptionHandler {
             HttpException httpException = (HttpException) e;
             ex = new ApiException(e, ERROR.HTTP_ERROR);
             ex.setCode(httpException.code());
-            ex.setMessage("网络出错，请稍后再试");
             try {
                 ResponseBody body = ((HttpException) e).response().errorBody();
                 if (body != null) {
                     ErrorBean error = new Gson().fromJson(body.string(), ErrorBean.class);
                     ex.setMessage(error.getMessage() != null ? error.getMessage() : "请求网络失败，请检查您的网络设置或稍后重试！");
+                } else {
+                    ex.setMessage("请求网络失败，请检查您的网络设置或稍后重试！");
                 }
             } catch (Exception e1) {
                 ex.setMessage("请求网络失败，请检查您的网络设置或稍后重试！");

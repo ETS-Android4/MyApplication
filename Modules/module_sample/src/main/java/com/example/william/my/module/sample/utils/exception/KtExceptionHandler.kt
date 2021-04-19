@@ -29,12 +29,13 @@ object KtExceptionHandler {
             is HttpException -> {
                 ex = KtApiException(e, ERROR.HTTP_ERROR)
                 ex.code = e.code()
-                ex.message = "网络出错，请稍后再试"
                 try {
                     val body = e.response()!!.errorBody()
                     if (body != null) {
                         val error = Gson().fromJson(body.string(), ErrorBean::class.java)
                         ex.message = error.message
+                    } else {
+                        ex.message = "请求网络失败，请检查您的网络设置或稍后重试！"
                     }
                 } catch (e1: Exception) {
                     ex.message = "请求网络失败，请检查您的网络设置或稍后重试！"
