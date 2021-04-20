@@ -22,21 +22,21 @@ import okhttp3.RequestBody;
 public class RetrofitUtils {
 
     @NonNull
-    public static <T> T buildApi(Class<T> service) {
+    public static <T> T buildApi(Class<T> api) {
         return RetrofitHelper
                 .getInstance()
                 .baseUrl("https://www.wanandroid.com/")
                 .build()
-                .create(service);
+                .create(api);
     }
 
     @NonNull
-    public static <T> T buildApi(String baseUrl, Class<T> service) {
+    public static <T> T buildApi(String baseUrl, Class<T> api) {
         return RetrofitHelper
                 .getInstance()
                 .baseUrl(baseUrl)
                 .build()
-                .create(service);
+                .create(api);
     }
 
     @NonNull

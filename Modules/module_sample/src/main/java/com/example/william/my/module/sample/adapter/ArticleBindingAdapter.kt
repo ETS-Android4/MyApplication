@@ -11,9 +11,8 @@ object ArticleBindingAdapter {
     @BindingAdapter("items")
     fun setItems(view: RecyclerView, articleBean: ArticleBean?) {
         val adapter = view.adapter
-        if (adapter is ArticleViewBindAdapter) {
-            //if (adapter is ArticleDataBindAdapter) {
-            if (articleBean != null && articleBean.data != null) {
+        if (adapter is ArticleDataBindAdapter) {
+            if (articleBean?.data != null) {
                 if (articleBean.data.datas.isNullOrEmpty()) {
                     if (articleBean.data.curPage == 1) {
                         ToastUtils.showShort("暂无数据")
