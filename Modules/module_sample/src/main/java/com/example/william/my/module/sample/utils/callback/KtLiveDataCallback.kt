@@ -17,7 +17,7 @@ class KtLiveDataCallback<Bean, Data> : KtRetrofitFlowCallback<KtRetrofitResponse
      */
     constructor(liveData: MutableLiveData<KtRetrofitResponse<Data>>) {
         this.liveData = liveData
-        onLoading()
+        this.liveData.postValue(KtRetrofitResponse.loading())
     }
 
     /**
@@ -29,10 +29,6 @@ class KtLiveDataCallback<Bean, Data> : KtRetrofitFlowCallback<KtRetrofitResponse
     ) {
         this.liveData = liveData
         this.convert = convert
-        onLoading()
-    }
-
-    override fun onLoading() {
         this.liveData.postValue(KtRetrofitResponse.loading())
     }
 

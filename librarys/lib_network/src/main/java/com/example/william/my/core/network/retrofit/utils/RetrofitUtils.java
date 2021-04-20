@@ -66,12 +66,6 @@ public class RetrofitUtils {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RetrofitObserverObserver<T>() {
-
-                    @Override
-                    public void onLoading() {
-                        callback.onLoading();
-                    }
-
                     @Override
                     public void onResponse(@NonNull T response) {
                         callback.onResponse(response);

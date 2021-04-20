@@ -52,11 +52,6 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
 
         obs.subscribe(new RetrofitObserverObserver<BannerBean>() {
             @Override
-            public void onLoading() {
-
-            }
-
-            @Override
             public void onResponse(@NonNull BannerBean response) {
                 String net_success = "Success: " + new Gson().toJson(response);
                 showResponse(net_success);
@@ -77,11 +72,6 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
         Observable<RetrofitResponse<List<BannerDetailBean>>> responseObs = RetrofitUtils.buildObs(service.getBannerResponse());
 
         responseObs.subscribe(new RetrofitObserverObserver<RetrofitResponse<List<BannerDetailBean>>>() {
-            @Override
-            public void onLoading() {
-
-            }
-
             @Override
             public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
                 String net_success = "Success: " + new Gson().toJson(response);

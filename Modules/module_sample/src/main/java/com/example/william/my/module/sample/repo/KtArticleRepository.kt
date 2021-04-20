@@ -93,9 +93,6 @@ class KtArticleRepository : KtArticleDataSource {
         KtRetrofit.buildFlow(
             getArticleResponseFlow(counter),
             object : KtRetrofitFlowCallback<KtRetrofitResponse<ArticleDataBean>> {
-                override fun onLoading() {
-                    _articleData.postValue(KtRetrofitResponse.loading())
-                }
 
                 override fun onResponse(response: KtRetrofitResponse<ArticleDataBean>) {
                     _articleData.postValue(response)

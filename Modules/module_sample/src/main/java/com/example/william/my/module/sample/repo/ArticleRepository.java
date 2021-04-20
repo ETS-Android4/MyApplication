@@ -47,11 +47,6 @@ public class ArticleRepository implements ArticleDataSource {
         RetrofitUtils.buildObs(service.getArticleListCache(page))
                 .subscribe(new RetrofitObserverObserver<RetrofitResponse<ArticleDataBean>>() {
                     @Override
-                    public void onLoading() {
-
-                    }
-
-                    @Override
                     public void onResponse(@NonNull RetrofitResponse<ArticleDataBean> response) {
                         if (ObjectUtils.isNotEmpty(response.getData()) &&
                                 CollectionUtils.isNotEmpty(response.getData().getDatas())) {
