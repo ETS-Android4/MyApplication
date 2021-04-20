@@ -3,12 +3,12 @@ package com.example.william.my.core.network.retrofit.utils;
 import androidx.annotation.NonNull;
 
 import com.example.william.my.core.network.retrofit.body.CountingRequestBody;
-import com.example.william.my.core.network.retrofit.callback.RetrofitCallback;
+import com.example.william.my.core.network.retrofit.callback.RetrofitObserverCallback;
 import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.function.HttpResultFunction;
 import com.example.william.my.core.network.retrofit.helper.RetrofitHelper;
 import com.example.william.my.core.network.retrofit.listener.RetrofitRequestListener;
-import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
+import com.example.william.my.core.network.retrofit.observer.RetrofitObserverObserver;
 
 import java.io.File;
 
@@ -60,12 +60,17 @@ public class RetrofitUtils {
      *
      * @param callback LiveDataCallback(需要RetrofitResponse<Bean>格式数据)
      */
-    public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitCallback<T> callback) {
+    public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitObserverCallback<T> callback) {
         observable
                 .onErrorResumeNext(new HttpResultFunction<>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RetrofitObserver<T>() {
+                .subscribe(new RetrofitObserverObserver<T>() {
+
+                    @Override
+                    public void onLoading() {
+                        callback.onLoading();
+                    }
 
                     @Override
                     public void onResponse(@NonNull T response) {

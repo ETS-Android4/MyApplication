@@ -2,7 +2,7 @@ package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.exception.ApiException;
-import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
+import com.example.william.my.core.network.retrofit.observer.RetrofitObserverObserver;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
@@ -50,7 +50,12 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
     private void getBanner() {
         Observable<BannerBean> obs = RetrofitUtils.buildObs(service.getBanner());
 
-        obs.subscribe(new RetrofitObserver<BannerBean>() {
+        obs.subscribe(new RetrofitObserverObserver<BannerBean>() {
+            @Override
+            public void onLoading() {
+
+            }
+
             @Override
             public void onResponse(@NonNull BannerBean response) {
                 String net_success = "Success: " + new Gson().toJson(response);
@@ -71,7 +76,12 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
     private void getBannerList() {
         Observable<RetrofitResponse<List<BannerDetailBean>>> responseObs = RetrofitUtils.buildObs(service.getBannerResponse());
 
-        responseObs.subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
+        responseObs.subscribe(new RetrofitObserverObserver<RetrofitResponse<List<BannerDetailBean>>>() {
+            @Override
+            public void onLoading() {
+
+            }
+
             @Override
             public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
                 String net_success = "Success: " + new Gson().toJson(response);

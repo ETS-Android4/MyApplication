@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.william.my.module.bean.ArticleBean
+import com.example.william.my.module.bean.ArticleDataBean
 import com.example.william.my.module.sample.repo.KtArticleRepository
+import com.example.william.my.module.sample.utils.response.KtRetrofitResponse
 import kotlinx.coroutines.launch
 
 /**
@@ -15,9 +17,12 @@ class KtArticleViewModel(private val articleDataSource: KtArticleRepository) : V
 
     val article: LiveData<ArticleBean> = articleDataSource.article
 
+    val articleData: LiveData<KtRetrofitResponse<ArticleDataBean>> = articleDataSource.articleData
+
     fun onRefresh() {
         viewModelScope.launch {
-            articleDataSource.fetchNewData()
+            //articleDataSource.fetchNewData()
+            articleDataSource.fetchNewDataResponse()
         }
     }
 

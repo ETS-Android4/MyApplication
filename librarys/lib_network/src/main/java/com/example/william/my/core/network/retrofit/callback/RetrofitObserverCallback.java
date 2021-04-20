@@ -4,7 +4,9 @@ import com.example.william.my.core.network.retrofit.exception.ApiException;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 
-public interface RetrofitCallback<T> {
+public interface RetrofitObserverCallback<T> {
+
+    void onLoading();
 
     void onResponse(@NonNull T response);
 

@@ -10,7 +10,7 @@ import com.example.william.my.core.network.retrofit.status.State;
 /**
  * 携带状态 {@link State} 的 LiveData
  */
-public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitResponse<Bean>> {
+public class LiveDataCallback<Bean, Data> implements RetrofitObserverCallback<RetrofitResponse<Bean>> {
 
     public LiveDataConvert<Bean, Data> convert;
     private final MutableLiveData<RetrofitResponse<Data>> liveData;
@@ -20,7 +20,7 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
      */
     public LiveDataCallback(MutableLiveData<RetrofitResponse<Data>> liveData) {
         this.liveData = liveData;
-        this.liveData.postValue(RetrofitResponse.loading());
+        onLoading();
     }
 
     /**
@@ -28,8 +28,13 @@ public class LiveDataCallback<Bean, Data> implements RetrofitCallback<RetrofitRe
      */
     public LiveDataCallback(MutableLiveData<RetrofitResponse<Data>> liveData, LiveDataConvert<Bean, Data> convert) {
         this.liveData = liveData;
-        this.liveData.postValue(RetrofitResponse.loading());
         this.convert = convert;
+        onLoading();
+    }
+
+    @Override
+    public void onLoading() {
+        this.liveData.postValue(RetrofitResponse.loading());
     }
 
     @SuppressWarnings("unchecked")

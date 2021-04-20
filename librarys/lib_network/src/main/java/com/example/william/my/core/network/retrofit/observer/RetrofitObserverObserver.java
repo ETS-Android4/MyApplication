@@ -1,6 +1,6 @@
 package com.example.william.my.core.network.retrofit.observer;
 
-import com.example.william.my.core.network.retrofit.callback.RetrofitCallback;
+import com.example.william.my.core.network.retrofit.callback.RetrofitObserverCallback;
 import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.exception.ExceptionHandler;
 
@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * <p>
  * io.reactivex.rxjava3.core.Observer
  */
-public abstract class RetrofitObserver<T> implements Observer<T>, RetrofitCallback<T> {
+public abstract class RetrofitObserverObserver<T> implements Observer<T>, RetrofitObserverCallback<T> {
 
     private Disposable disposable;
 
