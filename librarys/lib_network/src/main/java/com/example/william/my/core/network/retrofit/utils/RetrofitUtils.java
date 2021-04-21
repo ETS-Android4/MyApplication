@@ -58,9 +58,9 @@ public class RetrofitUtils {
     /**
      * ViewModel -> LiveDataCallback
      *
-     * @param callback LiveDataCallback(需要RetrofitResponse<Bean>格式数据)
+     * @param observerCallback LiveDataCallback(需要RetrofitResponse<Bean>格式数据)
      */
-    public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitObserverCallback<T> callback) {
+    public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitObserverCallback<T> observerCallback) {
         observable
                 .onErrorResumeNext(new HttpResultFunction<>())
                 .subscribeOn(Schedulers.io())
@@ -68,12 +68,12 @@ public class RetrofitUtils {
                 .subscribe(new RetrofitObserver<T>() {
                     @Override
                     public void onResponse(@NonNull T response) {
-                        callback.onResponse(response);
+                        observerCallback.onResponse(response);
                     }
 
                     @Override
                     public void onFailure(@NonNull ApiException e) {
-                        callback.onFailure(e);
+                        observerCallback.onFailure(e);
                     }
                 });
     }

@@ -38,7 +38,7 @@ object KtRetrofit {
         //Cookie
         builder.cookieJar(cookieJar())
 
-        ////忽略https证书
+        //忽略https证书
         builder.hostnameVerifier(ignoreHostnameVerifier())
             .sslSocketFactory(ignoreSSLSocketFactory(), trustManager())
         return builder
