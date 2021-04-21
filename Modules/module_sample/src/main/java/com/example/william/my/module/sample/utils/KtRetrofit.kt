@@ -116,7 +116,7 @@ object KtRetrofit {
         withContext(Dispatchers.Main) {
             flow
                 .onStart {
-
+                    flowCallback.onLoading()
                 }
                 .catch { exception ->
                     flowCallback.onFailure(KtExceptionHandler.handleException(exception))
