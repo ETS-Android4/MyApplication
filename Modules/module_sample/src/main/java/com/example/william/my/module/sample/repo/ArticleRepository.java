@@ -7,7 +7,7 @@ import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.example.william.my.core.network.retrofit.callback.LiveDataCallback;
 import com.example.william.my.core.network.retrofit.exception.ApiException;
-import com.example.william.my.core.network.retrofit.observer.RetrofitObserverObserver;
+import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.bean.ArticleDataBean;
@@ -45,7 +45,7 @@ public class ArticleRepository implements ArticleDataSource {
     public void getArticleList(int page, LoadArticleCallback callback) {
 
         RetrofitUtils.buildObs(service.getArticleListCache(page))
-                .subscribe(new RetrofitObserverObserver<RetrofitResponse<ArticleDataBean>>() {
+                .subscribe(new RetrofitObserver<RetrofitResponse<ArticleDataBean>>() {
                     @Override
                     public void onResponse(@NonNull RetrofitResponse<ArticleDataBean> response) {
                         if (ObjectUtils.isNotEmpty(response.getData()) &&

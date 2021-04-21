@@ -8,7 +8,7 @@ import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.function.HttpResultFunction;
 import com.example.william.my.core.network.retrofit.helper.RetrofitHelper;
 import com.example.william.my.core.network.retrofit.listener.RetrofitRequestListener;
-import com.example.william.my.core.network.retrofit.observer.RetrofitObserverObserver;
+import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
 
 import java.io.File;
 
@@ -65,7 +65,7 @@ public class RetrofitUtils {
                 .onErrorResumeNext(new HttpResultFunction<>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RetrofitObserverObserver<T>() {
+                .subscribe(new RetrofitObserver<T>() {
                     @Override
                     public void onResponse(@NonNull T response) {
                         callback.onResponse(response);

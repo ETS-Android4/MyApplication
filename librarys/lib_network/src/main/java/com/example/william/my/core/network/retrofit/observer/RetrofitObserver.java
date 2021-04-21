@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * <p>
  * io.reactivex.rxjava3.core.Observer
  */
-public abstract class RetrofitObserverObserver<T> implements Observer<T>, RetrofitObserverCallback<T> {
+public abstract class RetrofitObserver<T> implements Observer<T>, RetrofitObserverCallback<T> {
 
     private Disposable disposable;
 
