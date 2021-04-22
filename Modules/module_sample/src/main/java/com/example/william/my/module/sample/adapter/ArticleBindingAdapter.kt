@@ -4,7 +4,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
 import com.example.william.my.module.bean.ArticleDataBean
-import com.example.william.my.module.sample.utils.response.KtRetrofitResponse
+import com.example.william.my.module.sample.retrofit.response.KtRetrofitResponse
 
 object ArticleBindingAdapter {
 

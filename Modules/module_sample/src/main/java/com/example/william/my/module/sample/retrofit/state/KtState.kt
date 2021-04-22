@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.utils.state
+package com.example.william.my.module.sample.retrofit.state
 
 object KtState {
     const val LOADING = -1

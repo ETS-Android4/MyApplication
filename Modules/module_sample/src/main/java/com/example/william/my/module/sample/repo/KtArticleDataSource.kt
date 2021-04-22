@@ -3,7 +3,7 @@ package com.example.william.my.module.sample.repo
 import androidx.lifecycle.LiveData
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.bean.ArticleDataBean
-import com.example.william.my.module.sample.utils.response.KtRetrofitResponse
+import com.example.william.my.module.sample.retrofit.response.KtRetrofitResponse
 
 interface KtArticleDataSource {
     val article: LiveData<ArticleBean>

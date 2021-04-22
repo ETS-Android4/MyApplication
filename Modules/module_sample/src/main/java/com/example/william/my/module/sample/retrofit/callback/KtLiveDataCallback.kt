@@ -1,8 +1,8 @@
-package com.example.william.my.module.sample.utils.callback
+package com.example.william.my.module.sample.retrofit.callback
 
 import androidx.lifecycle.MutableLiveData
-import com.example.william.my.module.sample.utils.exception.KtApiException
-import com.example.william.my.module.sample.utils.response.KtRetrofitResponse
+import com.example.william.my.module.sample.retrofit.exception.KtApiException
+import com.example.william.my.module.sample.retrofit.response.KtRetrofitResponse
 
 /**
  * 携带状态 [State] 的 LiveData
@@ -11,7 +11,7 @@ class KtLiveDataCallback<Bean>(private val liveData: MutableLiveData<KtRetrofitR
     KtRetrofitFlowCallback<KtRetrofitResponse<Bean>> {
 
     override fun onLoading() {
-        this.liveData.postValue(KtRetrofitResponse.loading())
+        //this.liveData.postValue(KtRetrofitResponse.loading())
     }
 
     override fun onResponse(response: KtRetrofitResponse<Bean>) {

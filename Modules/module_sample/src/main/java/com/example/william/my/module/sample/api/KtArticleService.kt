@@ -3,7 +3,7 @@ package com.example.william.my.module.sample.api
 import com.example.william.my.module.base.Urls
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.bean.ArticleDataBean
-import com.example.william.my.module.sample.utils.response.KtRetrofitResponse
+import com.example.william.my.module.sample.retrofit.response.KtRetrofitResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 

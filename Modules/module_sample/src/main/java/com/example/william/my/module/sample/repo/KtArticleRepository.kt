@@ -6,12 +6,12 @@ import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.bean.ArticleDataBean
 import com.example.william.my.module.sample.api.KtArticleService
-import com.example.william.my.module.sample.utils.KtRetrofit
-import com.example.william.my.module.sample.utils.callback.KtLiveDataCallback
-import com.example.william.my.module.sample.utils.callback.KtRetrofitFlowCallback
-import com.example.william.my.module.sample.utils.exception.KtApiException
-import com.example.william.my.module.sample.utils.exception.KtExceptionHandler
-import com.example.william.my.module.sample.utils.response.KtRetrofitResponse
+import com.example.william.my.module.sample.retrofit.KtRetrofit
+import com.example.william.my.module.sample.retrofit.callback.KtLiveDataCallback
+import com.example.william.my.module.sample.retrofit.callback.KtRetrofitFlowCallback
+import com.example.william.my.module.sample.retrofit.exception.KtApiException
+import com.example.william.my.module.sample.retrofit.exception.KtExceptionHandler
+import com.example.william.my.module.sample.retrofit.response.KtRetrofitResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
@@ -74,16 +74,13 @@ class KtArticleRepository : KtArticleDataSource {
             counter = 0
             getArticleResponseFlow(counter)
                 .onStart {
-                    //_articleData.postValue(KtRetrofitResponse.loading())
+                   // _articleData.postValue(KtRetrofitResponse.loading())
                 }
                 .catch { exception ->
-                    // 捕获上游出现的异常
                     val e: KtApiException = KtExceptionHandler.handleException(exception)
                     _articleData.postValue(KtRetrofitResponse.error(e.message))
                 }
                 .collect { article ->
-                    // 更新视图
-                    // Update View with the latest favorite news
                     _articleData.postValue(article)
                 }
         }
@@ -95,7 +92,7 @@ class KtArticleRepository : KtArticleDataSource {
             object : KtRetrofitFlowCallback<KtRetrofitResponse<ArticleDataBean>> {
 
                 override fun onLoading() {
-                    _articleData.postValue(KtRetrofitResponse.loading())
+                    //_articleData.postValue(KtRetrofitResponse.loading())
                 }
 
                 override fun onResponse(response: KtRetrofitResponse<ArticleDataBean>) {

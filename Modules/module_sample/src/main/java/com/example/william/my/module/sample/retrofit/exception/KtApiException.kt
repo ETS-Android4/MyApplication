@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.utils.exception
+package com.example.william.my.module.sample.retrofit.exception
 
 /**
  * 统一异常管理

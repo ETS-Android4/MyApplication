@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.utils.exception
+package com.example.william.my.module.sample.retrofit.exception
 
 /**
  * 服务器返回自定义异常

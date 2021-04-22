@@ -1,6 +1,6 @@
-package com.example.william.my.module.sample.utils.response
+package com.example.william.my.module.sample.retrofit.response
 
-import com.example.william.my.module.sample.utils.state.KtState
+import com.example.william.my.module.sample.retrofit.state.KtState
 
 data class KtRetrofitResponse<T>(var code: Int, var message: String, val data: T?) {
 
@@ -17,9 +17,9 @@ data class KtRetrofitResponse<T>(var code: Int, var message: String, val data: T
         get() = code == KtState.SUCCESS
 
     companion object {
-        fun <T> loading(): KtRetrofitResponse<T> {
-            return KtRetrofitResponse(KtState.LOADING)
-        }
+        //fun <T> loading(): KtRetrofitResponse<T> {
+        //    return KtRetrofitResponse(KtState.LOADING)
+        //}
 
         fun <T> error(message: String): KtRetrofitResponse<T> {
             return KtRetrofitResponse(KtState.ERROR, message)

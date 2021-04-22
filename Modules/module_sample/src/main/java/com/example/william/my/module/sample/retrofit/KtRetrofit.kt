@@ -1,9 +1,9 @@
-package com.example.william.my.module.sample.utils
+package com.example.william.my.module.sample.retrofit
 
 import android.annotation.SuppressLint
 import com.example.william.my.core.network.retrofit.converter.RetrofitConverterFactory
-import com.example.william.my.module.sample.utils.callback.KtRetrofitFlowCallback
-import com.example.william.my.module.sample.utils.exception.KtExceptionHandler
+import com.example.william.my.module.sample.retrofit.callback.KtRetrofitFlowCallback
+import com.example.william.my.module.sample.retrofit.exception.KtExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

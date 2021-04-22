@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.utils.exception
+package com.example.william.my.module.sample.retrofit.exception
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException

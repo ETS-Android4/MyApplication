@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.utils
+package com.example.william.my.module.sample.retrofit
 
 sealed class KtRetrofitResult<out R> {
 

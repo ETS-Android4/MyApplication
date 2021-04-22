@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.bean.ArticleDataBean
 import com.example.william.my.module.sample.repo.KtArticleRepository
-import com.example.william.my.module.sample.utils.response.KtRetrofitResponse
+import com.example.william.my.module.sample.retrofit.response.KtRetrofitResponse
 import kotlinx.coroutines.launch
 
 /**
