@@ -1,5 +1,7 @@
 package com.example.william.my.core.network.retrofit.observer;
 
+import android.util.Log;
+
 import com.example.william.my.core.network.retrofit.callback.RetrofitObserverCallback;
 import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.exception.ExceptionHandler;
@@ -21,6 +23,7 @@ public abstract class RetrofitObserver<T> implements Observer<T>, RetrofitObserv
     @Override
     public void onSubscribe(@NonNull Disposable d) {
         disposable = d;
+        onLoading();
     }
 
     @Override

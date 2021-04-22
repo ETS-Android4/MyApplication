@@ -6,6 +6,8 @@ import io.reactivex.rxjava3.annotations.NonNull;
 
 public interface RetrofitObserverCallback<T> {
 
+    void onLoading();
+
     void onResponse(@NonNull T response);
 
     void onFailure(@NonNull ApiException e);

@@ -20,7 +20,7 @@ public class LiveDataCallback<Bean, Data> implements RetrofitObserverCallback<Re
      */
     public LiveDataCallback(MutableLiveData<RetrofitResponse<Data>> liveData) {
         this.liveData = liveData;
-        this.liveData.postValue(RetrofitResponse.loading());
+        onLoading();
     }
 
     /**
@@ -29,6 +29,11 @@ public class LiveDataCallback<Bean, Data> implements RetrofitObserverCallback<Re
     public LiveDataCallback(MutableLiveData<RetrofitResponse<Data>> liveData, LiveDataConvert<Bean, Data> convert) {
         this.liveData = liveData;
         this.convert = convert;
+        onLoading();
+    }
+
+    @Override
+    public void onLoading() {
         this.liveData.postValue(RetrofitResponse.loading());
     }
 

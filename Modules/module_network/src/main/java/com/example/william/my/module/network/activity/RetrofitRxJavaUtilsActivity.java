@@ -1,5 +1,7 @@
 package com.example.william.my.module.network.activity;
 
+import android.util.Log;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
@@ -52,6 +54,11 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
 
         obs.subscribe(new RetrofitObserver<BannerBean>() {
             @Override
+            public void onLoading() {
+
+            }
+
+            @Override
             public void onResponse(@NonNull BannerBean response) {
                 String net_success = "Success: " + new Gson().toJson(response);
                 showResponse(net_success);
@@ -72,6 +79,11 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
         Observable<RetrofitResponse<List<BannerDetailBean>>> responseObs = RetrofitUtils.buildObs(service.getBannerResponse());
 
         responseObs.subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
+            @Override
+            public void onLoading() {
+
+            }
+
             @Override
             public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
                 String net_success = "Success: " + new Gson().toJson(response);

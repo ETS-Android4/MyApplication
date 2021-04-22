@@ -36,6 +36,11 @@ public class RxRetrofitActivity extends BaseResponseActivity {
                 .createObservable()
                 .subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
                     @Override
+                    public void onLoading() {
+
+                    }
+
+                    @Override
                     public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
                         String net_success = "Success: " + new Gson().toJson(response);
                         showResponse(net_success);
