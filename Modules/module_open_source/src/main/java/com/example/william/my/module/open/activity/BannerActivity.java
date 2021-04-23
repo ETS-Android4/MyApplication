@@ -13,6 +13,10 @@ import com.bumptech.glide.Glide;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.router.ARouterPath;
+import com.youth.banner.Banner;
+import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.holder.BannerImageHolder;
+import com.youth.banner.indicator.CircleIndicator;
 
 import java.util.Arrays;
 
@@ -23,6 +27,7 @@ import java.util.Arrays;
  * app:canLoop="true"
  * <p>
  * https://github.com/saiwu-bigkoo/Android-ConvenientBanner
+ * https://github.com/youth5201314/banner
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_Banner)
 public class BannerActivity extends BaseActivity {
@@ -31,6 +36,8 @@ public class BannerActivity extends BaseActivity {
     private ConvenientBanner<Integer> mConvenientBannerLocal;
     //顶部广告栏控件，加载网络图片
     private ConvenientBanner<String> mConvenientBannerNet;
+
+    private Banner<Integer, BannerImageAdapter<Integer>> banner;
 
     //本地图片
     private final Integer[] mImagesLocal = new Integer[]{
@@ -99,6 +106,17 @@ public class BannerActivity extends BaseActivity {
         //.setOnPageChangeListener(this)
         ;
         mConvenientBannerNet.notifyDataSetChanged();
+
+        banner = findViewById(R.id.banner);
+        banner.setAdapter(new BannerImageAdapter<Integer>(Arrays.asList(mImagesLocal)) {
+
+            @Override
+            public void onBindView(BannerImageHolder holder, Integer data, int position, int size) {
+                holder.imageView.setImageResource(data);
+            }
+        })
+                .addBannerLifecycleObserver(this)//添加生命周期观察者
+                .setIndicator(new CircleIndicator(this));
     }
 
     @Override
