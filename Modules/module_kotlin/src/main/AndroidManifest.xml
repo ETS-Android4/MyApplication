@@ -4,12 +4,12 @@
 
     <application>
         <activity android:name=".KotlinActivity" />
+        <activity android:name=".activity.CoilActivity" />
         <activity android:name=".activity.FlowActivity" />
         <activity android:name=".activity.PagingActivity" />
         <activity android:name=".activity.DataStoreActivity" />
         <activity android:name=".activity.ResultActivity" />
         <activity android:name=".activity.ResultSecondActivity" />
-
         <activity android:name=".activity.CoroutinesActivity" />
         <activity android:name=".activity.ScopeActivity" />
         <activity android:name=".activity.DelegatesActivity" />

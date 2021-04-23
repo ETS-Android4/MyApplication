@@ -12,6 +12,7 @@ class KotlinActivity : BaseListActivity() {
 
     override fun initData() {
         super.initData()
+        mMap["CoilActivity"] = ARouterPath.Kotlin.Kotlin_Coil
         mMap["FLowActivity"] = ARouterPath.Kotlin.Kotlin_FLow
         mMap["PagingActivity"] = ARouterPath.Kotlin.Kotlin_Paging
         mMap["DataStoreActivity"] = ARouterPath.Kotlin.Kotlin_DataStore

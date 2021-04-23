@@ -29,7 +29,7 @@ public class GlideActivity extends BaseActivity {
 
     private boolean b;
     private ImageView mImageView;
-    private static final String url = "https://www.baidu.com/img/baidu_jgylogo1.gif";
+    private static final String url = "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

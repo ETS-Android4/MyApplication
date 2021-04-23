@@ -47,7 +47,7 @@ public class SVGAPlayerActivity extends AppCompatActivity {
         SVGAParser parser = SVGAParser.Companion.shareParser();
 
         try {
-            parser.decodeFromURL(new URL("https://github.com/yyued/SVGA-Samples/blob/master/posche.svga?raw=true"), new SVGAParser.ParseCompletion() {
+            parser.decodeFromURL(new URL("http://upload.fanqievv.com/resource/mobile/image/avatarframe/lmxingkong.svga"), new SVGAParser.ParseCompletion() {
                 @Override
                 public void onError() {
 

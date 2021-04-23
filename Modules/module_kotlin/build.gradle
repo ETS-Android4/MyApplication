@@ -1,5 +1,6 @@
 apply plugin: 'com.google.protobuf'
 apply from: '../../protobuf.gradle'
+apply plugin: 'kotlin-android'
 
 android {
     //自定义源文件
@@ -39,5 +40,9 @@ dependencies {
     //protobuf
     //You need to depend on the lite runtime library, not protobuf-java
     implementation deps.protobuf
+    //Coil
+    implementation deps.coil
+    implementation deps.coil_gif
+    implementation deps.coil_svg
 }
 
