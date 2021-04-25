@@ -8,7 +8,7 @@ public class Singleton {
      */
     private static Singleton instance;
 
-    public static Singleton getInstance() {
+    public static Singleton getInstance1() {
         if (instance == null) {
             instance = new Singleton();
         }
@@ -53,6 +53,13 @@ public class Singleton {
 
     public static Singleton getInstance4() {
         return SingletonHolder.INSTANCE;
+    }
+
+    /**
+     * 枚举
+     */
+    enum Singleton5 {
+        INSTANCE
     }
 
 }
