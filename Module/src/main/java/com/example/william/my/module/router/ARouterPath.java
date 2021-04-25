@@ -128,6 +128,7 @@ public class ARouterPath {
         public static final String Demo_Broadcast = "/module_demo/broadcast";
         public static final String Demo_FloatWindow = "/module_demo/float_window";
         public static final String Demo_JobScheduler = "/module_demo/job_scheduler";
+        public static final String Demo_KeyboardView = "/module_demo/Keyboard_view";
         public static final String Demo_Messenger = "/module_demo/messenger";
         public static final String Demo_NetworkStatus = "/module_demo/net_status";
         public static final String Demo_Permission = "/module_demo/permission";

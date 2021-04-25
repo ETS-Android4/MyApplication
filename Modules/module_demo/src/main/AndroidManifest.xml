@@ -13,6 +13,7 @@
         <activity android:name=".activity.JobSchedulerActivity" />
         <activity android:name=".activity.OptionalBeanActivity" />
         <activity android:name=".activity.MessengerActivity" />
+        <activity android:name=".activity.KeyboardViewActivity" />
         <activity android:name=".activity.NetworkStatusActivity" />
         <activity android:name=".activity.PermissionActivity" />
         <activity android:name=".activity.PicCropActivity" />

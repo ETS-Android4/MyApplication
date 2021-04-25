@@ -79,7 +79,7 @@ public class FloatWindowActivity extends BaseResponseActivity {
             mLayoutParams.type = WindowManager.LayoutParams.TYPE_TOAST;
         }
         //添加视图
-        mView = LayoutInflater.from(this).inflate(R.layout.widget_layout_float, (ViewGroup) getWindow().getDecorView(), false);
+        mView = LayoutInflater.from(this).inflate(R.layout.demo_layout_float, (ViewGroup) getWindow().getDecorView(), false);
 
         mView.setOnClickListener(new View.OnClickListener() {
             @Override

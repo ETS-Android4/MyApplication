@@ -44,7 +44,7 @@ public class TransitionSecondActivity extends BaseActivity {
                 break;
         }
         // 所有操作在设置内容视图之前
-        setContentView(R.layout.widget_activity_transition_second);
+        setContentView(R.layout.demo_activity_transition_second);
 
         findViewById(R.id.transition_share).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

@@ -16,7 +16,7 @@ public class BehaviorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.widget_activity_behavior);
+        setContentView(R.layout.demo_activity_behavior);
 
         RecyclerView mRecyclerView = findViewById(R.id.behavior_recycleView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

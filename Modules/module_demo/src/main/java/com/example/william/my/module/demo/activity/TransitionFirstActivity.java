@@ -24,7 +24,7 @@ public class TransitionFirstActivity extends BaseActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.widget_activity_transition_first);
+        setContentView(R.layout.demo_activity_transition_first);
 
         mIntent = new Intent(this, TransitionSecondActivity.class);
 
