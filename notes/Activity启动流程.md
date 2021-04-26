@@ -1,6 +1,9 @@
 ## Activity 启动流程
 
 startActivity -> startActivityForResult
+// Activity中的startActivity也是调用startActivityForResult方法来实现的，
+// 当startActivityForResult方法的requestCode为-1不返回结果，
+// requestCode大于等于零则会回调Activity.onActivityResult方法返回结果。
 ```
     @Override
     public void startActivity(Intent intent, @Nullable Bundle options) {
