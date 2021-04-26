@@ -15,7 +15,7 @@
         android:name=".app.SampleApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/bugly_app_name"
-        android:theme="@style/basics_AppTheme">
+        android:theme="@style/Basics_AppTheme">
         <activity android:name=".activity.BuglyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

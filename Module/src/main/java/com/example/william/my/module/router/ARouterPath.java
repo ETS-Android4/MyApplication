@@ -134,6 +134,7 @@ public class ARouterPath {
         public static final String Demo_PicCrop = "/module_demo/pic_crop";
         public static final String Demo_Service = "/module_demo/service";
         public static final String Demo_Transition = "/module_demo/transition";
+        public static final String Demo_Transparent = "/module_demo/Transparent";
         public static final String Demo_Turntable = "/module_demo/turntable";
         public static final String Demo_Typeface = "/module_demo/typeface";
     }

@@ -13,7 +13,7 @@
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/wx_app_name"
-        android:theme="@style/basics_AppTheme">
+        android:theme="@style/Basics_AppTheme">
         <activity android:name=".WeChatActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -19,6 +19,9 @@
         <activity android:name=".activity.ServiceActivity" />
         <activity android:name=".activity.TransitionFirstActivity" />
         <activity android:name=".activity.TransitionSecondActivity" />
+        <activity
+            android:name=".activity.TransparentActivity"
+            android:theme="@style/Basics_Transparent_Theme" />
         <activity android:name=".activity.TurntableActivity" />
         <activity android:name=".activity.TypefaceActivity" />
 

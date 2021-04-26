@@ -16,13 +16,13 @@ public class DemoActivity extends BaseListActivity {
         mMap.put("BroadcastActivity", ARouterPath.Demo.Demo_Broadcast);
         mMap.put("FloatWindowActivity", ARouterPath.Demo.Demo_FloatWindow);
         mMap.put("JobSchedulerActivity", ARouterPath.Demo.Demo_JobScheduler);
-        mMap.put("KeyboardViewActivity", ARouterPath.Demo.Demo_KeyboardView);
         mMap.put("MessengerActivity", ARouterPath.Demo.Demo_Messenger);
         mMap.put("NetworkStatusActivity", ARouterPath.Demo.Demo_NetworkStatus);
         mMap.put("PermissionActivity", ARouterPath.Demo.Demo_Permission);
         mMap.put("PicCropActivity", ARouterPath.Demo.Demo_PicCrop);
         mMap.put("ServiceActivity", ARouterPath.Demo.Demo_Service);
         mMap.put("TransitionActivity", ARouterPath.Demo.Demo_Transition);
+        mMap.put("TransparentActivity", ARouterPath.Demo.Demo_Transparent);
         mMap.put("TurntableActivity", ARouterPath.Demo.Demo_Turntable);
         mMap.put("TypefaceActivity", ARouterPath.Demo.Demo_Typeface);
     }

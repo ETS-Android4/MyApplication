@@ -30,7 +30,7 @@
         android:name=".app.JApp"
         android:icon="@drawable/ic_launcher"
         android:label="@string/j_app_name"
-        android:theme="@style/basics_AppTheme">
+        android:theme="@style/Basics_AppTheme">
         <!-- 极光认证 -->
         <activity android:name=".activity.JVerifyActivity">
             <intent-filter>
