@@ -2,13 +2,20 @@
 Set：代表无序、不可重复的集合；
 List：代表有序、重复的集合；
 Map：代表具有映射关系的集合
+
 ## HashMap 与 HashTable
 HashMap 是非 synchronized 的，性能更好，HashMap 可以接受为 null 的 key-value。
 Hashtable 是线程安全的，比 HashMap 要慢，不接受 null 的 key-value。
+
 ## ArrayList 与 LinkedList
 ArrayList 基于数组实现，查找快：o(1)，增删慢：o(n)
 LinkedList 基于双向链表实现，查找慢：o(n)，增删快：o(1)。
 当需要对数据进行对此访问的情况下选用ArrayList，当需要对数据进行多次增加删除修改时采用LinkedList。
+
+## ArrayBlockingQueue 与 LinkedBlockingQueue
+ArrayBlockingQueue和ArrayList一样，内部基于数组来存放元素
+LinkedBlockingQueue则和LinkedList一样，内部基于链表来存放元素。
+LinkedBlockingQueue如果不指定容量，默认为Integer.MAX_VALUE
 
 TCP
 TCP 三次握手
