@@ -69,12 +69,16 @@ class KtArticleRepository : KtArticleDataSource {
         fetchNewDataLiveDataCallback()
     }
 
+    override suspend fun loadMoreDataResponse() {
+        loadMoreDataLiveDataCallback()
+    }
+
     private suspend fun fetchNewDataBase() {
         withContext(Dispatchers.Main) {
             counter = 0
             getArticleResponseFlow(counter)
                 .onStart {
-                   // _articleData.postValue(KtRetrofitResponse.loading())
+                    // _articleData.postValue(KtRetrofitResponse.loading())
                 }
                 .catch { exception ->
                     val e: KtApiException = KtExceptionHandler.handleException(exception)
@@ -87,6 +91,7 @@ class KtArticleRepository : KtArticleDataSource {
     }
 
     private suspend fun fetchNewDataFlowCallback() {
+        counter = 0
         KtRetrofit.buildFlow(
             getArticleResponseFlow(counter),
             object : KtRetrofitFlowCallback<KtRetrofitResponse<ArticleDataBean>> {
@@ -106,6 +111,14 @@ class KtArticleRepository : KtArticleDataSource {
     }
 
     private suspend fun fetchNewDataLiveDataCallback() {
+        counter = 0
+        KtRetrofit.buildFlow(
+            getArticleResponseFlow(counter), KtLiveDataCallback(_articleData)
+        )
+    }
+
+    private suspend fun loadMoreDataLiveDataCallback() {
+        counter++
         KtRetrofit.buildFlow(
             getArticleResponseFlow(counter), KtLiveDataCallback(_articleData)
         )

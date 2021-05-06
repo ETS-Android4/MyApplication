@@ -51,11 +51,11 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
     }
 
     private fun subscribeToModel() {
-        mViewModel.article.observe(this, Observer {
-            if (it.data.datas.isNullOrEmpty()) {
-                onDataNotAvailable(it.data.curPage == 1)
+        mViewModel.articleData.observe(this, Observer {
+            if (it.data?.datas.isNullOrEmpty()) {
+                onDataNotAvailable(it.data?.curPage == 1)
             } else {
-                showArticles(it.data.curPage == 1, it.data.datas)
+                showArticles(it.data?.curPage == 1, it.data!!.datas)
             }
         })
         mViewModel.onRefresh()

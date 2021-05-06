@@ -11,4 +11,5 @@ interface KtArticleDataSource {
     suspend fun loadMoreData()
     val articleData: LiveData<KtRetrofitResponse<ArticleDataBean>>
     suspend fun fetchNewDataResponse()
+    suspend fun loadMoreDataResponse()
 }

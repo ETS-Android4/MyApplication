@@ -28,7 +28,8 @@ class KtArticleViewModel(private val articleDataSource: KtArticleRepository) : V
 
     fun onLoadMore() {
         viewModelScope.launch {
-            articleDataSource.loadMoreData()
+            //articleDataSource.loadMoreData()
+            articleDataSource.loadMoreDataResponse()
         }
     }
 }
