@@ -79,6 +79,66 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
         getArticleByWithLoadingTipObserver();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //mViewModel.queryArticleList();
+        mViewModel.onRefreshArticle();
+    }
+
+    private void showLoading() {
+        ToastUtils.showShort("正在请求数据…");
+    }
+
+    public void showToast(String message) {
+        showEmptyView();
+        ToastUtils.showShort(message);
+    }
+
+    private void onDataNotAvailable(boolean isFirst) {
+        if (isFirst) {
+            showEmptyView();
+        } else {
+            onDataNoMore();
+        }
+    }
+
+    public void showEmptyView() {
+        TextView textView = new TextView(getActivity());
+        textView.setGravity(Gravity.CENTER);
+        textView.setText("无数据");
+        mAdapter.setEmptyView(textView);
+        mAdapter.notifyDataSetChanged();
+        mSmartRefreshLayout.setEnableLoadMore(false);
+    }
+
+    public void onDataNoMore() {
+        ToastUtils.showShort("无更多数据");
+    }
+
+    private void showArticles(boolean isFirst, List<ArticleDetailBean> articles) {
+        if (isFirst) {
+            mAdapter.setNewInstance(articles);
+        } else {
+            mAdapter.addData(articles);
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        //mViewModel.onLoadMoreArticleList();
+        mViewModel.onLoadMoreArticle();
+        mSmartRefreshLayout.finishLoadMore(1000);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        //mViewModel.onRefreshArticleList();
+        mViewModel.onRefreshArticle();
+        mSmartRefreshLayout.finishRefresh(1000);
+    }
+
     /**
      * getArticleList -> Observer
      */
@@ -169,65 +229,5 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
                 return super.onFailure(msg);
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //mViewModel.queryArticleList();
-        mViewModel.onRefreshArticle();
-    }
-
-    private void showLoading() {
-        ToastUtils.showShort("正在请求数据…");
-    }
-
-    public void showToast(String message) {
-        showEmptyView();
-        ToastUtils.showShort(message);
-    }
-
-    private void onDataNotAvailable(boolean isFirst) {
-        if (isFirst) {
-            showEmptyView();
-        } else {
-            onDataNoMore();
-        }
-    }
-
-    public void showEmptyView() {
-        TextView textView = new TextView(getActivity());
-        textView.setGravity(Gravity.CENTER);
-        textView.setText("无数据");
-        mAdapter.setEmptyView(textView);
-        mAdapter.notifyDataSetChanged();
-        mSmartRefreshLayout.setEnableLoadMore(false);
-    }
-
-    public void onDataNoMore() {
-        ToastUtils.showShort("无更多数据");
-    }
-
-    private void showArticles(boolean isFirst, List<ArticleDetailBean> articles) {
-        if (isFirst) {
-            mAdapter.setNewInstance(articles);
-        } else {
-            mAdapter.addData(articles);
-        }
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        //mViewModel.onLoadMoreArticleList();
-        mViewModel.onLoadMoreArticle();
-        mSmartRefreshLayout.finishLoadMore(1000);
-    }
-
-    @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        //mViewModel.onRefreshArticleList();
-        mViewModel.onRefreshArticle();
-        mSmartRefreshLayout.finishRefresh(1000);
     }
 }

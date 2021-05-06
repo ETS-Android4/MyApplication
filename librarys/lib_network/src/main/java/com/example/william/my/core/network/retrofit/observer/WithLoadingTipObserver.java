@@ -36,7 +36,9 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
     public void onChanged(@NonNull RetrofitResponse<T> tRetrofitResponse) {
         switch (tRetrofitResponse.getCode()) {
             case State.LOADING:
-                mLoadingTip.setLoadingTip(LoadingTip.Status.loading);
+                if (mLoadingTip != null) {
+                    mLoadingTip.setLoadingTip(LoadingTip.Status.loading);
+                }
                 break;
             case State.SUCCESS:
                 if (mLoadingTip != null) {
