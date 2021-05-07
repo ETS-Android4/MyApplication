@@ -10,6 +10,7 @@
         <activity android:name=".activity.BroadcastActivity" />
         <activity android:name=".activity.BehaviorActivity" />
         <activity android:name=".activity.FloatWindowActivity" />
+        <activity android:name=".activity.ImageDecoderActivity" />
         <activity android:name=".activity.JobSchedulerActivity" />
         <activity android:name=".activity.OptionalBeanActivity" />
         <activity android:name=".activity.MessengerActivity" />
