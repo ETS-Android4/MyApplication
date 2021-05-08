@@ -18,6 +18,6 @@ public class ThreadPoolTest {
     // 缓存线程池
     ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
-    // 定长线程池 定时及周期性任务执行，延迟执行
+    // 定时线程池 定时及周期性任务执行，延迟执行
     ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5);
 }

@@ -23,3 +23,26 @@ IntentService是一个继承自Service的抽象类
 1. 在IntentService.onCreate()里创建一个Handle对象即HandlerThread，利用其内部的Looper会实例化一个ServiceHandler对象；
 2. 任务请求的Intent会被封装到Message并通过ServiceHandler发送给Looper的MessageQueue，最终在HandlerThread中执行；
 3. 在ServiceHandler.handleMessage()中会调用IntentService.onHandleIntent()，可在该方法中处理后台任务的逻辑。
+
+## 线程池
+
+```
+public ThreadPoolExecutor(int corePoolSize, // 核心线程数
+                          int maximumPoolSize, // 最大线程数
+                          long keepAliveTime,  // 闲置等待时间
+                          TimeUnit unit, // 超时时间
+                          BlockingQueue<Runnable> workQueue) { // 线程池中任务队列
+}
+```
+
+1. 单线程线程池
+ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
+
+2. 定长线程池
+ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+
+3. 缓存线程池
+ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+
+4. 定时线程池
+ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5);
