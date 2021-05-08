@@ -3,6 +3,7 @@
     package="com.example.william.my.module.demo">
 
     <application>
+
         <activity android:name=".DemoActivity" />
         <activity android:name=".activity.AnimatorActivity" />
         <activity android:name=".activity.AsyncTaskActivity" />
@@ -11,7 +12,7 @@
         <activity android:name=".activity.BehaviorActivity" />
         <activity android:name=".activity.FloatWindowActivity" />
         <activity android:name=".activity.ImageDecoderActivity" />
-        <activity android:name=".activity.JobSchedulerActivity" />
+        <activity android:name=".activity.JobActivity" />
         <activity android:name=".activity.OptionalBeanActivity" />
         <activity android:name=".activity.MessengerActivity" />
         <activity android:name=".activity.NetworkStatusActivity" />
@@ -20,6 +21,7 @@
         <activity android:name=".activity.ServiceActivity" />
         <activity android:name=".activity.TransitionFirstActivity" />
         <activity android:name=".activity.TransitionSecondActivity" />
+        <activity android:name=".activity.HandlerThreadActivity" />
         <activity
             android:name=".activity.TransparentActivity"
             android:theme="@style/Basics_Transparent_Theme" />
@@ -30,8 +32,10 @@
         <service android:name=".service.ForegroundService" />
         <service android:name=".service.MessageService" />
         <service
-            android:name=".service.JobSchedulerService"
+            android:name=".service.MyJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service android:name=".service.MyIntentService" />
     </application>
 
 </manifest>

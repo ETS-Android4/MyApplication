@@ -21,6 +21,7 @@ import android.app.job.JobService;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
@@ -28,32 +29,32 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.william.my.module.demo.activity.JobSchedulerActivity;
+import com.example.william.my.module.demo.activity.JobActivity;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class JobSchedulerService extends JobService {
+public class MyJobService extends JobService {
 
-    private static final String TAG = JobSchedulerService.class.getSimpleName();
+    private static final String TAG = MyJobService.class.getSimpleName();
 
     private Messenger mActivityMessenger;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mActivityMessenger = intent.getParcelableExtra(JobSchedulerActivity.KEY_MESSENGER);
+        mActivityMessenger = intent.getParcelableExtra(JobActivity.KEY_MESSENGER);
         return START_NOT_STICKY;
     }
 
     @Override
     public boolean onStartJob(final JobParameters params) {
-        sendMessage(JobSchedulerActivity.MSG_COLOR_START, params.getJobId());
+        sendMessage(JobActivity.MSG_COLOR_START, params.getJobId());
 
-        long duration = params.getExtras().getLong(JobSchedulerActivity.KEY_WORK_DURATION);
+        long duration = params.getExtras().getLong(JobActivity.KEY_WORK_DURATION);
 
-        Handler handler = new Handler();
+        Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                sendMessage(JobSchedulerActivity.MSG_COLOR_STOP, params.getJobId());
+                sendMessage(JobActivity.MSG_COLOR_STOP, params.getJobId());
                 jobFinished(params, false);
             }
         }, duration);
@@ -65,7 +66,7 @@ public class JobSchedulerService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        sendMessage(JobSchedulerActivity.MSG_COLOR_STOP, params.getJobId());
+        sendMessage(JobActivity.MSG_COLOR_STOP, params.getJobId());
         Log.e(TAG, "on stop job: " + params.getJobId());
 
         // Return false to drop the job.

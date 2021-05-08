@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.PersistableBundle;
@@ -17,7 +18,7 @@ import androidx.annotation.RequiresApi;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.demo.service.JobSchedulerService;
+import com.example.william.my.module.demo.service.MyJobService;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.lang.ref.WeakReference;
@@ -25,7 +26,7 @@ import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 @Route(path = ARouterPath.Demo.Demo_JobScheduler)
-public class JobSchedulerActivity extends BaseResponseActivity {
+public class JobActivity extends BaseResponseActivity {
 
     public static final int MSG_COLOR_START = 0;
     public static final int MSG_COLOR_STOP = 1;
@@ -37,18 +38,19 @@ public class JobSchedulerActivity extends BaseResponseActivity {
 
     private int mJobId = 0;
 
-    private static class JobSchedulerHandler extends Handler {
+    private static class JobHandler extends Handler {
 
-        private final WeakReference<JobSchedulerActivity> weakReference;
+        private final WeakReference<JobActivity> weakReference;
 
-        private JobSchedulerHandler(JobSchedulerActivity activity) {
-            super();
+
+        private JobHandler(JobActivity activity) {
+            super(Looper.getMainLooper());
             this.weakReference = new WeakReference<>(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            JobSchedulerActivity mActivity = weakReference.get();
+            JobActivity mActivity = weakReference.get();
             if (mActivity == null) {
                 return;
             }
@@ -68,7 +70,7 @@ public class JobSchedulerActivity extends BaseResponseActivity {
     @Override
     public void initView() {
         super.initView();
-        mServiceComponent = new ComponentName(this, JobSchedulerService.class);
+        mServiceComponent = new ComponentName(this, MyJobService.class);
     }
 
     @Override
@@ -80,9 +82,9 @@ public class JobSchedulerActivity extends BaseResponseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        JobSchedulerHandler jobHandler = new JobSchedulerHandler(this);
+        JobHandler jobHandler = new JobHandler(this);
         Messenger jobMessenger = new Messenger(jobHandler);
-        Intent intent = new Intent(this, JobSchedulerService.class);
+        Intent intent = new Intent(this, MyJobService.class);
         intent.putExtra(KEY_MESSENGER, jobMessenger);
         startService(intent);
     }
@@ -90,7 +92,7 @@ public class JobSchedulerActivity extends BaseResponseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        stopService(new Intent(this, JobSchedulerService.class));
+        stopService(new Intent(this, MyJobService.class));
     }
 
     @Override
@@ -144,7 +146,7 @@ public class JobSchedulerActivity extends BaseResponseActivity {
     public void cancelAllJobs() {
         JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         jobScheduler.cancelAll();
-        Toast.makeText(JobSchedulerActivity.this, "All jobs cancelled", Toast.LENGTH_SHORT).show();
+        Toast.makeText(JobActivity.this, "All jobs cancelled", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -156,9 +158,9 @@ public class JobSchedulerActivity extends BaseResponseActivity {
         if (jobs.size() > 0) {
             int jobId = jobs.get(0).getId();
             jobScheduler.cancel(jobId);
-            Toast.makeText(JobSchedulerActivity.this, "取消 : " + jobId, Toast.LENGTH_SHORT).show();
+            Toast.makeText(JobActivity.this, "取消 : " + jobId, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(JobSchedulerActivity.this, "No jobs to cancel", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JobActivity.this, "No jobs to cancel", Toast.LENGTH_SHORT).show();
         }
     }
 }
