@@ -36,7 +36,7 @@ public class ImageDecoderActivity extends AppCompatActivity {
         // 从asset中加载
         Drawable drawable2 = null;
         try {
-            drawable2 = Drawable.createFromStream(getAssets().open("ic_launcher.png"), "");
+            drawable2 = Drawable.createFromStream(getAssets().open("icons/ic_launcher.png"), "");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +46,7 @@ public class ImageDecoderActivity extends AppCompatActivity {
         // 从asset中加载
         Bitmap bitmap2 = null;
         try {
-            bitmap2 = BitmapFactory.decodeStream(getAssets().open("ic_launcher.png"));
+            bitmap2 = BitmapFactory.decodeStream(getAssets().open("icons/ic_launcher.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,7 +63,7 @@ public class ImageDecoderActivity extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
             Source source = ImageDecoder.createSource(getResources(), R.drawable.ic_launcher);
 
-            Source source2 = ImageDecoder.createSource(getAssets(), "ic_launcher.png");
+            Source source2 = ImageDecoder.createSource(getAssets(), "icons/ic_launcher.png");
 
             Bitmap decodeBitmap = null;
             Drawable decodeDrawable = null;

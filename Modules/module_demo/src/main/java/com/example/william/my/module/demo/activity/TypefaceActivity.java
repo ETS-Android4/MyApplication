@@ -15,7 +15,7 @@ public class TypefaceActivity extends BaseResponseActivity {
         super.initView();
 
         AssetManager assets = getAssets();
-        Typeface typeface = Typeface.createFromAsset(assets, "juice.ttf");
+        Typeface typeface = Typeface.createFromAsset(assets, "fonts/juice.ttf");
         mResponse.setTypeface(typeface);
     }
 }
