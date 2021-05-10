@@ -141,6 +141,14 @@ NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNE
 notificationManager.notify(notificationId, builder.build());
 ```
 
+### 透明主题
+
+只有全屏不透明的activity才可以设置方向，解决方案：1.要么去掉对应activity中的 screenOrientation 属性，2.或者对应设置方向的代码。
+
+```
+<item name="android:windowIsTranslucent">false</item>
+```
+
 ### 未知来源
 
 AndroidManifest文件中添加安装未知来源应用的权限

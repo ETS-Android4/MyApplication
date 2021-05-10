@@ -18,3 +18,41 @@
 ## Looper（消息泵）
 
 通过Looper.loop()不断地从MessageQueue中抽取Message，按分发机制将消息分发给目标处理者。
+
+## sendMessage 与 post 区别
+
+* sendMessage : 在当前线程执行
+* post : 开启新的线程执行
+
+```
+    public final boolean sendMessage(@NonNull Message msg) {
+        return sendMessageDelayed(msg, 0);
+    }
+
+    public final boolean post(@NonNull Runnable r) {
+       return  sendMessageDelayed(getPostMessage(r), 0);
+    }
+
+    private static Message getPostMessage(Runnable r) {
+        Message m = Message.obtain();
+        m.callback = r;
+        return m;
+    }
+
+    public void dispatchMessage(@NonNull Message msg) {
+        if (msg.callback != null) {
+            handleCallback(msg);
+        } else {
+            if (mCallback != null) {
+                if (mCallback.handleMessage(msg)) {
+                    return;
+                }
+            }
+            handleMessage(msg);
+        }
+    }
+
+    private static void handleCallback(Message message) {
+        message.callback.run();
+    }
+```
