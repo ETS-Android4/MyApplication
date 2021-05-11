@@ -3,7 +3,7 @@
     package="com.example.william.my.module.demo">
 
     <application>
-
+        <activity android:name=".activity.TouchEventActivity"></activity>
         <activity android:name=".DemoActivity" />
         <activity android:name=".activity.AnimatorActivity" />
         <activity android:name=".activity.AsyncTaskActivity" />
@@ -34,7 +34,6 @@
         <service
             android:name=".service.MyJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service android:name=".service.MyIntentService" />
     </application>
 

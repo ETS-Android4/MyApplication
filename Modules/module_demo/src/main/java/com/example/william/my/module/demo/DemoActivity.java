@@ -21,6 +21,7 @@ public class DemoActivity extends BaseListActivity {
         mMap.put("PermissionActivity", ARouterPath.Demo.Demo_Permission);
         mMap.put("PicCropActivity", ARouterPath.Demo.Demo_PicCrop);
         mMap.put("ServiceActivity", ARouterPath.Demo.Demo_Service);
+        mMap.put("TouchEventActivity", ARouterPath.Demo.Demo_TouchEvent);
         mMap.put("TransitionActivity", ARouterPath.Demo.Demo_Transition);
         mMap.put("TransparentActivity", ARouterPath.Demo.Demo_Transparent);
         mMap.put("TurntableActivity", ARouterPath.Demo.Demo_Turntable);
