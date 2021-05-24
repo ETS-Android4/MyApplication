@@ -25,6 +25,7 @@ res/drawable 下新建 xml 文件
 2. RotateAnimation（旋转动画）
 3. ScaleAnimation（缩放动画）
 4. TranslateAnimation（位移动画）
+5. AnimationSet 复合动画
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -57,12 +58,10 @@ res/drawable 下新建 xml 文件
 </set>
 ```
 
-5. AnimationSet 复合动画
-
 ## 3. 属性动画
 
-• ValueAnimator 类是先改变值，然后 手动赋值 给对象的属性从而实现动画；是 间接 对对象属性进行操作；
-• ObjectAnimator 类是先改变值，然后 自动赋值 给对象的属性从而实现动画；是 直接 对对象属性进行操作；
+* ValueAnimator 类是先改变值，然后 手动赋值 给对象的属性从而实现动画；是 间接 对对象属性进行操作；
+* ObjectAnimator 类是先改变值，然后 自动赋值 给对象的属性从而实现动画；是 直接 对对象属性进行操作；
 
 ### Interpolator（插值器）
 

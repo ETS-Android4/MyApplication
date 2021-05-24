@@ -1,23 +1,28 @@
 ## Java 集合框架
+
 Set：代表无序、不可重复的集合；
 List：代表有序、重复的集合；
 Map：代表具有映射关系的集合
 
 ## HashMap 与 HashTable
+
 HashMap 是非 synchronized 的，性能更好，HashMap 可以接受为 null 的 key-value。
 Hashtable 是线程安全的，比 HashMap 要慢，不接受 null 的 key-value。
 
 ## ArrayList 与 LinkedList
+
 ArrayList 基于数组实现，查找快：o(1)，增删慢：o(n)
 LinkedList 基于双向链表实现，查找慢：o(n)，增删快：o(1)。
 当需要对数据进行对此访问的情况下选用ArrayList，当需要对数据进行多次增加删除修改时采用LinkedList。
 
 ## ArrayBlockingQueue 与 LinkedBlockingQueue
+
 ArrayBlockingQueue和ArrayList一样，内部基于数组来存放元素
 LinkedBlockingQueue则和LinkedList一样，内部基于链表来存放元素。
 LinkedBlockingQueue如果不指定容量，默认为Integer.MAX_VALUE
 
 ## synchronized和lock的区别
+
 1.synchronized是java内置关键字，在jvm层面，Lock是java类；
 2.synchronized无法判断是否获取锁的状态，Lock可以判断是否获取到锁；
 3.synchronized会自动释放锁(a 线程执行完同步代码会释放锁 ；b 线程执行过程中发生异常会释放锁)，Lock需在finally中手工释放锁（unlock()方法释放锁），否则容易造成线程死锁；
@@ -28,7 +33,13 @@ LinkedBlockingQueue如果不指定容量，默认为Integer.MAX_VALUE
 
 https://www.cnblogs.com/iyyy/p/7993788.html
 
+## Thread wait和sleep的区别
+
+1. sleep()方法是Thread类里面的，主要的意义就是让当前线程停止执行，让出cpu给其他的线程，但是不会释放对象锁资源以及监控的状态，当指定的时间到了之后又会自动恢复运行状态。
+2. wait()方法是Object类里面的，主要的意义就是让线程放弃当前的对象的锁，进入等待此对象的等待锁定池，只有针对此对象调动notify方法后本线程才能够进入对象锁定池准备获取对象锁进入运行状态。
+
 ## TCP
+
 TCP 三次握手
 
 A：你能听到吗？

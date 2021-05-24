@@ -34,7 +34,7 @@ import com.example.william.my.module.demo.activity.JobActivity;
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MyJobService extends JobService {
 
-    private static final String TAG = MyJobService.class.getSimpleName();
+    private final String TAG = getClass().getSimpleName();
 
     private Messenger mActivityMessenger;
 

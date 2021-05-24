@@ -3,6 +3,8 @@
 
 * Retrofit是网络调度层，做具体业务请求、线程切换、数据转换
 
+## Retrofit 简单使用
+
 1. 创建 Retrofit 实例
 
 ```
@@ -41,3 +43,5 @@ repos.enqueue(new Callback<ResponseBody>() {
     }
 });
 ```
+
+## Retrofit 工作原理

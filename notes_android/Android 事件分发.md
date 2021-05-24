@@ -55,12 +55,11 @@ public boolean dispatch(MotionEvent ev) {
 
 ## requestDisallowInterceptTouchEvent 禁止拦截触摸事件
 
-• ViewGroup特有方法。一般在子view中来调用的。
-• 当一个子view不希望它的父view来通过onInterceptTouchEvent方法拦截事件的时候，调用该方法即可实现事件的传递和接管
+* ViewGroup特有方法。一般在子view中来调用的。
+* 当一个子view不希望它的父view来通过onInterceptTouchEvent方法拦截事件的时候，调用该方法即可实现事件的传递和接管
 
 ## onTouch、onTouchEvent、onClick执行顺序
 
-• 执行顺序：onTouch —> onTouchEvent —> onClick
+* 执行顺序：onTouch —> onTouchEvent —> onClick
 
 因此onTouchListener的onTouch()方法会先触发；如果onTouch()返回false才会接着触发onTouchEvent()，同样的，内置诸如onClick()事件的实现等等都基于onTouchEvent()；如果onTouch()返回true，这些事件将不会被触发。
-
