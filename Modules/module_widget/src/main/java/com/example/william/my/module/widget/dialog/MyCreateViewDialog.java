@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
-import com.example.william.my.library.dialog.BaseDialogFragment;
 import com.example.william.my.module.widget.R;
 
-public class MyCreateViewDialog extends BaseDialogFragment {
+public class MyCreateViewDialog extends DialogFragment {
 
     /**
      * 通过onCreateView返回一个view

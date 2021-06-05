@@ -100,7 +100,6 @@ public class ModuleActivity extends BaseListActivity {
                 .observe(this, new Observer<String>() {
                     @Override
                     public void onChanged(@Nullable String s) {
-                        Log.e("TAG", s);
                         Toast.makeText(ModuleActivity.this, s, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -110,7 +109,6 @@ public class ModuleActivity extends BaseListActivity {
                 .observe(this, new Observer<SmartMessageEvent>() {
                     @Override
                     public void onChanged(SmartMessageEvent event) {
-                        Log.e("TAG", event.getMessage());
                         Toast.makeText(ModuleActivity.this, event.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

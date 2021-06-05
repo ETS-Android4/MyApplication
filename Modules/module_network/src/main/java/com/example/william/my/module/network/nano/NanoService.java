@@ -28,9 +28,9 @@ public class NanoService extends Service {
         try {
             nanoServer = new NanoServer();
             nanoServer.start(30000);
-            Log.e(TAG, "Start HttpService Success...");
+            Log.i(TAG, "Start HttpService Success...");
         } catch (IOException e) {
-            Log.e(TAG, "Start HttpService Failed...");
+            Log.i(TAG, "Start HttpService Failed...");
             e.printStackTrace();
         }
     }
@@ -41,9 +41,9 @@ public class NanoService extends Service {
         if (nanoServer != null) {
             try {
                 nanoServer.stop();
-                Log.e(TAG, "Stop HttpService Success...");
+                Log.i(TAG, "Stop HttpService Success...");
             } catch (Exception e) {
-                Log.e(TAG, "Stop HttpService Failed...");
+                Log.i(TAG, "Stop HttpService Failed...");
                 e.printStackTrace();
             }
         }

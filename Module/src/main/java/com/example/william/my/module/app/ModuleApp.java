@@ -2,6 +2,7 @@ package com.example.william.my.module.app;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.william.my.library.interfaces.IComponentApplication;
@@ -10,9 +11,11 @@ import com.example.william.my.module.utils.Crash;
 
 public class ModuleApp implements IComponentApplication {
 
+    protected final String TAG = this.getClass().getSimpleName();
+
     @Override
     public void init(Application application) {
-        initCrash();
+        initCrash(application);
         initARouter(application);
     }
 
@@ -21,11 +24,12 @@ public class ModuleApp implements IComponentApplication {
 
     }
 
-    private void initCrash() {
+    private void initCrash(Application application) {
         Crash.init(new Crash.OnCrashListener() {
             @Override
             public void onCrash(String crashInfo, Throwable e) {
-                Log.e("ModuleApp", crashInfo);
+                Log.e(TAG, crashInfo);
+                Toast.makeText(application, crashInfo, Toast.LENGTH_SHORT).show();
             }
         });
     }

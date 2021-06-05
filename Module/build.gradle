@@ -47,4 +47,10 @@ dependencies {
     //SmartEventBus
     implementation deps.smartbus
     annotationProcessor deps.smartbus_compiler
+    //BRVAH
+    implementation deps.brvah
+    //SmartRefresh
+    implementation deps.smartrefresh
+    implementation deps.smartrefresh_header
+    implementation deps.smartrefresh_footer
 }

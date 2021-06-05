@@ -1,7 +1,5 @@
 package com.example.william.my.module.network.activity;
 
-import android.util.Log;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.network.retrofit.exception.ApiException;
 import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;

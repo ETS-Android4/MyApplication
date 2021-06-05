@@ -1,9 +1,15 @@
-package com.example.william.my.library.dialog;
+package com.example.william.my.module.base;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 public class BaseDialogFragment extends DialogFragment {
@@ -34,5 +40,31 @@ public class BaseDialogFragment extends DialogFragment {
                 e.printStackTrace();
             }
         }
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        if (setDialog() != null) {
+            return setDialog();
+        }
+        return super.onCreateDialog(savedInstanceState);
+    }
+
+    public Dialog setDialog() {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (setLayout() != 0) {
+            return inflater.inflate(setLayout(), container);
+        }
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    public int setLayout() {
+        return 0;
     }
 }

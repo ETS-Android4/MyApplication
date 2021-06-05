@@ -54,7 +54,6 @@ public class FileSDCardUtil {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
             File directory_downloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            Log.e("TAG", "directory_pictures=" + directory_downloads);
             return directory_downloads.getAbsolutePath();
         }
         return "";
@@ -65,7 +64,6 @@ public class FileSDCardUtil {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
             File directory = new File(Environment.getExternalStorageDirectory() + File.separator);
-            Log.e("TAG", "directory_pictures=" + directory);
             return directory.getAbsolutePath();
         }
         return "";

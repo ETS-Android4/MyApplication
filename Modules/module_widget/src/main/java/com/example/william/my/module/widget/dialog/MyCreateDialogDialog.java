@@ -7,11 +7,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
-import com.example.william.my.library.dialog.BaseDialogFragment;
 import com.example.william.my.module.widget.R;
 
-public class MyCreateDialogDialog extends BaseDialogFragment {
+public class MyCreateDialogDialog extends DialogFragment {
 
     /**
      * 重新onCreateDialog方法， 返回一个创建的dialog对象

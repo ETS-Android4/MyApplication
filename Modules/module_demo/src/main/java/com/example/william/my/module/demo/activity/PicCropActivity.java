@@ -134,9 +134,6 @@ public class PicCropActivity extends BaseActivity implements View.OnClickListene
 
     private void toCrop(Uri source, Uri destination) {
 
-        Log.e("TAG", "source : " + source);
-        Log.e("TAG", "destination : " + destination);
-
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(source, "image/*");
 

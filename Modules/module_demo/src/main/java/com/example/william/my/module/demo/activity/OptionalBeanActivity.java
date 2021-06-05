@@ -1,7 +1,6 @@
 package com.example.william.my.module.demo.activity;
 
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -32,13 +31,11 @@ public class OptionalBeanActivity extends BaseResponseActivity {
         String nickName = OptionalBean.ofNullable(loginBean)
                 .getBean(LoginBean::getUserData)
                 .getBean(LoginUserBean::getNickname).get();
-        Log.e("TAG", nickName);
 
         // 2. 扩展的 isPresent方法 用法与 Optional 一样
         boolean present = OptionalBean.ofNullable(loginBean)
                 .getBean(LoginBean::getUserData)
                 .getBean(LoginUserBean::getNickname).isPresent();
-        Log.e("TAG", String.valueOf(present));
 
         // 3. 扩展的 ifPresent 方法
         OptionalBean.ofNullable(loginBean)
@@ -47,7 +44,7 @@ public class OptionalBeanActivity extends BaseResponseActivity {
                 .ifPresent(new Consumer<String>() {
                     @Override
                     public void accept(String nickName) {
-                        Log.e("TAG", nickName);
+
                     }
                 });
 

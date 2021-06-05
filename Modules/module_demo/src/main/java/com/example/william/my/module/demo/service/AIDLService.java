@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -43,7 +42,6 @@ public class AIDLService extends Service {
     public class XBinder extends Binder {
 
         public void showToast(String s) {
-            Log.e(TAG, "XBinder: " + s);
             Toast.makeText(AIDLService.this, s, Toast.LENGTH_SHORT).show();
         }
     }
@@ -52,7 +50,6 @@ public class AIDLService extends Service {
 
         @Override
         public void showToast(String s) throws RemoteException {
-            Log.e(TAG, "AIDLBinder: " + s);
             Toast.makeText(AIDLService.this, s, Toast.LENGTH_SHORT).show();
         }
     }

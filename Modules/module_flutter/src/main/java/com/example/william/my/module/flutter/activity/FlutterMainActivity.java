@@ -21,8 +21,6 @@ public class FlutterMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flutter_activity_flutter);
 
-        Log.e("TAG", "FlutterMainActivity");
-
         //Step 1: Add FlutterActivity to AndroidManifest.xml
 //        startActivity(
 //                FlutterActivity.createDefaultIntent(this)

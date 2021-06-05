@@ -139,7 +139,7 @@ public class RetrofitActivity extends BaseResponseActivity {
         //MultipartBody filePart = RetrofitUtils.buildMultipart("file", mFile, new RetrofitRequestListener() {
         //    @Override
         //    public void onProgress(long bytesWritten, long contentLength) {
-        //        Log.e(TAG, "上传进度：" + (bytesWritten * 1f / contentLength * 100));
+        //        showResponse("上传进度：" + (bytesWritten * 1f / contentLength * 100));
         //    }
         //});
 

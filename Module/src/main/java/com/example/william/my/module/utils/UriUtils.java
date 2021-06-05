@@ -20,6 +20,8 @@ import java.io.OutputStream;
 @RequiresApi(api = Build.VERSION_CODES.Q)
 public class UriUtils {
 
+    protected static final String TAG = UriUtils.class.getSimpleName();
+
     private static final String RELATIVE_PATH = Environment.DIRECTORY_DOWNLOADS + "/" + BaseApp.getApp().getPackageName();
 
     public static Uri save(InputStream is, String fileName) {
@@ -76,7 +78,7 @@ public class UriUtils {
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 int name = cursor.getColumnIndexOrThrow(MediaStore.Downloads.DISPLAY_NAME);
-                Log.e("TAG", cursor.getString(name));
+                Log.e(TAG, cursor.getString(name));
             }
             cursor.close();
         }

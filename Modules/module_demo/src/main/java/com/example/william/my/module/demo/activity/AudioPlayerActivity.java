@@ -1,6 +1,5 @@
 package com.example.william.my.module.demo.activity;
 
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -22,12 +21,11 @@ public class AudioPlayerActivity extends BaseResponseActivity {
                         @Override
                         public void onStart() {
                             isPlay = true;
-                            Log.e(TAG, "onStart");
                         }
 
                         @Override
                         public void onCompletion(Boolean success) {
-                            Log.e(TAG, "onCompletion : " + success);
+
                         }
                     });
         } else {
