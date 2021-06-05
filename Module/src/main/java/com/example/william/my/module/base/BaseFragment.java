@@ -1,4 +1,4 @@
-package com.example.william.my.module.fragment;
+package com.example.william.my.module.base;
 
 import android.os.Bundle;
 import android.util.Log;

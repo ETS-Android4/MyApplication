@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+@Deprecated
 @RequiresApi(api = Build.VERSION_CODES.Q)
 public class UriUtils {
 
