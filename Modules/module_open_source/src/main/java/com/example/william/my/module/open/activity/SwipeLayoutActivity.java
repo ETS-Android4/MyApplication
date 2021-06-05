@@ -23,14 +23,14 @@ public class SwipeLayoutActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.open_layout_recycle);
+        setContentView(R.layout.open_activity_swipe_layout);
 
         List<String> mData = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             mData.add("item : " + (i + 1));
         }
 
-        RecyclerView mRecycleView = findViewById(R.id.basics_recycleView);
+        RecyclerView mRecycleView = findViewById(R.id.swipe_recycleView);
 
         SwipeRecyclerAdapter mAdapter = new SwipeRecyclerAdapter(mData);
         //mAdapter.setMode(Attributes.Mode.Multiple);//默认为Single
