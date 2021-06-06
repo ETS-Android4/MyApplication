@@ -22,14 +22,14 @@
         <item name="android:scrollbars">none</item>
     </style>
 
-    <style name="Basics_Fullscreen" parent="Basics_AppTheme">
+    <style name="Basics_FullscreenTheme" parent="Basics_AppTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="Basics_Transparent_Theme" parent="Basics_AppTheme">
+    <style name="Basics_TranslucentTheme" parent="Basics_AppTheme">
         <!--不设置activity进入和退出动画样式-->
         <item name="android:windowAnimationStyle">@null</item>
         <!--设置状态栏的背景为半透明-->
@@ -38,6 +38,28 @@
         <item name="android:windowIsTranslucent">true</item>
         <!--设置窗口的背景为透明，设置透明背景必须要设置此项-->
         <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="Basics_WindowAnimTheme_Bottom" parent="Basics_AppTheme">
+        <item name="android:windowAnimationStyle">@style/Basics_Translate_Bottom</item>
+    </style>
+
+    <style name="Basics_Translate_Bottom" parent="@android:style/Animation.Translucent">
+        <item name="android:activityOpenEnterAnimation">@anim/bottom_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/bottom_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/bottom_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/bottom_out</item>
+    </style>
+
+    <style name="Basics_WindowAnimTheme_Slide" parent="Basics_AppTheme">
+        <item name="android:windowAnimationStyle">@style/Basics_Translate_Slide</item>
+    </style>
+
+    <style name="Basics_Translate_Slide" parent="@android:style/Animation.Translucent">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
 </resources>

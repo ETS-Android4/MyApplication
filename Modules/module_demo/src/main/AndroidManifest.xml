@@ -3,7 +3,7 @@
     package="com.example.william.my.module.demo">
 
     <application>
-        <activity android:name=".activity.TouchEventActivity"></activity>
+        <activity android:name=".activity.TouchEventActivity" />
         <activity android:name=".DemoActivity" />
         <activity android:name=".activity.AnimatorActivity" />
         <activity android:name=".activity.AsyncTaskActivity" />
@@ -24,7 +24,7 @@
         <activity android:name=".activity.HandlerThreadActivity" />
         <activity
             android:name=".activity.TransparentActivity"
-            android:theme="@style/Basics_Transparent_Theme" />
+            android:theme="@style/Basics_TranslucentTheme" />
         <activity android:name=".activity.TurntableActivity" />
         <activity android:name=".activity.TypefaceActivity" />
 

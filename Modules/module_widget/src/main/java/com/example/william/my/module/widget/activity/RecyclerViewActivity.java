@@ -54,7 +54,7 @@ public class RecyclerViewActivity extends BaseActivity {
 
 
         LayoutAnimationController mController = new LayoutAnimationController(
-                AnimationUtils.loadAnimation(this, R.anim.widget_anim_view_left));
+                AnimationUtils.loadAnimation(this, R.anim.widget_anim_item_left));
         //ORDER_NORMAL 顺序，ORDER_REVERSE 倒序，ORDER_RANDOM 随机
         mController.setOrder(LayoutAnimationController.ORDER_NORMAL);//显示顺序
         mController.setDelay(0.2f);//显示间隔
