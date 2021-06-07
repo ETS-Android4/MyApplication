@@ -2,7 +2,7 @@ package com.example.william.my.module.demo.activity;
 
 import android.graphics.Point;
 import android.os.Bundle;
-import android.view.Display;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.WindowManager;
 
@@ -21,12 +21,14 @@ public class TransparentActivity extends AppCompatActivity {
 
         setContentView(R.layout.demo_activity_transparent);
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        Point point = new Point();
+        point.x = metrics.widthPixels;
+        point.y = metrics.heightPixels;
+        
         WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.width = (int) (size.x * 0.5);
-        params.height = (int) (size.y * 0.5);
+        params.width = (int) (point.x * 0.5);
+        params.height = (int) (point.y * 0.5);
         params.gravity = Gravity.START | Gravity.TOP;
         params.dimAmount = 0.1f;
         getWindow().setAttributes(params);
