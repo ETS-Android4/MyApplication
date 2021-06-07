@@ -1,5 +1,6 @@
 package com.example.william.my.module.sample.repo;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -14,11 +15,7 @@ import com.example.william.my.module.bean.ArticleDataBean;
 import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.api.ArticleService;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
-
-import io.reactivex.rxjava3.annotations.NonNull;
 
 public class ArticleRepository implements ArticleDataSource {
 
@@ -76,7 +73,7 @@ public class ArticleRepository implements ArticleDataSource {
 
         LiveDataCallback.LiveDataConvert<ArticleDataBean, List<ArticleDetailBean>> convert = new LiveDataCallback.LiveDataConvert<ArticleDataBean, List<ArticleDetailBean>>() {
             @Override
-            public RetrofitResponse<List<ArticleDetailBean>> onResponse(@NotNull RetrofitResponse<ArticleDataBean> data) throws Exception {
+            public RetrofitResponse<List<ArticleDetailBean>> onResponse(@NonNull RetrofitResponse<ArticleDataBean> data) throws Exception {
                 if (ObjectUtils.isNotEmpty(data.getData()) &&
                         CollectionUtils.isNotEmpty(data.getData().getDatas())) {
                     return RetrofitResponse.success(data.getData().getDatas());

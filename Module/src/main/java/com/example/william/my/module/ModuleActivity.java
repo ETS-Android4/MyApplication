@@ -66,6 +66,15 @@ import org.greenrobot.eventbus.ThreadMode;
  * <p>
  * Typo: In word -> application-level
  * 查询依赖树 -> gradlew app:dependencies
+ * <p>
+ * import androidx.annotation.NonNull; // 不可以传入NUll值
+ * import androidx.annotation.Nullable; // 可以传入NUll值
+ * <p>
+ * import org.jetbrains.annotations.NotNull;
+ * import org.jetbrains.annotations.Nullable;
+ * <p>
+ * import io.reactivex.rxjava3.annotations.NonNull;
+ * import io.reactivex.rxjava3.annotations.Nullable;
  */
 @Route(path = ARouterPath.Module)
 public class ModuleActivity extends BaseListActivity {

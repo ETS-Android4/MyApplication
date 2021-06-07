@@ -13,8 +13,6 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.william.my.module.open.R;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 public class SwipeRecyclerAdapter extends RecyclerSwipeAdapter<SwipeRecyclerAdapter.ViewHolder> {
@@ -25,7 +23,7 @@ public class SwipeRecyclerAdapter extends RecyclerSwipeAdapter<SwipeRecyclerAdap
         this.mData = mData;
     }
 
-    @NotNull
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.open_item_swipe, parent, false));

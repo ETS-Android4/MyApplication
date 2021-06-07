@@ -9,7 +9,7 @@ import com.example.william.my.module.router.ARouterPath;
 public class PrimaryLightFragment extends BaseFragment {
 
     @Override
-    protected int createView() {
+    protected int getLayout() {
         return R.layout.basics_fragment_primary_light;
     }
 }

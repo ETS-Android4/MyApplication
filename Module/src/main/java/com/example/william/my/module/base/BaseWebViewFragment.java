@@ -6,7 +6,7 @@ import com.example.william.my.module.R;
 public class BaseWebViewFragment extends BaseFragment {
 
     @Override
-    protected int createView() {
+    protected int getLayout() {
         return R.layout.basics_fragment_webview;
     }
 }

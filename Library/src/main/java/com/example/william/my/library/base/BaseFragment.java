@@ -22,7 +22,7 @@ public class BaseFragment extends LazyFragment {
     public final String TAG = this.getClass().getSimpleName();
 
     @Override
-    protected int createView() {
+    protected int getLayout() {
         return 0;
     }
 

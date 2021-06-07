@@ -1,5 +1,6 @@
 package com.example.william.my.module.jetpack.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -9,8 +10,6 @@ import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.api.NetworkService;
 import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.bean.BannerDetailData;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class DataRepository {
 
         LiveDataCallback.LiveDataConvert<List<BannerDetailBean>, List<BannerDetailData>> convert = new LiveDataCallback.LiveDataConvert<List<BannerDetailBean>, List<BannerDetailData>>() {
             @Override
-            public RetrofitResponse<List<BannerDetailData>> onResponse(@NotNull RetrofitResponse<List<BannerDetailBean>> data) throws Exception {
+            public RetrofitResponse<List<BannerDetailData>> onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> data) throws Exception {
                 List<BannerDetailData> movieData = new ArrayList<>();
                 for (BannerDetailBean movieBean : data.getData()) {
                     movieData.add(movieBean.convert());

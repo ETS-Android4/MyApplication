@@ -8,17 +8,15 @@ import com.example.william.my.module.api.NetworkService;
 import com.example.william.my.module.bean.ArticleBean;
 import com.example.william.my.module.bean.ArticleDetailBean;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.annotations.Nullable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ArticlePagingSource extends RxPagingSource<Integer, ArticleDetailBean> {
 
-    @NotNull
+    @NonNull
     @Override
     public Single<LoadResult<Integer, ArticleDetailBean>> loadSingle(@NonNull LoadParams<Integer> loadParams) {
 

@@ -24,7 +24,7 @@ public class BaseRecyclerFragment<T> extends BaseFragment {
 
 
     @Override
-    protected int createView() {
+    protected int getLayout() {
         return R.layout.basics_fragment_recycler;
     }
 

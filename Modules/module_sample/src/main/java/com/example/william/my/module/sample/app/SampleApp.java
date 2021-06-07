@@ -16,8 +16,6 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
 import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 
-import org.jetbrains.annotations.NotNull;
-
 public class SampleApp implements IComponentApplication {
 
     @Override
@@ -37,14 +35,14 @@ public class SampleApp implements IComponentApplication {
 
     private void initSmartRefreshLayout() {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
-            @NotNull
+            @NonNull
             @Override
             public RefreshHeader createRefreshHeader(@NonNull Context context, @NonNull RefreshLayout layout) {
                 return new ClassicsHeader(context);
             }
         });
         SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
-            @NotNull
+            @NonNull
             @Override
             public RefreshFooter createRefreshFooter(@NonNull Context context, @NonNull RefreshLayout layout) {
                 return new ClassicsFooter(context);
