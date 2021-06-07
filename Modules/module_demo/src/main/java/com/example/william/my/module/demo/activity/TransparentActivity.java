@@ -25,7 +25,7 @@ public class TransparentActivity extends AppCompatActivity {
         Point point = new Point();
         point.x = metrics.widthPixels;
         point.y = metrics.heightPixels;
-        
+
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.width = (int) (point.x * 0.5);
         params.height = (int) (point.y * 0.5);
