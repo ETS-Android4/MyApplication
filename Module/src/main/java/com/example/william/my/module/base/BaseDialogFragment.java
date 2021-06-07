@@ -2,7 +2,6 @@ package com.example.william.my.module.base;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,6 @@ import android.view.WindowManager.LayoutParams;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-
-import com.example.william.my.library.R;
 
 /**
  * onAttach -> onCreateDialog -> onCreateView -> onViewCreated -> onStart
@@ -32,13 +29,13 @@ public class BaseDialogFragment extends DialogFragment {
         Dialog dialog = getDialog();
         if (dialog != null) {
             //解决Dialog内存泄漏
-            getDialog().setOnDismissListener(null);
-            getDialog().setOnCancelListener(null);
+            dialog.setOnDismissListener(null);
+            dialog.setOnCancelListener(null);
 
-            Window window = getDialog().getWindow();
+            Window window = dialog.getWindow();
             if (window != null) {
                 LayoutParams params = window.getAttributes();
-                getAttributes(params);
+                setAttributes(params);
                 window.setAttributes(params);
                 //Android 5.0以上自定义Dialog时发现无法横向铺满屏幕
                 window.getDecorView().setPadding(0, 0, 0, 0);
@@ -54,12 +51,12 @@ public class BaseDialogFragment extends DialogFragment {
         return 0;
     }
 
-    public void getAttributes(LayoutParams params) {
+    public void setAttributes(LayoutParams params) {
         params.width = LayoutParams.MATCH_PARENT;
         params.height = LayoutParams.WRAP_CONTENT;
     }
 
     public int getWindowAnimationsRes() {
-        return R.style.Basics_WindowAnimTheme_Bottom;
+        return 0;
     }
 }
