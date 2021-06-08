@@ -14,5 +14,6 @@ public class SampleActivity extends BaseListActivity {
         mMap.put("MvvmActivity", ARouterPath.Sample.Sample_MVVM);
         mMap.put("KotlinActivity", ARouterPath.Sample.Sample_Kotlin);
         mMap.put("KotlinBindActivity", ARouterPath.Sample.Sample_Kotlin_Bind);
+        mMap.put("RecyclerActivity", ARouterPath.Sample.Sample_Recycler);
     }
 }

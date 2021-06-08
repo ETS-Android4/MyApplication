@@ -92,7 +92,6 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
         } else {
             mAdapter.addData(article);
         }
-        mAdapter.notifyDataSetChanged();
         mSmartRefreshLayout.setEnableLoadMore(true);
     }
 

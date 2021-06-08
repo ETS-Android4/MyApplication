@@ -88,7 +88,6 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         } else {
             mAdapter.addData(articles)
         }
-        mAdapter.notifyDataSetChanged()
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {

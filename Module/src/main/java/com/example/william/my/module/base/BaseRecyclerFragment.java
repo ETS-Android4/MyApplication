@@ -16,17 +16,21 @@ import com.example.william.my.library.base.BaseFragment;
 import com.example.william.my.module.R;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 import org.jetbrains.annotations.NotNull;
 
-public class BaseRecyclerFragment<T, K extends BaseViewHolder> extends BaseFragment implements OnItemClickListener, OnItemChildClickListener, OnRefreshListener, OnLoadMoreListener {
+import java.util.List;
+
+public abstract class BaseRecyclerFragment<T> extends BaseFragment
+        implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener {
 
     private RecyclerView mRecyclerView;
     private SmartRefreshLayout mSmartRefreshLayout;
 
-    private BaseQuickAdapter<T, K> mAdapter;
+    private BaseQuickAdapter<T, BaseViewHolder> mAdapter;
+
+    private int mPage = 1;
 
     @Override
     protected int getLayout() {
@@ -59,6 +63,7 @@ public class BaseRecyclerFragment<T, K extends BaseViewHolder> extends BaseFragm
         if (mSmartRefreshLayout != null) {
             mSmartRefreshLayout.setOnRefreshListener(this);
             mSmartRefreshLayout.setOnLoadMoreListener(this);
+            mSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
 
             mSmartRefreshLayout.setEnableRefresh(canPullRefresh());
             mSmartRefreshLayout.setEnableLoadMore(canLoadMore());
@@ -77,8 +82,18 @@ public class BaseRecyclerFragment<T, K extends BaseViewHolder> extends BaseFragm
         return new LinearLayoutManager(getActivity());
     }
 
-    public BaseQuickAdapter<T, K> setAdapter() {
-        return null;
+    public abstract BaseQuickAdapter<T, BaseViewHolder> setAdapter();
+
+    public void onDataSuccess(List<T> list) {
+        if (mPage == 1) {
+            mAdapter.setNewInstance(list);
+        } else {
+            mAdapter.addData(list);
+        }
+    }
+
+    public void onDataFail() {
+        mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
     @Override
