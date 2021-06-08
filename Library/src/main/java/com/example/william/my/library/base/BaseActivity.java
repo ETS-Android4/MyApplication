@@ -17,6 +17,10 @@ public class BaseActivity extends AppCompatActivity {
         setTheme(R.style.Basics_WindowAnimTheme_Slide);
     }
 
+    public int setStatusBarColor() {
+        return android.R.color.transparent;
+    }
+
     //@Override
     //public void finish() {
     //    super.finish();

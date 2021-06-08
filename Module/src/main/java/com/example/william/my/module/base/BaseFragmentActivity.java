@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.R;
 
-public class BaseFragmentActivity extends BaseActivity {
+public abstract class BaseFragmentActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,8 +31,6 @@ public class BaseFragmentActivity extends BaseActivity {
         fragmentTransaction.commit();
     }
 
-    public Fragment setFragment() {
-        return new Fragment();
-    }
+    public abstract Fragment setFragment();
 
 }
