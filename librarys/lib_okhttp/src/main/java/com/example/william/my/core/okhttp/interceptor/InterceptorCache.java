@@ -1,11 +1,12 @@
-package com.example.william.my.core.network.retrofit.interceptor;
+package com.example.william.my.core.okhttp.interceptor;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.example.william.my.core.network.retrofit.header.Header;
-import com.example.william.my.core.network.utils.NetworkUtils;
+import com.example.william.my.core.okhttp.header.Header;
+import com.example.william.my.core.okhttp.utils.NetworkUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +20,13 @@ import okhttp3.Response;
 /**
  * 缓存拦截器
  */
-public class RetrofitInterceptorCache implements Interceptor {
+public class InterceptorCache implements Interceptor {
+
+    private final Context mContext;
+
+    public InterceptorCache(Context context) {
+        this.mContext = context;
+    }
 
     @NonNull
     @Override
@@ -48,7 +55,7 @@ public class RetrofitInterceptorCache implements Interceptor {
     @NonNull
     private Request buildRequest(@NonNull Request request, int age) {
         Request.Builder builder = request.newBuilder();
-        if (NetworkUtils.isConnected()) {
+        if (NetworkUtils.isConnected(mContext)) {
             if (age <= 0) {
                 return builder
                         .cacheControl(CacheControl.FORCE_NETWORK)
@@ -74,7 +81,7 @@ public class RetrofitInterceptorCache implements Interceptor {
     @NonNull
     private Response buildResponse(@NonNull Response response, int age) {
         Response.Builder builder = response.newBuilder();
-        if (NetworkUtils.isConnected()) {
+        if (NetworkUtils.isConnected(mContext)) {
             if (age <= 0) {
                 return builder
                         .removeHeader("Pragma")

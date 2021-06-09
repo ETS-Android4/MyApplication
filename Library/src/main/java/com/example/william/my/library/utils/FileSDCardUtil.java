@@ -2,7 +2,6 @@ package com.example.william.my.library.utils;
 
 import android.content.Context;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 

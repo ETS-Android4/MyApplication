@@ -5,6 +5,7 @@ include ':library'
 include ':module'
 
 include ':librarys:lib_customview'
+include ':librarys:lib_okhttp'
 include ':librarys:lib_network'
 
 include ':modules:module_custom_view'
@@ -19,10 +20,10 @@ include ':modules:module_jetpack'
 include ':modules:module_kotlin'
 include ':modules:module_sample'
 
-include ':modules:module_wechat'
-include ':modules:module_jiguang'
-include ':modules:module_tencent_im'
-include ':modules:module_bugly'
+//include ':modules:module_wechat'
+//include ':modules:module_jiguang'
+//include ':modules:module_tencent_im'
+//include ':modules:module_bugly'
 //include ':modules:module_sophix'
 
 //include ':modules:module_flutter'

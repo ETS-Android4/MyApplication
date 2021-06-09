@@ -1,6 +1,6 @@
 package com.example.william.my.module.sample.api;
 
-import com.example.william.my.core.network.retrofit.api.Header;
+import com.example.william.my.core.network.retrofit.header.Header;
 import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.bean.ArticleDataBean;

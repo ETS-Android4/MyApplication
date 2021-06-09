@@ -2,10 +2,13 @@ android {
     resourcePrefix "net_"
 }
 dependencies {
+    implementation project(path: ':librarys:lib_okhttp')
     implementation project(path: ':librarys:lib_network')
     //Glide
     implementation deps.glide
     kapt deps.glide_compiler
+    //Volley
+    implementation deps.volley
     //RxAndroid
     implementation deps.rxandroid
     //Retrofit
