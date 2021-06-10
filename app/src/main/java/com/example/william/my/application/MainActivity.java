@@ -40,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (isRetry()) return;
+        if (isRetry()) {
+            return;
+        }
 
         //setContentView(R.layout.activity_main);
 
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 .navigation(this, new LoginNavigationImpl());
         //.greenChannel()//使用绿色通道(跳过所有的拦截器)
         //.navigation();
-        //startActivity(new Intent(this, MainFlutterActivity.class));
         finish();
     }
 

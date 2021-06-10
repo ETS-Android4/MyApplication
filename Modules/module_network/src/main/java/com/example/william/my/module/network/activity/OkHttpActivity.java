@@ -1,5 +1,7 @@
 package com.example.william.my.module.network.activity;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -8,6 +10,8 @@ import com.example.william.my.core.network.retrofit.body.CountingRequestBody;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
 import com.example.william.my.core.network.retrofit.listener.RetrofitRequestListener;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
+import com.example.william.my.core.okhttp.OkHttpHelper;
+import com.example.william.my.core.okhttp.listener.ResponseProgressListener;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
@@ -36,7 +40,8 @@ public class OkHttpActivity extends BaseResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        login();
+        //login();
+        download();
     }
 
     private void login() {
@@ -57,24 +62,26 @@ public class OkHttpActivity extends BaseResponseActivity {
         //创建请求
         Request request = new Request.Builder()
                 .url(Urls.login)
-                .post(formBody)//请求体
-                //.post(multipartBody)//表单
+                // 请求体
+                .post(formBody)
+                // 表单
+                //.post(multipartBody)
                 .build();
         Call call = okHttpClient.newCall(request);
         //加入调度
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull final IOException e) {
-                String net_error = "Error: " + e.getMessage();
-                showResponse(net_error);
+                String netError = "Error: " + e.getMessage();
+                showResponse(netError);
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
                 ResponseBody body = response.body();
                 if (body != null) {
-                    String net_success = "Success: " + body.string();
-                    showResponse(net_success);
+                    String netSuccess = "Success: " + body.string();
+                    showResponse(netSuccess);
                 }
             }
         });
@@ -87,10 +94,12 @@ public class OkHttpActivity extends BaseResponseActivity {
                     @Override
                     public void onProgress(String url, long bytesRead, long contentLength) {
                         int progress = (int) (bytesRead * 1f / contentLength * 100);
+                        Log.e("TAG", "下载进度：" + progress + "%");
                         showResponse("下载进度：" + progress + "%");
                     }
                 }))
                 .build();
+        okHttpClient = OkHttpHelper.getInstance().Builder().build();
         //创建请求
         Request request = new Request.Builder()
                 .url(Urls.download)
@@ -101,8 +110,8 @@ public class OkHttpActivity extends BaseResponseActivity {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull final IOException e) {
-                String net_error = "Error: " + e.getMessage();
-                showResponse(net_error);
+                String netError = "Error: " + e.getMessage();
+                showResponse(netError);
             }
 
             @Override
@@ -149,16 +158,16 @@ public class OkHttpActivity extends BaseResponseActivity {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull final IOException e) {
-                String net_error = "Error: " + e.getMessage();
-                showResponse(net_error);
+                String netError = "Error: " + e.getMessage();
+                showResponse(netError);
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
                 ResponseBody body = response.body();
                 if (body != null) {
-                    String net_success = "Success: " + body.string();
-                    showResponse(net_success);
+                    String netSuccess = "Success: " + body.string();
+                    showResponse(netSuccess);
                 }
             }
         });

@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.example.william.my.module.base.BaseRecyclerFragment;
+import com.example.william.my.library.base.BaseRecyclerFragment;
 import com.example.william.my.module.sample.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;

@@ -23,8 +23,6 @@ public class ViewCheckUtils {
 
     public static Point getScreenMetrics(Activity activity) {
         DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
-        int w_screen = metrics.widthPixels;
-        int h_screen = metrics.heightPixels;
-        return new Point(w_screen, h_screen);
+        return new Point(metrics.widthPixels, metrics.heightPixels);
     }
 }

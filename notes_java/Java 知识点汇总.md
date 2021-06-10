@@ -64,3 +64,7 @@ HTTP 是超文本传输协议，明文传输；HTTPS 使用 SSL 协议对 HTTP �
 HTTP 默认 80 端口；HTTPS 默认 443 端口
 优点：安全
 缺点：费时、SSL 证书收费，加密能力还是有限的，但是比 HTTP 强多了
+
+
+只要覆写equals，就必须覆写hashCode
+https://blog.csdn.net/weixin_46200547/article/details/104006016

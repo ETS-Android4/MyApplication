@@ -11,16 +11,25 @@ import androidx.fragment.app.Fragment;
 
 public abstract class LazyFragment extends Fragment {
 
-    private boolean isLoaded = false; // 是否已加载
+    /**
+     * 是否已加载
+     */
+    private boolean isLoaded = false;
 
-    private boolean isVisibleToUser = false; // 视图是否可见
-    private boolean isCallOnResume = false; // 视图是否可交互
+    /**
+     * 视图是否可见
+     */
+    private boolean isVisibleToUser = false;
+    /**
+     * 视图是否可交互
+     */
+    private boolean isCallOnResume = false;
 
     /**
      * 是否调用了setUserVisibleHint()方法
      * add show hide 不调用此方法，不执行懒加载
      */
-    private boolean isCallUserVisibleHint = false;// add show hide 不调用此方法
+    private boolean isCallUserVisibleHint = false;
 
     @Override
     public void onResume() {
@@ -79,10 +88,24 @@ public abstract class LazyFragment extends Fragment {
         initView(view, savedInstanceState);
     }
 
+    /**
+     * 布局 id
+     *
+     * @return
+     */
     protected abstract int getLayout();
 
+    /**
+     * 初始化布局
+     *
+     * @param view
+     * @param state
+     */
     protected abstract void initView(View view, Bundle state);
 
+    /**
+     * 懒加载初始化
+     */
     protected abstract void lazyInit();
 
 }

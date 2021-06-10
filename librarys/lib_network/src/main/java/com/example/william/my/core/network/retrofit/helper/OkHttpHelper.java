@@ -26,33 +26,33 @@ public class OkHttpHelper {
 
     private static OkHttpClient.Builder createBuilder() {
 
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        mOkHttpClient = new OkHttpClient.Builder();
 
         //设置连接使用的HTTP代理。该方法优先于proxySelector，默认代理为空，完全禁用代理使用NO_PROXY
         //okHttpClient.proxy(Proxy.NO_PROXY);
 
         //设置超时时间
-        TimeoutCompat.setTimeOut(builder);
+        TimeoutCompat.setTimeOut(mOkHttpClient);
 
         //设置缓存
         if (RxRetrofitConfig.setCache)
-            CacheCompat.cache(RxRetrofitConfig.getApp(), builder, RxRetrofitConfig.cacheDir, RxRetrofitConfig.cacheSize);
+            CacheCompat.cache(RxRetrofitConfig.getApp(), mOkHttpClient, RxRetrofitConfig.cacheDir, RxRetrofitConfig.cacheSize);
 
         //显示log
         if (RxRetrofitConfig.showLogging)
-            LoggingCompat.setLog(builder, RxRetrofitConfig.loggingTag);
+            LoggingCompat.setLog(mOkHttpClient, RxRetrofitConfig.loggingTag);
 
         //携带cookie
-        CookieJarCompat.cookieJar(builder);
+        CookieJarCompat.cookieJar(mOkHttpClient);
 
         //忽略https证书
-        HttpsSSLCompat.ignoreSSLForOkHttp(builder);
+        HttpsSSLCompat.ignoreSSLForOkHttp(mOkHttpClient);
         HttpsSSLCompat.ignoreSSLForHttpsURLConnection();
 
         //if (downloadListener != null) {
         //    builder.addInterceptor(new RetrofitInterceptorProgress(downloadListener));
         //}
 
-        return builder;
+        return mOkHttpClient;
     }
 }

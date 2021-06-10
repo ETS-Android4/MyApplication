@@ -48,6 +48,11 @@ public class HandlerUtils {
      * 收到消息回调接口
      */
     public interface OnReceiveMessageHandler {
+        /**
+         * 处理消息
+         *
+         * @param msg
+         */
         void handlerMessage(Message msg);
     }
 }

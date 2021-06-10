@@ -48,7 +48,8 @@ public class App extends BaseApp {
             ARouter.openLog();//打印日志
             ARouter.openDebug();//开启调试模式
         }
-        ARouter.init(getApp());//初始化
+        //ARouter初始化
+        ARouter.init(getApp());
     }
 
     private void initEventBus() {

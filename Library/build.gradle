@@ -32,7 +32,14 @@ android {
 dependencies {
     //Android
     implementation deps.appcompat
+    implementation deps.constraintlayout
     //EventBus
     implementation deps.eventbus
     annotationProcessor deps.eventbus_processor
+    //BRVAH
+    implementation deps.brvah
+    //SmartRefresh
+    implementation deps.smartrefresh
+    implementation deps.smartrefresh_header
+    implementation deps.smartrefresh_footer
 }

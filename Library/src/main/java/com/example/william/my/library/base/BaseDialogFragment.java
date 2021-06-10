@@ -1,4 +1,4 @@
-package com.example.william.my.module.base;
+package com.example.william.my.library.base;
 
 import android.app.Dialog;
 import android.os.Bundle;

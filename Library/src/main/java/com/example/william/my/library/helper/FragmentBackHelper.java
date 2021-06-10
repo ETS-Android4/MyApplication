@@ -94,6 +94,11 @@ public class FragmentBackHelper {
     }
 
     public interface FragmentBackHandler {
+        /**
+         * activity back 键相应
+         *
+         * @return
+         */
         boolean onBackPressed();
     }
 }

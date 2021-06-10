@@ -52,8 +52,8 @@ public class FileSDCardUtil {
     public static String getSdCardPublic() {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
-            File directory_downloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            return directory_downloads.getAbsolutePath();
+            File directoryDownloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            return directoryDownloads.getAbsolutePath();
         }
         return "";
     }

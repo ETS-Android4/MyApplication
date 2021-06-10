@@ -19,7 +19,7 @@ public class NetworkStatusActivity extends BaseResponseActivity {
         super.initView();
         NetworkChangeHelper.getInstance().register(this, new NetworkChangeHelper.NetworkChangeListener() {
             @Override
-            public void onNetworkChange(boolean isAvailable) {
+            public void onNetworkStatusChange(boolean isAvailable) {
                 showResponse("网络是否连接 ： " + isAvailable);
             }
         });

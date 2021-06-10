@@ -1,4 +1,4 @@
-package com.example.william.my.module.base;
+package com.example.william.my.library.base;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.example.william.my.library.base.BaseFragment;
-import com.example.william.my.module.R;
+import com.example.william.my.library.R;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;

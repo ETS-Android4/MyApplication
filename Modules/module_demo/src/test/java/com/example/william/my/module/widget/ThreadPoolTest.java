@@ -8,6 +8,8 @@ import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * 线程池
+ * LinkedBlockingQueue，无界缓存的等待队列
+ * SynchronousQueue，无缓冲的等待队列
  */
 public class ThreadPoolTest {
 

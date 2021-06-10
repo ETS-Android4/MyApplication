@@ -6,6 +6,8 @@ import android.os.Process;
 
 import com.example.william.my.library.interfaces.IComponentApplication;
 
+import java.util.concurrent.Executors;
+
 /**
  * Application
  */
@@ -49,7 +51,7 @@ public class BaseApp extends Application {
 
         modulesApplicationInit();
 
-        new Thread(new Runnable() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 //设置线程的优先级，不与主线程抢资源
@@ -57,7 +59,7 @@ public class BaseApp extends Application {
                 //Module类的APP初始化异步
                 modulesApplicationInitAsync();
             }
-        }).start();
+        });
     }
 
     private void modulesApplicationInit() {

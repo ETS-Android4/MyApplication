@@ -1,4 +1,4 @@
-package com.example.william.my.module.base;
+package com.example.william.my.library.base;
 
 import android.os.Bundle;
 
@@ -7,8 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.module.R;
+import com.example.william.my.library.R;
 
 public abstract class BaseFragmentActivity extends BaseActivity {
 
@@ -31,6 +30,11 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         fragmentTransaction.commit();
     }
 
+    /**
+     * 返回 Fragment
+     *
+     * @return
+     */
     public abstract Fragment setFragment();
 
 }

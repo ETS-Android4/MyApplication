@@ -1,10 +1,15 @@
 package com.example.william.my.library.utils;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class OptionalBean<T> {
 
     private static final OptionalBean<?> EMPTY = new OptionalBean<>();

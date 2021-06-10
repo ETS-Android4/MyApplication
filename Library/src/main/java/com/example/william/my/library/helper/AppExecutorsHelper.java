@@ -34,22 +34,30 @@ public class AppExecutorsHelper {
 
     private AppExecutorsHelper() {
         this(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
-                new MainThreadExecutor(), Executors.newScheduledThreadPool(count));
+                new MainThreadExecutor(), Executors.newScheduledThreadPool(COUNT));
     }
 
-    //磁盘IO线程
+    /**
+     * 磁盘IO线程
+     */
     private final Executor mDiskIO;
 
-    //网络IO线程
+    /**
+     * 网络IO线程
+     */
     private final Executor mNetworkIO;
 
-    //UI线程
+    /**
+     * UI线程
+     */
     private final Executor mMainThread;
 
-    //定时任务线程池
+    /**
+     * 定时任务线程池
+     */
     private final ScheduledExecutorService scheduledExecutor;
 
-    private static final int count = Runtime.getRuntime().availableProcessors() * 3 + 2;
+    private static final int COUNT = Runtime.getRuntime().availableProcessors() * 3 + 2;
 
     private AppExecutorsHelper(Executor diskIO, Executor networkIO, Executor mainThread, ScheduledExecutorService scheduledExecutor) {
         this.mDiskIO = diskIO;

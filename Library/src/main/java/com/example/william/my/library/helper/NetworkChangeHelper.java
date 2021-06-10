@@ -81,9 +81,9 @@ public class NetworkChangeHelper {
                         } else if (ConnectivityManager.TYPE_MOBILE == info.getType()) {
                             Log.e(TAG, "CONNECTIVITY_ACTION: 网络类型为移动数据");
                         }
-                        mNetworkChangeListener.onNetworkChange(true);
+                        mNetworkChangeListener.onNetworkStatusChange(true);
                     } else {
-                        mNetworkChangeListener.onNetworkChange(false);
+                        mNetworkChangeListener.onNetworkStatusChange(false);
                     }
                 }
             }
@@ -98,13 +98,13 @@ public class NetworkChangeHelper {
         @Override
         public void onAvailable(@NonNull Network network) {
             super.onAvailable(network);
-            mNetworkChangeListener.onNetworkChange(true);
+            mNetworkChangeListener.onNetworkStatusChange(true);
         }
 
         @Override
         public void onLost(@NonNull Network network) {
             super.onLost(network);
-            mNetworkChangeListener.onNetworkChange(false);
+            mNetworkChangeListener.onNetworkStatusChange(false);
         }
 
         @Override
@@ -126,6 +126,11 @@ public class NetworkChangeHelper {
     private static NetworkChangeListener mNetworkChangeListener;
 
     public interface NetworkChangeListener {
-        void onNetworkChange(boolean isAvailable);
+        /**
+         * 网络状态改变
+         *
+         * @param isAvailable 是否可用
+         */
+        void onNetworkStatusChange(boolean isAvailable);
     }
 }

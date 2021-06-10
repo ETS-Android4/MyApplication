@@ -29,8 +29,6 @@ android {
 dependencies {
     //Android
     implementation deps.constraintlayout
-    //Volley
-    implementation deps.volley
     //OkHttp
     implementation deps.okhttp
     implementation deps.okhttp_logging

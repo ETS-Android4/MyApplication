@@ -3,7 +3,7 @@ package com.example.william.my.module.widget.dialog;
 import android.view.Gravity;
 import android.view.WindowManager;
 
-import com.example.william.my.module.base.BaseDialogFragment;
+import com.example.william.my.library.base.BaseDialogFragment;
 import com.example.william.my.module.widget.R;
 
 public class MyCreateViewDialog extends BaseDialogFragment {
@@ -19,6 +19,7 @@ public class MyCreateViewDialog extends BaseDialogFragment {
         params.gravity = Gravity.BOTTOM;
     }
 
+    @Override
     public int getWindowAnimationsRes() {
         return R.style.Basics_WindowAnimTheme_Bottom;
     }

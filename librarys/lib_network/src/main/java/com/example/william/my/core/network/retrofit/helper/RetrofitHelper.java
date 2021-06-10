@@ -58,9 +58,12 @@ public class RetrofitHelper {
     public Retrofit build(OkHttpClient okHttpClient, Converter.Factory factory) {
         return retrofit
                 .client(okHttpClient)
-                .addConverterFactory(ScalarsConverterFactory.create()) //标准类型转换器，防止上传图文的时候带引号
-                .addConverterFactory(factory)//解析工厂类
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // 支持RxJava
+                // 标准类型转换器，防止上传图文的时候带引号
+                .addConverterFactory(ScalarsConverterFactory.create())
+                // 解析工厂类
+                .addConverterFactory(factory)
+                // 支持RxJava3
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
     }
 }

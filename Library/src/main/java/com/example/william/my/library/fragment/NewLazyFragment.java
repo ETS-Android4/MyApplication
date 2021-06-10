@@ -29,7 +29,7 @@ public abstract class NewLazyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(createView(), container, false);
+        return inflater.inflate(getLayout(), container, false);
     }
 
     /**
@@ -41,10 +41,24 @@ public abstract class NewLazyFragment extends Fragment {
         initView(view, savedInstanceState);
     }
 
-    protected abstract int createView();
+    /**
+     * 布局 id
+     *
+     * @return
+     */
+    protected abstract int getLayout();
 
+    /**
+     * 初始化布局
+     *
+     * @param view
+     * @param state
+     */
     protected abstract void initView(View view, Bundle state);
 
+    /**
+     * 懒加载初始化
+     */
     protected abstract void lazyInit();
 
 }

@@ -1,7 +1,7 @@
-package com.example.william.my.module.base;
+package com.example.william.my.library.base;
 
-import com.example.william.my.library.base.BaseFragment;
-import com.example.william.my.module.R;
+
+import com.example.william.my.library.R;
 
 public class BaseWebViewFragment extends BaseFragment {
 
