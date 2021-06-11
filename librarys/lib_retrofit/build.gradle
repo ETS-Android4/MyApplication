@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
 }
+
 android {
     compileSdkVersion config.compileSdkVersion
     buildToolsVersion config.buildToolsVersion
@@ -18,16 +19,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    // OkHttp
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
-    //OkHttp
-    implementation deps.okhttp
-    implementation deps.okhttp_logging
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation project(path: ':librarys:lib_okhttp')
+    //Android
+    implementation deps.constraintlayout
+    //Retrofit
+    implementation deps.retrofit
+    implementation deps.retrofit_gson
+    implementation deps.retrofit_scalars
+    implementation deps.retrofit_rxjava3
+    //RxAndroid
+    implementation deps.rxandroid
+    //RxLifecycle
+    implementation deps.rxlifecycle
 }

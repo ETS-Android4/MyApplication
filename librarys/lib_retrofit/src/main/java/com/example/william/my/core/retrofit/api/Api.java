@@ -1,6 +1,6 @@
-package com.example.william.my.core.network.retrofit.api;
+package com.example.william.my.core.retrofit.api;
 
-import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
+import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.google.gson.JsonElement;
 
 import java.util.Map;

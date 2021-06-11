@@ -1,4 +1,4 @@
-package com.example.william.my.core.okhttp;
+package com.example.william.my.core.okhttp.helper;
 
 import android.app.Application;
 
@@ -86,39 +86,47 @@ public class OkHttpHelper {
     }
 
     public OkHttpClient.Builder Builder() {
-
         if (okHttpClient == null) {
-
-            okHttpClient = new OkHttpClient.Builder();
-
-            //设置超时时间
-            CompatTimeout.setTimeOut(okHttpClient, timeout);
-
-            //设置连接使用的HTTP代理。该方法优先于proxySelector，默认代理为空，完全禁用代理使用NO_PROXY
-            if (noProxy) {
-                okHttpClient.proxy(Proxy.NO_PROXY);
+            synchronized (OkHttpHelper.class) {
+                if (okHttpClient == null) {
+                    okHttpClient = createBuilder();
+                }
             }
+        }
+        return okHttpClient;
+    }
 
-            //显示log
-            if (logShow) {
-                CompatLogging.setLog(okHttpClient, logTag);
-            }
+    private OkHttpClient.Builder createBuilder() {
 
-            //携带cookie
-            if (cookieJar) {
-                CompatCookieJar.cookieJar(okHttpClient);
-            }
+        okHttpClient = new OkHttpClient.Builder();
 
-            //忽略https证书
-            if (ignoreSSL) {
-                CompatHttpsSSL.ignoreSSLForOkHttp(okHttpClient);
-                CompatHttpsSSL.ignoreSSLForHttpsURLConnection();
-            }
+        //设置超时时间
+        CompatTimeout.setTimeOut(okHttpClient, timeout);
 
-            //设置缓存
-            if (cache) {
-                CompatCache.cache(app, okHttpClient, cacheDir, cacheSize);
-            }
+        //设置连接使用的HTTP代理。该方法优先于proxySelector，默认代理为空，完全禁用代理使用NO_PROXY
+        if (noProxy) {
+            okHttpClient.proxy(Proxy.NO_PROXY);
+        }
+
+        //显示log
+        if (logShow) {
+            CompatLogging.setLog(okHttpClient, logTag);
+        }
+
+        //携带cookie
+        if (cookieJar) {
+            CompatCookieJar.cookieJar(okHttpClient);
+        }
+
+        //忽略https证书
+        if (ignoreSSL) {
+            CompatHttpsSSL.ignoreSSLForOkHttp(okHttpClient);
+            CompatHttpsSSL.ignoreSSLForHttpsURLConnection();
+        }
+
+        //设置缓存
+        if (cache) {
+            CompatCache.cache(app, okHttpClient, cacheDir, cacheSize);
         }
 
         return okHttpClient;

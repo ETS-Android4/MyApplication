@@ -33,3 +33,5 @@ include ':modules:module_sample'
 //        settingsDir,
 //        'flutter_module/.android/include_flutter.groovy'
 //))
+include ':librarys:lib_retrofit_ktx'
+include ':librarys:lib_retrofit'
