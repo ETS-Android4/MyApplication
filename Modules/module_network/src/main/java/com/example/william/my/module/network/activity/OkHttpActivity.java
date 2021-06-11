@@ -1,13 +1,9 @@
 package com.example.william.my.module.network.activity;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
-import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
 import com.example.william.my.core.okhttp.body.RequestProgressBody;
 import com.example.william.my.core.okhttp.listener.RequestProgressListener;
 import com.example.william.my.module.activity.BaseResponseActivity;
@@ -93,41 +89,41 @@ public class OkHttpActivity extends BaseResponseActivity {
     }
 
     private void download() {
-        //创建Client对象
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new RetrofitInterceptorProgress(new RetrofitResponseListener() {
-                    @Override
-                    public void onProgress(String url, long bytesRead, long contentLength) {
-                        int progress = (int) (bytesRead * 1f / contentLength * 100);
-                        Log.e("TAG", "下载进度：" + progress + "%");
-                        showResponse("下载进度：" + progress + "%");
-                    }
-                }))
-                .build();
-        //创建请求
-        Request request = new Request.Builder()
-                .url(Urls.download)
-                .get()
-                .build();
-        Call call = okHttpClient.newCall(request);
-        //加入调度
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull final IOException e) {
-                String netError = "Error: " + e.getMessage();
-                showResponse(netError);
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
-                ResponseBody body = response.body();
-                if (response.isSuccessful() && body != null) {
-                    FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
-                    File file = new File(getExternalCacheDir() + File.separator + "ok_http_download.apk");
-                    boolean successful = fileIOUtils.writeFileFromIS(file, body.byteStream());
-                }
-            }
-        });
+//        //创建Client对象
+//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                .addInterceptor(new RetrofitInterceptorProgress(new RetrofitResponseListener() {
+//                    @Override
+//                    public void onProgress(String url, long bytesRead, long contentLength) {
+//                        int progress = (int) (bytesRead * 1f / contentLength * 100);
+//                        Log.e("TAG", "下载进度：" + progress + "%");
+//                        showResponse("下载进度：" + progress + "%");
+//                    }
+//                }))
+//                .build();
+//        //创建请求
+//        Request request = new Request.Builder()
+//                .url(Urls.download)
+//                .get()
+//                .build();
+//        Call call = okHttpClient.newCall(request);
+//        //加入调度
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(@NonNull Call call, @NonNull final IOException e) {
+//                String netError = "Error: " + e.getMessage();
+//                showResponse(netError);
+//            }
+//
+//            @Override
+//            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
+//                ResponseBody body = response.body();
+//                if (response.isSuccessful() && body != null) {
+//                    FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+//                    File file = new File(getExternalCacheDir() + File.separator + "ok_http_download.apk");
+//                    boolean successful = fileIOUtils.writeFileFromIS(file, body.byteStream());
+//                }
+//            }
+//        });
     }
 
     private void upload() {

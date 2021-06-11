@@ -1,8 +1,8 @@
 package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.network.retrofit.converter.RetrofitConverterFactory;
-import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
+import com.example.william.my.core.retrofit.converter.RetrofitConverterFactory;
+import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.api.NetworkService;
 import com.example.william.my.module.base.Urls;
@@ -48,10 +48,10 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
      */
     private void getBanner() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Urls.baseUrl)//baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
-                .addConverterFactory(ScalarsConverterFactory.create()) //标准类型转换器，防止上传图文的时候带引号
-                .addConverterFactory(GsonConverterFactory.create())//解析工厂类
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // 支持RxJava
+                .baseUrl(Urls.baseUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
 
         NetworkService service = retrofit.create(NetworkService.class);
@@ -68,14 +68,14 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
                     @Override
                     public void onNext(@NonNull BannerBean banner) {
-                        String net_success = "getBanner: " + new Gson().toJson(banner);
-                        showResponse(net_success);
+                        String netSuccess = "getBanner: " + new Gson().toJson(banner);
+                        showResponse(netSuccess);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        String net_error = "Error: " + e.getMessage();
-                        showResponse(net_error);
+                        String netError = "Error: " + e.getMessage();
+                        showResponse(netError);
                     }
 
                     @Override
@@ -90,10 +90,10 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
      */
     private void getBannerResponse() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Urls.baseUrl)//baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
-                .addConverterFactory(ScalarsConverterFactory.create()) //标准类型转换器，防止上传图文的时候带引号
-                .addConverterFactory(RetrofitConverterFactory.create())//解析工厂类
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // 支持RxJava
+                .baseUrl(Urls.baseUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(RetrofitConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
 
         NetworkService service = retrofit.create(NetworkService.class);
@@ -110,14 +110,14 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
                     @Override
                     public void onNext(@NonNull RetrofitResponse<List<BannerDetailBean>> banner) {
-                        String net_success = "getBannerResponse: " + new Gson().toJson(banner);
-                        showResponse(net_success);
+                        String netSuccess = "getBannerResponse: " + new Gson().toJson(banner);
+                        showResponse(netSuccess);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        String net_error = "Error: " + e.getMessage();
-                        showResponse(net_error);
+                        String netError = "Error: " + e.getMessage();
+                        showResponse(netError);
                     }
 
                     @Override

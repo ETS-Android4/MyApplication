@@ -14,7 +14,7 @@ class Config {
             Network        : new DepConfig(true, ":modules:module_network"),
             CustomView     : new DepConfig(true, ":modules:module_custom_view"),
 
-            Jetpack        : new DepConfig(true, ":modules:module_jetpack"),
+            Jetpack        : new DepConfig(false, ":modules:module_jetpack"),
             OpenSource     : new DepConfig(true, ":modules:module_open_source"),
 
             Widget         : new DepConfig(true, ":modules:module_widget"),
@@ -26,8 +26,8 @@ class Config {
             ModuleJiguang  : new DepConfig(false, ":modules:module_jiguang"),
             ModuleTencentIM: new DepConfig(false, ":modules:module_tencent_im"),
 
-            ModuleKotlin   : new DepConfig(true, ":modules:module_kotlin"),
-            ModuleSample   : new DepConfig(true, ":modules:module_sample"),
+            ModuleKotlin   : new DepConfig(false, ":modules:module_kotlin"),
+            ModuleSample   : new DepConfig(false, ":modules:module_sample"),
 
             ModuleFlutter  : new DepConfig(false, ":modules:module_flutter"),
     ]

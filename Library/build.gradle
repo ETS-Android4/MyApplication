@@ -42,4 +42,6 @@ dependencies {
     implementation deps.smartrefresh
     implementation deps.smartrefresh_header
     implementation deps.smartrefresh_footer
+    //RxLifecycle
+    implementation deps.rxlifecycle
 }

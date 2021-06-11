@@ -1,11 +1,10 @@
 package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.network.base.BaseBean;
+import com.example.william.my.library.helper.AppExecutorsHelper;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
-import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,8 +37,7 @@ public class HttpURLActivity extends BaseResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-
-        new Thread(new Runnable() {
+        AppExecutorsHelper.getInstance().networkIO().execute(new Runnable() {
             @Override
             public void run() {
                 b = !b;
@@ -51,7 +49,7 @@ public class HttpURLActivity extends BaseResponseActivity {
                     post(Urls.login, body);
                 }
             }
-        }).start();
+        });
     }
 
     private void get(String urlString) {
@@ -83,7 +81,6 @@ public class HttpURLActivity extends BaseResponseActivity {
                 // 关闭流
                 reader.close();
             }
-            BaseBean b = new Gson().fromJson(msg.toString(), BaseBean.class);
             // 6. 断开连接，释放资源
             connection.disconnect();
             showResponse(msg.toString());

@@ -1,6 +1,6 @@
 package com.example.william.my.module.bean;
 
-import com.example.william.my.core.network.base.BaseBean;
+import com.example.william.my.core.retrofit.base.BaseBean;
 import com.google.gson.annotations.SerializedName;
 
 public class ArticleDetailBean extends BaseBean {

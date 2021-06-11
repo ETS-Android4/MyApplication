@@ -9,8 +9,8 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.example.william.my.core.network.base.RxRetrofitConfig;
-import com.example.william.my.core.network.utils.NetworkUtils;
 import com.example.william.my.library.base.BaseApp;
+import com.example.william.my.module.network.utils.NetworkUtils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -61,7 +61,7 @@ public class NanoServer extends NanoHTTPD {
         String uri = session.getUri();
         String filename = uri.substring(1);
 
-        boolean is_ascii = true;
+        boolean isAscii = true;
         if (uri.equals("/")) {
             filename = "index.html";
         }
@@ -71,30 +71,30 @@ public class NanoServer extends NanoHTTPD {
         String mimeType;
         if (filename.contains(".html") || filename.contains(".htm")) {
             mimeType = "text/html";
-            is_ascii = true;
+            isAscii = true;
         } else if (filename.contains(".js")) {
             mimeType = "text/javascript";
-            is_ascii = true;
+            isAscii = true;
         } else if (filename.contains(".css")) {
             mimeType = "text/css";
-            is_ascii = true;
+            isAscii = true;
         } else if (filename.contains(".gif")) {
             mimeType = "text/gif";
-            is_ascii = false;
+            isAscii = false;
         } else if (filename.contains(".jpeg") || filename.contains(".jpg")) {
             mimeType = "text/jpeg";
-            is_ascii = false;
+            isAscii = false;
         } else if (filename.contains(".png")) {
             mimeType = "image/png";
-            is_ascii = false;
+            isAscii = false;
         } else if (filename.contains(".svg")) {
             mimeType = "image/svg+xml";
-            is_ascii = false;
+            isAscii = false;
         } else {
             filename = "index.html";
             mimeType = "text/html";
         }
-        if (is_ascii) {
+        if (isAscii) {
             return loadHtml(filename, mimeType);
         } else {
             return loadOrder(filename, mimeType);
