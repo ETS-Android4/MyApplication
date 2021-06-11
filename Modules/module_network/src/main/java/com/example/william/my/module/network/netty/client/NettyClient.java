@@ -12,7 +12,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class NettyClient {
 
-    private final String TAG = getClass().getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     private static NettyClient instance;
 

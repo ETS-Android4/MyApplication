@@ -21,37 +21,37 @@ import okio.Source;
  */
 public class ResponseProgressBody extends ResponseBody {
 
-    private static final String TAG = "ProgressResponseBody";
+    private final String TAG = this.getClass().getSimpleName();
 
-    private final String url;
-    private final ResponseBody body;
-    private final ResponseProgressListener listener;
+    private final String mUrl;
+    private final ResponseBody mResponseBody;
+    private final ResponseProgressListener mResponseProgressListener;
 
-    private BufferedSource bufferedSource;
+    private BufferedSource mBufferedSource;
 
-    public ResponseProgressBody(String url, ResponseBody body, ResponseProgressListener listener) {
-        this.url = url;
-        this.body = body;
-        this.listener = listener;
+    public ResponseProgressBody(String url, ResponseBody responseBody, ResponseProgressListener listener) {
+        this.mUrl = url;
+        this.mResponseBody = responseBody;
+        this.mResponseProgressListener = listener;
     }
 
     @Override
     public MediaType contentType() {
-        return body.contentType();
+        return mResponseBody.contentType();
     }
 
     @Override
     public long contentLength() {
-        return body.contentLength();
+        return mResponseBody.contentLength();
     }
 
     @NonNull
     @Override
     public BufferedSource source() {
-        if (bufferedSource == null) {
-            bufferedSource = Okio.buffer(source(body.source()));
+        if (mBufferedSource == null) {
+            mBufferedSource = Okio.buffer(source(mResponseBody.source()));
         }
-        return bufferedSource;
+        return mBufferedSource;
     }
 
     private Source source(Source source) {
@@ -69,16 +69,16 @@ public class ResponseProgressBody extends ResponseBody {
         @Override
         public long read(@NonNull Buffer sink, long byteCount) throws IOException {
             long count = super.read(sink, byteCount);
-            long contentLength = body.contentLength();
+            long contentLength = mResponseBody.contentLength();
             if (count == -1) { // this source is exhausted
                 bytesRead = contentLength;
             } else {
                 bytesRead += count;
             }
-            if (listener != null) {
-                listener.onResponseProgress(url, bytesRead, contentLength);
+            if (mResponseProgressListener != null) {
+                mResponseProgressListener.onResponseProgress(mUrl, bytesRead, contentLength);
             } else {
-                Log.e(TAG, "url: " + url + "bytesRead: " + bytesRead + " , totalBytesCount: " + contentLength);
+                Log.e(TAG, "url: " + mUrl + "bytesRead: " + bytesRead + " , totalBytesCount: " + contentLength);
             }
             return count;
         }

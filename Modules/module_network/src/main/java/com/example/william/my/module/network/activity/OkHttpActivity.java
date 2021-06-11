@@ -6,12 +6,10 @@ import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.william.my.core.network.retrofit.body.CountingRequestBody;
 import com.example.william.my.core.network.retrofit.interceptor.RetrofitInterceptorProgress;
-import com.example.william.my.core.network.retrofit.listener.RetrofitRequestListener;
 import com.example.william.my.core.network.retrofit.listener.RetrofitResponseListener;
-import com.example.william.my.core.okhttp.OkHttpHelper;
-import com.example.william.my.core.okhttp.listener.ResponseProgressListener;
+import com.example.william.my.core.okhttp.body.RequestProgressBody;
+import com.example.william.my.core.okhttp.listener.RequestProgressListener;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
@@ -37,6 +35,15 @@ import okhttp3.ResponseBody;
 @Route(path = ARouterPath.NetWork.NetWork_OkHttp)
 public class OkHttpActivity extends BaseResponseActivity {
 
+    private OkHttpClient mOkHttpClient;
+
+    @Override
+    public void initView() {
+        super.initView();
+        //创建Client对象
+        mOkHttpClient = new OkHttpClient();
+    }
+
     @Override
     public void setOnClick() {
         super.setOnClick();
@@ -45,8 +52,6 @@ public class OkHttpActivity extends BaseResponseActivity {
     }
 
     private void login() {
-        //创建Client对象
-        OkHttpClient okHttpClient = new OkHttpClient();
         //创建请求体
         FormBody.Builder formBuilder = new FormBody.Builder();
         RequestBody formBody = formBuilder
@@ -67,7 +72,7 @@ public class OkHttpActivity extends BaseResponseActivity {
                 // 表单
                 //.post(multipartBody)
                 .build();
-        Call call = okHttpClient.newCall(request);
+        Call call = mOkHttpClient.newCall(request);
         //加入调度
         call.enqueue(new Callback() {
             @Override
@@ -99,7 +104,6 @@ public class OkHttpActivity extends BaseResponseActivity {
                     }
                 }))
                 .build();
-        okHttpClient = OkHttpHelper.getInstance().Builder().build();
         //创建请求
         Request request = new Request.Builder()
                 .url(Urls.download)
@@ -132,15 +136,13 @@ public class OkHttpActivity extends BaseResponseActivity {
         FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
         boolean successful = fileIOUtils.writeFileFromString(file, "update");
 
-        //创建Client对象
-        OkHttpClient okHttpClient = new OkHttpClient();
         //创建表单
         MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         RequestBody multipartBody = multipartBuilder
                 .addFormDataPart("file", file.getName(), RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")))
                 .build();
         //监听上传进度
-        RequestBody countingRequestBody = new CountingRequestBody(multipartBody, new RetrofitRequestListener() {
+        RequestBody requestProgressBody = new RequestProgressBody(multipartBody, new RequestProgressListener() {
             @Override
             public void onProgress(long bytesWritten, long contentLength) {
                 int progress = (int) (bytesWritten * 1f / contentLength * 100);
@@ -151,9 +153,9 @@ public class OkHttpActivity extends BaseResponseActivity {
         Request request = new Request.Builder()
                 .url(Urls.upload)
                 //.post(multipartBody)
-                .post(countingRequestBody)
+                .post(requestProgressBody)
                 .build();
-        Call call = okHttpClient.newCall(request);
+        Call call = mOkHttpClient.newCall(request);
         //加入调度
         call.enqueue(new Callback() {
             @Override

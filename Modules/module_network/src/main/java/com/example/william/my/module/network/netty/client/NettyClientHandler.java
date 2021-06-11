@@ -7,7 +7,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 public class NettyClientHandler extends SimpleChannelInboundHandler<String> {
 
-    private final String TAG = getClass().getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     /**
      * 观察接收到的数据

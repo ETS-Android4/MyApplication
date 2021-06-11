@@ -34,12 +34,20 @@ public class InterceptorLogging implements Interceptor {
     private Level level = Level.BASIC;
 
     public enum Level {
+        /**
+         * 请求基本信息
+         */
         BASIC,
+        /**
+         * 请求响应主体
+         */
         BODY
     }
 
     public InterceptorLogging setLevel(Level level) {
-        if (level == null) throw new NullPointerException("level == null. Use Level.NONE instead.");
+        if (level == null) {
+            throw new NullPointerException("level == null. Use Level.NONE instead.");
+        }
         this.level = level;
         return this;
     }
@@ -68,12 +76,13 @@ public class InterceptorLogging implements Interceptor {
             }
         }
         //========================================
-        Headers headers_request = request.headers();
+        Headers headersRequest = request.headers();
         if (level == Level.BODY) {
-            for (int i = 0, count = headers_request.size(); i < count; i++) {
+            for (int i = 0, count = headersRequest.size(); i < count; i++) {
                 // Skip headers from the request body as they are explicitly logged above.
-                if (!"Content-Type".equalsIgnoreCase(headers_request.name(i)) && !"Content-Length".equalsIgnoreCase(headers_request.name(i))) {
-                    Log.i(TAG, headers_request.name(i) + ": " + headers_request.value(i));
+                if (!"Content-Type".equalsIgnoreCase(headersRequest.name(i)) &&
+                        !"Content-Length".equalsIgnoreCase(headersRequest.name(i))) {
+                    Log.i(TAG, headersRequest.name(i) + ": " + headersRequest.value(i));
                 }
             }
         }
@@ -87,17 +96,18 @@ public class InterceptorLogging implements Interceptor {
                 + ' ' + response.request().url()
                 + " (" + tookMs + "ms" + ')');
         //========================================
-        Headers headers_response = response.headers();
+        Headers headersResponse = response.headers();
         if (level == Level.BODY) {
-            for (int i = 0, count = headers_response.size(); i < count; i++) {
-                Log.i(TAG, headers_response.name(i) + ": " + headers_response.value(i));
+            for (int i = 0, count = headersResponse.size(); i < count; i++) {
+                Log.i(TAG, headersResponse.name(i) + ": " + headersResponse.value(i));
             }
         }
         //========================================
         ResponseBody responseBody = response.body();
         if (responseBody != null) {
             BufferedSource source = responseBody.source();
-            source.request(Long.MAX_VALUE); // Buffer the entire body.
+            // Buffer the entire body.
+            source.request(Long.MAX_VALUE);
             Buffer buffer = source.getBuffer();
             //========================================
             MediaType contentType = responseBody.contentType();

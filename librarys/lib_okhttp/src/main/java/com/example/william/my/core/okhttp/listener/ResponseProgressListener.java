@@ -7,6 +7,7 @@ public interface ResponseProgressListener {
 
     /**
      * 下载进度
+     *
      * @param url
      * @param bytesRead
      * @param contentLength
