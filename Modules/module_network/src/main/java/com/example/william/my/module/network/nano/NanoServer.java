@@ -8,7 +8,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.example.william.my.core.network.base.RxRetrofitConfig;
 import com.example.william.my.library.base.BaseApp;
 import com.example.william.my.module.network.utils.NetworkUtils;
 
@@ -149,7 +148,7 @@ public class NanoServer extends NanoHTTPD {
      * 加载HTML文件
      */
     private Response loadHtml(String filename, String mimeType) {
-        AssetManager assetManager = RxRetrofitConfig.getApp().getAssets();
+        AssetManager assetManager = BaseApp.getApp().getAssets();
         StringBuilder response = new StringBuilder();
         BufferedReader reader;
         InputStream isr;
@@ -169,7 +168,7 @@ public class NanoServer extends NanoHTTPD {
     }
 
     private Response loadOrder(String filename, String mimeType) {
-        AssetManager assetManager = RxRetrofitConfig.getApp().getAssets();
+        AssetManager assetManager = BaseApp.getApp().getAssets();
         InputStream isr;
         try {
             isr = assetManager.open(filename);

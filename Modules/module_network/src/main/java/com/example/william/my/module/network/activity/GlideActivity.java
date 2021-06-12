@@ -31,7 +31,7 @@ public class GlideActivity extends BaseActivity {
 
     private boolean b;
     private ImageView mImageView;
-    private static final String url = "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png";
+    private static final String URL_IMG = "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class GlideActivity extends BaseActivity {
     private void loadImage() {
         GlideApp
                 .with(this)
-                .load(url)
+                .load(URL_IMG)
                 .placeholder(R.drawable.ic_launcher)
                 //.skipMemoryCache(true)//跳过内存缓存，默认为false
                 //.diskCacheStrategy(DiskCacheStrategy.RESOURCE)//设置磁盘缓存。NONE：不缓存；DATA：解码前；RESOURCE：解码后
@@ -72,7 +72,7 @@ public class GlideActivity extends BaseActivity {
     private void loadRoundImage() {
         GlideApp.with(this)
                 .asBitmap()//.asBitmap()在.load()之前调用
-                .load(url)
+                .load(URL_IMG)
                 .centerCrop()
                 .into(new CustomTarget<Bitmap>() {
                     @Override
@@ -96,7 +96,7 @@ public class GlideActivity extends BaseActivity {
         GlideApp
                 .with(this)
                 .asBitmap()//在.load()之前调用
-                .load(url)
+                .load(URL_IMG)
                 .into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {

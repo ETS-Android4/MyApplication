@@ -39,7 +39,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
         if (b) {
             getBanner();
         } else {
-            getBannerResponse();
+            getBannerList();
         }
     }
 
@@ -48,7 +48,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
      */
     private void getBanner() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Urls.baseUrl)
+                .baseUrl(Urls.URL_BASE)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
@@ -88,9 +88,9 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
     /**
      * RetrofitConverterFactory 自定义解析 -> List<BannerDetailBean>
      */
-    private void getBannerResponse() {
+    private void getBannerList() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Urls.baseUrl)
+                .baseUrl(Urls.URL_BASE)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(RetrofitConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
@@ -98,7 +98,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
         NetworkService service = retrofit.create(NetworkService.class);
 
-        Observable<RetrofitResponse<List<BannerDetailBean>>> observable = service.getBannerResponse();
+        Observable<RetrofitResponse<List<BannerDetailBean>>> observable = service.getBannerList();
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -110,7 +110,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
                     @Override
                     public void onNext(@NonNull RetrofitResponse<List<BannerDetailBean>> banner) {
-                        String netSuccess = "getBannerResponse: " + new Gson().toJson(banner);
+                        String netSuccess = "getBannerList: " + new Gson().toJson(banner);
                         showResponse(netSuccess);
                     }
 

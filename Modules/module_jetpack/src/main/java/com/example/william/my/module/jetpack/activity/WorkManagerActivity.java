@@ -40,11 +40,16 @@ public class WorkManagerActivity extends BaseResponseActivity {
     private void initWork() {
         // 工作约束
         Constraints constraints = new Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED) //网络状态
-                //.setRequiresBatteryNotLow(true) //非低电量
-                //.setRequiresDeviceIdle(true)//设备待机空闲
-                //.setRequiresStorageNotLow(true)//内存不紧张
-                //.setRequiresCharging(true) //充电状态
+                //网络状态
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                //非低电量
+                //.setRequiresBatteryNotLow(true)
+                //设备待机空闲
+                //.setRequiresDeviceIdle(true)
+                //内存不紧张
+                //.setRequiresStorageNotLow(true)
+                //充电状态
+                //.setRequiresCharging(true)
                 .build();
 
         // 定义任务的输入/输出
@@ -55,12 +60,17 @@ public class WorkManagerActivity extends BaseResponseActivity {
         // 配置运行任务的方式和时间。
         // OneTimeWorkRequest 只执行一次的任务请求，支持任务链
         oneTimeWorkRequest = new OneTimeWorkRequest.Builder(UploadWorker.class)
-                .setInitialDelay(3, TimeUnit.SECONDS)//初始延迟
-                .setConstraints(constraints)//工作约束
-                .setInputData(imageData)//传递数据
-                .addTag("upload")//标记工作
+                //初始延迟
+                .setInitialDelay(3, TimeUnit.SECONDS)
+                //工作约束
+                .setConstraints(constraints)
+                //传递数据
+                .setInputData(imageData)
+                //标记工作
+                .addTag("upload")
                 .build();
 
+        // 配置运行任务的方式和时间。
         // PeriodicWorkRequest 可以多次、定时执行的任务请求，不支持任务链。可以定义的最短重复间隔是 15 分钟
         periodicWorkRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 15, TimeUnit.MINUTES)
                 .setConstraints(constraints)
@@ -72,8 +82,10 @@ public class WorkManagerActivity extends BaseResponseActivity {
 
         //链式执行
         //WorkManager.getInstance(this)
-        //        .beginWith(Arrays.asList(uploadWorkRequest, uploadWorkRequest, uploadWorkRequest))//并列运行
-        //        .then(uploadWorkRequest)//链式运行
+        //         //并列运行
+        //        .beginWith(Arrays.asList(uploadWorkRequest, uploadWorkRequest, uploadWorkRequest))
+        //         //链式运行
+        //        .then(uploadWorkRequest)
         //        .enqueue();
 
         // 唯一工作

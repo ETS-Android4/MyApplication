@@ -1,4 +1,4 @@
-package com.example.william.my.core.network.webSocket;
+package com.example.william.my.module.network.websocket;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;

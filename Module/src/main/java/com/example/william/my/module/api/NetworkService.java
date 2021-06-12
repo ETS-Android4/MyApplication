@@ -7,23 +7,18 @@ import com.example.william.my.module.bean.BannerBean;
 import com.example.william.my.module.bean.BannerDetailBean;
 
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.Streaming;
-import retrofit2.http.Url;
 
 /**
  * @PATH 动态URL
@@ -38,20 +33,20 @@ import retrofit2.http.Url;
 public interface NetworkService {
 
     /**
-     * 登陆 RetrofitActivity
+     * RetrofitActivity
      *
      * @param username
      * @param password
      * @return
      */
-    @POST(Urls.login)
+    @POST(Urls.URL_LOGIN)
     Call<ResponseBody> call(@Query("username") String username, @Query("password") String password);
 
     /**
      * @param page
      * @return
      */
-    @GET(Urls.article)
+    @GET(Urls.URL_ARTICLE)
     Single<ArticleBean> getArticleList(@Path("page") int page);
 
     /**
@@ -59,7 +54,7 @@ public interface NetworkService {
      *
      * @return
      */
-    @GET(Urls.banner)
+    @GET(Urls.URL_BANNER)
     Observable<BannerBean> getBanner();
 
     /**
@@ -67,22 +62,24 @@ public interface NetworkService {
      *
      * @return
      */
-    @GET(Urls.banner)
-    Observable<RetrofitResponse<List<BannerDetailBean>>> getBannerResponse();
+    @GET(Urls.URL_BANNER)
+    Observable<RetrofitResponse<List<BannerDetailBean>>> getBannerList();
 
     /**
+     * 上传文件
+     *
      * @param part
      * @return
      */
     @Multipart
-    @POST(Urls.upload)
+    @POST(Urls.URL_UPLOAD)
     Call<ResponseBody> uploadFile(@Part MultipartBody.Part part);
 
-    @Multipart
-    @POST(Urls.upload)
-    Call<ResponseBody> uploadFiles(@PartMap Map<String, RequestBody> map);
+    //@Multipart
+    //@POST(Urls.upload)
+    //Call<ResponseBody> uploadFiles(@PartMap Map<String, RequestBody> map);
 
-    @Streaming
-    @GET()
-    Call<ResponseBody> downloadFile(@Url String url);
+    //@Streaming
+    //@GET()
+    //Call<ResponseBody> downloadFile(@Url String url);
 }

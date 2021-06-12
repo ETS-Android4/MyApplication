@@ -125,21 +125,26 @@ public class VolleyUtils {
                 sharedPreferences = mContext.getSharedPreferences("cookie", Context.MODE_PRIVATE);
         }
 
+        @Override
         protected void deliverResponse(T response) {
             if (this.mListener != null) {
                 this.mListener.onResponse(response);
             }
         }
 
+        @Override
         protected Response<T> parseNetworkResponse(@NonNull NetworkResponse response) {
             try {
-                String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-                String temp_cookie = response.headers.get("Set-Cookie");
-                if (temp_cookie != null) {
-                    String cookie = temp_cookie.split(";")[0];
-                    sharedPreferences.edit().putString("cookie", cookie).apply();
+                Map<String, String> headers = response.headers;
+                if (headers != null) {
+                    String tempCookie = headers.get("Set-Cookie");
+                    if (tempCookie != null) {
+                        String cookie = tempCookie.split(";")[0];
+                        sharedPreferences.edit().putString("cookie", cookie).apply();
+                    }
                 }
-                Log.e(TAG, json);
+                String json = new String(response.data, HttpHeaderParser.parseCharset(headers));
+                Log.i(TAG, json);
                 return Response.success(new Gson().fromJson(json, mClazz), HttpHeaderParser.parseCacheHeaders(response));
             } catch (UnsupportedEncodingException | JsonSyntaxException e) {
                 return Response.error(new ParseError(e));
@@ -153,10 +158,18 @@ public class VolleyUtils {
 
         Response.ErrorListener mErrorListener;
 
-        // 请求成功时的回调函数
+        /**
+         * 请求成功时的回调函数
+         *
+         * @param result
+         */
         public abstract void onMySuccess(@NonNull T result);
 
-        // 请求失败时的回调函数
+        /**
+         * 请求失败时的回调函数
+         *
+         * @param error
+         */
         public abstract void onMyError(@NonNull String error);
 
         // 创建请求的事件监听
@@ -174,8 +187,12 @@ public class VolleyUtils {
         Response.ErrorListener errorListener() {
             mErrorListener = new Response.ErrorListener() {
                 @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    onMyError(volleyError.getMessage());
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getMessage() != null) {
+                        onMyError(error.getMessage());
+                    } else {
+                        onMyError("请求网络失败，请检查您的网络设置或稍后重试！");
+                    }
                 }
             };
             return mErrorListener;

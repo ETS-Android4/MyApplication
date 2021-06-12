@@ -2,7 +2,7 @@ package com.example.william.my.module.jetpack.database.api;
 
 import android.text.TextUtils;
 
-import com.example.william.my.core.network.base.RxRetrofitConfig;
+import com.example.william.my.library.base.BaseApp;
 import com.example.william.my.module.jetpack.database.AppDataBase;
 import com.example.william.my.module.jetpack.database.dao.OAuthDao;
 import com.example.william.my.module.jetpack.database.data.LoginData;
@@ -17,15 +17,19 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RoomApi {
 
+    /**
+     * 过期时间1天
+     */
+    private static final long OVERDUE_TIME = 3600 * 24;
+
     private static RoomApi api;
 
     private final OAuthDao mOAuthDao;
     private static CompositeDisposable mDisposable;
-    private static final long OVERDUE_TIME = 3600 * 24; // 过期时间1天
 
     public RoomApi() {
         mDisposable = new CompositeDisposable();
-        mOAuthDao = AppDataBase.getInstance(RxRetrofitConfig.getApp()).getOAuthDao();
+        mOAuthDao = AppDataBase.getInstance(BaseApp.getApp()).getOAuthDao();
     }
 
     public static RoomApi getInstance() {
@@ -59,10 +63,12 @@ public class RoomApi {
     }
 
     public void setOAuth(final OAuth oAuthDo) {
-        MyKit.setOAuth(oAuthDo);//内存中保存验证信息
+        //内存中保存验证信息
+        MyKit.setOAuth(oAuthDo);
         mDisposable.add(Completable.fromAction(new Action() {
             @Override
             public void run() throws Exception {
+                mOAuthDao.updateOAuth(oAuthDo);
                 mOAuthDao.insertOAuth(oAuthDo);
             }
         })
@@ -71,7 +77,8 @@ public class RoomApi {
     }
 
     public void deleteOAuth() {
-        MyKit.setOAuth(null);//内存中保存验证信息
+        //内存中保存验证信息
+        MyKit.setOAuth(null);
         mDisposable.add(Completable.fromAction(new Action() {
             @Override
             public void run() throws Exception {

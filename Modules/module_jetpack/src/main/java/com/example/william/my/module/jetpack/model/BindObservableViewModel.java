@@ -19,8 +19,10 @@ public class BindObservableViewModel extends BaseObservable {
     }
 
     public void onLike() {
-        likes.set(likes.get() + 1);
-        // You control when the @Bindable properties are updated using `notifyPropertyChanged()`.
-        notifyPropertyChanged(BR.likes);
+        if (likes.get() != null) {
+            likes.set(likes.get() + 1);
+            // You control when the @Bindable properties are updated using `notifyPropertyChanged()`.
+            notifyPropertyChanged(BR.likes);
+        }
     }
 }

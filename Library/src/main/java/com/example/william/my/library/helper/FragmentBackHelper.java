@@ -36,8 +36,6 @@ public class FragmentBackHelper {
      * 没有处理back事件，则尝试 FragmentManager.popBackStack()
      *
      * @return 如果处理了back键则返回 <b>true</b>
-     * @see #handleBackPress(Fragment)
-     * @see #handleBackPress(FragmentActivity)
      */
     public static boolean handleBackPress(FragmentManager fragmentManager) {
         List<Fragment> fragments = fragmentManager.getFragments();

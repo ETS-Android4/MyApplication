@@ -130,12 +130,12 @@ package语句不换行(即package语句写在一行里)
 ### 6. 具体结构
 #### 变量声明
 - **每次只声明一个变量不要使用组合声明**，比如int a, b;。
-- **需要时才声明，并尽快进行初始化**，不要在一个代码块的开头把局部变量一次性都声明了(这是c语言的做法)，而是在第一次需要使用它时才声明。 局部变量在声明时最好就进行初始化，或者声明后尽快进行初始化。
+- **需要时才声明，并尽快进行初始化**，不要在一个代码块的开头把局部变量一次性都声明了(这是c语言的做法)，而是在第一次需要使用它时才声明。局部变量在声明时最好就进行初始化，或者声明后尽快进行初始化。
 
 #### 数组
 - **数组初始化：**：可写成块状结构，数组初始化可以写成块状结构
 - **非C风格的数组声明：**
-中括号是类型的一部分：String[] args， 而非String args[]。
+中括号是类型的一部分：String[] args，而非String args[]。
 
 #### switch语句
 - **缩进：**
@@ -269,7 +269,7 @@ package语句不换行(即package语句写在一行里)
 ##### xml 控件id 统一命名规范
 
 xml中id命名统一使用后缀 _xx，对应java文件中变量命名`xxBtn`等  
-命名：模块名_逻辑名_控件名  `login_name_edit`
+命名：模块名_逻辑名_控件名 `login_name_edit`
 
 ##### Layout资源文件命名
 
@@ -291,7 +291,7 @@ Layout资源文件的命名(全部小写，下划线分隔)
 menu资源文件的命名(全部小写，下划线分隔):`menu_description1.description2.xml`  
 
 ##### drawable资源命名
-drawable资源：`selector_description1_description2.xml `    `shape_description1_description2.xml `
+drawable资源：`selector_description1_description2.xml` `shape_description1_description2.xml `
 
 controlName表示该资源要用在什么类型的控件上面，例如如果是按钮的图片切换则应该这么定义 `button_bg_sendmessage_selector.xml`；selector表示该资源的形式，例如还有shape等
 
@@ -313,7 +313,7 @@ controlName表示该资源要用在什么类型的控件上面，例如如果是
 
     <string name="common_str_ok">确定</string>
 
-非公用字符串 模块_描述 命名  
+非公用字符串：模块_描述 命名  
 例如：  
 
     <string name="mine_default_nickname">我的昵称</string>

@@ -14,7 +14,7 @@ class Config {
             Network        : new DepConfig(true, ":modules:module_network"),
             CustomView     : new DepConfig(true, ":modules:module_custom_view"),
 
-            Jetpack        : new DepConfig(false, ":modules:module_jetpack"),
+            Jetpack        : new DepConfig(true, ":modules:module_jetpack"),
             OpenSource     : new DepConfig(true, ":modules:module_open_source"),
 
             Widget         : new DepConfig(true, ":modules:module_widget"),

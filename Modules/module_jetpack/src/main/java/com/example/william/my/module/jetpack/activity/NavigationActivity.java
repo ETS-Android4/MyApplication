@@ -35,9 +35,14 @@ public class NavigationActivity extends BaseActivity {
         //AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
         //        R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
         //        .build();
-        // -> fragment
+
+        /*
+         * -> fragment
+         */
         //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        // -> FragmentContainerView
+        /*
+         * -> FragmentContainerView
+         */
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         if (navHostFragment != null) {
             NavController navController = navHostFragment.getNavController();

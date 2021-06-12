@@ -1,4 +1,4 @@
-package com.example.william.my.core.okhttp;
+package com.example.william.my.core.okhttp.utils;
 
 import com.example.william.my.core.okhttp.body.RequestProgressBody;
 import com.example.william.my.core.okhttp.listener.RequestProgressListener;

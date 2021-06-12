@@ -12,25 +12,25 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "oauth")
 public class OAuth {
 
-    /*
+    /**
      * 唯一标识
      */
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
     private String id;
-    /*
+    /**
      * Token
      */
     @ColumnInfo(name = "RefreshToken")
     private String refreshToken;
-    /*
+    /**
      * 过期时长
      */
     @ColumnInfo(name = "Expires")
     private long expires;
 
-    /*
+    /**
      * 不需要添加到数据表中的属性
      */
     @Ignore

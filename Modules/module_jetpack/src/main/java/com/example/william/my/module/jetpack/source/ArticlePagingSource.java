@@ -1,9 +1,10 @@
 package com.example.william.my.module.jetpack.source;
 
+import androidx.paging.PagingSource;
 import androidx.paging.PagingState;
 import androidx.paging.rxjava3.RxPagingSource;
 
-import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
+import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.api.NetworkService;
 import com.example.william.my.module.bean.ArticleBean;
 import com.example.william.my.module.bean.ArticleDetailBean;
@@ -18,7 +19,7 @@ public class ArticlePagingSource extends RxPagingSource<Integer, ArticleDetailBe
 
     @NonNull
     @Override
-    public Single<LoadResult<Integer, ArticleDetailBean>> loadSingle(@NonNull LoadParams<Integer> loadParams) {
+    public Single<PagingSource.LoadResult<Integer, ArticleDetailBean>> loadSingle(@NonNull LoadParams<Integer> loadParams) {
 
         // Start refresh at page 0 if undefined.
         Integer page = loadParams.getKey();
@@ -29,8 +30,8 @@ public class ArticlePagingSource extends RxPagingSource<Integer, ArticleDetailBe
         return RetrofitUtils.buildApi(NetworkService.class)
                 .getArticleList(page)
                 .subscribeOn(Schedulers.io())
-                .map(new toLoadResult())
-                .onErrorReturn(new toErrorResult());
+                .map(new LoadResult())
+                .onErrorReturn(new ErrorResult());
     }
 
     @Nullable
@@ -48,7 +49,7 @@ public class ArticlePagingSource extends RxPagingSource<Integer, ArticleDetailBe
             return null;
         }
 
-        LoadResult.Page<Integer, ArticleDetailBean> anchorPage = pagingState.closestPageToPosition(anchorPosition);
+        PagingSource.LoadResult.Page<Integer, ArticleDetailBean> anchorPage = pagingState.closestPageToPosition(anchorPosition);
         if (anchorPage == null) {
             return null;
         }
@@ -66,22 +67,22 @@ public class ArticlePagingSource extends RxPagingSource<Integer, ArticleDetailBe
         return null;
     }
 
-    private static class toLoadResult implements Function<ArticleBean, LoadResult<Integer, ArticleDetailBean>> {
+    private static class LoadResult implements Function<ArticleBean, PagingSource.LoadResult<Integer, ArticleDetailBean>> {
 
         @Override
-        public LoadResult<Integer, ArticleDetailBean> apply(ArticleBean articleBean) throws Throwable {
-            return new LoadResult.Page<>(
+        public PagingSource.LoadResult<Integer, ArticleDetailBean> apply(ArticleBean articleBean) throws Throwable {
+            return new PagingSource.LoadResult.Page<>(
                     articleBean.getData().getDatas(),
                     null,// Only paging forward.
                     articleBean.getData().getCurPage());
         }
     }
 
-    private static class toErrorResult implements Function<Throwable, LoadResult<Integer, ArticleDetailBean>> {
+    private static class ErrorResult implements Function<Throwable, PagingSource.LoadResult<Integer, ArticleDetailBean>> {
 
         @Override
-        public LoadResult<Integer, ArticleDetailBean> apply(Throwable throwable) throws Throwable {
-            return new LoadResult.Error<>(throwable);
+        public PagingSource.LoadResult<Integer, ArticleDetailBean> apply(Throwable throwable) throws Throwable {
+            return new PagingSource.LoadResult.Error<>(throwable);
         }
     }
 }

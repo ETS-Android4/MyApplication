@@ -1,4 +1,4 @@
-package com.example.william.my.core.retrofit;
+package com.example.william.my.core.retrofit.utils;
 
 import androidx.annotation.NonNull;
 
@@ -13,6 +13,20 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RetrofitUtils {
+
+    public static String getBaseUrl(String url) {
+        String head = "";
+        int index = url.indexOf("://");
+        if (index != -1) {
+            head = url.substring(0, index + 3);
+            url = url.substring(index + 3);
+        }
+        index = url.indexOf("/");
+        if (index != -1) {
+            url = url.substring(0, index + 1);
+        }
+        return head + url;
+    }
 
     @NonNull
     public static <T> T buildApi(Class<T> api) {
@@ -34,7 +48,7 @@ public class RetrofitUtils {
 
 
     @NonNull
-    public static <T> Observable<T> buildObs(Observable<T> observable) {
+    public static <T> Observable<T> buildObservable(Observable<T> observable) {
         return observable
                 //.map(new ServerResultFunction<T>())
                 .onErrorResumeNext(new HttpResultFunction<>())

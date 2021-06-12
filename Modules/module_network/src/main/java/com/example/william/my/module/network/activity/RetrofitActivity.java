@@ -40,7 +40,7 @@ public class RetrofitActivity extends BaseResponseActivity {
     private void login() {
         Retrofit retrofit = new Retrofit.Builder()
                 // baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
-                .baseUrl(Urls.baseUrl)
+                .baseUrl(Urls.URL_BASE)
                 .build();
         NetworkService service = retrofit.create(NetworkService.class);
 
@@ -114,7 +114,7 @@ public class RetrofitActivity extends BaseResponseActivity {
 
         Retrofit retrofit = new Retrofit.Builder()
                 // baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
-                .baseUrl(Urls.baseUrl)
+                .baseUrl(Urls.URL_BASE)
                 .build();
         NetworkService service = retrofit.create(NetworkService.class);
 
@@ -134,8 +134,10 @@ public class RetrofitActivity extends BaseResponseActivity {
         //创建Part
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
 
-        // RetrofitUtils -> buildMultipart()
-        //MultipartBody filePart = RetrofitUtils.buildMultipart("file", mFile, new RetrofitRequestListener() {
+        /*
+         *  RetrofitUtils -> buildMultipart()
+         */
+        //filePart = RetrofitUtils.buildMultipart("file", mFile, new RetrofitRequestListener() {
         //    @Override
         //    public void onProgress(long bytesWritten, long contentLength) {
         //        showResponse("上传进度：" + (bytesWritten * 1f / contentLength * 100));

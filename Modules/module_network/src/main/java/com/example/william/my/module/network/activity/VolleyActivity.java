@@ -9,7 +9,7 @@ import com.example.william.my.module.network.volley.VolleyUtils;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
-import static com.example.william.my.module.base.Urls.login;
+import static com.example.william.my.module.base.Urls.URL_LOGIN;
 
 /**
  * https://developer.android.google.cn/training/volley/index.html
@@ -25,7 +25,7 @@ public class VolleyActivity extends BaseResponseActivity {
 
     private void login() {
         VolleyUtils.<LoginBean>builder()
-                .url(login)
+                .url(URL_LOGIN)
                 .addParams("username", "17778060027")
                 .addParams("password", "wW123456")
                 .clazz(LoginBean.class)

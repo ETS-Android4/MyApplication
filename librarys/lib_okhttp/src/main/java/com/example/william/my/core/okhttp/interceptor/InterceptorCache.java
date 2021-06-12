@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.example.william.my.core.okhttp.header.Header;
+import com.example.william.my.core.okhttp.base.Header;
 import com.example.william.my.core.okhttp.utils.NetworkUtils;
 
 import java.io.IOException;

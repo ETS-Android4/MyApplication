@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
+import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.bean.BannerDetailData;
 import com.example.william.my.module.jetpack.repository.DataRepository;
@@ -32,10 +32,14 @@ public class BannerViewModel extends ViewModel {
 
     private final DataRepository mRepository;
 
-    // 私有的 MutableLiveData 可变的，对内访问
+    /**
+     * 私有的 MutableLiveData 可变的，对内访问
+     */
     private final MutableLiveData<Object> mMutableLiveData;
 
-    // 对外暴露 不可变的 LiveData，只能查询
+    /**
+     * 对外暴露 不可变的 LiveData，只能查询
+     */
     private final LiveData<RetrofitResponse<List<BannerDetailBean>>> bannerBean;
     private final LiveData<RetrofitResponse<List<BannerDetailData>>> bannerData;
 

@@ -27,6 +27,8 @@ public class BindLiveDataViewModel extends ViewModel {
     }
 
     public void onLike() {
-        _likes.setValue(_likes.getValue() + 1);
+        if (_likes.getValue() != null) {
+            _likes.setValue(_likes.getValue() + 1);
+        }
     }
 }

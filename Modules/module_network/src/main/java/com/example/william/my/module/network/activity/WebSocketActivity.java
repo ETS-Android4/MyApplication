@@ -3,13 +3,11 @@ package com.example.william.my.module.network.activity;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.network.webSocket.RxWebSocketObserver;
-import com.example.william.my.core.network.webSocket.RxWebSocketUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
+import com.example.william.my.module.network.websocket.RxWebSocketObserver;
+import com.example.william.my.module.network.websocket.RxWebSocketUtils;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
-
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import okhttp3.OkHttpClient;
@@ -24,6 +22,15 @@ public class WebSocketActivity extends BaseResponseActivity {
 
     private final String url = "wss://echo.websocket.org";
 
+    private OkHttpClient mOkHttpClient;
+
+    @Override
+    public void initView() {
+        super.initView();
+
+        mOkHttpClient = new OkHttpClient();
+    }
+
     @Override
     public void setOnClick() {
         super.setOnClick();
@@ -31,18 +38,10 @@ public class WebSocketActivity extends BaseResponseActivity {
     }
 
     private void webSocket() {
-        OkHttpClient client = new OkHttpClient.Builder()
-                //.retryOnConnectionFailure(true)//允许失败重试
-                .readTimeout(5, TimeUnit.SECONDS)//设置读取超时时间
-                .writeTimeout(5, TimeUnit.SECONDS)//设置写的超时时间
-                .connectTimeout(5, TimeUnit.SECONDS)//设置连接超时时间
-                .build();
-
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-
-        client.newWebSocket(request, new WebSocketListener() {
+        mOkHttpClient.newWebSocket(request, new WebSocketListener() {
             /**
              * 和远程建立连接时回调
              */

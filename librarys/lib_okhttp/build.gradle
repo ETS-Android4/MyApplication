@@ -29,5 +29,5 @@ dependencies {
     //OkHttp
     implementation deps.okhttp
     implementation deps.okhttp_logging
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation deps.appcompat
 }

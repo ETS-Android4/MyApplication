@@ -43,8 +43,8 @@ public class OkHttpActivity extends BaseResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        //login();
-        download();
+        login();
+        //download();
     }
 
     private void login() {
@@ -62,7 +62,7 @@ public class OkHttpActivity extends BaseResponseActivity {
                 .build();
         //创建请求
         Request request = new Request.Builder()
-                .url(Urls.login)
+                .url(Urls.URL_LOGIN)
                 // 请求体
                 .post(formBody)
                 // 表单
@@ -137,6 +137,7 @@ public class OkHttpActivity extends BaseResponseActivity {
         RequestBody multipartBody = multipartBuilder
                 .addFormDataPart("file", file.getName(), RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")))
                 .build();
+
         //监听上传进度
         RequestBody requestProgressBody = new RequestProgressBody(multipartBody, new RequestProgressListener() {
             @Override
@@ -145,13 +146,26 @@ public class OkHttpActivity extends BaseResponseActivity {
                 showResponse("上传进度：" + progress + "%");
             }
         });
+
+        /*
+         *  OkHttpUtils -> buildRequestProgressBody
+         */
+        //requestProgressBody = OkHttpUtils.buildRequestProgressBody("file", file, new RequestProgressListener() {
+        //    @Override
+        //    public void onProgress(long bytesWritten, long contentLength) {
+        //        int progress = (int) (bytesWritten * 1f / contentLength * 100);
+        //        showResponse("上传进度：" + progress + "%");
+        //    }
+        //});
+
         //创建请求
         Request request = new Request.Builder()
-                .url(Urls.upload)
+                .url(Urls.URL_UPLOAD)
                 //.post(multipartBody)
                 .post(requestProgressBody)
                 .build();
         Call call = mOkHttpClient.newCall(request);
+
         //加入调度
         call.enqueue(new Callback() {
             @Override

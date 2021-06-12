@@ -56,7 +56,6 @@ public class PagingActivity extends BaseActivity {
         mPagingAdapter.addLoadStateListener(new Function1<CombinedLoadStates, Unit>() {
             @Override
             public Unit invoke(CombinedLoadStates combinedLoadStates) {
-                Log.e("TAG", combinedLoadStates.getRefresh().toString());
                 return null;
             }
         });

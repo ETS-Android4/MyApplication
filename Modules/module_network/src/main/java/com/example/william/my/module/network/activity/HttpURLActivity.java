@@ -42,11 +42,11 @@ public class HttpURLActivity extends BaseResponseActivity {
             public void run() {
                 b = !b;
                 if (b) {
-                    get(Urls.banner);
+                    get(Urls.URL_BANNER);
                 } else {
                     String body = "username=" + "17778060027" +
                             "&password=" + "ww123456";
-                    post(Urls.login, body);
+                    post(Urls.URL_LOGIN, body);
                 }
             }
         });

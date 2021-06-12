@@ -28,7 +28,8 @@ public class ArticleViewModel extends ViewModel {
         CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
 
         Pager<Integer, ArticleDetailBean> pager = new Pager<>(
-                new PagingConfig(20),//一次加载的数目
+                //一次加载的数目
+                new PagingConfig(20),
                 new Function0<PagingSource<Integer, ArticleDetailBean>>() {
                     @Override
                     public PagingSource<Integer, ArticleDetailBean> invoke() {
@@ -48,7 +49,8 @@ public class ArticleViewModel extends ViewModel {
         CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
 
         Pager<Integer, ArticleDetailBean> pager = new Pager<>(
-                new PagingConfig(20),//一次加载的数目
+                //一次加载的数目
+                new PagingConfig(20),
                 new Function0<PagingSource<Integer, ArticleDetailBean>>() {
                     @Override
                     public PagingSource<Integer, ArticleDetailBean> invoke() {
