@@ -9,9 +9,9 @@ import retrofit2.http.Path
 
 interface KtArticleService {
 
-    @GET(Urls.article)
+    @GET(Urls.URL_ARTICLE)
     suspend fun getArticle(@Path("page") page: Int): ArticleBean
 
-    @GET(Urls.article)
+    @GET(Urls.URL_ARTICLE)
     suspend fun getArticleResponse(@Path("page") page: Int): KtRetrofitResponse<ArticleDataBean>
 }

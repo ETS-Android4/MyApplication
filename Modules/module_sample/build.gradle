@@ -3,7 +3,9 @@ android {
     resourcePrefix "sample_"
 }
 dependencies {
-    implementation project(path: ':librarys:lib_network')
+    //implementation project(path: ':librarys:lib_network')
+    implementation project(path: ':librarys:lib_okhttp')
+    implementation project(path: ':librarys:lib_retrofit')
     //OkHttp
     implementation deps.okhttp
     implementation deps.okhttp_logging

@@ -2,7 +2,7 @@ package com.example.william.my.module.kotlin.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
+import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.kotlin.api.KotlinApi
 

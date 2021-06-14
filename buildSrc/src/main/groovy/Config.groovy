@@ -26,8 +26,8 @@ class Config {
             ModuleJiguang  : new DepConfig(false, ":modules:module_jiguang"),
             ModuleTencentIM: new DepConfig(false, ":modules:module_tencent_im"),
 
-            ModuleKotlin   : new DepConfig(false, ":modules:module_kotlin"),
-            ModuleSample   : new DepConfig(false, ":modules:module_sample"),
+            ModuleKotlin   : new DepConfig(true, ":modules:module_kotlin"),
+            ModuleSample   : new DepConfig(true, ":modules:module_sample"),
 
             ModuleFlutter  : new DepConfig(false, ":modules:module_flutter"),
     ]

@@ -1,6 +1,6 @@
 package com.example.william.my.module.kotlin.repo
 
-import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
+import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.kotlin.api.KotlinApi
 import com.example.william.my.module.kotlin.utils.ThreadUtils

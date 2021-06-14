@@ -5,7 +5,6 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.example.william.my.core.network.base.RxRetrofitConfig;
 import com.example.william.my.library.interfaces.IComponentApplication;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
@@ -30,7 +29,7 @@ public class SampleApp implements IComponentApplication {
     }
 
     private void initRxRetrofit(Application application) {
-        RxRetrofitConfig.init(application);
+
     }
 
     private void initSmartRefreshLayout() {

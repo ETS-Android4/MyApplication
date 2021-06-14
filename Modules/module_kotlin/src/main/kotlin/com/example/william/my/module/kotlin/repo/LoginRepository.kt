@@ -1,7 +1,7 @@
 package com.example.william.my.module.kotlin.repo
 
 import android.util.Log
-import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
+import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.base.Urls
 import com.example.william.my.module.kotlin.api.KotlinApi
 import com.example.william.my.module.kotlin.data.LoginData
@@ -43,7 +43,7 @@ class LoginRepository {
         //打印线程
         ThreadUtils.isMainThread("LoginRepository makeLoginRequest")
 
-        val url = URL(Urls.login)
+        val url = URL(Urls.URL_LOGIN)
         (url.openConnection() as? HttpURLConnection)?.run {
             requestMethod = "POST"
             setRequestProperty("Content-Type", "application/x-www-form-urlencoded")

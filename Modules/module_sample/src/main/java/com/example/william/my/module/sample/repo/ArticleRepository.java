@@ -6,11 +6,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.example.william.my.core.network.retrofit.callback.LiveDataCallback;
-import com.example.william.my.core.network.retrofit.exception.ApiException;
-import com.example.william.my.core.network.retrofit.observer.RetrofitObserver;
-import com.example.william.my.core.network.retrofit.response.RetrofitResponse;
-import com.example.william.my.core.network.retrofit.utils.RetrofitUtils;
+import com.example.william.my.core.retrofit.callback.LiveDataCallback;
+import com.example.william.my.core.retrofit.exception.ApiException;
+import com.example.william.my.core.retrofit.observer.RetrofitObserver;
+import com.example.william.my.core.retrofit.response.RetrofitResponse;
+import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.bean.ArticleDataBean;
 import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.api.ArticleService;
@@ -41,7 +41,7 @@ public class ArticleRepository implements ArticleDataSource {
     @Override
     public void getArticleList(int page, LoadArticleCallback callback) {
 
-        RetrofitUtils.buildObs(service.getArticleListCache(page))
+        RetrofitUtils.buildObservable(service.getArticleListCache(page))
                 .subscribe(new RetrofitObserver<RetrofitResponse<ArticleDataBean>>() {
                     @Override
                     public void onLoading() {

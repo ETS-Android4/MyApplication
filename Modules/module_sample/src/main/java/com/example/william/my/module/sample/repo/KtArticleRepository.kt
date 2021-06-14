@@ -2,7 +2,7 @@ package com.example.william.my.module.sample.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.william.my.core.network.retrofit.utils.RetrofitUtils
+import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.bean.ArticleDataBean
 import com.example.william.my.module.sample.api.KtArticleService
