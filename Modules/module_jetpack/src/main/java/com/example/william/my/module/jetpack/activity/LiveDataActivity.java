@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.core.retrofit.view.LoadingTip;
+import com.example.william.my.core.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.bean.BannerDetailData;

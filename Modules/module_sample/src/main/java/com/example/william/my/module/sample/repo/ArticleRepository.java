@@ -1,13 +1,14 @@
 package com.example.william.my.module.sample.repo;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.example.william.my.core.retrofit.callback.LiveDataCallback;
-import com.example.william.my.core.retrofit.callback.ResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
+import com.example.william.my.core.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.bean.ArticleDataBean;
@@ -15,8 +16,6 @@ import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.api.ArticleService;
 
 import java.util.List;
-
-import io.reactivex.rxjava3.annotations.NonNull;
 
 public class ArticleRepository implements ArticleDataSource {
 
@@ -41,22 +40,29 @@ public class ArticleRepository implements ArticleDataSource {
 
     @Override
     public void getArticleList(int page, LoadArticleCallback callback) {
-        RetrofitUtils.buildObservable(service.getArticleListCache(page), new ResponseCallback<ArticleDataBean>() {
-            @Override
-            public void onResponse(@NonNull RetrofitResponse<ArticleDataBean> response) {
-                if (ObjectUtils.isNotEmpty(response.getData()) &&
-                        CollectionUtils.isNotEmpty(response.getData().getDatas())) {
-                    callback.onArticleLoaded(response.getData().getDatas());
-                } else {
-                    callback.onDataNotAvailable();
-                }
-            }
 
-            @Override
-            public void onFailure(@NonNull ApiException e) {
-                callback.onFailure(e.getMessage());
-            }
-        });
+        RetrofitUtils.buildObservable(service.getArticleListCache(page))
+                .subscribe(new RetrofitObserver<RetrofitResponse<ArticleDataBean>>() {
+                    @Override
+                    public void onLoading() {
+
+                    }
+
+                    @Override
+                    public void onResponse(@NonNull RetrofitResponse<ArticleDataBean> response) {
+                        if (ObjectUtils.isNotEmpty(response.getData()) &&
+                                CollectionUtils.isNotEmpty(response.getData().getDatas())) {
+                            callback.onArticleLoaded(response.getData().getDatas());
+                        } else {
+                            callback.onDataNotAvailable();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull ApiException e) {
+                        callback.onFailure(e.getMessage());
+                    }
+                });
     }
 
     /**

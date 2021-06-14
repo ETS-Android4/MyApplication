@@ -11,7 +11,7 @@ import com.example.william.my.core.retrofit.status.State;
 /**
  * 携带状态 {@link State} 的 LiveData
  */
-public class LiveDataCallback<Bean, Data> implements RetrofitResponseCallback<RetrofitResponse<Bean>> {
+public class LiveDataCallback<Bean, Data> implements RetrofitObserverCallback<RetrofitResponse<Bean>> {
 
     public LiveDataConvert<Bean, Data> convert;
     private final MutableLiveData<RetrofitResponse<Data>> liveData;

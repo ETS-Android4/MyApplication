@@ -9,7 +9,6 @@ public interface FileIOUtilsService extends IProvider {
 
     /**
      * 输入流写入文件
-     *
      * @param file
      * @param is
      * @return
@@ -18,7 +17,6 @@ public interface FileIOUtilsService extends IProvider {
 
     /**
      * 字符串写入文件
-     *
      * @param file
      * @param string
      * @return
