@@ -2,11 +2,11 @@ package com.example.william.my.core.retrofit.utils;
 
 import androidx.annotation.NonNull;
 
-import com.example.william.my.core.retrofit.callback.RetrofitObserverCallback;
+import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.function.HttpResultFunction;
 import com.example.william.my.core.retrofit.helper.RetrofitHelper;
-import com.example.william.my.core.retrofit.observer.RetrofitObserver;
+import com.example.william.my.core.retrofit.observer.RetrofitResponse;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -46,14 +46,22 @@ public class RetrofitUtils {
                 .create(api);
     }
 
-
-    @NonNull
-    public static <T> Observable<T> buildObservable(Observable<T> observable) {
-        return observable
-                //.map(new ServerResultFunction<T>())
+    public static <T> void buildObservable(Observable<T> observable, final RetrofitResponseCallback<T> callback) {
+        observable
                 .onErrorResumeNext(new HttpResultFunction<>())
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RetrofitResponse<T>() {
+                    @Override
+                    public void onResponse(@NonNull T response) {
+                        callback.onResponse(response);
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull ApiException e) {
+                        callback.onFailure(e);
+                    }
+                });
     }
 
     /**
@@ -61,12 +69,12 @@ public class RetrofitUtils {
      *
      * @param callback LiveDataCallback(需要RetrofitResponse<Bean>格式数据)
      */
-    public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitObserverCallback<T> callback) {
+    public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitResponseCallback<T> callback) {
         observable
                 .onErrorResumeNext(new HttpResultFunction<>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RetrofitObserver<T>() {
+                .subscribe(new RetrofitResponse<T>() {
                     @Override
                     public void onResponse(@NonNull T response) {
                         callback.onResponse(response);

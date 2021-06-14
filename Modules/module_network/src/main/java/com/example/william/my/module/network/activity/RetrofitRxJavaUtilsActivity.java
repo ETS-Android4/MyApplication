@@ -2,8 +2,7 @@ package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.retrofit.exception.ApiException;
-import com.example.william.my.core.retrofit.observer.RetrofitObserver;
-import com.example.william.my.core.retrofit.response.RetrofitResponse;
+import com.example.william.my.core.retrofit.observer.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.api.NetworkService;
@@ -15,7 +14,6 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observable;
 
 /**
  * {@link RetrofitUtils}
@@ -48,9 +46,7 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      * GsonConverterFactory Gson 解析 -> BannerBean
      */
     private void getBanner() {
-        Observable<BannerBean> obs = RetrofitUtils.buildObservable(service.getBanner());
-
-        obs.subscribe(new RetrofitObserver<BannerBean>() {
+        RetrofitUtils.buildObservable(service.getBanner(), new RetrofitResponse<BannerBean>() {
             @Override
             public void onResponse(@NonNull BannerBean response) {
                 String netSuccess = "getBanner: " + new Gson().toJson(response);
@@ -69,11 +65,9 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      * RetrofitConverterFactory 自定义解析 -> List<BannerDetailBean>
      */
     private void getBannerList() {
-        Observable<RetrofitResponse<List<BannerDetailBean>>> responseObs = RetrofitUtils.buildObservable(service.getBannerList());
-
-        responseObs.subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
+        RetrofitUtils.buildObservable(service.getBannerList(), new RetrofitResponse<RetrofitResponse<List<BannerDetailBean>>>() {
             @Override
-            public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
+            public void onResponse(@NonNull com.example.william.my.core.retrofit.response.RetrofitResponse response) {
                 String netSuccess = "getBannerList: " + new Gson().toJson(response);
                 showResponse(netSuccess);
             }
