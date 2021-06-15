@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.MarqueeViewActivity">
 
-    <com.example.william.my.core.widget.marqueeView.MarqueeView
+    <com.example.william.my.core.widget.marqueeview.MarqueeView
         android:id="@+id/marquee_marqueeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

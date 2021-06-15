@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.core.widget.recyclerView.NestedRecyclerView;
+import com.example.william.my.core.widget.recyclerview.NestedRecyclerView;
 import com.example.william.my.module.widget.R;
 
 import java.util.List;

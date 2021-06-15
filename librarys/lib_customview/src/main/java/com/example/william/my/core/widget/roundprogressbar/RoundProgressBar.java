@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.roundProgressBar;
+package com.example.william.my.core.widget.roundprogressbar;
 
 import android.content.Context;
 import android.content.res.TypedArray;

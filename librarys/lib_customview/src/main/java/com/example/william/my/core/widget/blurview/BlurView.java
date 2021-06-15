@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.blurView;
+package com.example.william.my.core.widget.blurview;
 
 import android.content.Context;
 import android.graphics.Bitmap;

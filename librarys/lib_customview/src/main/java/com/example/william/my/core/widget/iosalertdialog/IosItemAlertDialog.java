@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.iosAlertDialog;
+package com.example.william.my.core.widget.iosalertdialog;
 
 import android.app.Activity;
 import android.view.Gravity;

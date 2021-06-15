@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.gestureLock;
+package com.example.william.my.core.widget.gesturelock;
 
 import android.content.Context;
 import android.content.res.TypedArray;

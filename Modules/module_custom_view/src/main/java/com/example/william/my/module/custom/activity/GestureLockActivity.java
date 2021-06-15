@@ -3,7 +3,7 @@ package com.example.william.my.module.custom.activity;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.widget.gestureLock.GestureLock;
+import com.example.william.my.core.widget.gesturelock.GestureLock;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;

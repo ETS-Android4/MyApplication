@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.GestureLockActivity">
 
-    <com.example.william.my.core.widget.gestureLock.GestureLock
+    <com.example.william.my.core.widget.gesturelock.GestureLock
         android:id="@+id/gesture_lock_gestureLock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

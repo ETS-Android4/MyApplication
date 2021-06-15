@@ -20,8 +20,14 @@ import java.util.Arrays;
 @Route(path = ARouterPath.Widget.Widget_ViewPager)
 public class ViewPagerActivity extends BaseActivity {
 
-    private final String[] mData = new String[]{"fragment_primary", "fragment_primary_dark", "fragment_primary_light"};
-    private final Fragment[] mFragments = new Fragment[]{new PrimaryFragment(), new PrimaryDarkFragment(), new PrimaryLightFragment()};
+    private final String[] mData = new String[]{
+            "fragment_primary",
+            "fragment_primary_dark",
+            "fragment_primary_light"};
+    private final Fragment[] mFragments = new Fragment[]{
+            new PrimaryFragment(),
+            new PrimaryDarkFragment(),
+            new PrimaryLightFragment()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -25,4 +25,5 @@ dependencies {
     //Android
     implementation deps.constraintlayout
     implementation deps.recyclerview
+    implementation deps.material
 }

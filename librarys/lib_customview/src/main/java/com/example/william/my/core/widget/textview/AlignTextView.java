@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.textView;
+package com.example.william.my.core.widget.textview;
 
 import android.content.Context;
 import android.graphics.Canvas;

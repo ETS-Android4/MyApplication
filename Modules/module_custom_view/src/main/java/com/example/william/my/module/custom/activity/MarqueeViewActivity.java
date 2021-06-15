@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.widget.marqueeView.MarqueeView;
+import com.example.william.my.core.widget.marqueeview.MarqueeView;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;

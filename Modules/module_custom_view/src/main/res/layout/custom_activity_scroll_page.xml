@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.ScrollPageActivity">
 
-    <com.example.william.my.core.widget.scrollPage.ScrollPage
+    <com.example.william.my.core.widget.scrollpage.ScrollPage
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

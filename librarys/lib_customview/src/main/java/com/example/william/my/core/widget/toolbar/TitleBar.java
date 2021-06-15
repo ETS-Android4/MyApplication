@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.toolBar;
+package com.example.william.my.core.widget.toolbar;
 
 import android.app.Activity;
 import android.content.Context;

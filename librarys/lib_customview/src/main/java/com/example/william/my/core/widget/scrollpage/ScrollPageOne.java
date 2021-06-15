@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.scrollPage;
+package com.example.william.my.core.widget.scrollpage;
 
 import android.content.Context;
 import android.util.AttributeSet;

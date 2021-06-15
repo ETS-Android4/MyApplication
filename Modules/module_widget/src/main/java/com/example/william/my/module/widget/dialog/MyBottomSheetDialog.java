@@ -1,46 +1,50 @@
 package com.example.william.my.module.widget.dialog;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
+import com.example.william.my.core.widget.viewpagerbottomsheet.ViewPagerBottomSheetDialogFragment;
+import com.example.william.my.module.fragment.PrimaryFragment;
+import com.example.william.my.module.fragment.PrimaryLightFragment;
+import com.example.william.my.module.fragment.RecyclerFragment;
 import com.example.william.my.module.widget.R;
-import com.example.william.my.module.widget.adapter.RecyclerAdapter;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.example.william.my.module.widget.adapter.ViewPagerFragmentAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
-public class MyBottomSheetDialog extends BottomSheetDialogFragment {
+/**
+ * https://github.com/JiangAndroidwork/BottomSheetViewPager
+ */
+public class MyBottomSheetDialog extends ViewPagerBottomSheetDialogFragment {
 
-    @Nullable
+    private final Fragment[] mFragments = new Fragment[]{
+            new PrimaryFragment(),
+            new RecyclerFragment(),
+            new PrimaryLightFragment()};
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.widget_dialog_bottom_sheet, container, false);
+    protected int getLayout() {
+        return R.layout.widget_dialog_bottom_sheet;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ViewGroup.LayoutParams params = view.getLayoutParams();
-        params.height = 1920;
-
-        RecyclerView mRecyclerView = view.findViewById(R.id.recycleView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        List<String> mData = new ArrayList<>();
-        for (int i = 1; i < 61; i++) {
-            mData.add("POSITION " + i);
-        }
-
-        RecyclerAdapter mRecyclerAdapter = new RecyclerAdapter(mData);
-        mRecyclerView.setAdapter(mRecyclerAdapter);
+        ViewPager mViewPager = view.findViewById(R.id.viewPager);
+        mViewPager.setOffscreenPageLimit(mFragments.length);
+        mViewPager.setAdapter(new ViewPagerFragmentAdapter(getChildFragmentManager(), Arrays.asList(mFragments), false));
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                onPageChange(mViewPager);
+            }
+        });
     }
 }

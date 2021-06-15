@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.BlurViewActivity">
 
-    <com.example.william.my.core.widget.blurView.BlurView
+    <com.example.william.my.core.widget.blurview.BlurView
         android:id="@+id/blur_blurView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

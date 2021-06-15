@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.marqueeView;
+package com.example.william.my.core.widget.marqueeview;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.recyclerView;
+package com.example.william.my.core.widget.recyclerview;
 
 import android.content.Context;
 import android.util.AttributeSet;

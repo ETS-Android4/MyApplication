@@ -13,12 +13,14 @@ public interface RetrofitObserverCallback<T> {
 
     /**
      * onResponse
+     *
      * @param response
      */
     void onResponse(@NonNull T response);
 
     /**
      * onFailure
+     *
      * @param e
      */
     void onFailure(@NonNull ApiException e);
