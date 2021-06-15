@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.viewpagerbottomsheet;
+package com.example.william.my.core.widget.bottomsheet;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.william.my.core.widget.viewpagerbottomsheet.ViewPagerBottomSheetDialogFragment;
+import com.example.william.my.core.widget.bottomsheet.ViewPagerBottomSheetDialogFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryLightFragment;
 import com.example.william.my.module.fragment.RecyclerFragment;

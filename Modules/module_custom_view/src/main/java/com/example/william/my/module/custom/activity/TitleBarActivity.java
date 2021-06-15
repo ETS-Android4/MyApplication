@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.widget.toolbar.TitleBar;
+import com.example.william.my.core.widget.titlebar.TitleBar;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;

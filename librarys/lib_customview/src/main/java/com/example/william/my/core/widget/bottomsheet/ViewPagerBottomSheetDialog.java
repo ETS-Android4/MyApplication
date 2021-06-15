@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.viewpagerbottomsheet;
+package com.example.william.my.core.widget.bottomsheet;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -104,8 +104,8 @@ public class ViewPagerBottomSheetDialog extends AppCompatDialog {
     @Override
     protected void onStart() {
         super.onStart();
-        if (behavior != null && behavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
-            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        if (behavior != null && behavior.getState() == ViewPagerBottomSheetBehavior.STATE_HIDDEN) {
+            behavior.setState(ViewPagerBottomSheetBehavior.STATE_COLLAPSED);
         }
     }
 

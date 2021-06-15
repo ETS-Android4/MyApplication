@@ -4,8 +4,8 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.widget.iosalertdialog.IosAlertDialog;
-import com.example.william.my.core.widget.iosalertdialog.IosItemAlertDialog;
+import com.example.william.my.core.widget.dialog.IosAlertDialog;
+import com.example.william.my.core.widget.dialog.IosItemAlertDialog;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;

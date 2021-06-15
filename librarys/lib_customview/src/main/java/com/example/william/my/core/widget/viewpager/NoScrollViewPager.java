@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.viewPager;
+package com.example.william.my.core.widget.viewpager;
 
 import android.content.Context;
 import android.util.AttributeSet;
