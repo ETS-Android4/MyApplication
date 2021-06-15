@@ -20,6 +20,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.widget.R;
+import com.example.william.my.module.widget.dialog.MyBottomSheetDialog;
 import com.example.william.my.module.widget.dialog.MyCreateDialogDialog;
 import com.example.william.my.module.widget.dialog.MyCreateViewDialog;
 
@@ -29,7 +30,7 @@ import java.util.Calendar;
 public class DialogActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private final String[] mData = new String[]{"普通对话框", "列表对话框", "单选对话框", "日期对话框",
-            "自定义对话框", "自定义对话框2", "DialogFragment1", "DialogFragment2"};
+            "自定义对话框", "自定义对话框2", "DialogFragment1", "DialogFragment2", "BottomSheetDialog"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,12 @@ public class DialogActivity extends BaseActivity implements AdapterView.OnItemCl
             case 7:
                 MyCreateViewDialog dialogFragment2 = new MyCreateViewDialog();
                 dialogFragment2.show(getSupportFragmentManager(), "dialog");
+                break;
+            case 8:
+                MyBottomSheetDialog dialogFragment3 = new MyBottomSheetDialog();
+                dialogFragment3.show(getSupportFragmentManager(), "dialog");
+                break;
+            default:
                 break;
         }
     }
