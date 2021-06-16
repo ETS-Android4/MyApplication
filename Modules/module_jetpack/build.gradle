@@ -15,7 +15,6 @@ kapt {
     }
 }
 dependencies {
-    //implementation project(path: ':librarys:lib_network')
     implementation project(path: ':librarys:lib_retrofit')
     //Retrofit
     implementation deps.retrofit_gson
