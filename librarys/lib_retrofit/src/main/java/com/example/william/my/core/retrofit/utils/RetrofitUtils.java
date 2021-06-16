@@ -1,14 +1,16 @@
 package com.example.william.my.core.retrofit.utils;
 
-import androidx.annotation.NonNull;
-
+import com.example.william.my.core.retrofit.callback.ObserverCallback;
 import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.function.HttpResultFunction;
 import com.example.william.my.core.retrofit.helper.RetrofitHelper;
 import com.example.william.my.core.retrofit.observer.RetrofitObserver;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -46,14 +48,27 @@ public class RetrofitUtils {
                 .create(api);
     }
 
-
-    @NonNull
-    public static <T> Observable<T> buildObservable(Observable<T> observable) {
-        return observable
-                //.map(new ServerResultFunction<T>())
+    public static <T> void buildObservable(@NotNull Observable<T> observable, ObserverCallback<T> callback) {
+        observable
                 .onErrorResumeNext(new HttpResultFunction<>())
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RetrofitObserver<T>() {
+                    @Override
+                    public void onLoading() {
+                        super.onLoading();
+                    }
+
+                    @Override
+                    public void onResponse(@NonNull T response) {
+                        callback.onResponse(response);
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull ApiException e) {
+                        callback.onFailure(e);
+                    }
+                });
     }
 
     /**
@@ -67,6 +82,11 @@ public class RetrofitUtils {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RetrofitObserver<T>() {
+                    @Override
+                    public void onLoading() {
+                        super.onLoading();
+                    }
+
                     @Override
                     public void onResponse(@NonNull T response) {
                         callback.onResponse(response);
