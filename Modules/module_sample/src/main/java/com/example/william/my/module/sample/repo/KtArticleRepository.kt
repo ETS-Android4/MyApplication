@@ -2,16 +2,15 @@ package com.example.william.my.module.sample.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.william.my.core.retrofit.callback.LiveDataCallback
+import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback
+import com.example.william.my.core.retrofit.exception.ApiException
+import com.example.william.my.core.retrofit.exception.ExceptionHandler
+import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.bean.ArticleBean
 import com.example.william.my.module.bean.ArticleDataBean
 import com.example.william.my.module.sample.api.KtArticleService
-import com.example.william.my.module.sample.retrofit.KtRetrofit
-import com.example.william.my.module.sample.retrofit.callback.KtLiveDataCallback
-import com.example.william.my.module.sample.retrofit.callback.KtRetrofitFlowCallback
-import com.example.william.my.module.sample.retrofit.exception.KtApiException
-import com.example.william.my.module.sample.retrofit.exception.KtExceptionHandler
-import com.example.william.my.module.sample.retrofit.response.KtRetrofitResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
@@ -45,16 +44,16 @@ class KtArticleRepository : KtArticleDataSource {
             api.getArticle(counter)
         }
 
-    private val _articleData = MutableLiveData<KtRetrofitResponse<ArticleDataBean>>()
-    override val articleData: LiveData<KtRetrofitResponse<ArticleDataBean>> = _articleData
+    private val _articleData = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
+    override val articleData: LiveData<RetrofitResponse<ArticleDataBean>> = _articleData
 
-    private suspend fun getArticleResponse(counter: Int): KtRetrofitResponse<ArticleDataBean> =
+    private suspend fun getArticleResponse(counter: Int): RetrofitResponse<ArticleDataBean> =
         withContext(Dispatchers.IO) {
-            val api = KtRetrofit.buildApi(KtArticleService::class.java)
+            val api = RetrofitUtils.buildApi(KtArticleService::class.java)
             api.getArticleResponse(counter)
         }
 
-    private fun getArticleResponseFlow(counter: Int): Flow<KtRetrofitResponse<ArticleDataBean>> =
+    private fun getArticleResponseFlow(counter: Int): Flow<RetrofitResponse<ArticleDataBean>> =
         flow {
             val articleResponse = getArticleResponse(counter)
             emit(articleResponse)
@@ -78,11 +77,11 @@ class KtArticleRepository : KtArticleDataSource {
             counter = 0
             getArticleResponseFlow(counter)
                 .onStart {
-                    // _articleData.postValue(KtRetrofitResponse.loading())
+                    // _articleData.postValue(RetrofitResponse.loading())
                 }
                 .catch { exception ->
-                    val e: KtApiException = KtExceptionHandler.handleException(exception)
-                    _articleData.postValue(KtRetrofitResponse.error(e.message))
+                    val e: ApiException = ExceptionHandler.handleException(exception)
+                    _articleData.postValue(RetrofitResponse.error(e.message))
                 }
                 .collect { article ->
                     _articleData.postValue(article)
@@ -92,35 +91,35 @@ class KtArticleRepository : KtArticleDataSource {
 
     private suspend fun fetchNewDataFlowCallback() {
         counter = 0
-        KtRetrofit.buildFlow(
+        RetrofitUtils.buildFlow(
             getArticleResponseFlow(counter),
-            object : KtRetrofitFlowCallback<KtRetrofitResponse<ArticleDataBean>> {
+            object : RetrofitResponseCallback<RetrofitResponse<ArticleDataBean>> {
 
                 override fun onLoading() {
-                    //_articleData.postValue(KtRetrofitResponse.loading())
+                    //_articleData.postValue(RetrofitResponse.loading())
                 }
 
-                override fun onResponse(response: KtRetrofitResponse<ArticleDataBean>) {
+                override fun onResponse(response: RetrofitResponse<ArticleDataBean>) {
                     _articleData.postValue(response)
                 }
 
-                override fun onFailure(e: KtApiException) {
-                    _articleData.postValue(KtRetrofitResponse.error(e.message))
+                override fun onFailure(e: ApiException) {
+                    _articleData.postValue(RetrofitResponse.error(e.message))
                 }
             })
     }
 
     private suspend fun fetchNewDataLiveDataCallback() {
         counter = 0
-        KtRetrofit.buildFlow(
-            getArticleResponseFlow(counter), KtLiveDataCallback(_articleData)
+        RetrofitUtils.buildFlow(
+            getArticleResponseFlow(counter), LiveDataCallback(_articleData)
         )
     }
 
     private suspend fun loadMoreDataLiveDataCallback() {
         counter++
-        KtRetrofit.buildFlow(
-            getArticleResponseFlow(counter), KtLiveDataCallback(_articleData)
+        RetrofitUtils.buildFlow(
+            getArticleResponseFlow(counter), LiveDataCallback(_articleData)
         )
     }
 }

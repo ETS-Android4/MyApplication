@@ -8,7 +8,6 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.example.william.my.core.retrofit.callback.LiveDataCallback;
 import com.example.william.my.core.retrofit.callback.ObserverCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
-import com.example.william.my.core.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.bean.ArticleDataBean;

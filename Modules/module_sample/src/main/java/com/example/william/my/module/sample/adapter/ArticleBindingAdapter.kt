@@ -3,8 +3,8 @@ package com.example.william.my.module.sample.adapter
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
+import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.module.bean.ArticleDataBean
-import com.example.william.my.module.sample.retrofit.response.KtRetrofitResponse
 
 object ArticleBindingAdapter {
 
@@ -35,10 +35,10 @@ object ArticleBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("items")
-    fun setItemsResponse(view: RecyclerView, articleBean: KtRetrofitResponse<ArticleDataBean>?) {
+    fun setItemsResponse(view: RecyclerView, articleBean: RetrofitResponse<ArticleDataBean>) {
         val adapter = view.adapter
         if (adapter is ArticleDataBindAdapter) {
-            if (articleBean?.data != null) {
+            if (articleBean.data != null) {
                 if (articleBean.data.datas.isNullOrEmpty()) {
                     if (articleBean.data.curPage == 1) {
                         ToastUtils.showShort("暂无数据")

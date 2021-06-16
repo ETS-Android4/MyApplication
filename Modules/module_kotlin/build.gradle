@@ -1,6 +1,6 @@
 apply plugin: 'com.google.protobuf'
-apply from: '../../protobuf.gradle'
 apply plugin: 'kotlin-android'
+apply from: '../../protobuf.gradle'
 
 android {
     //自定义源文件
@@ -19,7 +19,6 @@ android {
 }
 
 dependencies {
-    //implementation project(path: ':librarys:lib_network')
     implementation project(path: ':librarys:lib_retrofit')
     //Coroutines
     implementation deps.coroutines
