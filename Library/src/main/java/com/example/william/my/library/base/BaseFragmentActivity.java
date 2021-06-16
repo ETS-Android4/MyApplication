@@ -25,9 +25,17 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         //创建FragmentTransaction事务对象
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
         //使用replace（将要替换位置的i的，替换的页面）方法实现页面的替换
-        fragmentTransaction.replace(R.id.fragment, setFragment());
-        //提交事务
-        fragmentTransaction.commit();
+        Fragment fragment = setFragment();
+        if (fragment != null) {
+            //??? 只能从外部传递
+//            Bundle bundle = getIntent().getExtras();
+//            if (bundle != null) {
+//                fragment.setArguments(bundle);
+//            }
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            //提交事务
+            fragmentTransaction.commitAllowingStateLoss();
+        }
     }
 
     /**

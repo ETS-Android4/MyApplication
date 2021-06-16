@@ -1,6 +1,7 @@
 package com.example.william.my.module.sample.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,9 @@ public class RecyclerFragment extends BaseRecyclerFragment<String> {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Bundle arguments = getArguments();
+        Log.e("TAG", arguments.getString("key")+"   ???");
 
         List<String> mData = new ArrayList<>();
         for (int i = 0; i <= 20; i++) {
