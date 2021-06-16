@@ -3,9 +3,9 @@ package com.example.william.my.core.retrofit.observer;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 
+import com.example.william.my.core.retrofit.loading.LoadingTip;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.status.State;
-import com.example.william.my.core.retrofit.view.LoadingTip;
 
 import java.util.Collection;
 

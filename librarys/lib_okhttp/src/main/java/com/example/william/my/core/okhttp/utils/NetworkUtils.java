@@ -4,14 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
-
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
-import java.util.LinkedList;
 
 import static android.Manifest.permission.ACCESS_NETWORK_STATE;
 

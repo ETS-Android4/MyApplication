@@ -2,7 +2,7 @@ package com.example.william.my.core.retrofit.utils;
 
 import androidx.annotation.NonNull;
 
-import com.example.william.my.core.retrofit.callback.RetrofitObserverCallback;
+import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.function.HttpResultFunction;
 import com.example.william.my.core.retrofit.helper.RetrofitHelper;
@@ -61,7 +61,7 @@ public class RetrofitUtils {
      *
      * @param callback LiveDataCallback(需要RetrofitResponse<Bean>格式数据)
      */
-    public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitObserverCallback<T> callback) {
+    public static <T> void buildLiveData(@NonNull Observable<T> observable, final RetrofitResponseCallback<T> callback) {
         observable
                 .onErrorResumeNext(new HttpResultFunction<>())
                 .subscribeOn(Schedulers.io())

@@ -1,4 +1,4 @@
-package com.example.william.my.core.retrofit.view;
+package com.example.william.my.core.retrofit.loading;
 
 import android.app.Activity;
 import android.content.Context;
