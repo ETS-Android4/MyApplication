@@ -23,12 +23,12 @@ import java.util.List;
 
 public abstract class BaseRecyclerFragment<T> extends BaseFragment
         implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener {
-    
-    private SmartRefreshLayout mSmartRefreshLayout;
-
-    private BaseQuickAdapter<T, BaseViewHolder> mAdapter;
 
     private int mPage = 1;
+
+    private SmartRefreshLayout mSmartRefreshLayout;
+
+    protected BaseQuickAdapter<T, BaseViewHolder> mAdapter;
 
     @Override
     protected int getLayout() {
@@ -39,10 +39,12 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initView(view);
+        initRecyclerView(view);
+
+        initRecyclerData(savedInstanceState);
     }
 
-    private void initView(View view) {
+    private void initRecyclerView(@NotNull View view) {
         RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
 
@@ -51,11 +53,16 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
             mRecyclerView.setNestedScrollingEnabled(true);
             mRecyclerView.setLayoutManager(setLayoutManager());
 
-            mAdapter = setAdapter();
-            mRecyclerView.setAdapter(mAdapter);
-
-            mAdapter.setOnItemClickListener(this);
-            mAdapter.setOnItemChildClickListener(this);
+            if (mAdapter == null) {
+                mAdapter = setAdapter();
+                if (mAdapter != null) {
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+            }
+            if (mAdapter != null) {
+                mAdapter.setOnItemClickListener(this);
+                mAdapter.setOnItemChildClickListener(this);
+            }
         }
 
         if (mSmartRefreshLayout != null) {
@@ -66,6 +73,10 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
             mSmartRefreshLayout.setEnableRefresh(canLoadMore());
             mSmartRefreshLayout.setEnableLoadMore(canRefresh());
         }
+    }
+
+    protected void initRecyclerData(Bundle savedInstanceState) {
+
     }
 
     private boolean canRefresh() {
