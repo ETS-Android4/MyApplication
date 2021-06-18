@@ -23,8 +23,7 @@ import java.util.List;
 
 public abstract class BaseRecyclerFragment<T> extends BaseFragment
         implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener {
-
-    private RecyclerView mRecyclerView;
+    
     private SmartRefreshLayout mSmartRefreshLayout;
 
     private BaseQuickAdapter<T, BaseViewHolder> mAdapter;
@@ -44,7 +43,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     }
 
     private void initView(View view) {
-        mRecyclerView = view.findViewById(R.id.recyclerView);
+        RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
 
         if (mRecyclerView != null) {
@@ -64,17 +63,17 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
             mSmartRefreshLayout.setOnLoadMoreListener(this);
             mSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
 
-            mSmartRefreshLayout.setEnableRefresh(canPullRefresh());
-            mSmartRefreshLayout.setEnableLoadMore(canLoadMore());
+            mSmartRefreshLayout.setEnableRefresh(canLoadMore());
+            mSmartRefreshLayout.setEnableLoadMore(canRefresh());
         }
+    }
+
+    private boolean canRefresh() {
+        return true;
     }
 
     private boolean canLoadMore() {
         return false;
-    }
-
-    private boolean canPullRefresh() {
-        return true;
     }
 
     public RecyclerView.LayoutManager setLayoutManager() {
@@ -84,10 +83,14 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     public abstract BaseQuickAdapter<T, BaseViewHolder> setAdapter();
 
     public void onDataSuccess(List<T> list) {
-        if (mPage == 1) {
-            mAdapter.setNewInstance(list);
+        if (list != null && !list.isEmpty()) {
+            if (mPage == 1) {
+                mAdapter.setNewInstance(list);
+            } else {
+                mAdapter.addData(list);
+            }
         } else {
-            mAdapter.addData(list);
+            mSmartRefreshLayout.setEnableLoadMore(false);
         }
     }
 
@@ -96,7 +99,19 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     }
 
     @Override
-    public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
+    public void onRefresh(@NonNull @NotNull RefreshLayout refreshLayout) {
+        mPage = 1;
+        mSmartRefreshLayout.autoRefresh();
+    }
+
+    @Override
+    public void onLoadMore(@NonNull @NotNull RefreshLayout refreshLayout) {
+        mPage++;
+        mSmartRefreshLayout.autoLoadMore();
+    }
+
+    @Override
+    public void onItemClick(@NonNull @NotNull BaseQuickAdapter adapter, @NonNull @NotNull View view, int position) {
 
     }
 
@@ -105,13 +120,4 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
 
     }
 
-    @Override
-    public void onRefresh(@NonNull @NotNull RefreshLayout refreshLayout) {
-
-    }
-
-    @Override
-    public void onLoadMore(@NonNull @NotNull RefreshLayout refreshLayout) {
-
-    }
 }
