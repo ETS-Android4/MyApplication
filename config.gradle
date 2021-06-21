@@ -286,16 +286,25 @@ project.buildscript.configurations.each { configuration ->
 }
 
 static def addRepos(RepositoryHandler handler) {
-    handler.google()
-    handler.mavenCentral()
-    handler.jcenter() // Warning: this repository is going to shut down soon
-    handler.maven { url "https://jitpack.io" }
-    handler.maven { url "https://maven.google.com" }
+    /**
+     * central
+     */
     handler.maven { url "https://maven.aliyun.com/repository/central" }
+    /**
+     * jcenter
+     */
     handler.maven { url "https://maven.aliyun.com/repository/jcenter" }
+    /**
+     * central仓和jcenter仓的聚合仓
+     */
     handler.maven { url "https://maven.aliyun.com/repository/public" }
+    /**
+     * google
+     */
     handler.maven { url "https://maven.aliyun.com/repository/google" }
-    handler.maven { url "https://maven.aliyun.com/repository/releases" }
+    //handler.google()
+    //handler.mavenCentral()
+    //handler.jcenter() // Warning: this repository is going to shut down soon
 }
 
 ext.addRepos = this.&addRepos

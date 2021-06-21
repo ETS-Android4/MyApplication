@@ -7,6 +7,7 @@ include ':module'
 include ':librarys:lib_customview'
 include ':librarys:lib_okhttp'
 include ':librarys:lib_retrofit'
+include ':librarys:lib_download'
 
 include ':modules:module_custom_view'
 include ':modules:module_widget'
