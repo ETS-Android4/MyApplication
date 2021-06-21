@@ -1,14 +1,14 @@
 package com.example.william.my.module.sample.contract;
 
-import com.example.william.my.library.presenter.BasePresenter;
-import com.example.william.my.library.view.BaseView;
+import com.example.william.my.library.presenter.IBasePresenter;
+import com.example.william.my.library.view.IBaseView;
 import com.example.william.my.module.bean.ArticleDetailBean;
 
 import java.util.List;
 
 public interface ArticleContract {
 
-    interface View extends BaseView<Presenter> {
+    interface View extends IBaseView<Presenter> {
 
         void showEmptyView();
 
@@ -18,7 +18,7 @@ public interface ArticleContract {
 
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends IBasePresenter {
 
         void onRefreshArticleList();
 

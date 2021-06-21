@@ -1,8 +1,10 @@
 package com.example.william.my.library.presenter;
 
-public interface BasePresenter {
+public interface IBasePresenter {
 
     void start();
+
+    void clear();
 
     //void queryData();
 

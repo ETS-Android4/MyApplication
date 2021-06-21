@@ -1,6 +1,6 @@
 package com.example.william.my.library.presenter;
 
-public interface BaseRxJavaPresenter {
+public interface IBaseRxJavaPresenter {
 
     void subscribe();//开启订阅
 

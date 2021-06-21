@@ -62,4 +62,9 @@ public class ArticlePresenter implements ArticleContract.Presenter {
     public void start() {
 
     }
+
+    @Override
+    public void clear() {
+
+    }
 }

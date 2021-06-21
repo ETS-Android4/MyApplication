@@ -1,6 +1,6 @@
 package com.example.william.my.library.view;
 
-public interface BaseView<T> {
+public interface IBaseView<T> {
 
     /**
      * 泛型，接收对Presenter的引用
