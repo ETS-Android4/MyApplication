@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * {@link OptionalBean}
+ * @see OptionalBean
  */
 public class OptionalBeanActivity extends BaseResponseActivity {
 

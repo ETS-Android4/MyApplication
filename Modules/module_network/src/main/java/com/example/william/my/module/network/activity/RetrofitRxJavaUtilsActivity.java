@@ -17,7 +17,7 @@ import java.util.List;
 import io.reactivex.rxjava3.annotations.NonNull;
 
 /**
- * {@link RetrofitUtils}
+ * @see RetrofitUtils
  */
 @Route(path = ARouterPath.NetWork.NetWork_RetrofitRxJavaUtils)
 public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {

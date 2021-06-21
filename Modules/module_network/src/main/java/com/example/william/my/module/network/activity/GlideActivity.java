@@ -22,7 +22,8 @@ import com.example.william.my.module.router.ARouterPath;
 
 /**
  * https://github.com/bumptech/glide/
- * {@link MyAppGlideModule}
+ *
+ * @see MyAppGlideModule
  * CenterCrop：剪裁，完全填充ImageVIew
  * FitCenter：不剪裁，不填充ImageVIew
  */

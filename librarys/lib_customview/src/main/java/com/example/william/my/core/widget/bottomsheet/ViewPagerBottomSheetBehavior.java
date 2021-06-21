@@ -51,9 +51,9 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 /**
- * {@link BottomSheetBehavior}
- * {@link #findScrollingChild}
- * {@link #updateScrollingChild}
+ * @see BottomSheetBehavior
+ * @see #findScrollingChild
+ * @see #updateScrollingChild
  *
  * @param <V>
  */
