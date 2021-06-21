@@ -18,10 +18,9 @@ public class ARouterPath {
     }
 
     public static class Fragment {
-        public static final String FragmentRecycler = "/base/fragment/recycler";
         public static final String FragmentPrimary = "/base/fragment/primary";
         public static final String FragmentPrimaryDark = "/base/fragment/primary_dark";
-        public static final String FragmentPrimaryLight = "/base/fragment/primary_light";
+        public static final String FragmentRecycler = "/base/fragment/recycler";
     }
 
     public static class Util {

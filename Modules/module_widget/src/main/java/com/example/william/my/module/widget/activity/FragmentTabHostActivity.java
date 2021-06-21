@@ -13,9 +13,9 @@ import androidx.fragment.app.FragmentTabHost;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
-import com.example.william.my.module.fragment.PrimaryLightFragment;
+import com.example.william.my.module.fragment.PrimaryVarFragment;
+import com.example.william.my.module.fragment.RecyclerFragment;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.widget.R;
 
@@ -33,7 +33,7 @@ public class FragmentTabHostActivity extends BaseActivity {
     private FragmentTabHost mTabHost;
 
     //Fragment界面数组
-    private final Class<?>[] mFragmentArray = {PrimaryFragment.class, PrimaryDarkFragment.class, PrimaryLightFragment.class};
+    private final Class<?>[] mFragmentArray = {PrimaryFragment.class, PrimaryVarFragment.class, RecyclerFragment.class};
 
     //存放图片数组
     private final int[] mImageArray = {R.drawable.widget_ic_home_black_24dp, R.drawable.widget_ic_dashboard_black_24dp, R.drawable.widget_ic_notifications_black_24dp};

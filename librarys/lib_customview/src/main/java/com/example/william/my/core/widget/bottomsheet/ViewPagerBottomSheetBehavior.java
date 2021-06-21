@@ -51,11 +51,10 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 /**
+ * @param <V>
  * @see BottomSheetBehavior
  * @see #findScrollingChild
  * @see #updateScrollingChild
- *
- * @param <V>
  */
 public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLayout.Behavior<V> {
 

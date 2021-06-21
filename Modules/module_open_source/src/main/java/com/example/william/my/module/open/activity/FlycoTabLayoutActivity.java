@@ -7,9 +7,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
-import com.example.william.my.module.fragment.PrimaryLightFragment;
+import com.example.william.my.module.fragment.PrimaryVarFragment;
+import com.example.william.my.module.fragment.RecyclerFragment;
 import com.example.william.my.module.open.R;
 import com.example.william.my.module.router.ARouterPath;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -35,8 +35,8 @@ public class FlycoTabLayoutActivity extends BaseActivity implements OnTabSelectL
 
         ArrayList<Fragment> mFragmentList = new ArrayList<>();
         mFragmentList.add(new PrimaryFragment());
-        mFragmentList.add(new PrimaryDarkFragment());
-        mFragmentList.add(new PrimaryLightFragment());
+        mFragmentList.add(new PrimaryVarFragment());
+        mFragmentList.add(new RecyclerFragment());
 
         mTabLayout.setViewPager(mViewPager, mTitles, this, mFragmentList);
 

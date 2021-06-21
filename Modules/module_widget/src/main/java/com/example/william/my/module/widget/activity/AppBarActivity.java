@@ -9,9 +9,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
-import com.example.william.my.module.fragment.PrimaryLightFragment;
+import com.example.william.my.module.fragment.PrimaryVarFragment;
+import com.example.william.my.module.fragment.RecyclerFragment;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.widget.R;
 import com.example.william.my.module.widget.adapter.ViewPagerFragmentAdapter;
@@ -27,7 +27,10 @@ public class AppBarActivity extends BaseActivity {
 
     private final String[] mTitles = new String[]{"Tab 1", "Tab 2", "Tab 3"};
 
-    private final Fragment[] mFragments = new Fragment[]{new PrimaryFragment(), new PrimaryDarkFragment(), new PrimaryLightFragment()};
+    private final Fragment[] mFragments = new Fragment[]{
+            new PrimaryFragment(),
+            new PrimaryVarFragment(),
+            new RecyclerFragment()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

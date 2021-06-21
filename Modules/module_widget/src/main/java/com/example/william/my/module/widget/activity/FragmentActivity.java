@@ -12,9 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.module.fragment.PrimaryDarkFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
-import com.example.william.my.module.fragment.PrimaryLightFragment;
+import com.example.william.my.module.fragment.PrimaryVarFragment;
+import com.example.william.my.module.fragment.RecyclerFragment;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.widget.R;
 
@@ -26,12 +26,15 @@ public class FragmentActivity extends BaseActivity implements View.OnClickListen
 
     private final String[] mTitles = new String[]{"首页", "列表", "消息"};
     private final int[] mButtons = new int[]{R.id.fragment_button1, R.id.fragment_button2, R.id.fragment_button3};
-    private final Fragment[] mFragments = new Fragment[]{new PrimaryFragment(), new PrimaryDarkFragment(), new PrimaryLightFragment()};
+    private final Fragment[] mFragments = new Fragment[]{
+            new PrimaryFragment(),
+            new PrimaryVarFragment(),
+            new RecyclerFragment()};
 
     private final Fragment[] mARouterFragments = new Fragment[]{
             (Fragment) ARouter.getInstance().build(ARouterPath.Fragment.FragmentPrimary).navigation(),
             (Fragment) ARouter.getInstance().build(ARouterPath.Fragment.FragmentPrimaryDark).navigation(),
-            (Fragment) ARouter.getInstance().build(ARouterPath.Fragment.FragmentPrimaryLight).navigation()};
+            (Fragment) ARouter.getInstance().build(ARouterPath.Fragment.FragmentRecycler).navigation()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

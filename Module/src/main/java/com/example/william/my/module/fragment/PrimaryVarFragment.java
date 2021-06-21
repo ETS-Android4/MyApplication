@@ -6,10 +6,10 @@ import com.example.william.my.module.R;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.Fragment.FragmentPrimaryDark)
-public class PrimaryDarkFragment extends BaseFragment {
+public class PrimaryVarFragment extends BaseFragment {
 
     @Override
     protected int getLayout() {
-        return R.layout.basics_fragment_primary_dark;
+        return R.layout.basics_fragment_primary_var;
     }
 }

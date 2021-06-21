@@ -45,7 +45,7 @@ class LoadStateViewHolder(parent: ViewGroup, retry: () -> Unit) :
                 mTextView.setBackgroundColor(
                     ContextCompat.getColor(
                         context,
-                        R.color.colorPrimaryLight
+                        R.color.colorPrimaryDark
                     )
                 )
             }

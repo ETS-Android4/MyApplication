@@ -13,14 +13,14 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.william.my.module.fragment.PrimaryDarkFragment"
+        android:name="com.example.william.my.module.fragment.PrimaryVarFragment"
         android:label="@string/jet_nav_dashboard"
-        tools:layout="@layout/basics_fragment_primary_dark" />
+        tools:layout="@layout/basics_fragment_primary_var" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.william.my.module.fragment.PrimaryLightFragment"
+        android:name="com.example.william.my.module.fragment.RecyclerFragment"
         android:label="@string/jet_nav_notifications"
-        tools:layout="@layout/basics_fragment_primary_light" />
+        tools:layout="@layout/basics_fragment_recycler" />
 
 </navigation>
