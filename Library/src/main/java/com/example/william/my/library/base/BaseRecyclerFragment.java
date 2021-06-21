@@ -53,16 +53,11 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
             mRecyclerView.setNestedScrollingEnabled(true);
             mRecyclerView.setLayoutManager(setLayoutManager());
 
-            if (mAdapter == null) {
-                mAdapter = setAdapter();
-                if (mAdapter != null) {
-                    mRecyclerView.setAdapter(mAdapter);
-                }
-            }
-            if (mAdapter != null) {
-                mAdapter.setOnItemClickListener(this);
-                mAdapter.setOnItemChildClickListener(this);
-            }
+            mAdapter = setAdapter();
+            mRecyclerView.setAdapter(mAdapter);
+
+            mAdapter.setOnItemClickListener(this);
+            mAdapter.setOnItemChildClickListener(this);
         }
 
         if (mSmartRefreshLayout != null) {

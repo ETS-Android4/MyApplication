@@ -27,11 +27,6 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         //使用replace（将要替换位置的i的，替换的页面）方法实现页面的替换
         Fragment fragment = setFragment();
         if (fragment != null) {
-            //??? 只能从外部传递
-//            Bundle bundle = getIntent().getExtras();
-//            if (bundle != null) {
-//                fragment.setArguments(bundle);
-//            }
             fragmentTransaction.replace(R.id.fragment, fragment);
             //提交事务
             fragmentTransaction.commitAllowingStateLoss();
