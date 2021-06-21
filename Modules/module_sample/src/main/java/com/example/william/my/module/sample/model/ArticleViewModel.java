@@ -45,7 +45,7 @@ public class ArticleViewModel extends ViewModel {
         mObservableArticle = Transformations.switchMap(mutableArticle, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
             @Override
             public LiveData<RetrofitResponse<ArticleDataBean>> apply(Integer input) {
-                return articleRepository.getArticle(input);
+                return articleRepository.getArticleData(input);
             }
         });
     }

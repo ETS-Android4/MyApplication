@@ -70,7 +70,6 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
 
     @Override
     public void showToast(String message) {
-        showEmptyView();
         ToastUtils.showShort(message);
     }
 

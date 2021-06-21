@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.kotlin.databinding.KtItemRecycleBinding
 
-class ArticleAdapter(diffCallback: DiffUtil.ItemCallback<ArticleDetailBean>) :
-    PagingDataAdapter<ArticleDetailBean, ArticleAdapter.ViewHolder>(
+class ArticlePagingAdapter(diffCallback: DiffUtil.ItemCallback<ArticleDetailBean>) :
+    PagingDataAdapter<ArticleDetailBean, ArticlePagingAdapter.ViewHolder>(
         diffCallback
     ) {
 

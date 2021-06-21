@@ -1,8 +1,9 @@
 package com.example.william.my.library.base;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,7 +76,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     }
 
     protected boolean canRefresh() {
-        return false;
+        return true;
     }
 
     protected boolean canLoadMore() {
@@ -100,7 +101,16 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         }
     }
 
-    protected void onDataFail() {
+    protected void onDataNoMore() {
+        mSmartRefreshLayout.setEnableLoadMore(false);
+    }
+
+    protected void onEmptyView() {
+        TextView textView = new TextView(getActivity());
+        textView.setGravity(Gravity.CENTER);
+        textView.setText("无数据");
+        mAdapter.setEmptyView(textView);
+        mAdapter.notifyDataSetChanged();
         mSmartRefreshLayout.setEnableLoadMore(false);
     }
 

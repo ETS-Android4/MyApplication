@@ -60,7 +60,7 @@ public class ArticleRepository implements ArticleDataSource {
     }
 
     /**
-     * List<ArticleDetailBean>
+     * LiveData -> List<ArticleDetailBean>
      */
     public LiveData<RetrofitResponse<List<ArticleDetailBean>>> getArticleList(int page) {
         final MutableLiveData<RetrofitResponse<List<ArticleDetailBean>>> liveData = new MutableLiveData<>();
@@ -85,9 +85,9 @@ public class ArticleRepository implements ArticleDataSource {
     }
 
     /**
-     * ArticleBean
+     * LiveData -> ArticleDataBean
      */
-    public LiveData<RetrofitResponse<ArticleDataBean>> getArticle(int page) {
+    public LiveData<RetrofitResponse<ArticleDataBean>> getArticleData(int page) {
         final MutableLiveData<RetrofitResponse<ArticleDataBean>> liveData = new MutableLiveData<>();
 
         RetrofitUtils.buildLiveData(

@@ -16,7 +16,7 @@ class ArticlePagingSource : PagingSource<Int, ArticleDetailBean>() {
 
             val api = RetrofitUtils.buildApi(KotlinApi::class.java)
 
-            val response = api.getArticle(nextPageNumber)
+            val response = api.getArticleSuspend(nextPageNumber)
 
             LoadResult.Page(
                 data = response.data.datas,

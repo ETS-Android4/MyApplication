@@ -28,6 +28,11 @@ public class RecyclerFragment extends BaseRecyclerFragment<String> {
     }
 
     @Override
+    protected boolean canRefresh() {
+        return false;
+    }
+
+    @Override
     public BaseQuickAdapter<String, BaseViewHolder> setAdapter() {
         return new RecyclerAdapter();
     }

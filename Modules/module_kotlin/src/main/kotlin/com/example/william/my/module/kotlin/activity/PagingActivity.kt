@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.bean.ArticleDetailBean
-import com.example.william.my.module.kotlin.adapter.ArticleAdapter
+import com.example.william.my.module.kotlin.adapter.ArticlePagingAdapter
 import com.example.william.my.module.kotlin.comparator.ArticleComparator
 import com.example.william.my.module.kotlin.databinding.KtActivityPagingBinding
 import com.example.william.my.module.kotlin.holder.ExampleLoadStateAdapter
@@ -43,7 +43,7 @@ class PagingActivity : BaseActivity() {
         //val viewModel by viewModels<ExampleViewModel>()
         val viewModel = ViewModelProvider(this).get(PagingViewModel::class.java)
 
-        val pagingAdapter = ArticleAdapter(ArticleComparator())
+        val pagingAdapter = ArticlePagingAdapter(ArticleComparator())
         val recycleView = binding.pagingRecycleView
         recycleView.layoutManager = LinearLayoutManager(this)
         recycleView.adapter = pagingAdapter
@@ -79,12 +79,12 @@ class PagingActivity : BaseActivity() {
     /**
      * Paging Coroutines -> LiveData
      */
-    private fun initArticleLiveData(viewModel: PagingViewModel, pagingAdapter: ArticleAdapter) {
+    private fun initArticleLiveData(viewModel: PagingViewModel, pagingPagingAdapter: ArticlePagingAdapter) {
         // activity 可以使用 lifecycleScope。fragment 需要使用 viewLifecycleOwner.lifecycleScope
         // Activities can use lifecycleScope directly, but Fragments should instead use viewLifecycleOwner.lifecycleScope.
         lifecycleScope.launch {
             viewModel.articleFlow.collectLatest { pagingData ->
-                pagingAdapter.submitData(pagingData)
+                pagingPagingAdapter.submitData(pagingData)
             }
         }
     }
@@ -92,13 +92,13 @@ class PagingActivity : BaseActivity() {
     /**
      * Paging RxJava -> Flowable
      */
-    private fun initArticleFlowable(viewModel: PagingViewModel, pagingAdapter: ArticleAdapter) {
+    private fun initArticleFlowable(viewModel: PagingViewModel, pagingPagingAdapter: ArticlePagingAdapter) {
         mDisposable.add(
             viewModel.articleFlowable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer<PagingData<ArticleDetailBean>> {
-                    pagingAdapter.submitData(lifecycle, it)
+                    pagingPagingAdapter.submitData(lifecycle, it)
                 })
         )
     }

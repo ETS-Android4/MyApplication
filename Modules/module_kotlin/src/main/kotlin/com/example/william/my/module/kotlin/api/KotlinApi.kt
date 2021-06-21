@@ -25,7 +25,7 @@ interface KotlinApi {
     // 提供挂起功能的网络请求接口
     // Interface that provides a way to make network requests with suspend functions
     @GET(Urls.URL_ARTICLE)
-    suspend fun getArticle(@Path("page") page: Int): ArticleBean
+    suspend fun getArticleSuspend(@Path("page") page: Int): ArticleBean
 
     @GET(Urls.URL_ARTICLE)
     fun getArticlesSingle(@Path("page") page: Int): Single<ArticleBean>

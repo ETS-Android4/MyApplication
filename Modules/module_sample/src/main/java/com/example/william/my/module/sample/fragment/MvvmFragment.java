@@ -91,7 +91,6 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
     }
 
     public void showToast(String message) {
-        showEmptyView();
         ToastUtils.showShort(message);
     }
 
