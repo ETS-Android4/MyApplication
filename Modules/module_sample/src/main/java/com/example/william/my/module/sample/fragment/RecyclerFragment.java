@@ -26,9 +26,6 @@ public class RecyclerFragment extends BaseRecyclerFragment<String> {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Bundle arguments = getArguments();
-        Log.e("TAG", arguments.getString("key") + "   ???");
-
         List<String> mData = new ArrayList<>();
         for (int i = 0; i <= 20; i++) {
             mData.add("POSITION " + i);

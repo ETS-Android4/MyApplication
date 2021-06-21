@@ -1,6 +1,7 @@
 package com.example.william.my.library.base;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -61,12 +62,11 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         }
 
         if (mSmartRefreshLayout != null) {
-            mSmartRefreshLayout.setOnRefreshListener(this);
-            mSmartRefreshLayout.setOnLoadMoreListener(this);
-            mSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
 
-            mSmartRefreshLayout.setEnableRefresh(canLoadMore());
-            mSmartRefreshLayout.setEnableLoadMore(canRefresh());
+            mSmartRefreshLayout.setEnableRefresh(canRefresh());
+            mSmartRefreshLayout.setEnableLoadMore(canLoadMore());
+
+            mSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
         }
     }
 
@@ -74,21 +74,21 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
 
     }
 
-    private boolean canRefresh() {
-        return true;
-    }
-
-    private boolean canLoadMore() {
+    protected boolean canRefresh() {
         return false;
     }
 
-    public RecyclerView.LayoutManager setLayoutManager() {
+    protected boolean canLoadMore() {
+        return false;
+    }
+
+    protected RecyclerView.LayoutManager setLayoutManager() {
         return new LinearLayoutManager(getActivity());
     }
 
-    public abstract BaseQuickAdapter<T, BaseViewHolder> setAdapter();
+    protected abstract BaseQuickAdapter<T, BaseViewHolder> setAdapter();
 
-    public void onDataSuccess(List<T> list) {
+    protected void onDataSuccess(List<T> list) {
         if (list != null && !list.isEmpty()) {
             if (mPage == 1) {
                 mAdapter.setNewInstance(list);
@@ -100,7 +100,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         }
     }
 
-    public void onDataFail() {
+    protected void onDataFail() {
         mSmartRefreshLayout.setEnableLoadMore(false);
     }
 

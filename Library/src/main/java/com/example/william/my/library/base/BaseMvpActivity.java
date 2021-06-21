@@ -25,16 +25,6 @@ public abstract class BaseMvpActivity<T extends IBasePresenter, K extends IBaseV
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initPresenter();
-    }
-
-    private void initPresenter() {
-        try {
-            Constructor<T> constructor = getPresenterClass().getConstructor(getViewClass());
-            mPresenter = (T) constructor.newInstance(this);
-        } catch (Exception e) {
-            Log.e(TAG, "Init presenter throw an error : [" + e.getMessage() + "]");
-        }
     }
 
     @Override
@@ -45,7 +35,5 @@ public abstract class BaseMvpActivity<T extends IBasePresenter, K extends IBaseV
         }
     }
 
-    protected abstract Class<T> getPresenterClass();
-
-    protected abstract Class<K> getViewClass();
+    protected abstract Class<T> initPresenter();
 }
