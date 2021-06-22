@@ -19,7 +19,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 import java.util.List;
 
-public class ArticleListFragment extends BaseRecyclerFragment<ArticleDetailBean> implements ArticleContract.View {
+public class RecyclerFragment extends BaseRecyclerFragment<ArticleDetailBean> implements ArticleContract.View {
 
     private ArticleContract.Presenter mPresenter;
 

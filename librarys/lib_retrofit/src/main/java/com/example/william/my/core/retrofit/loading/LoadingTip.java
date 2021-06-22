@@ -61,7 +61,7 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
     }
 
     public void setMessage(String message) {
-        mTextView.setText(message);
+        mMessage = message;
     }
 
     public void setLoadingTip(@NonNull Status status) {

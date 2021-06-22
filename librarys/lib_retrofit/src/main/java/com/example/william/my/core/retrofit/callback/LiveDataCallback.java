@@ -1,6 +1,5 @@
 package com.example.william.my.core.retrofit.callback;
 
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
@@ -20,7 +19,7 @@ public class LiveDataCallback<Bean, Data> implements RetrofitResponseCallback<Re
      * @param liveData Data
      */
     public LiveDataCallback(MutableLiveData<RetrofitResponse<Data>> liveData) {
-        this.liveData = liveData;
+        this(liveData, null);
     }
 
     /**
@@ -29,6 +28,7 @@ public class LiveDataCallback<Bean, Data> implements RetrofitResponseCallback<Re
     public LiveDataCallback(MutableLiveData<RetrofitResponse<Data>> liveData, LiveDataConvert<Bean, Data> convert) {
         this.liveData = liveData;
         this.convert = convert;
+        onLoading();
     }
 
     @Override

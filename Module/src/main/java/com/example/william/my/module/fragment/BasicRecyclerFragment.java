@@ -14,8 +14,8 @@ import com.example.william.my.module.router.ARouterPath;
 import java.util.ArrayList;
 import java.util.List;
 
-@Route(path = ARouterPath.Fragment.FragmentRecycler)
-public class RecyclerFragment extends BaseRecyclerFragment<String> {
+@Route(path = ARouterPath.Fragment.FragmentBasicRecycler)
+public class BasicRecyclerFragment extends BaseRecyclerFragment<String> {
 
     @Override
     protected void initRecyclerData(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class RecyclerFragment extends BaseRecyclerFragment<String> {
     public static class RecyclerAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         public RecyclerAdapter() {
-            super(R.layout.basic_item_recycler);
+            super(R.layout.basics_item_recycler);
         }
 
         @Override

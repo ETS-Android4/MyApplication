@@ -71,15 +71,6 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
     @Override
     public void showToast(String message) {
         ToastUtils.showShort(message);
-    }
-
-    @Override
-    public void showEmptyView() {
-        TextView textView = new TextView(getActivity());
-        textView.setGravity(Gravity.CENTER);
-        textView.setText("无数据");
-        mAdapter.setEmptyView(textView);
-        mAdapter.notifyDataSetChanged();
         mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
@@ -94,8 +85,19 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
     }
 
     @Override
+    public void showEmptyView() {
+        TextView textView = new TextView(getActivity());
+        textView.setGravity(Gravity.CENTER);
+        textView.setText("无数据");
+        mAdapter.setEmptyView(textView);
+        mAdapter.notifyDataSetChanged();
+        mSmartRefreshLayout.setEnableLoadMore(false);
+    }
+
+    @Override
     public void onDataNoMore() {
         ToastUtils.showShort("无更多数据");
+        mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
     @Override

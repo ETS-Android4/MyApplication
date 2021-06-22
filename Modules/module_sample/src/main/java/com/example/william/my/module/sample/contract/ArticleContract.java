@@ -10,9 +10,9 @@ public interface ArticleContract {
 
     interface View extends IBaseView<Presenter> {
 
-        void showEmptyView();
-
         void showArticles(boolean isFirst, List<ArticleDetailBean> article);
+
+        void showEmptyView();
 
         void onDataNoMore();
 

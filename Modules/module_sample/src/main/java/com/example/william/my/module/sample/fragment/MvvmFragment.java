@@ -30,6 +30,8 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener {
@@ -40,6 +42,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     private ArticleViewModel mViewModel;
 
+    @NotNull
     public static MvvmFragment newInstance() {
         MvvmFragment fragment = new MvvmFragment();
         Bundle args = new Bundle();
@@ -49,7 +52,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.sample_layout_recycler, container, false);
     }
 
@@ -72,9 +75,6 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
         mViewModel = new ViewModelProvider(this).get(ArticleViewModel.class);
 
-        //getArticleListByObserver();
-        //getArticleListByWithLoadingTipObserver();
-
         //getArticleByObserver();
         getArticleByWithLoadingTipObserver();
     }
@@ -82,7 +82,6 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
     @Override
     public void onResume() {
         super.onResume();
-        //mViewModel.queryArticleList();
         mViewModel.onRefreshArticle();
     }
 
@@ -92,6 +91,16 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     public void showToast(String message) {
         ToastUtils.showShort(message);
+        mSmartRefreshLayout.setEnableLoadMore(false);
+    }
+
+    private void showArticles(boolean isFirst, List<ArticleDetailBean> articles) {
+        if (isFirst) {
+            mAdapter.setNewInstance(articles);
+        } else {
+            mAdapter.addData(articles);
+        }
+        mSmartRefreshLayout.setEnableLoadMore(true);
     }
 
     private void onDataNotAvailable(boolean isFirst) {
@@ -113,73 +122,19 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     public void onDataNoMore() {
         ToastUtils.showShort("无更多数据");
-    }
-
-    private void showArticles(boolean isFirst, List<ArticleDetailBean> articles) {
-        if (isFirst) {
-            mAdapter.setNewInstance(articles);
-        } else {
-            mAdapter.addData(articles);
-        }
-        mAdapter.notifyDataSetChanged();
+        mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        //mViewModel.onLoadMoreArticleList();
         mViewModel.onLoadMoreArticle();
         mSmartRefreshLayout.finishLoadMore(1000);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        //mViewModel.onRefreshArticleList();
         mViewModel.onRefreshArticle();
         mSmartRefreshLayout.finishRefresh(1000);
-    }
-
-    /**
-     * getArticleList -> Observer
-     */
-    private void getArticleListByObserver() {
-        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<RetrofitResponse<List<ArticleDetailBean>>>() {
-            @Override
-            public void onChanged(RetrofitResponse<List<ArticleDetailBean>> response) {
-                if (response.getCode() == State.LOADING) {
-                    showLoading();
-                } else if (response.getCode() == State.SUCCESS) {
-                    if (CollectionUtils.isEmpty(response.getData())) {
-                        onDataNotAvailable(mViewModel.isFirst());
-                    } else {
-                        showArticles(mViewModel.isFirst(), response.getData());
-                    }
-                } else if (response.getCode() == State.ERROR) {
-                    showToast(response.getMessage());
-                }
-            }
-        });
-    }
-
-    /**
-     * getArticleList -> WithLoadingTipObserver
-     */
-    private void getArticleListByWithLoadingTipObserver() {
-        mViewModel.getArticleList().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<List<ArticleDetailBean>>() {
-            @Override
-            protected void onResponse(@NonNull List<ArticleDetailBean> response) {
-                if (CollectionUtils.isEmpty(response)) {
-                    onDataNotAvailable(mViewModel.isFirst());
-                } else {
-                    showArticles(mViewModel.isFirst(), response);
-                }
-            }
-
-            @Override
-            protected boolean onFailure(String msg) {
-                showToast(msg);
-                return super.onFailure(msg);
-            }
-        });
     }
 
     /**
@@ -192,16 +147,16 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
                 if (response.getCode() == State.LOADING) {
                     showLoading();
                 } else if (response.getCode() == State.SUCCESS) {
-                    if (ObjectUtils.isNotEmpty(response.getData())) {
-                        if (CollectionUtils.isEmpty(response.getData().getDatas())) {
-                            onDataNotAvailable(response.getData().getCurPage() == 1);
-                        } else {
-                            showArticles(response.getData().getCurPage() == 1, response.getData().getDatas());
-                        }
+                    if (ObjectUtils.isNotEmpty(response.getData()) &&
+                            CollectionUtils.isNotEmpty(response.getData().getDatas())) {
+                        showArticles(response.getData().getCurPage() == 1, response.getData().getDatas());
                     } else {
-                        showToast(response.getMessage());
+                        onDataNotAvailable(mViewModel.isFirst());
                     }
                 } else if (response.getCode() == State.ERROR) {
+                    if (mViewModel.isFirst()) {
+                        showEmptyView();
+                    }
                     showToast(response.getMessage());
                 }
             }
@@ -215,15 +170,18 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
         mViewModel.getArticle().observe(getViewLifecycleOwner(), new WithLoadingTipObserver<ArticleDataBean>() {
             @Override
             protected void onResponse(@NonNull ArticleDataBean response) {
-                if (CollectionUtils.isEmpty(response.getDatas())) {
-                    onDataNotAvailable(response.getCurPage() == 1);
-                } else {
+                if (CollectionUtils.isNotEmpty(response.getDatas())) {
                     showArticles(response.getCurPage() == 1, response.getDatas());
+                } else {
+                    onDataNotAvailable(response.getCurPage() == 1);
                 }
             }
 
             @Override
             protected boolean onFailure(String msg) {
+                if (mViewModel.isFirst()) {
+                    showEmptyView();
+                }
                 showToast(msg);
                 return super.onFailure(msg);
             }

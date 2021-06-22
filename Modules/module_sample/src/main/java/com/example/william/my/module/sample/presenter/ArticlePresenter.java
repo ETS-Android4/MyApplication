@@ -52,6 +52,9 @@ public class ArticlePresenter implements ArticleContract.Presenter {
 
             @Override
             public void onFailure(String msg) {
+                if (mPage == 0) {
+                    mArticleView.showEmptyView();
+                }
                 mArticleView.showToast(msg);
             }
         });

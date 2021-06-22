@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.william.my.core.widget.bottomsheet.ViewPagerBottomSheetDialogFragment;
+import com.example.william.my.module.fragment.BasicRecyclerFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryVarFragment;
-import com.example.william.my.module.fragment.RecyclerFragment;
 import com.example.william.my.module.widget.R;
 import com.example.william.my.module.widget.adapter.ViewPagerFragmentAdapter;
 
@@ -25,7 +25,7 @@ public class MyBottomSheetDialog extends ViewPagerBottomSheetDialogFragment {
     private final Fragment[] mFragments = new Fragment[]{
             new PrimaryFragment(),
             new PrimaryVarFragment(),
-            new RecyclerFragment()};
+            new BasicRecyclerFragment()};
 
     @Override
     protected int getLayout() {

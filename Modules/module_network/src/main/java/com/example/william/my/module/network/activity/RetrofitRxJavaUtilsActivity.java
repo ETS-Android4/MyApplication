@@ -47,49 +47,53 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      * GsonConverterFactory Gson 解析 -> BannerBean
      */
     private void getBanner() {
-        RetrofitUtils.buildObservable(service.getBanner(), new ObserverCallback<BannerBean>() {
+        RetrofitUtils.buildObservable(
+                service.getBanner(),
+                new ObserverCallback<BannerBean>() {
 
-            @Override
-            public void onLoading() {
-                showResponse("Loading");
-            }
+                    @Override
+                    public void onLoading() {
+                        showResponse("Loading");
+                    }
 
-            @Override
-            public void onResponse(@NonNull BannerBean response) {
-                String netSuccess = "getBanner: " + new Gson().toJson(response);
-                showResponse(netSuccess);
-            }
+                    @Override
+                    public void onResponse(@NonNull BannerBean response) {
+                        String netSuccess = "getBanner: " + new Gson().toJson(response);
+                        showResponse(netSuccess);
+                    }
 
-            @Override
-            public void onFailure(@NonNull ApiException e) {
-                String netError = "Error: " + e.getMessage();
-                showResponse(netError);
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull ApiException e) {
+                        String netError = "Error: " + e.getMessage();
+                        showResponse(netError);
+                    }
+                });
     }
 
     /**
      * RetrofitConverterFactory 自定义解析 -> List<BannerDetailBean>
      */
     private void getBannerList() {
-        RetrofitUtils.buildObservable(service.getBannerList(), new ObserverCallback<RetrofitResponse<List<BannerDetailBean>>>() {
+        RetrofitUtils.buildObservable(
+                service.getBannerList(),
+                new ObserverCallback<RetrofitResponse<List<BannerDetailBean>>>() {
 
-            @Override
-            public void onLoading() {
-                showResponse("Loading");
-            }
+                    @Override
+                    public void onLoading() {
+                        showResponse("Loading");
+                    }
 
-            @Override
-            public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
-                String netSuccess = "getBannerList: " + new Gson().toJson(response);
-                showResponse(netSuccess);
-            }
+                    @Override
+                    public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
+                        String netSuccess = "getBannerList: " + new Gson().toJson(response);
+                        showResponse(netSuccess);
+                    }
 
-            @Override
-            public void onFailure(@NonNull ApiException e) {
-                String netError = "Error: " + e.getMessage();
-                showResponse(netError);
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull ApiException e) {
+                        String netError = "Error: " + e.getMessage();
+                        showResponse(netError);
+                    }
+                });
     }
 }

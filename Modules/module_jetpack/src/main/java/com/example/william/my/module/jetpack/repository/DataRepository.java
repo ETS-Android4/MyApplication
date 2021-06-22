@@ -23,6 +23,8 @@ import java.util.List;
  */
 public class DataRepository {
 
+    private final NetworkService service;
+
     private static DataRepository sInstance;
 
     public static DataRepository getInstance() {
@@ -37,16 +39,14 @@ public class DataRepository {
     }
 
     private DataRepository() {
-
+        service = RetrofitUtils.buildApi(NetworkService.class);
     }
 
     public LiveData<RetrofitResponse<List<BannerDetailBean>>> bannerBean() {
         final MutableLiveData<RetrofitResponse<List<BannerDetailBean>>> liveData = new MutableLiveData<>();
 
         RetrofitUtils.buildLiveData(
-                RetrofitUtils
-                        .buildApi(NetworkService.class)
-                        .getBannerList(),
+                service.getBannerList(),
                 new LiveDataCallback<>(liveData));
 
         return liveData;
@@ -67,9 +67,7 @@ public class DataRepository {
         };
 
         RetrofitUtils.buildLiveData(
-                RetrofitUtils
-                        .buildApi(NetworkService.class)
-                        .getBannerList(),
+                service.getBannerList(),
                 new LiveDataCallback<>(liveData, convert));
 
         return liveData;

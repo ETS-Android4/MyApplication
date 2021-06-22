@@ -9,9 +9,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
+import com.example.william.my.module.fragment.BasicRecyclerFragment;
 import com.example.william.my.module.fragment.PrimaryFragment;
 import com.example.william.my.module.fragment.PrimaryVarFragment;
-import com.example.william.my.module.fragment.RecyclerFragment;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.widget.R;
 import com.example.william.my.module.widget.adapter.ViewPagerFragmentAdapter;
@@ -27,7 +27,7 @@ public class FragmentViewPagerActivity extends BaseActivity implements RadioGrou
     private final Fragment[] mFragments = new Fragment[]{
             new PrimaryFragment(),
             new PrimaryVarFragment(),
-            new RecyclerFragment()};
+            new BasicRecyclerFragment()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
