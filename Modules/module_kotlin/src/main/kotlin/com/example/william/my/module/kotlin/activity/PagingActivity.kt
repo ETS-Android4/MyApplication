@@ -79,7 +79,10 @@ class PagingActivity : BaseActivity() {
     /**
      * Paging Coroutines -> LiveData
      */
-    private fun initArticleLiveData(viewModel: PagingViewModel, pagingPagingAdapter: ArticlePagingAdapter) {
+    private fun initArticleLiveData(
+        viewModel: PagingViewModel,
+        pagingPagingAdapter: ArticlePagingAdapter
+    ) {
         // activity 可以使用 lifecycleScope。fragment 需要使用 viewLifecycleOwner.lifecycleScope
         // Activities can use lifecycleScope directly, but Fragments should instead use viewLifecycleOwner.lifecycleScope.
         lifecycleScope.launch {
@@ -92,7 +95,10 @@ class PagingActivity : BaseActivity() {
     /**
      * Paging RxJava -> Flowable
      */
-    private fun initArticleFlowable(viewModel: PagingViewModel, pagingPagingAdapter: ArticlePagingAdapter) {
+    private fun initArticleFlowable(
+        viewModel: PagingViewModel,
+        pagingPagingAdapter: ArticlePagingAdapter
+    ) {
         mDisposable.add(
             viewModel.articleFlowable
                 .subscribeOn(Schedulers.io())

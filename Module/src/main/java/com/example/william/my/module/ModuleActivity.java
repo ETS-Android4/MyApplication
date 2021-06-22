@@ -75,6 +75,11 @@ import org.greenrobot.eventbus.ThreadMode;
  * <p>
  * import io.reactivex.rxjava3.annotations.NonNull;
  * import io.reactivex.rxjava3.annotations.Nullable;
+ * <p>
+ * Plugins:
+ * GsonForMartPlus
+ * Google Library Version Querier
+ * Alibaba Java Coding Guidelines
  */
 @Route(path = ARouterPath.Module)
 public class ModuleActivity extends BaseListActivity {

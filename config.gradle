@@ -302,6 +302,10 @@ static def addRepos(RepositoryHandler handler) {
      * google
      */
     handler.maven { url "https://maven.aliyun.com/repository/google" }
+    /**
+     * jitpack.io
+     */
+    handler.maven { url "https://jitpack.io" }
     //handler.google()
     //handler.mavenCentral()
     //handler.jcenter() // Warning: this repository is going to shut down soon

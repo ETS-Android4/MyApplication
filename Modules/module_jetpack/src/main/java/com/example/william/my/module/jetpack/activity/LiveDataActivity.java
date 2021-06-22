@@ -59,7 +59,7 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
      * List<BannerDetailData>
      */
     private void initBannerData() {
-        mViewModel.getBannerData().observe(this, new WithLoadingTipObserver<List<BannerDetailData>>(mLoadingTip) {
+        mViewModel.getBannerData().observe(this, new WithLoadingTipObserver<List<BannerDetailData>>(mLoadingTip, "获取Banner数据") {
             @Override
             protected void onResponse(@NonNull List<BannerDetailData> response) {
                 showResponse(new Gson().toJson(response));

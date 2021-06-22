@@ -7,6 +7,10 @@ import com.example.william.my.core.retrofit.status.State;
  */
 public abstract class ObserverCallback<Bean> implements RetrofitResponseCallback<Bean> {
 
+    public ObserverCallback() {
+        onLoading();
+    }
+
     @Override
     public void onLoading() {
 

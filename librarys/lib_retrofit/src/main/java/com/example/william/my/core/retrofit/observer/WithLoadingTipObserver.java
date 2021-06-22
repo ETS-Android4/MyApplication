@@ -14,22 +14,18 @@ import java.util.Collection;
  */
 public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResponse<T>> {
 
-    private final String mMessage;
-
     private LoadingTip mLoadingTip;
 
     public WithLoadingTipObserver() {
-        this.mMessage = "";
     }
 
     public WithLoadingTipObserver(LoadingTip loadingTip) {
-        this.mMessage = "";
         this.mLoadingTip = loadingTip;
     }
 
-    public WithLoadingTipObserver(LoadingTip onProgressDialog, String mMessage) {
-        this.mMessage = mMessage;
-        this.mLoadingTip = onProgressDialog;
+    public WithLoadingTipObserver(LoadingTip loadingTip, String message) {
+        this.mLoadingTip = loadingTip;
+        this.mLoadingTip.setMessage(message);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.example.william.my.module.open.adapter;
 
+import androidx.annotation.NonNull;
+
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-
-import org.jetbrains.annotations.NotNull;
 
 public class BRVAHItemProvider extends BaseItemProvider<String> {
 
@@ -18,7 +18,7 @@ public class BRVAHItemProvider extends BaseItemProvider<String> {
     }
 
     @Override
-    public void convert(@NotNull BaseViewHolder baseViewHolder, String s) {
+    public void convert(@NonNull BaseViewHolder baseViewHolder, String s) {
 
     }
 }

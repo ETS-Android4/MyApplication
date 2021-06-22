@@ -17,8 +17,6 @@ import com.example.william.my.module.sample.presenter.ArticlePresenter;
 import com.example.william.my.module.sample.repo.ArticleRepository;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 public class ArticleListFragment extends BaseRecyclerFragment<ArticleDetailBean> implements ArticleContract.View {
@@ -38,12 +36,12 @@ public class ArticleListFragment extends BaseRecyclerFragment<ArticleDetailBean>
     }
 
     @Override
-    public void onRefresh(@NonNull @NotNull RefreshLayout refreshLayout) {
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         super.onRefresh(refreshLayout);
     }
 
     @Override
-    public void onLoadMore(@NonNull @NotNull RefreshLayout refreshLayout) {
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         super.onLoadMore(refreshLayout);
     }
 

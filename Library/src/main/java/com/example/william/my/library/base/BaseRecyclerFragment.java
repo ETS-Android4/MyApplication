@@ -19,8 +19,6 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 public abstract class BaseRecyclerFragment<T> extends BaseFragment
@@ -46,7 +44,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         initRecyclerData(savedInstanceState);
     }
 
-    private void initRecyclerView(@NotNull View view) {
+    private void initRecyclerView(@NonNull View view) {
         RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
 
@@ -115,24 +113,24 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     }
 
     @Override
-    public void onRefresh(@NonNull @NotNull RefreshLayout refreshLayout) {
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         mPage = 1;
         mSmartRefreshLayout.autoRefresh();
     }
 
     @Override
-    public void onLoadMore(@NonNull @NotNull RefreshLayout refreshLayout) {
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         mPage++;
         mSmartRefreshLayout.autoLoadMore();
     }
 
     @Override
-    public void onItemClick(@NonNull @NotNull BaseQuickAdapter adapter, @NonNull @NotNull View view, int position) {
+    public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
 
     }
 
     @Override
-    public void onItemChildClick(@NonNull @NotNull BaseQuickAdapter adapter, @NonNull @NotNull View view, int position) {
+    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
 
     }
 

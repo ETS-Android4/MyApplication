@@ -18,10 +18,13 @@ public abstract class RetrofitObserver<T> implements Observer<T>, RetrofitRespon
 
     private Disposable disposable;
 
+    public RetrofitObserver() {
+        onLoading();
+    }
+
     @Override
     public void onSubscribe(@NonNull Disposable d) {
         disposable = d;
-        onLoading();
     }
 
     @Override

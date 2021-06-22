@@ -62,10 +62,6 @@ object RetrofitUtils {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : RetrofitObserver<T>() {
-                override fun onLoading() {
-                    super.onLoading()
-                }
-
                 override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }
@@ -86,10 +82,6 @@ object RetrofitUtils {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : RetrofitObserver<T>() {
-                override fun onLoading() {
-                    super.onLoading()
-                }
-
                 override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }

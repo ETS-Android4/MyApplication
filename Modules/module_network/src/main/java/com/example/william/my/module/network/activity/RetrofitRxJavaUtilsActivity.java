@@ -48,6 +48,12 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      */
     private void getBanner() {
         RetrofitUtils.buildObservable(service.getBanner(), new ObserverCallback<BannerBean>() {
+
+            @Override
+            public void onLoading() {
+                showResponse("Loading");
+            }
+
             @Override
             public void onResponse(@NonNull BannerBean response) {
                 String netSuccess = "getBanner: " + new Gson().toJson(response);
@@ -67,6 +73,12 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      */
     private void getBannerList() {
         RetrofitUtils.buildObservable(service.getBannerList(), new ObserverCallback<RetrofitResponse<List<BannerDetailBean>>>() {
+
+            @Override
+            public void onLoading() {
+                showResponse("Loading");
+            }
+
             @Override
             public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
                 String netSuccess = "getBannerList: " + new Gson().toJson(response);
