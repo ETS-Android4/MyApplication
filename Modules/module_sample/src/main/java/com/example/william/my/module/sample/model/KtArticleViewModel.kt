@@ -17,7 +17,7 @@ class KtArticleViewModel(private val articleDataSource: KtArticleRepository) : V
 
     val article: LiveData<ArticleBean> = articleDataSource.article
 
-    val articleData: LiveData<RetrofitResponse<ArticleDataBean>> = articleDataSource.articleData
+    val articleResponse: LiveData<RetrofitResponse<ArticleDataBean>> = articleDataSource.articleResponse
 
     fun onRefresh() {
         viewModelScope.launch {

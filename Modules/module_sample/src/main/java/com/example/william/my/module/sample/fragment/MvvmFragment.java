@@ -59,6 +59,13 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        initView(view);
+
+        subscribeToModel();
+    }
+
+    private void initView(View view) {
         mRecyclerView = view.findViewById(R.id.recycleView);
         mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
 
@@ -67,8 +74,6 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
-
-        subscribeToModel();
     }
 
     private void subscribeToModel() {
@@ -77,11 +82,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
         //getArticleByObserver();
         getArticleByWithLoadingTipObserver();
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
         mViewModel.onRefreshArticle();
     }
 

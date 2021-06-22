@@ -1,6 +1,7 @@
 package com.example.william.my.module.sample.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -51,14 +52,45 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
     }
 
     private fun subscribeToModel() {
-        mViewModel.articleData.observe(this, Observer {
+        getArticleResponse()
+    }
+
+    private fun getArticle() {
+        mViewModel.article.observe(this, Observer {
             if (it.data?.datas.isNullOrEmpty()) {
-                onDataNotAvailable(it.data?.curPage == 1)
+                Log.e("TAG", "null")
+                //onDataNotAvailable(it.data?.curPage == 1)
             } else {
-                showArticles(it.data?.curPage == 1, it.data!!.datas)
+                Log.e("TAG", "not")
+                //showArticles(it.data?.curPage == 1, it.data!!.datas)
             }
         })
+    }
+
+    private fun getArticleResponse() {
+        mViewModel.articleResponse.observe(this, Observer {
+            if (it.data?.datas.isNullOrEmpty()) {
+                Log.e("TAG", "null")
+                //onDataNotAvailable(it.data?.curPage == 1)
+            } else {
+                Log.e("TAG", "not")
+                //showArticles(it.data?.curPage == 1, it.data!!.datas)
+            }
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
         mViewModel.onRefresh()
+    }
+
+    private fun showArticles(isFirst: Boolean, articles: MutableList<ArticleDetailBean>) {
+        if (isFirst) {
+            mAdapter.setNewInstance(articles)
+        } else {
+            mAdapter.addData(articles)
+        }
+        mBinding.smartRefreshLayout.setEnableLoadMore(true)
     }
 
     private fun onDataNotAvailable(isFirst: Boolean) {
@@ -80,14 +112,7 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     private fun onDataNoMore() {
         ToastUtils.showShort("无更多数据")
-    }
-
-    private fun showArticles(isFirst: Boolean, articles: MutableList<ArticleDetailBean>) {
-        if (isFirst) {
-            mAdapter.setNewInstance(articles)
-        } else {
-            mAdapter.addData(articles)
-        }
+        mBinding.smartRefreshLayout.setEnableLoadMore(false)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {

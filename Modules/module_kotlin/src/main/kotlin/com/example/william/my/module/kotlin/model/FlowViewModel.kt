@@ -21,7 +21,7 @@ class FlowViewModel : ViewModel() {
         get() = _login
 
     /**
-     * HttpURLConnection
+     * HttpURLConnection -> suspend
      */
     fun login(username: String, password: String) {
 
@@ -36,11 +36,12 @@ class FlowViewModel : ViewModel() {
 
             // 执行网络请求 并 挂起，直至请求完成
             // Make the network call and suspend execution until it finishes
-            val result = try {
-                LoginRepository().login(bodyJson)
-            } catch (e: Exception) {
-                NetworkResult.Error(Exception("Network request failed"))
-            }
+            val result =
+                try {
+                    LoginRepository().login(bodyJson)
+                } catch (e: Exception) {
+                    NetworkResult.Error(Exception("Network request failed"))
+                }
 
             // 向用户展示网络请求结果
             // Display result of the network request to the user
@@ -63,6 +64,9 @@ class FlowViewModel : ViewModel() {
     val article: LiveData<String>
         get() = _article
 
+    /**
+     * Retrofit -> Flow
+     */
     fun getArticle() {
         viewModelScope.launch {
             //打印线程
@@ -92,7 +96,7 @@ class FlowViewModel : ViewModel() {
     /**
      * 使用 Flow 流构造方法 -> asLiveData()
      */
-    fun getArticleByFlow() =
+    fun getArticleByFlow(): LiveData<String> =
         ArticleRepository().article
             .map {
                 Gson().toJson(it)
@@ -102,10 +106,11 @@ class FlowViewModel : ViewModel() {
     /**
      * 使用 Coroutine 协程构造方法 -> liveData<>
      */
-    fun getArticleByCoroutine() = liveData<String> {
-        ArticleRepository().article
-            .collect {
-                emit(Gson().toJson(it))
-            }
-    }
+    fun getArticleByCoroutine(): LiveData<String> =
+        liveData {
+            ArticleRepository().article
+                .collect {
+                    emit(Gson().toJson(it))
+                }
+        }
 }

@@ -47,6 +47,7 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
     @Override
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mRecyclerView = view.findViewById(R.id.recycleView);
         mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
 

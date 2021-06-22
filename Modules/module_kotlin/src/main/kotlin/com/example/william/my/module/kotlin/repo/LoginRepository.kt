@@ -18,7 +18,8 @@ import java.net.URL
 
 /**
  * withContext(Dispatchers.IO) {
- * }
+ * } 是一个suspend 函数,
+ * suspend函数需要在携程或者另一个suspend函数中调用
  */
 class LoginRepository {
 
@@ -33,6 +34,7 @@ class LoginRepository {
             // 阻塞网络请求
             // Blocking network request code
             makeLoginRequest(jsonBody)
+            // By Retrofit
             //makeLoginRequestRetrofit()
         }
 
@@ -69,7 +71,7 @@ class LoginRepository {
         return Gson().fromJson(response, LoginData::class.java)
     }
 
-    private suspend fun makeLoginRequestRetrofit(): NetworkResult<LoginData> {
+    private suspend fun makeLoginRequestByRetrofit(): NetworkResult<LoginData> {
         //打印线程
         ThreadUtils.isMainThread("LoginRepository makeLoginRequestRetrofit")
 

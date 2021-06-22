@@ -18,54 +18,52 @@ class FlowActivity : BaseActivity() {
 
     lateinit var binding: KtLayoutResponseBinding
 
+    lateinit var mViewModel: FlowViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = KtLayoutResponseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel = ViewModelProvider(this).get(FlowViewModel::class.java)
-
-        login(viewModel)
-
-        getArticle(viewModel)
-
-        //getArticleByFlow(viewModel)
-
-        //getArticleByCoroutine(viewModel)
+        mViewModel = ViewModelProvider(this).get(FlowViewModel::class.java)
 
         binding.contentTextView.setOnClickListener {
-            viewModel.getArticle()
-            //viewModel.login("17778060027", "ww123456")
+            login()
         }
     }
 
-    private fun login(viewModel: FlowViewModel) {
-        viewModel.login.observe(this, Observer {
+    private fun login() {
+        mViewModel.login.observe(this, Observer {
+            binding.contentTextView.text = it
+        })
+        mViewModel.login("17778060027", "ww123456")
+
+    }
+
+    private fun getArticle() {
+        mViewModel.article.observe(this, Observer {
+            binding.contentTextView.text = it
+        })
+        mViewModel.getArticle()
+    }
+
+    /**
+     * 通过 使用 Flow 流构造方法 -> asLiveData() 直接返回 LiveData
+     */
+    private fun getArticleByFlow() {
+        mViewModel.getArticleByFlow().observe(this, Observer {
             binding.contentTextView.text = it
         })
     }
 
-    private fun getArticle(viewModel: FlowViewModel) {
-        viewModel.article.observe(this, Observer {
+    /**
+     * 通过 使用 Coroutine 协程构造方法 -> liveData<> 直接返回 LiveData
+     */
+    private fun getArticleByCoroutine() {
+        mViewModel.getArticleByCoroutine().observe(this, Observer {
             binding.contentTextView.text = it
         })
-    }
-
-    private fun getArticleByFlow(viewModel: FlowViewModel) {
-        binding.contentTextView.setOnClickListener {
-            viewModel.getArticleByFlow().observe(this, Observer {
-                binding.contentTextView.text = it
-            })
-        }
-    }
-
-    private fun getArticleByCoroutine(viewModel: FlowViewModel) {
-        binding.contentTextView.setOnClickListener {
-            viewModel.getArticleByCoroutine().observe(this, Observer {
-                binding.contentTextView.text = it
-            })
-        }
     }
 
     fun flowOperator() {

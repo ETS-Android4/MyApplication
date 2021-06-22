@@ -44,9 +44,11 @@ class KtArticleRepository : KtArticleDataSource {
             api.getArticle(counter)
         }
 
-    private val _articleData = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
-    override val articleData: LiveData<RetrofitResponse<ArticleDataBean>> = _articleData
+    private val _articleResponse = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
+    override val articleResponse: LiveData<RetrofitResponse<ArticleDataBean>> = _articleResponse
 
+    // 移动到IO调度程序以使其成为安全的
+    // move the execution to an IO dispatcher to make it main-safe
     private suspend fun getArticleResponse(counter: Int): RetrofitResponse<ArticleDataBean> =
         withContext(Dispatchers.IO) {
             val api = RetrofitUtils.buildApi(KtArticleService::class.java)
@@ -81,10 +83,10 @@ class KtArticleRepository : KtArticleDataSource {
                 }
                 .catch { exception ->
                     val e: ApiException = ExceptionHandler.handleException(exception)
-                    _articleData.postValue(RetrofitResponse.error(e.message))
+                    _articleResponse.postValue(RetrofitResponse.error(e.message))
                 }
                 .collect { article ->
-                    _articleData.postValue(article)
+                    _articleResponse.postValue(article)
                 }
         }
     }
@@ -100,11 +102,11 @@ class KtArticleRepository : KtArticleDataSource {
                 }
 
                 override fun onResponse(response: RetrofitResponse<ArticleDataBean>) {
-                    _articleData.postValue(response)
+                    _articleResponse.postValue(response)
                 }
 
                 override fun onFailure(e: ApiException) {
-                    _articleData.postValue(RetrofitResponse.error(e.message))
+                    _articleResponse.postValue(RetrofitResponse.error(e.message))
                 }
             })
     }
@@ -112,14 +114,14 @@ class KtArticleRepository : KtArticleDataSource {
     private suspend fun fetchNewDataLiveDataCallback() {
         counter = 0
         RetrofitUtils.buildFlow(
-            getArticleResponseFlow(counter), LiveDataCallback(_articleData)
+            getArticleResponseFlow(counter), LiveDataCallback(_articleResponse)
         )
     }
 
     private suspend fun loadMoreDataLiveDataCallback() {
         counter++
         RetrofitUtils.buildFlow(
-            getArticleResponseFlow(counter), LiveDataCallback(_articleData)
+            getArticleResponseFlow(counter), LiveDataCallback(_articleResponse)
         )
     }
 }
