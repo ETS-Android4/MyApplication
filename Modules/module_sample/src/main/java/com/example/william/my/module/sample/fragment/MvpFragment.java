@@ -59,14 +59,24 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.onRefreshArticleList();
+    }
+
+    @Override
     public void setPresenter(@NonNull ArticleContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.onRefreshArticleList();
+    public void showLoading() {
+        ToastUtils.showLong("正在请求数据…");
+    }
+
+    @Override
+    public void closeLoading() {
+
     }
 
     @Override
@@ -96,7 +106,7 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
     }
 
     @Override
-    public void onDataNoMore() {
+    public void showArticlesNoMore() {
         ToastUtils.showShort("无更多数据");
         mSmartRefreshLayout.setEnableLoadMore(false);
     }

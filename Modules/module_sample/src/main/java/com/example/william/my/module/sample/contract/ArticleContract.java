@@ -14,7 +14,7 @@ public interface ArticleContract {
 
         void showEmptyView();
 
-        void onDataNoMore();
+        void showArticlesNoMore();
 
     }
 

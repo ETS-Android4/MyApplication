@@ -2,11 +2,11 @@ package com.example.william.my.module.sample.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerFragment;
@@ -36,28 +36,21 @@ public class RecyclerFragment extends BaseRecyclerFragment<ArticleDetailBean> im
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.onRefreshArticleList();
+    }
+
+    @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         super.onRefresh(refreshLayout);
+        mPresenter.onRefreshArticleList();
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         super.onLoadMore(refreshLayout);
-    }
-
-    @Override
-    public void showEmptyView() {
-        onEmptyView();
-    }
-
-    @Override
-    public void showArticles(boolean isFirst, List<ArticleDetailBean> article) {
-        onDataSuccess(article);
-    }
-
-    @Override
-    public void onDataNoMore() {
-        onDataNoMore();
+        mPresenter.onLoadMoreArticleList();
     }
 
     @Override
@@ -66,7 +59,32 @@ public class RecyclerFragment extends BaseRecyclerFragment<ArticleDetailBean> im
     }
 
     @Override
+    public void showLoading() {
+        ToastUtils.showLong("正在请求数据…");
+    }
+
+    @Override
+    public void closeLoading() {
+
+    }
+
+    @Override
     public void showToast(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        onDataFail(message);
+    }
+
+    @Override
+    public void showArticles(boolean isFirst, List<ArticleDetailBean> article) {
+        onDataSuccess(isFirst, article);
+    }
+
+    @Override
+    public void showEmptyView() {
+        onEmptyView();
+    }
+
+    @Override
+    public void showArticlesNoMore() {
+        onDataNoMore();
     }
 }

@@ -9,10 +9,10 @@ public interface IBaseView<T> {
     void setPresenter(T presenter);
 
     //显示loading
-    //void showLoading();
+    void showLoading();
 
     //关闭loading
-    //void closeLoading();
+    void closeLoading();
 
     //显示提示信息
     void showToast(String message);

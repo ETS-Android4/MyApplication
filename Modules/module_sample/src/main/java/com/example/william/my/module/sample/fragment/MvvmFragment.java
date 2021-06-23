@@ -87,7 +87,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
     }
 
     private void showLoading() {
-        ToastUtils.showShort("正在请求数据…");
+        ToastUtils.showLong("正在请求数据…");
     }
 
     public void showToast(String message) {

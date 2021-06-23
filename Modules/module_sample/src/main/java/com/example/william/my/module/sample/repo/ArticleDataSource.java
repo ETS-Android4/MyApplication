@@ -8,6 +8,8 @@ public interface ArticleDataSource {
 
     interface LoadArticleCallback {
 
+        void showLoading();
+
         void onArticleLoaded(List<ArticleDetailBean> articles);
 
         void onDataNotAvailable();

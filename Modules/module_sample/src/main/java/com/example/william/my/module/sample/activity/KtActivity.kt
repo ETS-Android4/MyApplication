@@ -1,7 +1,6 @@
 package com.example.william.my.module.sample.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -10,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.ToastUtils
+import com.example.william.my.core.retrofit.status.State
 import com.example.william.my.module.bean.ArticleDetailBean
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.adapter.ArticleAdapter
@@ -52,36 +52,42 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
     }
 
     private fun subscribeToModel() {
-        getArticleResponse()
+        getArticleByObserver()
+        //getArticleByWithLoadingTipObserver()
     }
 
-    private fun getArticle() {
-        mViewModel.article.observe(this, Observer {
-            if (it.data?.datas.isNullOrEmpty()) {
-                Log.e("TAG", "null")
-                //onDataNotAvailable(it.data?.curPage == 1)
-            } else {
-                Log.e("TAG", "not")
-                //showArticles(it.data?.curPage == 1, it.data!!.datas)
-            }
-        })
-    }
-
-    private fun getArticleResponse() {
+    private fun getArticleByObserver() {
         mViewModel.articleResponse.observe(this, Observer {
-            if (it.data?.datas.isNullOrEmpty()) {
-                Log.e("TAG", "null")
-                //onDataNotAvailable(it.data?.curPage == 1)
-            } else {
-                Log.e("TAG", "not")
-                //showArticles(it.data?.curPage == 1, it.data!!.datas)
+            if (it.code == State.LOADING) {
+                showLoading()
+            } else if (it.code == State.SUCCESS) {
+                if (!it.data?.datas.isNullOrEmpty()) {
+                    showArticles(it.data?.curPage == 1, it.data!!.datas)
+                } else {
+                    onDataNotAvailable(it.data?.curPage == 1)
+                }
+            } else if (it.code == State.ERROR) {
+                showToast(it.message)
             }
         })
+    }
+
+    private fun getArticleByWithLoadingTipObserver() {
+
     }
 
     override fun onResume() {
         super.onResume()
         mViewModel.onRefresh()
+    }
+
+    private fun showLoading() {
+        ToastUtils.showShort("正在请求数据…")
+    }
+
+    private fun showToast(message: String?) {
+        ToastUtils.showShort(message)
+        mBinding.smartRefreshLayout.setEnableLoadMore(false)
     }
 
     private fun showArticles(isFirst: Boolean, articles: MutableList<ArticleDetailBean>) {

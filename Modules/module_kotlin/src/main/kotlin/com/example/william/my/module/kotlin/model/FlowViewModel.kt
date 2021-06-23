@@ -64,7 +64,7 @@ class FlowViewModel : ViewModel() {
         get() = _article
 
     /**
-     * -> Flow
+     * -> flow
      */
     fun getArticle() {
         viewModelScope.launch {

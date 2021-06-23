@@ -48,6 +48,13 @@ public class ArticleRepository implements ArticleDataSource {
         RetrofitUtils.buildObservable(
                 service.getArticleListCache(page),
                 new ObserverCallback<RetrofitResponse<ArticleDataBean>>() {
+
+                    @Override
+                    public void onLoading() {
+                        super.onLoading();
+                        callback.showLoading();
+                    }
+
                     @Override
                     public void onResponse(@NonNull RetrofitResponse<ArticleDataBean> response) {
                         if (ObjectUtils.isNotEmpty(response.getData()) &&

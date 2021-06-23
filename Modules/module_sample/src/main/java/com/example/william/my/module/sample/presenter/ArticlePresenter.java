@@ -37,6 +37,11 @@ public class ArticlePresenter implements ArticleContract.Presenter {
     private void queryArticleList(int page) {
         mArticleRepository.getArticleList(page, new ArticleDataSource.LoadArticleCallback() {
             @Override
+            public void showLoading() {
+                mArticleView.showLoading();
+            }
+
+            @Override
             public void onArticleLoaded(List<ArticleDetailBean> articles) {
                 mArticleView.showArticles(mPage == 0, articles);
             }
@@ -46,7 +51,7 @@ public class ArticlePresenter implements ArticleContract.Presenter {
                 if (mPage == 0) {
                     mArticleView.showEmptyView();
                 } else {
-                    mArticleView.onDataNoMore();
+                    mArticleView.showArticlesNoMore();
                 }
             }
 

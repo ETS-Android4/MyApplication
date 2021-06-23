@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,8 +24,6 @@ import java.util.List;
 
 public abstract class BaseRecyclerFragment<T> extends BaseFragment
         implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener {
-
-    private int mPage = 1;
 
     private SmartRefreshLayout mSmartRefreshLayout;
 
@@ -87,20 +86,22 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
 
     protected abstract BaseQuickAdapter<T, BaseViewHolder> setAdapter();
 
-    protected void onDataSuccess(List<T> list) {
+    protected void onDataFail(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        mSmartRefreshLayout.setEnableLoadMore(false);
+    }
+
+    protected void onDataSuccess(boolean isFirst, List<T> list) {
         if (list != null && !list.isEmpty()) {
-            if (mPage == 1) {
+            if (isFirst) {
                 mAdapter.setNewInstance(list);
             } else {
                 mAdapter.addData(list);
             }
+            mSmartRefreshLayout.setEnableLoadMore(true);
         } else {
             mSmartRefreshLayout.setEnableLoadMore(false);
         }
-    }
-
-    protected void onDataNoMore() {
-        mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
     protected void onEmptyView() {
@@ -112,16 +113,19 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
+    protected void onDataNoMore() {
+        Toast.makeText(getContext(), "无更多数据", Toast.LENGTH_SHORT).show();
+        mSmartRefreshLayout.setEnableLoadMore(false);
+    }
+
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        mPage = 1;
-        mSmartRefreshLayout.autoRefresh();
+        mSmartRefreshLayout.finishRefresh(1000);
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        mPage++;
-        mSmartRefreshLayout.autoLoadMore();
+        mSmartRefreshLayout.finishLoadMore(1000);
     }
 
     @Override
