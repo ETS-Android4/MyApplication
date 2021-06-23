@@ -23,25 +23,52 @@ import java.net.URL
  */
 class LoginRepository {
 
+    private val tag = this.javaClass.simpleName
+
+    suspend fun loginByRetrofit(
+        username: String,
+        password: String
+    ): NetworkResult<LoginData> {
+
+        //val api = RetrofitUtils.buildApi(KotlinApi::class.java)
+        //val article = api.login(username, password)
+        //return NetworkResult.Success(article)
+
+        return withContext(Dispatchers.IO) {
+            //打印线程
+            ThreadUtils.isMainThread("LoginRepository loginByRetrofit")
+
+            val api = RetrofitUtils.buildApi(KotlinApi::class.java)
+            val article = api.login(username, password)
+            NetworkResult.Success(article)
+        }
+    }
+
     // 2. 使用协程确保主线程安全
     // 将 协程 切换到 I/O 调度，确保主线程安全
     // Move the execution of the coroutine to the I/O dispatcher
-    suspend fun login(jsonBody: String): NetworkResult<LoginData> =
-        withContext(Dispatchers.IO) {
+    suspend fun login(
+        username: String,
+        password: String
+    ): NetworkResult<LoginData> {
+        return withContext(Dispatchers.IO) {
             //打印线程
             ThreadUtils.isMainThread("LoginRepository login")
 
             // 阻塞网络请求
             // Blocking network request code
-            makeLoginRequest(jsonBody)
-            // By Retrofit
-            //makeLoginRequestRetrofit()
+            makeLoginRequest(username, password)
         }
+    }
+
 
     // 1. 在后台线程中执行
     // 发出网络请求，阻塞当前线程
     // Function that makes the network request, blocking the current thread
-    private fun makeLoginRequest(jsonBody: String): NetworkResult<LoginData> {
+    private fun makeLoginRequest(
+        username: String,
+        password: String
+    ): NetworkResult<LoginData> {
         //打印线程
         ThreadUtils.isMainThread("LoginRepository makeLoginRequest")
 
@@ -52,6 +79,7 @@ class LoginRepository {
             //setRequestProperty("Content-Type", "application/json; utf-8")
             //setRequestProperty("Accept", "application/json")
             doOutput = true
+            val jsonBody = "username=$username&password=$password"
             outputStream.write(jsonBody.toByteArray())
             return NetworkResult.Success(parse(inputStream))
         }
@@ -67,16 +95,7 @@ class LoginRepository {
         }
         reader.close()
         val response = msg.toString()
-        Log.e("LoginRepository", response)
+        Log.e(tag, response)
         return Gson().fromJson(response, LoginData::class.java)
-    }
-
-    private suspend fun makeLoginRequestByRetrofit(): NetworkResult<LoginData> {
-        //打印线程
-        ThreadUtils.isMainThread("LoginRepository makeLoginRequestRetrofit")
-
-        val api = RetrofitUtils.buildApi(KotlinApi::class.java)
-        val article = api.login("17778060027", "wW123456")
-        return NetworkResult.Success(article)
     }
 }

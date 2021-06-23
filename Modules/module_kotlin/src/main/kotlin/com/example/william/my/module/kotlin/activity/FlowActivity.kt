@@ -29,16 +29,8 @@ class FlowActivity : BaseActivity() {
         mViewModel = ViewModelProvider(this).get(FlowViewModel::class.java)
 
         binding.contentTextView.setOnClickListener {
-            login()
+            getArticle()
         }
-    }
-
-    private fun login() {
-        mViewModel.login.observe(this, Observer {
-            binding.contentTextView.text = it
-        })
-        mViewModel.login("17778060027", "ww123456")
-
     }
 
     private fun getArticle() {

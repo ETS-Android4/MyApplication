@@ -21,7 +21,7 @@ class FlowViewModel : ViewModel() {
         get() = _login
 
     /**
-     * HttpURLConnection -> suspend
+     * -> suspend
      */
     fun login(username: String, password: String) {
 
@@ -32,13 +32,12 @@ class FlowViewModel : ViewModel() {
             //打印线程
             ThreadUtils.isMainThread("CoroutinesViewModel login")
 
-            val bodyJson = "username=$username&password=$password"
-
             // 执行网络请求 并 挂起，直至请求完成
             // Make the network call and suspend execution until it finishes
             val result =
                 try {
-                    LoginRepository().login(bodyJson)
+                    //LoginRepository().login(username, password)
+                    LoginRepository().loginByRetrofit(username, password)
                 } catch (e: Exception) {
                     NetworkResult.Error(Exception("Network request failed"))
                 }
@@ -65,7 +64,7 @@ class FlowViewModel : ViewModel() {
         get() = _article
 
     /**
-     * Retrofit -> Flow
+     * -> Flow
      */
     fun getArticle() {
         viewModelScope.launch {
