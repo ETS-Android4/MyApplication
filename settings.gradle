@@ -26,6 +26,7 @@ include ':modules:module_jiguang'
 include ':modules:module_tencent_im'
 include ':modules:module_bugly'
 include ':modules:module_sophix'
+include ':modules:nertcvoiceroom'
 
 //include ':modules:module_flutter'
 //include ':flutter_module'
@@ -33,4 +34,4 @@ include ':modules:module_sophix'
 //evaluate(new File(
 //        settingsDir,
 //        'flutter_module/.android/include_flutter.groovy'
-//))
+//))//))

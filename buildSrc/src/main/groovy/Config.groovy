@@ -25,6 +25,7 @@ class Config {
             ModuleSophix   : new DepConfig(false, ":modules:module_sophix"),
             ModuleJiguang  : new DepConfig(false, ":modules:module_jiguang"),
             ModuleTencentIM: new DepConfig(false, ":modules:module_tencent_im"),
+            ModuleNeRTC    : new DepConfig(false, ":modules:nertcvoiceroom"),
 
             ModuleKotlin   : new DepConfig(true, ":modules:module_kotlin"),
             ModuleSample   : new DepConfig(true, ":modules:module_sample"),
