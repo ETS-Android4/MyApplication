@@ -21,13 +21,6 @@ include ':modules:module_jetpack'
 include ':modules:module_kotlin'
 include ':modules:module_sample'
 
-include ':modules:module_wechat'
-include ':modules:module_jiguang'
-include ':modules:module_tencent_im'
-include ':modules:module_bugly'
-include ':modules:module_sophix'
-include ':modules:nertcvoiceroom'
-
 //include ':modules:module_flutter'
 //include ':flutter_module'
 //setBinding(new Binding([gradle: this]))

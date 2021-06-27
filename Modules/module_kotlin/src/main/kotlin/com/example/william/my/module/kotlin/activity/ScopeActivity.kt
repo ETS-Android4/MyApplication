@@ -56,10 +56,18 @@ class ScopeActivity : BaseActivity() {
      */
     private fun scope() {
         val loginData = LoginData(LoginData.User("001", "nickname"))
+
+        // with
+        // 对于这个对象，执行以下操作
+        with(loginData) {
+            data.id = "004"
+            data.nickname = "nickname"
+        }
+
         // let
-        // 1. 用于仅使用非空值执行代码块
+        // 1. 用于仅使用 "非空" 值执行代码块
         // 2. 引入作用域受限的局部变量以提高代码的可读性。
-        val let: Unit = loginData.let { login ->
+        loginData.let { login ->
             login.data.id = "001"
             login.data.nickname = "nickname"
         }
@@ -71,16 +79,9 @@ class ScopeActivity : BaseActivity() {
         }
         Log.e(TAG, "let $let2")
 
-        // with
-        // 对于这个对象，执行以下操作
-        val with: Unit = with(loginData) {
-            data.id = "004"
-            data.nickname = "nickname"
-        }
-
         // run
         // 对于这个对象，执行以下操作
-        val run: Unit = loginData.run {
+        loginData.run {
             data.id = "002"
             data.nickname = "nickname"
         }

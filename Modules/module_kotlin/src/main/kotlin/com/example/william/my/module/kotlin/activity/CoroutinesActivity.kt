@@ -46,6 +46,7 @@ class CoroutinesActivity : BaseActivity() {
     /**
      * 1.启动一个新的线程，在新线程上创建运行协程，不堵塞当前线程
      */
+    @DelicateCoroutinesApi
     private fun launch() {
         ThreadUtils.isMainThread("启动协程")
         val job = GlobalScope.launch {
@@ -61,6 +62,7 @@ class CoroutinesActivity : BaseActivity() {
     /**
      * 2.启动一个新的线程，在新线程上创建运行协程，不堵塞当前线程。支持通过await获取返回值
      */
+    @DelicateCoroutinesApi
     private fun await() {
         GlobalScope.launch {
             val async1 = async(3000, 1)
@@ -70,6 +72,7 @@ class CoroutinesActivity : BaseActivity() {
         }
     }
 
+    @DelicateCoroutinesApi
     private fun async(timeMillis: Long, result: Int): Deferred<Int> {
         ThreadUtils.isMainThread("启动协程")
         val async = GlobalScope.async {

@@ -7,29 +7,22 @@ class Config {
     static depConfig = [
             //plugin_gradle  : new DepConfig(pluginPath: "com.android.tools.build:gradle:$gradleVersion"),
 
-            Module         : new DepConfig(true, ":module"),
+            Module       : new DepConfig(true, ":module"),
 
-            AndroidUtil    : new DepConfig(true, ":modules:module_android_util"),
+            AndroidUtil  : new DepConfig(true, ":modules:module_android_util"),
 
-            Network        : new DepConfig(true, ":modules:module_network"),
-            CustomView     : new DepConfig(true, ":modules:module_custom_view"),
+            Network      : new DepConfig(true, ":modules:module_network"),
+            CustomView   : new DepConfig(true, ":modules:module_custom_view"),
 
-            Jetpack        : new DepConfig(true, ":modules:module_jetpack"),
-            OpenSource     : new DepConfig(true, ":modules:module_open_source"),
+            Jetpack      : new DepConfig(true, ":modules:module_jetpack"),
+            OpenSource   : new DepConfig(true, ":modules:module_open_source"),
 
-            Widget         : new DepConfig(true, ":modules:module_widget"),
-            Demo           : new DepConfig(true, ":modules:module_demo"),
+            Widget       : new DepConfig(true, ":modules:module_widget"),
+            Demo         : new DepConfig(true, ":modules:module_demo"),
 
-            ModuleWeChat   : new DepConfig(false, ":modules:module_wechat"),
-            ModuleBugly    : new DepConfig(false, ":modules:module_bugly"),
-            ModuleSophix   : new DepConfig(false, ":modules:module_sophix"),
-            ModuleJiguang  : new DepConfig(false, ":modules:module_jiguang"),
-            ModuleTencentIM: new DepConfig(false, ":modules:module_tencent_im"),
-            ModuleNeRTC    : new DepConfig(false, ":modules:nertcvoiceroom"),
+            Kotlin       : new DepConfig(true, ":modules:module_kotlin"),
+            Sample       : new DepConfig(true, ":modules:module_sample"),
 
-            ModuleKotlin   : new DepConfig(true, ":modules:module_kotlin"),
-            ModuleSample   : new DepConfig(true, ":modules:module_sample"),
-
-            ModuleFlutter  : new DepConfig(false, ":modules:module_flutter"),
+            ModuleFlutter: new DepConfig(false, ":modules:module_flutter"),
     ]
 }

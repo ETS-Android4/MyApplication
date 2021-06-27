@@ -23,59 +23,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * 文件模板：
- * File => Settings => Editor => File and Code Templates
- * 开发规范：
- * Java文件命名：驼峰，资源命名：下划线
- * NotNull 使用在Bean的字段注解中
- * NonNull 使用在方法或构造函数的参数中
- * 命名规则：
- * 1. layout 文件的命名方
- * Activity 的 layout 以 module_activity 开头
- * Fragment 的 layout 以 module_fragment 开头
- * Dialog 的 layout 以 module_dialog 开头
- * include 的 layout 以 module_include 开头
- * ListView 的行 layout 以 module_list_item 开头
- * RecyclerView 的 item layout 以 module_recycle_item 开头
- * GridView 的行 layout 以 module_grid_item 开头
- * <p>
- * 2. drawable
- * 模块名_业务功能描述_控件描述_控件状态限定词 ： module_login_btn_pressed
- * <p>
- * 3. anim
- * 模块名_逻辑名称_[方向|序号] ：module_fade_in , module_push_down_in (动画+方向)
- * 模块名_功能命名_序号 ： module_loading_grey_001.
- * <p>
- * 4. color
- * 模块名_逻辑名称_颜色 : module_btn_bg_color
- * <p>
- * 5. dimen
- * 模块名_描述信息 : module_horizontal_line_height
- * <p>
- * 6. string
- * 模块名_逻辑名称 : module_login_tips
- * <p>
- * 7. Id 资源
- * (页面名称_控件名称_描述信息 ： login_btn_login)
- * <p>
- * 8. ApiService 实现方法 : find / getList
- * <p>
- * 9. Activity 内api调用方法以 Api 结尾 ：loadingAppListApi
- * <p>
- * mipmap会自动选择更加合适的图片仅在launcher中有效
- * <p>
- * Typo: In word -> application-level
- * 查询依赖树 -> gradlew app:dependencies
- * <p>
- * import androidx.annotation.NonNull; // 不可以传入NUll值
- * import androidx.annotation.Nullable; // 可以传入NUll值
- * <p>
- * import org.jetbrains.annotations.NotNull;
- * import org.jetbrains.annotations.Nullable;
- * <p>
- * import io.reactivex.rxjava3.annotations.NonNull;
- * import io.reactivex.rxjava3.annotations.Nullable;
- * <p>
  * Plugins:
  * GsonForMartPlus
  * Google Library Version Querier

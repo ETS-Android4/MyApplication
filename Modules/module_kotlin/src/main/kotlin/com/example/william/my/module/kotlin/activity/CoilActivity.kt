@@ -52,7 +52,10 @@ class CoilActivity : AppCompatActivity() {
             )
         }
 
-        val gifImageLoader = ImageLoader.Builder(this)
+        /*
+         * gif
+         */
+        ImageLoader.Builder(this)
             .componentRegistry {
                 if (SDK_INT >= 28) {
                     add(ImageDecoderDecoder(this@CoilActivity))
@@ -62,7 +65,10 @@ class CoilActivity : AppCompatActivity() {
             }
             .build()
 
-        val svgImageLoader = ImageLoader.Builder(this)
+        /*
+         * svg
+         */
+        ImageLoader.Builder(this)
             .componentRegistry {
                 add(SvgDecoder(this@CoilActivity))
             }

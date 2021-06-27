@@ -29,7 +29,7 @@ android {
             // arm64-v8a：目前主流架构平台（占用率：90%）
             //abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
-        manifestPlaceholders = [APP_NAME: '主包名称'] // 配置主包的应用名称
+        manifestPlaceholders = [APP_NAME: 'My App'] // 配置主包的应用名称
     }
     signingConfigs {
         sample {
@@ -43,6 +43,8 @@ android {
         release {
             minifyEnabled true // 混淆
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "NET_TYPE", '"https"')
+
             android.applicationVariants.all { variant ->//过滤器
                 variant.outputs.all {
                     outputFileName = outputFileName.replace(
@@ -57,6 +59,7 @@ android {
 
             minifyEnabled false// 混淆
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "NET_TYPE", '"http"')
         }
     }
     compileOptions {

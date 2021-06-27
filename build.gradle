@@ -4,7 +4,7 @@ apply plugin: 'com.alibaba.arouter'
 buildscript {
     apply from: 'config.gradle'
     ext {
-        kotlin_version = '1.5.10'
+        kotlin_version = '1.5.20'
     }
     ConfigUtils.init(gradle)
     addRepos(repositories)

@@ -282,25 +282,27 @@ Layout资源文件的命名(全部小写，下划线分隔)
 | Listview列表项的资源文件 | item_description1_description2.xml） |
 | Dialog命名 | dialog_description1_description2.xml |
 | PopupWindow命名  | pop_description1_description2.xml |
-| Include的文件命名 | layout_include_feature.xml |
+| Include的文件命名 | include_description1_description2.xml |
 
 ##### 动画文件命名
-动画文件（anim文件夹下）：全部小写，采用下划线命名法，加前缀区分。
+动画文件（anim文件夹下） ：`anim_fade_in , anim_push_down_in` 逻辑名称_方向_序号。
 
 ##### menu文件命名
 menu资源文件的命名(全部小写，下划线分隔):`menu_description1.description2.xml`  
 
 ##### drawable资源命名
-drawable资源：`selector_description1_description2.xml` `shape_description1_description2.xml `
+drawable资源：`selector_description1_description2.xml` `shape_description1_description2.xml ` 业务功能描述_控件描述_控件状态限定词。
 
-controlName表示该资源要用在什么类型的控件上面，例如如果是按钮的图片切换则应该这么定义 `button_bg_sendmessage_selector.xml`；selector表示该资源的形式，例如还有shape等
+例如：
+
+    `button_bg_sendmessage_selector.xml`
 
 ##### color命名
 公用颜色命名：`color_description` 以color为前缀，全部小写，下划线分隔。  
 例如：  
 
 	<color name="color_333333">#333333</color>
-	<color name="color_60_666666">#99666666</color>  
+	<color name="color_333333_60">#60333333</color>  
 
 非公用颜色命名:`color_function_description`
 例如  
@@ -332,6 +334,8 @@ controlName表示该资源要用在什么类型的控件上面，例如如果是
 #### 类说明（File Header）
 
 在每个创建类的时候，需要给它定义类说明：
+
+    设置文件模板：File => Settings => Editor => File and Code Templates
 
 ```
 /**
@@ -396,7 +400,6 @@ Tip：如果有一些相关信息是需要读者了解的，那么以上的例�
 如果一个方法重载了超类中的方法，那么Javadoc并非必需的。
 #### 可选的Javadoc
 对于包外不可见的类和方法，如有需要，也是要使用Javadoc的。如果一个注释是用来定义一个类，方法，字段的整体目的或行为， 那么这个注释应该写成Javadoc，这样更统一更友好
-
 
 
 ## 插件推荐
