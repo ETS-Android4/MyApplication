@@ -44,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        //判断是否是任务栈中的根Activity，如果是就不做任何处理，如果不是则直接finish掉;
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
+
         //setContentView(R.layout.activity_main);
 
         //ARouter.getInstance()
@@ -72,4 +78,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+
 }
