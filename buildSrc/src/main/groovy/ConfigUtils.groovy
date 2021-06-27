@@ -36,7 +36,7 @@ class ConfigUtils {
                     if (project.path.contains(":plugin:")) {
                         return
                     }
-                    if (project.path.startsWith(":modules")) {
+                    if (project.path.startsWith(":modules:module_")) {
                         project.apply {
                             from "${project.rootDir.path}/modules/buildApp.gradle"
                         }
