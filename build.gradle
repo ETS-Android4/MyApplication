@@ -7,10 +7,7 @@ buildscript {
         kotlin_version = '1.5.20'
     }
     ConfigUtils.init(gradle)
-    repositories {
-        google()
-        jcenter()
-    }
+    addRepos(repositories)
     dependencies {
 
         //for (def entrySet : ConfigUtils.getApplyPlugins().entrySet()) {

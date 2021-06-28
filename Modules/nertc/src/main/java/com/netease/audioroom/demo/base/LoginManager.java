@@ -1,6 +1,9 @@
 package com.netease.audioroom.demo.base;
 
 
+import android.util.Log;
+
+import com.google.gson.Gson;
 import com.netease.yunxin.kit.alog.ALog;
 import com.netease.audioroom.demo.base.action.ILoginAction;
 import com.netease.audioroom.demo.cache.DemoCache;
@@ -37,6 +40,7 @@ public class LoginManager implements ILoginAction {
     @Override
     public void tryLogin() {
         final AccountInfo accountInfo = DemoCache.getAccountInfo();
+        ALog.e("TAG", new Gson().toJson(accountInfo));
         if (accountInfo == null) {
             fetchLoginAccount(null);
             return;

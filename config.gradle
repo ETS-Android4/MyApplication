@@ -230,6 +230,9 @@ ext {
 
             //https://x5.tencent.com:
             x5                 : "com.tencent.tbs.tbssdk:sdk:43993",
+
+            //https://square.github.io/leakcanary
+            leakcanary         : "com.squareup.leakcanary:leakcanary-android:2.7",
     ]
 }
 
@@ -288,9 +291,9 @@ static def addRepos(RepositoryHandler handler) {
      * sonatype
      */
     handler.maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    handler.mavenCentral()
-    handler.google()
-    handler.jcenter() // Warning: this repository is going to shut down soon
+    //handler.mavenCentral()
+    //handler.google()
+    //handler.jcenter() // Warning: this repository is going to shut down soon
 }
 
 ext.addRepos = this.&addRepos

@@ -19,11 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
 -dontwarn com.netease.**
 -keep class com.netease.** {*;}
--keep class android.support.v7.widget.** { *; }
--keepattributes SourceFile,LineNumberTable
 
+-keep class android.support.v7.widget.** { *; }
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
