@@ -1,4 +1,4 @@
-package com.example.william.my.core.imageloader.glide.target;
+package com.example.william.my.core.imageloader.glide.transformation;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -19,7 +19,7 @@ import java.security.MessageDigest;
 /**
  * glide 定制圆角
  */
-public class GlideRadiusTransformation extends BitmapTransformation {
+public class RadiusTransformation extends BitmapTransformation {
 
     public enum CornerType {
         /**
@@ -39,11 +39,11 @@ public class GlideRadiusTransformation extends BitmapTransformation {
     private final int mRadius;
     private final CornerType mCornerType;
 
-    public GlideRadiusTransformation(int radius) {
+    public RadiusTransformation(int radius) {
         this(radius, CornerType.ALL);
     }
 
-    public GlideRadiusTransformation(int radius, CornerType cornerType) {
+    public RadiusTransformation(int radius, CornerType cornerType) {
         this.mRadius = radius;
         this.mCornerType = cornerType;
     }
@@ -100,7 +100,8 @@ public class GlideRadiusTransformation extends BitmapTransformation {
                 break;
             case ALL:
             default:
-                canvas.drawRoundRect(new RectF(0, 0, width, height), mRadius, mRadius, paint);
+                RectF rect = new RectF(0, 0, width, height);
+                canvas.drawRoundRect(rect, mRadius, mRadius, paint);
                 break;
         }
     }

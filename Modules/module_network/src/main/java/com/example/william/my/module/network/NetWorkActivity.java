@@ -10,7 +10,7 @@ public class NetWorkActivity extends BaseListActivity {
     @Override
     public void initData() {
         super.initData();
-        mMap.put("GlideActivity", ARouterPath.NetWork.NetWork_Glide);
+        mMap.put("GlideActivity", ARouterPath.NetWork.NetWork_ImageLoader);
         mMap.put("HttpURLActivity", ARouterPath.NetWork.NetWork_HttpURL);
         mMap.put("VolleyActivity", ARouterPath.NetWork.NetWork_Volley);
         mMap.put("OkHttpActivity", ARouterPath.NetWork.NetWork_OkHttp);

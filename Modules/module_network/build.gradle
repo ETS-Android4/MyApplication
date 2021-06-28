@@ -5,9 +5,6 @@ dependencies {
     implementation project(path: ':librarys:lib_okhttp')
     implementation project(path: ':librarys:lib_retrofit')
     implementation project(path: ':librarys:lib_imageloader')
-    //Glide
-    implementation deps.glide
-    kapt deps.glide_compiler
     //Volley
     implementation deps.volley
     //RxAndroid

@@ -11,7 +11,7 @@ public class ImageLoader {
         if (sImageLoader == null) {
             synchronized (ImageLoader.class) {
                 if (sImageLoader == null) {
-                    //sImageLoader = new GlideLoader();
+                    sImageLoader = new GlideLoader();
                 }
             }
         }

@@ -22,7 +22,7 @@ import com.example.william.my.module.router.ARouterPath
 @Route(path = ARouterPath.Kotlin.Kotlin_Coil)
 class CoilActivity : AppCompatActivity() {
 
-    private val url = "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
+    private val url = "https://web.hycdn.cn/arknights/official/pic/20210401/8b683b7c01ebf0eb570370a48b655504.png"
 
     lateinit var binding: KtActivityCoilBinding
 

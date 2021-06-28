@@ -8,11 +8,8 @@ import com.example.william.my.module.kotlin.datastore.ExamplePreferenceDataStore
 import com.example.william.my.module.kotlin.datastore.ExampleProtoDataStore
 import com.example.william.my.module.kotlin.utils.DataStoreUtils
 import com.example.william.my.module.router.ARouterPath
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 /**
  * DataStore
@@ -21,6 +18,7 @@ import kotlinx.coroutines.runBlocking
  * Preferences DataStore：不需要预先定义，但是不支持类型安全
  * Proto DataStore：需要预先使用protocol buffers定义数据，但是类型安全
  */
+@DelicateCoroutinesApi
 @Route(path = ARouterPath.Kotlin.Kotlin_DataStore)
 class DataStoreActivity : BaseActivity() {
 
