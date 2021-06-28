@@ -16,6 +16,11 @@ import com.netease.yunxin.android.lib.network.common.NetworkClient;
 
 import java.util.Map;
 
+/**
+ * 注意：每个进程都会创建自己的Application 然后调用onCreate()方法，
+ * 如果用户有自己的逻辑需要写在Application#onCreate()（还有Application的其他方法）中，一定要注意判断进程，不能把业务逻辑写在core进程，
+ * 理论上，core进程的Application#onCreate()（还有Application的其他方法）只能做与im sdk 相关的工作
+ */
 public class NimApplication extends BaseApplication {
     @Override
     public void onCreate() {
@@ -40,8 +45,12 @@ public class NimApplication extends BaseApplication {
         NELivePlayer.init(getApplicationContext(), config);
 
         DemoCache.init(this);
+        // SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将进行自动登录）。不能对初始化语句添加进程判断逻辑。
         NIMClient.init(this, null, getOptions());
         if (NIMUtil.isMainProcess(this)) {
+            // 注意：以下操作必须在主进程中进行
+            // 1、UI相关初始化操作
+            // 2、相关Service调用
             IconFontUtil.getInstance().init(this);
             initLog();
         }
