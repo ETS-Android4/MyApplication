@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.SeatApplyAdapter;
 import com.netease.audioroom.demo.util.ScreenUtil;
-import com.netease.audioroom.demo.widget.VerticalItemDecoration;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
 
 import java.util.ArrayList;
@@ -57,10 +57,9 @@ public class SeatApplyDialog extends BaseDialogFragment {
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.request_dialog_fragment);
     }
 
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         if (bundle != null) {
             ArrayList<VoiceRoomSeat> seats = getArguments().getParcelableArrayList(TAG);
@@ -71,14 +70,16 @@ public class SeatApplyDialog extends BaseDialogFragment {
             dismiss();
         }
         view = inflater.inflate(R.layout.apply_list_dialog_layout, container, false);
-        // 设置宽度为屏宽、靠近屏幕底部。
-        final Window window = getDialog().getWindow();
-        window.setBackgroundDrawableResource(R.color.color_00000000);
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        wlp.gravity = Gravity.TOP;
-        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(wlp);
+        if (getDialog() != null) {
+            // 设置宽度为屏宽、靠近屏幕底部。
+            final Window window = getDialog().getWindow();
+            window.setBackgroundDrawableResource(R.color.color_00000000);
+            WindowManager.LayoutParams wlp = window.getAttributes();
+            wlp.gravity = Gravity.TOP;
+            wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(wlp);
+        }
         return view;
     }
 
@@ -94,8 +95,6 @@ public class SeatApplyDialog extends BaseDialogFragment {
         requesterRecyclerView = view.findViewById(R.id.requesterRecyclerView);
         requesterRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         int padding = ScreenUtil.dip2px(requesterRecyclerView.getContext(), 16);
-        requesterRecyclerView.addItemDecoration(
-                new VerticalItemDecoration(getResources().getColor(R.color.color_33ffffff), 1, padding, padding));
         title = view.findViewById(R.id.title);
         tvDismiss = view.findViewById(R.id.dismiss);
         buildHeadView();
@@ -103,13 +102,11 @@ public class SeatApplyDialog extends BaseDialogFragment {
     }
 
     private void buildHeadView() {
-        adapter = new SeatApplyAdapter(new ArrayList<>(), getActivity());
+        adapter = new SeatApplyAdapter(getActivity());
         requesterRecyclerView.setAdapter(adapter);
         requesterRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
-
             @Override
-            public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state, int widthSpec,
-                                  int heightSpec) {
+            public void onMeasure(@NonNull RecyclerView.Recycler recycler, @NonNull RecyclerView.State state, int widthSpec, int heightSpec) {
                 int count = state.getItemCount();
                 if (count > 0) {
                     if (count > 4) {
@@ -119,13 +116,11 @@ public class SeatApplyDialog extends BaseDialogFragment {
                     int realWidth = 0;
                     for (int i = 0; i < count; i++) {
                         View view = recycler.getViewForPosition(0);
-                        if (view != null) {
-                            measureChild(view, widthSpec, heightSpec);
-                            int measuredWidth = View.MeasureSpec.getSize(widthSpec);
-                            int measuredHeight = view.getMeasuredHeight();
-                            realWidth = realWidth > measuredWidth ? realWidth : measuredWidth;
-                            realHeight += measuredHeight;
-                        }
+                        measureChild(view, widthSpec, heightSpec);
+                        int measuredWidth = View.MeasureSpec.getSize(widthSpec);
+                        int measuredHeight = view.getMeasuredHeight();
+                        realWidth = Math.max(realWidth, measuredWidth);
+                        realHeight += measuredHeight;
                         setMeasuredDimension(realWidth, realHeight);
                     }
                 } else {
@@ -137,7 +132,6 @@ public class SeatApplyDialog extends BaseDialogFragment {
 
     public void initListener() {
         adapter.setApplyAction(new SeatApplyAdapter.IApplyAction() {
-
             @Override
             public void refuse(VoiceRoomSeat seat) {
                 requestAction.refuse(seat);
@@ -170,9 +164,8 @@ public class SeatApplyDialog extends BaseDialogFragment {
     }
 
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         requestAction.dismiss();
-
     }
 }

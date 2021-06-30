@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
-import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
 
@@ -19,12 +18,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
+/**
+ * 直播间列表
+ */
+public class RoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
 
-    public ChatRoomListAdapter(Context context) {
+    public RoomListAdapter(Context context) {
         super(new ArrayList<>(), context);
     }
-
 
     @Override
     protected RecyclerView.ViewHolder onCreateBaseViewHolder(ViewGroup parent, int viewType) {
@@ -38,7 +39,7 @@ public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
         if (info == null) {
             return;
         }
-        ImageLoader.with(context).load(info.getThumbnail()).error(R.drawable.chat_room_default_bg).roundedCornerCenterCrop(ScreenUtil.dip2px(context, 4)).into(viewHolder.ivBg);
+        ImageLoader.with(context).load(info.getThumbnail()).error(R.drawable.chat_room_default_bg).into(viewHolder.ivBg);
         viewHolder.tvRoomName.setText(info.getName());
         viewHolder.tvMember.setText(getCurrentCount(info.getOnlineUserCount()));
         viewHolder.tvAnchorName.setText(info.getNickname());
@@ -50,7 +51,14 @@ public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
         }
         setItems(dataList);
         notifyDataSetChanged();
+    }
 
+    private String getCurrentCount(int count) {
+        if (count < 10000) {
+            return count + "人";
+        }
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        return decimalFormat.format(count / 10000.f) + "w人";
     }
 
     private static class ChatRoomHolder extends RecyclerView.ViewHolder {
@@ -70,13 +78,5 @@ public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
             tvMember = itemView.findViewById(R.id.tv_chat_room_member_num);
             tvAnchorName = itemView.findViewById(R.id.tv_chat_room_anchor_name);
         }
-    }
-
-    private String getCurrentCount(int count) {
-        if (count < 10000) {
-            return count + "人";
-        }
-        DecimalFormat decimalFormat = new DecimalFormat("#.#");
-        return decimalFormat.format(count / 10000.f) + "w人";
     }
 }

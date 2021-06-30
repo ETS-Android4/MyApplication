@@ -18,6 +18,9 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 抱麦列表
+ */
 public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.ChatRoomHolder> {
 
     private static final int TYPE_EMPTY = 1;
@@ -91,7 +94,6 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.Ch
     public static class ChatRoomHolder extends RecyclerView.ViewHolder {
         ImageView ivBg;
         TextView tvRoomName;
-
 
         ChatRoomHolder(View itemView, boolean needInit) {
             super(itemView);

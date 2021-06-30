@@ -55,11 +55,10 @@ public class HeadImageView extends CircleImageView {
          * 如果图片来源是非网易云信云存储，请不要使用NosThumbImageUtil
          */
 //        final String thumbUrl = makeAvatarThumbNosUrl(url, thumbSize);
-        final String thumbUrl = url;
 
         ImageLoader.with(getContext().getApplicationContext())
                 .asBitmap()
-                .load(thumbUrl)
+                .load(url)
                 .error(defaultResId)
                 .placeholder(defaultResId)
                 .override(thumbSize)

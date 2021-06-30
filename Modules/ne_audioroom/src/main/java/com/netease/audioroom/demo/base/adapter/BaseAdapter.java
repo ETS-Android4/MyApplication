@@ -126,20 +126,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
         notifyItemInserted(dataList.size() - 1);
     }
 
-
-    public final void appendItems(List<T> items) {
-        if (items == null) {
-            return;
-        }
-        int start = dataList.size();
-        dataList.addAll(items);
-//        notifyItemRangeChanged(start, items.size());
-        notifyDataSetChanged();
-
-
-    }
-
-
     public final void updateItem(int position, T model) {
         if (model == null || position < 0 || position >= dataList.size()) {
             return;

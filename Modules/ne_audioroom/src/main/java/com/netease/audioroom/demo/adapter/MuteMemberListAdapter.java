@@ -19,6 +19,9 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 禁言列表
+ */
 public class MuteMemberListAdapter extends RecyclerSwipeAdapter<MuteMemberListAdapter.MuteMemberViewHolder> {
 
     private static final int TYPE_EMPTY = 1;

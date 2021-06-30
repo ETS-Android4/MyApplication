@@ -3,13 +3,17 @@ package com.netease.audioroom.demo.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
+import com.netease.audioroom.demo.widget.HeadImageView;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Reason;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
@@ -18,12 +22,12 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 import java.util.ArrayList;
 
 /**
- * 麦位
+ * 麦位列表
  */
 public class SeatAdapter extends BaseAdapter<VoiceRoomSeat> {
 
-    public SeatAdapter(ArrayList<VoiceRoomSeat> seats, Context context) {
-        super(seats, context);
+    public SeatAdapter(Context context) {
+        super(new ArrayList<>(), context);
     }
 
     @Override
@@ -40,7 +44,6 @@ public class SeatAdapter extends BaseAdapter<VoiceRoomSeat> {
         SeatViewHolder viewHolder = (SeatViewHolder) holder;
         int status = seat.getStatus();
         VoiceRoomUser user = seat.getUser();
-
         switch (status) {
             case Status.INIT:
                 viewHolder.ivStatusHint.setVisibility(View.GONE);
@@ -119,6 +122,27 @@ public class SeatAdapter extends BaseAdapter<VoiceRoomSeat> {
             viewHolder.circle.setVisibility(View.INVISIBLE);
             viewHolder.ivAvatar.setVisibility(View.INVISIBLE);
             viewHolder.avatarBg.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public static class SeatViewHolder extends RecyclerView.ViewHolder {
+        HeadImageView ivAvatar;
+        ImageView ivStatusHint;
+        ImageView iv_user_status;
+        TextView tvNick;
+        ImageView circle;
+        View avatarBg;
+        LottieAnimationView applying;
+
+        SeatViewHolder(@NonNull View itemView) {
+            super(itemView);
+            ivAvatar = itemView.findViewById(R.id.iv_user_avatar);
+            ivStatusHint = itemView.findViewById(R.id.iv_user_status_hint);
+            tvNick = itemView.findViewById(R.id.tv_user_nick);
+            iv_user_status = itemView.findViewById(R.id.iv_user_stats);
+            circle = itemView.findViewById(R.id.circle);
+            avatarBg = itemView.findViewById(R.id.avatar_bg);
+            applying = itemView.findViewById(R.id.lav_apply);
         }
     }
 }

@@ -20,6 +20,7 @@ import java.util.List;
  * Created by luc on 1/29/21.
  */
 public class ListItemDialog extends BottomBaseDialog {
+
     private final List<String> items = new ArrayList<>();
     private OnItemClickListener<String> onItemClickListener;
 

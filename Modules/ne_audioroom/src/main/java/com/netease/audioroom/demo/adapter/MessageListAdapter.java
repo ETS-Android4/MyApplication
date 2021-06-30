@@ -16,6 +16,9 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomMessage;
 
 import java.util.ArrayList;
 
+/**
+ * 消息列表
+ */
 public class MessageListAdapter extends BaseAdapter<VoiceRoomMessage> {
 
     public MessageListAdapter(ArrayList<VoiceRoomMessage> dataList, Context context) {

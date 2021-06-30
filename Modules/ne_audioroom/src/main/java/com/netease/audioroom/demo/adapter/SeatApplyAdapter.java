@@ -19,22 +19,14 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 
 import java.util.ArrayList;
 
+/**
+ * 上麦列表
+ */
 public class SeatApplyAdapter extends BaseAdapter<VoiceRoomSeat> {
 
-    public interface IApplyAction {
-        void refuse(VoiceRoomSeat seat);
-
-        void agree(VoiceRoomSeat seat);
+    public SeatApplyAdapter(Context context) {
+        super(new ArrayList<>(), context);
     }
-
-    IApplyAction applyAction;
-    ArrayList<VoiceRoomSeat> seats;
-
-    public SeatApplyAdapter(ArrayList<VoiceRoomSeat> seats, Context context) {
-        super(seats, context);
-        this.seats = seats;
-    }
-
 
     @Override
     protected RecyclerView.ViewHolder onCreateBaseViewHolder(ViewGroup parent, int viewType) {
@@ -54,10 +46,9 @@ public class SeatApplyAdapter extends BaseAdapter<VoiceRoomSeat> {
             ImageLoader.with(context).load(user.getAvatar()).error(R.drawable.nim_avatar_default).into(viewHolder.ivAvatar);
             viewHolder.tvContent.setText(user.getNick() + "\t申请麦位(" + index + ")");
             viewHolder.ivRefuse.setOnClickListener((v) -> applyAction.refuse(seat));
-            viewHolder.ivAfree.setOnClickListener((v) ->
-                    applyAction.agree(seat));
+            viewHolder.ivAfree.setOnClickListener((v) -> applyAction.agree(seat));
         } else {
-            ALog.e("偶现看不到申请者情形", user.toString());
+            ALog.e("偶现看不到申请者情形");
         }
     }
 
@@ -75,6 +66,14 @@ public class SeatApplyAdapter extends BaseAdapter<VoiceRoomSeat> {
             tvContent = itemView.findViewById(R.id.item_requestlink_content);
         }
     }
+
+    public interface IApplyAction {
+        void refuse(VoiceRoomSeat seat);
+
+        void agree(VoiceRoomSeat seat);
+    }
+
+    IApplyAction applyAction;
 
     public void setApplyAction(IApplyAction applyAction) {
         this.applyAction = applyAction;

@@ -136,21 +136,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         });
     }
 
-    @Override
-    protected void leaveRoom() {
-        if (!mVoiceRoomInfo.isSupportCDN()) {
-            super.leaveRoom();
-            return;
-        }
-        VoiceRoomSeat seat = audience.getSeat();
-        boolean isInChannel = seat != null && seat.isOn();
-        super.leaveRoom();
-        if (isInChannel) {
-            return;
-        }
-        finish();
-    }
-
     private void watchNetWork() {
         NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
             if (network != null && network.isConnected()) {
@@ -187,6 +172,21 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     @Override
     protected void onSeatItemClick(VoiceRoomSeat seat, int position) {
         seatSource.onNext(seat);
+    }
+
+    @Override
+    protected void doLeaveRoom() {
+        if (!mVoiceRoomInfo.isSupportCDN()) {
+            super.leaveRoom();
+            return;
+        }
+        VoiceRoomSeat seat = audience.getSeat();
+        boolean isInChannel = seat != null && seat.isOn();
+        super.leaveRoom();
+        if (isInChannel) {
+            return;
+        }
+        finish();
     }
 
     //

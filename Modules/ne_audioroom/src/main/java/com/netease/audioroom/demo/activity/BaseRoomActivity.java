@@ -1,6 +1,5 @@
 package com.netease.audioroom.demo.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
@@ -21,6 +20,7 @@ import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MessageListAdapter;
 import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
+import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.ChoiceDialog;
 import com.netease.audioroom.demo.dialog.MuteMemberDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
@@ -29,11 +29,9 @@ import com.netease.audioroom.demo.dialog.RoomMoreDialog;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.util.Network;
-import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.util.ViewUtils;
 import com.netease.audioroom.demo.widget.HeadImageView;
-import com.netease.audioroom.demo.widget.VerticalItemDecoration;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomCallback;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
@@ -146,7 +144,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
 
         close = baseAudioView.findViewById(R.id.iv_leave_room);
         close.setOnClickListener(view ->
-                leaveRoom()
+                doLeaveRoom()
         );
 
         //底部操作栏
@@ -160,6 +158,9 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         mute.setOnClickListener(view ->
                 new MuteMemberDialog(BaseRoomActivity.this, mVoiceRoomInfo).show()
         );
+        if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
+            mute.setVisibility(View.VISIBLE);
+        }
 
         //更多
         more = baseAudioView.findViewById(R.id.iv_room_more);
@@ -176,7 +177,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
                                             if (dialog != null && dialog.isShowing()) {
                                                 dialog.dismiss();
                                             }
-                                            leaveRoom();
+                                            doLeaveRoom();
                                             break;
                                         }
                                     }
@@ -210,14 +211,13 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         tvMemberCount.setText(count);
 
         mSeatRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        mSeatAdapter = new SeatAdapter(null, this);
+        mSeatAdapter = new SeatAdapter(this);
 
         mSeatRecyclerView.setAdapter(mSeatAdapter);
         mSeatAdapter.setItemClickListener(this::onSeatItemClick);
         mMsgLayoutManager = new LinearLayoutManager(this);
         mMsgRecyclerView.setLayoutManager(mMsgLayoutManager);
         mMsgAdapter = new MessageListAdapter(null, this);
-        mMsgRecyclerView.addItemDecoration(new VerticalItemDecoration(Color.TRANSPARENT, ScreenUtil.dip2px(this, 5)));
         mMsgRecyclerView.setAdapter(mMsgAdapter);
     }
 
@@ -231,8 +231,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         }
         return super.dispatchTouchEvent(ev);
     }
-
-
+    
     protected abstract int getContentViewID();
 
     protected abstract void setupBaseView();
@@ -283,7 +282,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     /**
      * 离开直播间
      */
-    protected void leaveRoom() {
+    protected final void leaveRoom() {
         mNERtcVoiceRoom.leaveRoom();
     }
 
@@ -297,6 +296,10 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         } else {
             ToastHelper.showToast("话筒已打开");
         }
+    }
+
+    protected void doLeaveRoom() {
+        leaveRoom();
     }
 
     //

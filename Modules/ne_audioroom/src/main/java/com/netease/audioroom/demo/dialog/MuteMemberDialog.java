@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by luc on 1/28/21.
+ * 禁言列表
  */
 public class MuteMemberDialog extends BottomBaseDialog {
 

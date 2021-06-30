@@ -379,8 +379,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         EnterChatRoomData roomData = new EnterChatRoomData(voiceRoomInfo.getRoomId());
         roomData.setNick(user.nick);
         roomData.setAvatar(user.avatar);
-        InvocationFuture<EnterChatRoomResultData> future = anchorMode ? chatRoomService.enterChatRoom(
-                roomData) : chatRoomService.enterChatRoomEx(roomData, 1);
+        InvocationFuture<EnterChatRoomResultData> future = anchorMode ? chatRoomService.enterChatRoom(roomData) : chatRoomService.enterChatRoomEx(roomData, 1);
         future.setCallback(new RequestCallback<EnterChatRoomResultData>() {
             @Override
             public void onSuccess(EnterChatRoomResultData param) {

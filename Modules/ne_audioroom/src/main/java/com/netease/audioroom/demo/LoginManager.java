@@ -1,4 +1,4 @@
-package com.netease.audioroom.demo.base;
+package com.netease.audioroom.demo;
 
 
 import com.netease.audioroom.demo.base.action.ILoginAction;
@@ -13,9 +13,12 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.yunxin.kit.alog.ALog;
 
 public class LoginManager implements ILoginAction {
+
     private static final String TAG = "LoginManager";
-    private static final LoginManager instance = new LoginManager();
+
     private boolean isLogin = false;
+
+    private static final LoginManager instance = new LoginManager();
 
     private LoginManager() {
 
@@ -24,7 +27,6 @@ public class LoginManager implements ILoginAction {
     public static LoginManager getInstance() {
         return instance;
     }
-
 
     public interface Callback {
         void onSuccess(AccountInfo accountInfo);
@@ -43,11 +45,9 @@ public class LoginManager implements ILoginAction {
         }
         ALog.i("nim login: account = " + accountInfo.account + " token = " + accountInfo.token);
         LoginInfo loginInfo = new LoginInfo(accountInfo.account, accountInfo.token);
-        //服务器
-        NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback() {
-
+        NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
             @Override
-            public void onSuccess(Object o) {
+            public void onSuccess(LoginInfo info) {
                 ALog.i("nim login success");
                 afterLogin(accountInfo);
                 callback.onSuccess(accountInfo);
@@ -75,7 +75,6 @@ public class LoginManager implements ILoginAction {
             @Override
             public void onSuccess(AccountInfo accountInfo) {
                 login(accountInfo);
-
             }
 
             @Override
@@ -89,13 +88,11 @@ public class LoginManager implements ILoginAction {
 
 
     private void login(final AccountInfo accountInfo) {
-        ALog.i("nim login:" +
-                " account = " + accountInfo.account
-                + " token = " + accountInfo.token);
+        ALog.i("nim login:" + " account = " + accountInfo.account + " token = " + accountInfo.token);
         LoginInfo loginInfo = new LoginInfo(accountInfo.account, accountInfo.token);
-        NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback() {
+        NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
             @Override
-            public void onSuccess(Object o) {
+            public void onSuccess(LoginInfo info) {
                 ALog.i("nim login success");
                 afterLogin(accountInfo);
                 callback.onSuccess(accountInfo);
@@ -103,8 +100,7 @@ public class LoginManager implements ILoginAction {
 
             @Override
             public void onFailed(int i) {
-                ALog.i("nim login failed:"
-                        + " code = " + i);
+                ALog.i("nim login failed:" + " code = " + i);
                 callback.onFailed(i, "SDK登录失败");
                 ToastHelper.showToast("SDK登录失败 , code = " + i);
             }
@@ -116,7 +112,6 @@ public class LoginManager implements ILoginAction {
             }
         });
     }
-
 
     private void afterLogin(AccountInfo accountInfo) {
         isLogin = true;

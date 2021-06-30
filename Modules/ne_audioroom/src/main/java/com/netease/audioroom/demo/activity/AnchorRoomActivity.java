@@ -166,6 +166,16 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         }).show(items);
     }
 
+    @Override
+    protected void doLeaveRoom() {
+        new ChoiceDialog(AnchorRoomActivity.this)
+                .setTitle("确认结束直播？")
+                .setContent("请确认是否结束直播")
+                .setNegative(getString(R.string.cancel),null)
+                .setPositive("确认", v -> onSeatAction(null, "退出房间"))
+                .show();
+    }
+
     //
     // Anchor.Callback
     //
@@ -521,16 +531,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
 
     @Override
     public void onLeaveRoom() {
-        Runnable runnable = () -> {
-            new ChoiceDialog(AnchorRoomActivity.this)
-                    .setTitle("确认结束直播？")
-                    .setContent("请确认是否结束直播")
-                    .setNegative(getString(R.string.cancel), null)
-                    .setPositive("确认", v ->
-                            onSeatAction(null, "退出房间")
-                    )
-                    .show();
-        };
+        Runnable runnable = AnchorRoomActivity.super::onLeaveRoom;
         closeRoom(runnable);
         runnable.run();
     }

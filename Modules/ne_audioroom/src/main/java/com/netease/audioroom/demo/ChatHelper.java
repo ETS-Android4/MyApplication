@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
-import com.netease.audioroom.demo.base.LoginManager;
 import com.netease.neliveplayer.sdk.NELivePlayer;
 import com.netease.neliveplayer.sdk.model.NESDKConfig;
 import com.netease.nimlib.sdk.NIMClient;

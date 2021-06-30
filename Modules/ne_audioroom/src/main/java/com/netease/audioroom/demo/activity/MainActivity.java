@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.adapter.ChatRoomListAdapter;
+import com.netease.audioroom.demo.adapter.RoomListAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
-import com.netease.audioroom.demo.base.LoginManager;
+import com.netease.audioroom.demo.LoginManager;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
 
-    private ChatRoomListAdapter chatRoomListAdapter;
+    private RoomListAdapter roomListAdapter;
 
     private final ArrayList<VoiceRoomInfo> dataSource = new ArrayList<>();
 
@@ -57,8 +57,8 @@ public class MainActivity extends BaseActivity {
     private void initViews() {
         mEmptyView = findViewById(R.id.empty_view);
 
-        chatRoomListAdapter = new ChatRoomListAdapter(this);
-        chatRoomListAdapter.setItemClickListener((model, position) -> {
+        roomListAdapter = new RoomListAdapter(this);
+        roomListAdapter.setItemClickListener((model, position) -> {
             //当前帐号创建的房间
             model.setAudioQuality(DEFAULT_QUALITY);
 
@@ -71,7 +71,7 @@ public class MainActivity extends BaseActivity {
 
         mRecyclerView = findViewById(R.id.rv_room_list);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        mRecyclerView.setAdapter(chatRoomListAdapter);
+        mRecyclerView.setAdapter(roomListAdapter);
 
         View toCreate = findViewById(R.id.iv_new_live);
         toCreate.setOnClickListener(v -> {
@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onSuccess(ArrayList<VoiceRoomInfo> voiceRoomInfos) {
                         dataSource.addAll(voiceRoomInfos);
-                        chatRoomListAdapter.refreshList(dataSource);
+                        roomListAdapter.refreshList(dataSource);
                         showEmptyView();
                     }
 
