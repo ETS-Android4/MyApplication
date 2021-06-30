@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.ChatRoomHolder> {
+
     private static final int TYPE_EMPTY = 1;
     private static final int TYPE_NORMAL = 2;
 

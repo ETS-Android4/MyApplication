@@ -13,7 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.util.IconFontUtil;
+
+import java.util.Objects;
 
 public class NoticeDialog extends BaseDialogFragment {
 
@@ -30,7 +31,7 @@ public class NoticeDialog extends BaseDialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (getDialog() == null) {
             dismiss();
         }
@@ -52,13 +53,10 @@ public class NoticeDialog extends BaseDialogFragment {
 
     private void initView() {
         close = contentView.findViewById(R.id.close);
-        IconFontUtil.getInstance().setFontText(close, IconFontUtil.CLOSE);
+        close.setText("\ue7ca");
         close.setOnClickListener(v -> dismiss());
-        getDialog().setOnKeyListener((dialog, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                return true;
-            }
-            return false;
+        Objects.requireNonNull(getDialog()).setOnKeyListener((dialog, keyCode, event) -> {
+            return keyCode == KeyEvent.KEYCODE_BACK;
         });
     }
 }

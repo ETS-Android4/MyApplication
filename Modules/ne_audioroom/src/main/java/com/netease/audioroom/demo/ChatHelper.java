@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import com.netease.audioroom.demo.base.LoginManager;
-import com.netease.audioroom.demo.util.IconFontUtil;
 import com.netease.neliveplayer.sdk.NELivePlayer;
 import com.netease.neliveplayer.sdk.model.NESDKConfig;
 import com.netease.nimlib.sdk.NIMClient;
@@ -55,7 +54,6 @@ public class ChatHelper {
             // 注意：以下操作必须在主进程中进行
             // 1、UI相关初始化操作
             // 2、相关Service调用
-            IconFontUtil.getInstance().init(context);
             ALog.init(context, BuildConfig.DEBUG ? ALog.LEVEL_ALL : ALog.LEVEL_INFO);
         }
     }

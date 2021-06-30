@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MuteMemberListAdapter extends RecyclerSwipeAdapter<MuteMemberListAdapter.MuteMemberViewHolder> {
+
     private static final int TYPE_EMPTY = 1;
     private static final int TYPE_NORMAL = 2;
 
@@ -75,8 +76,6 @@ public class MuteMemberListAdapter extends RecyclerSwipeAdapter<MuteMemberListAd
             needInit = true;
         }
         return new MuteMemberViewHolder(LayoutInflater.from(context).inflate(layoutId, parent, false), needInit);
-
-
     }
 
     @Override

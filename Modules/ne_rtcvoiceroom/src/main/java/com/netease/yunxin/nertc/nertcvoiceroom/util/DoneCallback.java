@@ -3,6 +3,7 @@ package com.netease.yunxin.nertc.nertcvoiceroom.util;
 import com.netease.nimlib.sdk.RequestCallback;
 
 public class DoneCallback<T> implements RequestCallback<T> {
+
     private final Runnable runnable;
 
     public DoneCallback(Runnable runnable) {

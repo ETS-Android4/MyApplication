@@ -393,7 +393,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         audio.setSelected(muted);
     }
 
-
     /**
      * 显示音量
      */

@@ -1,6 +1,5 @@
 package com.netease.audioroom.demo.model;
 
-
 import com.netease.yunxin.nertc.nertcvoiceroom.util.JsonUtil;
 
 import org.json.JSONException;
@@ -56,7 +55,7 @@ public class AccountInfo implements Serializable {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     public static long accountUid(String accountId) {

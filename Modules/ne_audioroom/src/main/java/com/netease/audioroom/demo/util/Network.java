@@ -3,6 +3,7 @@ package com.netease.audioroom.demo.util;
 import java.util.Objects;
 
 public class Network {
+
     private boolean wifi;
     private boolean mobile;
     private boolean connected;

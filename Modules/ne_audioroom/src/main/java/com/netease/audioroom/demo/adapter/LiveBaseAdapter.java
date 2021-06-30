@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class LiveBaseAdapter<T> extends RecyclerView.Adapter<LiveBaseAdapter.LiveViewHolder> {
+
     protected final List<T> dataSource = new ArrayList<>();
     protected final Context context;
 

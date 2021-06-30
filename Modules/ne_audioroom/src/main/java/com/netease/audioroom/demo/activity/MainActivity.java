@@ -1,7 +1,5 @@
 package com.netease.audioroom.demo.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,7 +13,6 @@ import com.netease.audioroom.demo.adapter.ChatRoomListAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.base.LoginManager;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.constant.Extras;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 import com.netease.audioroom.demo.model.AccountInfo;
@@ -39,12 +36,6 @@ public class MainActivity extends BaseActivity {
     private ChatRoomListAdapter chatRoomListAdapter;
 
     private final ArrayList<VoiceRoomInfo> dataSource = new ArrayList<>();
-
-    public static void start(Context context, int type) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(Extras.ROOM_TYPE, type);
-        context.startActivity(intent);
-    }
 
     @Override
     protected int getContentViewID() {

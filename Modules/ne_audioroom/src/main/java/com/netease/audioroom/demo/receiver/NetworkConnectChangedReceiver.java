@@ -19,12 +19,7 @@ public class NetworkConnectChangedReceiver extends BroadcastReceiver {
             ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo activeNetworkInfo = manager.getActiveNetworkInfo();
             if (activeNetworkInfo != null) {
-                // todo network type
-                if (activeNetworkInfo.isConnected()) {
-                    network.setConnected(true);
-                } else {
-                    network.setConnected(false);
-                }
+                network.setConnected(activeNetworkInfo.isConnected());
             } else {
                 network.setWifi(false);
                 network.setMobile(false);

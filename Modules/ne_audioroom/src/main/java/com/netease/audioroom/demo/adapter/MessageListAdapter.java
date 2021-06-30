@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class MessageListAdapter extends BaseAdapter<VoiceRoomMessage> {
 
-
     public MessageListAdapter(ArrayList<VoiceRoomMessage> dataList, Context context) {
         super(dataList, context);
     }

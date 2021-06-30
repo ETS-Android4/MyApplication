@@ -11,7 +11,6 @@ public class ToastHelper {
 
     private static Toast sToast;
 
-
     private ToastHelper() {
 
     }

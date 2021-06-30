@@ -7,7 +7,7 @@ public class NetworkChange {
     private static NetworkChange instance = null;
 
     // may be use ignore first event aware
-    private InitAwareLiveData<Network> networkLiveData = new InitAwareLiveData<>();
+    private final InitAwareLiveData<Network> networkLiveData = new InitAwareLiveData<>();
 
     public InitAwareLiveData<Network> getNetworkLiveData() {
         return networkLiveData;
