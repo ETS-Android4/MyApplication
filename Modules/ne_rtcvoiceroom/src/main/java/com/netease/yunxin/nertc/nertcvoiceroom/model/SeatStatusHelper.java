@@ -1,24 +1,25 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model.impl;
+package com.netease.yunxin.nertc.nertcvoiceroom.model;
 
 import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
 
 import java.util.List;
 import java.util.Objects;
 
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.APPLY;
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.AUDIO_CLOSED;
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.AUDIO_CLOSED_AND_MUTED;
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.AUDIO_MUTED;
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.CLOSED;
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.FORBID;
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.INIT;
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.ON;
+import static com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status.APPLY;
+import static com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status.AUDIO_CLOSED;
+import static com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status.AUDIO_CLOSED_AND_MUTED;
+import static com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status.AUDIO_MUTED;
+import static com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status.CLOSED;
+import static com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status.FORBID;
+import static com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status.INIT;
+import static com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status.ON;
 
 /**
  * Created by luc on 2/24/21.
  */
 public final class SeatStatusHelper {
+
     private final NERtcVoiceRoomInner voiceRoomInner;
 
     public SeatStatusHelper(NERtcVoiceRoomInner voiceRoomInner) {

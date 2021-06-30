@@ -1,6 +1,6 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model.impl;
+package com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces;
 
-interface SeatCommandDef {
+public interface SeatCommandDef {
     /**
      * 请求连麦
      */

@@ -34,10 +34,10 @@ import com.netease.audioroom.demo.util.ViewUtils;
 import com.netease.audioroom.demo.widget.HeadImageView;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomCallback;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomMessage;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomMessage;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
 
 import java.util.Collections;
 import java.util.List;
@@ -231,7 +231,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         }
         return super.dispatchTouchEvent(ev);
     }
-    
+
     protected abstract int getContentViewID();
 
     protected abstract void setupBaseView();

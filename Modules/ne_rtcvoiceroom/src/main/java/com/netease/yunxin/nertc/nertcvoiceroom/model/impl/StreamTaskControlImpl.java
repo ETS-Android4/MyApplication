@@ -10,8 +10,8 @@ import com.netease.lava.nertc.sdk.live.NERtcLiveStreamTaskInfo;
 import com.netease.lava.nertc.sdk.live.NERtcLiveStreamUserTranscoding;
 import com.netease.lava.nertc.sdk.live.UpdateLiveTaskCallback;
 import com.netease.yunxin.kit.alog.ALog;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.StreamTaskControl;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Anchor;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.StreamTaskControl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,7 +19,8 @@ import java.util.Iterator;
 /**
  * Created by luc on 1/18/21.
  */
-class StreamTaskControlImpl implements StreamTaskControl {
+public class StreamTaskControlImpl implements StreamTaskControl {
+
     private final NERtcEx engine;
     private final Anchor anchor;
     private NERtcLiveStreamTaskInfo streamTaskInfo;

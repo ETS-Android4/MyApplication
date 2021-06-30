@@ -5,7 +5,6 @@ import com.netease.yunxin.kit.alog.ALog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class JsonUtil {
 
     private static final String TAG = "JsonUtil";

@@ -1,4 +1,4 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model;
+package com.netease.yunxin.nertc.nertcvoiceroom.model.bean;
 
 import androidx.annotation.NonNull;
 

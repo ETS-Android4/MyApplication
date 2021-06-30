@@ -1,5 +1,7 @@
 package com.netease.yunxin.nertc.nertcvoiceroom.model;
 
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+
 /**
  * Created by luc on 1/19/21.
  */

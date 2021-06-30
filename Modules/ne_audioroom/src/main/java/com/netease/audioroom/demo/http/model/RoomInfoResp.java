@@ -4,8 +4,8 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.StreamConfig;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.StreamConfig;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
 
 import java.util.ArrayList;
 

@@ -14,7 +14,7 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.widget.HeadImageView;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
 
 import java.util.ArrayList;
 import java.util.List;

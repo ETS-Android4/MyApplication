@@ -1,7 +1,8 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model;
+package com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces;
 
 import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.impl.RoomQuery;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.RoomQuery;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface Anchor {
     /**
      * 通过上麦请求
      *
-     * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+     * @param seat     {@link VoiceRoomSeat 麦位}
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      * @return 动作是否执行
      */
@@ -21,7 +22,7 @@ public interface Anchor {
     /**
      * 拒绝上麦请求
      *
-     * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+     * @param seat     {@link VoiceRoomSeat 麦位}
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      */
     void denySeatApply(VoiceRoomSeat seat, RequestCallback<Void> callback);
@@ -29,7 +30,7 @@ public interface Anchor {
     /**
      * 打开麦位
      *
-     * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+     * @param seat     {@link VoiceRoomSeat 麦位}
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      */
     void openSeat(VoiceRoomSeat seat, RequestCallback<Void> callback);
@@ -37,7 +38,7 @@ public interface Anchor {
     /**
      * 关闭麦位
      *
-     * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+     * @param seat     {@link VoiceRoomSeat 麦位}
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      */
     void closeSeat(VoiceRoomSeat seat, RequestCallback<Void> callback);
@@ -45,7 +46,7 @@ public interface Anchor {
     /**
      * 静音麦位
      *
-     * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+     * @param seat     {@link VoiceRoomSeat 麦位}
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      */
     void muteSeat(VoiceRoomSeat seat, RequestCallback<Void> callback);
@@ -53,7 +54,7 @@ public interface Anchor {
     /**
      * 抱上麦位
      *
-     * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+     * @param seat     {@link VoiceRoomSeat 麦位}
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      * @return 动作是否执行
      */
@@ -62,7 +63,7 @@ public interface Anchor {
     /**
      * 踢下麦位
      *
-     * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+     * @param seat     {@link VoiceRoomSeat 麦位}
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      */
     void kickSeat(VoiceRoomSeat seat, RequestCallback<Void> callback);
@@ -105,7 +106,7 @@ public interface Anchor {
         /**
          * 上麦请求列表
          *
-         * @param seats {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位列表}
+         * @param seats {@link VoiceRoomSeat 麦位列表}
          */
         void onApplySeats(List<VoiceRoomSeat> seats);
     }
@@ -113,7 +114,7 @@ public interface Anchor {
     /**
      * 设置主播回调
      *
-     * @param callback {@link com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor.Callback 回调}
+     * @param callback {@link Anchor.Callback 回调}
      */
     void setCallback(Callback callback);
 }

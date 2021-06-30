@@ -41,21 +41,26 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.netease.nimlib.sdk.util.Entry;
 import com.netease.yunxin.kit.alog.ALog;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.Audience;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.ChatRoomInfoExtKey;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.ChatRoomMsgExtKey;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.AccountMapper;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomCallback;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomInner;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.PushTypeSwitcher;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.StreamTaskControl;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomMessage;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.RoomQuery;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.SeatCommands;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomMessage;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.CloseRoomAttach;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.CustomAttachParser;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.StreamRestarted;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.StreamRestartedAttach;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Anchor;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Audience;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.StreamTaskControl;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.SuccessCallback;
 
 import java.util.ArrayList;
@@ -63,7 +68,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 直播间实现类
+ */
 public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
+
     private static final String LOG_TAG = NERtcVoiceRoomImpl.class.getSimpleName();
 
     private static NERtcVoiceRoomImpl sInstance;
@@ -105,7 +114,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
      * 用户信息
      */
     private VoiceRoomUser user;
-
 
     /**
      * 主播模式
@@ -253,7 +261,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                     return;
                 }
 
-                if (attachment instanceof StreamRestarted) {
+                if (attachment instanceof StreamRestartedAttach) {
                     audience.restartAudioOrNot();
                     return;
                 }
@@ -567,7 +575,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    void updateSeat(VoiceRoomSeat seat) {
+    public void updateSeat(VoiceRoomSeat seat) {
         this.seats.set(seat.getIndex(), seat);
         if (roomCallback != null) {
             roomCallback.updateSeat(seat);
@@ -575,24 +583,24 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    synchronized VoiceRoomSeat getSeat(int index) {
+    public synchronized VoiceRoomSeat getSeat(int index) {
         return seats.get(index);
     }
 
     @Override
-    void sendSeatEvent(VoiceRoomSeat seat, boolean enter) {
+    public void sendSeatEvent(VoiceRoomSeat seat, boolean enter) {
         sendMessage(getMessageTextBuilder().seatEvent(seat, enter), true);
     }
 
     @Override
-    void sendSeatUpdate(VoiceRoomSeat seat, RequestCallback<Void> callback) {
+    public void sendSeatUpdate(VoiceRoomSeat seat, RequestCallback<Void> callback) {
         chatRoomService.updateQueue(voiceRoomInfo.getRoomId(),
                 seat.getKey(),
                 seat.toJsonString()).setCallback(callback);
     }
 
     @Override
-    void fetchSeats(final RequestCallback<List<VoiceRoomSeat>> callback) {
+    public void fetchSeats(final RequestCallback<List<VoiceRoomSeat>> callback) {
         chatRoomService.fetchQueue(voiceRoomInfo.getRoomId()).setCallback(new RequestCallback<List<Entry<String, String>>>() {
             @Override
             public void onSuccess(List<Entry<String, String>> param) {
@@ -622,7 +630,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    boolean isInitial() {
+    public boolean isInitial() {
         return initial;
     }
 

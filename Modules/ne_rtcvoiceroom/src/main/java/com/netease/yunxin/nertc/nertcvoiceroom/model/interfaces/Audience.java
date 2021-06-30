@@ -1,6 +1,7 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model;
+package com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces;
 
 import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
 
 /**
  * 观众操作接口
@@ -9,7 +10,7 @@ public interface Audience {
     /**
      * 申请上麦
      *
-     * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+     * @param seat     {@link VoiceRoomSeat 麦位}
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      */
     void applySeat(VoiceRoomSeat seat, RequestCallback<Void> callback);
@@ -31,14 +32,14 @@ public interface Audience {
     /**
      * 获取当前麦位
      *
-     * @return {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+     * @return {@link VoiceRoomSeat 麦位}
      */
     VoiceRoomSeat getSeat();
 
     /**
      * 获取当前 CDN 模式下播放器控制
      *
-     * @return {@link com.netease.yunxin.nertc.nertcvoiceroom.model.AudiencePlay 观众播放器控制}
+     * @return {@link AudiencePlay 观众播放器控制}
      */
     AudiencePlay getAudiencePlay();
 
@@ -67,7 +68,7 @@ public interface Audience {
          * 进入麦位
          *
          * @param last 是否为恢复时
-         * @return {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+         * @return {@link VoiceRoomSeat 麦位}
          */
         void onEnterSeat(VoiceRoomSeat seat, boolean last);
 
@@ -75,7 +76,7 @@ public interface Audience {
          * 离开麦位
          *
          * @param bySelf 是否为自己下麦
-         * @return {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+         * @return {@link VoiceRoomSeat 麦位}
          */
         void onLeaveSeat(VoiceRoomSeat seat, boolean bySelf);
 
@@ -98,7 +99,7 @@ public interface Audience {
     /**
      * 设置观众回调
      *
-     * @param callback {@link com.netease.yunxin.nertc.nertcvoiceroom.model.Audience.Callback 回调}
+     * @param callback {@link Audience.Callback 回调}
      */
     void setCallback(Callback callback);
 }

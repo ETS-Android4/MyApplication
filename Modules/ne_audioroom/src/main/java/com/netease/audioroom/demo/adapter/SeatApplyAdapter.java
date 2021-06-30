@@ -14,8 +14,8 @@ import com.netease.audioroom.demo.base.adapter.BaseAdapter;
 import com.netease.audioroom.demo.widget.HeadImageView;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
 import com.netease.yunxin.kit.alog.ALog;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
 
 import java.util.ArrayList;
 

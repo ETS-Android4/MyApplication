@@ -25,12 +25,12 @@ import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Reason;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Reason;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Anchor;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.SuccessCallback;
 
 import java.util.ArrayList;
@@ -171,7 +171,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         new ChoiceDialog(AnchorRoomActivity.this)
                 .setTitle("确认结束直播？")
                 .setContent("请确认是否结束直播")
-                .setNegative(getString(R.string.cancel),null)
+                .setNegative(getString(R.string.cancel), null)
                 .setPositive("确认", v -> onSeatAction(null, "退出房间"))
                 .show();
     }
@@ -183,7 +183,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     /**
      * 上麦请求列表
      *
-     * @param seats {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位列表}
+     * @param seats {@link VoiceRoomSeat 麦位列表}
      */
     @Override
     public void onApplySeats(List<VoiceRoomSeat> seats) {

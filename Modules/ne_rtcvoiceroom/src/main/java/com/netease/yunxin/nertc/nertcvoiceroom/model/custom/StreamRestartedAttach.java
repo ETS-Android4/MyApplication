@@ -5,9 +5,10 @@ import org.json.JSONObject;
 /**
  * 推流重新开始
  */
-public class StreamRestarted extends CustomAttachment {
-    public StreamRestarted() {
-        super(CustomAttachmentType.STREAM_RESTARTED);
+public class StreamRestartedAttach extends CustomAttach {
+
+    public StreamRestartedAttach() {
+        super(CustomAttachParser.CustomAttachType.STREAM_RESTARTED);
     }
 
     @Override

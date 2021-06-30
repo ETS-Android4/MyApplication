@@ -1,4 +1,4 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model.impl;
+package com.netease.yunxin.nertc.nertcvoiceroom.model;
 
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.chatroom.ChatRoomService;
@@ -6,8 +6,8 @@ import com.netease.nimlib.sdk.chatroom.constant.MemberQueryType;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomInfo;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomMember;
 import com.netease.nimlib.sdk.chatroom.model.MemberOption;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.ConvertCallback;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.ConvertCallback.Converter;
 
@@ -16,14 +16,13 @@ import java.util.List;
 
 public final class RoomQuery {
 
-    private static final int MUTE_DURATION = 30/*day*/
-            * 24/*hour*/ * 60/*minute*/ * 60/*second*/;
+    private static final int MUTE_DURATION = 30/*day*/ * 24/*hour*/ * 60/*minute*/ * 60/*second*/;
 
     private final String roomId;
 
     private final ChatRoomService chatRoomService;
 
-    RoomQuery(VoiceRoomInfo voiceRoomInfo, ChatRoomService service) {
+    public RoomQuery(VoiceRoomInfo voiceRoomInfo, ChatRoomService service) {
         this.roomId = voiceRoomInfo.getRoomId();
         this.chatRoomService = service;
     }
@@ -37,7 +36,7 @@ public final class RoomQuery {
         }, callback);
     }
 
-    void fetchMember(String account, final RequestCallback<ChatRoomMember> callback) {
+    public void fetchMember(String account, final RequestCallback<ChatRoomMember> callback) {
         List<String> accounts = new ArrayList<>();
         accounts.add(account);
         fetchRoomMembers(accounts, new Converter<List<ChatRoomMember>, ChatRoomMember>() {

@@ -15,7 +15,7 @@ public class CustomAttachParser implements MsgAttachmentParser {
 
     @Override
     public MsgAttachment parse(String json) {
-        CustomAttachment attachment = null;
+        CustomAttach attachment = null;
         JSONObject object = JsonUtil.parse(json);
         if (object == null) {
             return null;
@@ -23,11 +23,11 @@ public class CustomAttachParser implements MsgAttachmentParser {
         int type = object.optInt(KEY_TYPE);
         JSONObject data = object.optJSONObject(KEY_DATA);
         switch (type) {
-            case CustomAttachmentType.CLOSER_ROOM:
+            case CustomAttachType.CLOSER_ROOM:
                 attachment = new CloseRoomAttach();
                 break;
-            case CustomAttachmentType.STREAM_RESTARTED:
-                attachment = new StreamRestarted();
+            case CustomAttachType.STREAM_RESTARTED:
+                attachment = new StreamRestartedAttach();
                 break;
         }
 
@@ -48,5 +48,13 @@ public class CustomAttachParser implements MsgAttachmentParser {
             e.printStackTrace();
         }
         return object.toString();
+    }
+
+    public interface CustomAttachType {
+
+        int CLOSER_ROOM = 1; // 关闭房间
+
+        int STREAM_RESTARTED = 2;// 推流重新开始
+
     }
 }

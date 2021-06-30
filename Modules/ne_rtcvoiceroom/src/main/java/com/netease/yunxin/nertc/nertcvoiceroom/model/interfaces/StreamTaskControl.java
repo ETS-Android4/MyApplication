@@ -1,4 +1,4 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model;
+package com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces;
 
 /**
  * Created by luc on 1/18/21.

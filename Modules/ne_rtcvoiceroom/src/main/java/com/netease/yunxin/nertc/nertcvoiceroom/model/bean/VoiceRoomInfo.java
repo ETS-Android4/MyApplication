@@ -1,4 +1,6 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model;
+package com.netease.yunxin.nertc.nertcvoiceroom.model.bean;
+
+import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef;
 
 import java.io.Serializable;
 

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
 import com.netease.audioroom.demo.widget.ChatMessageSpannableStr;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomMessage;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomMessage;
 
 import java.util.ArrayList;
 

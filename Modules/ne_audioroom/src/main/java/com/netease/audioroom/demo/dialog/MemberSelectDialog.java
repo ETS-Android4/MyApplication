@@ -18,9 +18,9 @@ import com.netease.audioroom.demo.adapter.MemberListAdapter;
 import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Anchor;
 
 import java.util.ArrayList;
 import java.util.List;

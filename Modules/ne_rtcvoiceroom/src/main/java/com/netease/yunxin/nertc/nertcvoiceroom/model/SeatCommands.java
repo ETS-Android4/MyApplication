@@ -1,21 +1,23 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model.impl;
+package com.netease.yunxin.nertc.nertcvoiceroom.model;
 
 import android.text.TextUtils;
 
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Reason;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Reason;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.SeatCommandDef;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.JsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-class SeatCommands {
-    static CustomNotification applySeat(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
+public class SeatCommands {
+
+    public static CustomNotification applySeat(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
         String content;
         try {
             JSONObject jsonObject = new JSONObject();
@@ -37,7 +39,7 @@ class SeatCommands {
         return notification;
     }
 
-    static CustomNotification leaveSeat(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
+    public static CustomNotification leaveSeat(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
         String content;
         try {
             JSONObject jsonObject = new JSONObject();
@@ -56,7 +58,7 @@ class SeatCommands {
         return notification;
     }
 
-    static CustomNotification cancelSeatApply(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
+    public static CustomNotification cancelSeatApply(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
         String content;
         try {
             JSONObject jsonObject = new JSONObject();
@@ -75,7 +77,7 @@ class SeatCommands {
         return notification;
     }
 
-    static int commandFrom(CustomNotification notification) {
+    public static int commandFrom(CustomNotification notification) {
         String content = notification.getContent();
         if (TextUtils.isEmpty(content)) {
             return 0;
@@ -87,7 +89,7 @@ class SeatCommands {
         return jsonObject.optInt(SeatCommandDef.COMMAND, 0);
     }
 
-    static VoiceRoomSeat seatFrom(CustomNotification notification) {
+    public static VoiceRoomSeat seatFrom(CustomNotification notification) {
         String content = notification.getContent();
         if (TextUtils.isEmpty(content)) {
             return null;

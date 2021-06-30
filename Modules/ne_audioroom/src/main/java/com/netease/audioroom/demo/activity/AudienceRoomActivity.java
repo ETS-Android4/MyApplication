@@ -20,12 +20,12 @@ import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.Audience;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.AudiencePlay;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Reason;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Reason;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Audience;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.AudiencePlay;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.SuccessCallback;
 
 import java.util.Arrays;
@@ -170,7 +170,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     }
 
     @Override
-    protected void onSeatItemClick(VoiceRoomSeat seat, int position) {
+    protected synchronized void onSeatItemClick(VoiceRoomSeat seat, int position) {
         seatSource.onNext(seat);
     }
 

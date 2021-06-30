@@ -8,10 +8,10 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.netease.audioroom.demo.LoginManager;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.RoomListAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
-import com.netease.audioroom.demo.LoginManager;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
@@ -21,7 +21,7 @@ import com.netease.audioroom.demo.util.NetworkUtils;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
 import com.netease.yunxin.kit.alog.ALog;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
 
 import java.util.ArrayList;
 

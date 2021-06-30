@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.widget.OnItemClickListener;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
 
 import java.util.ArrayList;
 import java.util.List;

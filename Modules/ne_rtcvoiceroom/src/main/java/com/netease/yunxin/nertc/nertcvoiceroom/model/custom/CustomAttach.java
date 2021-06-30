@@ -4,11 +4,11 @@ import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 
 import org.json.JSONObject;
 
-public abstract class CustomAttachment implements MsgAttachment {
+public abstract class CustomAttach implements MsgAttachment {
 
     protected int type;
 
-    CustomAttachment(int type) {
+    CustomAttach(int type) {
         this.type = type;
     }
 

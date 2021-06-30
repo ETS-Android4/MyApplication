@@ -6,7 +6,11 @@ import com.netease.lava.nertc.sdk.NERtcCallbackEx;
 import com.netease.lava.nertc.sdk.stats.NERtcAudioVolumeInfo;
 import com.netease.lava.nertc.sdk.video.NERtcVideoStreamType;
 
+/**
+ * 音频引擎回调
+ */
 public class NERtcCallbackExImpl implements NERtcCallbackEx {
+
     public NERtcCallbackExImpl() {
 
     }

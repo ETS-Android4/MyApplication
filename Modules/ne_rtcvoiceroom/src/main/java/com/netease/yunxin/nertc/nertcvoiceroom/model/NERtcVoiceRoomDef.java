@@ -1,5 +1,9 @@
 package com.netease.yunxin.nertc.nertcvoiceroom.model;
 
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomMessage;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
+
 import java.util.List;
 
 /**
@@ -47,7 +51,7 @@ public class NERtcVoiceRoomDef {
         /**
          * 主播信息更新
          *
-         * @param user {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 资料信息}
+         * @param user {@link VoiceRoomSeat 资料信息}
          */
         void onAnchorInfo(VoiceRoomUser user);
 
@@ -75,21 +79,21 @@ public class NERtcVoiceRoomDef {
         /**
          * 更新所有麦位信息
          *
-         * @param seats {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+         * @param seats {@link VoiceRoomSeat 麦位}
          */
         void updateSeats(List<VoiceRoomSeat> seats);
 
         /**
          * 更新麦位信息
          *
-         * @param seat {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+         * @param seat {@link VoiceRoomSeat 麦位}
          */
         void updateSeat(VoiceRoomSeat seat);
 
         /**
          * 麦位音量
          *
-         * @param seat   {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+         * @param seat   {@link VoiceRoomSeat 麦位}
          * @param volume 说话音量0-100
          */
         void onSeatVolume(VoiceRoomSeat seat, int volume);
@@ -97,7 +101,7 @@ public class NERtcVoiceRoomDef {
         /**
          * 收到消息
          *
-         * @param message {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomMessage 消息}
+         * @param message {@link VoiceRoomMessage 消息}
          */
         void onVoiceRoomMessage(VoiceRoomMessage message);
 

@@ -5,10 +5,10 @@ import org.json.JSONObject;
 /**
  * 解散聊天室的自定义消息
  */
-public class CloseRoomAttach extends CustomAttachment {
+public class CloseRoomAttach extends CustomAttach {
 
     public CloseRoomAttach() {
-        super(CustomAttachmentType.CLOSER_ROOM);
+        super(CustomAttachParser.CustomAttachType.CLOSER_ROOM);
     }
 
     @Override

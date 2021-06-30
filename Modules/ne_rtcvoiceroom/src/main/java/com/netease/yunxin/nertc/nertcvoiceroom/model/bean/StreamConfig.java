@@ -1,10 +1,8 @@
-package com.netease.yunxin.nertc.nertcvoiceroom.model;
+package com.netease.yunxin.nertc.nertcvoiceroom.model.bean;
 
 import java.io.Serializable;
 
 /**
- * Created by luc on 1/18/21.
- * <p>
  * 主播进行 CDN 模式下，推拉流配置信息
  */
 public class StreamConfig implements Serializable {

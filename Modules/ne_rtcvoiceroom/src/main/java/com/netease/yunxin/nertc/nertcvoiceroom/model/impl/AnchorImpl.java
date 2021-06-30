@@ -9,11 +9,16 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.chatroom.ChatRoomMessageBuilder;
 import com.netease.nimlib.sdk.chatroom.ChatRoomService;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomUpdateInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.StreamRestarted;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.ChatRoomInfoExtKey;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomInner;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.RoomQuery;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.SeatStatusHelper;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.StreamRestartedAttach;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Anchor;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.SeatCommandDef;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.RequestCallbackEx;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.SuccessCallback;
 
@@ -24,9 +29,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-class AnchorImpl implements Anchor {
-
-    private static final int MUTE_DURATION = 30/*day*/ * 24/*hour*/ * 60/*minute*/ * 60/*second*/;
+/**
+ * 主播实现类
+ */
+public class AnchorImpl implements Anchor {
 
     private final NERtcVoiceRoomInner voiceRoom;
 
@@ -59,7 +65,7 @@ class AnchorImpl implements Anchor {
 
     private final SeatStatusHelper statusRecorder;
 
-    AnchorImpl(NERtcVoiceRoomInner voiceRoom) {
+    public AnchorImpl(NERtcVoiceRoomInner voiceRoom) {
         this.voiceRoom = voiceRoom;
         this.statusRecorder = new SeatStatusHelper(voiceRoom);
         this.chatRoomService = NIMClient.getService(ChatRoomService.class);
@@ -251,21 +257,21 @@ class AnchorImpl implements Anchor {
         }
         // 重新开始推流
         chatRoomService
-                .sendMessage(ChatRoomMessageBuilder.createChatRoomCustomMessage(voiceRoomInfo.getRoomId(), new StreamRestarted()), false);
+                .sendMessage(ChatRoomMessageBuilder.createChatRoomCustomMessage(voiceRoomInfo.getRoomId(), new StreamRestartedAttach()), false);
     }
 
-    void initRoom(VoiceRoomInfo voiceRoomInfo) {
+    public void initRoom(VoiceRoomInfo voiceRoomInfo) {
         this.voiceRoomInfo = voiceRoomInfo;
         this.roomQuery = new RoomQuery(voiceRoomInfo, chatRoomService);
     }
 
-    void enterRoom() {
+    public void enterRoom() {
         clearSeats();
         sendMute(false);
         sendRoomMute(false);
     }
 
-    void command(int command, final VoiceRoomSeat seat) {
+    public void command(int command, final VoiceRoomSeat seat) {
         switch (command) {
             case SeatCommandDef.APPLY_SEAT: {
                 VoiceRoomSeat local = seats.get(seat.getKey());
@@ -364,7 +370,7 @@ class AnchorImpl implements Anchor {
         }
     }
 
-    void memberExit(String account) {
+    public void memberExit(String account) {
         removeApplySeat(account);
         fetchSeat(account, new SuccessCallback<List<VoiceRoomSeat>>() {
             @Override
@@ -383,7 +389,7 @@ class AnchorImpl implements Anchor {
         });
     }
 
-    void initSeats(@NonNull List<VoiceRoomSeat> seats) {
+    public void initSeats(@NonNull List<VoiceRoomSeat> seats) {
         for (VoiceRoomSeat seat : seats) {
             if (!TextUtils.isEmpty(seat.getAccount())) {
                 this.seats.put(seat.getKey(), seat);
@@ -395,12 +401,12 @@ class AnchorImpl implements Anchor {
 
     }
 
-    void clearSeats() {
+    public void clearSeats() {
         seats.clear();
         applySeats.clear();
     }
 
-    boolean seatChange(VoiceRoomSeat seat) {
+    public boolean seatChange(VoiceRoomSeat seat) {
         if (seat.getIndex() != -1) {
             seats.put(seat.getKey(), seat);
         }
@@ -412,11 +418,11 @@ class AnchorImpl implements Anchor {
         return true;
     }
 
-    void muteLocalAudio(boolean muted) {
+    public void muteLocalAudio(boolean muted) {
         sendMute(muted);
     }
 
-    void muteRoomAudio(boolean muted) {
+    public void muteRoomAudio(boolean muted) {
         sendRoomMute(muted);
     }
 

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

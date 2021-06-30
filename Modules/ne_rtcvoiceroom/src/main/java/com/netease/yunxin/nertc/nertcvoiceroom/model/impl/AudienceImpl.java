@@ -12,20 +12,27 @@ import com.netease.nimlib.sdk.chatroom.model.EnterChatRoomResultData;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.netease.yunxin.kit.alog.ALog;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.Audience;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.AudiencePlay;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.StreamConfig;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Reason;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomInner;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.SeatCommands;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.SeatStatusHelper;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.StreamConfig;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Reason;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Audience;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.AudiencePlay;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.DoneCallback;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.RequestCallbackEx;
 
 import java.util.List;
 
-class AudienceImpl implements Audience {
+/**
+ * 观众实现类
+ */
+public class AudienceImpl implements Audience {
+
     private final NERtcVoiceRoomInner voiceRoom;
 
     /**
@@ -60,7 +67,7 @@ class AudienceImpl implements Audience {
 
     private final SeatStatusHelper statusRecorder;
 
-    AudienceImpl(NERtcVoiceRoomImpl voiceRoom) {
+    public AudienceImpl(NERtcVoiceRoomImpl voiceRoom) {
         this.voiceRoom = voiceRoom;
         this.statusRecorder = new SeatStatusHelper(voiceRoom);
         this.msgService = NIMClient.getService(MsgService.class);
@@ -115,8 +122,6 @@ class AudienceImpl implements Audience {
                     return;
                 }
                 mySeat.setStatus(Status.APPLY);
-//                mySeat.setUser(user);
-//                voiceRoom.updateSeat(mySeat);
 
                 if (callback != null) {
                     callback.onSuccess(param);
@@ -229,9 +234,9 @@ class AudienceImpl implements Audience {
         getAudiencePlay().play(config.rtmpPullUrl);
     }
 
-    void enterRoom(VoiceRoomInfo voiceRoomInfo,
-                   VoiceRoomUser user,
-                   EnterChatRoomResultData result) {
+    public void enterRoom(VoiceRoomInfo voiceRoomInfo,
+                          VoiceRoomUser user,
+                          EnterChatRoomResultData result) {
         this.voiceRoomInfo = voiceRoomInfo;
         this.user = user;
         clearSeats();
@@ -243,7 +248,7 @@ class AudienceImpl implements Audience {
         }
     }
 
-    boolean leaveRoom(Runnable runnable) {
+    public boolean leaveRoom(Runnable runnable) {
         if (!audiencePlay.isReleased()) {
             audiencePlay.release();
         }
@@ -255,19 +260,19 @@ class AudienceImpl implements Audience {
         return true;
     }
 
-    void updateRoomInfo(ChatRoomInfo roomInfo) {
+    public void updateRoomInfo(ChatRoomInfo roomInfo) {
         if (roomInfo.isMute()) {
             muteText(true);
         }
     }
 
-    void updateMemberInfo(@NonNull ChatRoomMember member) {
+    public void updateMemberInfo(@NonNull ChatRoomMember member) {
         if (!member.isTempMuted() && !member.isMuted()) {
             muteText(false);
         }
     }
 
-    void initSeats(@NonNull List<VoiceRoomSeat> seats) {
+    public void initSeats(@NonNull List<VoiceRoomSeat> seats) {
         List<VoiceRoomSeat> userSeats = VoiceRoomSeat.find(seats, user.account);
         for (VoiceRoomSeat seat : userSeats) {
             if (seat != null && seat.isOn()) {
@@ -278,11 +283,11 @@ class AudienceImpl implements Audience {
         }
     }
 
-    void clearSeats() {
+    public void clearSeats() {
         mySeat = null;
     }
 
-    void seatChange(VoiceRoomSeat seat) {
+    public void seatChange(VoiceRoomSeat seat) {
         // my seat is 'STATUS_CLOSE'
         if (seat.getStatus() == Status.CLOSED
                 && mySeat != null && mySeat.isSameIndex(seat)) {
@@ -344,7 +349,7 @@ class AudienceImpl implements Audience {
         }
     }
 
-    void muteLocalAudio(boolean muted) {
+    public void muteLocalAudio(boolean muted) {
         if (mySeat == null) {
             return;
         }
@@ -352,7 +357,7 @@ class AudienceImpl implements Audience {
         voiceRoom.sendSeatUpdate(mySeat, null);
     }
 
-    void muteText(boolean mute) {
+    public void muteText(boolean mute) {
         if (callback != null) {
             callback.onTextMuted(mute);
         }

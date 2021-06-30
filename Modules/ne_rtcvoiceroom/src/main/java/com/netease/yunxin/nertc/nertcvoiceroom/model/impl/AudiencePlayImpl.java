@@ -6,14 +6,15 @@ import com.netease.neliveplayer.sdk.NELivePlayer;
 import com.netease.neliveplayer.sdk.constant.NEBufferStrategy;
 import com.netease.neliveplayer.sdk.model.NEAutoRetryConfig;
 import com.netease.yunxin.kit.alog.ALog;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.AudiencePlay;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.AudiencePlay;
 
 import java.io.IOException;
 
 /**
- * Created by luc on 1/18/21.
+ * 播放器实现类
  */
 class AudiencePlayImpl implements AudiencePlay {
+
     /**
      * 播放器实例
      */

@@ -4,7 +4,12 @@ import android.content.Context;
 
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.AccountMapper;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomCallback;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomMessage;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.impl.NERtcVoiceRoomImpl;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Anchor;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Audience;
 
 /**
  * 语聊房
@@ -18,6 +23,7 @@ public abstract class NERtcVoiceRoom {
     public static synchronized NERtcVoiceRoom sharedInstance(Context context) {
         return NERtcVoiceRoomImpl.sharedInstance(context);
     }
+
     /**
      * 初始化
      *
@@ -36,8 +42,8 @@ public abstract class NERtcVoiceRoom {
     /**
      * 初始化房间
      *
-     * @param voiceRoomInfo {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo 房间信息}
-     * @param user          {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser 资料信息}
+     * @param voiceRoomInfo {@link VoiceRoomInfo 房间信息}
+     * @param user          {@link VoiceRoomUser 资料信息}
      */
     public abstract void initRoom(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user);
 
