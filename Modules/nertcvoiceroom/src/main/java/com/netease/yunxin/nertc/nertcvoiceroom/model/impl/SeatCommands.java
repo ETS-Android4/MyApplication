@@ -15,7 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 class SeatCommands {
-
     static CustomNotification applySeat(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
         String content;
         try {

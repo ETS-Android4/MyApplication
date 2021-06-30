@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
-import com.example.william.my.core.imageloader.corner.CornerType;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,16 +21,30 @@ import java.security.MessageDigest;
  */
 public class RadiusTransformation extends BitmapTransformation {
 
+    public enum CornerType {
+        /**
+         * 所有角
+         */
+        ALL,
+        /**
+         * 左上，左下，右上，右下
+         */
+        LEFT_TOP, LEFT_BOTTOM, RIGHT_TOP, RIGHT_BOTTOM,
+        /**
+         * 左侧，右侧，下侧，上侧
+         */
+        LEFT, RIGHT, BOTTOM, TOP,
+    }
 
-    private final float mRadius;
-    private final float mDiameter;
+    private final int mRadius;
+    private final int mDiameter;
     private final CornerType mCornerType;
 
     public RadiusTransformation(int radius) {
         this(radius, CornerType.ALL);
     }
 
-    public RadiusTransformation(float radius, CornerType cornerType) {
+    public RadiusTransformation(int radius, CornerType cornerType) {
         this.mRadius = radius;
         this.mDiameter = 2 * mRadius;
         this.mCornerType = cornerType;
@@ -66,29 +79,29 @@ public class RadiusTransformation extends BitmapTransformation {
      */
     private void drawRoundRect(Canvas canvas, Paint paint, float width, float height) {
         switch (mCornerType) {
-            case TOP_LEFT:
+            case LEFT_TOP:
                 drawLeftTopCorner(canvas, paint, width, height);
                 break;
-            case TOP_RIGHT:
-                drawRightTopCorner(canvas, paint, width, height);
-                break;
-            case BOTTOM_LEFT:
+            case LEFT_BOTTOM:
                 drawLeftBottomCorner(canvas, paint, width, height);
                 break;
-            case BOTTOM_RIGHT:
+            case RIGHT_TOP:
+                drawRightTopCorner(canvas, paint, width, height);
+                break;
+            case RIGHT_BOTTOM:
                 drawRightBottomCorner(canvas, paint, width, height);
-                break;
-            case TOP:
-                drawTopCorner(canvas, paint, width, height);
-                break;
-            case BOTTOM:
-                drawBottomCorner(canvas, paint, width, height);
                 break;
             case LEFT:
                 drawLeftCorner(canvas, paint, width, height);
                 break;
             case RIGHT:
                 drawRightCorner(canvas, paint, width, height);
+                break;
+            case BOTTOM:
+                drawBottomCorner(canvas, paint, width, height);
+                break;
+            case TOP:
+                drawTopCorner(canvas, paint, width, height);
                 break;
             case ALL:
             default:

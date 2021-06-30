@@ -74,7 +74,6 @@ import java.util.Map;
 import static com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomAudioQuality;
 
 public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
-
     private static final String LOG_TAG = NERtcVoiceRoomImpl.class.getSimpleName();
 
     private static NERtcVoiceRoomImpl sInstance;

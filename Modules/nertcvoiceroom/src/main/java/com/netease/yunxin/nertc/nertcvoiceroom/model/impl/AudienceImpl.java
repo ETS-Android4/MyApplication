@@ -27,7 +27,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.util.RequestCallbackEx;
 import java.util.List;
 
 class AudienceImpl implements Audience {
-
     private final NERtcVoiceRoomInner voiceRoom;
 
     /**
@@ -117,6 +116,8 @@ class AudienceImpl implements Audience {
                     return;
                 }
                 mySeat.setStatus(Status.APPLY);
+//                mySeat.setUser(user);
+//                voiceRoom.updateSeat(mySeat);
 
                 if (callback != null) {
                     callback.onSuccess(param);

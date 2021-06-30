@@ -6,9 +6,9 @@ import android.widget.ImageView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.request.RequestOptions;
-import com.example.william.my.core.imageloader.corner.CornerType;
 import com.example.william.my.core.imageloader.glide.module.GlideApp;
 import com.example.william.my.core.imageloader.glide.transformation.RadiusTransformation;
+import com.example.william.my.core.imageloader.glide.transformation.RadiusTransformation.CornerType;
 import com.example.william.my.core.imageloader.loader.ILoader;
 
 /**
@@ -25,17 +25,22 @@ public class GlideLoader implements ILoader {
     }
 
     @Override
+    public void load(FragmentActivity activity, String url, ImageView imageView, RequestOptions options) {
+        loadActivity(activity, url, imageView, options);
+    }
+
+    @Override
     public void loadCircle(FragmentActivity activity, String url, ImageView imageView) {
         loadCircleActivity(activity, url, imageView);
     }
 
     @Override
-    public void loadRadius(FragmentActivity activity, String url, ImageView imageView, float radius) {
+    public void loadRadius(FragmentActivity activity, String url, ImageView imageView, int radius) {
         loadRadiusActivity(activity, url, imageView, radius, CornerType.ALL);
     }
 
     @Override
-    public void loadRadius(FragmentActivity activity, String url, ImageView imageView, float radius, CornerType type) {
+    public void loadRadius(FragmentActivity activity, String url, ImageView imageView, int radius, CornerType type) {
         loadRadiusActivity(activity, url, imageView, radius, type);
     }
 
@@ -52,8 +57,9 @@ public class GlideLoader implements ILoader {
         loadActivity(activity, url, imageView, circleOptions);
     }
 
-    private void loadRadiusActivity(Activity activity, String url, ImageView imageView, float radius, CornerType type) {
-        RequestOptions radiusOptions = new RequestOptions().transform(new RadiusTransformation(radius, type));
+    private void loadRadiusActivity(Activity activity, String url, ImageView imageView, int radius, CornerType type) {
+        RequestOptions radiusOptions = new RequestOptions()
+                .transform(new RadiusTransformation(radius, type));
         loadActivity(activity, url, imageView, radiusOptions);
     }
 }

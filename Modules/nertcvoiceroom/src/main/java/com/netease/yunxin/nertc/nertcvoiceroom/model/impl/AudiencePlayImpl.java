@@ -10,9 +10,10 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.AudiencePlay;
 
 import java.io.IOException;
 
-
+/**
+ * Created by luc on 1/18/21.
+ */
 class AudiencePlayImpl implements AudiencePlay {
-
     /**
      * 播放器实例
      */

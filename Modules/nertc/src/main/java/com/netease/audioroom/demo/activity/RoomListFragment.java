@@ -91,7 +91,7 @@ public class RoomListFragment extends Fragment {
                 model.setAudioQuality(MUSIC_QUALITY);
             }
             if (TextUtils.equals(DemoCache.getAccountId(), model.getCreatorAccount())) {
-                RoomActivity.start(getActivity(), model);
+                AnchorActivity.start(getActivity(), model);
             } else {
                 AudienceActivity.start(getActivity(), model);
             }

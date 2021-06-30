@@ -37,7 +37,7 @@ class CoilActivity : AppCompatActivity() {
         //binding.image.load(url)
 
         binding.image.load(url) {
-            crossfade(true)//淡入淡出
+            crossfade(true)
             placeholder(R.drawable.ic_launcher)
             transformations(
                 BlurTransformation(this@CoilActivity),
