@@ -59,6 +59,11 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
             new RoomMoreDialog.MoreItem(MORE_ITEM_FINISH, R.drawable.icon_room_more_finish, "结束")
     );
 
+    @Override
+    protected List<RoomMoreDialog.MoreItem> getMoreItems() {
+        return MORE_ITEMS;
+    }
+
     private TopTipsDialog mTopTipsDialog;
     private Anchor anchor;
 

@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -50,16 +49,12 @@ import java.util.List;
  */
 public abstract class BaseRoomActivity extends BaseActivity implements RoomCallback {
 
-    public static final String TAG = "AudioRoom";
-
     public static final String EXTRA_VOICE_ROOM_INFO = "extra_voice_room_info";
 
     protected static final int MORE_ITEM_MICRO_PHONE = 0; //麦克风
 
     protected static final int MORE_ITEM_FINISH = 5 - 1; //关闭房间
 
-
-    @NonNull
     protected List<RoomMoreDialog.MoreItem> getMoreItems() {
         return Collections.emptyList();
     }

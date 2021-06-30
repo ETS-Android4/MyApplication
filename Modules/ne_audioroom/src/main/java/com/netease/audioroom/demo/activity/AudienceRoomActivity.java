@@ -57,6 +57,11 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
             new RoomMoreDialog.MoreItem(MORE_ITEM_MICRO_PHONE, R.drawable.selector_more_micro_phone_status, "麦克风")
     );
 
+    @Override
+    protected List<RoomMoreDialog.MoreItem> getMoreItems() {
+        return MORE_ITEMS;
+    }
+
     private TopTipsDialog mTopTipsDialog;
     private Audience audience;
 
