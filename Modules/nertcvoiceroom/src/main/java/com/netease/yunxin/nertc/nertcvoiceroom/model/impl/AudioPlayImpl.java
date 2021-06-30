@@ -18,6 +18,7 @@ import static com.netease.yunxin.nertc.nertcvoiceroom.model.AudioPlay.AudioMixin
 import static com.netease.yunxin.nertc.nertcvoiceroom.model.AudioPlay.AudioMixingPlayState.STATE_STOPPED;
 
 class AudioPlayImpl implements AudioPlay {
+
     private final NERtcEx engine;
 
     private Callback callback;

@@ -48,7 +48,7 @@ import java.util.List;
 /**
  * 直播间
  */
-public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Callback {
+public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callback {
     private static final int CODE_SELECT_FILE = 10001;
 
     private static final List<ChatRoomMoreDialog.MoreItem> MORE_ITEMS = Arrays.asList(
@@ -61,7 +61,7 @@ public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Call
     );
 
     public static void start(Context context, VoiceRoomInfo voiceRoomInfo) {
-        Intent intent = new Intent(context, AnchorActivity.class);
+        Intent intent = new Intent(context, RoomActivity.class);
         intent.putExtra(EXTRA_VOICE_ROOM_INFO, voiceRoomInfo);
         context.startActivity(intent);
         if (context instanceof Activity) {
@@ -141,7 +141,7 @@ public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Call
 
         ImageView ivMuteOtherText = findViewById(R.id.iv_mute_other_text);
         ivMuteOtherText.setVisibility(View.VISIBLE);
-        ivMuteOtherText.setOnClickListener(view -> MuteMembersActivity.start(AnchorActivity.this, voiceRoomInfo));
+        ivMuteOtherText.setOnClickListener(view -> MuteMembersActivity.start(RoomActivity.this, voiceRoomInfo));
         tvApplyHint.setOnClickListener(view -> showApplySeats(anchor.getApplySeats()));
 
         tvApplyHint.setVisibility(View.INVISIBLE);
@@ -159,7 +159,7 @@ public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Call
             onSeatAction(seat, item);
         };
         List<String> items = new ArrayList<>();
-        ListItemDialog itemDialog = new ListItemDialog(AnchorActivity.this);
+        ListItemDialog itemDialog = new ListItemDialog(RoomActivity.this);
         switch (seat.getStatus()) {
             // 抱观众上麦（点击麦位）
             case Status.INIT:
@@ -201,7 +201,7 @@ public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Call
 
     @Override
     protected void doLeaveRoom() {
-        new ChoiceDialog(AnchorActivity.this)
+        new ChoiceDialog(RoomActivity.this)
                 .setTitle("确认结束直播？")
                 .setContent("请确认是否结束直播")
                 .setNegative(getString(R.string.cancel), null)
@@ -221,7 +221,7 @@ public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Call
     private void onSeatAction(VoiceRoomSeat seat, String item) {
         switch (item) {
             case "确定踢下麦位":
-                new ListItemDialog(AnchorActivity.this).setOnItemClickListener(item1 -> {
+                new ListItemDialog(RoomActivity.this).setOnItemClickListener(item1 -> {
                     if ("确定踢下麦位".equals(item1)) {
                         kickSeat(seat);
                     }
@@ -405,7 +405,7 @@ public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Call
 
     @Override
     public void onLeaveRoom() {
-        Runnable runnable = AnchorActivity.super::onLeaveRoom;
+        Runnable runnable = RoomActivity.super::onLeaveRoom;
         closeRoom(runnable);
         runnable.run();
     }
@@ -508,7 +508,7 @@ public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Call
         anchor.fetchSeats(new SuccessCallback<List<VoiceRoomSeat>>() {
             @Override
             public void onSuccess(List<VoiceRoomSeat> param) {
-                new MemberSelectDialog(AnchorActivity.this, getOnSeatAccounts(param), member -> {
+                new MemberSelectDialog(RoomActivity.this, getOnSeatAccounts(param), member -> {
                     //被抱用户
                     if (member != null) {
                         inviteSeat(member);

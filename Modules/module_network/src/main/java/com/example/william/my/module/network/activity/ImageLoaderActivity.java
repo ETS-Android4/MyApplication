@@ -6,11 +6,10 @@ import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.imageloader.ImageLoader;
-import com.example.william.my.core.imageloader.glide.transformation.RadiusTransformation.CornerType;
+import com.example.william.my.core.imageloader.corner.CornerType;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.network.R;
 import com.example.william.my.module.router.ARouterPath;
-
 
 @Route(path = ARouterPath.NetWork.NetWork_ImageLoader)
 public class ImageLoaderActivity extends BaseActivity {

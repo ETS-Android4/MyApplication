@@ -5,6 +5,7 @@ import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 import org.json.JSONObject;
 
 public abstract class CustomAttachment implements MsgAttachment {
+
     protected int type;
 
     CustomAttachment(int type) {

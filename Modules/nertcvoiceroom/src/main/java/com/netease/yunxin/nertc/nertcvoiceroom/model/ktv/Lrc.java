@@ -4,6 +4,7 @@ package com.netease.yunxin.nertc.nertcvoiceroom.model.ktv;
  * 歌词
  */
 public class Lrc {
+
     private long time;
     private String text;
 

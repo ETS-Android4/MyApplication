@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CustomAttachParser implements MsgAttachmentParser {
+
     private static final String KEY_TYPE = "type";
 
     private static final String KEY_DATA = "data";

@@ -162,7 +162,7 @@ public class CreateRoomActivity extends AppCompatActivity {
                             }
 
                             // 跳转直播间
-                            AnchorActivity.start(CreateRoomActivity.this, roomInfo);
+                            RoomActivity.start(CreateRoomActivity.this, roomInfo);
                             finish();
                         } else {
                             ToastHelper.showToast(

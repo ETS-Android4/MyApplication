@@ -16,10 +16,9 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.StreamTaskControl;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * Created by luc on 1/18/21.
- */
+
 class StreamTaskControlImpl implements StreamTaskControl {
+
     private final NERtcEx engine;
     private final Anchor anchor;
     private NERtcLiveStreamTaskInfo streamTaskInfo;
