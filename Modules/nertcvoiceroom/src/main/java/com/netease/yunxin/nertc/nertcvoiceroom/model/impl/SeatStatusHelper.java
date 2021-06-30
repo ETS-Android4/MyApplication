@@ -15,10 +15,8 @@ import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status
 import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.INIT;
 import static com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status.ON;
 
-/**
- * Created by luc on 2/24/21.
- */
 public final class SeatStatusHelper {
+
     private final NERtcVoiceRoomInner voiceRoomInner;
 
     public SeatStatusHelper(NERtcVoiceRoomInner voiceRoomInner) {

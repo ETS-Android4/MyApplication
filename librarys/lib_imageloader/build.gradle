@@ -25,9 +25,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
     implementation deps.glide
     kapt deps.glide_compiler
+    //Coil
+    implementation deps.coil
+    implementation deps.coil_gif
 }

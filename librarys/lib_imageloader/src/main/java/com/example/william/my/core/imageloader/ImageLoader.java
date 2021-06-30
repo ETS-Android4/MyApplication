@@ -1,6 +1,6 @@
 package com.example.william.my.core.imageloader;
 
-import com.example.william.my.core.imageloader.glide.GlideLoader;
+import com.example.william.my.core.imageloader.coil.CoilLoader;
 import com.example.william.my.core.imageloader.loader.ILoader;
 
 public class ImageLoader {
@@ -11,7 +11,8 @@ public class ImageLoader {
         if (sImageLoader == null) {
             synchronized (ImageLoader.class) {
                 if (sImageLoader == null) {
-                    sImageLoader = new GlideLoader();
+                    //sImageLoader = new GlideLoader();
+                    sImageLoader = new CoilLoader();
                 }
             }
         }
