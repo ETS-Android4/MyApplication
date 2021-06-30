@@ -1,4 +1,4 @@
-package com.netease.audioroom.demo.widget.unitepage.loadsir;
+package com.example.william.my.core.loadsir;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,17 +6,17 @@ import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.netease.audioroom.demo.widget.unitepage.loadsir.core.TargetContext;
-
+import com.example.william.my.core.loadsir.base.TargetContext;
 
 public class LoadSirUtil {
+
     public static TargetContext getTargetContext(Object target) {
         ViewGroup contentParent;
         Context context;
         if (target instanceof Activity) {
             Activity activity = (Activity) target;
             context = activity;
-            contentParent = (ViewGroup) activity.findViewById(android.R.id.content);
+            contentParent = activity.findViewById(android.R.id.content);
         } else if (target instanceof View) {
             View view = (View) target;
             contentParent = (ViewGroup) (view.getParent());

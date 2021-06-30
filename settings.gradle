@@ -5,6 +5,8 @@ include ':library'
 include ':module'
 
 include ':librarys:lib_customview'
+include ':librarys:lib_loadsir'
+
 include ':librarys:lib_okhttp'
 include ':librarys:lib_retrofit'
 include ':librarys:lib_download'

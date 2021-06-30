@@ -1,15 +1,15 @@
-package com.netease.audioroom.demo.widget.unitepage.loadsir.core;
+package com.example.william.my.core.loadsir.base;
 
 import androidx.annotation.NonNull;
 
-import com.netease.audioroom.demo.widget.unitepage.loadsir.LoadSirUtil;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.BaseCallback;
+import com.example.william.my.core.loadsir.LoadSirUtil;
+import com.example.william.my.core.loadsir.callback.BaseCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class LoadSir {
+
     private static volatile LoadSir loadSir;
     private Builder builder;
 
@@ -36,15 +36,15 @@ public class LoadSir {
         this.builder = builder;
     }
 
-    public LoadService register(@NonNull Object target) {
+    public <T> LoadService<T> register(@NonNull Object target) {
         return register(target, null, null);
     }
 
-    public LoadService register(Object target, BaseCallback.OnReloadListener onReloadListener) {
+    public <T> LoadService<T> register(Object target, BaseCallback.OnReloadListener onReloadListener) {
         return register(target, onReloadListener, null);
     }
 
-    public <T> LoadService register(Object target, BaseCallback.OnReloadListener onReloadListener, Convertor<T>
+    public <T> LoadService<T> register(Object target, BaseCallback.OnReloadListener onReloadListener, Convertor<T>
             convertor) {
         TargetContext targetContext = LoadSirUtil.getTargetContext(target);
         return new LoadService<>(convertor, targetContext, onReloadListener, builder);
@@ -55,7 +55,8 @@ public class LoadSir {
     }
 
     public static class Builder {
-        private List<BaseCallback> callbacks = new ArrayList<>();
+
+        private final List<BaseCallback> callbacks = new ArrayList<>();
         private Class<? extends BaseCallback> defaultCallback;
 
         public Builder addCallback(@NonNull BaseCallback callback) {
@@ -83,6 +84,5 @@ public class LoadSir {
         public LoadSir build() {
             return new LoadSir(this);
         }
-
     }
 }

@@ -17,7 +17,7 @@ import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.widget.VerticalItemDecoration;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.EmptyChatRoomListCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.EmptyChatRoomListCallback;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;

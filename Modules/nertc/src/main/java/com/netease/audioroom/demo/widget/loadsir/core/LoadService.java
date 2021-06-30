@@ -1,22 +1,21 @@
-package com.netease.audioroom.demo.widget.unitepage.loadsir.core;
+package com.netease.audioroom.demo.widget.loadsir.core;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.BaseCallback;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.SuccessCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.BaseCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.SuccessCallback;
 
 import java.util.List;
 
 public class LoadService<T> {
 
-    private LoadLayout loadLayout;
-    private Convertor<T> convertor;
+    private final LoadLayout loadLayout;
+    private final Convertor<T> convertor;
 
-    LoadService(Convertor<T> convertor, TargetContext targetContext, BaseCallback.OnReloadListener onReloadListener,
-                LoadSir.Builder builder) {
+    LoadService(Convertor<T> convertor, TargetContext targetContext, BaseCallback.OnReloadListener onReloadListener, LoadSir.Builder builder) {
         this.convertor = convertor;
         Context context = targetContext.getContext();
         View oldContent = targetContext.getOldContent();
@@ -57,14 +56,6 @@ public class LoadService<T> {
         loadLayout.showCallback(convertor.map(t));
     }
 
-    public LoadLayout getLoadLayout() {
-        return loadLayout;
-    }
-
-    public Class<? extends BaseCallback> getCurrentCallback() {
-        return loadLayout.getCurrentCallback();
-    }
-
     /**
      * obtain rootView if you want keep the toolbar in Fragment
      *
@@ -74,8 +65,7 @@ public class LoadService<T> {
     public LinearLayout getTitleLoadLayout(Context context, ViewGroup rootView, View titleView) {
         LinearLayout newRootView = new LinearLayout(context);
         newRootView.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         newRootView.setLayoutParams(layoutParams);
         rootView.removeView(titleView);
         newRootView.addView(titleView);
