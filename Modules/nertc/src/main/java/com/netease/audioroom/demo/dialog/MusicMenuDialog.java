@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * 点歌dialog
  */
-public class MusicMenuDialog extends BaseBottomDialogFragment{
+public class MusicMenuDialog extends BaseBottomDialogFragment {
 
     /**
      * 已点歌曲数量
@@ -166,7 +166,7 @@ public class MusicMenuDialog extends BaseBottomDialogFragment{
             params.gravity = Gravity.BOTTOM;
             // 使用ViewGroup.LayoutParams，以便Dialog 宽度充满整个屏幕
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            params.height = ScreenUtils.getScreenHeight() *3/4;
+            params.height = ScreenUtils.getScreenHeight() * 3 / 4;
             window.setAttributes(params);
 
         }

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.netease.audioroom.demo.widget.pullloadmorerecyclerview.PullLoadMoreRecyclerView xmlns:tools="http://schemas.android.com/tools"
+    <com.netease.audioroom.demo.widget.pullloadmorerecyclerview.PullLoadMoreRecyclerView
         android:id="@+id/rv_room_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -6,7 +6,7 @@ package com.netease.audioroom.demo.config;
 public class DemoServers {
 
     private static final String API_SERVER = "https://app.yunxin.163.com/appdemo/voicechat/";// 线上
-//    private static final String API_SERVER_TEST = "http://apptest.netease.im:8080/appdemo/voicechat/";// 测试
+    //    private static final String API_SERVER_TEST = "http://apptest.netease.im:8080/appdemo/voicechat/";// 测试
     private static final String API_SERVER_TEST = "https://apptest.netease.im/appdemo/voicechat/";// 测试
 
     public static final String audioRoomAPIServer() {

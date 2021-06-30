@@ -139,6 +139,13 @@ public class CreateRoomActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 创建房间
+     *
+     * @param roomName 房间名称
+     * @param roomType 房间类型 语聊 / KTV
+     * @param pushType 推流类型 RTC / CDN
+     */
     private void createRoom(String roomName, int roomType, int pushType) {
         createRoom.setEnabled(false);
         ChatRoomHttpClient.getInstance().createRoom(DemoCache.getAccountId(), roomName, pushType, roomType,
@@ -154,6 +161,7 @@ public class CreateRoomActivity extends AppCompatActivity {
                                 roomInfo.setAudioQuality(MUSIC_QUALITY);
                             }
 
+                            // 跳转直播间
                             AnchorActivity.start(CreateRoomActivity.this, roomInfo);
                             finish();
                         } else {

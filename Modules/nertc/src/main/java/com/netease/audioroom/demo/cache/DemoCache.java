@@ -4,11 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.netease.audioroom.demo.model.AccountInfo;
-import com.netease.audioroom.demo.util.ToastHelper;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 
 public class DemoCache {

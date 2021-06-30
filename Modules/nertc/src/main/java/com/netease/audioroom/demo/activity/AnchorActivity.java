@@ -46,7 +46,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 主播页
+ * 直播间
  */
 public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Callback {
     private static final int CODE_SELECT_FILE = 10001;
@@ -204,7 +204,7 @@ public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Call
         new ChoiceDialog(AnchorActivity.this)
                 .setTitle("确认结束直播？")
                 .setContent("请确认是否结束直播")
-                .setNegative(getString(R.string.cancel),null)
+                .setNegative(getString(R.string.cancel), null)
                 .setPositive("确认", v -> onSeatAction(null, "退出房间"))
                 .show();
     }
@@ -222,10 +222,10 @@ public class AnchorActivity extends VoiceRoomBaseActivity implements Anchor.Call
         switch (item) {
             case "确定踢下麦位":
                 new ListItemDialog(AnchorActivity.this).setOnItemClickListener(item1 -> {
-                    if ("确定踢下麦位".equals(item1)){
+                    if ("确定踢下麦位".equals(item1)) {
                         kickSeat(seat);
                     }
-                }).show(Arrays.asList("确定踢下麦位","取消"));
+                }).show(Arrays.asList("确定踢下麦位", "取消"));
                 break;
             case "关闭麦位":
                 closeSeat(seat);

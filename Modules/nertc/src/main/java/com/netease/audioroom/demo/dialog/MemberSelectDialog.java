@@ -1,6 +1,5 @@
 package com.netease.audioroom.demo.dialog;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Color;
 import android.util.TypedValue;
@@ -9,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MemberListAdapter;
@@ -21,10 +24,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by luc on 1/29/21.

@@ -1,10 +1,10 @@
 package com.netease.audioroom.demo.widget.unitepage.loadsir.core;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 
 import com.netease.audioroom.demo.widget.unitepage.loadsir.LoadSirUtil;
 import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.BaseCallback;

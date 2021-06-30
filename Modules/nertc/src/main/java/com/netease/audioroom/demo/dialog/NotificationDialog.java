@@ -3,10 +3,9 @@ package com.netease.audioroom.demo.dialog;
 import android.app.Activity;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 
 import com.netease.audioroom.demo.R;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by luc on 2020/12/3.

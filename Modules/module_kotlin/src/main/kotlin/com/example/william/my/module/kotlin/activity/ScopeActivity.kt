@@ -41,21 +41,16 @@ class ScopeActivity : BaseActivity() {
 
     /**
      * 作用域函数
-     * run 与 let 会将最后一行传给下个extension function或是回传；
-     * also 和 apply 则是将「自己(this)」回传或传入下个extension function
+     * let 与 also -> it
+     * run 与 apply -> this
      * <p>
-     * 对一个非空（non-null）对象执行 lambda 表达式：let
-     * 将表达式作为变量引入为局部作用域中：let
-     * 一个对象的一组函数调用：with
-     * 对象配置并且计算结果：run
-     * 在需要表达式的地方运行语句：非扩展的 run
+     * let 与 run 会将 "最后一行" 传给下个extension function或是回传；
+     * also 和 apply 则是将 "this" 回传或传入下个extension function
      * <p>
-     * run ： 是 let , with 两个函数结合体
-     * also ： 该对象执行以下操作
-     * apply : 将以下赋值操作应用于该对象
+     * it 可重命名微一个可读的lambda参数，适合多重嵌套
      */
     private fun scope() {
-        val loginData = LoginData(LoginData.User("001", "nickname"))
+        val loginData: LoginData = LoginData(LoginData.User("001", "nickname"))
 
         // with
         // 对于这个对象，执行以下操作
@@ -64,9 +59,7 @@ class ScopeActivity : BaseActivity() {
             data.nickname = "nickname"
         }
 
-        // let
-        // 1. 用于仅使用 "非空" 值执行代码块
-        // 2. 引入作用域受限的局部变量以提高代码的可读性。
+        // let  -> it
         loginData.let { login ->
             login.data.id = "001"
             login.data.nickname = "nickname"
@@ -79,8 +72,7 @@ class ScopeActivity : BaseActivity() {
         }
         Log.e(TAG, "let $let2")
 
-        // run
-        // 对于这个对象，执行以下操作
+        // run -> this
         loginData.run {
             data.id = "002"
             data.nickname = "nickname"
@@ -93,7 +85,7 @@ class ScopeActivity : BaseActivity() {
         }
         Log.e(TAG, "run $run2")
 
-        // also
+        // also -> it
         // 上下文对象 作为 lambda 表达式参数（it）来访问。 返回值是上下文对象本身。
         val alsoData: LoginData = loginData.also { login ->
             login.data.id = "005"
@@ -101,7 +93,7 @@ class ScopeActivity : BaseActivity() {
         }
         Log.e("TAG", Gson().toJson(alsoData))
 
-        // apply
+        // apply -> this
         // 上下文对象 作为接收者（this）来访问。 返回值 是上下文对象本身。
         val applyData: LoginData = loginData.apply {
             data.id = "006"

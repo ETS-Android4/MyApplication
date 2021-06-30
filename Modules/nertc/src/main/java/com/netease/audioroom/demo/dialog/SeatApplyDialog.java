@@ -10,6 +10,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.SeatApplyAdapter;
 import com.netease.audioroom.demo.util.ScreenUtil;
@@ -19,11 +24,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class SeatApplyDialog extends BaseDialogFragment {
 
@@ -93,7 +93,7 @@ public class SeatApplyDialog extends BaseDialogFragment {
     private void initView() {
         requesterRecyclerView = view.findViewById(R.id.requesterRecyclerView);
         requesterRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        int padding = ScreenUtil.dip2px(requesterRecyclerView.getContext(),16);
+        int padding = ScreenUtil.dip2px(requesterRecyclerView.getContext(), 16);
         requesterRecyclerView.addItemDecoration(
                 new VerticalItemDecoration(getResources().getColor(R.color.color_33ffffff), 1, padding, padding));
         title = view.findViewById(R.id.title);

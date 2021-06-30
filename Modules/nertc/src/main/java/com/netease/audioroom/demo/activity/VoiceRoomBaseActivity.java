@@ -286,7 +286,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         setupBaseView();
         rootView = getWindow().getDecorView();
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(this);
-        requestLivePermission();
     }
 
     @Override

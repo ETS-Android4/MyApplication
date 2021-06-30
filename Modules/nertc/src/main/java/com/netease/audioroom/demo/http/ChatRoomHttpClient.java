@@ -237,7 +237,7 @@ public class ChatRoomHttpClient {
         });
     }
 
-    public void getRandomTopic(final ChatRoomHttpCallback<String> callback){
+    public void getRandomTopic(final ChatRoomHttpCallback<String> callback) {
         ChatRoomApi api = NetworkClient.getInstance().getService(ChatRoomApi.class);
         api.getRandomTopic().compose(new CommonScheduleThread<>()).subscribe(new ResourceSingleObserver<BaseResponse<String>>() {
 

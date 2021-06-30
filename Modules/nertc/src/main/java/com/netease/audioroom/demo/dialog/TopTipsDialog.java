@@ -84,7 +84,7 @@ public class TopTipsDialog extends BaseDialogFragment {
             Drawable drawable = getResources().getDrawable(style.getTipIcon());
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             content.setCompoundDrawables(drawable, null, null, null);
-            content.setCompoundDrawablePadding(ScreenUtil.dip2px(content.getContext(),4));
+            content.setCompoundDrawablePadding(ScreenUtil.dip2px(content.getContext(), 4));
         }
         if (style.getBackground() != 0) {
             linearLayout.setBackgroundColor(getResources().getColor(style.getBackground()));
@@ -119,11 +119,14 @@ public class TopTipsDialog extends BaseDialogFragment {
 
         String tips;
 
-        @ColorInt int background;
+        @ColorInt
+        int background;
 
-        @DrawableRes int tipIcon;
+        @DrawableRes
+        int tipIcon;
 
-        @ColorInt int textColor;
+        @ColorInt
+        int textColor;
 
         public Style(String tips, int background, int tipIcon, int textColor) {
             this.tips = tips;

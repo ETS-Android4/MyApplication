@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
@@ -18,9 +21,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
 
@@ -42,7 +42,7 @@ public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
             return;
         }
         ImageLoader.with(context).load(info.getThumbnail()).error(R.drawable.chat_room_default_bg)
-                   .roundedCornerCenterCrop(ScreenUtil.dip2px(context, 4)).into(viewHolder.ivBg);
+                .roundedCornerCenterCrop(ScreenUtil.dip2px(context, 4)).into(viewHolder.ivBg);
         viewHolder.tvRoomName.setText(info.getName());
         viewHolder.tvMember.setText(getCurrentCount(info.getOnlineUserCount()));
         viewHolder.tvAnchorName.setText(info.getNickname());
@@ -54,7 +54,7 @@ public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
             } else {
                 viewHolder.tvCurrentMusicName.setVisibility(View.VISIBLE);
                 IconFontUtil.getInstance().setFontText(viewHolder.tvCurrentMusicName, IconFontUtil.MUSIC,
-                                                       " "+info.getCurrentMusicName());
+                        " " + info.getCurrentMusicName());
             }
         }
     }
@@ -90,7 +90,7 @@ public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
         }
     }
 
-    private String getCurrentCount(int count){
+    private String getCurrentCount(int count) {
         if (count < 10000) {
             return count + "人";
         }

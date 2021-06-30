@@ -18,6 +18,13 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * @author WilliamWu
+ * @version [1.0.0]
+ * @date 2021/5/31
+ * @see [class/method]
+ * @since [1.0.0]
+ */
 public class ChatHelper {
 
     private static LoginInfoProvider sProvider;

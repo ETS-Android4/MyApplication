@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_58"
         android:background="@drawable/room_item_mask"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/tv_chat_room_member_num"

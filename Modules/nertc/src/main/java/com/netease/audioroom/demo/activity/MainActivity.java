@@ -7,10 +7,10 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.netease.audioroom.demo.LoginManager;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.FunctionAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
-import com.netease.audioroom.demo.LoginManager;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.NetworkChange;
@@ -83,7 +83,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(AccountInfo accountInfo) {
                 loadSuccess();
-                requestLivePermission();
             }
 
             @Override

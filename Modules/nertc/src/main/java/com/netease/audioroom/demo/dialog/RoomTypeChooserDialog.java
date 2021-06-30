@@ -12,9 +12,9 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.netease.audioroom.demo.R;
-
 import androidx.annotation.NonNull;
+
+import com.netease.audioroom.demo.R;
 
 /**
  * Created by luc on 1/20/21.

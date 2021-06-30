@@ -10,11 +10,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-
-import com.netease.audioroom.demo.R;
-
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+
+import com.netease.audioroom.demo.R;
 
 
 /**

@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MuteMemberListAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
@@ -24,10 +28,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 禁言成员页面（可侧滑）
@@ -54,7 +54,7 @@ public class MuteMembersActivity extends BaseActivity {
 //        intent.putExtra(EXTRA_VOICE_ROOM_INFO, voiceRoomInfo);
 //        context.startActivity(intent);
 
-        new MuteMemberDialog(context,voiceRoomInfo).show();
+        new MuteMemberDialog(context, voiceRoomInfo).show();
     }
 
     @Override
@@ -117,40 +117,40 @@ public class MuteMembersActivity extends BaseActivity {
                     empty_view.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                     anchor.getRoomQuery().muteMember(member, true, new RequestCallback<Void>() {
-                                @Override
-                                public void onSuccess(Void param) {
-                                    String nick = member.getNick();
-                                    ToastHelper.showToast(nick + "已被禁言");
+                        @Override
+                        public void onSuccess(Void param) {
+                            String nick = member.getNick();
+                            ToastHelper.showToast(nick + "已被禁言");
 
-                                    ArrayList<String> accountList = new ArrayList<>();
-                                    for (String account : accountList) {
-                                        accountList.add(0, account);
-                                    }
-                                    adapter = new MuteMemberListAdapter(MuteMembersActivity.this);
-                                    adapter.updateDataSource(muteList);
-                                    recyclerView.setAdapter(adapter);
-                                    title.setText("禁言成员 (" + muteList.size() + ")");
-                                    adapter.setRemoveMute((p) -> {
-                                        if (isAllMute) {
-                                            ToastHelper.showToast("全员禁言中,不能解禁");
-                                        } else {
-                                            removeMuteMember(p, muteList.get(p));
-                                        }
-                                    });
-                                }
-
-                                @Override
-                                public void onFailed(int code) {
-                                    // 失败
-                                    ToastHelper.showToast("禁言失败" + code);
-                                }
-
-                                @Override
-                                public void onException(Throwable exception) {
-                                    // 错误
-                                    ToastHelper.showToast("禁言异常" + exception.getMessage());
+                            ArrayList<String> accountList = new ArrayList<>();
+                            for (String account : accountList) {
+                                accountList.add(0, account);
+                            }
+                            adapter = new MuteMemberListAdapter(MuteMembersActivity.this);
+                            adapter.updateDataSource(muteList);
+                            recyclerView.setAdapter(adapter);
+                            title.setText("禁言成员 (" + muteList.size() + ")");
+                            adapter.setRemoveMute((p) -> {
+                                if (isAllMute) {
+                                    ToastHelper.showToast("全员禁言中,不能解禁");
+                                } else {
+                                    removeMuteMember(p, muteList.get(p));
                                 }
                             });
+                        }
+
+                        @Override
+                        public void onFailed(int code) {
+                            // 失败
+                            ToastHelper.showToast("禁言失败" + code);
+                        }
+
+                        @Override
+                        public void onException(Throwable exception) {
+                            // 错误
+                            ToastHelper.showToast("禁言异常" + exception.getMessage());
+                        }
+                    });
                 }
 
             }
@@ -253,29 +253,29 @@ public class MuteMembersActivity extends BaseActivity {
 
     private void removeMuteMember(int p, VoiceRoomUser member) {
         anchor.getRoomQuery().muteMember(member, false, new RequestCallback<Void>() {
-                    @Override
-                    public void onSuccess(Void param) {
-                        ToastHelper.showToast(member.getNick() + "已被解除禁言");
-                            muteList.remove(p);
-                        if (muteList.size() == 0) {
-                            adapter.notifyDataSetChanged();
-                            empty_view.setVisibility(View.VISIBLE);
-                            title.setText("禁言成员");
-                        } else {
-                            title.setText("禁言成员 (" + muteList.size() + ")");
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
+            @Override
+            public void onSuccess(Void param) {
+                ToastHelper.showToast(member.getNick() + "已被解除禁言");
+                muteList.remove(p);
+                if (muteList.size() == 0) {
+                    adapter.notifyDataSetChanged();
+                    empty_view.setVisibility(View.VISIBLE);
+                    title.setText("禁言成员");
+                } else {
+                    title.setText("禁言成员 (" + muteList.size() + ")");
+                    adapter.notifyDataSetChanged();
+                }
+            }
 
-                    @Override
-                    public void onFailed(int code) {
-                        ToastHelper.showToast("解禁失败" + code);
-                    }
+            @Override
+            public void onFailed(int code) {
+                ToastHelper.showToast("解禁失败" + code);
+            }
 
-                    @Override
-                    public void onException(Throwable exception) {
-                        ToastHelper.showToast("解禁异常" + exception.getMessage());
-                    }
-                });
+            @Override
+            public void onException(Throwable exception) {
+                ToastHelper.showToast("解禁异常" + exception.getMessage());
+            }
+        });
     }
 }

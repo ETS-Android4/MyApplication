@@ -9,11 +9,11 @@ import android.text.style.DynamicDrawableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 
-import java.util.Objects;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
+
+import java.util.Objects;
 
 /**
  * Created by luc on 2020/11/10.

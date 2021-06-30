@@ -87,7 +87,7 @@
             android:layout_marginTop="@dimen/dimen_10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cly_anchor_avatar"
@@ -258,7 +258,7 @@
         android:padding="8dp"
         android:src="@drawable/icon_room_more"
         android:background="@drawable/seat_item_round_bg"
-        android:layout_height="36dp"/>
+        android:layout_height="36dp" />
 
     <ImageView
         android:id="@+id/iv_mute_other_text"
@@ -271,7 +271,7 @@
         android:src="@drawable/icon_room_mute_text"
         android:visibility="gone"
         android:background="@drawable/seat_item_round_bg"
-        android:layout_height="36dp"/>
+        android:layout_height="36dp" />
 
     <ImageView
         android:id="@+id/iv_local_audio_switch"

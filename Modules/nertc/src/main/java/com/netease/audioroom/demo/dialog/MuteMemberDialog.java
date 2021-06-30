@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MuteMemberListAdapter;
 import com.netease.audioroom.demo.cache.DemoCache;
@@ -24,10 +28,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by luc on 1/28/21.
@@ -226,9 +226,9 @@ public class MuteMemberDialog extends BottomBaseDialog {
                 ToastHelper.showToast(member.getNick() + "已被解除禁言");
                 muteList.remove(p);
                 adapter.removeItem(p);
-                if (muteList.isEmpty()){
+                if (muteList.isEmpty()) {
                     tvTitle.setText("禁言成员");
-                }else {
+                } else {
                     tvTitle.setText("禁言成员 (" + muteList.size() + ")");
                 }
             }

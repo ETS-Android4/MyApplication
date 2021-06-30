@@ -37,7 +37,7 @@ public class MusicMenuAdapter extends BaseAdapter<Music> {
     @Override
     protected void onBindBaseViewHolder(@NonNull ViewHolder holder, int position) {
         Music music = getDataList().get(position);
-        if(music == null) return;
+        if (music == null) return;
         MusicMenuViewHolder viewHolder = (MusicMenuViewHolder) holder;
         ImageLoader.with(context).load(music.avatar).roundedCorner(ScreenUtil.dip2px(context, 4)).into(viewHolder.ivMusicAvatar);
         viewHolder.tvMusicName.setText(music.name);
@@ -63,8 +63,7 @@ public class MusicMenuAdapter extends BaseAdapter<Music> {
     }
 
 
-
-    static class MusicMenuViewHolder extends ViewHolder{
+    static class MusicMenuViewHolder extends ViewHolder {
 
         public ImageView ivMusicAvatar;
 

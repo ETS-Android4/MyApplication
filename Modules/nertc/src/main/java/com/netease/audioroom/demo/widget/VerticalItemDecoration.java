@@ -5,9 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.view.View;
+
 import androidx.annotation.ColorInt;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
 
 /**
  * 垂直线性布局的RecyclerView分割线

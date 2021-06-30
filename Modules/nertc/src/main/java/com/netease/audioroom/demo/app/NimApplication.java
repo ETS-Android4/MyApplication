@@ -1,10 +1,7 @@
 package com.netease.audioroom.demo.app;
 
 
-import com.netease.yunxin.kit.alog.ALog;
-import com.netease.yunxin.kit.alog.BasicInfo;
 import com.netease.audioroom.demo.BuildConfig;
-import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.util.IconFontUtil;
 import com.netease.neliveplayer.sdk.NELivePlayer;
@@ -13,6 +10,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.netease.yunxin.android.lib.network.common.NetworkClient;
+import com.netease.yunxin.kit.alog.ALog;
 
 import java.util.Map;
 

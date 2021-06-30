@@ -12,8 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/icon_room_member_empty"
-        />
+        android:src="@drawable/icon_room_member_empty" />
 
     <TextView
         android:id="@+id/tv_empty_comment"
@@ -25,6 +24,6 @@
         android:layout_marginTop="12dp"
         android:textSize="14dp"
         android:textColor="#ffbfbfbf"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

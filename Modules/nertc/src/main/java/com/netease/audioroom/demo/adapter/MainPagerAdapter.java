@@ -3,15 +3,15 @@ package com.netease.audioroom.demo.adapter;
 import android.content.Context;
 import android.util.SparseArray;
 
-import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.activity.RoomListFragment;
-import com.netease.audioroom.demo.http.ChatRoomNetConstants;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.netease.audioroom.demo.R;
+import com.netease.audioroom.demo.activity.RoomListFragment;
+import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
 

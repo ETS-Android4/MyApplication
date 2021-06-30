@@ -14,6 +14,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.activity.AnchorActivity;
 import com.netease.audioroom.demo.cache.DemoCache;
@@ -24,10 +28,6 @@ import com.netease.audioroom.demo.util.NetworkUtils;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentTransaction;
 
 public class CreateRoomNameDialog extends BaseDialogFragment {
 

@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.ChatRoomListAdapter;
 import com.netease.audioroom.demo.cache.DemoCache;
@@ -23,6 +22,7 @@ import com.netease.audioroom.demo.util.IconFontUtil;
 import com.netease.audioroom.demo.util.NetworkUtils;
 import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.audioroom.demo.widget.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
+import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
 
 import java.util.ArrayList;
@@ -149,7 +149,7 @@ public class RoomListFragment extends Fragment {
     private void fetchRoomList(PullLoadMoreRecyclerView pull, boolean refresh) {
         if (refresh) {
             dataSource.clear();
-            if (!NetworkUtils.isNetworkConnected(getContext())){
+            if (!NetworkUtils.isNetworkConnected(getContext())) {
                 chatRoomListAdapter.refreshList(dataSource);
                 pull.setPullLoadMoreCompleted();
                 showEmptyView();
