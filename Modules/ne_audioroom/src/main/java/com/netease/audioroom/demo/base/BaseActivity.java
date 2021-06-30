@@ -11,12 +11,11 @@ import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.widget.loadsir.callback.BaseCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.ErrorCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.LoadingCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.NetErrCallback;
 import com.netease.audioroom.demo.widget.loadsir.core.LoadService;
 import com.netease.audioroom.demo.widget.loadsir.core.LoadSir;
 import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.StatusCode;
 import com.netease.nimlib.sdk.auth.AuthServiceObserver;
 import com.netease.yunxin.kit.alog.ALog;
@@ -24,16 +23,48 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected LoadService<?> loadService;//提示页面
+    private LoadService<?> loadService;//提示页面
 
     // 权限控制
-    protected static final String[] LIVE_PERMISSIONS = new String[]{
+    private static final String[] LIVE_PERMISSIONS = new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.WAKE_LOCK};
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        registerObserver(true);
+        setContentView(getContentViewID());
+        loadService = LoadSir.getDefault().register(BaseActivityManager.getInstance().getCurrentActivity());
+    }
+
+    @Override
+    protected void onDestroy() {
+        registerObserver(false);
+        super.onDestroy();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
+    }
+
+    private void registerObserver(boolean register) {
+        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(new Observer<StatusCode>() {
+            @Override
+            public void onEvent(StatusCode statusCode) {
+                ALog.i(BaseActivityManager.getInstance().getCurrentActivityName(), "login status  , code = " + statusCode);
+            }
+        }, register);
+    }
+
+    //加载页面
+    protected abstract int getContentViewID();
 
     protected void requestLivePermission() {
         PermissionUtils.permission(
@@ -51,50 +82,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         }).request();
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        registerObserver(true);
-        setContentView(getContentViewID());
-        setupLoadService();
-    }
-
-    //加载页面
-    protected abstract int getContentViewID();
-
-    @Override
-    protected void onDestroy() {
-        registerObserver(false);
-        super.onDestroy();
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
-    }
-
-    /**
-     * 监听登录状态
-     */
-    protected void registerObserver(boolean register) {
-        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(this::onLoginEvent, register);
-    }
-
-    private void setupLoadService() {
-        loadService = LoadSir.getDefault().register(BaseActivityManager.getInstance().getCurrentActivity());
-    }
-
-    protected void showNetError() {
-        loadShowCallback(NetErrCallback.class);
-    }
-
     protected void showError() {
-        loadShowCallback(ErrorCallback.class);
-    }
-
-    protected void showLoading() {
-        loadShowCallback(LoadingCallback.class);
+        loadShowCallback(NetErrCallback.class);
     }
 
     protected void loadSuccess() {
@@ -107,10 +96,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (loadService != null) {
             loadService.showCallback(callback);
         }
-    }
-
-    protected void onLoginEvent(StatusCode statusCode) {
-        ALog.i(BaseActivityManager.getInstance().getCurrentActivityName(), "login status  , code = " + statusCode);
     }
 
     protected static VoiceRoomUser createUser() {

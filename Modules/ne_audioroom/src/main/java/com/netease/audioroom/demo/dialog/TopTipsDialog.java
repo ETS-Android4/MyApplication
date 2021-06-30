@@ -20,27 +20,26 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.util.ScreenUtil;
 
+
 public class TopTipsDialog extends BaseDialogFragment {
 
-    View view;
+    private Style style;
 
-    TextView content;
-
-    LinearLayout linearLayout;
-
-    Style style;
+    private View view;
+    private TextView content;
 
     public interface IClickListener {
 
         void onClick();
     }
 
-    IClickListener clickListener;
+    private IClickListener clickListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class TopTipsDialog extends BaseDialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         if (bundle != null) {
             style = getArguments().getParcelable(TAG);
@@ -59,13 +58,15 @@ public class TopTipsDialog extends BaseDialogFragment {
         }
         view = inflater.inflate(R.layout.dialog_top_tips, container, false);
         // 设置宽度为屏宽、靠近屏幕底部。
-        Window window = getDialog().getWindow();
-        //window.setBackgroundDrawableResource(R.color.color_00000000);
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        wlp.gravity = Gravity.TOP;
-        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(wlp);
+
+        if (getDialog() != null) {
+            Window window = getDialog().getWindow();
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.gravity = Gravity.TOP;
+            params.width = WindowManager.LayoutParams.MATCH_PARENT;
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(params);
+        }
         return view;
     }
 
@@ -82,28 +83,29 @@ public class TopTipsDialog extends BaseDialogFragment {
 
     private void initView() {
         content = view.findViewById(R.id.content);
-        linearLayout = view.findViewById(R.id.root);
+        LinearLayout root = view.findViewById(R.id.root);
         if (!TextUtils.isEmpty(style.getTips())) {
             content.setText(Html.fromHtml(style.getTips()));
         }
-        if (style.getTipIcon() != 0) {
-            Drawable drawable = getResources().getDrawable(style.getTipIcon());
-            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-            content.setCompoundDrawables(drawable, null, null, null);
-            content.setCompoundDrawablePadding(ScreenUtil.dip2px(content.getContext(), 4));
+        if (style.getTipIcon() != 0 && getContext() != null) {
+            Drawable drawable = ContextCompat.getDrawable(getContext(), style.tipIcon);
+            if (drawable != null) {
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                content.setCompoundDrawables(drawable, null, null, null);
+                content.setCompoundDrawablePadding(ScreenUtil.dip2px(content.getContext(), 4));
+            }
         }
         if (style.getBackground() != 0) {
-            linearLayout.setBackgroundColor(getResources().getColor(style.getBackground()));
+            root.setBackgroundColor(getResources().getColor(style.getBackground()));
         }
         if (style.getTextColor() != 0) {
             content.setTextColor(getResources().getColor(style.getTextColor()));
         }
-        getDialog().setOnKeyListener((dialog, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                return true;
-            }
-            return false;
-        });
+        if (getDialog() != null) {
+            getDialog().setOnKeyListener((dialog, keyCode, event) ->
+                    keyCode == KeyEvent.KEYCODE_BACK
+            );
+        }
         content.setOnClickListener(v -> {
             if (clickListener != null) {
                 clickListener.onClick();
@@ -121,18 +123,18 @@ public class TopTipsDialog extends BaseDialogFragment {
     }
 
 
-    public class Style implements Parcelable {
+    public static class Style implements Parcelable {
 
-        String tips;
+        private final String tips;
 
         @ColorInt
-        int background;
+        private final int background;
 
         @DrawableRes
-        int tipIcon;
+        private final int tipIcon;
 
         @ColorInt
-        int textColor;
+        private final int textColor;
 
         public Style(String tips, int background, int tipIcon, int textColor) {
             this.tips = tips;

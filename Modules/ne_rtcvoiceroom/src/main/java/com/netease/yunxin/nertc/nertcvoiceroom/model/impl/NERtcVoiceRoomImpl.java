@@ -481,7 +481,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         }
 
         if (roomCallback != null) {
-            roomCallback.onMuteLocalAudio(muted);
+            roomCallback.onMuteAudio(muted);
         }
 
         return muted;

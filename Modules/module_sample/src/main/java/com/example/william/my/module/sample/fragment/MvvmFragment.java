@@ -30,8 +30,6 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener {
@@ -42,7 +40,6 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     private ArticleViewModel mViewModel;
 
-    @NotNull
     public static MvvmFragment newInstance() {
         MvvmFragment fragment = new MvvmFragment();
         Bundle args = new Bundle();
@@ -52,7 +49,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     @Nullable
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.sample_layout_recycler, container, false);
     }
 

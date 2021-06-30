@@ -159,7 +159,7 @@ public abstract class NERtcVoiceRoom {
         NERtcVoiceRoomImpl.setAccountMapper(mapper);
     }
 
-    public static void setMessageTextBuilder(VoiceRoomMessage.MessageTextBuilder messageTextBuilder) {
+    public static void setMessageBuilder(VoiceRoomMessage.MessageTextBuilder messageTextBuilder) {
         NERtcVoiceRoomImpl.setMessageTextBuilder(messageTextBuilder);
     }
 }

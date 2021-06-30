@@ -32,20 +32,14 @@ public class InitAwareLiveData<T> extends MediatorLiveData<T> {
         owner.getLifecycle().addObserver(wrapper);
     }
 
-    private Object getExisting(@NonNull Observer observer, LifecycleBoundObserver wrapper) {
+    private Object getExisting(@NonNull Observer<T> observer, LifecycleBoundObserver wrapper) {
         try {
             Field mObservers = LiveData.class.getDeclaredField("mObservers");
             mObservers.setAccessible(true);
             Object o = mObservers.get(this);
             Method putIfAbsent = o.getClass().getMethod("putIfAbsent", Object.class, Object.class);
             return putIfAbsent.invoke(o, observer, wrapper);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;

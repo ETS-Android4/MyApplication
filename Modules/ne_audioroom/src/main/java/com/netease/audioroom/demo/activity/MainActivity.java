@@ -22,6 +22,7 @@ import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.NetworkUtils;
 import com.netease.audioroom.demo.util.ToastHelper;
+import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
 import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
 
@@ -71,9 +72,9 @@ public class MainActivity extends BaseActivity {
             model.setAudioQuality(DEFAULT_QUALITY);
 
             if (TextUtils.equals(DemoCache.getAccountId(), model.getCreatorAccount())) {
-                RoomActivity.start(this, model);//主播
+                AnchorRoomActivity.start(this, model);//主播
             } else {
-                AudienceActivity.start(this, model);//观众
+                AudienceRoomActivity.start(this, model);//观众
             }
         });
 
@@ -92,7 +93,7 @@ public class MainActivity extends BaseActivity {
             if (network != null && network.isConnected()) {
                 onNetwork();
             } else {
-                showNetError();
+                showError();
             }
         });
     }
@@ -111,7 +112,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onFailed(int code, String errorMsg) {
-                showError();
+                loadShowCallback(FailureCallback.class);
             }
         });
     }
@@ -184,8 +185,7 @@ public class MainActivity extends BaseActivity {
                         if (roomInfo != null) {
                             roomInfo.setAudioQuality(DEFAULT_QUALITY);
 
-                            RoomActivity.start(MainActivity.this, roomInfo);
-                            finish();
+                            AnchorRoomActivity.start(MainActivity.this, roomInfo);
                         } else {
                             ToastHelper.showToast(getString(R.string.crate_room_error));
                         }

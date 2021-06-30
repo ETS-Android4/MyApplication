@@ -73,13 +73,6 @@ public class NERtcVoiceRoomDef {
         void onOnlineUserCount(int onlineUserCount);
 
         /**
-         * 静音状态
-         *
-         * @param muted 是否静音
-         */
-        void onMuteLocalAudio(boolean muted);
-
-        /**
          * 更新所有麦位信息
          *
          * @param seats {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
@@ -107,6 +100,14 @@ public class NERtcVoiceRoomDef {
          * @param message {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomMessage 消息}
          */
         void onVoiceRoomMessage(VoiceRoomMessage message);
+
+        /**
+         * 静音状态
+         *
+         * @param muted 是否静音
+         */
+        void onMuteAudio(boolean muted);
+
     }
 
     /**

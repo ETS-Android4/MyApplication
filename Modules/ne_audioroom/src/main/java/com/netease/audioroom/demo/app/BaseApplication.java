@@ -11,8 +11,7 @@ import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkUtils;
 import com.netease.audioroom.demo.widget.loadsir.callback.EmptyChatRoomListCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.EmptyMuteRoomListCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.ErrorCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.LoadingCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.NetErrCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.TimeoutCallback;
 import com.netease.audioroom.demo.widget.loadsir.core.LoadSir;
@@ -30,14 +29,13 @@ public class BaseApplication extends Application {
         }
         //同一页面初始化
         LoadSir.beginBuilder()
-                .addCallback(new ErrorCallback())
+                .addCallback(new FailureCallback())
                 .addCallback(new EmptyChatRoomListCallback())
                 .addCallback(new NetErrCallback())
-                .addCallback(new LoadingCallback())
                 .addCallback(new TimeoutCallback())
                 .addCallback(new EmptyChatRoomListCallback())
                 .addCallback(new EmptyMuteRoomListCallback())
-                .setDefaultCallback(LoadingCallback.class)
+                .setDefaultCallback(FailureCallback.class)
                 .commit();
 
         registerActivity();

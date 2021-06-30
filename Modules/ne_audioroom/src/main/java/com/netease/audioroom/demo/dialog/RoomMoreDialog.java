@@ -25,11 +25,12 @@ import java.util.List;
 /**
  * 主播端底部更多弹窗
  */
-public class ChatRoomMoreDialog extends BottomBaseDialog {
+public class RoomMoreDialog extends BottomBaseDialog {
+
     private final List<MoreItem> itemList;
     protected OnItemClickListener clickListener;
 
-    public ChatRoomMoreDialog(@NonNull Activity activity, List<MoreItem> itemList) {
+    public RoomMoreDialog(@NonNull Activity activity, List<MoreItem> itemList) {
         super(activity);
         this.itemList = new ArrayList<>(itemList.size());
         for (MoreItem item : itemList) {
@@ -40,7 +41,7 @@ public class ChatRoomMoreDialog extends BottomBaseDialog {
         }
     }
 
-    public ChatRoomMoreDialog registerOnItemClickListener(OnItemClickListener listener) {
+    public RoomMoreDialog registerOnItemClickListener(OnItemClickListener listener) {
         this.clickListener = listener;
         return this;
     }
@@ -100,7 +101,7 @@ public class ChatRoomMoreDialog extends BottomBaseDialog {
                 holder.itemView.setOnClickListener(v -> {
 
                     if (clickListener != null) {
-                        if (clickListener.onItemClick(ChatRoomMoreDialog.this, v, itemData)) {
+                        if (clickListener.onItemClick(RoomMoreDialog.this, v, itemData)) {
                             itemData.enable = !ivIcon.isEnabled();
                             ivIcon.setEnabled(itemData.enable);
                             updateData(itemData);

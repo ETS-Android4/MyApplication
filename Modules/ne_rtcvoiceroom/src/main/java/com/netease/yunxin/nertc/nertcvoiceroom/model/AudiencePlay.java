@@ -15,6 +15,8 @@ public interface AudiencePlay {
 
     void release();
 
+    void stop();
+
     void setVolume(float volume);
 
     float getVolume();

@@ -13,8 +13,6 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 import com.example.william.my.core.imageloader.corner.CornerType;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.security.MessageDigest;
 
 /**
@@ -110,7 +108,7 @@ public class RadiusTransformation extends BitmapTransformation {
     /**
      * 画左下角
      */
-    private void drawLeftBottomCorner(@NotNull Canvas canvas, Paint paint, float width, float height) {
+    private void drawLeftBottomCorner(Canvas canvas, Paint paint, float width, float height) {
         canvas.drawRect(new RectF(0, 0, width, height - mRadius), paint);
         canvas.drawRect(new RectF(mRadius, height - mRadius, width, height), paint);
         canvas.drawArc(new RectF(0, height - mDiameter, mDiameter, height), 90, 90, true, paint);
@@ -119,7 +117,7 @@ public class RadiusTransformation extends BitmapTransformation {
     /**
      * 画右上角
      */
-    private void drawRightTopCorner(@NotNull Canvas canvas, Paint paint, float width, float height) {
+    private void drawRightTopCorner(Canvas canvas, Paint paint, float width, float height) {
         canvas.drawRect(new RectF(0, 0, width - mRadius, height), paint);
         canvas.drawRect(new RectF(width - mRadius, mRadius, width, height), paint);
         canvas.drawArc(new RectF(width - mDiameter, 0, width, mDiameter), 270, 90, true, paint);
@@ -128,7 +126,7 @@ public class RadiusTransformation extends BitmapTransformation {
     /**
      * 画右下角
      */
-    private void drawRightBottomCorner(@NotNull Canvas canvas, Paint paint, float width, float height) {
+    private void drawRightBottomCorner(Canvas canvas, Paint paint, float width, float height) {
         canvas.drawRect(new RectF(0, 0, width, height - mRadius), paint);
         canvas.drawRect(new RectF(0, height - mRadius, width - mRadius, height), paint);
         canvas.drawArc(new RectF(width - mDiameter, height - mDiameter, width, height), 0, 90, true, paint);
@@ -137,7 +135,7 @@ public class RadiusTransformation extends BitmapTransformation {
     /**
      * 画左圆角
      */
-    private void drawLeftCorner(@NotNull Canvas canvas, Paint paint, float width, float height) {
+    private void drawLeftCorner(Canvas canvas, Paint paint, float width, float height) {
         canvas.drawRect(new RectF(mRadius, 0, width, height), paint);
         canvas.drawRect(new RectF(0, mRadius, mRadius, height - mRadius), paint);
         canvas.drawArc(new RectF(0, 0, mDiameter, mDiameter), 180, 90, true, paint);
@@ -147,7 +145,7 @@ public class RadiusTransformation extends BitmapTransformation {
     /**
      * 画右圆角
      */
-    private void drawRightCorner(@NotNull Canvas canvas, Paint paint, float width, float height) {
+    private void drawRightCorner(Canvas canvas, Paint paint, float width, float height) {
         canvas.drawRect(new RectF(0, 0, width - mRadius, height), paint);
         canvas.drawRect(new RectF(width - mRadius, mRadius, width, height - mRadius), paint);
         canvas.drawArc(new RectF(width - mDiameter, 0, width, mDiameter), 270, 90, true, paint);
@@ -157,7 +155,7 @@ public class RadiusTransformation extends BitmapTransformation {
     /**
      * 画上圆角
      */
-    private void drawTopCorner(@NotNull Canvas canvas, Paint paint, float width, float height) {
+    private void drawTopCorner(Canvas canvas, Paint paint, float width, float height) {
         canvas.drawRect(new RectF(0, mRadius, width, height), paint);
         canvas.drawRect(new RectF(mRadius, 0, width - mRadius, mRadius), paint);
         canvas.drawArc(new RectF(0, 0, mDiameter, mDiameter), 180, 90, true, paint);
@@ -167,7 +165,7 @@ public class RadiusTransformation extends BitmapTransformation {
     /**
      * 画下圆角
      */
-    private void drawBottomCorner(@NotNull Canvas canvas, Paint paint, float width, float height) {
+    private void drawBottomCorner(Canvas canvas, Paint paint, float width, float height) {
         canvas.drawRect(new RectF(0, 0, width, height - mRadius), paint);
         canvas.drawRect(new RectF(mRadius, height - mRadius, width - mRadius, height), paint);
         canvas.drawArc(new RectF(0, height - mDiameter, mDiameter, height), 90, 90, true, paint);
