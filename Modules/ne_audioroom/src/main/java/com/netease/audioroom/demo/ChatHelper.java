@@ -49,7 +49,8 @@ public class ChatHelper {
     /**
      * IM 初始化
      */
-    public static void initIM(Context context) {
+    public static void initIM(Context context, LoginInfoProvider info) {
+        sProvider = info;
         NIMClient.init(context, null, getOptions(context));
         if (NIMUtil.isMainProcess(context)) {
             // 注意：以下操作必须在主进程中进行
@@ -93,37 +94,37 @@ public class ChatHelper {
         options.appKey = BuildConfig.NIM_APP_KEY;
 
         // 如果将新消息通知提醒托管给SDK完成，需要添加以下配置。
-        options.statusBarNotificationConfig = initStatusBarNotificationConfig();
+        //options.statusBarNotificationConfig = initStatusBarNotificationConfig();
 
         // 配置保存图片，文件，log等数据的目录
-        options.sdkStorageRootPath = Environment.getExternalStorageDirectory() + "/" + context.getPackageName() + "/nim";
+        //options.sdkStorageRootPath = Environment.getExternalStorageDirectory() + "/" + context.getPackageName() + "/nim";
 
         // 配置是否需要预下载附件缩略图，默认为 true
-        options.preloadAttach = true;
+        //options.preloadAttach = true;
 
         // 配置附件缩略图的尺寸大小，
-        options.thumbnailSize = getThumbnailSize(context);
+        //options.thumbnailSize = getThumbnailSize(context);
 
         // 用户资料提供者, 目前主要用于提供用户资料，用于新消息通知栏中显示消息来源的头像和昵称
-        options.userInfoProvider = getUserInfo();
+        //options.userInfoProvider = getUserInfo();
 
         //是否提高SDK进程优先级（默认提高，可以降低SDK核心进程被系统回收的概率）
-        options.improveSDKProcessPriority = true;
+        //options.improveSDKProcessPriority = true;
         //预加载服务，默认true，不建议设置为false，预加载连接可以优化登陆流程
-        options.preLoadServers = true;
+        //options.preLoadServers = true;
         //是否开启会话已读多端同步
-        options.sessionReadAck = true;
+        //options.sessionReadAck = true;
         //开启对动图缩略图的支持，默认为 false，截取第一帧
-        options.animatedImageThumbnailEnabled = true;
+        //options.animatedImageThumbnailEnabled = true;
         //是否在 SDK 初始化时检查清单文件配置是否完全，默认为 false，建议开发者在调试阶段打开，上线时关掉
-        options.checkManifestConfig = BuildConfig.DEBUG;
+        //options.checkManifestConfig = BuildConfig.DEBUG;
         //是否使用随机退避重连策略，默认true，强烈建议打开。如需关闭，请咨询云信技术支持。
-        options.enableBackOffReconnectStrategy = true;
+        //options.enableBackOffReconnectStrategy = true;
 
-        options.shouldConsiderRevokedMessageUnreadCount = true;
+        //options.shouldConsiderRevokedMessageUnreadCount = true;
 
         //异步初始化
-        options.asyncInitSDK = true;
+        //options.asyncInitSDK = true;
 
         return options;
     }

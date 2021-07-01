@@ -16,10 +16,10 @@ import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.LoadingCallb
 import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.NetErrCallback;
 import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.TimeoutCallback;
 import com.netease.audioroom.demo.widget.unitepage.loadsir.core.LoadSir;
-//import com.squareup.leakcanary.LeakCanary;
 
 public class BaseApplication extends Application {
-    private NetworkConnectChangedReceiver networkConnectChangedReceiver = new NetworkConnectChangedReceiver();
+
+    private final NetworkConnectChangedReceiver networkConnectChangedReceiver = new NetworkConnectChangedReceiver();
 
     @Override
     public void onCreate() {
@@ -39,7 +39,16 @@ public class BaseApplication extends Application {
                 .addCallback(new EmptyMuteRoomListCallback())
                 .setDefaultCallback(LoadingCallback.class)
                 .commit();
-        //监听activity生命周期
+
+        registerActivity();
+
+        registerReceiver();
+    }
+
+    /**
+     * 监听activity生命周期
+     */
+    private void registerActivity() {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
@@ -76,22 +85,16 @@ public class BaseApplication extends Application {
                 BaseActivityManager.getInstance().removeActivity(activity);
             }
         });
+    }
 
-        //网络变化观察者
+    /**
+     * 网络变化观察者
+     */
+    private void registerReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         filter.addAction("android.net.wifi.WIFI_STATE_CHANGE");
         filter.addAction("android.net.conn.STATE_CHANGE");
         registerReceiver(networkConnectChangedReceiver, filter);
-
-        //内存泄漏检测
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            // This process is dedicated to LeakCanary for heap analysis.
-//            // You should not init your app in this process.
-//            return;
-//        }
-//        LeakCanary.install(this);
-
-
     }
 }

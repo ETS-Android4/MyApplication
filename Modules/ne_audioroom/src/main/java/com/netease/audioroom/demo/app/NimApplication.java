@@ -1,6 +1,7 @@
 package com.netease.audioroom.demo.app;
 
 
+import com.netease.audioroom.demo.ChatHelper;
 import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.kit.alog.BasicInfo;
 import com.netease.audioroom.demo.BuildConfig;
@@ -23,28 +24,12 @@ public class NimApplication extends BaseApplication {
         NetworkClient.getInstance().configBaseUrl(BuildConfig.SERVER_BASE_URL)
                 .appKey(BuildConfig.NIM_APP_KEY)
                 .configDebuggable(true);
-        // 播放器初始化，用于 CDN 拉流
-        NESDKConfig config = new NESDKConfig();
-        config.dataUploadListener = new NELivePlayer.OnDataUploadListener() {
-            @Override
-            public boolean onDataUpload(String url, String data) {
-                ALog.e("Player===>", "stream url is " + url + ", detail data is " + data);
-                return true;
-            }
 
-            @Override
-            public boolean onDocumentUpload(String url, Map<String, String> params, Map<String, String> filepaths) {
-                return false;
-            }
-        };
-        NELivePlayer.init(getApplicationContext(), config);
+        ChatHelper.initPlayer(getApplicationContext());//播放器初始化
 
-        DemoCache.init(this);
-        NIMClient.init(this, null, getOptions());
-        if (NIMUtil.isMainProcess(this)) {
-            IconFontUtil.getInstance().init(this);
-            initLog();
-        }
+        DemoCache.init(this);//用户数据初始化
+
+        ChatHelper.initIM(this, null);
     }
 
     private void initLog() {
