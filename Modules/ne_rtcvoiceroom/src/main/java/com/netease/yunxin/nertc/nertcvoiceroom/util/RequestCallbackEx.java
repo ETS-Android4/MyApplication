@@ -3,6 +3,7 @@ package com.netease.yunxin.nertc.nertcvoiceroom.util;
 import com.netease.nimlib.sdk.RequestCallback;
 
 public class RequestCallbackEx<T> implements RequestCallback<T> {
+
     private final RequestCallback<T> callback;
 
     public RequestCallbackEx(RequestCallback<T> callback) {

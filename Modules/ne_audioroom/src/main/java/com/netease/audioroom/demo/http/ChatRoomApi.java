@@ -14,7 +14,6 @@ import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ACCOUNT_F
 import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_CREATE;
 import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_DISSOLVE;
 import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_LIST_FETCH;
-import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_MUSIC_LIST;
 import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_MUTE_ALL;
 import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_RANDOM_TOPIC;
 

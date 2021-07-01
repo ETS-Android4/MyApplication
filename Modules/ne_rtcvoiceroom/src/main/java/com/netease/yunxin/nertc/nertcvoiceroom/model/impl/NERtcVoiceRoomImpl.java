@@ -8,7 +8,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.blankj.utilcode.util.GsonUtils;
 import com.netease.lava.nertc.sdk.NERtcConstants;
 import com.netease.lava.nertc.sdk.NERtcEx;
 import com.netease.lava.nertc.sdk.NERtcOption;
@@ -19,7 +18,6 @@ import com.netease.nimlib.sdk.InvocationFuture;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.nimlib.sdk.StatusCode;
 import com.netease.nimlib.sdk.chatroom.ChatRoomMessageBuilder;
 import com.netease.nimlib.sdk.chatroom.ChatRoomService;
 import com.netease.nimlib.sdk.chatroom.ChatRoomServiceObserver;
@@ -57,8 +55,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.CloseRoomAttach;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.CustomAttachParser;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.CustomAttachmentType;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.MusicControl;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.StreamRestarted;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.SuccessCallback;
 
@@ -66,8 +62,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomAudioQuality;
 
 public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     private static final String LOG_TAG = NERtcVoiceRoomImpl.class.getSimpleName();
@@ -193,6 +187,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                 onLeaveRoom();
             }
         }
+
         @Override
         public void onUserVideoStart(long uid, int maxProfile) {
             super.onUserVideoStart(uid, maxProfile);
@@ -261,16 +256,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                 if (attachment instanceof StreamRestarted) {
                     audience.restartAudioOrNot();
                     return;
-                }
-
-                if (attachment instanceof MusicControl) {
-                    MusicControl musicControl = (MusicControl) attachment;
-                    int type = musicControl.getType();
-                    if (roomCallback != null) {
-                        VoiceRoomMessage msg = VoiceRoomMessage.createEventMessage(
-                                getMessageTextBuilder().musicEvent(musicControl.operator, type == CustomAttachmentType.MUSIC_PAUSE));
-                        roomCallback.onVoiceRoomMessage(msg);
-                    }
                 }
             }
         }
@@ -374,10 +359,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     public void setAudioQuality(int quality) {
         int scenario = NERtcConstants.AudioScenario.CHATROOM;
         int profile = NERtcConstants.AudioProfile.HIGH_QUALITY;
-        if (quality == RoomAudioQuality.MUSIC_QUALITY) {
-            scenario = NERtcConstants.AudioScenario.MUSIC;
-            profile = NERtcConstants.AudioProfile.HIGH_QUALITY_STEREO;
-        }
         engine.setAudioProfile(profile, scenario);
     }
 

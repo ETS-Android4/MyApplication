@@ -16,7 +16,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**
- * Created by luc on 2020/12/2.
+ * 软键盘工具类
  */
 public final class InputUtils {
     /**
@@ -52,46 +52,8 @@ public final class InputUtils {
         if (service == null) {
             return;
         }
+        inputView.setVisibility(GONE);
         service.hideSoftInputFromWindow(inputView.getWindowToken(), 0);
-    }
-
-    /**
-     * 添加软键盘弹起高度注册监听
-     *
-     * @param activity 软键盘所在 页面
-     */
-    public static void registerSoftInputListener(AppCompatActivity activity, InputParamHelper helper) {
-        View rootView = activity.getWindow().getDecorView();
-        ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = () -> {
-            if (helper.getHeight() <= 0 || helper.getInputView() == null) {
-                return;
-            }
-            Rect outRect = new Rect();
-            rootView.getWindowVisibleDisplayFrame(outRect);
-            int differ = helper.getHeight() - outRect.bottom;
-            if (differ == 0) {
-                helper.getInputView().setVisibility(GONE);
-                helper.getInputView().setText("");
-                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) helper.getInputView().getLayoutParams();
-                layoutParams.bottomMargin = 0;
-                return;
-            }
-            helper.getInputView().setVisibility(VISIBLE);
-            helper.getInputView().requestFocus();
-
-            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) helper.getInputView().getLayoutParams();
-            layoutParams.bottomMargin = differ;
-        };
-        rootView.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
-
-        // 反注册
-        activity.getLifecycle().addObserver((LifecycleEventObserver) (source, event) -> {
-            if (event == Lifecycle.Event.ON_DESTROY || (event == Lifecycle.Event.ON_PAUSE && activity.isFinishing())) {
-                rootView.getViewTreeObserver().removeOnGlobalLayoutListener(onGlobalLayoutListener);
-            }
-        });
-
-
     }
 
     /**

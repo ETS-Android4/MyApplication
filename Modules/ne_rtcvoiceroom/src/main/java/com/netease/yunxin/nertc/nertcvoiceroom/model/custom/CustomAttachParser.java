@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CustomAttachParser implements MsgAttachmentParser {
+
     private static final String KEY_TYPE = "type";
 
     private static final String KEY_DATA = "data";
@@ -28,16 +29,11 @@ public class CustomAttachParser implements MsgAttachmentParser {
             case CustomAttachmentType.STREAM_RESTARTED:
                 attachment = new StreamRestarted();
                 break;
-            case CustomAttachmentType.MUSIC_PAUSE:
-            case CustomAttachmentType.MUSIC_RESUME:
-                attachment = new MusicControl(type);
-                break;
         }
 
         if (attachment != null) {
             attachment.fromJson(data);
         }
-
         return attachment;
     }
 
@@ -51,7 +47,6 @@ public class CustomAttachParser implements MsgAttachmentParser {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return object.toString();
     }
 }

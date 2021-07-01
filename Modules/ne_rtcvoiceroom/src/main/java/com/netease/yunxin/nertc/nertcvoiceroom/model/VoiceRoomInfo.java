@@ -48,16 +48,6 @@ public class VoiceRoomInfo implements Serializable {
     private String nickname;
 
     /**
-     * 当前歌曲作者
-     */
-    private String currentMusicAuthor;
-
-    /**
-     * 当前正在演唱的歌曲
-     */
-    private String currentMusicName;
-
-    /**
      * CDN 模式下的推拉流配置信息
      */
     private StreamConfig streamConfig;
@@ -139,21 +129,5 @@ public class VoiceRoomInfo implements Serializable {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
-    }
-
-    public String getCurrentMusicName() {
-        return currentMusicName;
-    }
-
-    public void setCurrentMusicName(String currentMusicName) {
-        this.currentMusicName = currentMusicName;
-    }
-
-    public String getCurrentMusicAuthor() {
-        return currentMusicAuthor;
-    }
-
-    public void setCurrentMusicAuthor(String currentMusicAuthor) {
-        this.currentMusicAuthor = currentMusicAuthor;
     }
 }

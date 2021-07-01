@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 public class JsonUtil {
 
-
     private static final String TAG = "JsonUtil";
 
     public static JSONObject parse(String json) {
@@ -19,9 +18,4 @@ public class JsonUtil {
             return null;
         }
     }
-
-    public static String getUnescapeJson(String escapeJson) {
-        return null;
-    }
-
 }

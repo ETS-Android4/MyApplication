@@ -7,6 +7,7 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
 import java.util.List;
 
 abstract class NERtcVoiceRoomInner extends NERtcVoiceRoom {
+
     abstract void updateSeat(VoiceRoomSeat seat);
 
     abstract VoiceRoomSeat getSeat(int index);

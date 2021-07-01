@@ -1,12 +1,12 @@
-package com.netease.audioroom.demo.widget.unitepage.loadsir.core;
+package com.netease.audioroom.demo.widget.loadsir.core;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.BaseCallback;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.SuccessCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.BaseCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.SuccessCallback;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package com.netease.audioroom.demo.widget.unitepage.loadsir.core;
+package com.netease.audioroom.demo.widget.loadsir.core;
 
 import androidx.annotation.NonNull;
 
-import com.netease.audioroom.demo.widget.unitepage.loadsir.LoadSirUtil;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.BaseCallback;
+import com.netease.audioroom.demo.widget.loadsir.LoadSirUtil;
+import com.netease.audioroom.demo.widget.loadsir.callback.BaseCallback;
 
 import java.util.ArrayList;
 import java.util.List;

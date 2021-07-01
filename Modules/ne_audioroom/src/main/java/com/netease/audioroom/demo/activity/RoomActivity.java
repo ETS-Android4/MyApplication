@@ -3,11 +3,9 @@ package com.netease.audioroom.demo.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,8 +20,6 @@ import com.netease.audioroom.demo.dialog.MemberSelectDialog;
 import com.netease.audioroom.demo.dialog.SeatApplyDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialog;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
-import com.netease.audioroom.demo.util.AudioChooser;
-import com.netease.audioroom.demo.util.CommonUtil;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.ToastHelper;
@@ -38,7 +34,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.SuccessCallback;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

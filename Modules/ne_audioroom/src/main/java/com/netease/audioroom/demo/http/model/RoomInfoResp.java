@@ -59,11 +59,6 @@ public class RoomInfoResp {
         @SerializedName("roomType")
         int roomType;
 
-        @SerializedName("currentMusicName")
-        String currentMusicName;
-
-        @SerializedName("currentMusicAuthor")
-        String currentMusicAuthor;
 
         public VoiceRoomInfo toVoiceRoomInfo() {
             VoiceRoomInfo roomInfo = new VoiceRoomInfo();
@@ -74,8 +69,6 @@ public class RoomInfoResp {
             roomInfo.setThumbnail(thumbnail);
             roomInfo.setNickname(nickname);
             roomInfo.setOnlineUserCount(onlineUserCount);
-            roomInfo.setCurrentMusicName(currentMusicName);
-            roomInfo.setCurrentMusicAuthor(currentMusicAuthor);
             if (!TextUtils.isEmpty(configStr)) {
                 PushConfig config = new Gson().fromJson(configStr, PushConfig.class);
                 roomInfo.setStreamConfig(

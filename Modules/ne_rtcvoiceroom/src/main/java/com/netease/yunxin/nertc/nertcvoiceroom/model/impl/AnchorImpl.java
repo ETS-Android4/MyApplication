@@ -366,7 +366,6 @@ class AnchorImpl implements Anchor {
 
     void memberExit(String account) {
         removeApplySeat(account);
-
         fetchSeat(account, new SuccessCallback<List<VoiceRoomSeat>>() {
             @Override
             public void onSuccess(List<VoiceRoomSeat> seats) {
@@ -407,8 +406,7 @@ class AnchorImpl implements Anchor {
         }
 
         // local STATUS_CLOSE and remote STATUS_LOAD ???
-        if (voiceRoom.getSeat(seat.getIndex()).getStatus() == Status.CLOSED
-                && seat.getStatus() == Status.APPLY) {
+        if (voiceRoom.getSeat(seat.getIndex()).getStatus() == Status.CLOSED && seat.getStatus() == Status.APPLY) {
             return false;
         }
         return true;

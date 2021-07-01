@@ -3,6 +3,7 @@ package com.netease.yunxin.nertc.nertcvoiceroom.util;
 import com.netease.nimlib.sdk.RequestCallback;
 
 public class ConvertCallback<T, S> implements RequestCallback<S> {
+
     public interface Converter<S, T> {
         T convert(S param);
     }

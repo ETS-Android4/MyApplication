@@ -15,6 +15,7 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
  * Created by luc on 1/19/21.
  */
 public class PushTypeSwitcherImpl implements PushTypeSwitcher {
+
     private final NERtcEx engine;
     private final AudiencePlay audiencePlay;
     private final AudioManager audioManager;

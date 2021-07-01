@@ -1,4 +1,4 @@
-package com.netease.audioroom.demo.widget.unitepage.loadsir.core;
+package com.netease.audioroom.demo.widget.loadsir.core;
 
 import android.content.Context;
 import android.view.View;

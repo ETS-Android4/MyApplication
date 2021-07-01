@@ -17,22 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@drawable/chat_room_default_bg" />
 
-
-    <TextView
-        android:id="@+id/current_play_music"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_8"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="@dimen/dimen_8"
-        android:lines="1"
-        android:ellipsize="end"
-        android:textColor="@color/color_ffffff"
-        android:textSize="@dimen/text_12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="我爱北京天安门" />
-
     <View
         android:id="@+id/mask"
         android:layout_width="match_parent"

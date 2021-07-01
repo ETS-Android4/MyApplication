@@ -1,4 +1,4 @@
-package com.netease.audioroom.demo.widget.unitepage.loadsir;
+package com.netease.audioroom.demo.widget.loadsir;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.netease.audioroom.demo.widget.unitepage.loadsir.core.TargetContext;
+import com.netease.audioroom.demo.widget.loadsir.core.TargetContext;
 
 
 public class LoadSirUtil {

@@ -3,7 +3,7 @@ package com.netease.yunxin.nertc.nertcvoiceroom.model.custom;
 import org.json.JSONObject;
 
 /**
- * Created by luc on 1/21/21.
+ * 推流重新开始
  */
 public class StreamRestarted extends CustomAttachment {
     public StreamRestarted() {

@@ -26,6 +26,5 @@ public @interface ChatRoomNetConstants {
     String URL_ROOM_CREATE = "room/create";
     String URL_ROOM_DISSOLVE = "room/dissolve";
     String URL_ROOM_MUTE_ALL = "room/mute";
-    String URL_ROOM_MUSIC_LIST = "room/music/list";
     String URL_ROOM_RANDOM_TOPIC = "room/getRandomRoomTopic";
 }

@@ -9,13 +9,13 @@ import com.netease.audioroom.demo.base.BaseActivityManager;
 import com.netease.audioroom.demo.receiver.NetworkConnectChangedReceiver;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkUtils;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.EmptyChatRoomListCallback;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.EmptyMuteRoomListCallback;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.ErrorCallback;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.LoadingCallback;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.NetErrCallback;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.callback.TimeoutCallback;
-import com.netease.audioroom.demo.widget.unitepage.loadsir.core.LoadSir;
+import com.netease.audioroom.demo.widget.loadsir.callback.EmptyChatRoomListCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.EmptyMuteRoomListCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.ErrorCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.LoadingCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.NetErrCallback;
+import com.netease.audioroom.demo.widget.loadsir.callback.TimeoutCallback;
+import com.netease.audioroom.demo.widget.loadsir.core.LoadSir;
 
 public class BaseApplication extends Application {
 

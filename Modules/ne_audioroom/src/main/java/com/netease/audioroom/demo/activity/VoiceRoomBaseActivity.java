@@ -2,12 +2,10 @@ package com.netease.audioroom.demo.activity;
 
 import android.app.Dialog;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,9 +24,9 @@ import com.netease.audioroom.demo.adapter.MessageListAdapter;
 import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
-import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.ChatRoomMoreDialog;
 import com.netease.audioroom.demo.dialog.ChoiceDialog;
+import com.netease.audioroom.demo.dialog.MuteMemberDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.NotificationDialog;
 import com.netease.audioroom.demo.model.AccountInfo;
@@ -52,15 +50,13 @@ import java.util.List;
 /**
  * 主播与观众基础页，包含所有的通用UI元素
  */
-public abstract class VoiceRoomBaseActivity extends BaseActivity implements RoomCallback, ViewTreeObserver.OnGlobalLayoutListener {
+public abstract class VoiceRoomBaseActivity extends BaseActivity implements RoomCallback {
 
     public static final String TAG = "AudioRoom";
 
     public static final String EXTRA_VOICE_ROOM_INFO = "extra_voice_room_info";
 
     protected NERtcVoiceRoom voiceRoom;
-
-    private View rootView;
 
     //主播信息
     protected ConstraintLayout mAnchorView;
@@ -89,10 +85,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
     protected TextView tvInput;
     protected EditText edtInput;
 
-
-    private int rootViewVisibleHeight;
-
-
     private BaseAdapter.ItemClickListener<VoiceRoomSeat> itemClickListener = this::onSeatItemClick;
 
     private BaseAdapter.ItemLongClickListener<VoiceRoomSeat> itemLongClickListener = this::onSeatItemLongClick;
@@ -120,17 +112,7 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         findBaseView();
         setupBaseViewInner();
         setupBaseView();
-        rootView = getWindow().getDecorView();
-        rootView.getViewTreeObserver().addOnGlobalLayoutListener(this);
         requestLivePermission();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (rootView != null) {
-            rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-        }
-        super.onDestroy();
     }
 
     @Override
@@ -146,23 +128,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
             loadSuccess();
         } else {
             showNetError();
-        }
-    }
-
-    @Override
-    public void onGlobalLayout() {
-        int preHeight = rootViewVisibleHeight;
-        //获取当前根视图在屏幕上显示的大小
-        Rect r = new Rect();
-        rootView.getWindowVisibleDisplayFrame(r);
-        rootViewVisibleHeight = r.height();
-        if (preHeight == 0 || preHeight == rootViewVisibleHeight) {
-            return;
-        }
-        //根视图显示高度变大超过KEY_BOARD_MIN_SIZE，可以看作软键盘隐藏了
-        int KEY_BOARD_MIN_SIZE = ScreenUtil.dip2px(DemoCache.getContext(), 80);
-        if (rootViewVisibleHeight - preHeight >= KEY_BOARD_MIN_SIZE) {
-            scrollToBottom();
         }
     }
 
@@ -202,7 +167,8 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         mute = findViewById(R.id.iv_room_mute);
         mute.setVisibility(View.VISIBLE);
         mute.setOnClickListener(view ->
-                MuteMembersActivity.start(VoiceRoomBaseActivity.this, voiceRoomInfo));
+                new MuteMemberDialog(VoiceRoomBaseActivity.this, voiceRoomInfo).show());
+
         //更多
         more = baseAudioView.findViewById(R.id.iv_room_more);
         more.setOnClickListener(v ->
@@ -222,19 +188,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
             InputUtils.hideSoftInput(VoiceRoomBaseActivity.this, edtInput);
             sendTextMessage();
             return true;
-        });
-
-        InputUtils.registerSoftInputListener(this, new InputUtils.InputParamHelper() {
-
-            @Override
-            public int getHeight() {
-                return baseAudioView.getHeight();
-            }
-
-            @Override
-            public EditText getInputView() {
-                return edtInput;
-            }
         });
     }
 
@@ -320,6 +273,7 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         }
         voiceRoom.sendTextMessage(content);
     }
+
     //
     // RoomCallback
     //
@@ -452,14 +406,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
             int position = seat.getIndex() + 1;
             return who + action + position;
         }
-
-        @Override
-        public String musicEvent(String nick, boolean isPause) {
-            String who = "“" + nick + "”";
-            String action = isPause ? "暂停音乐" : "恢复演唱";
-            return who + action;
-        }
-
     };
 
     @Override

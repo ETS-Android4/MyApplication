@@ -41,22 +41,10 @@ public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
         if (info == null) {
             return;
         }
-        ImageLoader.with(context).load(info.getThumbnail()).error(R.drawable.chat_room_default_bg)
-                .roundedCornerCenterCrop(ScreenUtil.dip2px(context, 4)).into(viewHolder.ivBg);
+        ImageLoader.with(context).load(info.getThumbnail()).error(R.drawable.chat_room_default_bg).roundedCornerCenterCrop(ScreenUtil.dip2px(context, 4)).into(viewHolder.ivBg);
         viewHolder.tvRoomName.setText(info.getName());
         viewHolder.tvMember.setText(getCurrentCount(info.getOnlineUserCount()));
         viewHolder.tvAnchorName.setText(info.getNickname());
-        if (info.getRoomType() == ChatRoomNetConstants.ROOM_TYPE_CHAT) {
-            viewHolder.tvCurrentMusicName.setVisibility(View.GONE);
-        } else {
-            if (TextUtils.isEmpty(info.getCurrentMusicName())) {
-                viewHolder.tvCurrentMusicName.setVisibility(View.GONE);
-            } else {
-                viewHolder.tvCurrentMusicName.setVisibility(View.VISIBLE);
-                IconFontUtil.getInstance().setFontText(viewHolder.tvCurrentMusicName, IconFontUtil.MUSIC,
-                        " " + info.getCurrentMusicName());
-            }
-        }
     }
 
     public void refreshList(List<VoiceRoomInfo> dataList) {
@@ -78,15 +66,12 @@ public class ChatRoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
 
         TextView tvAnchorName;
 
-        TextView tvCurrentMusicName;
-
         ChatRoomHolder(View itemView) {
             super(itemView);
             ivBg = itemView.findViewById(R.id.iv_chat_room_bg);
             tvRoomName = itemView.findViewById(R.id.tv_chat_room_name);
             tvMember = itemView.findViewById(R.id.tv_chat_room_member_num);
             tvAnchorName = itemView.findViewById(R.id.tv_chat_room_anchor_name);
-            tvCurrentMusicName = itemView.findViewById(R.id.current_play_music);
         }
     }
 

@@ -6,6 +6,7 @@ import java.util.List;
  * 语聊房定义
  */
 public class NERtcVoiceRoomDef {
+
     /**
      * 房间语音质量
      */
@@ -19,11 +20,6 @@ public class NERtcVoiceRoomDef {
          * 高音质
          */
         int HIGH_QUALITY = 1;
-
-        /**
-         * 音乐音质
-         */
-        int MUSIC_QUALITY = 2;
     }
 
     /**

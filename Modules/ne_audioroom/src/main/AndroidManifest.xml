@@ -106,9 +106,6 @@
         <activity
             android:name=".activity.MemberSelectActivity"
             android:launchMode="singleTop" />
-        <activity
-            android:name=".activity.MuteMembersActivity"
-            android:launchMode="singleTop" />
 
         <uses-library
             android:name="org.apache.http.legacy"
