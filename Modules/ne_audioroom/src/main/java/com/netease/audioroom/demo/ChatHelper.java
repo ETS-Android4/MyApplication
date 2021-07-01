@@ -3,7 +3,6 @@ package com.netease.audioroom.demo;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Environment;
 
 import com.netease.audioroom.demo.base.LoginManager;
 import com.netease.audioroom.demo.util.IconFontUtil;

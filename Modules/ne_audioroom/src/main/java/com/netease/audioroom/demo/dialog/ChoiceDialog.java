@@ -12,8 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.audioroom.demo.R;
+import com.netease.yunxin.kit.alog.ALog;
 
 /**
  * Created by luc on 2020/12/3.

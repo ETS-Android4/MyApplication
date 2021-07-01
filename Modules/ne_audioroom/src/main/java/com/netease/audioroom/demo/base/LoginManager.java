@@ -1,7 +1,6 @@
 package com.netease.audioroom.demo.base;
 
 
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.audioroom.demo.base.action.ILoginAction;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
@@ -11,6 +10,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.netease.yunxin.kit.alog.ALog;
 
 public class LoginManager implements ILoginAction {
     private static final String TAG = "LoginManager";
@@ -129,7 +129,7 @@ public class LoginManager implements ILoginAction {
         this.callback = callback;
     }
 
-    public boolean isLogin(){
+    public boolean isLogin() {
         return isLogin;
     }
 

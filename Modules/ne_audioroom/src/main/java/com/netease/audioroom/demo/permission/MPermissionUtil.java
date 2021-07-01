@@ -4,8 +4,8 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import androidx.fragment.app.Fragment;
 
+import androidx.fragment.app.Fragment;
 
 import com.netease.audioroom.demo.permission.annotation.OnMPermissionDenied;
 import com.netease.audioroom.demo.permission.annotation.OnMPermissionGranted;

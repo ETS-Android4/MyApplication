@@ -14,9 +14,11 @@ import java.util.ArrayList;
  */
 public class RoomInfoResp {
 
-    @SerializedName("total") public int total;
+    @SerializedName("total")
+    public int total;
 
-    @SerializedName("list") public ArrayList<RoomInfoItem> roomInfoItems;
+    @SerializedName("list")
+    public ArrayList<RoomInfoItem> roomInfoItems;
 
     public ArrayList<VoiceRoomInfo> toVoiceRoomInfoList() {
         if (roomInfoItems == null || roomInfoItems.isEmpty()) {
@@ -33,25 +35,35 @@ public class RoomInfoResp {
 
     public static class RoomInfoItem {
 
-        @SerializedName("roomId") String roomId;
+        @SerializedName("roomId")
+        String roomId;
 
-        @SerializedName("creator") String creatorAccount;
+        @SerializedName("creator")
+        String creatorAccount;
 
-        @SerializedName("name") String name;
+        @SerializedName("name")
+        String name;
 
-        @SerializedName("thumbnail") String thumbnail;
+        @SerializedName("thumbnail")
+        String thumbnail;
 
-        @SerializedName("nickname") String nickname;
+        @SerializedName("nickname")
+        String nickname;
 
-        @SerializedName("onlineUserCount") int onlineUserCount;
+        @SerializedName("onlineUserCount")
+        int onlineUserCount;
 
-        @SerializedName("liveConfig") String configStr;
+        @SerializedName("liveConfig")
+        String configStr;
 
-        @SerializedName("roomType") int roomType;
+        @SerializedName("roomType")
+        int roomType;
 
-        @SerializedName("currentMusicName") String currentMusicName;
+        @SerializedName("currentMusicName")
+        String currentMusicName;
 
-        @SerializedName("currentMusicAuthor") String currentMusicAuthor;
+        @SerializedName("currentMusicAuthor")
+        String currentMusicAuthor;
 
         public VoiceRoomInfo toVoiceRoomInfo() {
             VoiceRoomInfo roomInfo = new VoiceRoomInfo();
@@ -75,12 +87,16 @@ public class RoomInfoResp {
 
     public static class PushConfig {
 
-        @SerializedName("pushUrl") String pushUrl;
+        @SerializedName("pushUrl")
+        String pushUrl;
 
-        @SerializedName("httpPullUrl") String httpPullUrl;
+        @SerializedName("httpPullUrl")
+        String httpPullUrl;
 
-        @SerializedName("rtmpPullUrl") String rtmpPullUrl;
+        @SerializedName("rtmpPullUrl")
+        String rtmpPullUrl;
 
-        @SerializedName("hlsPullUrl") String hlsPullUrl;
+        @SerializedName("hlsPullUrl")
+        String hlsPullUrl;
     }
 }

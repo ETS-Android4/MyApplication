@@ -349,13 +349,12 @@ public class SingingControlView extends LinearLayout implements LyricListener {
             public void onFinish() {
                 onMusicSing(currentMusic, isMySong, false);
                 if (isMySong) {
-                    MusicSing.shareInstance().updateMusicTime(currentMusic,0);
+                    MusicSing.shareInstance().updateMusicTime(currentMusic, 0);
                 }
             }
         };
         timer.start();
     }
-
 
 
     @Override
@@ -364,7 +363,7 @@ public class SingingControlView extends LinearLayout implements LyricListener {
         lrcView.updateTime(timestamp);
     }
 
-    public void setOrder(OnClickListener listener){
+    public void setOrder(OnClickListener listener) {
         tvOrderSong.setOnClickListener(listener);
     }
 

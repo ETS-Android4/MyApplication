@@ -218,18 +218,19 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
     }
 
     private boolean canShowTip = false;
+
     private void onApplySeatSuccess() {
         Bundle bundle = new Bundle();
         topTipsDialog = new TopTipsDialog();
         TopTipsDialog.Style style = topTipsDialog.new Style("已申请上麦，等待通过...  <font color=\"#0888ff\">取消</color>", 0, 0,
-                                                            0);
+                0);
         bundle.putParcelable(topTipsDialog.TAG, style);
         topTipsDialog.setArguments(bundle);
         topTipsDialog.show(getSupportFragmentManager(), topTipsDialog.TAG);
         canShowTip = true;
         topTipsDialog.setClickListener(() -> {
             topTipsDialog.dismiss();
-            if (cancelApplyDialog!=null&&cancelApplyDialog.isShowing()){
+            if (cancelApplyDialog != null && cancelApplyDialog.isShowing()) {
                 cancelApplyDialog.dismiss();
             }
             cancelApplyDialog = new ListItemDialog(AudienceActivity.this).setOnItemClickListener(item -> {
@@ -239,7 +240,7 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
                 }
             });
             cancelApplyDialog.setOnDismissListener(dialog1 -> {
-                if (canShowTip){
+                if (canShowTip) {
                     topTipsDialog.show(getSupportFragmentManager(), topTipsDialog.TAG);
                 }
             });
@@ -322,13 +323,13 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
                 case Reason.CANCEL_MUTED: {
                     new NotificationDialog(this)
                             .setTitle("通知")
-                            .setContent( "该麦位被主播“解除语音屏蔽”\n" +
+                            .setContent("该麦位被主播“解除语音屏蔽”\n" +
                                     "现在您可以再次进行语音互动了")
-                            .setPositive("知道了",null)
+                            .setPositive("知道了", null)
                             .show();
                     break;
                 }
-                default:{
+                default: {
                 }
             }
             if (topTipsDialog != null) {
@@ -343,7 +344,7 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
                 new NotificationDialog(this)
                         .setTitle("通知")
                         .setContent("您已被主播请下麦位")
-                        .setPositive("知道了",null)
+                        .setPositive("知道了", null)
                         .show();
             }
         }
@@ -462,7 +463,7 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
         new NotificationDialog(this)
                 .setTitle("通知")
                 .setContent("该麦位被主播“屏蔽语音”\n 现在您已无法进行语音互动")
-                .setPositive("知道了",null)
+                .setPositive("知道了", null)
                 .show();
     }
 

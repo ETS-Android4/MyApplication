@@ -230,7 +230,7 @@
             android:text="唱歌时请佩戴耳机避免回音"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dimen_15"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/tv_order"

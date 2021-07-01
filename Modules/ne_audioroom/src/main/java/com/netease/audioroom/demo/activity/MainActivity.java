@@ -1,24 +1,47 @@
 package com.netease.audioroom.demo.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.adapter.FunctionAdapter;
+import com.netease.audioroom.demo.adapter.ChatRoomListAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.base.LoginManager;
+import com.netease.audioroom.demo.cache.DemoCache;
+import com.netease.audioroom.demo.constant.Extras;
+import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.NetworkChange;
+import com.netease.yunxin.kit.alog.ALog;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
+import static com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomAudioQuality.DEFAULT_QUALITY;
 
 public class MainActivity extends BaseActivity {
+
+    private View mEmptyView;
+
+    private RecyclerView mRecyclerView;
+
+    private ChatRoomListAdapter chatRoomListAdapter;
+
+    private final ArrayList<VoiceRoomInfo> dataSource = new ArrayList<>();
+
+    public static void start(Context context, int type) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(Extras.ROOM_TYPE, type);
+        context.startActivity(intent);
+    }
 
     @Override
     protected int getContentViewID() {
@@ -33,37 +56,39 @@ public class MainActivity extends BaseActivity {
             return;
         }
         initViews();
-        showLoading();
+        fetchRoomList();
         watchNetWork();
     }
 
-    protected void initViews() {
-        // 功能列表初始化
-        RecyclerView rvFunctionList = findViewById(R.id.rv_function_list);
-        rvFunctionList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        rvFunctionList.setAdapter(new FunctionAdapter(this, Arrays.asList(
-                new FunctionAdapter.FunctionItem(FunctionAdapter.TYPE_VIEW_TITLE, getString(R.string.funciton_title)),
-                // 每个业务功能入口均在此处生成 item
-                new FunctionAdapter.FunctionItem(R.drawable.icon_function_chat_room, getString(R.string.voice_chat),
-                        getString(R.string.function_desc), () -> {
-                    RoomListActivity.start(MainActivity.this, ChatRoomNetConstants.ROOM_TYPE_CHAT);
-                }),
-                new FunctionAdapter.FunctionItem(R.drawable.icon_funcation_ktv, getString(R.string.ktv),
-                        getString(R.string.function_desc), () -> {
-                    RoomListActivity.start(MainActivity.this, ChatRoomNetConstants.ROOM_TYPE_KTV);
-                }))));
+    private void initViews() {
+        mEmptyView = findViewById(R.id.empty_view);
+
+        chatRoomListAdapter = new ChatRoomListAdapter(this);
+        chatRoomListAdapter.setItemClickListener((model, position) -> {
+            //当前帐号创建的房间
+            model.setAudioQuality(DEFAULT_QUALITY);
+
+            if (TextUtils.equals(DemoCache.getAccountId(), model.getCreatorAccount())) {
+                RoomActivity.start(this, model);//主播
+            } else {
+                AudienceActivity.start(this, model);//观众
+            }
+        });
+
+        mRecyclerView = findViewById(R.id.rv_room_list);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        mRecyclerView.setAdapter(chatRoomListAdapter);
 
         View toCreate = findViewById(R.id.iv_new_live);
         toCreate.setOnClickListener(v -> {
-            CreateRoomActivity.start(MainActivity.this, ChatRoomNetConstants.ROOM_TYPE_CHAT);
+            CreateRoomActivity.start(this, ChatRoomNetConstants.ROOM_TYPE_CHAT);
         });
     }
-
 
     private void watchNetWork() {
         NetworkChange.getInstance().getNetworkLiveData().observe(this, network -> {
             if (network != null && network.isConnected()) {
-                MainActivity.this.onNetwork();
+                onNetwork();
             } else {
                 showNetError();
             }
@@ -87,5 +112,34 @@ public class MainActivity extends BaseActivity {
                 showError();
             }
         });
+    }
+
+    private void fetchRoomList() {
+        ChatRoomHttpClient client = ChatRoomHttpClient.getInstance();
+        client.fetchChatRoomList(dataSource.size(), 20, ChatRoomNetConstants.ROOM_TYPE_CHAT,
+                new ChatRoomHttpClient.ChatRoomHttpCallback<ArrayList<VoiceRoomInfo>>() {
+                    @Override
+                    public void onSuccess(ArrayList<VoiceRoomInfo> voiceRoomInfos) {
+                        dataSource.addAll(voiceRoomInfos);
+                        chatRoomListAdapter.refreshList(dataSource);
+                        showEmptyView();
+                    }
+
+                    @Override
+                    public void onFailed(int code, String errorMsg) {
+                        if (dataSource.isEmpty()) {
+                            showEmptyView();
+                        }
+                        ALog.e("FetchRoomList", "errorMsg is " + errorMsg + ", errorCode is " + code);
+                    }
+                });
+    }
+
+    private void showEmptyView() {
+        if (dataSource.isEmpty()) {
+            mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mEmptyView.setVisibility(View.GONE);
+        }
     }
 }

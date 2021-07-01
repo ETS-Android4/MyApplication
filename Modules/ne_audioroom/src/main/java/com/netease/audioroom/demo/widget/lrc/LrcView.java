@@ -59,7 +59,7 @@ public class LrcView extends View {
     //用户开始操作
     private boolean isUserScroll;
     private boolean isAutoAdjustPosition = true;
-//    private Drawable mPlayDrawable;
+    //    private Drawable mPlayDrawable;
     private boolean isShowTimeIndicator;
     private Rect mPlayRect;
     private Paint mIndicatorPaint;

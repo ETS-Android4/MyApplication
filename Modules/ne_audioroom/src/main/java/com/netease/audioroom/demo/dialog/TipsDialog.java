@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.netease.audioroom.demo.R;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.netease.audioroom.demo.R;
 
 public class TipsDialog extends BaseDialogFragment {
 

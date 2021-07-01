@@ -21,10 +21,10 @@ public class LyricDown {
 
     public static final String BASE_CDN_URL = "https://yx-web-nosdn.netease.im/";
 
-    public static void download(String url,final DownloadListener downloadListener) {
-        if(url .contains(BASE_CDN_URL)){
-            url.replace(BASE_CDN_URL,"");
-        }else {
+    public static void download(String url, final DownloadListener downloadListener) {
+        if (url.contains(BASE_CDN_URL)) {
+            url.replace(BASE_CDN_URL, "");
+        } else {
             return;
         }
 
@@ -40,16 +40,16 @@ public class LyricDown {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
-                if(response.body() != null) {
-                      List<Lrc> lrcs =  LrcHelper.parseInputStream(response.body().byteStream());
-                      if(lrcs != null){
-                          new Handler(Looper.getMainLooper()).post(() ->{
-                              downloadListener.onSuccess(lrcs);
-                          });
-                      }else {
-                          downloadListener.onFail("解析错误");
-                      }
-                }else {
+                if (response.body() != null) {
+                    List<Lrc> lrcs = LrcHelper.parseInputStream(response.body().byteStream());
+                    if (lrcs != null) {
+                        new Handler(Looper.getMainLooper()).post(() -> {
+                            downloadListener.onSuccess(lrcs);
+                        });
+                    } else {
+                        downloadListener.onFail("解析错误");
+                    }
+                } else {
                     downloadListener.onFail("返回为空");
                 }
             }
@@ -62,7 +62,7 @@ public class LyricDown {
     }
 
     public interface DownloadListener {
-       void onSuccess(List<Lrc> lrcs);
+        void onSuccess(List<Lrc> lrcs);
 
         void onFail(String errorInfo);//下载失败
     }

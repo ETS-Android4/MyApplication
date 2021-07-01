@@ -65,7 +65,7 @@ public class CreateRoomActivity extends AppCompatActivity {
         root = findViewById(R.id.cl_root);
         int barHeight = ImmersionBar.getStatusBarHeight(this);
         root.setPadding(root.getPaddingLeft(), root.getPaddingTop() + barHeight, root.getPaddingRight(),
-                        root.getPaddingBottom());
+                root.getPaddingBottom());
         currentType = getIntent().getIntExtra(Extras.ROOM_TYPE, ChatRoomNetConstants.ROOM_TYPE_CHAT);
         initViews();
     }
@@ -101,8 +101,8 @@ public class CreateRoomActivity extends AppCompatActivity {
             }
             if (currentType == ChatRoomNetConstants.ROOM_TYPE_CHAT) {
                 new RoomTypeChooserDialog(CreateRoomActivity.this,
-                                          (context, type) -> createRoom(roomName, ChatRoomNetConstants.ROOM_TYPE_CHAT,
-                                                                        type)).show();
+                        (context, type) -> createRoom(roomName, ChatRoomNetConstants.ROOM_TYPE_CHAT,
+                                type)).show();
             } else {
                 createRoom(roomName, ChatRoomNetConstants.ROOM_TYPE_KTV, ChatRoomNetConstants.PUSH_TYPE_RTC);
             }
@@ -144,38 +144,38 @@ public class CreateRoomActivity extends AppCompatActivity {
     private void createRoom(String roomName, int roomType, int pushType) {
         createRoom.setEnabled(false);
         ChatRoomHttpClient.getInstance().createRoom(DemoCache.getAccountId(), roomName, pushType, roomType,
-                                                    new ChatRoomHttpClient.ChatRoomHttpCallback<VoiceRoomInfo>() {
+                new ChatRoomHttpClient.ChatRoomHttpCallback<VoiceRoomInfo>() {
 
-                                                        @Override
-                                                        public void onSuccess(VoiceRoomInfo roomInfo) {
-                                                            createRoom.setEnabled(true);
-                                                            if (roomInfo != null) {
-                                                                if (roomInfo.getRoomType() == ChatRoomNetConstants.ROOM_TYPE_CHAT) {
-                                                                    roomInfo.setAudioQuality(DEFAULT_QUALITY);
-                                                                } else if (roomInfo.getRoomType() == ChatRoomNetConstants.ROOM_TYPE_KTV) {
-                                                                    roomInfo.setAudioQuality(MUSIC_QUALITY);
-                                                                }
+                    @Override
+                    public void onSuccess(VoiceRoomInfo roomInfo) {
+                        createRoom.setEnabled(true);
+                        if (roomInfo != null) {
+                            if (roomInfo.getRoomType() == ChatRoomNetConstants.ROOM_TYPE_CHAT) {
+                                roomInfo.setAudioQuality(DEFAULT_QUALITY);
+                            } else if (roomInfo.getRoomType() == ChatRoomNetConstants.ROOM_TYPE_KTV) {
+                                roomInfo.setAudioQuality(MUSIC_QUALITY);
+                            }
 
-                                                                RoomActivity.start(CreateRoomActivity.this, roomInfo);
-                                                                finish();
-                                                            } else {
-                                                                ToastHelper.showToast(
-                                                                        getString(R.string.crate_room_error));
-                                                            }
-                                                        }
+                            RoomActivity.start(CreateRoomActivity.this, roomInfo);
+                            finish();
+                        } else {
+                            ToastHelper.showToast(
+                                    getString(R.string.crate_room_error));
+                        }
+                    }
 
-                                                        @Override
-                                                        public void onFailed(int code, String errorMsg) {
-                                                            createRoom.setEnabled(true);
-                                                            if (TextUtils.isEmpty(errorMsg)) {
-                                                                errorMsg = getString(R.string.params_error);
-                                                            } else {
-                                                                errorMsg = "服务器失败";
-                                                            }
-                                                            ToastHelper.showToast(
-                                                                    "创建失败:" + (!NetworkUtils.isNetworkConnected(
-                                                                            CreateRoomActivity.this) ? "网络错误" : errorMsg));
-                                                        }
-                                                    });
+                    @Override
+                    public void onFailed(int code, String errorMsg) {
+                        createRoom.setEnabled(true);
+                        if (TextUtils.isEmpty(errorMsg)) {
+                            errorMsg = getString(R.string.params_error);
+                        } else {
+                            errorMsg = "服务器失败";
+                        }
+                        ToastHelper.showToast(
+                                "创建失败:" + (!NetworkUtils.isNetworkConnected(
+                                        CreateRoomActivity.this) ? "网络错误" : errorMsg));
+                    }
+                });
     }
 }

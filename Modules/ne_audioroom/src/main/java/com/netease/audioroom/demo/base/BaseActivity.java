@@ -3,7 +3,9 @@ package com.netease.audioroom.demo.base;
 import android.Manifest;
 import android.os.Bundle;
 
-import com.netease.yunxin.kit.alog.ALog;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
@@ -16,13 +18,10 @@ import com.netease.audioroom.demo.widget.unitepage.loadsir.core.LoadService;
 import com.netease.audioroom.demo.widget.unitepage.loadsir.core.LoadSir;
 import com.netease.audioroom.demo.widget.unitepage.loadsir.core.Transport;
 import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.StatusCode;
 import com.netease.nimlib.sdk.auth.AuthServiceObserver;
+import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -32,11 +31,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     // 权限控制
     protected static final String[] LIVE_PERMISSIONS = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                                                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                                                                    Manifest.permission.CAMERA,
-                                                                    Manifest.permission.RECORD_AUDIO,
-                                                                    Manifest.permission.READ_PHONE_STATE,
-                                                                    Manifest.permission.WAKE_LOCK};
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.WAKE_LOCK};
 
     protected void requestLivePermission() {
         MPermission.with(this).addRequestCode(LIVE_PERMISSION_REQUEST_CODE).permissions(LIVE_PERMISSIONS).request();
@@ -73,6 +72,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void showNetError() {
         loadShowCallback(NetErrCallback.class);
     }
+
     protected void showError() {
         loadShowCallback(ErrorCallback.class);
     }
