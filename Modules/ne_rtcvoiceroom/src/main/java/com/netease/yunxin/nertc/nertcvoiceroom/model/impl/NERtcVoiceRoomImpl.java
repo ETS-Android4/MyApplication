@@ -316,7 +316,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                         VoiceRoomMessage msg = VoiceRoomMessage.createEventMessage(
                                 getMessageTextBuilder().musicEvent(musicControl.operator, type == CustomAttachmentType.MUSIC_PAUSE));
                         roomCallback.onVoiceRoomMessage(msg);
-                        roomCallback.onMusicStateChange(type);
                     }
                 }
             }

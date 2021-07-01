@@ -31,6 +31,7 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.SuccessCallback;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -41,11 +42,9 @@ import io.reactivex.subjects.PublishSubject;
  * 观众页
  */
 public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.Callback {
-    private static final List<ChatRoomMoreDialog.MoreItem> MORE_ITEMS = Arrays.asList(
-            new ChatRoomMoreDialog.MoreItem(MORE_ITEM_MICRO_PHONE, R.drawable.selector_more_micro_phone_status, "麦克风"),
-//            new ChatRoomMoreDialog.MoreItem(MORE_ITEM_SPEAKER, R.drawable.selector_more_speaker_status, "扬声器"),
-            new ChatRoomMoreDialog.MoreItem(MORE_ITEM_EAR_BACK, R.drawable.selector_more_ear_back_status, "耳返"),
-            new ChatRoomMoreDialog.MoreItem(MORE_ITEM_MIXER, R.drawable.icon_room_more_mixer, "调音台")
+
+    private static final List<ChatRoomMoreDialog.MoreItem> MORE_ITEMS = Collections.singletonList(
+            new ChatRoomMoreDialog.MoreItem(MORE_ITEM_MICRO_PHONE, R.drawable.selector_more_micro_phone_status, "麦克风")
     );
 
     private TopTipsDialog topTipsDialog;
@@ -124,7 +123,6 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
 
     @Override
     protected void setupBaseView() {
-        singView.setAnchor(false);
         ivLeaveSeat = findViewById(R.id.iv_leave_seat);
         ivLeaveSeat.setOnClickListener(view -> promptLeaveSeat());
         more.setVisibility(View.GONE);
@@ -368,16 +366,12 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
         ivLeaveSeat.setVisibility(visible ? View.VISIBLE : View.GONE);
         more.setVisibility(visible ? View.VISIBLE : View.GONE);
         MORE_ITEMS.get(MORE_ITEM_MICRO_PHONE).setVisible(visible);
-        MORE_ITEMS.get(MORE_ITEM_EAR_BACK).setVisible(visible);
-        MORE_ITEMS.get(MORE_ITEM_MIXER).setVisible(visible);
     }
 
     @NonNull
     @Override
     protected List<ChatRoomMoreDialog.MoreItem> getMoreItems() {
         MORE_ITEMS.get(MORE_ITEM_MICRO_PHONE).setEnable(!voiceRoom.isLocalAudioMute());
-        MORE_ITEMS.get(MORE_ITEM_EAR_BACK).setEnable(!voiceRoom.isEarBackEnable());
-//        MORE_ITEMS.get(MORE_ITEM_SPEAKER).setEnable(!voiceRoom.isRoomAudioMute());
         return MORE_ITEMS;
     }
 

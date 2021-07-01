@@ -111,13 +111,6 @@ public class NERtcVoiceRoomDef {
          * @param message {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomMessage 消息}
          */
         void onVoiceRoomMessage(VoiceRoomMessage message);
-
-        /**
-         * 演唱歌曲状态变化
-         *
-         * @param type {@link com.netease.yunxin.nertc.nertcvoiceroom.model.custom.CustomAttachmentType}
-         */
-        void onMusicStateChange(int type);
     }
 
     /**

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,7 +15,6 @@ import androidx.annotation.Nullable;
 
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.ChatRoomAudioDialog;
 import com.netease.audioroom.demo.dialog.ChatRoomMoreDialog;
 import com.netease.audioroom.demo.dialog.ChoiceDialog;
 import com.netease.audioroom.demo.dialog.ListItemDialog;
@@ -31,6 +29,7 @@ import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.widget.OnItemClickListener;
 import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.AudioPlay;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
@@ -49,14 +48,14 @@ import java.util.List;
  * 直播
  */
 public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callback {
+
     private static final int CODE_SELECT_FILE = 10001;
 
+    /**
+     * 底部菜单栏
+     */
     private static final List<ChatRoomMoreDialog.MoreItem> MORE_ITEMS = Arrays.asList(
             new ChatRoomMoreDialog.MoreItem(MORE_ITEM_MICRO_PHONE, R.drawable.selector_more_micro_phone_status, "麦克风"),
-//            new ChatRoomMoreDialog.MoreItem(MORE_ITEM_SPEAKER, R.drawable.selector_more_speaker_status, "扬声器"),
-            new ChatRoomMoreDialog.MoreItem(MORE_ITEM_EAR_BACK, R.drawable.selector_more_ear_back_status, "耳返"),
-            new ChatRoomMoreDialog.MoreItem(MORE_ITEM_MIXER, R.drawable.icon_room_more_mixer, "调音台"),
-            new ChatRoomMoreDialog.MoreItem(MORE_ITEM_AUDIO, R.drawable.icon_room_more_audio, "伴音"),
             new ChatRoomMoreDialog.MoreItem(MORE_ITEM_FINISH, R.drawable.icon_room_more_finish, "结束")
     );
 
@@ -114,35 +113,18 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CODE_SELECT_FILE) {
-            if (resultCode == RESULT_OK) {
-                if (data != null) {
-                    AudioChooser.result(this, data, path -> {
-                        if (!TextUtils.isEmpty(path)) {
-                            setAudioFixingFilePath(path);
-                            audioPlay.setMixingFile(2, path);
-                        }
-                    });
-                }
-            }
-        }
-    }
 
     @Override
     protected void setupBaseView() {
-        singView.setAnchor(true);
         topTipsDialog = new TopTipsDialog();
         tvApplyHint = findViewById(R.id.apply_hint);
-
 
         ImageView ivMuteOtherText = findViewById(R.id.iv_mute_other_text);
         ivMuteOtherText.setVisibility(View.VISIBLE);
         ivMuteOtherText.setOnClickListener(view -> MuteMembersActivity.start(RoomActivity.this, voiceRoomInfo));
-        tvApplyHint.setOnClickListener(view -> showApplySeats(anchor.getApplySeats()));
+        tvApplyHint.setOnClickListener(
+                view -> showApplySeats(anchor.getApplySeats())
+        );
 
         tvApplyHint.setVisibility(View.INVISIBLE);
         tvApplyHint.setClickable(true);
@@ -213,11 +195,14 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
     @Override
     protected List<ChatRoomMoreDialog.MoreItem> getMoreItems() {
         MORE_ITEMS.get(MORE_ITEM_MICRO_PHONE).setEnable(!voiceRoom.isLocalAudioMute());
-        MORE_ITEMS.get(MORE_ITEM_EAR_BACK).setEnable(!voiceRoom.isEarBackEnable());
-//        MORE_ITEMS.get(MORE_ITEM_SPEAKER).setEnable(!voiceRoom.isRoomAudioMute());
         return MORE_ITEMS;
     }
 
+    /**
+     * 点击麦上动作
+     * @param seat
+     * @param item
+     */
     private void onSeatAction(VoiceRoomSeat seat, String item) {
         switch (item) {
             case "确定踢下麦位":
@@ -249,6 +234,10 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         }
     }
 
+    /**
+     * 展示麦上用户
+     * @param seats
+     */
     private void showApplySeats(List<VoiceRoomSeat> seats) {
         seatApplyDialog = new SeatApplyDialog();
         Bundle bundle = new Bundle();
@@ -301,6 +290,9 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         return "";
     }
 
+    /**
+     * 检查音频文件
+     */
     private void checkMusicFiles() {
         new Thread(() -> {
             String root = ensureMusicDirectory();
@@ -318,33 +310,15 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
             musicPaths[3] = getAudioFixingFilePath();
 
             audioPlay.setMixingFile(musicPaths);
-            if (audioMixingMusicInfos == null) {
-                audioMixingMusicInfos = new ArrayList<>();
-            }
-            audioMixingMusicInfos.clear();
-            for (int i = 0; i < musicPaths.length - 1; i++) {
-                String path = musicPaths[i];
-                audioMixingMusicInfos.add(getMusicInfo("0" + (i + 1), path));
-            }
         }).start();
-    }
-
-    /**
-     * 获取音乐文件信息
-     *
-     * @param mediaUri 文件路径
-     */
-    private ChatRoomAudioDialog.MusicItem getMusicInfo(String order, String mediaUri) {
-        MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
-        mediaMetadataRetriever.setDataSource(mediaUri);
-        String name = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-        String author = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-        return new ChatRoomAudioDialog.MusicItem(order, name, author);
     }
 
     private static final String SHARED_PREFERENCES_NAME = "audio_room_pref";
     private static final String KEY_AUDIO_MIXING_FILE_PATH = "audio_mixing_file_path";
 
+    //
+    // 音频
+    //
     private String getAudioFixingFilePath() {
         return getValueFromSharedPreferences(KEY_AUDIO_MIXING_FILE_PATH);
     }
@@ -414,6 +388,10 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
     // Anchor call
     //
 
+    /**
+     * 同意上麦申请
+     * @param seat
+     */
     private void approveSeatApply(VoiceRoomSeat seat) {
         final String text = "成功通过连麦请求";
 
@@ -428,6 +406,10 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         }
     }
 
+    /**
+     * 拒绝麦位申请
+     * @param seat
+     */
     private void denySeatApply(VoiceRoomSeat seat) {
         VoiceRoomUser user = seat.getUser();
         String nick = user != null ? user.getNick() : "";
@@ -441,6 +423,10 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         });
     }
 
+    /**
+     * 打开麦位
+     * @param seat
+     */
     public void openSeat(VoiceRoomSeat seat) {
         String msg = "";
         String msgError = "";
@@ -481,6 +467,10 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         });
     }
 
+    /**
+     * 关闭麦位
+     * @param seat
+     */
     private void closeSeat(VoiceRoomSeat seat) {
         final String text = "\"麦位" + (seat.getIndex() + 1) + "\"已关闭";
         anchor.closeSeat(seat, new SuccessCallback<Void>() {
@@ -491,6 +481,10 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         });
     }
 
+    /**
+     * 屏蔽麦位
+     * @param seat
+     */
     private void muteSeat(VoiceRoomSeat seat) {
         final String text = "该麦位语音已被屏蔽，无法发言";
         anchor.muteSeat(seat, new SuccessCallback<Void>() {
@@ -503,6 +497,10 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     private int inviteIndex = -1;
 
+    /**
+     * 抱麦
+     * @param seat
+     */
     private void inviteSeat0(VoiceRoomSeat seat) {
         inviteIndex = seat.getIndex();
         anchor.fetchSeats(new SuccessCallback<List<VoiceRoomSeat>>() {
@@ -518,6 +516,11 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         });
     }
 
+    /**
+     * 获取麦上用户
+     * @param seats
+     * @return
+     */
     private static List<String> getOnSeatAccounts(List<VoiceRoomSeat> seats) {
         List<String> accounts = new ArrayList<>();
         for (VoiceRoomSeat seat : seats) {
@@ -531,6 +534,10 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         return accounts;
     }
 
+    /**
+     * 抱麦
+     * @param member
+     */
     private void inviteSeat(@NonNull VoiceRoomUser member) {
         anchor.getRoomQuery().isMember(member.getAccount(), new SuccessCallback<Boolean>() {
             @Override
@@ -549,9 +556,13 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         });
     }
 
-    private void inviteSeat(@NonNull VoiceRoomUser member,
-                            int index,
-                            @NonNull List<VoiceRoomSeat> seats) {
+    /**
+     * 抱麦
+     * @param member
+     * @param index
+     * @param seats
+     */
+    private void inviteSeat(@NonNull VoiceRoomUser member, int index, @NonNull List<VoiceRoomSeat> seats) {
         String account = member.getAccount();
         List<VoiceRoomSeat> userSeats = VoiceRoomSeat.find(seats, account);
 
@@ -578,12 +589,18 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         if (position != -1 && position != index) {
             denySeatApply(anchor.getSeat(position));
         }
-        inviteSeat(new VoiceRoomSeat(index,
+        inviteSeat(new VoiceRoomSeat(
+                index,
                 seats.get(index).getStatus() == Status.FORBID ? Status.FORBID : Status.ON, Reason.ANCHOR_INVITE, member
         ));
     }
 
-    private void inviteSeat(VoiceRoomSeat seat) {
+    /**
+     * 抱麦
+     *
+     * @param seat
+     */
+    private void inviteSeat(@NonNull VoiceRoomSeat seat) {
         VoiceRoomUser user = seat.getUser();
         String nick = user != null ? user.getNick() : "";
         final String text = "已将" + nick + "抱上麦位" + (seat.getIndex() + 1);
@@ -599,11 +616,15 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         }
     }
 
+    /**
+     * 踢人
+     *
+     * @param seat
+     */
     private void kickSeat(@NonNull VoiceRoomSeat seat) {
         VoiceRoomUser user = seat.getUser();
         String nick = user != null ? user.getNick() : "";
         final String text = "已将“" + nick + "”踢下麦位";
-
         anchor.kickSeat(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void param) {
@@ -612,11 +633,17 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         });
     }
 
+    /**
+     * 关闭房间
+     *
+     * @param runnable
+     */
     private void closeRoom(Runnable runnable) {
         ChatRoomHttpClient.getInstance().closeRoom(DemoCache.getAccountId(),
-                voiceRoomInfo.getRoomId(), new ChatRoomHttpClient.ChatRoomHttpCallback() {
+                voiceRoomInfo.getRoomId(), new ChatRoomHttpClient.ChatRoomHttpCallback<BaseResponse<Void>>() {
+
                     @Override
-                    public void onSuccess(Object o) {
+                    public void onSuccess(BaseResponse<Void> response) {
                         loadSuccess();
                         ToastHelper.showToast("退出房间成功");
                         if (runnable != null) {
@@ -636,5 +663,23 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
                         }
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CODE_SELECT_FILE) {
+            if (resultCode == RESULT_OK) {
+                if (data != null) {
+                    AudioChooser.result(this, data, path -> {
+                        if (!TextUtils.isEmpty(path)) {
+                            setAudioFixingFilePath(path);
+                            audioPlay.setMixingFile(2, path);
+                        }
+                    });
+                }
+            }
+        }
     }
 }

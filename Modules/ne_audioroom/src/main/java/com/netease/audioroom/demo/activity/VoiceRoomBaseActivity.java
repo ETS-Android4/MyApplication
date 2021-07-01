@@ -31,7 +31,6 @@ import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.ChatRoomAudioDialog;
 import com.netease.audioroom.demo.dialog.ChatRoomMixerDialog;
 import com.netease.audioroom.demo.dialog.ChatRoomMoreDialog;
 import com.netease.audioroom.demo.dialog.ChoiceDialog;
@@ -46,7 +45,6 @@ import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.util.ViewUtils;
 import com.netease.audioroom.demo.widget.HeadImageView;
-import com.netease.audioroom.demo.widget.SingingControlView;
 import com.netease.audioroom.demo.widget.VerticalItemDecoration;
 import com.netease.audioroom.demo.widget.VolumeSetup;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
@@ -56,7 +54,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomMessage;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.MusicChangeListener;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.MusicOrderedItem;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.MusicSing;
 
 import java.util.Collections;
@@ -75,47 +72,16 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
 
     protected static final int MORE_ITEM_MICRO_PHONE = 0;
 
-//    protected static final int MORE_ITEM_SPEAKER = 1;
-
-    protected static final int MORE_ITEM_EAR_BACK = 2 - 1;
-
-    protected static final int MORE_ITEM_MIXER = 3 - 1;
-
-    protected static final int MORE_ITEM_AUDIO = 4 - 1;
-
     protected static final int MORE_ITEM_FINISH = 5 - 1;
 
     protected NERtcVoiceRoom voiceRoom;
 
-    /**
-     * 混音文件信息
-     */
-    protected List<ChatRoomAudioDialog.MusicItem> audioMixingMusicInfos;
 
     protected ChatRoomMoreDialog.OnItemClickListener onMoreItemClickListener = (dialog, itemView, item) -> {
         switch (item.id) {
             case MORE_ITEM_MICRO_PHONE: {
                 item.enable = !voiceRoom.isLocalAudioMute();
                 toggleMuteLocalAudio();
-                break;
-            }
-            case MORE_ITEM_EAR_BACK: {
-                item.enable = !voiceRoom.isEarBackEnable();
-                enableEarback(item.enable);
-                break;
-            }
-            case MORE_ITEM_MIXER: {
-                if (dialog != null && dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-                showChatRoomMixerDialog();
-                break;
-            }
-            case MORE_ITEM_AUDIO: {
-                if (dialog != null && dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-                new ChatRoomAudioDialog(VoiceRoomBaseActivity.this, voiceRoom, audioMixingMusicInfos).show();
                 break;
             }
             case MORE_ITEM_FINISH: {
@@ -130,7 +96,7 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
     };
 
     //ktv
-    protected SingingControlView singView;
+    //protected SingingControlView singView;
 
     protected ConstraintLayout clyAnchorView;
 
@@ -217,56 +183,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         initViews();
     }
 
-    private void initSingView() {
-        singView.setVoiceRoom(voiceRoom);
-        singView.setUserInfo(createUser());
-        singView.setControlCallBack(() -> showChatRoomMixerDialog());
-        musicChangeListener = new MusicChangeListener() {
-
-            @Override
-            public void onListChange(List<MusicOrderedItem> musicList, boolean isInit) {
-                if (musicList == null || musicList.size() == 0) {
-                    singView.noSongOrdered();
-                    tvOrderedNum.setVisibility(View.GONE);
-                    updateSeat("");
-                    voiceRoom.getAudioPlay().onSingFinish(true, false);
-                    singView.cancelReady();
-                } else {
-                    tvOrderedNum.setVisibility(View.VISIBLE);
-                    voiceRoom.getAudioPlay().onSingStart();
-                    tvOrderedNum.setText(String.valueOf(musicList.size()));
-                    if (musicList.size() > 1) {
-                        singView.updateNextSong(musicList.get(1));
-                    } else {
-                        singView.updateNextSong(null);
-                    }
-                }
-            }
-
-            @Override
-            public void onSongChange(MusicOrderedItem music, boolean isMy, boolean isInit) {
-                if (music == null) {
-                    return;
-                }
-                singView.cancelReady();
-                if (music.countTimeSec <= 0) {
-                    singView.onMusicSing(music, isMy, true);
-                } else {
-                    singView.onReady(music, isMy);
-                    voiceRoom.getAudioPlay().onSingFinish(false, true);
-                }
-                updateSeat(music.userId);
-            }
-
-            @Override
-            public void onError(String msg) {
-                ToastHelper.showToast(msg);
-            }
-
-
-        };
-    }
-
     protected void updateSeat(String userId) {
         seatAdapter.setSingUser(userId);
         if (!TextUtils.isEmpty(anchorUserId) && !TextUtils.isEmpty(userId) && TextUtils.equals(userId, anchorUserId)) {
@@ -343,7 +259,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         int barHeight = ImmersionBar.getStatusBarHeight(this);
         baseAudioView.setPadding(baseAudioView.getPaddingLeft(), baseAudioView.getPaddingTop() + barHeight,
                 baseAudioView.getPaddingRight(), baseAudioView.getPaddingBottom());
-        singView = baseAudioView.findViewById(R.id.sing_view);
         clyAnchorView = baseAudioView.findViewById(R.id.cly_anchor_layout);
         ivAnchorAvatar = baseAudioView.findViewById(R.id.iv_liver_avatar);
         ivAnchorAudioCloseHint = baseAudioView.findViewById(R.id.iv_liver_audio_close_hint);
@@ -418,17 +333,10 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         tvRoomName.setText(name);
         String count = "在线" + voiceRoomInfo.getOnlineUserCount() + "人";
         tvMemberCount.setText(count);
-        if (isKtvModel) {
-            setKtvView();
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            recyclerView.setLayoutManager(layoutManager);
-            seatAdapter = new SeatAdapter(null, this, true);
-            initSingView();
-        } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-            seatAdapter = new SeatAdapter(null, this);
-        }
+
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        seatAdapter = new SeatAdapter(null, this);
+
         recyclerView.setAdapter(seatAdapter);
         seatAdapter.setItemClickListener(itemClickListener);
         seatAdapter.setItemLongClickListener(itemLongClickListener);
@@ -450,12 +358,9 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         });
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(clyAnchorView);
-        constraintSet.setVisibility(R.id.sing_view, ConstraintSet.VISIBLE);
         constraintSet.clear(R.id.cly_anchor_avatar);
         constraintSet.constrainHeight(R.id.cly_anchor_avatar, ConstraintSet.WRAP_CONTENT);
         constraintSet.constrainWidth(R.id.cly_anchor_avatar, ConstraintSet.WRAP_CONTENT);
-        constraintSet.connect(R.id.cly_anchor_avatar, ConstraintSet.TOP, R.id.sing_view, ConstraintSet.BOTTOM);
-        constraintSet.connect(R.id.cly_anchor_avatar, ConstraintSet.START, R.id.sing_view, ConstraintSet.START);
         constraintSet.clear(R.id.tv_liver_nick);
         constraintSet.constrainHeight(R.id.tv_liver_nick, ConstraintSet.WRAP_CONTENT);
         constraintSet.constrainWidth(R.id.tv_liver_nick, ScreenUtil.dip2px(this, 40));
@@ -468,7 +373,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         constraintSet.constrainWidth(R.id.recyclerview_seat, ConstraintSet.MATCH_CONSTRAINT);
         constraintSet.connect(R.id.recyclerview_seat, ConstraintSet.START, R.id.cly_anchor_avatar, ConstraintSet.END,
                 ScreenUtil.dip2px(this, 10));
-        constraintSet.connect(R.id.recyclerview_seat, ConstraintSet.END, R.id.sing_view, ConstraintSet.END);
         constraintSet.connect(R.id.recyclerview_seat, ConstraintSet.TOP, R.id.cly_anchor_avatar, ConstraintSet.TOP);
         constraintSet.applyTo(clyAnchorView);
         ConstraintLayout clyAnchorAvatar = findViewById(R.id.cly_anchor_avatar);
@@ -480,7 +384,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         constraintSetAvatar.constrainWidth(R.id.frame, ScreenUtil.dip2px(this, 40));
         constraintSetAvatar.constrainHeight(R.id.frame, ScreenUtil.dip2px(this, 40));
         constraintSetAvatar.applyTo(clyAnchorAvatar);
-        singView.setOrder((view) -> showMusicMenuDialog());
     }
 
     protected void scrollToBottom() {
@@ -513,22 +416,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         voiceRoom = NERtcVoiceRoom.sharedInstance(this);
         voiceRoom.init(BuildConfig.NERTC_APP_KEY, this);
         voiceRoom.initRoom(voiceRoomInfo, createUser());
-    }
-
-    @Override
-    protected void showNetError() {
-        super.showNetError();
-        if (isKtvModel) {
-            voiceRoom.getAudioPlay().pauseKtvMusic();
-        }
-    }
-
-    @Override
-    protected void loadSuccess() {
-        super.loadSuccess();
-        if (isKtvModel && singView != null && !singView.getPaused()) {
-            voiceRoom.getAudioPlay().resumeKtvMusic();
-        }
     }
 
 
@@ -586,9 +473,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
             finish();
         } else {
             loadSuccess();
-            if (isKtvModel) {
-                MusicSing.shareInstance().addMusicChangeListener(musicChangeListener);
-            }
         }
     }
 
@@ -599,9 +483,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
 
     @Override
     public void onRoomDismiss() {
-        if (isKtvModel) {
-            voiceRoom.getAudioPlay().onSingFinish(true, false);
-        }
         ChoiceDialog dialog = new NotificationDialog(this).setTitle("通知").setContent("该房间已被主播解散").setPositive("知道了",
                 v -> {
                     leaveRoom();
@@ -645,11 +526,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
     @Override
     public void updateSeats(List<VoiceRoomSeat> seats) {
         seatAdapter.setItems(seats);
-    }
-
-    @Override
-    public void onMusicStateChange(int type) {
-        singView.onMusicStateChange(type);
     }
 
     @Override
