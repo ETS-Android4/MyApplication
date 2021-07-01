@@ -20,6 +20,8 @@ import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.NetworkChange;
+import com.netease.audioroom.demo.util.NetworkUtils;
+import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
 
@@ -81,7 +83,7 @@ public class MainActivity extends BaseActivity {
 
         View toCreate = findViewById(R.id.iv_new_live);
         toCreate.setOnClickListener(v -> {
-            CreateRoomActivity.start(this, ChatRoomNetConstants.ROOM_TYPE_CHAT);
+            getRandomName();
         });
     }
 
@@ -141,5 +143,63 @@ public class MainActivity extends BaseActivity {
         } else {
             mEmptyView.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * 生成随机名
+     */
+    private void getRandomName() {
+        ChatRoomHttpClient.getInstance().getRandomTopic(new ChatRoomHttpClient.ChatRoomHttpCallback<String>() {
+
+            @Override
+            public void onSuccess(String s) {
+                if (s != null) {
+                    createRoom(s, ChatRoomNetConstants.PUSH_TYPE_CDN);
+                }
+            }
+
+            @Override
+            public void onFailed(int code, String errorMsg) {
+                // 获取随机名称失败；
+            }
+        });
+    }
+
+    /**
+     * 创建直播间
+     *
+     * @param roomName
+     * @param pushType ChatRoomNetConstants.PUSH_TYPE_RTC / ChatRoomNetConstants.PUSH_TYPE_CDN
+     */
+    private void createRoom(String roomName, int pushType) {
+        ChatRoomHttpClient.getInstance().createRoom(
+                DemoCache.getAccountId(),
+                roomName,
+                pushType,
+                ChatRoomNetConstants.ROOM_TYPE_CHAT,
+                new ChatRoomHttpClient.ChatRoomHttpCallback<VoiceRoomInfo>() {
+
+                    @Override
+                    public void onSuccess(VoiceRoomInfo roomInfo) {
+                        if (roomInfo != null) {
+                            roomInfo.setAudioQuality(DEFAULT_QUALITY);
+
+                            RoomActivity.start(MainActivity.this, roomInfo);
+                            finish();
+                        } else {
+                            ToastHelper.showToast(getString(R.string.crate_room_error));
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(int code, String errorMsg) {
+                        if (TextUtils.isEmpty(errorMsg)) {
+                            errorMsg = getString(R.string.params_error);
+                        } else {
+                            errorMsg = "服务器失败";
+                        }
+                        ToastHelper.showToast("创建失败:" + (!NetworkUtils.isNetworkConnected(MainActivity.this) ? "网络错误" : errorMsg));
+                    }
+                });
     }
 }
