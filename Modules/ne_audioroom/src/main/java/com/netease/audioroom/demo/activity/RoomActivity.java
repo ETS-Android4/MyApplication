@@ -67,7 +67,6 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     private Anchor anchor;
 
-
     @Override
     protected int getContentViewID() {
         return R.layout.activity_live;
@@ -164,17 +163,14 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
     }
 
     @Override
-    protected boolean onSeatItemLongClick(VoiceRoomSeat model, int position) {
-        return false;
-    }
-
-    @Override
     protected void doLeaveRoom() {
         new ChoiceDialog(RoomActivity.this)
                 .setTitle("确认结束直播？")
                 .setContent("请确认是否结束直播")
                 .setNegative(getString(R.string.cancel), null)
-                .setPositive("确认", v -> onSeatAction(null, "退出房间"))
+                .setPositive("确认", v ->
+                        onSeatAction(null, "退出房间")
+                )
                 .show();
     }
 
@@ -217,7 +213,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
                 openSeat(seat);
                 break;
             case "退出房间":
-                leaveRoom();
+                doLeaveRoom();
                 break;
         }
     }

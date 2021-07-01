@@ -45,13 +45,6 @@ public class NERtcVoiceRoomDef {
         void onRoomDismiss();
 
         /**
-         * 当前在线用户数量更新
-         *
-         * @param onlineUserCount 当前在线用户数量
-         */
-        void onOnlineUserCount(int onlineUserCount);
-
-        /**
          * 主播信息更新
          *
          * @param user {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 资料信息}
@@ -73,11 +66,18 @@ public class NERtcVoiceRoomDef {
         void onAnchorVolume(int volume);
 
         /**
+         * 当前在线用户数量更新
+         *
+         * @param onlineUserCount 当前在线用户数量
+         */
+        void onOnlineUserCount(int onlineUserCount);
+
+        /**
          * 静音状态
          *
          * @param muted 是否静音
          */
-        void onMute(boolean muted);
+        void onMuteLocalAudio(boolean muted);
 
         /**
          * 更新所有麦位信息
@@ -94,7 +94,7 @@ public class NERtcVoiceRoomDef {
         void updateSeat(VoiceRoomSeat seat);
 
         /**
-         * 麦位说话音量
+         * 麦位音量
          *
          * @param seat   {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
          * @param volume 说话音量0-100

@@ -25,6 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 class AnchorImpl implements Anchor {
+
     private static final int MUTE_DURATION = 30/*day*/
             * 24/*hour*/ * 60/*minute*/ * 60/*second*/;
 

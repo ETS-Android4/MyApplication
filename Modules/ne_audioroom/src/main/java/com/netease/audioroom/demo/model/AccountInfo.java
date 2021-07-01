@@ -59,7 +59,7 @@ public class AccountInfo implements Serializable {
         return null;
     }
 
-    public static long accountToVoiceUid(String accountId) {
+    public static long accountUid(String accountId) {
         long result = -1;
         try {
             result = Long.parseLong(accountId);

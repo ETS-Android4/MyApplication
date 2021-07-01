@@ -124,21 +124,21 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
         more.setVisibility(View.GONE);
         updateAudioSwitchVisible(false);
     }
-
-    @Override
-    protected void doLeaveRoom() {
-        if (!voiceRoomInfo.isSupportCDN()) {
-            super.doLeaveRoom();
-            return;
-        }
-        VoiceRoomSeat seat = audience.getSeat();
-        boolean isInChannel = seat != null && seat.isOn();
-        super.doLeaveRoom();
-        if (isInChannel) {
-            return;
-        }
-        finish();
-    }
+//
+//    @Override
+//    protected void doLeaveRoom() {
+//        if (!voiceRoomInfo.isSupportCDN()) {
+//            super.doLeaveRoom();
+//            return;
+//        }
+//        VoiceRoomSeat seat = audience.getSeat();
+//        boolean isInChannel = seat != null && seat.isOn();
+//        super.doLeaveRoom();
+//        if (isInChannel) {
+//            return;
+//        }
+//        finish();
+//    }
 
     @Override
     protected synchronized void onSeatItemClick(VoiceRoomSeat seat, int position) {
@@ -170,11 +170,6 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
                 ToastHelper.showToast("该麦位已被关闭");
                 break;
         }
-    }
-
-    @Override
-    protected boolean onSeatItemLongClick(VoiceRoomSeat model, int position) {
-        return false;
     }
 
     private boolean checkMySeat() {

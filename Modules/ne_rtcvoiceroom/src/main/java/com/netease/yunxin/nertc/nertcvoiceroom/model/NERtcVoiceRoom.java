@@ -18,14 +18,6 @@ public abstract class NERtcVoiceRoom {
     public static synchronized NERtcVoiceRoom sharedInstance(Context context) {
         return NERtcVoiceRoomImpl.sharedInstance(context);
     }
-
-    /**
-     * 销毁实例
-     */
-    public static void destroySharedInstance() {
-        NERtcVoiceRoomImpl.destroySharedInstance();
-    }
-
     /**
      * 初始化
      *

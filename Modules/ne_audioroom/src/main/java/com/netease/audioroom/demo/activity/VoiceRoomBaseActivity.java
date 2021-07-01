@@ -23,7 +23,6 @@ import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MessageListAdapter;
 import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
-import com.netease.audioroom.demo.base.adapter.BaseAdapter;
 import com.netease.audioroom.demo.dialog.ChatRoomMoreDialog;
 import com.netease.audioroom.demo.dialog.ChoiceDialog;
 import com.netease.audioroom.demo.dialog.MuteMemberDialog;
@@ -85,10 +84,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
     protected TextView tvInput;
     protected EditText edtInput;
 
-    private BaseAdapter.ItemClickListener<VoiceRoomSeat> itemClickListener = this::onSeatItemClick;
-
-    private BaseAdapter.ItemLongClickListener<VoiceRoomSeat> itemLongClickListener = this::onSeatItemLongClick;
-
     protected VoiceRoomInfo voiceRoomInfo;
 
     @Override
@@ -102,23 +97,10 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
             finish();
             return;
         }
-
         initVoiceRoom();
-        initViews();
-    }
-
-
-    private void initViews() {
-        findBaseView();
-        setupBaseViewInner();
+        initBaseView();
         setupBaseView();
         requestLivePermission();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        leaveRoom();
     }
 
     @Override
@@ -131,7 +113,13 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         }
     }
 
-    private void findBaseView() {
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        doLeaveRoom();
+    }
+
+    private void initBaseView() {
         View baseAudioView = findViewById(R.id.rl_base_audio_ui);
         if (baseAudioView == null) {
             throw new IllegalStateException("xml layout must include base_audio_ui.xml layout");
@@ -155,26 +143,28 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
 
         close = baseAudioView.findViewById(R.id.iv_leave_room);
         close.setOnClickListener(view ->
-                doLeaveRoom());
+                doLeaveRoom()
+        );
 
         //底部操作栏
         //麦克
         audio = baseAudioView.findViewById(R.id.iv_room_audio);
         audio.setOnClickListener(view ->
-                toggleMuteLocalAudio()
+                toMuteAudio()
         );
         //禁言
         mute = findViewById(R.id.iv_room_mute);
-        mute.setVisibility(View.VISIBLE);
         mute.setOnClickListener(view ->
-                new MuteMemberDialog(VoiceRoomBaseActivity.this, voiceRoomInfo).show());
+                new MuteMemberDialog(VoiceRoomBaseActivity.this, voiceRoomInfo).show()
+        );
 
         //更多
         more = baseAudioView.findViewById(R.id.iv_room_more);
         more.setOnClickListener(v ->
                 new ChatRoomMoreDialog(VoiceRoomBaseActivity.this, getMoreItems())
                         .registerOnItemClickListener(getMoreItemClickListener())
-                        .show());
+                        .show()
+        );
 
         mSeatRecyclerView = baseAudioView.findViewById(R.id.recyclerview_seat);
         mMsgRecyclerView = baseAudioView.findViewById(R.id.rcy_chat_message_list);
@@ -186,16 +176,14 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         edtInput = baseAudioView.findViewById(R.id.edt_input_text);
         edtInput.setOnEditorActionListener((v, actionId, event) -> {
             InputUtils.hideSoftInput(VoiceRoomBaseActivity.this, edtInput);
-            sendTextMessage();
+            String content = edtInput.getText().toString().trim();
+            if (TextUtils.isEmpty(content)) {
+                ToastHelper.showToast("请输入消息内容");
+            }
+            voiceRoom.sendTextMessage(content);
             return true;
         });
-    }
 
-    protected void doLeaveRoom() {
-        leaveRoom();
-    }
-
-    private void setupBaseViewInner() {
         String name = voiceRoomInfo.getName();
         name = TextUtils.isEmpty(name) ? voiceRoomInfo.getRoomId() : name;
         tvRoomName.setText(name);
@@ -206,8 +194,7 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         mSeatAdapter = new SeatAdapter(null, this);
 
         mSeatRecyclerView.setAdapter(mSeatAdapter);
-        mSeatAdapter.setItemClickListener(itemClickListener);
-        mSeatAdapter.setItemLongClickListener(itemLongClickListener);
+        mSeatAdapter.setItemClickListener(this::onSeatItemClick);
         mMsgLayoutManager = new LinearLayoutManager(this);
         mMsgRecyclerView.setLayoutManager(mMsgLayoutManager);
         mMsgAdapter = new MessageListAdapter(null, this);
@@ -215,8 +202,9 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         mMsgRecyclerView.setAdapter(mMsgAdapter);
     }
 
-    protected void scrollToBottom() {
-        mMsgLayoutManager.scrollToPosition(mMsgAdapter.getItemCount() - 1);
+    @NonNull
+    protected List<ChatRoomMoreDialog.MoreItem> getMoreItems() {
+        return Collections.emptyList();
     }
 
     protected abstract int getContentViewID();
@@ -225,38 +213,43 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
 
     protected abstract void onSeatItemClick(VoiceRoomSeat model, int position);
 
-    protected abstract boolean onSeatItemLongClick(VoiceRoomSeat model, int position);
-
-    @NonNull
-    protected List<ChatRoomMoreDialog.MoreItem> getMoreItems() {
-        return Collections.emptyList();
-    }
-
     protected ChatRoomMoreDialog.OnItemClickListener getMoreItemClickListener() {
         return onMoreItemClickListener;
     }
+
     //
     // NERtcVoiceRoom call
     //
 
+    /**
+     * 初始化直播间
+     */
     protected void initVoiceRoom() {
-        NERtcVoiceRoom.setAccountMapper(AccountInfo::accountToVoiceUid);
+        NERtcVoiceRoom.setAccountMapper(AccountInfo::accountUid);
         NERtcVoiceRoom.setMessageTextBuilder(messageTextBuilder);
         voiceRoom = NERtcVoiceRoom.sharedInstance(this);
         voiceRoom.init(BuildConfig.NERTC_APP_KEY, this);
         voiceRoom.initRoom(voiceRoomInfo, createUser());
     }
 
-
+    /**
+     * 进入直播间
+     */
     protected final void enterRoom(boolean anchorMode) {
         voiceRoom.enterRoom(anchorMode);
     }
 
-    protected final void leaveRoom() {
+    /**
+     * 离开直播间
+     */
+    protected void doLeaveRoom() {
         voiceRoom.leaveRoom();
     }
 
-    protected final void toggleMuteLocalAudio() {
+    /**
+     * 静音
+     */
+    protected final void toMuteAudio() {
         boolean muted = voiceRoom.muteLocalAudio(!voiceRoom.isLocalAudioMute());
         if (muted) {
             ToastHelper.showToast("话筒已关闭");
@@ -265,19 +258,9 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         }
     }
 
-    private void sendTextMessage() {
-        String content = edtInput.getText().toString().trim();
-        if (TextUtils.isEmpty(content)) {
-            ToastHelper.showToast("请输入消息内容");
-            return;
-        }
-        voiceRoom.sendTextMessage(content);
-    }
-
     //
     // RoomCallback
     //
-
     @Override
     public void onEnterRoom(boolean success) {
         if (!success) {
@@ -295,22 +278,17 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
 
     @Override
     public void onRoomDismiss() {
-        ChoiceDialog dialog = new NotificationDialog(this).setTitle("通知").setContent("该房间已被主播解散").setPositive("知道了",
-                v -> {
-                    leaveRoom();
-                    if (voiceRoomInfo
-                            .isSupportCDN()) {
+        ChoiceDialog dialog = new NotificationDialog(this)
+                .setTitle("通知")
+                .setContent("该房间已被主播解散")
+                .setPositive("知道了", v -> {
+                    doLeaveRoom();
+                    if (voiceRoomInfo.isSupportCDN()) {
                         finish();
                     }
                 });
         dialog.setCancelable(false);
         dialog.show();
-    }
-
-    @Override
-    public void onOnlineUserCount(int onlineUserCount) {
-        String count = "在线" + onlineUserCount + "人";
-        tvMemberCount.setText(count);
     }
 
     @Override
@@ -330,7 +308,13 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
     }
 
     @Override
-    public void onMute(boolean muted) {
+    public void onOnlineUserCount(int onlineUserCount) {
+        String count = "在线" + onlineUserCount + "人";
+        tvMemberCount.setText(count);
+    }
+
+    @Override
+    public void onMuteLocalAudio(boolean muted) {
         audio.setSelected(muted);
     }
 
@@ -363,9 +347,15 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
     @Override
     public void onVoiceRoomMessage(VoiceRoomMessage message) {
         mMsgAdapter.appendItem(message);
-        scrollToBottom();
+        mMsgLayoutManager.scrollToPosition(mMsgAdapter.getItemCount() - 1);
     }
 
+    /**
+     * 显示麦位音量
+     *
+     * @param view
+     * @param volume
+     */
     private static void showVolume(ImageView view, int volume) {
         volume = toStepVolume(volume);
         if (volume == 0) {
@@ -388,25 +378,26 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         return step;
     }
 
-    private static final VoiceRoomMessage.MessageTextBuilder messageTextBuilder = new VoiceRoomMessage.MessageTextBuilder() {
+    private static final VoiceRoomMessage.MessageTextBuilder messageTextBuilder =
+            new VoiceRoomMessage.MessageTextBuilder() {
 
-        @Override
-        public String roomEvent(String nick, boolean enter) {
-            String who = "“" + nick + "”";
-            String action = enter ? "进了房间" : "离开了房间";
-            return who + action;
-        }
+                @Override
+                public String roomEvent(String nick, boolean enter) {
+                    String who = "“" + nick + "”";
+                    String action = enter ? "进了房间" : "离开了房间";
+                    return who + action;
+                }
 
-        @Override
-        public String seatEvent(VoiceRoomSeat seat, boolean enter) {
-            VoiceRoomUser user = seat.getUser();
-            String nick = user != null ? user.getNick() : "";
-            String who = "“" + nick + "”";
-            String action = enter ? "进入了麦位" : "退出了麦位";
-            int position = seat.getIndex() + 1;
-            return who + action + position;
-        }
-    };
+                @Override
+                public String seatEvent(VoiceRoomSeat seat, boolean enter) {
+                    VoiceRoomUser user = seat.getUser();
+                    String nick = user != null ? user.getNick() : "";
+                    String who = "“" + nick + "”";
+                    String action = enter ? "进入了麦位" : "退出了麦位";
+                    int position = seat.getIndex() + 1;
+                    return who + action + position;
+                }
+            };
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -432,7 +423,7 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
             switch (item.id) {
                 case MORE_ITEM_MICRO_PHONE: { //麦克风
                     item.enable = !voiceRoom.isLocalAudioMute();
-                    toggleMuteLocalAudio();
+                    toMuteAudio();
                     break;
                 }
                 case MORE_ITEM_FINISH: { //关闭房间

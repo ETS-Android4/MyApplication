@@ -1,7 +1,6 @@
 package com.netease.audioroom.demo.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
-import com.netease.audioroom.demo.http.ChatRoomNetConstants;
-import com.netease.audioroom.demo.util.IconFontUtil;
 import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
