@@ -1,9 +1,12 @@
 package com.example.william.my.library.base;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Process;
 
+import com.example.william.my.library.helper.ActivityManager;
 import com.example.william.my.library.interfaces.IComponentApplication;
 
 import java.util.concurrent.Executors;
@@ -60,6 +63,8 @@ public class BaseApp extends Application {
                 modulesApplicationInitAsync();
             }
         });
+
+        //registerActivityLifecycleCallbacks();
     }
 
     private void modulesApplicationInit() {
@@ -88,5 +93,45 @@ public class BaseApp extends Application {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void registerActivityLifecycleCallbacks() {
+        //监听activity生命周期
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                ActivityManager.getInstance().addActivity(activity);
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+                ActivityManager.getInstance().removeActivity(activity);
+            }
+        });
     }
 }
