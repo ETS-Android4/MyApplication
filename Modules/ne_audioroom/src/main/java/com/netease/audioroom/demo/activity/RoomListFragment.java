@@ -81,26 +81,21 @@ public class RoomListFragment extends Fragment {
 
     private void initViews(View rootView) {
         setupEmptyFont();
-        // 每个item 16dp 的间隔
         chatRoomListAdapter = new ChatRoomListAdapter(getContext());
         chatRoomListAdapter.setItemClickListener((model, position) -> {
             //当前帐号创建的房间
-            if (model.getRoomType() == ChatRoomNetConstants.ROOM_TYPE_CHAT) {
-                model.setAudioQuality(DEFAULT_QUALITY);
-            } else if (model.getRoomType() == ChatRoomNetConstants.ROOM_TYPE_KTV) {
-                model.setAudioQuality(MUSIC_QUALITY);
-            }
+            model.setAudioQuality(DEFAULT_QUALITY);
+
             if (TextUtils.equals(DemoCache.getAccountId(), model.getCreatorAccount())) {
-                RoomActivity.start(getActivity(), model);
+                RoomActivity.start(getActivity(), model);//主播
             } else {
-                AudienceActivity.start(getActivity(), model);
+                AudienceActivity.start(getActivity(), model);//观众
             }
         });
         pullLoadMoreRecyclerView = rootView.findViewById(R.id.rv_room_list);
         //获取mRecyclerView对象
         RecyclerView recyclerView = pullLoadMoreRecyclerView.getRecyclerView();
         recyclerView.setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
-        recyclerView.addItemDecoration(getDecor(ScreenUtil.dip2px(getContext(), 8)));
         recyclerView.setVerticalScrollBarEnabled(true);
         pullLoadMoreRecyclerView.setRefreshing(true);
         pullLoadMoreRecyclerView.setFooterViewText("加载中");
@@ -149,7 +144,7 @@ public class RoomListFragment extends Fragment {
     private void fetchRoomList(PullLoadMoreRecyclerView pull, boolean refresh) {
         if (refresh) {
             dataSource.clear();
-            if (!NetworkUtils.isNetworkConnected(getContext())){
+            if (!NetworkUtils.isNetworkConnected(getContext())) {
                 chatRoomListAdapter.refreshList(dataSource);
                 pull.setPullLoadMoreCompleted();
                 showEmptyView();
@@ -177,8 +172,7 @@ public class RoomListFragment extends Fragment {
                         if (dataSource.isEmpty()) {
                             showEmptyView();
                         }
-                        ALog.e("FetchRoomList", "errorMsg is " + errorMsg +
-                                ", errorCode is " + code);
+                        ALog.e("FetchRoomList", "errorMsg is " + errorMsg + ", errorCode is " + code);
                     }
                 });
     }
@@ -189,9 +183,5 @@ public class RoomListFragment extends Fragment {
         } else {
             emptyView.setVisibility(View.GONE);
         }
-    }
-
-    public void refresh() {
-        fetchRoomList(pullLoadMoreRecyclerView, true);
     }
 }

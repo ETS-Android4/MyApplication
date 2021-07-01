@@ -65,8 +65,7 @@ import java.util.List;
 /**
  * 主播与观众基础页，包含所有的通用UI元素
  */
-public abstract class VoiceRoomBaseActivity extends BaseActivity implements RoomCallback,
-        ViewTreeObserver.OnGlobalLayoutListener {
+public abstract class VoiceRoomBaseActivity extends BaseActivity implements RoomCallback, ViewTreeObserver.OnGlobalLayoutListener {
 
     public static final String TAG = "AudioRoom";
 
@@ -100,11 +99,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
                 toggleMuteLocalAudio();
                 break;
             }
-//            case MORE_ITEM_SPEAKER: {
-//                item.enable = !voiceRoom.isRoomAudioMute();
-//                toggleMuteRoomAudio();
-//                break;
-//            }
             case MORE_ITEM_EAR_BACK: {
                 item.enable = !voiceRoom.isEarBackEnable();
                 enableEarback(item.enable);

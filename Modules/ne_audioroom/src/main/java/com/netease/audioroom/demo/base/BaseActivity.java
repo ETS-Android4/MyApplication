@@ -28,10 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected static final int LIVE_PERMISSION_REQUEST_CODE = 1001;
 
-    protected LoadService loadService;//提示页面
-
-    //监听登录状态
-    private Observer<StatusCode> onlineStatusObserver = statusCode -> onLoginEvent(statusCode);
+    protected LoadService<?> loadService;//提示页面
 
     // 权限控制
     protected static final String[] LIVE_PERMISSIONS = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -66,8 +63,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    /**
+     * 监听登录状态
+     */
     protected void registerObserver(boolean register) {
-        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(onlineStatusObserver, register);
+        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(this::onLoginEvent, register);
     }
 
     protected void showNetError() {
@@ -93,7 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public LoadService setLoadCallBack(Class<? extends BaseCallback> callback, Transport transport) {
+    public LoadService<?> setLoadCallBack(Class<? extends BaseCallback> callback, Transport transport) {
         return loadService.setCallBack(callback, transport);
     }
 
@@ -103,6 +103,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         MPermission.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 

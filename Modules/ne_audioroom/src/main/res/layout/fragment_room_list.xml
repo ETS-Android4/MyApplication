@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.netease.audioroom.demo.widget.pullloadmorerecyclerview.PullLoadMoreRecyclerView xmlns:tools="http://schemas.android.com/tools"
+    <com.netease.audioroom.demo.widget.pullloadmorerecyclerview.PullLoadMoreRecyclerView
         android:id="@+id/rv_room_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,10 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
+        android:layout_marginTop="@dimen/dimen_160"
         android:gravity="center_horizontal"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/dimen_160">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/room_list_empty_icon"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/color_E6E7EB"
-            android:textSize="@dimen/text_100"></TextView>
+            android:textSize="@dimen/text_100"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:text="@string/room_list_empty"
             android:textColor="@color/color_999999"
-            android:textSize="@dimen/text_14"></TextView>
+            android:textSize="@dimen/text_14"/>
 
     </LinearLayout>
 
