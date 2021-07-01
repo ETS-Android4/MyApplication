@@ -130,11 +130,7 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
 
     protected ImageView ivLocalAudioSwitch;
 
-    protected ImageView ivRoomAudioSwitch;
-
     protected TextView tvInput;
-
-    protected ImageView ivSettingSwitch;
 
     protected EditText edtInput;
 
@@ -267,11 +263,8 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         tvRoomName = baseAudioView.findViewById(R.id.tv_chat_room_name);
         tvMemberCount = baseAudioView.findViewById(R.id.tv_chat_room_member_count);
         settingsContainer = findViewById(R.id.settings_container);
-        tvOrderMusic = findViewById(R.id.tv_order_music);
         tvOrderedNum = findViewById(R.id.tv_ordered_num);
         settingsContainer.setOnClickListener(view -> settingsContainer.setVisibility(View.GONE));
-        ivSettingSwitch = baseAudioView.findViewById(R.id.iv_settings);
-        ivSettingSwitch.setOnClickListener(view -> settingsContainer.setVisibility(View.VISIBLE));
         findViewById(R.id.settings_action_container).setOnClickListener(view -> {
         });
         SeekBar skRecordingVolume = settingsContainer.findViewById(R.id.recording_volume_control);
@@ -290,8 +283,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
                 .registerOnItemClickListener(getMoreItemClickListener()).show());
         ivLocalAudioSwitch = baseAudioView.findViewById(R.id.iv_local_audio_switch);
         ivLocalAudioSwitch.setOnClickListener(view -> toggleMuteLocalAudio());
-        ivRoomAudioSwitch = baseAudioView.findViewById(R.id.iv_room_audio_switch);
-        ivRoomAudioSwitch.setOnClickListener(view -> toggleMuteRoomAudio());
         baseAudioView.findViewById(R.id.iv_leave_room).setOnClickListener(view -> doLeaveRoom());
         ivAnchorVolume = baseAudioView.findViewById(R.id.circle);
         recyclerView = baseAudioView.findViewById(R.id.recyclerview_seat);
@@ -434,16 +425,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         } else {
             ToastHelper.showToast("话筒已打开");
         }
-    }
-
-    protected final void toggleMuteRoomAudio() {
-        boolean muted = voiceRoom.muteRoomAudio(!voiceRoom.isRoomAudioMute());
-        if (muted) {
-            ToastHelper.showToast("已关闭“聊天室声音”");
-        } else {
-            ToastHelper.showToast("已打开“聊天室声音”");
-        }
-        ivRoomAudioSwitch.setSelected(muted);
     }
 
     protected void setAudioCaptureVolume(int volume) {

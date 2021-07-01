@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,7 +47,6 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
     );
 
     private TopTipsDialog topTipsDialog;
-    private ImageView ivLeaveSeat;
     private Audience audience;
 
     private final PublishSubject<VoiceRoomSeat> seatSource = PublishSubject.create();
@@ -123,8 +121,6 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
 
     @Override
     protected void setupBaseView() {
-        ivLeaveSeat = findViewById(R.id.iv_leave_seat);
-        ivLeaveSeat.setOnClickListener(view -> promptLeaveSeat());
         more.setVisibility(View.GONE);
         updateAudioSwitchVisible(false);
     }
@@ -361,9 +357,7 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
     }
 
     private void updateAudioSwitchVisible(boolean visible) {
-        ivSettingSwitch.setVisibility(visible ? View.VISIBLE : View.GONE);
         ivLocalAudioSwitch.setVisibility(visible ? View.VISIBLE : View.GONE);
-        ivLeaveSeat.setVisibility(visible ? View.VISIBLE : View.GONE);
         more.setVisibility(visible ? View.VISIBLE : View.GONE);
         MORE_ITEMS.get(MORE_ITEM_MICRO_PHONE).setVisible(visible);
     }
