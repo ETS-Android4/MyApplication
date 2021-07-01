@@ -65,7 +65,7 @@ public class NERtcVoiceRoomDef {
         /**
          * 主播静音状态
          *
-         * @param muted    是否静音
+         * @param muted 是否静音
          */
         void onAnchorMute(boolean muted);
 
@@ -79,28 +79,28 @@ public class NERtcVoiceRoomDef {
         /**
          * 静音状态
          *
-         * @param muted    是否静音
+         * @param muted 是否静音
          */
         void onMute(boolean muted);
 
         /**
          * 更新所有麦位信息
          *
-         * @param seats     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+         * @param seats {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
          */
         void updateSeats(List<VoiceRoomSeat> seats);
 
         /**
          * 更新麦位信息
          *
-         * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+         * @param seat {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
          */
         void updateSeat(VoiceRoomSeat seat);
 
         /**
          * 麦位说话音量
          *
-         * @param seat     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
+         * @param seat   {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位}
          * @param volume 说话音量0-100
          */
         void onSeatVolume(VoiceRoomSeat seat, int volume);

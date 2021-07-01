@@ -38,7 +38,7 @@
 
     <!--聊天室公告-->
     <TextView
-        android:id="@+id/tv_chat_room_announcement"
+        android:id="@+id/tv_room_announcement"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_below="@id/tv_chat_room_name"
@@ -56,10 +56,10 @@
         app:layout_constraintTop_toBottomOf="@id/tv_chat_room_name" />
 
     <TextView
-        android:id="@+id/tv_chat_room_member_count"
+        android:id="@+id/tv_room_member_count"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_alignTop="@id/tv_chat_room_announcement"
+        android:layout_alignTop="@id/tv_room_announcement"
         android:layout_alignParentEnd="true"
         android:background="@drawable/shape_corner_20_bg"
         android:gravity="center"
@@ -69,7 +69,7 @@
         android:textColor="#ffffff"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_chat_room_announcement" />
+        app:layout_constraintTop_toTopOf="@+id/tv_room_announcement" />
 
     <!-- 主播区域-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_chat_room_announcement">
+        app:layout_constraintTop_toBottomOf="@id/tv_room_announcement">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cly_anchor_avatar"
@@ -120,21 +120,11 @@
                 app:layout_constraintTop_toTopOf="@id/circle" />
 
             <ImageView
-                android:id="@+id/iv_liver_audio_close_hint"
+                android:id="@+id/iv_liver_audio"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/icon_seat_open_micro"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@id/iv_liver_avatar"
-                app:layout_constraintEnd_toEndOf="@id/iv_liver_avatar"
-                tools:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/iv_anchor_singing"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/icon_singing"
-                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/iv_liver_avatar"
                 app:layout_constraintEnd_toEndOf="@id/iv_liver_avatar"
                 tools:visibility="visible" />
@@ -217,7 +207,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_mute_other_text"
+        android:id="@+id/iv_room_mute"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginEnd="10dp"
@@ -231,7 +221,7 @@
         tools:visibility="visible" />
 
     <ImageView
-        android:id="@+id/iv_local_audio_switch"
+        android:id="@+id/iv_room_audio"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginEnd="10dp"
@@ -240,7 +230,7 @@
         android:padding="8dp"
         android:src="@drawable/selector_room_micro_phone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iv_mute_other_text" />
+        app:layout_constraintEnd_toStartOf="@+id/iv_room_mute" />
 
     <EditText
         android:id="@+id/edt_input_text"
@@ -260,6 +250,7 @@
         android:textColorHint="#bfbfbf"
         android:textSize="14sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -357,7 +357,7 @@ public class AudienceActivity extends VoiceRoomBaseActivity implements Audience.
     }
 
     private void updateAudioSwitchVisible(boolean visible) {
-        ivLocalAudioSwitch.setVisibility(visible ? View.VISIBLE : View.GONE);
+        audio.setVisibility(visible ? View.VISIBLE : View.GONE);
         more.setVisibility(visible ? View.VISIBLE : View.GONE);
         MORE_ITEMS.get(MORE_ITEM_MICRO_PHONE).setVisible(visible);
     }

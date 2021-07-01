@@ -12,31 +12,40 @@ public class NERtcCallbackExImpl implements NERtcCallbackEx {
     }
 
     @Override
-    public void onJoinChannel(int result, long channelId,long elapsed) {}
+    public void onJoinChannel(int result, long channelId, long elapsed) {
+    }
 
     @Override
-    public void onLeaveChannel(int result) {}
+    public void onLeaveChannel(int result) {
+    }
 
     @Override
-    public void onUserJoined(long uid) {}
+    public void onUserJoined(long uid) {
+    }
 
     @Override
-    public void onUserLeave(long uid, int reason) {}
+    public void onUserLeave(long uid, int reason) {
+    }
 
     @Override
-    public void onUserAudioStart(long uid) {}
+    public void onUserAudioStart(long uid) {
+    }
 
     @Override
-    public void onUserAudioStop(long uid) {}
+    public void onUserAudioStop(long uid) {
+    }
 
     @Override
-    public void onUserVideoStart(long uid,int maxProfile) {}
+    public void onUserVideoStart(long uid, int maxProfile) {
+    }
 
     @Override
-    public void onUserVideoStop(long uid) {}
+    public void onUserVideoStop(long uid) {
+    }
 
     @Override
-    public void onDisconnect(int reason) {}
+    public void onDisconnect(int reason) {
+    }
 
     @Override
     public void onClientRoleChange(int i, int i1) {
@@ -54,37 +63,48 @@ public class NERtcCallbackExImpl implements NERtcCallbackEx {
     }
 
     @Override
-    public void onUserAudioMute(long uid, boolean muted) {}
+    public void onUserAudioMute(long uid, boolean muted) {
+    }
 
     @Override
-    public void onUserVideoMute(long uid, boolean muted) {}
+    public void onUserVideoMute(long uid, boolean muted) {
+    }
 
     @Override
-    public void onFirstAudioDataReceived(long uid) {}
+    public void onFirstAudioDataReceived(long uid) {
+    }
 
     @Override
-    public void onFirstVideoDataReceived(long uid) {}
+    public void onFirstVideoDataReceived(long uid) {
+    }
 
     @Override
-    public void onFirstAudioFrameDecoded(long uid) {}
+    public void onFirstAudioFrameDecoded(long uid) {
+    }
 
     @Override
-    public void onFirstVideoFrameDecoded(long uid,int width, int height) {}
+    public void onFirstVideoFrameDecoded(long uid, int width, int height) {
+    }
 
     @Override
-    public void onUserVideoProfileUpdate(long uid, int maxProfile) {}
+    public void onUserVideoProfileUpdate(long uid, int maxProfile) {
+    }
 
     @Override
-    public void onAudioDeviceChanged(int selected) {}
+    public void onAudioDeviceChanged(int selected) {
+    }
 
     @Override
-    public void onAudioDeviceStateChange(int deviceType, int deviceState) {}
+    public void onAudioDeviceStateChange(int deviceType, int deviceState) {
+    }
 
     @Override
-    public void onVideoDeviceStageChange(int deviceState) {}
+    public void onVideoDeviceStageChange(int deviceState) {
+    }
 
     @Override
-    public void onConnectionTypeChanged(int newConnectionType) {}
+    public void onConnectionTypeChanged(int newConnectionType) {
+    }
 
     @Override
     public void onReconnectingStart() {
@@ -92,25 +112,32 @@ public class NERtcCallbackExImpl implements NERtcCallbackEx {
     }
 
     @Override
-    public void onReJoinChannel(int result, long channelId) {}
+    public void onReJoinChannel(int result, long channelId) {
+    }
 
     @Override
-    public void onAudioMixingStateChanged(int reason) {}
+    public void onAudioMixingStateChanged(int reason) {
+    }
 
     @Override
-    public void onAudioMixingTimestampUpdate(long timestampMs) {}
+    public void onAudioMixingTimestampUpdate(long timestampMs) {
+    }
 
     @Override
-    public void onAudioEffectFinished(int effectId) {}
+    public void onAudioEffectFinished(int effectId) {
+    }
 
     @Override
-    public void onLocalAudioVolumeIndication(int volume) {}
+    public void onLocalAudioVolumeIndication(int volume) {
+    }
 
     @Override
-    public void onRemoteAudioVolumeIndication(NERtcAudioVolumeInfo[] volumeArray, int totalVolume) {}
+    public void onRemoteAudioVolumeIndication(NERtcAudioVolumeInfo[] volumeArray, int totalVolume) {
+    }
 
     @Override
-    public void onLiveStreamState(String taskId, String pushUrl, int liveState) {}
+    public void onLiveStreamState(String taskId, String pushUrl, int liveState) {
+    }
 
     @Override
     public void onConnectionStateChanged(int i, int i1) {
@@ -139,10 +166,12 @@ public class NERtcCallbackExImpl implements NERtcCallbackEx {
 
 
     @Override
-    public void onError(int code) {}
+    public void onError(int code) {
+    }
 
     @Override
-    public void onWarning(int code) {}
+    public void onWarning(int code) {
+    }
 
     @Override
     public void onMediaRelayStatesChange(int i, String s) {

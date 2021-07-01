@@ -105,7 +105,7 @@ public interface Anchor {
         /**
          * 上麦请求列表
          *
-         * @param seats     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位列表}
+         * @param seats {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat 麦位列表}
          */
         void onApplySeats(List<VoiceRoomSeat> seats);
     }
@@ -113,7 +113,7 @@ public interface Anchor {
     /**
      * 设置主播回调
      *
-     * @param callback     {@link com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor.Callback 回调}
+     * @param callback {@link com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor.Callback 回调}
      */
     void setCallback(Callback callback);
 }

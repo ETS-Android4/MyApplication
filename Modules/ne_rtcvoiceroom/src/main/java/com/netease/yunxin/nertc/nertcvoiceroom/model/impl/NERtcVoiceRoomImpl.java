@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.GsonUtils;
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.lava.nertc.sdk.NERtcConstants;
 import com.netease.lava.nertc.sdk.NERtcEx;
 import com.netease.lava.nertc.sdk.NERtcOption;
@@ -43,9 +42,9 @@ import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.netease.nimlib.sdk.util.Entry;
+import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.Audience;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.AudioPlay;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.AccountMapper;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomCallback;
@@ -61,9 +60,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.CustomAttachParser;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.CustomAttachmentType;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.MusicControl;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.custom.StreamRestarted;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.MusicSing;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.SEI;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.impl.MusicSingImpl;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.SuccessCallback;
 
 import java.util.ArrayList;
@@ -116,10 +112,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
      */
     private VoiceRoomUser user;
 
-    /**
-     * 点歌服务
-     */
-    private MusicSing musicSing;
 
     /**
      * 主播模式
@@ -201,42 +193,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                 onLeaveRoom();
             }
         }
-
-        /**
-         * 通知混音状态
-         * 0 播放完成
-         * 1 播放出错
-         */
-        @Override
-        public void onAudioMixingStateChanged(int reason) {
-            if (audioPlay != null) {
-                audioPlay.onAudioMixingStateChanged(reason);
-            }
-        }
-
-        @Override
-        public void onAudioMixingTimestampUpdate(long timestampMs) {
-            musicSing.receiveSEIMsg(timestampMs);
-            String seiString = GsonUtils.toJson(new SEI(timestampMs));
-            engine.sendSEIMsg(seiString);
-        }
-
-        @Override
-        public void onRecvSEIMsg(long l, String s) {
-            SEI sei = GsonUtils.fromJson(s, SEI.class);
-            musicSing.receiveSEIMsg(sei.audio_mixing_pos);
-        }
-
-        /**
-         * 通知音效播放完成
-         */
-        @Override
-        public void onAudioEffectFinished(int effectId) {
-            if (audioPlay != null) {
-                audioPlay.onAudioEffectFinished(effectId);
-            }
-        }
-
         @Override
         public void onUserVideoStart(long uid, int maxProfile) {
             super.onUserVideoStart(uid, maxProfile);
@@ -266,8 +222,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     private final AnchorImpl anchor = new AnchorImpl(this);
 
     private final AudienceImpl audience = new AudienceImpl(this);
-
-    private AudioPlayImpl audioPlay;
 
     private StreamTaskControl streamTaskControl;
 
@@ -358,9 +312,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             if (!roomId.equals(change.roomId)) {
                 return;
             }
-            if (change.status == StatusCode.LOGINED && musicSing != null) {
-                musicSing.update();
-            }
             if (change.status.wontAutoLogin()) {
                 //
             }
@@ -410,7 +361,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     public void init(String appKey, RoomCallback callback) {
         roomCallback = callback;
         NERtcOption option = new NERtcOption();
-        musicSing = MusicSing.shareInstance();
         option.logLevel = NERtcConstants.LogLevel.DEBUG;
         try {
             engine.init(context, appKey, this.callback, option);
@@ -480,7 +430,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
 
                 initSeats();
                 initAnchorInfo();
-                initKtv();
             }
 
             @Override
@@ -613,14 +562,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    public AudioPlay getAudioPlay() {
-        if (audioPlay == null) {
-            audioPlay = new AudioPlayImpl(engine);
-        }
-        return audioPlay;
-    }
-
-    @Override
     public PushTypeSwitcher getPushTypeSwitcher() {
         if (switcher == null) {
             switcher = new PushTypeSwitcherImpl(context, engine, audience.getAudiencePlay());
@@ -650,9 +591,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         this.seats.set(seat.getIndex(), seat);
         if (roomCallback != null) {
             roomCallback.updateSeat(seat);
-        }
-        if (!seat.isOn() &&(seat.getReason() == VoiceRoomSeat.Reason.ANCHOR_KICK || seat.getReason() == VoiceRoomSeat.Reason.LEAVE)&& anchorMode) {
-            musicSing.leaveSet(seat.getUser(), false);
         }
     }
 
@@ -725,9 +663,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             enableEarback(false);
             // 设置音量汇报间隔 500ms
             engine.enableAudioVolumeIndication(true, 500);
-            if (!anchorMode) {
-                musicSing.update();
-            }
         }
 
         if (roomCallback != null) {
@@ -736,9 +671,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     private void onLeaveRoom() {
-        if (audioPlay!=null){
-            audioPlay.reset();
-        }
         engine.release();
         restoreInstanceInfo();
 
@@ -807,12 +739,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                 }
             }
         });
-    }
-
-    private void initKtv() {
-        musicSing.initRoom(chatRoomService, user, voiceRoomInfo.getRoomId());
-        musicSing.setAudienceInfo(anchorMode, audience);
-        musicSing.setRoomCallback(roomCallback);
     }
 
     private void initAnchorInfo(VoiceRoomUser user) {
@@ -947,24 +873,17 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
 
         if (type == ChatRoomQueueChangeType.OFFER || type == ChatRoomQueueChangeType.POLL) {
             String content = queueChange.getContent();
-            String key = queueChange.getKey();
             if (TextUtils.isEmpty(content)) {
                 return;
             }
-            if (MusicSingImpl.isMusicKey(key)) {
-                if (type == ChatRoomQueueChangeType.OFFER) {
-                    musicSing.addSongFromQueue(content);
-                } else {
-                    musicSing.removeSongFromQueue(content);
-                }
-            } else if (type == ChatRoomQueueChangeType.OFFER) {
+            if (type == ChatRoomQueueChangeType.OFFER) {
                 VoiceRoomSeat seat = VoiceRoomSeat.fromJson(content);
                 if (seat == null) {
                     return;
                 }
                 VoiceRoomSeat currentSeat = getSeat(seat.getIndex());
                 if (currentSeat != null && currentSeat.isOn() && seat.getStatus() == Status.INIT && seat.getReason() == VoiceRoomSeat.Reason.CANCEL_APPLY) {
-                    if (!anchorMode){
+                    if (!anchorMode) {
                         audience.initSeats(seats);
                     }
                     return;

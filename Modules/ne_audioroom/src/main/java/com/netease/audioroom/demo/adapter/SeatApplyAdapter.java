@@ -20,6 +20,7 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 import java.util.ArrayList;
 
 public class SeatApplyAdapter extends BaseAdapter<VoiceRoomSeat> {
+
     public interface IApplyAction {
         void refuse(VoiceRoomSeat seat);
 
@@ -58,11 +59,9 @@ public class SeatApplyAdapter extends BaseAdapter<VoiceRoomSeat> {
         } else {
             ALog.e("偶现看不到申请者情形", user.toString());
         }
-
-
     }
 
-    private class ApplyViewHolder extends RecyclerView.ViewHolder {
+    private static class ApplyViewHolder extends RecyclerView.ViewHolder {
         HeadImageView ivAvatar;
         ImageView ivRefuse;
         ImageView ivAfree;

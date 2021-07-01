@@ -17,7 +17,6 @@ public class SeatViewHolder extends RecyclerView.ViewHolder {
     ImageView iv_user_status;
     TextView tvNick;
     ImageView circle;
-    ImageView ivUserSinging;
     View avatarBg;
     LottieAnimationView applying;
 
@@ -28,7 +27,6 @@ public class SeatViewHolder extends RecyclerView.ViewHolder {
         tvNick = itemView.findViewById(R.id.tv_user_nick);
         iv_user_status = itemView.findViewById(R.id.iv_user_stats);
         circle = itemView.findViewById(R.id.circle);
-        ivUserSinging = itemView.findViewById(R.id.iv_user_singing);
         avatarBg = itemView.findViewById(R.id.avatar_bg);
         applying = itemView.findViewById(R.id.lav_apply);
     }

@@ -43,7 +43,7 @@ public class VoiceRoomMessage {
         /**
          * 房间事件
          *
-         * @param nick 昵称
+         * @param nick  昵称
          * @param enter 进入或退出房间
          * @return text
          */

@@ -4,11 +4,11 @@ import android.text.TextUtils;
 
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Reason;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.JsonUtil;
 
 import org.json.JSONException;

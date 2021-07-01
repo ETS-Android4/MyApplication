@@ -1,10 +1,8 @@
 package com.netease.audioroom.demo.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieDrawable;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
-import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Reason;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
@@ -20,34 +17,18 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
 
 import java.util.ArrayList;
 
+/**
+ * 麦位
+ */
 public class SeatAdapter extends BaseAdapter<VoiceRoomSeat> {
-
-    boolean isKtv;
-
-    String singingUser;//正在唱歌的人
 
     public SeatAdapter(ArrayList<VoiceRoomSeat> seats, Context context) {
         super(seats, context);
-
     }
-
-    public SeatAdapter(ArrayList<VoiceRoomSeat> seats, Context context, boolean isKtv) {
-        super(seats, context);
-        this.isKtv = isKtv;
-    }
-
 
     @Override
     protected RecyclerView.ViewHolder onCreateBaseViewHolder(ViewGroup parent, int viewType) {
-        if (isKtv) {
-            return new SeatViewHolder(layoutInflater.inflate(R.layout.item_seat_ktv, parent, false));
-        }
         return new SeatViewHolder(layoutInflater.inflate(R.layout.item_seat, parent, false));
-    }
-
-    public void setSingUser(String userId) {
-        singingUser = userId;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -57,11 +38,6 @@ public class SeatAdapter extends BaseAdapter<VoiceRoomSeat> {
             return;
         }
         SeatViewHolder viewHolder = (SeatViewHolder) holder;
-        if (isKtv) {
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.rightMargin = ScreenUtil.dip2px(context, 10);
-            viewHolder.itemView.setLayoutParams(layoutParams);
-        }
         int status = seat.getStatus();
         VoiceRoomUser user = seat.getUser();
 
@@ -144,18 +120,5 @@ public class SeatAdapter extends BaseAdapter<VoiceRoomSeat> {
             viewHolder.ivAvatar.setVisibility(View.INVISIBLE);
             viewHolder.avatarBg.setVisibility(View.INVISIBLE);
         }
-
-        if (isKtv) {
-            if (singingUser != null && seat.getAccount() != null && seat.isOn() && TextUtils.equals(seat.getAccount(), singingUser)) {
-                viewHolder.ivUserSinging.setVisibility(View.VISIBLE);
-            } else {
-                viewHolder.ivUserSinging.setVisibility(View.GONE);
-            }
-        } else {
-            viewHolder.ivUserSinging.setVisibility(View.GONE);
-        }
-
     }
-
-
 }

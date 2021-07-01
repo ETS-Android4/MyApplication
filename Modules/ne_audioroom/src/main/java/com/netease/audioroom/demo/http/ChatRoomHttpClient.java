@@ -1,20 +1,17 @@
 package com.netease.audioroom.demo.http;
 
 import com.netease.audioroom.demo.http.model.AccountInfoResp;
-import com.netease.audioroom.demo.http.model.MusicListResp;
 import com.netease.audioroom.demo.http.model.RoomInfoResp;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.android.lib.network.common.NetworkClient;
 import com.netease.yunxin.android.lib.network.common.transform.CommonScheduleThread;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.Music;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.annotations.NonNull;
@@ -192,35 +189,6 @@ public class ChatRoomHttpClient {
                 }
                 if (response.isSuccessful()) {
                     callback.onSuccess(null);
-                } else {
-                    callback.onFailed(response.code, response.msg);
-                }
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-                if (callback == null) {
-                    return;
-                }
-                e.printStackTrace();
-                callback.onFailed(-1, e.getMessage());
-            }
-        });
-    }
-
-    public void getMusicList(final ChatRoomHttpCallback<List<Music>> callback, int limit, int offset) {
-        ChatRoomApi api = NetworkClient.getInstance().getService(ChatRoomApi.class);
-        Map<String, Object> params = new HashMap<>(2);
-        params.put("limit", limit);
-        params.put("offset", offset);
-        api.getMusicList(params).compose(new CommonScheduleThread<>()).subscribe(new ResourceSingleObserver<BaseResponse<MusicListResp>>() {
-            @Override
-            public void onSuccess(@NonNull BaseResponse<MusicListResp> response) {
-                if (callback == null) {
-                    return;
-                }
-                if (response.isSuccessful()) {
-                    callback.onSuccess(response.data.list);
                 } else {
                     callback.onFailed(response.code, response.msg);
                 }

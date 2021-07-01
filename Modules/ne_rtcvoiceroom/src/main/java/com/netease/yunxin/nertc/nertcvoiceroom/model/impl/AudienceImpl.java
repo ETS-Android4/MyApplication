@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomInfo;
@@ -12,6 +11,7 @@ import com.netease.nimlib.sdk.chatroom.model.ChatRoomMember;
 import com.netease.nimlib.sdk.chatroom.model.EnterChatRoomResultData;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
+import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.Audience;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.AudiencePlay;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.StreamConfig;
@@ -20,7 +20,6 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Reason;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Status;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.MusicSing;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.DoneCallback;
 import com.netease.yunxin.nertc.nertcvoiceroom.util.RequestCallbackEx;
 
@@ -378,7 +377,6 @@ class AudienceImpl implements Audience {
             voiceRoom.getPushTypeSwitcher().toCDN(voiceRoomInfo.getStreamConfig().httpPullUrl);
         }
 
-        MusicSing.shareInstance().leaveSet(user, true);
         voiceRoom.enableEarback(false);
         voiceRoom.stopLocalAudio();
         if (callback != null) {

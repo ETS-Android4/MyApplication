@@ -144,12 +144,6 @@ public abstract class NERtcVoiceRoom {
      */
     public abstract void sendTextMessage(String text);
 
-    /**
-     * 获取播放接口
-     *
-     * @return 播放接口
-     */
-    public abstract AudioPlay getAudioPlay();
 
     /**
      * 获取推流方式切换开关

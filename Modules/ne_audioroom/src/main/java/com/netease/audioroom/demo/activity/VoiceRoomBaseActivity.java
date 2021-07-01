@@ -1,5 +1,6 @@
 package com.netease.audioroom.demo.activity;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -9,21 +10,16 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gyf.immersionbar.ImmersionBar;
 import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MessageListAdapter;
@@ -31,13 +27,10 @@ import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.ChatRoomMixerDialog;
 import com.netease.audioroom.demo.dialog.ChatRoomMoreDialog;
 import com.netease.audioroom.demo.dialog.ChoiceDialog;
-import com.netease.audioroom.demo.dialog.MusicMenuDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.NotificationDialog;
-import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.util.Network;
@@ -46,15 +39,12 @@ import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.util.ViewUtils;
 import com.netease.audioroom.demo.widget.HeadImageView;
 import com.netease.audioroom.demo.widget.VerticalItemDecoration;
-import com.netease.audioroom.demo.widget.VolumeSetup;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomCallback;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomMessage;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.MusicChangeListener;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.ktv.MusicSing;
 
 import java.util.Collections;
 import java.util.List;
@@ -68,99 +58,46 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
 
     public static final String EXTRA_VOICE_ROOM_INFO = "extra_voice_room_info";
 
-    private static final int KEY_BOARD_MIN_SIZE = ScreenUtil.dip2px(DemoCache.getContext(), 80);
-
-    protected static final int MORE_ITEM_MICRO_PHONE = 0;
-
-    protected static final int MORE_ITEM_FINISH = 5 - 1;
-
     protected NERtcVoiceRoom voiceRoom;
-
-
-    protected ChatRoomMoreDialog.OnItemClickListener onMoreItemClickListener = (dialog, itemView, item) -> {
-        switch (item.id) {
-            case MORE_ITEM_MICRO_PHONE: {
-                item.enable = !voiceRoom.isLocalAudioMute();
-                toggleMuteLocalAudio();
-                break;
-            }
-            case MORE_ITEM_FINISH: {
-                if (dialog != null && dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-                doLeaveRoom();
-                break;
-            }
-        }
-        return true;
-    };
-
-    //ktv
-    //protected SingingControlView singView;
-
-    protected ConstraintLayout clyAnchorView;
-
-    protected MusicMenuDialog musicMenuDialog;
-
-    protected MusicChangeListener musicChangeListener;
-
-    protected TextView tvOrderMusic;
-
-    protected TextView tvOrderedNum;
-
-    protected boolean isKtvModel;
-
-    //主播基础信息
-    protected HeadImageView ivAnchorAvatar;
-
-    protected ImageView ivAnchorAudioCloseHint;
-
-    protected ImageView ivAnchorSiniging;
-
-    protected TextView tvAnchorNick;
-
-    protected TextView tvRoomName;
-
-    protected TextView tvMemberCount;
-
-    private ImageView ivAnchorVolume;
-
-    // 各种控制开关
-    protected FrameLayout settingsContainer;
-
-    protected ImageView ivLocalAudioSwitch;
-
-    protected TextView tvInput;
-
-    protected EditText edtInput;
-
-    protected View more;
-
-    //聊天室队列（麦位）
-    protected RecyclerView recyclerView;
-
-    protected SeatAdapter seatAdapter;
-
-    //消息列表
-    protected RecyclerView rcyChatMsgList;
-
-    private LinearLayoutManager msgLayoutManager;
-
-    protected MessageListAdapter msgAdapter;
-
-    private int rootViewVisibleHeight;
 
     private View rootView;
 
-    private View announcement;
+    //主播信息
+    protected ConstraintLayout mAnchorView;
+    protected HeadImageView ivAnchorAvatar;
+    protected ImageView ivAnchorCircle;
+    protected ImageView ivAnchorAudio;
+    protected TextView tvAnchorNick;
+
+    //房间信息
+    protected TextView tvRoomName;
+    protected View tvAnnouncement;
+    protected TextView tvMemberCount;
+
+    //麦位
+    protected RecyclerView mSeatRecyclerView;
+    protected SeatAdapter mSeatAdapter;
+
+    //消息列表
+    protected RecyclerView mMsgRecyclerView;
+    protected MessageListAdapter mMsgAdapter;
+    protected LinearLayoutManager mMsgLayoutManager;
+
+    //底部操作栏按钮
+    protected ImageView close, audio, mute, more;
+
+    protected TextView tvInput;
+    protected EditText edtInput;
+
+
+    private int rootViewVisibleHeight;
+
 
     private BaseAdapter.ItemClickListener<VoiceRoomSeat> itemClickListener = this::onSeatItemClick;
 
     private BaseAdapter.ItemLongClickListener<VoiceRoomSeat> itemLongClickListener = this::onSeatItemLongClick;
 
     protected VoiceRoomInfo voiceRoomInfo;
-
-    protected String anchorUserId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -173,20 +110,11 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
             finish();
             return;
         }
-        isKtvModel = voiceRoomInfo.getRoomType() == ChatRoomNetConstants.ROOM_TYPE_KTV;
-        ImmersionBar.with(this).statusBarDarkFont(false).init();
+
         initVoiceRoom();
         initViews();
     }
 
-    protected void updateSeat(String userId) {
-        seatAdapter.setSingUser(userId);
-        if (!TextUtils.isEmpty(anchorUserId) && !TextUtils.isEmpty(userId) && TextUtils.equals(userId, anchorUserId)) {
-            ivAnchorSiniging.setVisibility(View.VISIBLE);
-        } else {
-            ivAnchorSiniging.setVisibility(View.GONE);
-        }
-    }
 
     private void initViews() {
         findBaseView();
@@ -202,19 +130,13 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         if (rootView != null) {
             rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
-        MusicSing.shareInstance().removeMusicChangeListener(musicChangeListener);
-        MusicSing.shareInstance().reset();
         super.onDestroy();
     }
 
     @Override
     public void onBackPressed() {
-        if (settingsContainer.getVisibility() == View.VISIBLE) {
-            settingsContainer.setVisibility(View.GONE);
-            return;
-        }
-        leaveRoom();
         super.onBackPressed();
+        leaveRoom();
     }
 
     @Override
@@ -238,9 +160,9 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
             return;
         }
         //根视图显示高度变大超过KEY_BOARD_MIN_SIZE，可以看作软键盘隐藏了
+        int KEY_BOARD_MIN_SIZE = ScreenUtil.dip2px(DemoCache.getContext(), 80);
         if (rootViewVisibleHeight - preHeight >= KEY_BOARD_MIN_SIZE) {
             scrollToBottom();
-            return;
         }
     }
 
@@ -249,52 +171,59 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         if (baseAudioView == null) {
             throw new IllegalStateException("xml layout must include base_audio_ui.xml layout");
         }
-        if (isKtvModel) {
-            baseAudioView.setBackgroundResource(R.drawable.ktv_bg_image);
-        }
-        int barHeight = ImmersionBar.getStatusBarHeight(this);
-        baseAudioView.setPadding(baseAudioView.getPaddingLeft(), baseAudioView.getPaddingTop() + barHeight,
-                baseAudioView.getPaddingRight(), baseAudioView.getPaddingBottom());
-        clyAnchorView = baseAudioView.findViewById(R.id.cly_anchor_layout);
-        ivAnchorAvatar = baseAudioView.findViewById(R.id.iv_liver_avatar);
-        ivAnchorAudioCloseHint = baseAudioView.findViewById(R.id.iv_liver_audio_close_hint);
-        ivAnchorSiniging = baseAudioView.findViewById(R.id.iv_anchor_singing);
-        tvAnchorNick = baseAudioView.findViewById(R.id.tv_liver_nick);
-        tvRoomName = baseAudioView.findViewById(R.id.tv_chat_room_name);
-        tvMemberCount = baseAudioView.findViewById(R.id.tv_chat_room_member_count);
-        settingsContainer = findViewById(R.id.settings_container);
-        tvOrderedNum = findViewById(R.id.tv_ordered_num);
-        settingsContainer.setOnClickListener(view -> settingsContainer.setVisibility(View.GONE));
-        findViewById(R.id.settings_action_container).setOnClickListener(view -> {
-        });
-        SeekBar skRecordingVolume = settingsContainer.findViewById(R.id.recording_volume_control);
-        skRecordingVolume.setOnSeekBarChangeListener(new VolumeSetup() {
 
-            @Override
-            protected void onVolume(int volume) {
-                setAudioCaptureVolume(volume);
-            }
+        // 主播信息
+        mAnchorView = baseAudioView.findViewById(R.id.cly_anchor_layout);
+        ivAnchorAvatar = baseAudioView.findViewById(R.id.iv_liver_avatar);
+        ivAnchorCircle = baseAudioView.findViewById(R.id.circle);
+        ivAnchorAudio = baseAudioView.findViewById(R.id.iv_liver_audio);
+        tvAnchorNick = baseAudioView.findViewById(R.id.tv_liver_nick);
+
+        // 房间信息
+        tvRoomName = baseAudioView.findViewById(R.id.tv_chat_room_name);
+        tvAnnouncement = baseAudioView.findViewById(R.id.tv_room_announcement);
+        tvAnnouncement.setOnClickListener(v -> {
+            new NoticeDialog()
+                    .show(getSupportFragmentManager(), "notice");
         });
-        SwitchCompat switchEarBack = settingsContainer.findViewById(R.id.ear_back);
-        switchEarBack.setChecked(false);
-        switchEarBack.setOnCheckedChangeListener((buttonView, isChecked) -> enableEarback(isChecked));
+        tvMemberCount = baseAudioView.findViewById(R.id.tv_room_member_count);
+
+        close = baseAudioView.findViewById(R.id.iv_leave_room);
+        close.setOnClickListener(view ->
+                doLeaveRoom());
+
+        //底部操作栏
+        //麦克
+        audio = baseAudioView.findViewById(R.id.iv_room_audio);
+        audio.setOnClickListener(view ->
+                toggleMuteLocalAudio()
+        );
+        //禁言
+        mute = findViewById(R.id.iv_room_mute);
+        mute.setVisibility(View.VISIBLE);
+        mute.setOnClickListener(view ->
+                MuteMembersActivity.start(VoiceRoomBaseActivity.this, voiceRoomInfo));
+        //更多
         more = baseAudioView.findViewById(R.id.iv_room_more);
-        more.setOnClickListener(v -> new ChatRoomMoreDialog(VoiceRoomBaseActivity.this, getMoreItems())
-                .registerOnItemClickListener(getMoreItemClickListener()).show());
-        ivLocalAudioSwitch = baseAudioView.findViewById(R.id.iv_local_audio_switch);
-        ivLocalAudioSwitch.setOnClickListener(view -> toggleMuteLocalAudio());
-        baseAudioView.findViewById(R.id.iv_leave_room).setOnClickListener(view -> doLeaveRoom());
-        ivAnchorVolume = baseAudioView.findViewById(R.id.circle);
-        recyclerView = baseAudioView.findViewById(R.id.recyclerview_seat);
-        rcyChatMsgList = baseAudioView.findViewById(R.id.rcy_chat_message_list);
+        more.setOnClickListener(v ->
+                new ChatRoomMoreDialog(VoiceRoomBaseActivity.this, getMoreItems())
+                        .registerOnItemClickListener(getMoreItemClickListener())
+                        .show());
+
+        mSeatRecyclerView = baseAudioView.findViewById(R.id.recyclerview_seat);
+        mMsgRecyclerView = baseAudioView.findViewById(R.id.rcy_chat_message_list);
+
         tvInput = baseAudioView.findViewById(R.id.tv_input_text);
-        tvInput.setOnClickListener(v -> InputUtils.showSoftInput(VoiceRoomBaseActivity.this, edtInput));
+        tvInput.setOnClickListener(v ->
+                InputUtils.showSoftInput(VoiceRoomBaseActivity.this, edtInput)
+        );
         edtInput = baseAudioView.findViewById(R.id.edt_input_text);
         edtInput.setOnEditorActionListener((v, actionId, event) -> {
             InputUtils.hideSoftInput(VoiceRoomBaseActivity.this, edtInput);
             sendTextMessage();
             return true;
         });
+
         InputUtils.registerSoftInputListener(this, new InputUtils.InputParamHelper() {
 
             @Override
@@ -306,11 +235,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
             public EditText getInputView() {
                 return edtInput;
             }
-        });
-        announcement = baseAudioView.findViewById(R.id.tv_chat_room_announcement);
-        announcement.setOnClickListener(v -> {
-            NoticeDialog noticeDialog = new NoticeDialog();
-            noticeDialog.show(getSupportFragmentManager(), noticeDialog.TAG);
         });
     }
 
@@ -325,60 +249,21 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         String count = "在线" + voiceRoomInfo.getOnlineUserCount() + "人";
         tvMemberCount.setText(count);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        seatAdapter = new SeatAdapter(null, this);
+        mSeatRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        mSeatAdapter = new SeatAdapter(null, this);
 
-        recyclerView.setAdapter(seatAdapter);
-        seatAdapter.setItemClickListener(itemClickListener);
-        seatAdapter.setItemLongClickListener(itemLongClickListener);
-        msgLayoutManager = new LinearLayoutManager(this);
-        rcyChatMsgList.setLayoutManager(msgLayoutManager);
-        msgAdapter = new MessageListAdapter(null, this);
-        rcyChatMsgList.addItemDecoration(new VerticalItemDecoration(Color.TRANSPARENT, ScreenUtil.dip2px(this, 5)));
-        rcyChatMsgList.setAdapter(msgAdapter);
-
-    }
-
-    /**
-     * 设置KTV布局
-     */
-    private void setKtvView() {
-        tvOrderMusic.setVisibility(View.VISIBLE);
-        tvOrderMusic.setOnClickListener((view) -> {
-            showMusicMenuDialog();
-        });
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(clyAnchorView);
-        constraintSet.clear(R.id.cly_anchor_avatar);
-        constraintSet.constrainHeight(R.id.cly_anchor_avatar, ConstraintSet.WRAP_CONTENT);
-        constraintSet.constrainWidth(R.id.cly_anchor_avatar, ConstraintSet.WRAP_CONTENT);
-        constraintSet.clear(R.id.tv_liver_nick);
-        constraintSet.constrainHeight(R.id.tv_liver_nick, ConstraintSet.WRAP_CONTENT);
-        constraintSet.constrainWidth(R.id.tv_liver_nick, ScreenUtil.dip2px(this, 40));
-        constraintSet.connect(R.id.tv_liver_nick, ConstraintSet.TOP, R.id.cly_anchor_avatar, ConstraintSet.BOTTOM,
-                ScreenUtil.dip2px(this, 10));
-        constraintSet.connect(R.id.tv_liver_nick, ConstraintSet.START, R.id.cly_anchor_avatar, ConstraintSet.START);
-        constraintSet.connect(R.id.tv_liver_nick, ConstraintSet.END, R.id.cly_anchor_avatar, ConstraintSet.END);
-        constraintSet.clear(R.id.recyclerview_seat);
-        constraintSet.constrainHeight(R.id.recyclerview_seat, ConstraintSet.WRAP_CONTENT);
-        constraintSet.constrainWidth(R.id.recyclerview_seat, ConstraintSet.MATCH_CONSTRAINT);
-        constraintSet.connect(R.id.recyclerview_seat, ConstraintSet.START, R.id.cly_anchor_avatar, ConstraintSet.END,
-                ScreenUtil.dip2px(this, 10));
-        constraintSet.connect(R.id.recyclerview_seat, ConstraintSet.TOP, R.id.cly_anchor_avatar, ConstraintSet.TOP);
-        constraintSet.applyTo(clyAnchorView);
-        ConstraintLayout clyAnchorAvatar = findViewById(R.id.cly_anchor_avatar);
-        ConstraintSet constraintSetAvatar = new ConstraintSet();
-        constraintSetAvatar.clone(clyAnchorAvatar);
-
-        constraintSetAvatar.constrainWidth(R.id.circle, ScreenUtil.dip2px(this, 40));
-        constraintSetAvatar.constrainHeight(R.id.circle, ScreenUtil.dip2px(this, 40));
-        constraintSetAvatar.constrainWidth(R.id.frame, ScreenUtil.dip2px(this, 40));
-        constraintSetAvatar.constrainHeight(R.id.frame, ScreenUtil.dip2px(this, 40));
-        constraintSetAvatar.applyTo(clyAnchorAvatar);
+        mSeatRecyclerView.setAdapter(mSeatAdapter);
+        mSeatAdapter.setItemClickListener(itemClickListener);
+        mSeatAdapter.setItemLongClickListener(itemLongClickListener);
+        mMsgLayoutManager = new LinearLayoutManager(this);
+        mMsgRecyclerView.setLayoutManager(mMsgLayoutManager);
+        mMsgAdapter = new MessageListAdapter(null, this);
+        mMsgRecyclerView.addItemDecoration(new VerticalItemDecoration(Color.TRANSPARENT, ScreenUtil.dip2px(this, 5)));
+        mMsgRecyclerView.setAdapter(mMsgAdapter);
     }
 
     protected void scrollToBottom() {
-        msgLayoutManager.scrollToPosition(msgAdapter.getItemCount() - 1);
+        mMsgLayoutManager.scrollToPosition(mMsgAdapter.getItemCount() - 1);
     }
 
     protected abstract int getContentViewID();
@@ -425,14 +310,6 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         } else {
             ToastHelper.showToast("话筒已打开");
         }
-    }
-
-    protected void setAudioCaptureVolume(int volume) {
-        voiceRoom.setAudioCaptureVolume(volume);
-    }
-
-    protected void enableEarback(boolean enable) {
-        voiceRoom.enableEarback(enable);
     }
 
     private void sendTextMessage() {
@@ -486,44 +363,43 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
     public void onAnchorInfo(VoiceRoomUser user) {
         ivAnchorAvatar.loadAvatar(user.avatar);
         tvAnchorNick.setText(user.nick);
-        anchorUserId = user.account;
     }
 
     @Override
     public void onAnchorMute(boolean muted) {
-        ivAnchorAudioCloseHint.setImageResource(muted ? R.drawable.icon_seat_close_micro : R.drawable.icon_seat_open_micro);
+        ivAnchorAudio.setImageResource(muted ? R.drawable.icon_seat_close_micro : R.drawable.icon_seat_open_micro);
     }
 
     @Override
     public void onAnchorVolume(int volume) {
-        showVolume(ivAnchorVolume, volume);
+        showVolume(ivAnchorCircle, volume);
     }
 
     @Override
     public void onMute(boolean muted) {
-        ivLocalAudioSwitch.setSelected(muted);
+        audio.setSelected(muted);
     }
 
     @Override
     public void updateSeats(List<VoiceRoomSeat> seats) {
-        seatAdapter.setItems(seats);
+        mSeatAdapter.setItems(seats);
     }
 
     @Override
     public void updateSeat(VoiceRoomSeat seat) {
-        seatAdapter.updateItem(seat.getIndex(), seat);
+        mSeatAdapter.updateItem(seat.getIndex(), seat);
     }
 
     @Override
     public void onSeatVolume(VoiceRoomSeat seat, int volume) {
-        if (recyclerView == null) {
-            recyclerView = findViewById(R.id.rl_base_audio_ui).findViewById(R.id.recyclerview_seat);
+        if (mSeatRecyclerView == null) {
+            mSeatRecyclerView = findViewById(R.id.rl_base_audio_ui).findViewById(R.id.recyclerview_seat);
         }
-        if (recyclerView.getLayoutManager() == null) {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        if (mSeatRecyclerView.getLayoutManager() == null) {
+            mSeatRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
         }
-        View itemView = recyclerView.getLayoutManager().findViewByPosition(seat.getIndex());
+        View itemView = mSeatRecyclerView.getLayoutManager().findViewByPosition(seat.getIndex());
         if (itemView != null) {
             ImageView circle = itemView.findViewById(R.id.circle);
             showVolume(circle, volume);
@@ -532,7 +408,7 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
 
     @Override
     public void onVoiceRoomMessage(VoiceRoomMessage message) {
-        msgAdapter.appendItem(message);
+        mMsgAdapter.appendItem(message);
         scrollToBottom();
     }
 
@@ -597,18 +473,31 @@ public abstract class VoiceRoomBaseActivity extends BaseActivity implements Room
         return super.dispatchTouchEvent(ev);
     }
 
-    private void showMusicMenuDialog() {
-        if (musicMenuDialog == null) {
-            musicMenuDialog = new MusicMenuDialog();
-        }
-        musicMenuDialog.setUser(createUser());
-        musicMenuDialog.show(getSupportFragmentManager(), musicMenuDialog.TAG);
-    }
+    protected static final int MORE_ITEM_MICRO_PHONE = 0; //麦克风
+
+    protected static final int MORE_ITEM_FINISH = 5 - 1; //关闭房间
 
     /**
-     * 显示调音台
+     * 底部操作栏 - 更多菜单
      */
-    public void showChatRoomMixerDialog() {
-        new ChatRoomMixerDialog(VoiceRoomBaseActivity.this, voiceRoom, isKtvModel).show();
-    }
+    protected ChatRoomMoreDialog.OnItemClickListener onMoreItemClickListener = new ChatRoomMoreDialog.OnItemClickListener() {
+        @Override
+        public boolean onItemClick(Dialog dialog, View itemView, ChatRoomMoreDialog.MoreItem item) {
+            switch (item.id) {
+                case MORE_ITEM_MICRO_PHONE: { //麦克风
+                    item.enable = !voiceRoom.isLocalAudioMute();
+                    toggleMuteLocalAudio();
+                    break;
+                }
+                case MORE_ITEM_FINISH: { //关闭房间
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                    doLeaveRoom();
+                    break;
+                }
+            }
+            return true;
+        }
+    };
 }

@@ -20,7 +20,7 @@ public class JsonUtil {
         }
     }
 
-    public static String getUnescapeJson(String escapeJson){
+    public static String getUnescapeJson(String escapeJson) {
         return null;
     }
 

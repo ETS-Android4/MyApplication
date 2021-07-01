@@ -5,7 +5,7 @@ import org.json.JSONObject;
 /**
  * Created by luc on 1/21/21.
  */
-public class StreamRestarted extends CustomAttachment{
+public class StreamRestarted extends CustomAttachment {
     public StreamRestarted() {
         super(CustomAttachmentType.STREAM_RESTARTED);
     }

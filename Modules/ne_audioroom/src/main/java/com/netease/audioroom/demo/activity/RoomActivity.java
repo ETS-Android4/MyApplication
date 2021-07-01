@@ -31,7 +31,6 @@ import com.netease.audioroom.demo.widget.OnItemClickListener;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.AudioPlay;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomSeat.Reason;
@@ -48,8 +47,6 @@ import java.util.List;
  * 直播
  */
 public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callback {
-
-    private static final int CODE_SELECT_FILE = 10001;
 
     /**
      * 底部菜单栏
@@ -75,7 +72,6 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     private Anchor anchor;
 
-    private AudioPlay audioPlay;
 
     @Override
     protected int getContentViewID() {
@@ -87,7 +83,6 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         super.onCreate(savedInstanceState);
 
         enterRoom(true);
-        checkMusicFiles();
         watchNetWork();
     }
 
@@ -119,9 +114,6 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
         topTipsDialog = new TopTipsDialog();
         tvApplyHint = findViewById(R.id.apply_hint);
 
-        ImageView ivMuteOtherText = findViewById(R.id.iv_mute_other_text);
-        ivMuteOtherText.setVisibility(View.VISIBLE);
-        ivMuteOtherText.setOnClickListener(view -> MuteMembersActivity.start(RoomActivity.this, voiceRoomInfo));
         tvApplyHint.setOnClickListener(
                 view -> showApplySeats(anchor.getApplySeats())
         );
@@ -200,6 +192,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 点击麦上动作
+     *
      * @param seat
      * @param item
      */
@@ -236,6 +229,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 展示麦上用户
+     *
      * @param seats
      */
     private void showApplySeats(List<VoiceRoomSeat> seats) {
@@ -263,81 +257,6 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
     }
 
     //
-    // play music files
-    //
-
-    private static final String MUSIC_DIR = "music";
-    private static final String MUSIC1 = "music1.mp3";
-    private static final String MUSIC2 = "music2.mp3";
-    private static final String MUSIC3 = "music3.mp3";
-    private static final String EFFECT1 = "effect1.wav";
-    private static final String EFFECT2 = "effect2.wav";
-
-    private String extractMusicFile(String path, String name) {
-        CommonUtil.copyAssetToFile(this, MUSIC_DIR + "/" + name, path, name);
-        return new File(path, name).getAbsolutePath();
-    }
-
-    private String ensureMusicDirectory() {
-        File dir = getExternalFilesDir(MUSIC_DIR);
-        if (dir == null) {
-            dir = getDir(MUSIC_DIR, 0);
-        }
-        if (dir != null) {
-            dir.mkdirs();
-            return dir.getAbsolutePath();
-        }
-        return "";
-    }
-
-    /**
-     * 检查音频文件
-     */
-    private void checkMusicFiles() {
-        new Thread(() -> {
-            String root = ensureMusicDirectory();
-
-            String[] effectPaths = new String[2];
-            effectPaths[0] = extractMusicFile(root, EFFECT1);
-            effectPaths[1] = extractMusicFile(root, EFFECT2);
-
-            audioPlay.setEffectFile(effectPaths);
-
-            String[] musicPaths = new String[4];
-            musicPaths[0] = extractMusicFile(root, MUSIC1);
-            musicPaths[1] = extractMusicFile(root, MUSIC2);
-            musicPaths[2] = extractMusicFile(root, MUSIC3);
-            musicPaths[3] = getAudioFixingFilePath();
-
-            audioPlay.setMixingFile(musicPaths);
-        }).start();
-    }
-
-    private static final String SHARED_PREFERENCES_NAME = "audio_room_pref";
-    private static final String KEY_AUDIO_MIXING_FILE_PATH = "audio_mixing_file_path";
-
-    //
-    // 音频
-    //
-    private String getAudioFixingFilePath() {
-        return getValueFromSharedPreferences(KEY_AUDIO_MIXING_FILE_PATH);
-    }
-
-    private void setAudioFixingFilePath(String path) {
-        saveToSharedPreferences(KEY_AUDIO_MIXING_FILE_PATH, path);
-    }
-
-    private void saveToSharedPreferences(String key, String value) {
-        SharedPreferences preference = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-        preference.edit().putString(key, value).apply();
-    }
-
-    private String getValueFromSharedPreferences(String key) {
-        SharedPreferences preference = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-        return preference.getString(key, null);
-    }
-
-    //
     // room call
     //
 
@@ -345,7 +264,6 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
     protected void initVoiceRoom() {
         super.initVoiceRoom();
         anchor = voiceRoom.getAnchor();
-        audioPlay = voiceRoom.getAudioPlay();
         anchor.setCallback(this);
     }
 
@@ -390,6 +308,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 同意上麦申请
+     *
      * @param seat
      */
     private void approveSeatApply(VoiceRoomSeat seat) {
@@ -408,6 +327,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 拒绝麦位申请
+     *
      * @param seat
      */
     private void denySeatApply(VoiceRoomSeat seat) {
@@ -425,6 +345,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 打开麦位
+     *
      * @param seat
      */
     public void openSeat(VoiceRoomSeat seat) {
@@ -469,6 +390,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 关闭麦位
+     *
      * @param seat
      */
     private void closeSeat(VoiceRoomSeat seat) {
@@ -483,6 +405,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 屏蔽麦位
+     *
      * @param seat
      */
     private void muteSeat(VoiceRoomSeat seat) {
@@ -499,6 +422,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 抱麦
+     *
      * @param seat
      */
     private void inviteSeat0(VoiceRoomSeat seat) {
@@ -518,6 +442,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 获取麦上用户
+     *
      * @param seats
      * @return
      */
@@ -536,6 +461,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 抱麦
+     *
      * @param member
      */
     private void inviteSeat(@NonNull VoiceRoomUser member) {
@@ -558,6 +484,7 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
 
     /**
      * 抱麦
+     *
      * @param member
      * @param index
      * @param seats
@@ -663,23 +590,5 @@ public class RoomActivity extends VoiceRoomBaseActivity implements Anchor.Callba
                         }
                     }
                 });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CODE_SELECT_FILE) {
-            if (resultCode == RESULT_OK) {
-                if (data != null) {
-                    AudioChooser.result(this, data, path -> {
-                        if (!TextUtils.isEmpty(path)) {
-                            setAudioFixingFilePath(path);
-                            audioPlay.setMixingFile(2, path);
-                        }
-                    });
-                }
-            }
-        }
     }
 }

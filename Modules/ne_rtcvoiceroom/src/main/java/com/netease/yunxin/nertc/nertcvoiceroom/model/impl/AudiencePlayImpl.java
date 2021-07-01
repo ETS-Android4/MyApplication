@@ -2,10 +2,10 @@ package com.netease.yunxin.nertc.nertcvoiceroom.model.impl;
 
 import android.text.TextUtils;
 
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.neliveplayer.sdk.NELivePlayer;
 import com.netease.neliveplayer.sdk.constant.NEBufferStrategy;
 import com.netease.neliveplayer.sdk.model.NEAutoRetryConfig;
+import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.AudiencePlay;
 
 import java.io.IOException;

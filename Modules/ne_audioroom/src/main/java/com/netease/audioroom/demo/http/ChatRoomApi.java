@@ -1,7 +1,6 @@
 package com.netease.audioroom.demo.http;
 
 import com.netease.audioroom.demo.http.model.AccountInfoResp;
-import com.netease.audioroom.demo.http.model.MusicListResp;
 import com.netease.audioroom.demo.http.model.RoomInfoResp;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 
@@ -19,9 +18,6 @@ import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_MUSI
 import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_MUTE_ALL;
 import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_RANDOM_TOPIC;
 
-/**
- * Created by luc on 12/23/20.
- */
 public interface ChatRoomApi {
 
     /**
@@ -54,20 +50,10 @@ public interface ChatRoomApi {
     @POST(URL_ROOM_MUTE_ALL)
     Single<BaseResponse<Void>> muteAll(@QueryMap Map<String, Object> body);
 
-    /**
-     * 获取歌单
-     *
-     * @param body
-     * @return
-     */
-    @POST(URL_ROOM_MUSIC_LIST)
-    Single<BaseResponse<MusicListResp>> getMusicList(@QueryMap Map<String, Object> body);
 
     /**
      * 获取随机主题
      */
     @POST(URL_ROOM_RANDOM_TOPIC)
     Single<BaseResponse<String>> getRandomTopic();
-
-
 }

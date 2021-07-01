@@ -2,7 +2,6 @@ package com.netease.yunxin.nertc.nertcvoiceroom.model.impl;
 
 import android.graphics.Color;
 
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.lava.nertc.sdk.NERtcEx;
 import com.netease.lava.nertc.sdk.live.AddLiveTaskCallback;
 import com.netease.lava.nertc.sdk.live.DeleteLiveTaskCallback;
@@ -10,6 +9,7 @@ import com.netease.lava.nertc.sdk.live.NERtcLiveStreamLayout;
 import com.netease.lava.nertc.sdk.live.NERtcLiveStreamTaskInfo;
 import com.netease.lava.nertc.sdk.live.NERtcLiveStreamUserTranscoding;
 import com.netease.lava.nertc.sdk.live.UpdateLiveTaskCallback;
+import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.Anchor;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.StreamTaskControl;
 
@@ -24,7 +24,7 @@ class StreamTaskControlImpl implements StreamTaskControl {
     private final Anchor anchor;
     private NERtcLiveStreamTaskInfo streamTaskInfo;
 
-    public StreamTaskControlImpl(Anchor anchor,NERtcEx engine) {
+    public StreamTaskControlImpl(Anchor anchor, NERtcEx engine) {
         this.engine = engine;
         this.anchor = anchor;
     }
