@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+    defaultConfig {
+        applicationId "com.netease.yunxin.app.chatroom"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 17
+        versionName "3.2.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    useLibrary 'org.apache.http.legacy'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // NIM app key for code
+    defaultConfig {
+        //test
+        //buildConfigField "String", "NIM_APP_KEY", "\"56813bdfbaa1c2a29bbea391ffbbe27a\""
+        // online
+        buildConfigField "String", "NIM_APP_KEY", "\"9ee2101a195b4044c4002d1972156396\""
+    }
+    // NERTC app key for code
+    defaultConfig {
+        buildConfigField "String", "NERTC_APP_KEY", "\"5887359c380d534ad99b33a07d8723e5\""
+    }
+    // base server url
+    defaultConfig {
+        //test
+        //buildConfigField "String", "SERVER_BASE_URL", "\"https://yiyong-qa.netease.im/voicechat/\""
+        // online
+        buildConfigField "String", "SERVER_BASE_URL", "\"https://yiyong.netease.im/voicechat/\""
+    }
+}
+
+//repositories {
+//    flatDir {
+//        dirs 'libs'
+//    }
+//}
+
+dependencies {
+    implementation project(':modules:ne_rtcvoiceroom')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation "android.arch.lifecycle:livedata:1.1.1"
+
+    implementation "com.blankj:utilcodex:1.30.6"
+    implementation 'com.netease.yunxin.kit:alog:1.0.0'
+
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+    implementation 'com.airbnb.android:lottie:3.5.0'
+
+    implementation "com.netease.nimlib:basesdk:8.2.0"
+    implementation "com.netease.nimlib:neliveplayer:2.7.1"
+
+    // 网络依赖
+    //implementation(name: 'netease-network', ext: 'aar')
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // 图片
+    //implementation(name: 'netease-picture', ext: 'aar')
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
+}

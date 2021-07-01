@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.loadsir.LoadSirUtil;
 import com.example.william.my.core.loadsir.callback.BaseCallback;
 import com.example.william.my.core.loadsir.callback.SuccessCallback;
@@ -23,11 +21,11 @@ public class LoadLayout extends FrameLayout {
     private Class<? extends BaseCallback> curCallback;
     private static final int CALLBACK_CUSTOM_INDEX = 1;
 
-    public LoadLayout(@NonNull Context context) {
+    public LoadLayout(Context context) {
         super(context);
     }
 
-    public LoadLayout(@NonNull Context context, BaseCallback.OnReloadListener onReloadListener) {
+    public LoadLayout(Context context, BaseCallback.OnReloadListener onReloadListener) {
         this(context);
         this.context = context;
         this.onReloadListener = onReloadListener;
