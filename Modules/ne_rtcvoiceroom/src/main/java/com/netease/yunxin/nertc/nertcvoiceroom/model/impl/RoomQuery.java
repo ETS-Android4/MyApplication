@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class RoomQuery {
+
     private static final int MUTE_DURATION = 30/*day*/
             * 24/*hour*/ * 60/*minute*/ * 60/*second*/;
 

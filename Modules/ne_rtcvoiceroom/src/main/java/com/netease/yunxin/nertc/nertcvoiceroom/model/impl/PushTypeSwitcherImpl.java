@@ -68,7 +68,6 @@ public class PushTypeSwitcherImpl implements PushTypeSwitcher {
         audiencePlay.release();
         int volumeIndex = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, getCallVolumeIndex(volumeIndex), AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
-        // 获取music 音量填充至 communication
     }
 
     private int getMusicVolumeIndex(int indexFromCall) {

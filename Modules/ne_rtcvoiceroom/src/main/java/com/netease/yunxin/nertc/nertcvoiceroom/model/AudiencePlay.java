@@ -1,7 +1,7 @@
 package com.netease.yunxin.nertc.nertcvoiceroom.model;
 
 /**
- * Created by luc on 1/18/21.
+ * 播放器接口
  */
 public interface AudiencePlay {
 
@@ -12,8 +12,6 @@ public interface AudiencePlay {
     boolean isPaused();
 
     void resume();
-
-    void stop();
 
     void release();
 

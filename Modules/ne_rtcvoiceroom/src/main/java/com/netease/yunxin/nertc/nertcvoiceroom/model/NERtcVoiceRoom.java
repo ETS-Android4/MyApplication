@@ -39,8 +39,7 @@ public abstract class NERtcVoiceRoom {
      * @param voiceRoomInfo {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomInfo 房间信息}
      * @param user          {@link com.netease.yunxin.nertc.nertcvoiceroom.model.VoiceRoomUser 资料信息}
      */
-    public abstract void initRoom(VoiceRoomInfo voiceRoomInfo,
-                                  VoiceRoomUser user);
+    public abstract void initRoom(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user);
 
     /**
      * 进入房间
