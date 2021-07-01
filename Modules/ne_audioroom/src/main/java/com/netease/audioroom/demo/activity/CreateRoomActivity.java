@@ -156,7 +156,7 @@ public class CreateRoomActivity extends AppCompatActivity {
                                                                     roomInfo.setAudioQuality(MUSIC_QUALITY);
                                                                 }
 
-                                                                AnchorActivity.start(CreateRoomActivity.this, roomInfo);
+                                                                RoomActivity.start(CreateRoomActivity.this, roomInfo);
                                                                 finish();
                                                             } else {
                                                                 ToastHelper.showToast(

@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.activity.AnchorActivity;
+import com.netease.audioroom.demo.activity.RoomActivity;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.util.Network;
@@ -150,7 +150,7 @@ public class CreateRoomNameDialog extends BaseDialogFragment {
                     public void onSuccess(VoiceRoomInfo roomInfo) {
                         if (roomInfo != null) {
                             roomInfo.setAudioQuality(audioQuality);
-                            AnchorActivity.start(context, roomInfo);
+                            RoomActivity.start(context, roomInfo);
                             dismiss();
                         } else {
                             ToastHelper.showToast("创建房间失败，返回信息为空");

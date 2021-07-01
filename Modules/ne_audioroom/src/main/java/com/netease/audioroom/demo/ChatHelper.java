@@ -43,19 +43,20 @@ public class ChatHelper {
                 return false;
             }
         };
-        NELivePlayer.init(context, config);
+        NELivePlayer.init(context.getApplicationContext(), config);
     }
 
     /**
-     * SDK 初始化
+     * IM 初始化
      */
     public static void initIM(Context context) {
-        NIMClient.init(context, getLoginInfo(), getOptions(context));
+        NIMClient.init(context, null, getOptions(context));
         if (NIMUtil.isMainProcess(context)) {
             // 注意：以下操作必须在主进程中进行
             // 1、UI相关初始化操作
             // 2、相关Service调用
             IconFontUtil.getInstance().init(context);
+            ALog.init(context, BuildConfig.DEBUG ? ALog.LEVEL_ALL : ALog.LEVEL_INFO);
         }
     }
 
