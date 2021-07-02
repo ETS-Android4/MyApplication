@@ -7,9 +7,9 @@ import com.netease.lava.nertc.sdk.NERtcConstants;
 import com.netease.lava.nertc.sdk.NERtcEx;
 import com.netease.lava.nertc.sdk.NERtcParameters;
 import com.netease.yunxin.kit.alog.ALog;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.PushTypeSwitcher;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.AudiencePlay;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.PushTypeSwitcher;
 
 /**
  * Created by luc on 1/19/21.

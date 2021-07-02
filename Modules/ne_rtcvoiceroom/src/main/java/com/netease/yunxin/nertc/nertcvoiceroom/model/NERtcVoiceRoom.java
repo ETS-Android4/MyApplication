@@ -10,6 +10,7 @@ import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.impl.NERtcVoiceRoomImpl;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Anchor;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Audience;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.PushTypeSwitcher;
 
 /**
  * 语聊房
