@@ -14,6 +14,9 @@ import com.netease.yunxin.nertc.nertcvoiceroom.util.ConvertCallback.Converter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 直播间请求
+ */
 public final class RoomQuery {
 
     private static final int MUTE_DURATION = 30/*day*/ * 24/*hour*/ * 60/*minute*/ * 60/*second*/;

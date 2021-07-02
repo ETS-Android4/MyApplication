@@ -377,8 +377,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         this.roomQuery = new RoomQuery(voiceRoomInfo, chatRoomService);
 
         anchor.initRoom(voiceRoomInfo);
-
-
     }
 
     @Override
@@ -545,7 +543,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    public void sendTextMessage(String text) {
+    public void sendMessage(String text) {
         sendMessage(text, false);
     }
 

@@ -33,6 +33,7 @@ import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.util.ViewUtils;
 import com.netease.audioroom.demo.widget.HeadImageView;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
+import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomCallback;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomMessage;
@@ -203,7 +204,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
             if (TextUtils.isEmpty(content)) {
                 ToastHelper.showToast("请输入消息内容");
             }
-            mNERtcVoiceRoom.sendTextMessage(content);
+            mNERtcVoiceRoom.sendMessage(content);
             return true;
         });
 
@@ -253,7 +254,12 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
      * 初始化直播间
      */
     private void initBaseRoom() {
-        NERtcVoiceRoom.setAccountMapper(AccountInfo::accountUid);
+        NERtcVoiceRoom.setAccountMapper(new NERtcVoiceRoomDef.AccountMapper() {
+            @Override
+            public long accountToVoiceUid(String account) {
+                return AccountInfo.accountUid(account);
+            }
+        });
         NERtcVoiceRoom.setMessageBuilder(new VoiceRoomMessage.MessageTextBuilder() {
             @Override
             public String roomEvent(String nick, boolean enter) {

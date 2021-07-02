@@ -16,7 +16,7 @@ public class LoginManager implements ILoginAction {
 
     private static final String TAG = "LoginManager";
 
-    private boolean isLogin = false;
+    private static boolean isLogin = false;
 
     private static final LoginManager instance = new LoginManager();
 
@@ -120,7 +120,7 @@ public class LoginManager implements ILoginAction {
         NIMSDK.getAuthService().logout();
     }
 
-    public boolean isLogin() {
+    public static boolean isLogin() {
         return isLogin;
     }
 

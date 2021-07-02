@@ -139,7 +139,7 @@ public abstract class NERtcVoiceRoom {
      *
      * @param text 文字内容
      */
-    public abstract void sendTextMessage(String text);
+    public abstract void sendMessage(String text);
 
 
     /**
