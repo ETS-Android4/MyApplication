@@ -6,9 +6,9 @@ import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.ToastHelper;
-import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.AbortableFuture;
+import com.netease.nimlib.sdk.NIMSDK;
 import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.yunxin.kit.alog.ALog;
 
@@ -28,14 +28,6 @@ public class LoginManager implements ILoginAction {
         return instance;
     }
 
-    public interface Callback {
-        void onSuccess(AccountInfo accountInfo);
-
-        void onFailed(int code, String errorMsg);
-    }
-
-    private Callback callback;
-
     @Override
     public void tryLogin() {
         final AccountInfo accountInfo = DemoCache.getAccountInfo();
@@ -45,7 +37,9 @@ public class LoginManager implements ILoginAction {
         }
         ALog.i("nim login: account = " + accountInfo.account + " token = " + accountInfo.token);
         LoginInfo loginInfo = new LoginInfo(accountInfo.account, accountInfo.token);
-        NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
+        //AbortableFuture<LoginInfo> future = NIMClient.getService(AuthService.class).login(loginInfo);
+        AbortableFuture<LoginInfo> future = NIMSDK.getAuthService().login(loginInfo);
+        future.setCallback(new RequestCallback<LoginInfo>() {
             @Override
             public void onSuccess(LoginInfo info) {
                 ALog.i("nim login success");
@@ -86,11 +80,12 @@ public class LoginManager implements ILoginAction {
         });
     }
 
-
     private void login(final AccountInfo accountInfo) {
         ALog.i("nim login:" + " account = " + accountInfo.account + " token = " + accountInfo.token);
         LoginInfo loginInfo = new LoginInfo(accountInfo.account, accountInfo.token);
-        NIMClient.getService(AuthService.class).login(loginInfo).setCallback(new RequestCallback<LoginInfo>() {
+        //AbortableFuture<LoginInfo> future = NIMClient.getService(AuthService.class).login(loginInfo);
+        AbortableFuture<LoginInfo> future = NIMSDK.getAuthService().login(loginInfo);
+        future.setCallback(new RequestCallback<LoginInfo>() {
             @Override
             public void onSuccess(LoginInfo info) {
                 ALog.i("nim login success");
@@ -120,12 +115,24 @@ public class LoginManager implements ILoginAction {
         ALog.i(TAG, "after login  , account = " + accountInfo.account + " , nick = " + accountInfo.nick);
     }
 
-    public void setCallback(Callback callback) {
-        this.callback = callback;
+    public void logout() {
+        //NIMClient.getService(AuthService.class).logout();
+        NIMSDK.getAuthService().logout();
     }
 
     public boolean isLogin() {
         return isLogin;
     }
 
+    private Callback callback;
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+    }
+
+    public interface Callback {
+        void onSuccess(AccountInfo accountInfo);
+
+        void onFailed(int code, String errorMsg);
+    }
 }

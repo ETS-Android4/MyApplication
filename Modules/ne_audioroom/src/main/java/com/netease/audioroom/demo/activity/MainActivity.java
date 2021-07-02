@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.LoginManager;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.RoomListAdapter;
@@ -91,10 +92,7 @@ public class MainActivity extends BaseActivity {
 
     // not need every time login. im auto login when network change
     private void onNetwork() {
-        LoginManager loginManager = LoginManager.getInstance();
-        loginManager.tryLogin();
-        loginManager.setCallback(new LoginManager.Callback() {
-
+        ChatHelper.loginIM(new LoginManager.Callback() {
             @Override
             public void onSuccess(AccountInfo accountInfo) {
                 loadSuccess();

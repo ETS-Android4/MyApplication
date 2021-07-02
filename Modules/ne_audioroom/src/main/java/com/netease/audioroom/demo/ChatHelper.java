@@ -7,7 +7,6 @@ import android.graphics.Color;
 import com.netease.neliveplayer.sdk.NELivePlayer;
 import com.netease.neliveplayer.sdk.model.NESDKConfig;
 import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.NIMSDK;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
@@ -70,8 +69,8 @@ public class ChatHelper {
      * 退出登录
      */
     public static void logoutIM() {
-        NIMSDK.getAuthService().logout();
-        //NIMClient.getService(AuthService.class).logout();
+        LoginManager loginManager = LoginManager.getInstance();
+        loginManager.logout();
     }
 
     private static LoginInfo getLoginInfo() {
