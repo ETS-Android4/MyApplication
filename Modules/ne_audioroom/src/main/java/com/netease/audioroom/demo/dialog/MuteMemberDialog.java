@@ -21,10 +21,10 @@ import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.interfaces.Anchor;
+import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
+import com.netease.yunxin.nertc.model.interfaces.Anchor;
 
 import java.util.ArrayList;
 import java.util.List;

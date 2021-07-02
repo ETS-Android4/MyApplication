@@ -22,11 +22,11 @@ import com.netease.audioroom.demo.util.NetworkUtils;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
 import com.netease.yunxin.kit.alog.ALog;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 
 import java.util.ArrayList;
 
-import static com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef.RoomAudioQuality.DEFAULT_QUALITY;
+import static com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomAudioQuality.DEFAULT_QUALITY;
 
 public class MainActivity extends BaseActivity {
 

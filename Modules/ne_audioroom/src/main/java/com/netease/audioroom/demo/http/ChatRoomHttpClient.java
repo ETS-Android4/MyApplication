@@ -6,7 +6,7 @@ import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.android.lib.network.common.NetworkClient;
 import com.netease.yunxin.android.lib.network.common.transform.CommonScheduleThread;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 
 import org.json.JSONException;
 

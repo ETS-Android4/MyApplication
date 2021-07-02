@@ -25,7 +25,7 @@ include ':modules:module_kotlin'
 include ':modules:module_sample'
 
 include ':modules:ne_audioroom'
-include ':modules:ne_rtcvoiceroom'
+include ':modules:ne_rtcaudioroom'
 
 //include ':modules:module_flutter'
 //include ':flutter_module'

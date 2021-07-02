@@ -14,10 +14,10 @@ import com.airbnb.lottie.LottieDrawable;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
 import com.netease.audioroom.demo.widget.HeadImageView;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Reason;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Reason;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 
 import java.util.ArrayList;
 

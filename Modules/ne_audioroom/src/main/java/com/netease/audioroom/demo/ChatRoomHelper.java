@@ -5,12 +5,12 @@ import android.content.Context;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.ToastHelper;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoom;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.NERtcVoiceRoomDef;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomInfo;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomMessage;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomUser;
+import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
+import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 
 public class ChatRoomHelper {
 

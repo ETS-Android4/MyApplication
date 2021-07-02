@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.SeatApplyAdapter;
 import com.netease.audioroom.demo.util.ScreenUtil;
-import com.netease.yunxin.nertc.nertcvoiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 
 import java.util.ArrayList;
 import java.util.Collection;
