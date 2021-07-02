@@ -99,9 +99,12 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
             finish();
             return;
         }
-        initRoom();
+        initBaseRoom();
         initBaseView();
-        setupBaseView();
+
+        setupRoom();
+        setupView();
+
         requestLivePermission();
     }
 
@@ -144,7 +147,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
 
         close = baseAudioView.findViewById(R.id.iv_leave_room);
         close.setOnClickListener(view ->
-                doLeaveRoom()
+                closeRoom()
         );
 
         //底部操作栏
@@ -177,7 +180,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
                                             if (dialog != null && dialog.isShowing()) {
                                                 dialog.dismiss();
                                             }
-                                            doLeaveRoom();
+                                            closeRoom();
                                             break;
                                         }
                                     }
@@ -234,9 +237,13 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
 
     protected abstract int getContentViewID();
 
-    protected abstract void setupBaseView();
+    protected abstract void setupRoom();
+
+    protected abstract void setupView();
 
     protected abstract void onSeatItemClick(VoiceRoomSeat seat, int position);
+
+    protected abstract void closeRoom();
 
     //
     // NERtcVoiceRoom call
@@ -245,7 +252,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     /**
      * 初始化直播间
      */
-    protected void initRoom() {
+    private void initBaseRoom() {
         NERtcVoiceRoom.setAccountMapper(AccountInfo::accountUid);
         NERtcVoiceRoom.setMessageBuilder(new VoiceRoomMessage.MessageTextBuilder() {
             @Override
@@ -296,10 +303,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         } else {
             ToastHelper.showToast("话筒已打开");
         }
-    }
-
-    protected void doLeaveRoom() {
-        leaveRoom();
     }
 
     //
@@ -357,7 +360,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         String count = "在线" + onlineUserCount + "人";
         tvMemberCount.setText(count);
     }
-
 
     @Override
     public void updateSeats(List<VoiceRoomSeat> seats) {

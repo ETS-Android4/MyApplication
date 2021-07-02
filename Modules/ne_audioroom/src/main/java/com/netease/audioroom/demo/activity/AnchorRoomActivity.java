@@ -84,13 +84,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         watchNetWork();
     }
 
-    @Override
-    protected void initRoom() {
-        super.initRoom();
-        anchor = mNERtcVoiceRoom.getAnchor();
-        anchor.setCallback(this);
-    }
-
     private void watchNetWork() {
         NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
             if (network != null && network.isConnected()) {
@@ -112,7 +105,13 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     }
 
     @Override
-    protected void setupBaseView() {
+    protected void setupRoom() {
+        anchor = mNERtcVoiceRoom.getAnchor();
+        anchor.setCallback(this);
+    }
+
+    @Override
+    protected void setupView() {
         mTopTipsDialog = new TopTipsDialog();
         tvApplyHint = findViewById(R.id.apply_hint);
         tvApplyHint.setVisibility(View.INVISIBLE);
@@ -167,7 +166,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     }
 
     @Override
-    protected void doLeaveRoom() {
+    protected void closeRoom() {
         new ChoiceDialog(AnchorRoomActivity.this)
                 .setTitle("确认结束直播？")
                 .setContent("请确认是否结束直播")

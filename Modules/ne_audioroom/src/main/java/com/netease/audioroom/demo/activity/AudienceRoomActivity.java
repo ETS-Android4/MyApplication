@@ -75,6 +75,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         return R.layout.activity_audience;
     }
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,30 +113,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                 }, Throwable::printStackTrace);
     }
 
-    @Override
-    protected void initRoom() {
-        super.initRoom();
-
-        audience = mNERtcVoiceRoom.getAudience();
-        audience.setCallback(this);
-        audience.getAudiencePlay().registerNotify(new AudiencePlay.PlayerNotify() {
-            @Override
-            public void onPreparing() {
-            }
-
-            @Override
-            public void onPlaying() {
-            }
-
-            @Override
-            public void onError() {
-                if (Network.getInstance().isConnected()) {
-                    ToastHelper.showToastLong("主播网络好像出了问题");
-                }
-            }
-        });
-    }
-
     private void watchNetWork() {
         NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
             if (network != null && network.isConnected()) {
@@ -161,9 +138,30 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         });
     }
 
+    @Override
+    protected void setupRoom() {
+        audience = mNERtcVoiceRoom.getAudience();
+        audience.setCallback(this);
+        audience.getAudiencePlay().registerNotify(new AudiencePlay.PlayerNotify() {
+            @Override
+            public void onPreparing() {
+            }
+
+            @Override
+            public void onPlaying() {
+            }
+
+            @Override
+            public void onError() {
+                if (Network.getInstance().isConnected()) {
+                    ToastHelper.showToastLong("主播网络好像出了问题");
+                }
+            }
+        });
+    }
 
     @Override
-    protected void setupBaseView() {
+    protected void setupView() {
         mTopTipsDialog = new TopTipsDialog();
         audio.setVisibility(View.GONE);
         more.setVisibility(View.GONE);
@@ -175,18 +173,15 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     }
 
     @Override
-    protected void doLeaveRoom() {
+    protected void closeRoom() {
         if (!mVoiceRoomInfo.isSupportCDN()) {
-            super.leaveRoom();
-            return;
+            finish();
         }
         VoiceRoomSeat seat = audience.getSeat();
         boolean isInChannel = seat != null && seat.isOn();
-        super.leaveRoom();
-        if (isInChannel) {
-            return;
+        if (!isInChannel) {
+            finish();
         }
-        finish();
     }
 
     //
