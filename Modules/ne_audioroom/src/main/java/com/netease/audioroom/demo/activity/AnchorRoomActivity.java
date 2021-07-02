@@ -530,17 +530,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
 
     @Override
     public void onLeaveRoom() {
-        Runnable runnable = AnchorRoomActivity.super::onLeaveRoom;
-        closeRoom(runnable);
-        runnable.run();
-    }
-
-    /**
-     * 关闭房间
-     *
-     * @param runnable
-     */
-    private void closeRoom(Runnable runnable) {
         ChatRoomHttpClient.getInstance().closeRoom(DemoCache.getAccountId(),
                 mVoiceRoomInfo.getRoomId(), new ChatRoomHttpClient.ChatRoomHttpCallback<BaseResponse<Void>>() {
 
@@ -548,9 +537,8 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                     public void onSuccess(BaseResponse<Void> response) {
                         loadSuccess();
                         ToastHelper.showToast("退出房间成功");
-                        if (runnable != null) {
-                            runnable.run();
-                        }
+                        Runnable runnable = () -> finish();
+                        runnable.run();
                     }
 
                     @Override
@@ -560,9 +548,8 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                         } else {
                             ToastHelper.showToast("房间解散失败 " + errorMsg);
                         }
-                        if (runnable != null) {
-                            runnable.run();
-                        }
+                        Runnable runnable = () -> finish();
+                        runnable.run();
                     }
                 });
     }
