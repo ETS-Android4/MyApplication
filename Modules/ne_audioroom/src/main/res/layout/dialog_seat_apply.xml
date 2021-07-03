@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/apply_list_dialog_bg"
+        android:background="@drawable/shape_dialog_apply_list"
         android:orientation="vertical">
 
         <TextView
@@ -24,7 +24,7 @@
             tools:text="sssss" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/requesterRecyclerView"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical" />
@@ -34,14 +34,14 @@
             android:layout_height="1px"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="#33ffffff" />
+            android:background="@color/color_ffffff" />
 
         <TextView
             android:id="@+id/dismiss"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_40"
             android:layout_gravity="center"
-            android:drawableRight="@drawable/arrow_up"
+            android:drawableEnd="@drawable/icon_arrow_up"
             android:gravity="center"
             android:padding="@dimen/dimen_5"
             android:paddingLeft="@dimen/dimen_30"

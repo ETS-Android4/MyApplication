@@ -27,7 +27,6 @@
     <!--退出房间-->
     <ImageView
         android:id="@+id/iv_leave_room"
-        style="@style/Base_Audio_UI_Switch"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_alignParentEnd="true"
@@ -151,10 +150,10 @@
             android:id="@+id/recyclerview_seat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginTop="28dp"
             android:overScrollMode="never"
-            app:layout_constraintTop_toBottomOf="@+id/tv_liver_nick" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_liver_nick"
+            tools:layout_editor_absoluteX="-104dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

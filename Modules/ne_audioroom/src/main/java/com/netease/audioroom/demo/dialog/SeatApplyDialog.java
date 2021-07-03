@@ -18,38 +18,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.SeatApplyAdapter;
-import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 上麦请求列表
+ */
 public class SeatApplyDialog extends BaseDialogFragment {
 
-    RecyclerView requesterRecyclerView;
-
-    SeatApplyAdapter adapter;
-
-    View view;
-
-    TextView title;
-
+    TextView tvTitle;
     TextView tvDismiss;
 
+    RecyclerView recyclerView;
+    SeatApplyAdapter adapter;
+
     private final List<VoiceRoomSeat> seats = new ArrayList<>();
-
-    public interface IRequestAction {
-
-        void refuse(VoiceRoomSeat seat);
-
-        void agree(VoiceRoomSeat seat);
-
-        void dismiss();
-
-    }
-
-    IRequestAction requestAction;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +57,12 @@ public class SeatApplyDialog extends BaseDialogFragment {
         } else {
             dismiss();
         }
-        view = inflater.inflate(R.layout.apply_list_dialog_layout, container, false);
+        return inflater.inflate(R.layout.dialog_seat_apply, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (getDialog() != null) {
             // 设置宽度为屏宽、靠近屏幕底部。
             final Window window = getDialog().getWindow();
@@ -80,22 +73,15 @@ public class SeatApplyDialog extends BaseDialogFragment {
             wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
             window.setAttributes(wlp);
         }
-        return view;
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initView();
+        initView(view);
         initListener();
-
     }
 
-    private void initView() {
-        requesterRecyclerView = view.findViewById(R.id.requesterRecyclerView);
-        requesterRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        int padding = ScreenUtil.dip2px(requesterRecyclerView.getContext(), 16);
-        title = view.findViewById(R.id.title);
+    private void initView(View view) {
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        tvTitle = view.findViewById(R.id.title);
         tvDismiss = view.findViewById(R.id.dismiss);
         buildHeadView();
         refresh();
@@ -103,8 +89,8 @@ public class SeatApplyDialog extends BaseDialogFragment {
 
     private void buildHeadView() {
         adapter = new SeatApplyAdapter(getActivity());
-        requesterRecyclerView.setAdapter(adapter);
-        requesterRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public void onMeasure(@NonNull RecyclerView.Recycler recycler, @NonNull RecyclerView.State state, int widthSpec, int heightSpec) {
                 int count = state.getItemCount();
@@ -145,11 +131,6 @@ public class SeatApplyDialog extends BaseDialogFragment {
         tvDismiss.setOnClickListener((v) -> dismiss());
     }
 
-    public void setRequestAction(IRequestAction requestAction) {
-        this.requestAction = requestAction;
-    }
-
-
     public void update(Collection<VoiceRoomSeat> seats) {
         this.seats.clear();
         this.seats.addAll(seats);
@@ -159,7 +140,7 @@ public class SeatApplyDialog extends BaseDialogFragment {
     }
 
     private void refresh() {
-        title.setText(getString(R.string.apply_micro, seats.size()));
+        tvTitle.setText(getString(R.string.apply_micro, seats.size()));
         adapter.setItems(seats);
     }
 
@@ -167,5 +148,21 @@ public class SeatApplyDialog extends BaseDialogFragment {
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         requestAction.dismiss();
+    }
+
+    IRequestAction requestAction;
+
+    public void setRequestAction(IRequestAction requestAction) {
+        this.requestAction = requestAction;
+    }
+
+    public interface IRequestAction {
+
+        void refuse(VoiceRoomSeat seat);
+
+        void agree(VoiceRoomSeat seat);
+
+        void dismiss();
+
     }
 }

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by luc on 1/29/21.
+ * 列表弹窗
  */
 public class ListItemDialog extends BottomBaseDialog {
 

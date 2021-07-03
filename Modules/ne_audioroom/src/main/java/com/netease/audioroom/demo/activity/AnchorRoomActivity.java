@@ -23,7 +23,6 @@ import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.ToastHelper;
-import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -55,7 +54,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     private Anchor anchor;
 
     private TextView tvApplyHint;
-    private SeatApplyDialog mSeatApplyDialog;
+    private SeatApplyDialog mSeatApplyDialog;//上麦请求列表
 
     @Override
     protected int getContentViewID() {
@@ -93,8 +92,8 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
 
     @Override
     protected void setupRoom() {
-        anchor = ChatRoomHelper.getNERtcVoiceRoom().getAnchor();
-        anchor.setCallback(this);
+        // 初始化主播
+        ChatRoomHelper.initAnchor(this);
     }
 
     @Override
@@ -103,8 +102,29 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         tvApplyHint = findViewById(R.id.apply_hint);
         tvApplyHint.setVisibility(View.INVISIBLE);
         tvApplyHint.setClickable(true);
-        tvApplyHint.setOnClickListener(view ->
-                showApplySeats(anchor.getApplySeats())
+        tvApplyHint.setOnClickListener(view -> {
+                    mSeatApplyDialog = new SeatApplyDialog();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList(mSeatApplyDialog.TAG, new ArrayList<>(ChatRoomHelper.getApplySeats()));
+                    mSeatApplyDialog.setArguments(bundle);
+                    mSeatApplyDialog.show(getSupportFragmentManager(), mSeatApplyDialog.TAG);
+                    mSeatApplyDialog.setRequestAction(new SeatApplyDialog.IRequestAction() {
+                        @Override
+                        public void refuse(VoiceRoomSeat seat) {
+                            ChatRoomHelper.denySeatApply(seat);
+                        }
+
+                        @Override
+                        public void agree(VoiceRoomSeat seat) {
+                            ChatRoomHelper.approveSeatApply(seat);
+                        }
+
+                        @Override
+                        public void dismiss() {
+
+                        }
+                    });
+                }
         );
     }
 
@@ -158,7 +178,9 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                 .setTitle("确认结束直播？")
                 .setContent("请确认是否结束直播")
                 .setNegative(getString(R.string.cancel), null)
-                .setPositive("确认", v -> onSeatAction(null, "退出房间"))
+                .setPositive("确认", v -> {
+                    onSeatAction(null, "退出房间");
+                })
                 .show();
     }
 
@@ -192,141 +214,43 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     }
 
     //
-    // ==========
+    // Anchor.Callback END
     //
 
     /**
-     * 展示麦上用户
-     *
-     * @param seats
-     */
-    private void showApplySeats(List<VoiceRoomSeat> seats) {
-        mSeatApplyDialog = new SeatApplyDialog();
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(mSeatApplyDialog.TAG, new ArrayList<>(seats));
-        mSeatApplyDialog.setArguments(bundle);
-        mSeatApplyDialog.show(getSupportFragmentManager(), mSeatApplyDialog.TAG);
-        mSeatApplyDialog.setRequestAction(new SeatApplyDialog.IRequestAction() {
-            @Override
-            public void refuse(VoiceRoomSeat seat) {
-                denySeatApply(seat);
-            }
-
-            @Override
-            public void agree(VoiceRoomSeat seat) {
-                approveSeatApply(seat);
-            }
-
-            @Override
-            public void dismiss() {
-
-            }
-        });
-    }
-
-    /**
-     * 拒绝麦位申请
-     *
-     * @param seat
-     */
-    private void denySeatApply(VoiceRoomSeat seat) {
-        VoiceRoomUser user = seat.getUser();
-        String nick = user != null ? user.getNick() : "";
-        final String text = "已拒绝“" + nick + "”的申请";
-        anchor.denySeatApply(seat, new SuccessCallback<Void>() {
-            @Override
-            public void onSuccess(Void param) {
-                ToastHelper.showToast(text);
-            }
-        });
-    }
-
-    /**
-     * 同意上麦申请
-     *
-     * @param seat
-     */
-    private void approveSeatApply(VoiceRoomSeat seat) {
-        final String text = "成功通过连麦请求";
-
-        boolean ret = anchor.approveSeatApply(seat, new SuccessCallback<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                ToastHelper.showToast(text);
-            }
-        });
-        if (!ret) {
-            denySeatApply(seat);
-        }
-    }
-
-    /**
      * 麦位菜单
-     *
-     * @param seat
-     * @param item
      */
     private void onSeatAction(VoiceRoomSeat seat, String item) {
         switch (item) {
             case "确定踢下麦位":
-                new ListItemDialog(AnchorRoomActivity.this).setOnItemClickListener(item1 -> {
-                    if ("确定踢下麦位".equals(item1)) {
-                        kickSeat(seat);
-                    }
-                }).show(Arrays.asList("确定踢下麦位", "取消"));
+                new ListItemDialog(AnchorRoomActivity.this)
+                        .setOnItemClickListener(item1 -> {
+                            if ("确定踢下麦位".equals(item1)) {
+                                ChatRoomHelper.kickSeat(seat);
+                            }
+                        })
+                        .show(Arrays.asList("确定踢下麦位", "取消"));
                 break;
             case "关闭麦位":
-                closeSeat(seat);
+                ChatRoomHelper.closeSeat(seat);
                 break;
             case "将成员抱上麦位":
                 inviteSeat0(seat);
                 break;
             case "将TA踢下麦位":
-                kickSeat(seat);
+                ChatRoomHelper.kickSeat(seat);
                 break;
             case "屏蔽麦位":
-                muteSeat(seat);
+                ChatRoomHelper.muteSeat(seat);
                 break;
             case "解除语音屏蔽":
             case "打开麦位":
-                openSeat(seat);
+                ChatRoomHelper.openSeat(seat);
                 break;
             case "退出房间":
                 ChatRoomHelper.leaveRoom();
                 break;
         }
-    }
-
-    /**
-     * 踢人
-     *
-     * @param seat
-     */
-    private void kickSeat(@NonNull VoiceRoomSeat seat) {
-        VoiceRoomUser user = seat.getUser();
-        String nick = user != null ? user.getNick() : "";
-        final String text = "已将“" + nick + "”踢下麦位";
-        anchor.kickSeat(seat, new SuccessCallback<Void>() {
-            @Override
-            public void onSuccess(Void param) {
-                ToastHelper.showToast(text);
-            }
-        });
-    }
-
-    /**
-     * 关闭麦位
-     *
-     * @param seat
-     */
-    private void closeSeat(VoiceRoomSeat seat) {
-        final String text = "\"麦位" + (seat.getIndex() + 1) + "\"已关闭";
-        anchor.closeSeat(seat, new SuccessCallback<Void>() {
-            @Override
-            public void onSuccess(Void param) {
-                ToastHelper.showToast(text);
-            }
-        });
     }
 
     private int inviteIndex = -1;
@@ -352,66 +276,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     }
 
     /**
-     * 屏蔽麦位
-     *
-     * @param seat
-     */
-    private void muteSeat(VoiceRoomSeat seat) {
-        final String text = "该麦位语音已被屏蔽，无法发言";
-        anchor.muteSeat(seat, new SuccessCallback<Void>() {
-            @Override
-            public void onSuccess(Void param) {
-                ToastHelper.showToast(text);
-            }
-        });
-    }
-
-    /**
-     * 打开麦位
-     *
-     * @param seat
-     */
-    public void openSeat(@NonNull VoiceRoomSeat seat) {
-        String msg = "";
-        String msgError = "";
-        switch (seat.getStatus()) {
-            case Status.CLOSED:
-                int position = seat.getIndex() + 1;
-                msg = "“麦位" + position + "”已打开”";
-                msgError = "“麦位" + position + "”打开失败”";
-                break;
-            case Status.FORBID:
-            case Status.AUDIO_MUTED:
-                msg = "“该麦位已“解除语音屏蔽”";
-                msgError = "该麦位“解除语音屏蔽”失败";
-                break;
-            case Status.AUDIO_CLOSED_AND_MUTED:
-                msg = "该麦位已“解除语音屏蔽”";
-                msgError = "该麦位“解除语音屏蔽”失败";
-                break;
-        }
-        String text = msg;
-        String textError = msgError;
-
-        anchor.openSeat(seat, new RequestCallback<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                ToastHelper.showToast(text);
-            }
-
-            @Override
-            public void onFailed(int i) {
-                ToastHelper.showToast(textError + " code " + i);
-            }
-
-            @Override
-            public void onException(Throwable throwable) {
-                ToastHelper.showToast(textError + " " + throwable.getMessage());
-            }
-        });
-    }
-
-    /**
      * 获取麦上用户
      *
      * @param seats
@@ -429,7 +293,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         }
         return accounts;
     }
-
 
     /**
      * 抱麦
@@ -481,12 +344,12 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         //拒绝申请麦位上不是选中用户的观众
         VoiceRoomSeat local = anchor.getSeat(index);
         if (local.getStatus() == Status.APPLY && !local.isSameAccount(account)) {
-            denySeatApply(local);
+            //denySeatApply(local);
         }
 
         //拒绝选中用户的观众在别的麦位的申请
         if (position != -1 && position != index) {
-            denySeatApply(anchor.getSeat(position));
+            //denySeatApply(anchor.getSeat(position));
         }
         inviteSeat(new VoiceRoomSeat(
                 index,
@@ -511,7 +374,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
             }
         });
         if (!ret) {
-            denySeatApply(seat);
+            //denySeatApply(seat);
         }
     }
 

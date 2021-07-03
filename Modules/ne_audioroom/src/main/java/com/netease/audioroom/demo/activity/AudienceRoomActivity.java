@@ -61,7 +61,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         return R.layout.activity_audience;
     }
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +75,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                         case Status.INIT:
                         case Status.FORBID:
                             if (checkSeat()) {
-                                applySeat(seat);
+                                ChatRoomHelper.applySeat(seat);
                             }
                             break;
                         case Status.APPLY:
@@ -126,24 +125,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
 
     @Override
     protected void setupRoom() {
-        audience = ChatRoomHelper.getNERtcVoiceRoom().getAudience();
-        audience.setCallback(this);
-        audience.getAudiencePlay().registerNotify(new AudiencePlay.PlayerNotify() {
-            @Override
-            public void onPreparing() {
-            }
-
-            @Override
-            public void onPlaying() {
-            }
-
-            @Override
-            public void onError() {
-                if (Network.getInstance().isConnected()) {
-                    ToastHelper.showToastLong("主播网络好像出了问题");
-                }
-            }
-        });
+        ChatRoomHelper.initAudience(this);
     }
 
     @Override
@@ -276,14 +258,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         }
     }
 
-    /**
-     * 更新底部操作栏按钮
-     *
-     * @param visible
-     */
-    private void updateBottomActionBar(boolean visible) {
-        mic.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
 
     /**
      * 麦位状态提示
@@ -372,29 +346,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     // ==========
     //
 
-    /**
-     * 上麦
-     *
-     * @param seat
-     */
-    public void applySeat(VoiceRoomSeat seat) {
-        audience.applySeat(seat, new RequestCallback<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                onApplySeatSuccess();
-            }
 
-            @Override
-            public void onFailed(int i) {
-                ToastHelper.showToast("请求连麦失败 ， code = " + i);
-            }
-
-            @Override
-            public void onException(Throwable throwable) {
-                ToastHelper.showToast("请求连麦异常 ， e = " + throwable);
-            }
-        });
-    }
 
     /**
      * 取消上麦
@@ -468,7 +420,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
             }
             mCancelApplyDialog = new ListItemDialog(AudienceRoomActivity.this).setOnItemClickListener(item -> {
                 if ("确认取消申请上麦".equals(item)) {
-                    cancelSeatApply();
+                    ChatRoomHelper.cancelSeatApply();
                     canShowTip = false;
                 }
             });
