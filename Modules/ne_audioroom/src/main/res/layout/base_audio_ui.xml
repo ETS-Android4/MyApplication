@@ -196,17 +196,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_room_more"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/seat_item_round_bg"
-        android:padding="8dp"
-        android:src="@drawable/icon_room_more"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
         android:id="@+id/iv_room_mute"
         android:layout_width="36dp"
         android:layout_height="36dp"
@@ -217,7 +206,7 @@
         android:src="@drawable/icon_room_mute"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iv_room_more"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible" />
 
     <ImageView
@@ -233,7 +222,7 @@
         app:layout_constraintEnd_toStartOf="@+id/iv_room_mute" />
 
     <ImageView
-        android:id="@+id/iv_room_aduio"
+        android:id="@+id/iv_room_audio"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginEnd="10dp"
@@ -245,7 +234,7 @@
         app:layout_constraintEnd_toStartOf="@+id/iv_room_mic" />
 
     <EditText
-        android:id="@+id/edt_input_text"
+        android:id="@+id/et_input_text"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="-8dp"

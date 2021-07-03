@@ -25,7 +25,6 @@ import com.netease.audioroom.demo.dialog.ChoiceDialog;
 import com.netease.audioroom.demo.dialog.MuteMemberDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.NotificationDialog;
-import com.netease.audioroom.demo.dialog.RoomMoreDialog;
 import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.ToastHelper;
@@ -37,7 +36,6 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,14 +44,6 @@ import java.util.List;
 public abstract class BaseRoomActivity extends BaseActivity implements RoomCallback {
 
     public static final String EXTRA_VOICE_ROOM_INFO = "extra_voice_room_info";
-
-    protected static final int MORE_ITEM_MICRO_PHONE = 0; //麦克风
-
-    protected static final int MORE_ITEM_FINISH = 5 - 1; //关闭房间
-
-    protected List<RoomMoreDialog.MoreItem> getMoreItems() {
-        return Collections.emptyList();
-    }
 
     //主播信息
     protected ConstraintLayout mAnchorView;
@@ -77,7 +67,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     protected LinearLayoutManager mMsgLayoutManager;
 
     //底部操作栏按钮
-    protected ImageView close, audio, mic, mute, more;
+    protected ImageView close, audio, mic, mute;
 
     //聊天框
     protected TextView tvInput;
@@ -154,7 +144,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         //底部操作栏
 
         //扬声器
-        audio = baseAudioView.findViewById(R.id.iv_room_aduio);
+        audio = baseAudioView.findViewById(R.id.iv_room_audio);
 
         //麦克
         mic = baseAudioView.findViewById(R.id.iv_room_mic);
@@ -171,30 +161,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
             mute.setVisibility(View.VISIBLE);
         }
 
-        //更多
-        more = baseAudioView.findViewById(R.id.iv_room_more);
-        more.setOnClickListener(v ->
-                new RoomMoreDialog(BaseRoomActivity.this, getMoreItems())
-                        .registerOnItemClickListener((dialog, itemView, item) -> {
-                                    switch (item.id) {
-                                        case MORE_ITEM_MICRO_PHONE: { //麦克风
-                                            item.enable = !ChatRoomHelper.isMicClosed();
-                                            ChatRoomHelper.closeMic();
-                                            break;
-                                        }
-                                        case MORE_ITEM_FINISH: { //关闭房间
-                                            if (dialog != null && dialog.isShowing()) {
-                                                dialog.dismiss();
-                                            }
-                                            closeRoom();
-                                            break;
-                                        }
-                                    }
-                                    return true;
-                                }
-                        ).show()
-        );
-
         mSeatRecyclerView = baseAudioView.findViewById(R.id.recyclerview_seat);
         mMsgRecyclerView = baseAudioView.findViewById(R.id.recyclerview_message);
 
@@ -202,7 +168,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         tvInput.setOnClickListener(v ->
                 InputUtils.showSoftInput(BaseRoomActivity.this, edtInput)
         );
-        edtInput = baseAudioView.findViewById(R.id.edt_input_text);
+        edtInput = baseAudioView.findViewById(R.id.et_input_text);
         edtInput.setOnEditorActionListener((v, actionId, event) -> {
             InputUtils.hideSoftInput(BaseRoomActivity.this, edtInput);
             String content = edtInput.getText().toString().trim();

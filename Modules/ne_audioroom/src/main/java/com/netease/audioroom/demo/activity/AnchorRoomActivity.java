@@ -17,7 +17,6 @@ import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.ChoiceDialog;
 import com.netease.audioroom.demo.dialog.ListItemDialog;
 import com.netease.audioroom.demo.dialog.MemberSelectDialog;
-import com.netease.audioroom.demo.dialog.RoomMoreDialog;
 import com.netease.audioroom.demo.dialog.SeatApplyDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialog;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
@@ -50,19 +49,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         if (context instanceof Activity) {
             ((Activity) context).overridePendingTransition(R.anim.in_from_right, R.anim.out_from_left);
         }
-    }
-
-    /**
-     * 底部菜单栏
-     */
-    private static final List<RoomMoreDialog.MoreItem> MORE_ITEMS = Arrays.asList(
-            new RoomMoreDialog.MoreItem(MORE_ITEM_MICRO_PHONE, R.drawable.selector_more_micro_phone_status, "麦克风"),
-            new RoomMoreDialog.MoreItem(MORE_ITEM_FINISH, R.drawable.icon_room_more_finish, "结束")
-    );
-
-    @Override
-    protected List<RoomMoreDialog.MoreItem> getMoreItems() {
-        return MORE_ITEMS;
     }
 
     private TopTipsDialog mTopTipsDialog;

@@ -15,7 +15,6 @@ import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.ListItemDialog;
 import com.netease.audioroom.demo.dialog.NotificationDialog;
-import com.netease.audioroom.demo.dialog.RoomMoreDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialog;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkChange;
@@ -30,8 +29,6 @@ import com.netease.yunxin.nertc.model.interfaces.AudiencePlay;
 import com.netease.yunxin.nertc.util.SuccessCallback;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
@@ -49,18 +46,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         if (context instanceof Activity) {
             ((Activity) context).overridePendingTransition(R.anim.in_from_right, R.anim.out_from_left);
         }
-    }
-
-    /**
-     * 底部菜单栏
-     */
-    private static final List<RoomMoreDialog.MoreItem> MORE_ITEMS = Collections.singletonList(
-            new RoomMoreDialog.MoreItem(MORE_ITEM_MICRO_PHONE, R.drawable.selector_more_micro_phone_status, "麦克风")
-    );
-
-    @Override
-    protected List<RoomMoreDialog.MoreItem> getMoreItems() {
-        return MORE_ITEMS;
     }
 
     private TopTipsDialog mTopTipsDialog;
@@ -165,7 +150,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     protected void setupView() {
         mTopTipsDialog = new TopTipsDialog();
         mic.setVisibility(View.GONE);
-        more.setVisibility(View.GONE);
     }
 
     @Override
@@ -228,7 +212,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
      */
     @Override
     public void onEnterSeat(VoiceRoomSeat seat, boolean last) {
-        updateBottomActionBar(true);
+        mic.setVisibility(View.VISIBLE);
         if (!last) {
             hintSeatState(seat, true);
         }
@@ -242,7 +226,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
      */
     @Override
     public void onLeaveSeat(VoiceRoomSeat seat, boolean bySelf) {
-        updateBottomActionBar(false);
+        mic.setVisibility(View.GONE);
         if (!bySelf) {
             hintSeatState(seat, false);
         }
@@ -299,8 +283,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
      */
     private void updateBottomActionBar(boolean visible) {
         mic.setVisibility(visible ? View.VISIBLE : View.GONE);
-        more.setVisibility(visible ? View.VISIBLE : View.GONE);
-        MORE_ITEMS.get(MORE_ITEM_MICRO_PHONE).setVisible(visible);
     }
 
     /**
