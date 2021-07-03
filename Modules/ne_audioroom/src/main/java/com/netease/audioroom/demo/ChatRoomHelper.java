@@ -16,6 +16,10 @@ public class ChatRoomHelper {
 
     private static NERtcVoiceRoom mNERtcVoiceRoom;
 
+    public static NERtcVoiceRoom getNERtcVoiceRoom() {
+        return mNERtcVoiceRoom;
+    }
+
     /**
      * 直播间初始化
      */
@@ -49,26 +53,10 @@ public class ChatRoomHelper {
         mNERtcVoiceRoom.initRoom(roomInfo, createUser());
     }
 
-    public static void joinRoom(boolean anchorMode) {
-        if (LoginManager.isLogin()) {
-            enterRoom(anchorMode);
-        } else {
-            ChatHelper.loginIM(new LoginManager.Callback() {
-                @Override
-                public void onSuccess(AccountInfo accountInfo) {
-                    enterRoom(anchorMode);
-                }
-
-                @Override
-                public void onFailed(int code, String errorMsg) {
-                    ToastHelper.showToast("加入房间失败");
-                }
-            });
-        }
-    }
-
     /**
      * 进入直播间
+     *
+     * @param anchorMode 是否为主播
      */
     public static void enterRoom(boolean anchorMode) {
         mNERtcVoiceRoom.enterRoom(anchorMode);
@@ -82,10 +70,17 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 静音
+     * 本地是否静音
      */
-    public static void muteAudio() {
-        boolean muted = mNERtcVoiceRoom.muteLocalAudio(!mNERtcVoiceRoom.isLocalAudioMute());
+    public static boolean isLocalAudioMute() {
+        return mNERtcVoiceRoom.isLocalAudioMute();
+    }
+
+    /**
+     * 关闭话筒
+     */
+    public static void muteLocalAudio() {
+        boolean muted = mNERtcVoiceRoom.muteLocalAudio(!isLocalAudioMute());
         if (muted) {
             ToastHelper.showToast("话筒已关闭");
         } else {

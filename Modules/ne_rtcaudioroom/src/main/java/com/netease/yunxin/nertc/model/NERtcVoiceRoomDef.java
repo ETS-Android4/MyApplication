@@ -81,14 +81,14 @@ public class NERtcVoiceRoomDef {
          *
          * @param seats {@link VoiceRoomSeat 麦位}
          */
-        void updateSeats(List<VoiceRoomSeat> seats);
+        void onUpdateSeats(List<VoiceRoomSeat> seats);
 
         /**
          * 更新麦位信息
          *
          * @param seat {@link VoiceRoomSeat 麦位}
          */
-        void updateSeat(VoiceRoomSeat seat);
+        void onUpdateSeat(VoiceRoomSeat seat);
 
         /**
          * 麦位音量

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.ChoiceDialog;
@@ -79,7 +80,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        enterRoom(true);
+        ChatRoomHelper.enterRoom(true);
 
         watchNetWork();
     }
@@ -106,7 +107,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
 
     @Override
     protected void setupRoom() {
-        anchor = mNERtcVoiceRoom.getAnchor();
+        anchor = ChatRoomHelper.getNERtcVoiceRoom().getAnchor();
         anchor.setCallback(this);
     }
 
@@ -305,7 +306,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                 openSeat(seat);
                 break;
             case "退出房间":
-                leaveRoom();
+                ChatRoomHelper.leaveRoom();
                 break;
         }
     }

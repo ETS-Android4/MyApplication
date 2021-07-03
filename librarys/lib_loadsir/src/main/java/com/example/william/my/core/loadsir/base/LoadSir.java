@@ -1,7 +1,5 @@
 package com.example.william.my.core.loadsir.base;
 
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.loadsir.LoadSirUtil;
 import com.example.william.my.core.loadsir.callback.BaseCallback;
 
@@ -28,7 +26,7 @@ public class LoadSir {
         this.builder = new Builder();
     }
 
-    private void setBuilder(@NonNull Builder builder) {
+    private void setBuilder(Builder builder) {
         this.builder = builder;
     }
 
@@ -36,7 +34,7 @@ public class LoadSir {
         this.builder = builder;
     }
 
-    public <T> LoadService<T> register(@NonNull Object target) {
+    public <T> LoadService<T> register(Object target) {
         return register(target, null, null);
     }
 
@@ -59,12 +57,12 @@ public class LoadSir {
         private final List<BaseCallback> callbacks = new ArrayList<>();
         private Class<? extends BaseCallback> defaultCallback;
 
-        public Builder addCallback(@NonNull BaseCallback callback) {
+        public Builder addCallback(BaseCallback callback) {
             callbacks.add(callback);
             return this;
         }
 
-        public Builder setDefaultCallback(@NonNull Class<? extends BaseCallback> defaultCallback) {
+        public Builder setDefaultCallback(Class<? extends BaseCallback> defaultCallback) {
             this.defaultCallback = defaultCallback;
             return this;
         }

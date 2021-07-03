@@ -34,9 +34,9 @@ android {
     // NIM app key for code
     defaultConfig {
         //test
-        //buildConfigField "String", "NIM_APP_KEY", "\"56813bdfbaa1c2a29bbea391ffbbe27a\""
+        buildConfigField "String", "NIM_APP_KEY", "\"56813bdfbaa1c2a29bbea391ffbbe27a\""
         // online
-        buildConfigField "String", "NIM_APP_KEY", "\"9ee2101a195b4044c4002d1972156396\""
+        //buildConfigField "String", "NIM_APP_KEY", "\"9ee2101a195b4044c4002d1972156396\""
     }
     // NERTC app key for code
     defaultConfig {
@@ -45,9 +45,9 @@ android {
     // base server url
     defaultConfig {
         //test
-        //buildConfigField "String", "SERVER_BASE_URL", "\"https://yiyong-qa.netease.im/voicechat/\""
+        buildConfigField "String", "SERVER_BASE_URL", "\"https://yiyong-qa.netease.im/voicechat/\""
         // online
-        buildConfigField "String", "SERVER_BASE_URL", "\"https://yiyong.netease.im/voicechat/\""
+        //buildConfigField "String", "SERVER_BASE_URL", "\"https://yiyong.netease.im/voicechat/\""
     }
 }
 

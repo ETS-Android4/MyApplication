@@ -576,7 +576,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     public void updateSeat(VoiceRoomSeat seat) {
         this.seats.set(seat.getIndex(), seat);
         if (roomCallback != null) {
-            roomCallback.updateSeat(seat);
+            roomCallback.onUpdateSeat(seat);
         }
     }
 
@@ -903,7 +903,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         this.seats.clear();
         this.seats.addAll(seats);
         if (roomCallback != null) {
-            roomCallback.updateSeats(this.seats);
+            roomCallback.onUpdateSeats(this.seats);
         }
     }
 

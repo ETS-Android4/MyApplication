@@ -10,6 +10,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.ListItemDialog;
@@ -80,7 +81,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        enterRoom(false);
+        ChatRoomHelper.enterRoom(false);
 
         watchNetWork();
 
@@ -140,7 +141,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
 
     @Override
     protected void setupRoom() {
-        audience = mNERtcVoiceRoom.getAudience();
+        audience = ChatRoomHelper.getNERtcVoiceRoom().getAudience();
         audience.setCallback(this);
         audience.getAudiencePlay().registerNotify(new AudiencePlay.PlayerNotify() {
             @Override
@@ -342,7 +343,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                     }
 
                     TopTipsDialog.Style style = new TopTipsDialog.Style("申请通过!",
-                            R.color.color_00000000,
+                            R.color.color_000000,
                             R.drawable.right,
                             R.color.color_000000);
                     bundle.putParcelable(mTopTipsDialog.TAG, style);

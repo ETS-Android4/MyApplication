@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.netease.audioroom.demo.BuildConfig;
+import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MessageListAdapter;
 import com.netease.audioroom.demo.adapter.SeatAdapter;
@@ -26,14 +26,12 @@ import com.netease.audioroom.demo.dialog.MuteMemberDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.NotificationDialog;
 import com.netease.audioroom.demo.dialog.RoomMoreDialog;
-import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.util.ViewUtils;
 import com.netease.audioroom.demo.widget.HeadImageView;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomCallback;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
@@ -87,7 +85,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     protected EditText edtInput;
 
     protected VoiceRoomInfo mVoiceRoomInfo;
-    protected NERtcVoiceRoom mNERtcVoiceRoom;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -100,8 +97,10 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
             finish();
             return;
         }
-        initBaseRoom();
-        initBaseView();
+        //聊天室初始化
+        ChatRoomHelper.initRoom(this, mVoiceRoomInfo, this);
+
+        initView();
 
         setupRoom();
         setupView();
@@ -119,13 +118,15 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         }
     }
 
+    /**
+     * 屏蔽返回按键
+     */
     @Override
     public void onBackPressed() {
-        leaveRoom();
-        super.onBackPressed();
+
     }
 
-    private void initBaseView() {
+    private void initView() {
         View baseAudioView = findViewById(R.id.rl_base_audio_ui);
         if (baseAudioView == null) {
             throw new IllegalStateException("xml layout must include base_audio_ui.xml layout");
@@ -155,9 +156,9 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         //麦克
         audio = baseAudioView.findViewById(R.id.iv_room_audio);
         audio.setOnClickListener(view ->
-                muteAudio()
+                ChatRoomHelper.muteLocalAudio()
         );
-        //禁言
+        //禁言 管理员可见
         mute = findViewById(R.id.iv_room_mute);
         mute.setOnClickListener(view ->
                 new MuteMemberDialog(BaseRoomActivity.this, mVoiceRoomInfo).show()
@@ -173,8 +174,8 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
                         .registerOnItemClickListener((dialog, itemView, item) -> {
                                     switch (item.id) {
                                         case MORE_ITEM_MICRO_PHONE: { //麦克风
-                                            item.enable = !mNERtcVoiceRoom.isLocalAudioMute();
-                                            muteAudio();
+                                            item.enable = !ChatRoomHelper.isLocalAudioMute();
+                                            ChatRoomHelper.muteLocalAudio();
                                             break;
                                         }
                                         case MORE_ITEM_FINISH: { //关闭房间
@@ -204,7 +205,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
             if (TextUtils.isEmpty(content)) {
                 ToastHelper.showToast("请输入消息内容");
             }
-            mNERtcVoiceRoom.sendMessage(content);
+            ChatRoomHelper.sendMessage(content);
             return true;
         });
 
@@ -247,74 +248,8 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     protected abstract void closeRoom();
 
     //
-    // NERtcVoiceRoom call
-    //
-
-    /**
-     * 初始化直播间
-     */
-    private void initBaseRoom() {
-        NERtcVoiceRoom.setAccountMapper(new NERtcVoiceRoomDef.AccountMapper() {
-            @Override
-            public long accountToVoiceUid(String account) {
-                return AccountInfo.accountUid(account);
-            }
-        });
-        NERtcVoiceRoom.setMessageBuilder(new VoiceRoomMessage.MessageTextBuilder() {
-            @Override
-            public String roomEvent(String nick, boolean enter) {
-                String who = "“" + nick + "”";
-                String action = enter ? "进了房间" : "离开了房间";
-                return who + action;
-            }
-
-            @Override
-            public String seatEvent(VoiceRoomSeat seat, boolean enter) {
-                VoiceRoomUser user = seat.getUser();
-                String nick = user != null ? user.getNick() : "";
-                String who = "“" + nick + "”";
-                String action = enter ? "进入了麦位" : "退出了麦位";
-                int position = seat.getIndex() + 1;
-                return who + action + position;
-            }
-        });
-        mNERtcVoiceRoom = NERtcVoiceRoom.sharedInstance(this);
-        mNERtcVoiceRoom.init(BuildConfig.NERTC_APP_KEY, this);
-        mNERtcVoiceRoom.initRoom(mVoiceRoomInfo, createUser());
-    }
-
-    /**
-     * 进入直播间
-     *
-     * @param anchorMode 是否为主播
-     */
-    protected final void enterRoom(boolean anchorMode) {
-        mNERtcVoiceRoom.enterRoom(anchorMode);
-    }
-
-    /**
-     * 离开直播间
-     */
-    protected final void leaveRoom() {
-        mNERtcVoiceRoom.leaveRoom();
-    }
-
-    /**
-     * 静音
-     */
-    protected final void muteAudio() {
-        boolean muted = mNERtcVoiceRoom.muteLocalAudio(!mNERtcVoiceRoom.isLocalAudioMute());
-        if (muted) {
-            ToastHelper.showToast("话筒已关闭");
-        } else {
-            ToastHelper.showToast("话筒已打开");
-        }
-    }
-
-    //
     // RoomCallback
     //
-
     @Override
     public void onEnterRoom(boolean success) {
         if (!success) {
@@ -336,7 +271,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
                 .setTitle("通知")
                 .setContent("该房间已被主播解散")
                 .setPositive("知道了", v -> {
-                    leaveRoom();
+                    ChatRoomHelper.leaveRoom();
                     if (mVoiceRoomInfo.isSupportCDN()) {
                         finish();
                     }
@@ -368,12 +303,12 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     }
 
     @Override
-    public void updateSeats(List<VoiceRoomSeat> seats) {
+    public void onUpdateSeats(List<VoiceRoomSeat> seats) {
         mSeatAdapter.setItems(seats);
     }
 
     @Override
-    public void updateSeat(VoiceRoomSeat seat) {
+    public void onUpdateSeat(VoiceRoomSeat seat) {
         mSeatAdapter.updateItem(seat.getIndex(), seat);
     }
 
