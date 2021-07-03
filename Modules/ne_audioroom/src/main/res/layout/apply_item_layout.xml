@@ -29,7 +29,7 @@
         android:layout_marginRight="@dimen/dimen_12"
         android:padding="@dimen/dimen_2"
         android:scaleType="fitXY"
-        android:src="@drawable/close_icon" />
+        android:src="@drawable/icon_close" />
 
     <ImageView
         android:id="@+id/agree"

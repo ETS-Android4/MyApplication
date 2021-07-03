@@ -164,7 +164,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     @Override
     protected void setupView() {
         mTopTipsDialog = new TopTipsDialog();
-        audio.setVisibility(View.GONE);
+        mic.setVisibility(View.GONE);
         more.setVisibility(View.GONE);
     }
 
@@ -298,7 +298,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
      * @param visible
      */
     private void updateBottomActionBar(boolean visible) {
-        audio.setVisibility(visible ? View.VISIBLE : View.GONE);
+        mic.setVisibility(visible ? View.VISIBLE : View.GONE);
         more.setVisibility(visible ? View.VISIBLE : View.GONE);
         MORE_ITEMS.get(MORE_ITEM_MICRO_PHONE).setVisible(visible);
     }

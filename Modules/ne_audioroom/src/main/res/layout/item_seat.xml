@@ -11,16 +11,16 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/shape_dialog_utils_icon_circle_bg"
+        android:background="@drawable/shape_circle_fff2f3f5"
         android:src="@drawable/nim_avatar_default"
         android:visibility="visible" />
 
     <ImageView
-        android:id="@+id/circle"
+        android:id="@+id/iv_circle"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:background="@mipmap/point_empty"
+        android:background="@drawable/point_empty"
         android:visibility="visible" />
 
     <com.netease.audioroom.demo.widget.HeadImageView

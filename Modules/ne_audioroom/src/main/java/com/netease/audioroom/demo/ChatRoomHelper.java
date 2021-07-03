@@ -72,15 +72,15 @@ public class ChatRoomHelper {
     /**
      * 本地是否静音
      */
-    public static boolean isLocalAudioMute() {
+    public static boolean isMicClosed() {
         return mNERtcVoiceRoom.isLocalAudioMute();
     }
 
     /**
      * 关闭话筒
      */
-    public static void muteLocalAudio() {
-        boolean muted = mNERtcVoiceRoom.muteLocalAudio(!isLocalAudioMute());
+    public static void closeMic() {
+        boolean muted = mNERtcVoiceRoom.muteLocalAudio(!isMicClosed());
         if (muted) {
             ToastHelper.showToast("话筒已关闭");
         } else {

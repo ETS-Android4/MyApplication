@@ -31,7 +31,6 @@ import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.util.ViewUtils;
 import com.netease.audioroom.demo.widget.HeadImageView;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomCallback;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
@@ -78,7 +77,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     protected LinearLayoutManager mMsgLayoutManager;
 
     //底部操作栏按钮
-    protected ImageView close, audio, mute, more;
+    protected ImageView close, audio, mic, mute, more;
 
     //聊天框
     protected TextView tvInput;
@@ -127,15 +126,15 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     }
 
     private void initView() {
-        View baseAudioView = findViewById(R.id.rl_base_audio_ui);
+        View baseAudioView = findViewById(R.id.cl_base_audio_ui);
         if (baseAudioView == null) {
             throw new IllegalStateException("xml layout must include base_audio_ui.xml layout");
         }
 
         // 主播信息
-        mAnchorView = baseAudioView.findViewById(R.id.cly_anchor_layout);
+        mAnchorView = baseAudioView.findViewById(R.id.cl_anchor_layout);
         ivAnchorAvatar = baseAudioView.findViewById(R.id.iv_liver_avatar);
-        ivAnchorCircle = baseAudioView.findViewById(R.id.circle);
+        ivAnchorCircle = baseAudioView.findViewById(R.id.iv_circle);
         ivAnchorAudio = baseAudioView.findViewById(R.id.iv_liver_audio);
         tvAnchorNick = baseAudioView.findViewById(R.id.tv_liver_nick);
 
@@ -153,16 +152,21 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         );
 
         //底部操作栏
+
+        //扬声器
+        audio = baseAudioView.findViewById(R.id.iv_room_aduio);
+
         //麦克
-        audio = baseAudioView.findViewById(R.id.iv_room_audio);
-        audio.setOnClickListener(view ->
-                ChatRoomHelper.muteLocalAudio()
+        mic = baseAudioView.findViewById(R.id.iv_room_mic);
+        mic.setOnClickListener(view ->
+                ChatRoomHelper.closeMic()
         );
-        //禁言 管理员可见
+        //禁言
         mute = findViewById(R.id.iv_room_mute);
         mute.setOnClickListener(view ->
                 new MuteMemberDialog(BaseRoomActivity.this, mVoiceRoomInfo).show()
         );
+        //     -> 管理员可见
         if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
             mute.setVisibility(View.VISIBLE);
         }
@@ -174,8 +178,8 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
                         .registerOnItemClickListener((dialog, itemView, item) -> {
                                     switch (item.id) {
                                         case MORE_ITEM_MICRO_PHONE: { //麦克风
-                                            item.enable = !ChatRoomHelper.isLocalAudioMute();
-                                            ChatRoomHelper.muteLocalAudio();
+                                            item.enable = !ChatRoomHelper.isMicClosed();
+                                            ChatRoomHelper.closeMic();
                                             break;
                                         }
                                         case MORE_ITEM_FINISH: { //关闭房间
@@ -192,7 +196,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         );
 
         mSeatRecyclerView = baseAudioView.findViewById(R.id.recyclerview_seat);
-        mMsgRecyclerView = baseAudioView.findViewById(R.id.rcy_chat_message_list);
+        mMsgRecyclerView = baseAudioView.findViewById(R.id.recyclerview_message);
 
         tvInput = baseAudioView.findViewById(R.id.tv_input_text);
         tvInput.setOnClickListener(v ->
@@ -250,6 +254,12 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     //
     // RoomCallback
     //
+
+    /**
+     * 进入房间
+     *
+     * @param success 是否成功
+     */
     @Override
     public void onEnterRoom(boolean success) {
         if (!success) {
@@ -260,11 +270,17 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         }
     }
 
+    /**
+     * 离开房间
+     */
     @Override
     public void onLeaveRoom() {
         finish();
     }
 
+    /**
+     * 房间解散
+     */
     @Override
     public void onRoomDismiss() {
         ChoiceDialog dialog = new NotificationDialog(this)
@@ -280,42 +296,79 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         dialog.show();
     }
 
+    /**
+     * 主播信息更新
+     *
+     * @param user {@link VoiceRoomSeat 资料信息}
+     */
     @Override
     public void onAnchorInfo(VoiceRoomUser user) {
         ivAnchorAvatar.loadAvatar(user.avatar);
         tvAnchorNick.setText(user.nick);
     }
 
+
+    /**
+     * 主播静音状态
+     *
+     * @param muted 是否静音
+     */
     @Override
     public void onAnchorMute(boolean muted) {
-        ivAnchorAudio.setImageResource(muted ? R.drawable.icon_seat_close_micro : R.drawable.icon_seat_open_micro);
+        ivAnchorAudio.setImageResource(muted ? R.drawable.icon_seat_close_micro : R.drawable.icon_mic);
     }
 
+    /**
+     * 主播说话音量
+     *
+     * @param volume 说话音量0-100
+     */
     @Override
     public void onAnchorVolume(int volume) {
         showVolume(ivAnchorCircle, volume);
     }
 
+    /**
+     * 当前在线用户数量更新
+     *
+     * @param onlineUserCount 当前在线用户数量
+     */
     @Override
     public void onOnlineUserCount(int onlineUserCount) {
         String count = "在线" + onlineUserCount + "人";
         tvMemberCount.setText(count);
     }
 
+    /**
+     * 更新所有麦位信息
+     *
+     * @param seats {@link VoiceRoomSeat 麦位}
+     */
     @Override
     public void onUpdateSeats(List<VoiceRoomSeat> seats) {
         mSeatAdapter.setItems(seats);
     }
 
+    /**
+     * 更新麦位信息
+     *
+     * @param seat {@link VoiceRoomSeat 麦位}
+     */
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
         mSeatAdapter.updateItem(seat.getIndex(), seat);
     }
 
+    /**
+     * 麦位音量
+     *
+     * @param seat   {@link VoiceRoomSeat 麦位}
+     * @param volume 说话音量0-100
+     */
     @Override
     public void onSeatVolume(VoiceRoomSeat seat, int volume) {
         if (mSeatRecyclerView == null) {
-            mSeatRecyclerView = findViewById(R.id.rl_base_audio_ui).findViewById(R.id.recyclerview_seat);
+            mSeatRecyclerView = findViewById(R.id.cl_base_audio_ui).findViewById(R.id.recyclerview_seat);
         }
         if (mSeatRecyclerView.getLayoutManager() == null) {
             mSeatRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
@@ -323,20 +376,30 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         }
         View itemView = mSeatRecyclerView.getLayoutManager().findViewByPosition(seat.getIndex());
         if (itemView != null) {
-            ImageView circle = itemView.findViewById(R.id.circle);
+            ImageView circle = itemView.findViewById(R.id.iv_liver_circle);
             showVolume(circle, volume);
         }
     }
 
+    /**
+     * 收到消息
+     *
+     * @param message {@link VoiceRoomMessage 消息}
+     */
     @Override
     public void onVoiceRoomMessage(VoiceRoomMessage message) {
         mMsgAdapter.appendItem(message);
         mMsgLayoutManager.scrollToPosition(mMsgAdapter.getItemCount() - 1);
     }
 
+    /**
+     * ???
+     *
+     * @param muted 是否静音
+     */
     @Override
     public void onMuteAudio(boolean muted) {
-        audio.setSelected(muted);
+        mic.setSelected(muted);
     }
 
     /**

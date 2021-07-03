@@ -10,7 +10,7 @@
         android:id="@+id/iv_item_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/shape_dialog_utils_icon_circle_bg"
+        android:background="@drawable/shape_circle_fff2f3f5"
         android:padding="18dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"

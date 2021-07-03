@@ -71,7 +71,7 @@ public class SeatAdapter extends BaseAdapter<VoiceRoomSeat> {
             case Status.ON:
                 viewHolder.iv_user_status.setVisibility(View.GONE);
                 viewHolder.ivStatusHint.setVisibility(View.VISIBLE);
-                viewHolder.ivStatusHint.setImageResource(R.drawable.icon_seat_open_micro);
+                viewHolder.ivStatusHint.setImageResource(R.drawable.icon_mic);
                 viewHolder.circle.setVisibility(View.VISIBLE);
                 viewHolder.applying.setVisibility(View.GONE);
                 break;
@@ -140,7 +140,7 @@ public class SeatAdapter extends BaseAdapter<VoiceRoomSeat> {
             ivStatusHint = itemView.findViewById(R.id.iv_user_status_hint);
             tvNick = itemView.findViewById(R.id.tv_user_nick);
             iv_user_status = itemView.findViewById(R.id.iv_user_stats);
-            circle = itemView.findViewById(R.id.circle);
+            circle = itemView.findViewById(R.id.iv_circle);
             avatarBg = itemView.findViewById(R.id.avatar_bg);
             applying = itemView.findViewById(R.id.lav_apply);
         }

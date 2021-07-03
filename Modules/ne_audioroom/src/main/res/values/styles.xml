@@ -12,7 +12,7 @@
     </style>
 
     <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/background_img</item>
+        <item name="android:windowBackground">@drawable/bg_img</item>
     </style>
 
     <style name="BottomDialogTheme" parent="ThemeOverlay.AppCompat.Dialog">
@@ -38,15 +38,6 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
-
-
-    <style name="TextStyle_Color_828282_Size_14sp">
-        <item name="android:textColor">@color/color_828282</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
 
     <style name="Base_Audio_UI_Switch">
         <item name="android:layout_width">30dp</item>

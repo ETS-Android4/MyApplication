@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl_base_audio_ui"
+    android:id="@+id/cl_base_audio_ui"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_img"
+    android:background="@drawable/bg_img"
     android:clipToPadding="false"
     android:orientation="vertical"
     android:paddingStart="8dp"
@@ -14,10 +14,11 @@
 
     <TextView
         android:id="@+id/tv_chat_room_name"
-        style="@style/TextStyle_Color_828282_Size_14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ellipsize="middle"
         android:singleLine="true"
-        android:textColor="#ffffffff"
+        android:textColor="@color/color_ffffff"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +33,7 @@
         android:layout_alignParentEnd="true"
         android:background="@drawable/seat_item_round_bg"
         android:padding="7dp"
-        android:src="@drawable/close_icon"
+        android:src="@drawable/icon_close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,13 +44,13 @@
         android:layout_height="20dp"
         android:layout_below="@id/tv_chat_room_name"
         android:layout_marginTop="12dp"
-        android:background="@drawable/shape_corner_7f000000_20_bg"
+        android:background="@drawable/shape_corner_7f000000_r20"
         android:drawablePadding="2dp"
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="公告"
-        android:textColor="#ffffffff"
+        android:textColor="@color/color_ffffff"
         android:textSize="12sp"
         app:drawableStartCompat="@drawable/icon_announcement"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +62,7 @@
         android:layout_height="20dp"
         android:layout_alignTop="@id/tv_room_announcement"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/shape_corner_7f000000_20_bg"
+        android:background="@drawable/shape_corner_7f000000_r20"
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
@@ -73,7 +74,7 @@
 
     <!-- 主播区域-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cly_anchor_layout"
+        android:id="@+id/cl_anchor_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_room_announcement">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cly_anchor_avatar"
+            android:id="@+id/cl_anchor_avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,17 +94,17 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/shape_dialog_utils_icon_circle_bg"
+                android:background="@drawable/shape_circle_fff2f3f5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/circle"
+                android:id="@+id/iv_liver_circle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="16dp"
-                android:src="@mipmap/point_empty"
+                android:src="@drawable/point_empty"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -114,16 +115,16 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="1dp"
-                app:layout_constraintBottom_toBottomOf="@id/circle"
-                app:layout_constraintEnd_toEndOf="@id/circle"
-                app:layout_constraintStart_toStartOf="@id/circle"
-                app:layout_constraintTop_toTopOf="@id/circle" />
+                app:layout_constraintBottom_toBottomOf="@id/iv_liver_circle"
+                app:layout_constraintEnd_toEndOf="@id/iv_liver_circle"
+                app:layout_constraintStart_toStartOf="@id/iv_liver_circle"
+                app:layout_constraintTop_toTopOf="@id/iv_liver_circle" />
 
             <ImageView
                 android:id="@+id/iv_liver_audio"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/icon_seat_open_micro"
+                android:src="@drawable/icon_mic"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@id/iv_liver_avatar"
                 app:layout_constraintEnd_toEndOf="@id/iv_liver_avatar"
@@ -140,11 +141,11 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="主播昵称"
-            android:textColor="#ffffffff"
+            android:textColor="@color/color_ffffff"
             android:textSize="@dimen/text_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cly_anchor_avatar" />
+            app:layout_constraintTop_toBottomOf="@id/cl_anchor_avatar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_seat"
@@ -155,23 +156,22 @@
             android:overScrollMode="never"
             app:layout_constraintTop_toBottomOf="@+id/tv_liver_nick" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:id="@+id/rcy_chat_message_list_group"
+        android:id="@+id/fl_message_layout"
         android:layout_width="280dp"
         android:layout_height="0dp"
-        android:layout_below="@id/cly_anchor_layout"
+        android:layout_below="@id/cl_anchor_layout"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="16dp"
         android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@id/tv_input_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cly_anchor_layout">
+        app:layout_constraintTop_toBottomOf="@id/cl_anchor_layout">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcy_chat_message_list"
+            android:id="@+id/recyclerview_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -183,7 +183,7 @@
         android:layout_width="140dp"
         android:layout_height="36dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/shape_corner_7f000000_18_bg"
+        android:background="@drawable/shape_corner_7f000000_r18"
         android:drawablePadding="2dp"
         android:gravity="center_vertical"
         android:hint="一起聊聊吧~"
@@ -214,23 +214,35 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/seat_item_round_bg"
         android:padding="8dp"
-        android:src="@drawable/icon_room_mute_text"
+        android:src="@drawable/icon_room_mute"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_room_more"
         tools:visibility="visible" />
 
     <ImageView
-        android:id="@+id/iv_room_audio"
+        android:id="@+id/iv_room_mic"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/seat_item_round_bg"
         android:padding="8dp"
-        android:src="@drawable/selector_room_micro_phone"
+        android:src="@drawable/selector_room_mic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_room_mute" />
+
+    <ImageView
+        android:id="@+id/iv_room_aduio"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/seat_item_round_bg"
+        android:padding="8dp"
+        android:src="@drawable/selector_room_audio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_room_mic" />
 
     <EditText
         android:id="@+id/edt_input_text"
