@@ -1,6 +1,5 @@
 package com.netease.audioroom.demo.app;
 
-
 import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.cache.DemoCache;
@@ -11,7 +10,6 @@ public class NimApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
         NetworkClient.getInstance().configBaseUrl(BuildConfig.SERVER_BASE_URL)
                 .appKey(BuildConfig.NIM_APP_KEY)
                 .configDebuggable(true);

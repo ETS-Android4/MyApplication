@@ -69,11 +69,11 @@ public interface Anchor {
     void kickSeat(VoiceRoomSeat seat, RequestCallback<Void> callback);
 
     /**
-     * 获取服务器最新麦位列表
+     * 获取服务器最新成员列表
      *
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      */
-    void fetchSeats(RequestCallback<List<VoiceRoomSeat>> callback);
+    void fetchMemberList(RequestCallback<List<VoiceRoomSeat>> callback);
 
     /**
      * 获取本地麦位

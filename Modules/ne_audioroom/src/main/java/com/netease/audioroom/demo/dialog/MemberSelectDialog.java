@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 抱麦列表
+ * 成员列表
  */
 public class MemberSelectDialog extends BottomBaseDialog {
 

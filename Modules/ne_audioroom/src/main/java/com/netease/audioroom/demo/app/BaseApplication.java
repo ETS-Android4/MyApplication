@@ -9,12 +9,14 @@ import com.netease.audioroom.demo.base.BaseActivityManager;
 import com.netease.audioroom.demo.receiver.NetworkConnectChangedReceiver;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkUtils;
+import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.widget.loadsir.callback.EmptyChatRoomListCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.EmptyMuteRoomListCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.NetErrCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.TimeoutCallback;
 import com.netease.audioroom.demo.widget.loadsir.core.LoadSir;
+import com.netease.yunxin.kit.alog.ALog;
 
 public class BaseApplication extends Application {
 

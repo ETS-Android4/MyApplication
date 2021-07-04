@@ -24,10 +24,6 @@ public class ChatRoomHelper {
 
     private static NERtcVoiceRoom mNERtcVoiceRoom;
 
-    public static NERtcVoiceRoom getNERtcVoiceRoom() {
-        return mNERtcVoiceRoom;
-    }
-
     /**
      * 直播间初始化
      */
@@ -112,6 +108,9 @@ public class ChatRoomHelper {
 
     private static Anchor anchor;
 
+    /**
+     * 初始化房主
+     */
     public static void initAnchor(Anchor.Callback callback) {
         anchor = mNERtcVoiceRoom.getAnchor();
         anchor.setCallback(callback);
@@ -143,7 +142,7 @@ public class ChatRoomHelper {
      *
      * @param seat
      */
-    public static void approveSeatApply(VoiceRoomSeat seat) {
+    public static void agreeSeatApply(VoiceRoomSeat seat) {
         boolean ret = anchor.approveSeatApply(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -235,6 +234,91 @@ public class ChatRoomHelper {
         });
     }
 
+    /**
+     * 获取直播间成员列表
+     */
+    public static void fetchMemberList(SuccessCallback<List<VoiceRoomSeat>> callback) {
+        anchor.fetchMemberList(callback);
+    }
+
+    /**
+     * 成员是否还在直播间
+     */
+    public static void checkIsRoomMember(int index, VoiceRoomUser member) {
+        anchor.getRoomQuery().isMember(member.getAccount(), new SuccessCallback<Boolean>() {
+            @Override
+            public void onSuccess(Boolean in) {
+                if (!in) {
+                    ToastHelper.showToast("操作失败:用户离开房间");
+                    return;
+                }
+
+                //获取直播间成员列表
+                fetchMemberList(new SuccessCallback<List<VoiceRoomSeat>>() {
+                    @Override
+                    public void onSuccess(List<VoiceRoomSeat> seats) {
+                        inviteSeat(member, index, seats);
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * 抱麦
+     */
+    public static void inviteSeat(VoiceRoomUser member, int index, List<VoiceRoomSeat> seats) {
+        String account = member.getAccount();
+        List<VoiceRoomSeat> userSeats = VoiceRoomSeat.find(seats, account);
+
+        //是否为麦上用户
+        for (VoiceRoomSeat seat : userSeats) {
+            if (seat != null && seat.isOn()) {
+                ToastHelper.showToast("操作失败:当前用户已在麦位上");
+                return;
+            }
+        }
+
+        int position = -1;//当前用户申请麦位位置
+        VoiceRoomSeat seat = VoiceRoomSeat.findByStatus(userSeats, account, VoiceRoomSeat.Status.APPLY);
+        if (seat != null) {
+            position = seat.getIndex();
+        }
+
+        //拒绝申请麦位上不是选中用户的观众
+        VoiceRoomSeat local = anchor.getSeat(index);
+        if (local.getStatus() == VoiceRoomSeat.Status.APPLY && !local.isSameAccount(account)) {
+            //denySeatApply(local);
+        }
+
+        //拒绝选中用户的观众在别的麦位的申请
+        if (position != -1 && position != index) {
+            //denySeatApply(anchor.getSeat(position));
+        }
+        inviteSeat(new VoiceRoomSeat(
+                index,
+                seats.get(index).getStatus() == VoiceRoomSeat.Status.FORBID ? VoiceRoomSeat.Status.FORBID : VoiceRoomSeat.Status.ON, VoiceRoomSeat.Reason.ANCHOR_INVITE,
+                member
+        ));
+    }
+
+    /**
+     * 抱麦
+     */
+    private static void inviteSeat(VoiceRoomSeat seat) {
+        boolean ret = anchor.inviteSeat(seat, new SuccessCallback<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                VoiceRoomUser user = seat.getUser();
+                String nick = user != null ? user.getNick() : "";
+                ToastHelper.showToast("已将" + nick + "抱上麦位" + (seat.getIndex() + 1));
+            }
+        });
+        if (!ret) {
+            //denySeatApply(seat);
+        }
+    }
+
     private static Audience audience;
 
     public static void initAudience(Audience.Callback callback) {
@@ -303,13 +387,25 @@ public class ChatRoomHelper {
         });
     }
 
-    private static void leaveSeat() {
+
+    /**
+     * 下麦
+     */
+    public static void leaveSeat() {
         audience.leaveSeat(new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 ToastHelper.showToast("您已下麦");
             }
         });
+    }
+
+    /**
+     * 是否在麦上
+     */
+    public static boolean isOnSeat() {
+        VoiceRoomSeat seat = audience.getSeat();
+        return seat != null && seat.isOn();
     }
 
     protected static VoiceRoomUser createUser() {

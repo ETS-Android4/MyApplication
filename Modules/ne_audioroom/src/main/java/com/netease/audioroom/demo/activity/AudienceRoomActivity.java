@@ -347,41 +347,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     //
 
 
-
-    /**
-     * 取消上麦
-     */
-    public void cancelSeatApply() {
-        audience.cancelSeatApply(new RequestCallback<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                ToastHelper.showToast("已取消申请上麦");
-            }
-
-            @Override
-            public void onFailed(int i) {
-                ToastHelper.showToast("操作失败");
-            }
-
-            @Override
-            public void onException(Throwable throwable) {
-                ToastHelper.showToast("操作失败");
-            }
-        });
-    }
-
-    /**
-     * 下麦
-     */
-    private void leaveSeat() {
-        audience.leaveSeat(new SuccessCallback<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                ToastHelper.showToast("您已下麦");
-            }
-        });
-    }
-
     /**
      * 是否可以上麦
      *
@@ -443,7 +408,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         new ListItemDialog(AudienceRoomActivity.this)
                 .setOnItemClickListener(item -> {
                     if ("下麦".equals(item)) {
-                        leaveSeat();
+                        ChatRoomHelper.leaveSeat();
                     }
                 }).show(Arrays.asList("下麦", "取消"));
     }

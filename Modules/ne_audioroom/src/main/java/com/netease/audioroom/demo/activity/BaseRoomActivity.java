@@ -22,7 +22,7 @@ import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.ChoiceDialog;
-import com.netease.audioroom.demo.dialog.MuteMemberDialog;
+import com.netease.audioroom.demo.dialog.MemberMuteDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.NotificationDialog;
 import com.netease.audioroom.demo.util.InputUtils;
@@ -154,7 +154,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         //禁言
         mute = findViewById(R.id.iv_room_mute);
         mute.setOnClickListener(view ->
-                new MuteMemberDialog(BaseRoomActivity.this, mVoiceRoomInfo).show()
+                new MemberMuteDialog(BaseRoomActivity.this, mVoiceRoomInfo).show()
         );
         //     -> 管理员可见
         if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
