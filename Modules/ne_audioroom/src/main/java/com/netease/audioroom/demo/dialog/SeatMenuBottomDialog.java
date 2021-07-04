@@ -20,18 +20,18 @@ import java.util.List;
 /**
  * 麦位点击弹窗
  */
-public class SeatMenuDialog extends BottomBaseDialog {
+public class SeatMenuBottomDialog extends BaseBottomDialog {
 
     private Activity activity;
     private final List<String> items = new ArrayList<>();
     private OnItemClickListener<String> onItemClickListener;
 
-    public SeatMenuDialog(@NonNull Activity activity) {
+    public SeatMenuBottomDialog(@NonNull Activity activity) {
         super(activity);
         this.activity = activity;
     }
 
-    public SeatMenuDialog setOnItemClickListener(OnItemClickListener<String> onItemClickListener) {
+    public SeatMenuBottomDialog setOnItemClickListener(OnItemClickListener<String> onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
         return this;
     }

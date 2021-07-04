@@ -13,11 +13,11 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.MemberSelectDialog;
+import com.netease.audioroom.demo.dialog.MemberSelectBottomDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
-import com.netease.audioroom.demo.dialog.SeatApplyDialog;
-import com.netease.audioroom.demo.dialog.SeatMenuDialog;
-import com.netease.audioroom.demo.dialog.TopTipsDialog;
+import com.netease.audioroom.demo.dialog.SeatApplyDialogFragment;
+import com.netease.audioroom.demo.dialog.SeatMenuBottomDialog;
+import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkChange;
@@ -45,10 +45,10 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         }
     }
 
-    private TopTipsDialog mTopTipsDialog;
+    private TopTipsDialogFragment mTopTipsDialogFragment;
 
     private TextView tvApplyHint;
-    private SeatApplyDialog mSeatApplyDialog;//上麦请求列表
+    private SeatApplyDialogFragment mSeatApplyDialogFragment;//上麦请求列表
 
     @Override
     protected int getContentViewID() {
@@ -67,17 +67,17 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     private void watchNetWork() {
         NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
             if (network != null && network.isConnected()) {
-                if (mTopTipsDialog != null) {
-                    mTopTipsDialog.dismiss();
+                if (mTopTipsDialogFragment != null) {
+                    mTopTipsDialogFragment.dismiss();
                 }
                 loadSuccess();
             } else {
                 Bundle bundle = new Bundle();
-                TopTipsDialog.Style style = new TopTipsDialog.Style(getString(R.string.network_broken), 0, R.drawable.neterrricon, 0);
-                bundle.putParcelable(mTopTipsDialog.TAG, style);
-                mTopTipsDialog.setArguments(bundle);
-                if (!mTopTipsDialog.isVisible()) {
-                    mTopTipsDialog.show(getSupportFragmentManager(), mTopTipsDialog.TAG);
+                TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style(getString(R.string.network_broken), 0, R.drawable.neterrricon, 0);
+                bundle.putParcelable(mTopTipsDialogFragment.TAG, style);
+                mTopTipsDialogFragment.setArguments(bundle);
+                if (!mTopTipsDialogFragment.isVisible()) {
+                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.TAG);
                 }
                 showError();
             }
@@ -108,18 +108,18 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                         .show();
             }
         });
-        mTopTipsDialog = new TopTipsDialog();
+        mTopTipsDialogFragment = new TopTipsDialogFragment();
         tvApplyHint = findViewById(R.id.apply_hint);
         tvApplyHint.setVisibility(View.INVISIBLE);
         tvApplyHint.setClickable(true);
         tvApplyHint.setOnClickListener(view -> {
                     //申请上麦弹窗
-                    mSeatApplyDialog = new SeatApplyDialog();
+                    mSeatApplyDialogFragment = new SeatApplyDialogFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList(mSeatApplyDialog.TAG, new ArrayList<>(ChatRoomHelper.getApplySeats()));
-                    mSeatApplyDialog.setArguments(bundle);
-                    mSeatApplyDialog.show(getSupportFragmentManager(), mSeatApplyDialog.TAG);
-                    mSeatApplyDialog.setRequestAction(new SeatApplyDialog.IRequestAction() {
+                    bundle.putParcelableArrayList(mSeatApplyDialogFragment.TAG, new ArrayList<>(ChatRoomHelper.getApplySeats()));
+                    mSeatApplyDialogFragment.setArguments(bundle);
+                    mSeatApplyDialogFragment.show(getSupportFragmentManager(), mSeatApplyDialogFragment.TAG);
+                    mSeatApplyDialogFragment.setRequestAction(new SeatApplyDialogFragment.IRequestAction() {
                         @Override
                         public void refuse(VoiceRoomSeat seat) {
                             //拒绝麦位申请
@@ -148,7 +148,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
             return;
         }
         List<String> items = new ArrayList<>();
-        SeatMenuDialog itemDialog = new SeatMenuDialog(AnchorRoomActivity.this);
+        SeatMenuBottomDialog itemDialog = new SeatMenuBottomDialog(AnchorRoomActivity.this);
         switch (seat.getStatus()) {
             // 抱观众上麦（点击麦位）
             case Status.INIT:
@@ -204,12 +204,12 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
             tvApplyHint.setVisibility(View.INVISIBLE);
         }
         if (size > 0) {
-            if (mSeatApplyDialog != null && mSeatApplyDialog.isVisible()) {
-                mSeatApplyDialog.update(seats);
+            if (mSeatApplyDialogFragment != null && mSeatApplyDialogFragment.isVisible()) {
+                mSeatApplyDialogFragment.update(seats);
             }
         } else {
-            if (mSeatApplyDialog != null && mSeatApplyDialog.isVisible()) {
-                mSeatApplyDialog.dismiss();
+            if (mSeatApplyDialogFragment != null && mSeatApplyDialogFragment.isVisible()) {
+                mSeatApplyDialogFragment.dismiss();
             }
         }
     }
@@ -229,7 +229,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                     @Override
                     public void onSuccess(List<VoiceRoomSeat> seats) {
                         //展示成员列表
-                        new MemberSelectDialog(AnchorRoomActivity.this, seats, member -> {
+                        new MemberSelectBottomDialog(AnchorRoomActivity.this, seats, member -> {
                             //被抱用户
                             if (member != null) {
                                 ChatRoomHelper.checkIsRoomMember(seat.getIndex(), member);

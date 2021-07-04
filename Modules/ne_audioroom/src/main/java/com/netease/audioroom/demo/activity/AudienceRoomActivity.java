@@ -13,7 +13,7 @@ import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
-import com.netease.audioroom.demo.dialog.TopTipsDialog;
+import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -41,7 +41,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         }
     }
 
-    private TopTipsDialog mTopTipsDialog;
+    private TopTipsDialogFragment mTopTipsDialogFragment;
 
     private Disposable disposable;
     private final PublishSubject<VoiceRoomSeat> seatSource = PublishSubject.create();
@@ -69,14 +69,14 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                                 public void onSuccess(Void param) {
                                     //展示申请上麦提示弹窗
                                     Bundle bundle = new Bundle();
-                                    TopTipsDialog.Style style = new TopTipsDialog.Style("已申请上麦，等待通过...  <font color=\"#0888ff\">取消</color>", 0, 0, 0);
-                                    bundle.putParcelable(mTopTipsDialog.TAG, style);
-                                    mTopTipsDialog.setArguments(bundle);
-                                    mTopTipsDialog.show(getSupportFragmentManager(), mTopTipsDialog.TAG);
-                                    mTopTipsDialog.setClickListener(() -> {
+                                    TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style("已申请上麦，等待通过...  <font color=\"#0888ff\">取消</color>", 0, 0, 0);
+                                    bundle.putParcelable(mTopTipsDialogFragment.TAG, style);
+                                    mTopTipsDialogFragment.setArguments(bundle);
+                                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.TAG);
+                                    mTopTipsDialogFragment.setClickListener(() -> {
                                         //取消上麦
                                         ChatRoomHelper.cancelSeatApply();
-                                        mTopTipsDialog.dismiss();
+                                        mTopTipsDialogFragment.dismiss();
                                     });
                                 }
                             });
@@ -105,20 +105,20 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     private void watchNetWork() {
         NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
             if (network != null && network.isConnected()) {
-                if (mTopTipsDialog != null) {
-                    mTopTipsDialog.dismiss();
+                if (mTopTipsDialogFragment != null) {
+                    mTopTipsDialogFragment.dismiss();
                 }
                 loadSuccess();
                 //刷新音频和座位信息
                 ChatRoomHelper.restartAudioAndSeat();
             } else {
                 Bundle bundle = new Bundle();
-                mTopTipsDialog = new TopTipsDialog();
-                TopTipsDialog.Style style = new TopTipsDialog.Style("网络断开", 0, R.drawable.neterrricon, 0);
-                bundle.putParcelable(mTopTipsDialog.TAG, style);
-                mTopTipsDialog.setArguments(bundle);
-                if (!mTopTipsDialog.isVisible()) {
-                    mTopTipsDialog.show(getSupportFragmentManager(), mTopTipsDialog.TAG);
+                mTopTipsDialogFragment = new TopTipsDialogFragment();
+                TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style("网络断开", 0, R.drawable.neterrricon, 0);
+                bundle.putParcelable(mTopTipsDialogFragment.TAG, style);
+                mTopTipsDialogFragment.setArguments(bundle);
+                if (!mTopTipsDialogFragment.isVisible()) {
+                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.TAG);
                 }
                 showError();
             }
@@ -145,7 +145,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                 }
             }
         });
-        mTopTipsDialog = new TopTipsDialog();
+        mTopTipsDialogFragment = new TopTipsDialogFragment();
         mic.setVisibility(View.GONE);
     }
 
@@ -167,16 +167,16 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     public void onSeatApplyDenied(boolean otherOn) {
         if (otherOn) {
             ToastUtils.showShort("申请麦位已被拒绝");
-            if (mTopTipsDialog != null) {
-                mTopTipsDialog.dismiss();
+            if (mTopTipsDialogFragment != null) {
+                mTopTipsDialogFragment.dismiss();
             }
         } else {
             new NoticeDialog(this)
                     .setTitle("通知")
                     .setContent("您的申请已被拒绝")
                     .setPositive("知道了", v -> {
-                        if (mTopTipsDialog != null) {
-                            mTopTipsDialog.dismiss();
+                        if (mTopTipsDialogFragment != null) {
+                            mTopTipsDialogFragment.dismiss();
                         }
                     })
                     .show();
@@ -193,8 +193,8 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         mic.setVisibility(View.VISIBLE);
         if (!last) {
             if (seat.getReason() == Reason.ANCHOR_APPROVE_APPLY) {//主播同意上麦
-                if (mTopTipsDialog != null) {
-                    mTopTipsDialog.dismiss();
+                if (mTopTipsDialogFragment != null) {
+                    mTopTipsDialogFragment.dismiss();
                 }
                 new NoticeDialog(AudienceRoomActivity.this)
                         .setTitle("通知")
@@ -234,8 +234,8 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
      */
     @Override
     public void onSeatMuted() {
-        if (mTopTipsDialog != null) {
-            mTopTipsDialog.dismiss();
+        if (mTopTipsDialogFragment != null) {
+            mTopTipsDialogFragment.dismiss();
         }
         new NoticeDialog(this)
                 .setTitle("通知")
@@ -249,8 +249,8 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
      */
     @Override
     public void onSeatClosed() {
-        if (mTopTipsDialog != null) {
-            mTopTipsDialog.dismiss();
+        if (mTopTipsDialogFragment != null) {
+            mTopTipsDialogFragment.dismiss();
         }
     }
 

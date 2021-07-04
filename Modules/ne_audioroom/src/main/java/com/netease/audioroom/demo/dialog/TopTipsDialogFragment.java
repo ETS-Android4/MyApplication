@@ -27,7 +27,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.netease.audioroom.demo.R;
 
 
-public class TopTipsDialog extends BaseDialogFragment {
+public class TopTipsDialogFragment extends BaseDialogFragment {
 
     private Style style;
 

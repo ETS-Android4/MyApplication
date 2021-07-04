@@ -50,7 +50,7 @@ public class NoticeDialog extends Dialog {
 
     protected @LayoutRes
     int contentLayoutId() {
-        return R.layout.view_dialog_choice_layout;
+        return R.layout.dialog_notice;
     }
 
     /**
@@ -84,7 +84,6 @@ public class NoticeDialog extends Dialog {
                 negativeListener.onClick(v);
             }
         });
-
     }
 
     public NoticeDialog setTitle(String title) {

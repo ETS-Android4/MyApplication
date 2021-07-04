@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * 禁言列表
  */
-public class MemberMuteDialog extends BottomBaseDialog {
+public class MemberMuteBottomDialog extends BaseBottomDialog {
 
     private final List<VoiceRoomUser> muteList = new ArrayList<>();
     private final VoiceRoomInfo voiceRoomInfo;
@@ -44,7 +44,7 @@ public class MemberMuteDialog extends BottomBaseDialog {
     private MuteMemberListAdapter adapter;
     public boolean isAllMute;
 
-    public MemberMuteDialog(@NonNull Activity activity, VoiceRoomInfo voiceRoomInfo) {
+    public MemberMuteBottomDialog(@NonNull Activity activity, VoiceRoomInfo voiceRoomInfo) {
         super(activity);
         this.voiceRoomInfo = voiceRoomInfo;
         this.anchor = NERtcVoiceRoom.sharedInstance(activity).getAnchor();
@@ -154,7 +154,7 @@ public class MemberMuteDialog extends BottomBaseDialog {
     }
 
     private void addMuteMember() {
-        new MemberSelectDialog(activity, member -> {
+        new MemberSelectBottomDialog(activity, member -> {
             if (member == null) {
                 return;
             }

@@ -15,15 +15,15 @@ import androidx.annotation.NonNull;
 
 import com.netease.audioroom.demo.R;
 
-
 /**
  * 底部弹窗基类，子类需要实现 顶部view，以及底部view 的渲染即可
  */
-public abstract class BottomBaseDialog extends Dialog {
+public abstract class BaseBottomDialog extends Dialog {
+
     protected Activity activity;
     protected View rootView;
 
-    public BottomBaseDialog(@NonNull Activity activity) {
+    public BaseBottomDialog(@NonNull Activity activity) {
         super(activity, R.style.BottomDialogTheme);
         this.activity = activity;
         rootView = LayoutInflater.from(getContext()).inflate(contentLayoutId(), null);

@@ -20,8 +20,6 @@ import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.SeatApplyAdapter;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +27,7 @@ import java.util.List;
 /**
  * 上麦请求列表
  */
-public class SeatApplyDialog extends BaseDialogFragment {
+public class SeatApplyDialogFragment extends BaseDialogFragment {
 
     TextView tvTitle;
     TextView tvDismiss;
@@ -61,7 +59,7 @@ public class SeatApplyDialog extends BaseDialogFragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getDialog() != null) {
             // 设置宽度为屏宽、靠近屏幕底部。

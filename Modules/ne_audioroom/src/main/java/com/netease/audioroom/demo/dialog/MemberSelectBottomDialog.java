@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * 成员列表
  */
-public class MemberSelectDialog extends BottomBaseDialog {
+public class MemberSelectBottomDialog extends BaseBottomDialog {
 
     private OnMemberChosenListener listener;
     private MemberListAdapter adapter;
@@ -41,12 +41,12 @@ public class MemberSelectDialog extends BottomBaseDialog {
 
     private List<String> excludeAccounts = new ArrayList<>();
 
-    public MemberSelectDialog(@NonNull Activity activity, OnMemberChosenListener listener) {
+    public MemberSelectBottomDialog(@NonNull Activity activity, OnMemberChosenListener listener) {
         this(activity, null, listener);
     }
 
 
-    public MemberSelectDialog(@NonNull Activity activity, List<String> accounts, OnMemberChosenListener listener) {
+    public MemberSelectBottomDialog(@NonNull Activity activity, List<String> accounts, OnMemberChosenListener listener) {
         super(activity);
         this.listener = listener;
         if (accounts != null && !accounts.isEmpty()) {
@@ -55,7 +55,7 @@ public class MemberSelectDialog extends BottomBaseDialog {
         this.anchor = NERtcVoiceRoom.sharedInstance(activity).getAnchor();
     }
 
-    public MemberSelectDialog(AnchorRoomActivity activity, List<VoiceRoomSeat> seats, OnMemberChosenListener listener) {
+    public MemberSelectBottomDialog(AnchorRoomActivity activity, List<VoiceRoomSeat> seats, OnMemberChosenListener listener) {
         super(activity);
         this.listener = listener;
         List<String> accounts = new ArrayList<>();
