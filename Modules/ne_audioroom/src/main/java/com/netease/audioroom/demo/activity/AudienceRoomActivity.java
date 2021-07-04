@@ -42,7 +42,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     }
 
     private TopTipsDialog mTopTipsDialog;
-    private Audience audience;
 
     private Disposable disposable;
     private final PublishSubject<VoiceRoomSeat> seatSource = PublishSubject.create();
@@ -137,9 +136,11 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
             @Override
             public void onClick(View v) {
                 if (!mVoiceRoomInfo.isSupportCDN()) {
-                    finish();
+                    ChatRoomHelper.leaveRoom();
                 }
-                if (!ChatRoomHelper.isInChannel()) {
+                if (ChatRoomHelper.isInChannel()) {
+                    ChatRoomHelper.leaveRoom();
+                } else {
                     finish();
                 }
             }
