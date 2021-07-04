@@ -137,9 +137,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         tvMemberCount = baseAudioView.findViewById(R.id.tv_room_member_count);
 
         close = baseAudioView.findViewById(R.id.iv_leave_room);
-        close.setOnClickListener(view ->
-                closeRoom()
-        );
 
         //底部操作栏
 
@@ -214,8 +211,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     protected abstract void setupView();
 
     protected abstract void onSeatItemClick(VoiceRoomSeat seat, int position);
-
-    protected abstract void closeRoom();
 
     //
     // RoomCallback

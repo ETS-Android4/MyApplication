@@ -2,6 +2,7 @@ package com.netease.audioroom.demo.dialog;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -14,11 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.netease.audioroom.demo.R;
+import com.netease.audioroom.demo.activity.AnchorRoomActivity;
 import com.netease.audioroom.demo.adapter.MemberListAdapter;
 import com.netease.audioroom.demo.util.ScreenUtil;
 import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 import com.netease.yunxin.nertc.model.interfaces.Anchor;
 
@@ -30,21 +33,40 @@ import java.util.List;
  */
 public class MemberSelectDialog extends BottomBaseDialog {
 
-    private final OnMemberChosenListener listener;
+    private OnMemberChosenListener listener;
     private MemberListAdapter adapter;
 
-    private final Anchor anchor;
+    private Anchor anchor;
 
-    private final List<String> excludeAccounts = new ArrayList<>();
+    private List<String> excludeAccounts = new ArrayList<>();
 
     public MemberSelectDialog(@NonNull Activity activity, OnMemberChosenListener listener) {
         this(activity, null, listener);
     }
 
+
     public MemberSelectDialog(@NonNull Activity activity, List<String> accounts, OnMemberChosenListener listener) {
         super(activity);
         this.listener = listener;
         if (accounts != null && !accounts.isEmpty()) {
+            this.excludeAccounts.addAll(accounts);
+        }
+        this.anchor = NERtcVoiceRoom.sharedInstance(activity).getAnchor();
+    }
+
+    public MemberSelectDialog(AnchorRoomActivity activity, List<VoiceRoomSeat> seats, OnMemberChosenListener listener) {
+        super(activity);
+        this.listener = listener;
+        List<String> accounts = new ArrayList<>();
+        for (VoiceRoomSeat seat : seats) {
+            if (seat.isOn()) {
+                String account = seat.getAccount();
+                if (!TextUtils.isEmpty(account)) {
+                    accounts.add(account);
+                }
+            }
+        }
+        if (!accounts.isEmpty()) {
             this.excludeAccounts.addAll(accounts);
         }
         this.anchor = NERtcVoiceRoom.sharedInstance(activity).getAnchor();

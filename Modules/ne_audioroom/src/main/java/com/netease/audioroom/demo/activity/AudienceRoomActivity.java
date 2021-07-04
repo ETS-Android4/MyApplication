@@ -16,17 +16,13 @@ import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.ListItemDialog;
 import com.netease.audioroom.demo.dialog.NotificationDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialog;
-import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.ToastHelper;
-import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Reason;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Status;
 import com.netease.yunxin.nertc.model.interfaces.Audience;
-import com.netease.yunxin.nertc.model.interfaces.AudiencePlay;
-import com.netease.yunxin.nertc.util.SuccessCallback;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -130,6 +126,19 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
 
     @Override
     protected void setupView() {
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mVoiceRoomInfo.isSupportCDN()) {
+                    finish();
+                }
+                VoiceRoomSeat seat = audience.getSeat();
+                boolean isInChannel = seat != null && seat.isOn();
+                if (!isInChannel) {
+                    finish();
+                }
+            }
+        });
         mTopTipsDialog = new TopTipsDialog();
         mic.setVisibility(View.GONE);
     }
@@ -137,18 +146,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     @Override
     protected synchronized void onSeatItemClick(VoiceRoomSeat seat, int position) {
         seatSource.onNext(seat);
-    }
-
-    @Override
-    protected void closeRoom() {
-        if (!mVoiceRoomInfo.isSupportCDN()) {
-            finish();
-        }
-        VoiceRoomSeat seat = audience.getSeat();
-        boolean isInChannel = seat != null && seat.isOn();
-        if (!isInChannel) {
-            finish();
-        }
     }
 
     //

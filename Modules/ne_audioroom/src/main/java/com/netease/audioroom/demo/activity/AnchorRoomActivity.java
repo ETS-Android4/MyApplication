@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,7 +29,6 @@ import com.netease.yunxin.nertc.model.interfaces.Anchor;
 import com.netease.yunxin.nertc.util.SuccessCallback;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,7 +46,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     }
 
     private TopTipsDialog mTopTipsDialog;
-    private Anchor anchor;
 
     private TextView tvApplyHint;
     private SeatApplyDialog mSeatApplyDialog;//上麦请求列表
@@ -95,6 +92,22 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
 
     @Override
     protected void setupView() {
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ChoiceDialog(AnchorRoomActivity.this)
+                        .setTitle("确认结束直播？")
+                        .setContent("请确认是否结束直播")
+                        .setNegative(getString(R.string.cancel), null)
+                        .setPositive("确认", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                onSeatAction(null, "退出房间");
+                            }
+                        })
+                        .show();
+            }
+        });
         mTopTipsDialog = new TopTipsDialog();
         tvApplyHint = findViewById(R.id.apply_hint);
         tvApplyHint.setVisibility(View.INVISIBLE);
@@ -171,18 +184,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         }).show(items);
     }
 
-    @Override
-    protected void closeRoom() {
-        new ChoiceDialog(AnchorRoomActivity.this)
-                .setTitle("确认结束直播？")
-                .setContent("请确认是否结束直播")
-                .setNegative(getString(R.string.cancel), null)
-                .setPositive("确认", v -> {
-                    onSeatAction(null, "退出房间");
-                })
-                .show();
-    }
-
     //
     // Anchor.Callback
     //
@@ -221,35 +222,27 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
      */
     private void onSeatAction(VoiceRoomSeat seat, String item) {
         switch (item) {
-            case "确定踢下麦位":
-                new ListItemDialog(AnchorRoomActivity.this)
-                        .setOnItemClickListener(item1 -> {
-                            if ("确定踢下麦位".equals(item1)) {
-                                ChatRoomHelper.kickSeat(seat);
-                            }
-                        })
-                        .show(Arrays.asList("确定踢下麦位", "取消"));
-                break;
-            case "关闭麦位":
-                ChatRoomHelper.closeSeat(seat);
-                break;
             case "将成员抱上麦位":
                 //获取成员列表
                 ChatRoomHelper.fetchMemberList(new SuccessCallback<List<VoiceRoomSeat>>() {
                     @Override
-                    public void onSuccess(List<VoiceRoomSeat> param) {
+                    public void onSuccess(List<VoiceRoomSeat> seats) {
                         //展示成员列表
-                        new MemberSelectDialog(AnchorRoomActivity.this, getOnSeatAccounts(param), member -> {
+                        new MemberSelectDialog(AnchorRoomActivity.this, seats, member -> {
                             //被抱用户
                             if (member != null) {
                                 ChatRoomHelper.checkIsRoomMember(seat.getIndex(), member);
                             }
                         }).show();
+
                     }
                 });
                 break;
             case "将TA踢下麦位":
                 ChatRoomHelper.kickSeat(seat);
+                break;
+            case "关闭麦位":
+                ChatRoomHelper.closeSeat(seat);
                 break;
             case "屏蔽麦位":
                 ChatRoomHelper.muteSeat(seat);
@@ -264,23 +257,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         }
     }
 
-
-    /**
-     * 获取麦上用户
-     */
-    private static List<String> getOnSeatAccounts(List<VoiceRoomSeat> seats) {
-        List<String> accounts = new ArrayList<>();
-        for (VoiceRoomSeat seat : seats) {
-            if (seat.isOn()) {
-                String account = seat.getAccount();
-                if (!TextUtils.isEmpty(account)) {
-                    accounts.add(account);
-                }
-            }
-        }
-        return accounts;
-    }
-
     @Override
     public void onLeaveRoom() {
         ChatRoomHttpClient.getInstance().closeRoom(DemoCache.getAccountId(),
@@ -290,8 +266,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                     public void onSuccess(BaseResponse<Void> response) {
                         loadSuccess();
                         ToastHelper.showToast("退出房间成功");
-                        Runnable runnable = () -> finish();
-                        runnable.run();
+                        finish();
                     }
 
                     @Override
@@ -301,8 +276,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                         } else {
                             ToastHelper.showToast("房间解散失败 " + errorMsg);
                         }
-                        Runnable runnable = () -> finish();
-                        runnable.run();
+                        finish();
                     }
                 });
     }

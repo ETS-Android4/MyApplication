@@ -154,6 +154,10 @@ public class ChatRoomHelper {
         }
     }
 
+    //
+    // 麦位操作
+    //
+
     /**
      * 踢人
      */
@@ -234,6 +238,10 @@ public class ChatRoomHelper {
         });
     }
 
+    //
+    // ===
+    //
+
     /**
      * 获取直播间成员列表
      */
@@ -267,7 +275,7 @@ public class ChatRoomHelper {
     /**
      * 抱麦
      */
-    public static void inviteSeat(VoiceRoomUser member, int index, List<VoiceRoomSeat> seats) {
+    private static void inviteSeat(VoiceRoomUser member, int index, List<VoiceRoomSeat> seats) {
         String account = member.getAccount();
         List<VoiceRoomSeat> userSeats = VoiceRoomSeat.find(seats, account);
 
@@ -285,16 +293,17 @@ public class ChatRoomHelper {
             position = seat.getIndex();
         }
 
-        //拒绝申请麦位上不是选中用户的观众
+        //拒绝 选中麦位 其他成员的申请
         VoiceRoomSeat local = anchor.getSeat(index);
         if (local.getStatus() == VoiceRoomSeat.Status.APPLY && !local.isSameAccount(account)) {
-            //denySeatApply(local);
+            denySeatApply(local);
         }
 
-        //拒绝选中用户的观众在别的麦位的申请
+        //拒绝 选中成员 其他麦位的申请
         if (position != -1 && position != index) {
-            //denySeatApply(anchor.getSeat(position));
+            denySeatApply(anchor.getSeat(position));
         }
+
         inviteSeat(new VoiceRoomSeat(
                 index,
                 seats.get(index).getStatus() == VoiceRoomSeat.Status.FORBID ? VoiceRoomSeat.Status.FORBID : VoiceRoomSeat.Status.ON, VoiceRoomSeat.Reason.ANCHOR_INVITE,
@@ -315,7 +324,7 @@ public class ChatRoomHelper {
             }
         });
         if (!ret) {
-            //denySeatApply(seat);
+            denySeatApply(seat);
         }
     }
 
