@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="解除禁言"
-            android:textColor="@color/color_ffffff"
+            android:textColor="@color/color_ffffffff"
             android:textSize="14dp" />
     </LinearLayout>
     <!-- Bottom View End-->

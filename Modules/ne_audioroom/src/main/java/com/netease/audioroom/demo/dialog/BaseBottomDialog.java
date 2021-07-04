@@ -48,7 +48,7 @@ public abstract class BaseBottomDialog extends Dialog {
 
     protected @LayoutRes
     int contentLayoutId() {
-        return R.layout.view_dialog_utils_base;
+        return R.layout.dialog_base;
     }
 
     /**

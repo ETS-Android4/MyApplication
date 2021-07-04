@@ -17,7 +17,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="暂无群成员~"
-        android:textColor="@color/color_ffffff" />
+        android:textColor="@color/color_ffffffff" />
 
     <ImageView
         android:id="@+id/icon"

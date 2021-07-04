@@ -103,7 +103,6 @@ public class NoticeDialog extends Dialog {
     }
 
     public NoticeDialog setNegative(String negative, View.OnClickListener listener) {
-        findViewById(R.id.line_divide).setVisibility(View.VISIBLE);
         this.negativeListener = listener;
         this.negativeStr = negative;
         return this;

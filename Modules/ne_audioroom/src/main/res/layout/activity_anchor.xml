@@ -15,12 +15,12 @@
         android:layout_height="@dimen/dimen_38"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:background="@drawable/apply_tips_bg"
+        android:background="@drawable/shape_gradient_r20"
         android:gravity="center"
         android:paddingLeft="@dimen/dimen_12"
         android:paddingRight="@dimen/dimen_12"
         android:text="@string/apply_micro"
-        android:textColor="@color/color_ffffff"
+        android:textColor="@color/color_ffffffff"
         android:textSize="@dimen/text_14"
         app:drawableEndCompat="@drawable/arrow_down" />
 

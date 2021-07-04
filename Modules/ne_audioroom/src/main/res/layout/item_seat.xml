@@ -11,7 +11,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/shape_circle_fff2f3f5"
+        android:background="@drawable/shape_circle_ffffffff"
         android:src="@drawable/nim_avatar_default"
         android:visibility="visible" />
 
@@ -40,7 +40,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:background="@drawable/seat_item_round_bg"
+        android:background="@drawable/shape_circle_7f000000"
         android:scaleType="center"
         tools:src="@drawable/seat_add_member" />
 
@@ -64,7 +64,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/color_ffffff"
+        android:textColor="@color/color_ffffffff"
         android:textSize="12dp"
         tools:text="麦位1" />
 

@@ -2,18 +2,17 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/color_000000</item>
-        <item name="colorPrimaryDark">@color/color_000000</item>
+        <item name="colorPrimary">@color/color_0888ff</item>
+        <item name="colorPrimaryDark">@color/color_0888ff</item>
         <item name="colorAccent">@color/color_0888ff</item>
-        <item name="android:textColorPrimary">@color/color_ffffff</item>
+        <item name="android:textColorPrimary">@color/color_ffffffff</item>
         <item name="actionBarSize">@dimen/action_bar_height</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-
     <style name="BottomDialogTheme" parent="ThemeOverlay.AppCompat.Dialog">
-        <item name="android:windowBackground">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowIsTranslucent">false</item>
@@ -21,7 +20,7 @@
     </style>
 
     <style name="CommonDialog" parent="ThemeOverlay.AppCompat.Dialog">
-        <item name="android:windowBackground">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="BottomDialogAnimation">
@@ -45,14 +44,14 @@
 
 
     <style name="request_dialog_fragment">
-        <item name="android:windowBackground">@color/color_00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowSoftInputMode">adjustNothing</item>
     </style>
 
     <style name="TransBottomDialogTheme" parent="ThemeOverlay.AppCompat.Dialog">
-        <item name="android:windowBackground">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowAnimationStyle">@style/Animation</item>

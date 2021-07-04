@@ -74,7 +74,7 @@ public class MemberMuteBottomDialog extends BaseBottomDialog {
 
     @Override
     protected void renderBottomView(FrameLayout parent) {
-        View bottomView = LayoutInflater.from(getContext()).inflate(R.layout.view_dialog_more_muter_member, parent);
+        View bottomView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_member_muter, parent);
         View tvAddMuteMember = bottomView.findViewById(R.id.tv_add_mute_member);
         tvAddMuteMember.setOnClickListener(v -> addMuteMember());
 

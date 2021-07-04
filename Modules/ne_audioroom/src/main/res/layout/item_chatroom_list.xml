@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    android:background="@drawable/layer_room_member_item_bg"
+    android:background="@drawable/layer_member_item"
     android:paddingTop="8dp"
     android:paddingBottom="8dp">
 

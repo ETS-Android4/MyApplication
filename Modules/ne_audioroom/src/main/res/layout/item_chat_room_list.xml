@@ -17,20 +17,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@drawable/chat_room_default_bg" />
 
-    <View
-        android:id="@+id/mask"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_58"
-        android:background="@drawable/room_item_mask"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
     <TextView
         android:id="@+id/tv_chat_room_member_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
-        android:textColor="@color/color_ffffff"
+        android:textColor="@color/color_ffffffff"
         android:textSize="@dimen/text_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:singleLine="true"
-        android:textColor="@color/color_ffffff"
+        android:textColor="@color/color_ffffffff"
         android:textSize="13dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tv_chat_room_anchor_name"

@@ -64,7 +64,7 @@ public class SeatApplyDialogFragment extends BaseDialogFragment {
         if (getDialog() != null) {
             // 设置宽度为屏宽、靠近屏幕底部。
             final Window window = getDialog().getWindow();
-            window.setBackgroundDrawableResource(R.color.color_00000000);
+            window.setBackgroundDrawableResource(android.R.color.transparent);
             WindowManager.LayoutParams wlp = window.getAttributes();
             wlp.gravity = Gravity.TOP;
             wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
