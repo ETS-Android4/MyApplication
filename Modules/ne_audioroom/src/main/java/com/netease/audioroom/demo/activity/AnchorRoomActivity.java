@@ -9,18 +9,18 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.ChoiceDialog;
-import com.netease.audioroom.demo.dialog.ListItemDialog;
 import com.netease.audioroom.demo.dialog.MemberSelectDialog;
+import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.SeatApplyDialog;
+import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialog;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkChange;
-import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -95,7 +95,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ChoiceDialog(AnchorRoomActivity.this)
+                new NoticeDialog(AnchorRoomActivity.this)
                         .setTitle("确认结束直播？")
                         .setContent("请确认是否结束直播")
                         .setNegative(getString(R.string.cancel), null)
@@ -144,11 +144,11 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     @Override
     protected void onSeatItemClick(VoiceRoomSeat seat, int position) {
         if (seat.getStatus() == Status.APPLY) {
-            ToastHelper.showToast(getString(R.string.applying_now));
+            ToastUtils.showShort(getString(R.string.applying_now));
             return;
         }
         List<String> items = new ArrayList<>();
-        ListItemDialog itemDialog = new ListItemDialog(AnchorRoomActivity.this);
+        SeatMenuDialog itemDialog = new SeatMenuDialog(AnchorRoomActivity.this);
         switch (seat.getStatus()) {
             // 抱观众上麦（点击麦位）
             case Status.INIT:
@@ -182,7 +182,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         items.add(getString(R.string.cancel));
         itemDialog.setOnItemClickListener(item -> {
             onSeatAction(seat, item);
-        }).show(items);
+        }).show(getSupportFragmentManager(), items);
     }
 
     //
@@ -266,16 +266,16 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                     @Override
                     public void onSuccess(BaseResponse<Void> response) {
                         loadSuccess();
-                        ToastHelper.showToast("退出房间成功");
+                        ToastUtils.showShort("退出房间成功");
                         finish();
                     }
 
                     @Override
                     public void onFailed(int code, String errorMsg) {
                         if (!Network.getInstance().isConnected()) {
-                            ToastHelper.showToast("网络问题导致房间解散失败");
+                            ToastUtils.showShort("网络问题导致房间解散失败");
                         } else {
-                            ToastHelper.showToast("房间解散失败 " + errorMsg);
+                            ToastUtils.showShort("房间解散失败 " + errorMsg);
                         }
                         finish();
                     }

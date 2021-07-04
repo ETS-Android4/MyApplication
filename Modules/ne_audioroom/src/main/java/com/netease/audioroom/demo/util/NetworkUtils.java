@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
 public class NetworkUtils {
+
     /**
      * 判断是否有网络连接
      *

@@ -6,6 +6,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,18 +18,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 列表弹窗
+ * 麦位点击弹窗
  */
-public class ListItemDialog extends BottomBaseDialog {
+public class SeatMenuDialog extends BottomBaseDialog {
 
+    private Activity activity;
     private final List<String> items = new ArrayList<>();
     private OnItemClickListener<String> onItemClickListener;
 
-    public ListItemDialog(@NonNull Activity activity) {
+    public SeatMenuDialog(@NonNull Activity activity) {
         super(activity);
+        this.activity = activity;
     }
 
-    public ListItemDialog setOnItemClickListener(OnItemClickListener<String> onItemClickListener) {
+    public SeatMenuDialog setOnItemClickListener(OnItemClickListener<String> onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
         return this;
     }
@@ -76,10 +79,11 @@ public class ListItemDialog extends BottomBaseDialog {
         parent.addView(rvMemberList, layoutParams);
     }
 
-    public void show(List<String> items) {
+
+    public void show(@NonNull FragmentManager manager, List<String> items) {
         if (items != null && !items.isEmpty()) {
             this.items.addAll(items);
         }
-        show();
+        super.show();
     }
 }

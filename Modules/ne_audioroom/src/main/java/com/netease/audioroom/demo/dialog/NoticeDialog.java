@@ -1,62 +1,125 @@
 package com.netease.audioroom.demo.dialog;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 import com.netease.audioroom.demo.R;
+import com.netease.yunxin.kit.alog.ALog;
 
-import java.util.Objects;
+/**
+ * 提示弹窗
+ */
+public class NoticeDialog extends Dialog {
 
-public class NoticeDialog extends BaseDialogFragment {
+    protected Activity activity;
+    protected View rootView;
 
-    View contentView;
+    protected String titleStr;
+    protected String contentStr;
+    protected String positiveStr;
+    protected String negativeStr;
 
-    TextView close;
+    protected boolean enableTitle = true;
+
+    protected View.OnClickListener positiveListener;
+    protected View.OnClickListener negativeListener;
+
+
+    public NoticeDialog(@NonNull Activity activity) {
+        super(activity, R.style.CommonDialog);
+        this.activity = activity;
+        rootView = LayoutInflater.from(getContext()).inflate(contentLayoutId(), null);
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.request_dialog_fragment);
-
+        setContentView(rootView);
+        //fix one plus not show when resume from background
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (getDialog() == null) {
-            dismiss();
+    protected @LayoutRes
+    int contentLayoutId() {
+        return R.layout.view_dialog_choice_layout;
+    }
+
+    /**
+     * 页面渲染
+     */
+    protected void renderRootView(View rootView) {
+        if (rootView == null) {
+            return;
         }
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        contentView = inflater.inflate(R.layout.dialog_notice_layout, container, false);
-        return contentView;
-    }
+        TextView tvTitle = rootView.findViewById(R.id.tv_dialog_title);
+        tvTitle.setText(titleStr);
+        tvTitle.setVisibility(enableTitle ? View.VISIBLE : View.GONE);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
+        TextView tvContent = rootView.findViewById(R.id.tv_dialog_content);
+        tvContent.setText(contentStr);
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initView();
-    }
-
-    private void initView() {
-        close = contentView.findViewById(R.id.close);
-        close.setText("\ue7ca");
-        close.setOnClickListener(v -> dismiss());
-        Objects.requireNonNull(getDialog()).setOnKeyListener((dialog, keyCode, event) -> {
-            return keyCode == KeyEvent.KEYCODE_BACK;
+        TextView tvPositive = rootView.findViewById(R.id.tv_dialog_positive);
+        tvPositive.setText(positiveStr);
+        tvPositive.setOnClickListener(v -> {
+            dismiss();
+            if (positiveListener != null) {
+                positiveListener.onClick(v);
+            }
         });
+
+        TextView tvNegative = rootView.findViewById(R.id.tv_dialog_negative);
+        tvNegative.setText(negativeStr);
+        tvNegative.setOnClickListener(v -> {
+            dismiss();
+            if (negativeListener != null) {
+                negativeListener.onClick(v);
+            }
+        });
+
+    }
+
+    public NoticeDialog setTitle(String title) {
+        this.titleStr = title;
+        return this;
+    }
+
+    public NoticeDialog setContent(String content) {
+        this.contentStr = content;
+        return this;
+    }
+
+    public NoticeDialog setPositive(String positive, View.OnClickListener listener) {
+        this.positiveStr = positive;
+        this.positiveListener = listener;
+        return this;
+    }
+
+    public NoticeDialog setNegative(String negative, View.OnClickListener listener) {
+        findViewById(R.id.line_divide).setVisibility(View.VISIBLE);
+        this.negativeListener = listener;
+        this.negativeStr = negative;
+        return this;
+    }
+
+    @Override
+    public void show() {
+        if (isShowing()) {
+            return;
+        }
+        renderRootView(rootView);
+        try {
+            super.show();
+        } catch (WindowManager.BadTokenException e) {
+            ALog.e("ChoiceDialog", "error message is :" + e.getMessage());
+        }
     }
 }

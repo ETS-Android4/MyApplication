@@ -14,12 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MuteMemberListAdapter;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
-import com.netease.audioroom.demo.util.ScreenUtil;
-import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
@@ -62,7 +63,7 @@ public class MemberMuteDialog extends BottomBaseDialog {
         TextView cancelView = new TextView(getContext());
         cancelView.setText("取消");
         cancelView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-        cancelView.setPadding(ScreenUtil.dip2px(getContext(), 20), 0, 0, 0);
+        cancelView.setPadding(SizeUtils.dp2px(20), 0, 0, 0);
         cancelView.setGravity(Gravity.CENTER);
         cancelView.setTextColor(Color.parseColor("#ff333333"));
         FrameLayout.LayoutParams cancelLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -81,7 +82,7 @@ public class MemberMuteDialog extends BottomBaseDialog {
         tvMuteAll.setOnClickListener(v -> muteAllMember(!isAllMute));
 
         RecyclerView rvMemberList = bottomView.findViewById(R.id.rv_member_list);
-        rvMemberList.getLayoutParams().height = (int) (ScreenUtil.getScreenHeight(getContext()) * 0.8) - ScreenUtil.dip2px(getContext(), 108);
+        rvMemberList.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight() * 0.8) - SizeUtils.dp2px((108));
         rvMemberList.requestLayout();
         rvMemberList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new MuteMemberListAdapter(getContext());
@@ -107,12 +108,12 @@ public class MemberMuteDialog extends BottomBaseDialog {
 
             @Override
             public void onFailed(int code) {
-                ToastHelper.showToast("禁言失败code" + code);
+                ToastUtils.showShort("禁言失败code" + code);
             }
 
             @Override
             public void onException(Throwable exception) {
-                ToastHelper.showToast("禁言失败exception" + exception.getMessage());
+                ToastUtils.showShort("禁言失败exception" + exception.getMessage());
             }
         });
     }
@@ -132,7 +133,7 @@ public class MemberMuteDialog extends BottomBaseDialog {
                 adapter.updateDataSource(muteList);
                 adapter.setRemoveMute((p) -> {
                     if (isAllMute) {
-                        ToastHelper.showToast("全员禁言中,不能解禁");
+                        ToastUtils.showShort("全员禁言中,不能解禁");
                     } else {
                         removeMuteMember(p, muteList.get(p));
                     }
@@ -142,12 +143,12 @@ public class MemberMuteDialog extends BottomBaseDialog {
 
             @Override
             public void onFailed(int i) {
-                ToastHelper.showToast("获取禁言用户失败code" + i);
+                ToastUtils.showShort("获取禁言用户失败code" + i);
             }
 
             @Override
             public void onException(Throwable throwable) {
-                ToastHelper.showToast("获取禁言用户失败Exception" + throwable.getMessage());
+                ToastUtils.showShort("获取禁言用户失败Exception" + throwable.getMessage());
             }
         });
     }
@@ -164,7 +165,7 @@ public class MemberMuteDialog extends BottomBaseDialog {
                 @Override
                 public void onSuccess(Void param) {
                     String nick = member.getNick();
-                    ToastHelper.showToast(nick + "已被禁言");
+                    ToastUtils.showShort(nick + "已被禁言");
 
                     ArrayList<String> accountList = new ArrayList<>();
                     for (String account : accountList) {
@@ -174,7 +175,7 @@ public class MemberMuteDialog extends BottomBaseDialog {
                     tvTitle.setText("禁言成员 (" + muteList.size() + ")");
                     adapter.setRemoveMute((p) -> {
                         if (isAllMute) {
-                            ToastHelper.showToast("全员禁言中,不能解禁");
+                            ToastUtils.showShort("全员禁言中,不能解禁");
                         } else {
                             removeMuteMember(p, muteList.get(p));
                         }
@@ -184,13 +185,13 @@ public class MemberMuteDialog extends BottomBaseDialog {
                 @Override
                 public void onFailed(int code) {
                     // 失败
-                    ToastHelper.showToast("禁言失败" + code);
+                    ToastUtils.showShort("禁言失败" + code);
                 }
 
                 @Override
                 public void onException(Throwable exception) {
                     // 错误
-                    ToastHelper.showToast("禁言异常" + exception.getMessage());
+                    ToastUtils.showShort("禁言异常" + exception.getMessage());
                 }
             });
 
@@ -204,17 +205,17 @@ public class MemberMuteDialog extends BottomBaseDialog {
                     public void onSuccess(Object o) {
                         if (!isAllMute) {
                             tvMuteAll.setText("取消全部禁麦");
-                            ToastHelper.showToast("已全部禁麦");
+                            ToastUtils.showShort("已全部禁麦");
                         } else {
                             tvMuteAll.setText("全部禁言");
-                            ToastHelper.showToast("取消全部禁麦");
+                            ToastUtils.showShort("取消全部禁麦");
                         }
                         isAllMute = mute;
                     }
 
                     @Override
                     public void onFailed(int code, String errorMsg) {
-                        ToastHelper.showToast("全部禁麦失败+" + errorMsg);
+                        ToastUtils.showShort("全部禁麦失败+" + errorMsg);
                     }
                 });
     }
@@ -223,7 +224,7 @@ public class MemberMuteDialog extends BottomBaseDialog {
         anchor.getRoomQuery().muteMember(member, false, new RequestCallback<Void>() {
             @Override
             public void onSuccess(Void param) {
-                ToastHelper.showToast(member.getNick() + "已被解除禁言");
+                ToastUtils.showShort(member.getNick() + "已被解除禁言");
                 muteList.remove(p);
                 adapter.removeItem(p);
                 if (muteList.isEmpty()) {
@@ -235,12 +236,12 @@ public class MemberMuteDialog extends BottomBaseDialog {
 
             @Override
             public void onFailed(int code) {
-                ToastHelper.showToast("解禁失败" + code);
+                ToastUtils.showShort("解禁失败" + code);
             }
 
             @Override
             public void onException(Throwable exception) {
-                ToastHelper.showToast("解禁异常" + exception.getMessage());
+                ToastUtils.showShort("解禁异常" + exception.getMessage());
             }
         });
     }

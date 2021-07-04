@@ -59,7 +59,8 @@
             android:layout_height="43dp"
             android:layout_below="@id/line_bottom"
             android:layout_centerHorizontal="true"
-            android:background="#0c000050" />
+            android:background="#0c000050"
+            android:visibility="gone" />
 
         <View
             android:id="@+id/line_bottom"

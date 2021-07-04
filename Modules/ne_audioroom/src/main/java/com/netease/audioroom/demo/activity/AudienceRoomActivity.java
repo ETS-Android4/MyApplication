@@ -8,13 +8,13 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.NotificationDialog;
+import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialog;
 import com.netease.audioroom.demo.util.NetworkChange;
-import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Reason;
@@ -82,7 +82,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                             });
                             break;
                         case Status.APPLY:
-                            ToastHelper.showToast("该麦位正在被申请,\n请尝试申请其他麦位");
+                            ToastUtils.showShort("该麦位正在被申请,\n请尝试申请其他麦位");
                             break;
                         case Status.ON:
                         case Status.AUDIO_MUTED:
@@ -92,11 +92,11 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                             if (seat.isSameAccount(DemoCache.getAccountId())) {
                                 ChatRoomHelper.leaveSeat();
                             } else {
-                                ToastHelper.showToast("当前麦位有人");
+                                ToastUtils.showShort("当前麦位有人");
                             }
                             break;
                         case Status.CLOSED:
-                            ToastHelper.showToast("该麦位已被关闭");
+                            ToastUtils.showShort("该麦位已被关闭");
                             break;
                     }
                 }, Throwable::printStackTrace);
@@ -166,12 +166,12 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     @Override
     public void onSeatApplyDenied(boolean otherOn) {
         if (otherOn) {
-            ToastHelper.showToast("申请麦位已被拒绝");
+            ToastUtils.showShort("申请麦位已被拒绝");
             if (mTopTipsDialog != null) {
                 mTopTipsDialog.dismiss();
             }
         } else {
-            new NotificationDialog(this)
+            new NoticeDialog(this)
                     .setTitle("通知")
                     .setContent("您的申请已被拒绝")
                     .setPositive("知道了", v -> {
@@ -196,14 +196,14 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                 if (mTopTipsDialog != null) {
                     mTopTipsDialog.dismiss();
                 }
-                new NotificationDialog(AudienceRoomActivity.this)
+                new NoticeDialog(AudienceRoomActivity.this)
                         .setTitle("通知")
                         .setContent("申请通过")
                         .setPositive("知道了", null)
                         .show();
             } else if (seat.getReason() == Reason.ANCHOR_INVITE) {//主播抱上麦
                 int position = seat.getIndex() + 1;
-                new NotificationDialog(AudienceRoomActivity.this)
+                new NoticeDialog(AudienceRoomActivity.this)
                         .setTitle("通知")
                         .setContent("您已被主播抱上“麦位”" + position + "\n" + "现在可以进行语音互动啦\n" + "如需下麦，可点击自己的头像或下麦按钮")
                         .setPositive("知道了", null)
@@ -220,7 +220,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         mic.setVisibility(View.GONE);
         if (!bySelf) {
             if (seat.getReason() == Reason.ANCHOR_KICK) {
-                new NotificationDialog(this)
+                new NoticeDialog(this)
                         .setTitle("通知")
                         .setContent("您已被主播请下麦位")
                         .setPositive("知道了", null)
@@ -237,7 +237,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         if (mTopTipsDialog != null) {
             mTopTipsDialog.dismiss();
         }
-        new NotificationDialog(this)
+        new NoticeDialog(this)
                 .setTitle("通知")
                 .setContent("该麦位被主播“屏蔽语音”\n 现在您已无法进行语音互动")
                 .setPositive("知道了", null)
@@ -263,11 +263,11 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         if (muted) {
             tvInput.setHint("您已被禁言");
             tvInput.setFocusable(false);
-            ToastHelper.showToast("您已被禁言");
+            ToastUtils.showShort("您已被禁言");
         } else {
             tvInput.setHint("一起聊聊吧~");
             tvInput.requestFocus();
-            ToastHelper.showToast("您的禁言被解除");
+            ToastUtils.showShort("您的禁言被解除");
         }
     }
 

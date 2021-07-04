@@ -16,12 +16,13 @@ import androidx.core.content.ContextCompat;
 import java.util.Objects;
 
 /**
- * Created by luc on 2020/11/10.
+ * 聊天消息构建
  */
-public final class ChatMessageSpannableStr {
+public final class MessageSpannableStr {
+
     private final CharSequence messageInfo;
 
-    public ChatMessageSpannableStr(CharSequence messageInfo) {
+    public MessageSpannableStr(CharSequence messageInfo) {
         this.messageInfo = messageInfo;
     }
 
@@ -98,8 +99,8 @@ public final class ChatMessageSpannableStr {
         /**
          * 构建 ChatMessage
          */
-        public ChatMessageSpannableStr build() {
-            return new ChatMessageSpannableStr(builder);
+        public MessageSpannableStr build() {
+            return new MessageSpannableStr(builder);
         }
 
         /**

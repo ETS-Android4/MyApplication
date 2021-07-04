@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.LoginManager;
 import com.netease.audioroom.demo.R;
@@ -19,7 +20,6 @@ import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.NetworkUtils;
-import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
 import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
@@ -176,7 +176,7 @@ public class MainActivity extends BaseActivity {
 
                             AnchorRoomActivity.start(MainActivity.this, roomInfo);
                         } else {
-                            ToastHelper.showToast(getString(R.string.crate_room_error));
+                            ToastUtils.showShort(getString(R.string.crate_room_error));
                         }
                     }
 
@@ -187,7 +187,7 @@ public class MainActivity extends BaseActivity {
                         } else {
                             errorMsg = "服务器失败";
                         }
-                        ToastHelper.showToast("创建失败:" + (!NetworkUtils.isNetworkConnected(MainActivity.this) ? "网络错误" : errorMsg));
+                        ToastUtils.showShort("创建失败:" + (!NetworkUtils.isNetworkConnected(MainActivity.this) ? "网络错误" : errorMsg));
                     }
                 });
     }

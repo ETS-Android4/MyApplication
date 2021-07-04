@@ -23,8 +23,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.util.ScreenUtil;
 
 
 public class TopTipsDialog extends BaseDialogFragment {
@@ -58,7 +58,6 @@ public class TopTipsDialog extends BaseDialogFragment {
         }
         view = inflater.inflate(R.layout.dialog_top_tips, container, false);
         // 设置宽度为屏宽、靠近屏幕底部。
-
         if (getDialog() != null) {
             Window window = getDialog().getWindow();
             WindowManager.LayoutParams params = window.getAttributes();
@@ -92,7 +91,7 @@ public class TopTipsDialog extends BaseDialogFragment {
             if (drawable != null) {
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                 content.setCompoundDrawables(drawable, null, null, null);
-                content.setCompoundDrawablePadding(ScreenUtil.dip2px(content.getContext(), 4));
+                content.setCompoundDrawablePadding(SizeUtils.dp2px(4));
             }
         }
         if (style.getBackground() != 0) {

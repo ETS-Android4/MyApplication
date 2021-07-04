@@ -11,6 +11,7 @@ import static android.view.View.VISIBLE;
  * 软键盘工具类
  */
 public final class InputUtils {
+
     /**
      * 展示软键盘
      *

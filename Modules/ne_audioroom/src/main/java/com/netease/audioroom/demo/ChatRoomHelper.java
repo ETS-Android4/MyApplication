@@ -2,10 +2,10 @@ package com.netease.audioroom.demo;
 
 import android.content.Context;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.Network;
-import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef;
@@ -93,9 +93,9 @@ public class ChatRoomHelper {
     public static void closeMic() {
         boolean muted = mNERtcVoiceRoom.muteLocalAudio(!isMicClosed());
         if (muted) {
-            ToastHelper.showToast("话筒已关闭");
+            ToastUtils.showShort("话筒已关闭");
         } else {
-            ToastHelper.showToast("话筒已打开");
+            ToastUtils.showShort("话筒已打开");
         }
     }
 
@@ -132,7 +132,7 @@ public class ChatRoomHelper {
             public void onSuccess(Void param) {
                 VoiceRoomUser user = seat.getUser();
                 String nick = user != null ? user.getNick() : "";
-                ToastHelper.showToast("已拒绝“" + nick + "”的申请");
+                ToastUtils.showShort("已拒绝“" + nick + "”的申请");
             }
         });
     }
@@ -146,7 +146,7 @@ public class ChatRoomHelper {
         boolean ret = anchor.approveSeatApply(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                ToastHelper.showToast("成功通过连麦请求");
+                ToastUtils.showShort("成功通过连麦请求");
             }
         });
         if (!ret) {
@@ -163,7 +163,7 @@ public class ChatRoomHelper {
             public void onSuccess(Void param) {
                 VoiceRoomUser user = seat.getUser();
                 String nick = user != null ? user.getNick() : "";
-                ToastHelper.showToast("已将“" + nick + "”踢下麦位");
+                ToastUtils.showShort("已将“" + nick + "”踢下麦位");
             }
         });
     }
@@ -175,7 +175,7 @@ public class ChatRoomHelper {
         anchor.closeSeat(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void param) {
-                ToastHelper.showToast("麦位" + (seat.getIndex() + 1) + "已关闭");
+                ToastUtils.showShort("麦位" + (seat.getIndex() + 1) + "已关闭");
             }
         });
     }
@@ -187,7 +187,7 @@ public class ChatRoomHelper {
         anchor.muteSeat(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void param) {
-                ToastHelper.showToast("该麦位语音已被屏蔽，无法发言");
+                ToastUtils.showShort("该麦位语音已被屏蔽，无法发言");
             }
         });
     }
@@ -219,17 +219,17 @@ public class ChatRoomHelper {
         anchor.openSeat(seat, new RequestCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                ToastHelper.showToast(text);
+                ToastUtils.showShort(text);
             }
 
             @Override
             public void onFailed(int i) {
-                ToastHelper.showToast(textError + " code " + i);
+                ToastUtils.showShort(textError + " code " + i);
             }
 
             @Override
             public void onException(Throwable throwable) {
-                ToastHelper.showToast(textError + " " + throwable.getMessage());
+                ToastUtils.showShort(textError + " " + throwable.getMessage());
             }
         });
     }
@@ -249,7 +249,7 @@ public class ChatRoomHelper {
             @Override
             public void onSuccess(Boolean in) {
                 if (!in) {
-                    ToastHelper.showToast("操作失败:用户离开房间");
+                    ToastUtils.showShort("操作失败:用户离开房间");
                     return;
                 }
 
@@ -274,7 +274,7 @@ public class ChatRoomHelper {
         //是否为麦上用户
         for (VoiceRoomSeat seat : userSeats) {
             if (seat != null && seat.isOn()) {
-                ToastHelper.showToast("操作失败:当前用户已在麦位上");
+                ToastUtils.showShort("操作失败:当前用户已在麦位上");
                 return;
             }
         }
@@ -312,7 +312,7 @@ public class ChatRoomHelper {
             public void onSuccess(Void aVoid) {
                 VoiceRoomUser user = seat.getUser();
                 String nick = user != null ? user.getNick() : "";
-                ToastHelper.showToast("已将" + nick + "抱上麦位" + (seat.getIndex() + 1));
+                ToastUtils.showShort("已将" + nick + "抱上麦位" + (seat.getIndex() + 1));
             }
         });
         if (!ret) {
@@ -338,7 +338,7 @@ public class ChatRoomHelper {
             @Override
             public void onError() {
                 if (Network.getInstance().isConnected()) {
-                    ToastHelper.showToastLong("主播网络好像出了问题");
+                    ToastUtils.showShort("主播网络好像出了问题");
                 }
             }
         });
@@ -367,9 +367,9 @@ public class ChatRoomHelper {
         VoiceRoomSeat seat = audience.getSeat();
         if (seat != null) {
             if (seat.getStatus() == VoiceRoomSeat.Status.CLOSED) {
-                ToastHelper.showToast("麦位已关闭");
+                ToastUtils.showShort("麦位已关闭");
             } else if (seat.isOn()) {
-                ToastHelper.showToast("您已在麦上");
+                ToastUtils.showShort("您已在麦上");
             } else {
                 return true;
             }
@@ -391,12 +391,12 @@ public class ChatRoomHelper {
 
                 @Override
                 public void onFailed(int i) {
-                    ToastHelper.showToast("请求连麦失败 ， code = " + i);
+                    ToastUtils.showShort("请求连麦失败 ， code = " + i);
                 }
 
                 @Override
                 public void onException(Throwable throwable) {
-                    ToastHelper.showToast("请求连麦异常 ， e = " + throwable);
+                    ToastUtils.showShort("请求连麦异常 ， e = " + throwable);
                 }
             });
         }
@@ -409,17 +409,17 @@ public class ChatRoomHelper {
         audience.cancelSeatApply(new RequestCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                ToastHelper.showToast("已取消申请上麦");
+                ToastUtils.showShort("已取消申请上麦");
             }
 
             @Override
             public void onFailed(int i) {
-                ToastHelper.showToast("操作失败");
+                ToastUtils.showShort("操作失败");
             }
 
             @Override
             public void onException(Throwable throwable) {
-                ToastHelper.showToast("操作失败");
+                ToastUtils.showShort("操作失败");
             }
         });
     }
@@ -432,7 +432,7 @@ public class ChatRoomHelper {
         audience.leaveSeat(new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                ToastHelper.showToast("您已下麦");
+                ToastUtils.showShort("您已下麦");
             }
         });
     }

@@ -25,7 +25,6 @@ public final class ViewUtils {
         int top = location[1];
         int right = left + view.getMeasuredWidth();
         int bottom = top + view.getMeasuredHeight();
-        return y >= top && y <= bottom && x >= left
-                && x <= right;
+        return y >= top && y <= bottom && x >= left && x <= right;
     }
 }

@@ -1,11 +1,11 @@
 package com.netease.audioroom.demo;
 
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.base.action.ILoginAction;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.model.AccountInfo;
-import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.nimlib.sdk.AbortableFuture;
 import com.netease.nimlib.sdk.NIMSDK;
 import com.netease.nimlib.sdk.RequestCallback;
@@ -73,7 +73,7 @@ public class LoginManager implements ILoginAction {
 
             @Override
             public void onFailed(int code, String errorMsg) {
-                ToastHelper.showToast("获取登录帐号失败 ， code = " + code);
+                ToastUtils.showShort("获取登录帐号失败 ， code = " + code);
                 callback.onFailed(code, errorMsg);
                 isLogin = false;
             }
@@ -97,12 +97,12 @@ public class LoginManager implements ILoginAction {
             public void onFailed(int i) {
                 ALog.i("nim login failed:" + " code = " + i);
                 callback.onFailed(i, "SDK登录失败");
-                ToastHelper.showToast("SDK登录失败 , code = " + i);
+                ToastUtils.showShort("SDK登录失败 , code = " + i);
             }
 
             @Override
             public void onException(Throwable throwable) {
-                ToastHelper.showToast("SDK登录异常 , e = " + throwable);
+                ToastUtils.showShort("SDK登录异常 , e = " + throwable);
                 callback.onFailed(throwable.hashCode(), "SDK登录异常");
             }
         });

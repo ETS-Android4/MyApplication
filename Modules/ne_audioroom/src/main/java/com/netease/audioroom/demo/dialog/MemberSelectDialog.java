@@ -14,11 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.activity.AnchorRoomActivity;
 import com.netease.audioroom.demo.adapter.MemberListAdapter;
-import com.netease.audioroom.demo.util.ScreenUtil;
-import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -84,7 +85,7 @@ public class MemberSelectDialog extends BottomBaseDialog {
 
         ImageView cancelView = new ImageView(getContext());
         cancelView.setImageResource(R.drawable.icon_room_memeber_back_arrow);
-        cancelView.setPadding(ScreenUtil.dip2px(getContext(), 20), 0, 0, 0);
+        cancelView.setPadding(SizeUtils.dp2px(20), 0, 0, 0);
         FrameLayout.LayoutParams cancelLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         parent.addView(cancelView, cancelLayoutParams);
 
@@ -95,7 +96,7 @@ public class MemberSelectDialog extends BottomBaseDialog {
     protected void renderBottomView(FrameLayout parent) {
         RecyclerView rvMemberList = new RecyclerView(getContext());
         rvMemberList.setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
-        int height = (int) (ScreenUtil.getScreenHeight(getContext()) * 0.8) - ScreenUtil.dip2px(getContext(), 48);
+        int height = (int) (ScreenUtils.getScreenHeight() * 0.8) - SizeUtils.dp2px(48);
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
         rvMemberList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new MemberListAdapter(getContext());
@@ -122,12 +123,12 @@ public class MemberSelectDialog extends BottomBaseDialog {
 
             @Override
             public void onFailed(int i) {
-                ToastHelper.showToast("获取用户失败code" + i);
+                ToastUtils.showShort("获取用户失败code" + i);
             }
 
             @Override
             public void onException(Throwable throwable) {
-                ToastHelper.showToast("获取用户失败Exception" + throwable.getMessage());
+                ToastUtils.showShort("获取用户失败Exception" + throwable.getMessage());
             }
         };
         if (!excludeAccounts.isEmpty()) {

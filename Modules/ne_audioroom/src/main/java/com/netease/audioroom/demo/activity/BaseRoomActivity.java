@@ -15,19 +15,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MessageListAdapter;
 import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.ChoiceDialog;
 import com.netease.audioroom.demo.dialog.MemberMuteDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
-import com.netease.audioroom.demo.dialog.NotificationDialog;
 import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.util.Network;
-import com.netease.audioroom.demo.util.ToastHelper;
 import com.netease.audioroom.demo.util.ViewUtils;
 import com.netease.audioroom.demo.widget.HeadImageView;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomCallback;
@@ -82,7 +80,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mVoiceRoomInfo = (VoiceRoomInfo) getIntent().getSerializableExtra(EXTRA_VOICE_ROOM_INFO);
         if (mVoiceRoomInfo == null) {
-            ToastHelper.showToast("聊天室信息不能为空");
+            ToastUtils.showShort("聊天室信息不能为空");
             finish();
             return;
         }
@@ -132,7 +130,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         tvRoomName = baseAudioView.findViewById(R.id.tv_chat_room_name);
         tvAnnouncement = baseAudioView.findViewById(R.id.tv_room_announcement);
         tvAnnouncement.setOnClickListener(v ->
-                new NoticeDialog().show(getSupportFragmentManager(), "notice")
+                ToastUtils.showShort("公告")
         );
         tvMemberCount = baseAudioView.findViewById(R.id.tv_room_member_count);
 
@@ -151,7 +149,8 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
         //禁言
         mute = findViewById(R.id.iv_room_mute);
         mute.setOnClickListener(view ->
-                new MemberMuteDialog(BaseRoomActivity.this, mVoiceRoomInfo).show()
+                new MemberMuteDialog(BaseRoomActivity.this, mVoiceRoomInfo)
+                        .show()
         );
         //     -> 管理员可见
         if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
@@ -170,7 +169,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
             InputUtils.hideSoftInput(BaseRoomActivity.this, edtInput);
             String content = edtInput.getText().toString().trim();
             if (TextUtils.isEmpty(content)) {
-                ToastHelper.showToast("请输入消息内容");
+                ToastUtils.showShort("请输入消息内容");
             }
             ChatRoomHelper.sendMessage(content);
             return true;
@@ -224,7 +223,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
     @Override
     public void onEnterRoom(boolean success) {
         if (!success) {
-            ToastHelper.showToast("进入聊天室失败");
+            ToastUtils.showShort("进入聊天室失败");
             finish();
         } else {
             loadSuccess();
@@ -244,7 +243,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements RoomCallb
      */
     @Override
     public void onRoomDismiss() {
-        ChoiceDialog dialog = new NotificationDialog(this)
+        NoticeDialog dialog = new NoticeDialog(this)
                 .setTitle("通知")
                 .setContent("该房间已被主播解散")
                 .setPositive("知道了", v -> {

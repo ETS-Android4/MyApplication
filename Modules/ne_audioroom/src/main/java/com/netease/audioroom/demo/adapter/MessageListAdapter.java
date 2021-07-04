@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
-import com.netease.audioroom.demo.widget.ChatMessageSpannableStr;
+import com.netease.audioroom.demo.widget.MessageSpannableStr;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class MessageListAdapter extends BaseAdapter<VoiceRoomMessage> {
         }
 
         if (message.type == VoiceRoomMessage.Type.TEXT) {
-            CharSequence content = new ChatMessageSpannableStr.Builder()
+            CharSequence content = new MessageSpannableStr.Builder()
                     .append(message.nick + "：", Color.parseColor("#99ffffff"))
                     .append(message.content)
                     .build().getMessageInfo();

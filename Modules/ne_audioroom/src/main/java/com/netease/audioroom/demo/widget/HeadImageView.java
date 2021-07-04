@@ -10,7 +10,6 @@ import com.netease.nimlib.sdk.nos.model.NosThumbParam;
 import com.netease.nimlib.sdk.nos.util.NosThumbImageUtil;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
 
-
 public class HeadImageView extends CircleImageView {
 
     public static final int DEFAULT_AVATAR_THUMB_SIZE = (int) DemoCache.getContext().getResources().getDimension(R.dimen.avatar_size_default);
