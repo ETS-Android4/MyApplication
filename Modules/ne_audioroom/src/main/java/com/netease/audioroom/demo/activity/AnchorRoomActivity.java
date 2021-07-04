@@ -113,6 +113,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         tvApplyHint.setVisibility(View.INVISIBLE);
         tvApplyHint.setClickable(true);
         tvApplyHint.setOnClickListener(view -> {
+                    //申请上麦弹窗
                     mSeatApplyDialog = new SeatApplyDialog();
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList(mSeatApplyDialog.TAG, new ArrayList<>(ChatRoomHelper.getApplySeats()));

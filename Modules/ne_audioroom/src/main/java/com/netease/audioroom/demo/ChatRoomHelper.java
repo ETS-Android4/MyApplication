@@ -154,10 +154,6 @@ public class ChatRoomHelper {
         }
     }
 
-    //
-    // 麦位操作
-    //
-
     /**
      * 踢人
      */
@@ -237,10 +233,6 @@ public class ChatRoomHelper {
             }
         });
     }
-
-    //
-    // ===
-    //
 
     /**
      * 获取直播间成员列表
@@ -353,25 +345,61 @@ public class ChatRoomHelper {
     }
 
     /**
+     * 刷新音频和座位
+     */
+    public static void restartAudioAndSeat() {
+        audience.restartAudioOrNot();
+        audience.refreshSeat();
+    }
+
+    /**
+     * 是否上麦状态
+     */
+    public static boolean isInChannel() {
+        VoiceRoomSeat seat = audience.getSeat();
+        return seat != null && seat.isOn();
+    }
+
+    /**
+     * 是否可以上麦
+     */
+    private static boolean checkSeat() {
+        VoiceRoomSeat seat = audience.getSeat();
+        if (seat != null) {
+            if (seat.getStatus() == VoiceRoomSeat.Status.CLOSED) {
+                ToastHelper.showToast("麦位已关闭");
+            } else if (seat.isOn()) {
+                ToastHelper.showToast("您已在麦上");
+            } else {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 上麦
      */
-    public static void applySeat(VoiceRoomSeat seat) {
-        audience.applySeat(seat, new RequestCallback<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                //onApplySeatSuccess();
-            }
+    public static void applySeat(VoiceRoomSeat seat, SuccessCallback<Void> callback) {
+        if (checkSeat()) {
+            audience.applySeat(seat, new RequestCallback<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    callback.onSuccess(aVoid);
+                }
 
-            @Override
-            public void onFailed(int i) {
-                ToastHelper.showToast("请求连麦失败 ， code = " + i);
-            }
+                @Override
+                public void onFailed(int i) {
+                    ToastHelper.showToast("请求连麦失败 ， code = " + i);
+                }
 
-            @Override
-            public void onException(Throwable throwable) {
-                ToastHelper.showToast("请求连麦异常 ， e = " + throwable);
-            }
-        });
+                @Override
+                public void onException(Throwable throwable) {
+                    ToastHelper.showToast("请求连麦异常 ， e = " + throwable);
+                }
+            });
+        }
     }
 
     /**
