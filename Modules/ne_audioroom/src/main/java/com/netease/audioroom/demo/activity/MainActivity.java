@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatHelper;
-import com.netease.audioroom.demo.LoginManager;
+import com.netease.audioroom.demo.ChatLoginManager;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.RoomListAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initViews() {
-        mEmptyView = findViewById(R.id.empty_view);
+        mEmptyView = findViewById(R.id.tv_empty);
 
         roomListAdapter = new RoomListAdapter(this);
         roomListAdapter.setItemClickListener((model, position) -> {
@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity {
 
     // not need every time login. im auto login when network change
     private void onNetwork() {
-        ChatHelper.loginIM(new LoginManager.Callback() {
+        ChatHelper.loginIM(new ChatLoginManager.Callback() {
             @Override
             public void onSuccess(AccountInfo accountInfo) {
                 loadSuccess();

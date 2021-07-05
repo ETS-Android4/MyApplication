@@ -20,16 +20,16 @@ import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_RAND
 public interface ChatRoomApi {
 
     /**
-     * 获取聊天室房间列表
-     */
-    @POST(URL_ROOM_LIST_FETCH)
-    Single<BaseResponse<RoomInfoResp>> fetchRoomList(@QueryMap Map<String, Object> body);
-
-    /**
      * 获取 IM 账号
      */
     @POST(URL_ACCOUNT_FETCH)
     Single<BaseResponse<AccountInfoResp>> fetchAccount(@QueryMap Map<String, Object> body);
+
+    /**
+     * 获取聊天室房间列表
+     */
+    @POST(URL_ROOM_LIST_FETCH)
+    Single<BaseResponse<RoomInfoResp>> fetchRoomList(@QueryMap Map<String, Object> body);
 
     /**
      * 创建聊天室房间
@@ -48,7 +48,6 @@ public interface ChatRoomApi {
      */
     @POST(URL_ROOM_MUTE_ALL)
     Single<BaseResponse<Void>> muteAll(@QueryMap Map<String, Object> body);
-
 
     /**
      * 获取随机主题

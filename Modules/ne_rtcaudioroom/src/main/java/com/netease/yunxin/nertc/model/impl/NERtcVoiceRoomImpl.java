@@ -407,6 +407,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                     }
                 }
 
+                //主播加入音视频频道，不然无法推流
                 if (anchorMode || !voiceRoomInfo.isSupportCDN()) {
                     joinChannel();
                 } else {
@@ -414,8 +415,10 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                     onEnterRoom(true);
                 }
 
-                initSeats();
-                initAnchorInfo();
+                //初始化麦位信息
+                initSeatsInfo();
+                //初始化主播信息
+                setOnAnchorInfo();
             }
 
             @Override
@@ -712,31 +715,36 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         });
     }
 
-    private void initAnchorInfo() {
+    /**
+     * 初始化主播信息
+     */
+    private void setOnAnchorInfo() {
         if (anchorMode) {
-            initAnchorInfo(user);
-            return;
-        }
-        roomQuery.fetchMember(voiceRoomInfo.getCreatorAccount(), new SuccessCallback<ChatRoomMember>() {
-            @Override
-            public void onSuccess(ChatRoomMember chatRoomMember) {
-                if (chatRoomMember != null) {
-                    initAnchorInfo(new VoiceRoomUser(chatRoomMember));
+            setOnAnchorInfo(user);
+        } else {
+            roomQuery.fetchMember(voiceRoomInfo.getCreatorAccount(), new SuccessCallback<ChatRoomMember>() {
+                @Override
+                public void onSuccess(ChatRoomMember chatRoomMember) {
+                    if (chatRoomMember != null) {
+                        setOnAnchorInfo(new VoiceRoomUser(chatRoomMember));
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
-    private void initAnchorInfo(VoiceRoomUser user) {
+    private void setOnAnchorInfo(VoiceRoomUser user) {
         if (roomCallback != null) {
             roomCallback.onAnchorInfo(user);
         }
     }
 
-    private void initSeats() {
+    /**
+     * 初始化麦位信息
+     */
+    private void initSeatsInfo() {
         if (anchorMode) {
-            updateSeats(createSeats());
-//            return;
+            setOnUpdateSeats(createSeats());
         }
         fetchSeats(new SuccessCallback<List<VoiceRoomSeat>>() {
             @Override
@@ -746,14 +754,22 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                 } else {
                     anchor.initSeats(seats);
                 }
-                updateSeats(seats);
+                setOnUpdateSeats(seats);
             }
         });
     }
 
+    private void setOnUpdateSeats(@NonNull List<VoiceRoomSeat> seats) {
+        this.seats.clear();
+        this.seats.addAll(seats);
+        if (roomCallback != null) {
+            roomCallback.onUpdateSeats(this.seats);
+        }
+    }
+
     @Override
     public void refreshSeats() {
-        initSeats();
+        initSeatsInfo();
     }
 
     private void onNotification(final ChatRoomNotificationAttachment notification) {
@@ -853,7 +869,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             } else {
                 audience.clearSeats();
             }
-            updateSeats(createSeats());
+            setOnUpdateSeats(createSeats());
             return;
         }
 
@@ -896,14 +912,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             if (roomCallback != null) {
                 roomCallback.onVoiceRoomMessage(message);
             }
-        }
-    }
-
-    private void updateSeats(@NonNull List<VoiceRoomSeat> seats) {
-        this.seats.clear();
-        this.seats.addAll(seats);
-        if (roomCallback != null) {
-            roomCallback.onUpdateSeats(this.seats);
         }
     }
 

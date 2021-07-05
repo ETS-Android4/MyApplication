@@ -12,19 +12,19 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.yunxin.kit.alog.ALog;
 
-public class LoginManager implements ILoginAction {
+public class ChatLoginManager implements ILoginAction {
 
     private static final String TAG = "LoginManager";
 
     private static boolean isLogin = false;
 
-    private static final LoginManager instance = new LoginManager();
+    private static final ChatLoginManager instance = new ChatLoginManager();
 
-    private LoginManager() {
+    private ChatLoginManager() {
 
     }
 
-    public static LoginManager getInstance() {
+    public static ChatLoginManager getInstance() {
         return instance;
     }
 

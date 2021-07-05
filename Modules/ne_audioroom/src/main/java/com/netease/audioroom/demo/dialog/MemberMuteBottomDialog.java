@@ -18,7 +18,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.adapter.MuteMemberListAdapter;
+import com.netease.audioroom.demo.adapter.MemberMuteListAdapter;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.nimlib.sdk.RequestCallback;
@@ -41,7 +41,7 @@ public class MemberMuteBottomDialog extends BaseBottomDialog {
 
     private TextView tvMuteAll;
     private TextView tvTitle;
-    private MuteMemberListAdapter adapter;
+    private MemberMuteListAdapter adapter;
     public boolean isAllMute;
 
     public MemberMuteBottomDialog(@NonNull Activity activity, VoiceRoomInfo voiceRoomInfo) {
@@ -85,7 +85,7 @@ public class MemberMuteBottomDialog extends BaseBottomDialog {
         rvMemberList.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight() * 0.8) - SizeUtils.dp2px((108));
         rvMemberList.requestLayout();
         rvMemberList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new MuteMemberListAdapter(getContext());
+        adapter = new MemberMuteListAdapter(getContext());
         rvMemberList.setAdapter(adapter);
 
         fetchRoomMute();

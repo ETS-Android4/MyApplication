@@ -19,7 +19,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.activity.AnchorRoomActivity;
-import com.netease.audioroom.demo.adapter.MemberListAdapter;
+import com.netease.audioroom.demo.adapter.MemberSelectListAdapter;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -35,7 +35,7 @@ import java.util.List;
 public class MemberSelectBottomDialog extends BaseBottomDialog {
 
     private OnMemberChosenListener listener;
-    private MemberListAdapter adapter;
+    private MemberSelectListAdapter adapter;
 
     private Anchor anchor;
 
@@ -99,7 +99,7 @@ public class MemberSelectBottomDialog extends BaseBottomDialog {
         int height = (int) (ScreenUtils.getScreenHeight() * 0.8) - SizeUtils.dp2px(48);
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
         rvMemberList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new MemberListAdapter(getContext());
+        adapter = new MemberSelectListAdapter(getContext());
         rvMemberList.setAdapter(adapter);
         parent.addView(rvMemberList, layoutParams);
 

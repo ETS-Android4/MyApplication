@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 禁言列表
  */
-public class MuteMemberListAdapter extends RecyclerSwipeAdapter<MuteMemberListAdapter.MuteMemberViewHolder> {
+public class MemberMuteListAdapter extends RecyclerSwipeAdapter<MemberMuteListAdapter.MuteMemberViewHolder> {
 
     private static final int TYPE_EMPTY = 1;
     private static final int TYPE_NORMAL = 2;
@@ -36,7 +36,7 @@ public class MuteMemberListAdapter extends RecyclerSwipeAdapter<MuteMemberListAd
 
     IRemoveMute removeMute;
 
-    public MuteMemberListAdapter(Context context) {
+    public MemberMuteListAdapter(Context context) {
         this.context = context;
     }
 

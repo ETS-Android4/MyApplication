@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 抱麦列表
+ * 选择成员列表
  */
-public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.ChatRoomHolder> {
+public class MemberSelectListAdapter extends RecyclerView.Adapter<MemberSelectListAdapter.ChatRoomHolder> {
 
     private static final int TYPE_EMPTY = 1;
     private static final int TYPE_NORMAL = 2;
@@ -30,14 +30,14 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.Ch
     private final Context context;
     private OnItemClickListener<Integer> onItemClickListener;
 
-    public MemberListAdapter(List<VoiceRoomUser> dataList, Context context) {
+    public MemberSelectListAdapter(List<VoiceRoomUser> dataList, Context context) {
         if (dataList != null && !dataList.isEmpty()) {
             this.members.addAll(dataList);
         }
         this.context = context;
     }
 
-    public MemberListAdapter(Context context) {
+    public MemberSelectListAdapter(Context context) {
         this(null, context);
     }
 

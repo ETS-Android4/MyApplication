@@ -28,7 +28,7 @@ import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.ViewUtils;
 import com.netease.audioroom.demo.widget.HeadImageView;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomCallback;
+import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * 主播与观众基础页，包含所有的通用UI元素
  */
-public abstract class BaseRoomActivity extends BaseActivity implements RoomCallback {
+public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoiceRoomDef.RoomCallback {
 
     public static final String EXTRA_VOICE_ROOM_INFO = "extra_voice_room_info";
 

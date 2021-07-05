@@ -59,18 +59,25 @@ public class ChatHelper {
     /**
      * 登陆
      */
-    public static void loginIM(LoginManager.Callback callback) {
-        LoginManager loginManager = LoginManager.getInstance();
-        loginManager.tryLogin();
-        loginManager.setCallback(callback);
+    public static void loginIM(ChatLoginManager.Callback callback) {
+        ChatLoginManager chatLoginManager = ChatLoginManager.getInstance();
+        chatLoginManager.tryLogin();
+        chatLoginManager.setCallback(callback);
     }
 
     /**
      * 退出登录
      */
     public static void logoutIM() {
-        LoginManager loginManager = LoginManager.getInstance();
-        loginManager.logout();
+        ChatLoginManager chatLoginManager = ChatLoginManager.getInstance();
+        chatLoginManager.logout();
+    }
+
+    /**
+     * 是否登陆
+     */
+    public static boolean isLogin() {
+        return ChatLoginManager.isLogin();
     }
 
     private static LoginInfo getLoginInfo() {
