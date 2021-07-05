@@ -140,6 +140,9 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
 
         //扬声器
         audio = baseAudioView.findViewById(R.id.iv_room_audio);
+        audio.setOnClickListener(v ->
+                ChatRoomHelper.closeRoomAudio()
+        );
 
         //麦克
         mic = baseAudioView.findViewById(R.id.iv_room_mic);
@@ -353,13 +356,23 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
     }
 
     /**
-     * ???
+     * 是否关闭麦克
      *
-     * @param muted 是否静音
+     * @param muted
      */
     @Override
-    public void onMuteAudio(boolean muted) {
+    public void onLocalMuteMic(boolean muted) {
         mic.setSelected(muted);
+    }
+
+    /**
+     * 是否关闭音频
+     *
+     * @param muted
+     */
+    @Override
+    public void onRoomMuteAudio(boolean muted) {
+        audio.setSelected(muted);
     }
 
     /**

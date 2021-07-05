@@ -2,6 +2,7 @@ package com.netease.audioroom.demo;
 
 import android.app.Activity;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
@@ -114,7 +115,12 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     }
 
     @Override
-    public void onMuteAudio(boolean muted) {
+    public void onLocalMuteMic(boolean muted) {
+
+    }
+
+    @Override
+    public void onRoomMuteAudio(boolean muted) {
 
     }
 

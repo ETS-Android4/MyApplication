@@ -106,11 +106,18 @@ public class NERtcVoiceRoomDef {
         void onVoiceRoomMessage(VoiceRoomMessage message);
 
         /**
-         * 静音状态
+         * 是否关闭麦克风
          *
          * @param muted 是否静音
          */
-        void onMuteAudio(boolean muted);
+        void onLocalMuteMic(boolean muted);
+
+        /**
+         * 是否关闭音频
+         *
+         * @param muted
+         */
+        void onRoomMuteAudio(boolean muted);
 
     }
 

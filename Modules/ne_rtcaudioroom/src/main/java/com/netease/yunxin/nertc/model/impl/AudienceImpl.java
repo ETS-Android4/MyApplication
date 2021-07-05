@@ -370,7 +370,7 @@ public class AudienceImpl implements Audience {
         }
         voiceRoom.startLocalAudio();
         if (voiceRoom.isLocalAudioMute()) {
-            voiceRoom.muteLocalAudio(false);
+            voiceRoom.muteLocalMic(false);
         }
         if (callback != null) {
             callback.onEnterSeat(seat, last);
@@ -382,7 +382,7 @@ public class AudienceImpl implements Audience {
             voiceRoom.getPushTypeSwitcher().toCDN(voiceRoomInfo.getStreamConfig().httpPullUrl);
         }
 
-        voiceRoom.enableEarback(false);
+        voiceRoom.enableEarBack(false);
         voiceRoom.stopLocalAudio();
         if (callback != null) {
             callback.onLeaveSeat(seat, bySelf);

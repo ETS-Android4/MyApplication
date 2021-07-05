@@ -216,7 +216,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/shape_circle_7f000000"
         android:padding="8dp"
-        android:src="@drawable/selector_room_mic"
+        android:src="@drawable/selector_local_mic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_room_mute" />
 

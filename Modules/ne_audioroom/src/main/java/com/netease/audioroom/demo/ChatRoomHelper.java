@@ -91,7 +91,7 @@ public class ChatRoomHelper {
      * 关闭话筒
      */
     public static void closeMic() {
-        boolean muted = mNERtcVoiceRoom.muteLocalAudio(!isMicClosed());
+        boolean muted = mNERtcVoiceRoom.muteLocalMic(!isMicClosed());
         if (muted) {
             ToastUtils.showShort("话筒已关闭");
         } else {
@@ -100,10 +100,22 @@ public class ChatRoomHelper {
     }
 
     /**
+     * 本地是否静音
+     */
+    public static boolean isRoomAudioMute() {
+        return mNERtcVoiceRoom.isRoomAudioMute();
+    }
+
+    /**
      * 关闭扬声器
      */
-    public static void closeAudio() {
-
+    public static void closeRoomAudio() {
+        boolean muted = mNERtcVoiceRoom.muteRoomAudio(!isRoomAudioMute());
+        if (muted) {
+            ToastUtils.showShort("已关闭“聊天室声音”");
+        } else {
+            ToastUtils.showShort("已打开“聊天室声音”");
+        }
     }
 
     private static Anchor anchor;

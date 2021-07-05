@@ -76,7 +76,7 @@ public abstract class NERtcVoiceRoom {
      * @param mute 是否静音
      * @return 是否静音
      */
-    public abstract boolean muteLocalAudio(boolean mute);
+    public abstract boolean muteLocalMic(boolean mute);
 
     /**
      * 本地是否静音
@@ -133,7 +133,7 @@ public abstract class NERtcVoiceRoom {
      *
      * @param enable 是否开启耳返
      */
-    public abstract void enableEarback(boolean enable);
+    public abstract void enableEarBack(boolean enable);
 
     /**
      * 发送房间文本消息
@@ -141,7 +141,6 @@ public abstract class NERtcVoiceRoom {
      * @param text 文字内容
      */
     public abstract void sendMessage(String text);
-
 
     /**
      * 获取推流方式切换开关

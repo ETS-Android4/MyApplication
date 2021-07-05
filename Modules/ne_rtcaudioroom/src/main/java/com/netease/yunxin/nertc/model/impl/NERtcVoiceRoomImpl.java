@@ -478,7 +478,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    public boolean muteLocalAudio(boolean mute) {
+    public boolean muteLocalMic(boolean mute) {
         engine.setRecordDeviceMute(mute);
         boolean muted = isLocalAudioMute();
 
@@ -489,7 +489,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         }
 
         if (roomCallback != null) {
-            roomCallback.onMuteAudio(muted);
+            roomCallback.onLocalMuteMic(muted);
         }
 
         return muted;
@@ -521,11 +521,17 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     public boolean muteRoomAudio(boolean mute) {
         muteRoomAudio = mute;
         engine.setPlayoutDeviceMute(mute);
+
         if (anchorMode) {
             anchor.muteRoomAudio(mute);
         } else if (voiceRoomInfo.isSupportCDN()) {
             audience.getAudiencePlay().setVolume(mute ? 0f : 1f);
         }
+
+        if (roomCallback != null) {
+            roomCallback.onRoomMuteAudio(mute);
+        }
+
         return mute;
     }
 
@@ -540,7 +546,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    public void enableEarback(boolean enable) {
+    public void enableEarBack(boolean enable) {
         this.enableEarBack = enable;
         engine.enableEarback(enable, 100);
     }
@@ -649,7 +655,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             // 打开扬声器
             setSpeaker(true);
             // 打开耳返
-            enableEarback(false);
+            enableEarBack(false);
             // 设置音量汇报间隔 500ms
             engine.enableAudioVolumeIndication(true, 500);
         }
