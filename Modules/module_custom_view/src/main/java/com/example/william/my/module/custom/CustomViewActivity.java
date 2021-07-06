@@ -16,6 +16,7 @@ public class CustomViewActivity extends BaseListActivity {
         mMap.put("IosDialogActivity", ARouterPath.CustomView.CustomView_IosDialog);
         mMap.put("MarqueeViewActivity", ARouterPath.CustomView.CustomView_MarqueeView);
         mMap.put("ScrollPageActivity", ARouterPath.CustomView.CustomView_ScrollPage);
+        mMap.put("SecurityCodeActivity", ARouterPath.CustomView.CustomView_SecurityCode);
         mMap.put("SpinnerActivity", ARouterPath.CustomView.CustomView_Spinner);
         mMap.put("TitleBarActivity", ARouterPath.CustomView.CustomView_TitleBar);
     }

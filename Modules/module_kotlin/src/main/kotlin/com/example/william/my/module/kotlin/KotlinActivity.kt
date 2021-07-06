@@ -18,5 +18,9 @@ class KotlinActivity : BaseListActivity() {
         mMap["DataStoreActivity"] = ARouterPath.Kotlin.Kotlin_DataStore
         mMap["ResultActivity"] = ARouterPath.Kotlin.Kotlin_Result
     }
+    
+    fun setListener(listener: (user: String?) -> String) {
+
+    }
 }
 

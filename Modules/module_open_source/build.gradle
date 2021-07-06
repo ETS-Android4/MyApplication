@@ -62,6 +62,10 @@ dependencies {
     //https://github.com/zhihu/Matisse
     implementation deps.glide
     implementation deps.matisse
+    //https://github.com/gyf-dev/ImmersionBar
+    implementation deps.immersionbar
+    ///https://github.com/airbnb/lottie-android
+    implementation deps.lottie
     //https://github.com/chrisbanes/PhotoView
     implementation deps.photoview
     //https://github.com/Bigkoo/Android-PickerView

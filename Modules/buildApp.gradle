@@ -70,8 +70,10 @@ kapt {
     }
 }
 dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     implementation project(path: ':module')
     //Android
+    implementation deps.multidex
     implementation deps.material
     implementation deps.appcompat
     implementation deps.constraintlayout

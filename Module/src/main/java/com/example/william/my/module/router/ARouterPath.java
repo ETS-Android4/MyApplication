@@ -60,6 +60,7 @@ public class ARouterPath {
         public static final String CustomView_IosDialog = "/module_custom/basics_ios_dialog";
         public static final String CustomView_MarqueeView = "/module_custom/marquee_view";
         public static final String CustomView_ScrollPage = "/module_custom/scroll_page";
+        public static final String CustomView_SecurityCode = "/module_custom/security_code";
         public static final String CustomView_Spinner = "/module_custom/spinner";
         public static final String CustomView_TitleBar = "/module_custom/title";
     }
@@ -90,6 +91,7 @@ public class ARouterPath {
         public static final String OpenSource_FlycoTabLayout = "/module_open/flyco_tab_layout";
         public static final String OpenSource_GSYPlayer = "/module_open/gsy_player";
         public static final String OpenSource_ImageSelector = "/module_open/image_picker";
+        public static final String OpenSource_ImmersionBar = "/module_open/immersion_bar";
         public static final String OpenSource_PhotoView = "/module_open/photo_view";
         public static final String OpenSource_PickerView = "/module_open/picker_view";
         public static final String OpenSource_PopWindow = "/module_open/pop_window";

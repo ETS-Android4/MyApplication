@@ -24,8 +24,8 @@ include ':modules:module_jetpack'
 include ':modules:module_kotlin'
 include ':modules:module_sample'
 
-include ':modules:ne_audioroom'
-include ':modules:ne_rtcaudioroom'
+include ':modules:module_ne_rtc'
+include ':modules:module_ne_audio'
 
 //include ':modules:module_flutter'
 //include ':flutter_module'

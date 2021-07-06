@@ -24,5 +24,8 @@ class Config {
             Sample       : new DepConfig(true, ":modules:module_sample"),
 
             ModuleFlutter: new DepConfig(false, ":modules:module_flutter"),
+
+            ModuleNeRtc  : new DepConfig(true, ":modules:module_ne_rtc"),
+            ModuleNeAudio: new DepConfig(false, ":modules:module_ne_audio"),
     ]
 }

@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.request.RequestOptions;
+import com.example.william.my.core.imageloader.R;
 import com.example.william.my.core.imageloader.corner.CornerType;
 import com.example.william.my.core.imageloader.glide.module.GlideApp;
 import com.example.william.my.core.imageloader.glide.transformation.RadiusTransformation;
