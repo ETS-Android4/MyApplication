@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/layer_member_item"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingStart="20dp"
     android:paddingTop="8dp"
     android:paddingEnd="20dp"
-    android:paddingBottom="8dp">
+    android:paddingBottom="8dp"
+    tools:viewBindingIgnore="true">
 
     <com.netease.audioroom.demo.widget.HeadImageView
         android:id="@+id/headview"

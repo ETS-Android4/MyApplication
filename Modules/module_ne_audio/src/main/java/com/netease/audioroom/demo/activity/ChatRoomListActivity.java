@@ -8,7 +8,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ToastUtils;
+import com.example.william.my.module.router.ARouterPath;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.ChatLoginManager;
 import com.netease.audioroom.demo.R;
@@ -28,7 +30,8 @@ import java.util.ArrayList;
 
 import static com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomAudioQuality.DEFAULT_QUALITY;
 
-public class MainActivity extends BaseActivity {
+@Route(path = ARouterPath.NeRtc.Audio)
+public class ChatRoomListActivity extends BaseActivity {
 
     private View mEmptyView;
 
@@ -40,7 +43,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int getContentViewID() {
-        return R.layout.activity_main;
+        return R.layout.activity_chat_room_list;
     }
 
     @Override
@@ -174,7 +177,7 @@ public class MainActivity extends BaseActivity {
                         if (roomInfo != null) {
                             roomInfo.setAudioQuality(DEFAULT_QUALITY);
 
-                            AnchorRoomActivity.start(MainActivity.this, roomInfo);
+                            AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);
                         } else {
                             ToastUtils.showShort(getString(R.string.crate_room_error));
                         }
@@ -187,7 +190,7 @@ public class MainActivity extends BaseActivity {
                         } else {
                             errorMsg = "服务器失败";
                         }
-                        ToastUtils.showShort("创建失败:" + (!NetworkUtils.isNetworkConnected(MainActivity.this) ? "网络错误" : errorMsg));
+                        ToastUtils.showShort("创建失败:" + (!NetworkUtils.isNetworkConnected(ChatRoomListActivity.this) ? "网络错误" : errorMsg));
                     }
                 });
     }

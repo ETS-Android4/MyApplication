@@ -6,8 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Process;
 
-import com.example.william.my.library.helper.ActivityManager;
 import com.example.william.my.library.interfaces.IComponentApplication;
+import com.example.william.my.library.utils.ActivityManagerUtil;
 
 import java.util.concurrent.Executors;
 
@@ -36,7 +36,8 @@ public class BaseApp extends Application {
             "com.example.william.my.module.network.app.NetWorkApp",
             "com.example.william.my.module.jetpack.app.JetPackApp",
             "com.example.william.my.module.open.app.OpenSourceApp",
-            "com.example.william.my.module.sample.app.SampleApp"
+            "com.example.william.my.module.sample.app.SampleApp",
+            "com.netease.audioroom.demo.app.NimApplication",
     };
 
     @Override
@@ -100,7 +101,7 @@ public class BaseApp extends Application {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                ActivityManager.getInstance().addActivity(activity);
+                ActivityManagerUtil.getInstance().addActivity(activity);
             }
 
             @Override
@@ -130,7 +131,7 @@ public class BaseApp extends Application {
 
             @Override
             public void onActivityDestroyed(Activity activity) {
-                ActivityManager.getInstance().removeActivity(activity);
+                ActivityManagerUtil.getInstance().removeActivity(activity);
             }
         });
     }

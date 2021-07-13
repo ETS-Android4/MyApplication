@@ -52,6 +52,9 @@ public class ModuleActivity extends BaseListActivity {
         mMap.put("KotlinActivity", ARouterPath.Kotlin.Kotlin);
         mMap.put("SampleActivity", ARouterPath.Sample.Sample);
 
+        // 网易云信直播间
+        mMap.put("NeRtcActivity", ARouterPath.NeRtc.Audio);
+
         //Flutter
         //mMap.put("Flutter", "Flutter");
         //mMap.put("FlutterActivity", ARouterPath.Flutter.Flutter);

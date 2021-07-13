@@ -3,6 +3,7 @@ package com.example.william.my.module.open.activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -25,5 +26,14 @@ public class BackgroundActivity extends BaseActivity {
         Drawable drawable = new DrawableCreator.Builder()
                 .setSolidColor(ContextCompat.getColor(this, R.color.colorPrimary))
                 .build();
+    }
+
+    public static class LottieActivity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_lottie);
+        }
     }
 }

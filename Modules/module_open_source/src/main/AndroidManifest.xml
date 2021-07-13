@@ -3,6 +3,7 @@
     package="com.example.william.my.module.open">
 
     <application>
+        <activity android:name=".activity.BackgroundActivity$LottieActivity"></activity>
         <activity android:name=".OpenSourceActivity" />
         <activity android:name=".activity.MMKVActivity" />
         <activity android:name=".activity.GreenDaoActivity" />

@@ -2,7 +2,6 @@ package com.netease.audioroom.demo;
 
 import android.app.Activity;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
@@ -27,6 +26,22 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     public static ChatRoomManager getInstance() {
         return instance;
+    }
+
+    private IChatRoomCallback mIChatRoomCallback;
+
+    /**
+     * 绑定Activity
+     */
+    public void onActivityAttach(IChatRoomCallback iChatRoomCallback) {
+        mIChatRoomCallback = iChatRoomCallback;
+    }
+
+    /**
+     * 解绑Activity
+     */
+    public void onActivityDetach() {
+        this.mIChatRoomCallback = null;
     }
 
     /**

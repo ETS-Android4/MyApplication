@@ -1,7 +1,6 @@
 package com.example.william.my.module.open.activity;
 
 import android.os.Bundle;
-import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 

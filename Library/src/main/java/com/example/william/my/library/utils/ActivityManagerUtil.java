@@ -1,22 +1,22 @@
-package com.example.william.my.library.helper;
+package com.example.william.my.library.utils;
 
 import android.app.Activity;
 
 import java.util.Stack;
 
-public class ActivityManager {
+public class ActivityManagerUtil {
 
     private Stack<Activity> activityStack;
 
-    private ActivityManager() {
+    private ActivityManagerUtil() {
     }
 
-    public static ActivityManager getInstance() {
+    public static ActivityManagerUtil getInstance() {
         return ActivityManagerHolder.instance;
     }
 
     private static class ActivityManagerHolder {
-        private static final ActivityManager instance = new ActivityManager();
+        private static final ActivityManagerUtil instance = new ActivityManagerUtil();
     }
 
     public void addActivity(Activity activity) {

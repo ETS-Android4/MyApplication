@@ -92,6 +92,7 @@ public class ARouterPath {
         public static final String OpenSource_GSYPlayer = "/module_open/gsy_player";
         public static final String OpenSource_ImageSelector = "/module_open/image_picker";
         public static final String OpenSource_ImmersionBar = "/module_open/immersion_bar";
+        public static final String OpenSource_Lottie = "/module_open/lottie";
         public static final String OpenSource_PhotoView = "/module_open/photo_view";
         public static final String OpenSource_PickerView = "/module_open/picker_view";
         public static final String OpenSource_PopWindow = "/module_open/pop_window";
@@ -158,6 +159,10 @@ public class ARouterPath {
         public static final String Sample_Kotlin = "/module_sample/sample_kotlin";
         public static final String Sample_Kotlin_Bind = "/module_sample/sample_kotlin_bind";
         public static final String Sample_Recycler = "/module_sample/sample_recycler";
+    }
+
+    public static class NeRtc {
+        public static final String Audio = "/module_ne_rtc/audio";
     }
 
     public static class Flutter {

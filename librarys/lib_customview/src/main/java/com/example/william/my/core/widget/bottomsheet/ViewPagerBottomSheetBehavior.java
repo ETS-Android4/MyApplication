@@ -52,6 +52,7 @@ import static java.lang.Math.min;
 
 /**
  * BottomSheetBehavior内的ViewPager下的RecyclerView无法响应滑动
+ *
  * @param <V>
  * @see BottomSheetBehavior
  * @see #findScrollingChild

@@ -1,6 +1,6 @@
 android {
     defaultConfig {
-        applicationId "com.netease.yunxin.app.chatroom"
+        //applicationId "com.netease.yunxin.app.chatroom"
         versionCode 17
         versionName "3.2.1"
         ndk {
