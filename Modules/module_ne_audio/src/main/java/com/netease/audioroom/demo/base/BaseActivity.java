@@ -2,6 +2,7 @@ package com.netease.audioroom.demo.base;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,6 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.StatusCode;
 import com.netease.nimlib.sdk.auth.AuthServiceObserver;
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -58,7 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(new Observer<StatusCode>() {
             @Override
             public void onEvent(StatusCode statusCode) {
-                ALog.i(BaseActivityManager.getInstance().getCurrentActivityName(), "login status  , code = " + statusCode);
+                Log.i(BaseActivityManager.getInstance().getCurrentActivityName(), "login status  , code = " + statusCode);
             }
         }, register);
     }

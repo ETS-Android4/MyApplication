@@ -1,6 +1,7 @@
 package com.netease.audioroom.demo.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,7 +14,6 @@ import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.base.adapter.BaseAdapter;
 import com.netease.audioroom.demo.widget.HeadImageView;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 
@@ -48,7 +48,7 @@ public class SeatApplyAdapter extends BaseAdapter<VoiceRoomSeat> {
             viewHolder.ivRefuse.setOnClickListener((v) -> applyAction.refuse(seat));
             viewHolder.ivAfree.setOnClickListener((v) -> applyAction.agree(seat));
         } else {
-            ALog.e("偶现看不到申请者情形");
+            Log.e("TAG","偶现看不到申请者情形");
         }
     }
 

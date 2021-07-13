@@ -1,6 +1,8 @@
 package com.netease.audioroom.demo;
 
 
+import android.util.Log;
+
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.base.action.ILoginAction;
 import com.netease.audioroom.demo.cache.DemoCache;
@@ -10,7 +12,6 @@ import com.netease.nimlib.sdk.AbortableFuture;
 import com.netease.nimlib.sdk.NIMSDK;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.LoginInfo;
-import com.netease.yunxin.kit.alog.ALog;
 
 public class ChatLoginManager implements ILoginAction {
 
@@ -35,21 +36,21 @@ public class ChatLoginManager implements ILoginAction {
             fetchLoginAccount(null);
             return;
         }
-        ALog.i("nim login: account = " + accountInfo.account + " token = " + accountInfo.token);
+        Log.i(TAG, "nim login: account = " + accountInfo.account + " token = " + accountInfo.token);
         LoginInfo loginInfo = new LoginInfo(accountInfo.account, accountInfo.token);
         //AbortableFuture<LoginInfo> future = NIMClient.getService(AuthService.class).login(loginInfo);
         AbortableFuture<LoginInfo> future = NIMSDK.getAuthService().login(loginInfo);
         future.setCallback(new RequestCallback<LoginInfo>() {
             @Override
             public void onSuccess(LoginInfo info) {
-                ALog.i("nim login success");
+                Log.i(TAG, "nim login success");
                 afterLogin(accountInfo);
                 callback.onSuccess(accountInfo);
             }
 
             @Override
             public void onFailed(int i) {
-                ALog.i("nim login failed:" + " code = " + i);
+                Log.i(TAG, "nim login failed:" + " code = " + i);
                 fetchLoginAccount(accountInfo.account);
                 isLogin = false;
 
@@ -81,21 +82,21 @@ public class ChatLoginManager implements ILoginAction {
     }
 
     private void login(final AccountInfo accountInfo) {
-        ALog.i("nim login:" + " account = " + accountInfo.account + " token = " + accountInfo.token);
+        Log.i(TAG, "nim login:" + " account = " + accountInfo.account + " token = " + accountInfo.token);
         LoginInfo loginInfo = new LoginInfo(accountInfo.account, accountInfo.token);
         //AbortableFuture<LoginInfo> future = NIMClient.getService(AuthService.class).login(loginInfo);
         AbortableFuture<LoginInfo> future = NIMSDK.getAuthService().login(loginInfo);
         future.setCallback(new RequestCallback<LoginInfo>() {
             @Override
             public void onSuccess(LoginInfo info) {
-                ALog.i("nim login success");
+                Log.i(TAG, "nim login success");
                 afterLogin(accountInfo);
                 callback.onSuccess(accountInfo);
             }
 
             @Override
             public void onFailed(int i) {
-                ALog.i("nim login failed:" + " code = " + i);
+                Log.i(TAG, "nim login failed:" + " code = " + i);
                 callback.onFailed(i, "SDK登录失败");
                 ToastUtils.showShort("SDK登录失败 , code = " + i);
             }
@@ -112,7 +113,7 @@ public class ChatLoginManager implements ILoginAction {
         isLogin = true;
         DemoCache.setAccountId(accountInfo.account);
         DemoCache.saveAccountInfo(accountInfo);
-        ALog.i(TAG, "after login  , account = " + accountInfo.account + " , nick = " + accountInfo.nick);
+        Log.i(TAG, "after login  , account = " + accountInfo.account + " , nick = " + accountInfo.nick);
     }
 
     public void logout() {

@@ -2,6 +2,7 @@ package com.netease.audioroom.demo.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -23,7 +24,6 @@ import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.NetworkUtils;
 import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
-import com.netease.yunxin.kit.alog.ALog;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 
 import java.util.ArrayList;
@@ -125,7 +125,7 @@ public class ChatRoomListActivity extends BaseActivity {
                         if (dataSource.isEmpty()) {
                             showEmptyView();
                         }
-                        ALog.e("FetchRoomList", "errorMsg is " + errorMsg + ", errorCode is " + code);
+                        Log.e("FetchRoomList", "errorMsg is " + errorMsg + ", errorCode is " + code);
                     }
                 });
     }

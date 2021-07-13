@@ -37,7 +37,7 @@ dependencies {
     implementation "android.arch.lifecycle:livedata:1.1.1"
 
     implementation "com.blankj:utilcodex:1.30.6"
-    implementation 'com.netease.yunxin.kit:alog:1.0.0'
+    //implementation 'com.netease.yunxin.kit:alog:1.0.0'
 
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
     implementation 'com.airbnb.android:lottie:3.5.0'

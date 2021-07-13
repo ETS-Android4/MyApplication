@@ -13,7 +13,6 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
 import com.netease.audioroom.demo.R;
-import com.netease.yunxin.kit.alog.ALog;
 
 /**
  * 提示弹窗
@@ -117,7 +116,7 @@ public class NoticeDialog extends Dialog {
         try {
             super.show();
         } catch (WindowManager.BadTokenException e) {
-            ALog.e("ChoiceDialog", "error message is :" + e.getMessage());
+            Log.e("ChoiceDialog", "error message is :" + e.getMessage());
         }
     }
 }

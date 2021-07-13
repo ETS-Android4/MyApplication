@@ -3,6 +3,7 @@ package com.netease.audioroom.demo;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.util.Log;
 
 import com.netease.neliveplayer.sdk.NELivePlayer;
 import com.netease.neliveplayer.sdk.model.NESDKConfig;
@@ -14,7 +15,6 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.UserInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
-import com.netease.yunxin.kit.alog.ALog;
 
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public class ChatHelper {
         config.dataUploadListener = new NELivePlayer.OnDataUploadListener() {
             @Override
             public boolean onDataUpload(String url, String data) {
-                ALog.e("Player===>", "stream url is " + url + ", detail data is " + data);
+                Log.e("Player===>", "stream url is " + url + ", detail data is " + data);
                 return true;
             }
 
@@ -52,7 +52,7 @@ public class ChatHelper {
             // 注意：以下操作必须在主进程中进行
             // 1、UI相关初始化操作
             // 2、相关Service调用
-            ALog.init(context, BuildConfig.DEBUG ? ALog.LEVEL_ALL : ALog.LEVEL_INFO);
+            //ALog.init(context, BuildConfig.DEBUG ? ALog.LEVEL_ALL : ALog.LEVEL_INFO);
         }
     }
 
