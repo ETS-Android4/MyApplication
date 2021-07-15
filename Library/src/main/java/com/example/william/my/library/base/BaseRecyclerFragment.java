@@ -87,8 +87,8 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     protected abstract BaseQuickAdapter<T, BaseViewHolder> setAdapter();
 
     protected void onDataFail(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
         mSmartRefreshLayout.setEnableLoadMore(false);
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     protected void onDataSuccess(boolean isFirst, List<T> list) {
@@ -114,8 +114,8 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     }
 
     protected void onDataNoMore() {
-        Toast.makeText(getContext(), "无更多数据", Toast.LENGTH_SHORT).show();
         mSmartRefreshLayout.setEnableLoadMore(false);
+        Toast.makeText(getContext(), "无更多数据", Toast.LENGTH_SHORT).show();
     }
 
     @Override

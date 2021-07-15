@@ -29,6 +29,10 @@ public class NimApplication extends Application implements IComponentApplication
     @Override
     public void onCreate() {
         super.onCreate();
+        initNim();
+    }
+
+    private void initNim(){
         if (NetworkUtils.isNetworkConnected(getApplicationContext())) {
             Network network = Network.getInstance();
             network.setConnected(true);
@@ -48,7 +52,15 @@ public class NimApplication extends Application implements IComponentApplication
 
         registerReceiver();
 
-        initNeIm();
+        NetworkClient.getInstance().configBaseUrl(BuildConfig.SERVER_BASE_URL)
+                .appKey(BuildConfig.NIM_APP_KEY)
+                .configDebuggable(true);
+
+        DemoCache.init(this);//用户数据初始化
+
+        ChatHelper.initPlayer(getApplicationContext());//播放器初始化
+
+        ChatHelper.initIM(this, null);//IM 初始化
     }
 
     /**
@@ -104,41 +116,9 @@ public class NimApplication extends Application implements IComponentApplication
         registerReceiver(networkConnectChangedReceiver, filter);
     }
 
-    private void initNeIm() {
-        NetworkClient.getInstance().configBaseUrl(BuildConfig.SERVER_BASE_URL)
-                .appKey(BuildConfig.NIM_APP_KEY)
-                .configDebuggable(true);
-
-        ChatHelper.initPlayer(getApplicationContext());//播放器初始化
-
-        DemoCache.init(this);//用户数据初始化
-
-        ChatHelper.initIM(this, null);//IM 初始化
-    }
-
     @Override
     public void init(Application application) {
         Log.e("TAG", "init");
-        if (NetworkUtils.isNetworkConnected(application)) {
-            Network network = Network.getInstance();
-            network.setConnected(true);
-        }
-        //同一页面初始化
-        LoadSir.beginBuilder()
-                .addCallback(new FailureCallback())
-                .addCallback(new EmptyChatRoomListCallback())
-                .addCallback(new NetErrCallback())
-                .addCallback(new TimeoutCallback())
-                .addCallback(new EmptyChatRoomListCallback())
-                .addCallback(new EmptyMuteRoomListCallback())
-                .setDefaultCallback(FailureCallback.class)
-                .commit();
-
-        registerActivity();
-
-        registerReceiver();
-
-        initNeIm();
     }
 
     @Override

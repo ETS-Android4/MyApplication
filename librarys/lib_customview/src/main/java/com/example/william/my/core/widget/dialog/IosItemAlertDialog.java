@@ -126,24 +126,24 @@ public class IosItemAlertDialog {
 
             if (showTitle) {
                 if (alertItems.size() == 1) {
-                    textView.setBackgroundResource(R.drawable.alert_item_bottom);
+                    textView.setBackgroundResource(R.drawable.alert_selector_item_bottom);
                 } else {
                     if (i == alertItems.size() - 1) {
-                        textView.setBackgroundResource(R.drawable.alert_item_bottom);
+                        textView.setBackgroundResource(R.drawable.alert_selector_item_bottom);
                     } else {
-                        textView.setBackgroundResource(R.drawable.alert_item_middle);
+                        textView.setBackgroundResource(R.drawable.alert_selector_item_middle);
                     }
                 }
             } else {
                 if (alertItems.size() == 1) {
-                    textView.setBackgroundResource(R.drawable.alert_item_single);
+                    textView.setBackgroundResource(R.drawable.alert_selector_item_single);
                 } else {
                     if (i == 0) {
-                        textView.setBackgroundResource(R.drawable.alert_item_top);
+                        textView.setBackgroundResource(R.drawable.alert_selector_item_top);
                     } else if (i == alertItems.size() - 1) {
-                        textView.setBackgroundResource(R.drawable.alert_item_bottom);
+                        textView.setBackgroundResource(R.drawable.alert_selector_item_bottom);
                     } else {
-                        textView.setBackgroundResource(R.drawable.alert_item_middle);
+                        textView.setBackgroundResource(R.drawable.alert_selector_item_middle);
                     }
                 }
             }

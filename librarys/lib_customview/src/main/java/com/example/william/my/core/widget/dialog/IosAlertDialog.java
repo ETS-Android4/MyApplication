@@ -175,7 +175,7 @@ public class IosAlertDialog {
         if (!showRightBtn && !showLeftBtn) {
             ios_dialog_btn_right.setText(context.getResources().getString(R.string.dialog_ok));
             ios_dialog_btn_right.setVisibility(View.VISIBLE);
-            ios_dialog_btn_right.setBackgroundResource(R.drawable.alert_btn_single);
+            ios_dialog_btn_right.setBackgroundResource(R.drawable.alert_selector_btn_single);
             ios_dialog_btn_right.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -186,20 +186,20 @@ public class IosAlertDialog {
 
         if (showRightBtn && showLeftBtn) {
             ios_dialog_btn_right.setVisibility(View.VISIBLE);
-            ios_dialog_btn_right.setBackgroundResource(R.drawable.alert_btn_right);
+            ios_dialog_btn_right.setBackgroundResource(R.drawable.alert_selector_btn_right);
             ios_dialog_btn_left.setVisibility(View.VISIBLE);
-            ios_dialog_btn_left.setBackgroundResource(R.drawable.alert_btn_left);
+            ios_dialog_btn_left.setBackgroundResource(R.drawable.alert_selector_btn_left);
             ios_dialog_iv_line.setVisibility(View.VISIBLE);
         }
 
         if (showRightBtn && !showLeftBtn) {
             ios_dialog_btn_right.setVisibility(View.VISIBLE);
-            ios_dialog_btn_right.setBackgroundResource(R.drawable.alert_btn_single);
+            ios_dialog_btn_right.setBackgroundResource(R.drawable.alert_selector_btn_single);
         }
 
         if (!showRightBtn && showLeftBtn) {
             ios_dialog_btn_left.setVisibility(View.VISIBLE);
-            ios_dialog_btn_left.setBackgroundResource(R.drawable.alert_btn_single);
+            ios_dialog_btn_left.setBackgroundResource(R.drawable.alert_selector_btn_single);
         }
     }
 

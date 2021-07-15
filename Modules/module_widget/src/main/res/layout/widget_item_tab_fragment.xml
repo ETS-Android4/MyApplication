@@ -20,7 +20,7 @@
         android:id="@+id/item_tab_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@drawable/widget_item_tab_text_select"
+        android:textColor="@drawable/widget_selector_select_primary_primarydark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
