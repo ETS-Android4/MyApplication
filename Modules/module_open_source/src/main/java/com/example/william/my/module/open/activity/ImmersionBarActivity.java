@@ -70,7 +70,6 @@ public class ImmersionBarActivity extends AppCompatActivity {
                     //Keyboard
                     .keyboardEnable(true, getKeyboardMode())//解决软键盘与底部输入框冲突问题，默认为false
                     .init();
-
         }
     }
 }

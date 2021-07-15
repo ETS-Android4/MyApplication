@@ -1,6 +1,8 @@
 package com.example.william.my.library.utils;
 
 import android.app.Activity;
+import android.app.Application;
+import android.os.Bundle;
 
 import java.util.Stack;
 
@@ -102,8 +104,8 @@ public class ActivityManagerUtil {
             for (Activity activity : activityStack) {
                 activity.finish();
             }
+            activityStack.clear();
         }
-        activityStack.clear();
     }
 
     /**
@@ -131,6 +133,45 @@ public class ActivityManagerUtil {
 
     public String getCurrentActivityName() {
         return getCurrentActivity().getLocalClassName();
+    }
+
+    public void register(Application mApplication) {
+        mApplication.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                addActivity(activity);
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+                removeActivity(activity);
+            }
+        });
     }
 
 }

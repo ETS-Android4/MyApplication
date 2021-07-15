@@ -1,9 +1,7 @@
 package com.netease.audioroom.demo.app;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.IntentFilter;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.example.william.my.library.interfaces.IComponentApplication;
@@ -24,15 +22,13 @@ import com.netease.yunxin.android.lib.network.common.NetworkClient;
 
 public class NimApplication extends Application implements IComponentApplication {
 
-    private final NetworkConnectChangedReceiver networkConnectChangedReceiver = new NetworkConnectChangedReceiver();
-
     @Override
     public void onCreate() {
         super.onCreate();
         initNim();
     }
 
-    private void initNim(){
+    private void initNim() {
         if (NetworkUtils.isNetworkConnected(getApplicationContext())) {
             Network network = Network.getInstance();
             network.setConnected(true);
@@ -48,7 +44,7 @@ public class NimApplication extends Application implements IComponentApplication
                 .setDefaultCallback(FailureCallback.class)
                 .commit();
 
-        registerActivity();
+        BaseActivityManager.getInstance().register(this);
 
         registerReceiver();
 
@@ -63,47 +59,6 @@ public class NimApplication extends Application implements IComponentApplication
         ChatHelper.initIM(this, null);//IM 初始化
     }
 
-    /**
-     * 监听activity生命周期
-     */
-    private void registerActivity() {
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                BaseActivityManager.getInstance().addActivity(activity);
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-                BaseActivityManager.getInstance().removeActivity(activity);
-            }
-        });
-    }
 
     /**
      * 网络变化观察者
@@ -113,7 +68,7 @@ public class NimApplication extends Application implements IComponentApplication
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         filter.addAction("android.net.wifi.WIFI_STATE_CHANGE");
         filter.addAction("android.net.conn.STATE_CHANGE");
-        registerReceiver(networkConnectChangedReceiver, filter);
+        registerReceiver(new NetworkConnectChangedReceiver(), filter);
     }
 
     @Override

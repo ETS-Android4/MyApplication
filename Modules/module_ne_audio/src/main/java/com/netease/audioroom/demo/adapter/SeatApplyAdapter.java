@@ -48,7 +48,7 @@ public class SeatApplyAdapter extends BaseAdapter<VoiceRoomSeat> {
             viewHolder.ivRefuse.setOnClickListener((v) -> applyAction.refuse(seat));
             viewHolder.ivAfree.setOnClickListener((v) -> applyAction.agree(seat));
         } else {
-            Log.e("TAG","偶现看不到申请者情形");
+            Log.e("TAG", "偶现看不到申请者情形");
         }
     }
 

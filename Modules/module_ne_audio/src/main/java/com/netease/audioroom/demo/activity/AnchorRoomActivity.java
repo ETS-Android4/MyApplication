@@ -20,7 +20,6 @@ import com.netease.audioroom.demo.dialog.SeatMenuBottomDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.util.Network;
-import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -65,23 +64,27 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     }
 
     private void watchNetWork() {
-        NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
-            if (network != null && network.isConnected()) {
-                if (mTopTipsDialogFragment != null) {
-                    mTopTipsDialogFragment.dismiss();
-                }
-                loadSuccess();
-            } else {
-                Bundle bundle = new Bundle();
-                TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style(getString(R.string.network_broken), 0, R.drawable.neterrricon, 0);
-                bundle.putParcelable(mTopTipsDialogFragment.TAG, style);
-                mTopTipsDialogFragment.setArguments(bundle);
-                if (!mTopTipsDialogFragment.isVisible()) {
-                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.TAG);
-                }
-                showError();
-            }
-        });
+        if (mTopTipsDialogFragment != null) {
+            mTopTipsDialogFragment.dismiss();
+        }
+        loadSuccess();
+//        NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
+//            if (network != null && network.isConnected()) {
+//                if (mTopTipsDialogFragment != null) {
+//                    mTopTipsDialogFragment.dismiss();
+//                }
+//                loadSuccess();
+//            } else {
+//                Bundle bundle = new Bundle();
+//                TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style(getString(R.string.network_broken), 0, R.drawable.neterrricon, 0);
+//                bundle.putParcelable(mTopTipsDialogFragment.TAG, style);
+//                mTopTipsDialogFragment.setArguments(bundle);
+//                if (!mTopTipsDialogFragment.isVisible()) {
+//                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.TAG);
+//                }
+//                showError();
+//            }
+//        });
     }
 
     @Override

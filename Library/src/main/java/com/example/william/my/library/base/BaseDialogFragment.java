@@ -2,6 +2,7 @@ package com.example.william.my.library.base;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,8 @@ public class BaseDialogFragment extends DialogFragment {
     public void setAttributes(LayoutParams params) {
         params.width = LayoutParams.MATCH_PARENT;
         params.height = LayoutParams.WRAP_CONTENT;
+        params.dimAmount = 0.8f;
+        params.gravity = Gravity.CENTER;
     }
 
     public int getWindowAnimationsRes() {

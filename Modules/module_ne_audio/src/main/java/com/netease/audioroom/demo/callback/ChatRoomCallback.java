@@ -1,6 +1,7 @@
 package com.netease.audioroom.demo.callback;
 
 import com.netease.audioroom.demo.IChatRoomCallback;
+import com.netease.audioroom.demo.databinding.ActivityAnchorBinding;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 
@@ -8,8 +9,10 @@ import java.util.List;
 
 public class ChatRoomCallback implements IChatRoomCallback {
 
-    public ChatRoomCallback() {
+    public ActivityAnchorBinding mBinding;
 
+    public ChatRoomCallback(ActivityAnchorBinding binding) {
+        this.mBinding = binding;
     }
 
     @Override
