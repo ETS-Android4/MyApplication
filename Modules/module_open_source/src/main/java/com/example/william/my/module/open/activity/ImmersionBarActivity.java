@@ -1,6 +1,7 @@
 package com.example.william.my.module.open.activity;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,6 +40,15 @@ public class ImmersionBarActivity extends AppCompatActivity {
         return R.color.colorPrimary;
     }
 
+    private int getKeyboardMode() {
+        return //隐藏输入法
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN
+                        //输入法显示时，允许窗口重新计算尺寸，使内容不被输入法所覆盖。
+                        | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+                        //输入法显示时，平移窗口。它不需要处理尺寸变化，框架能够移动窗口以确保输入焦点可见。
+                        | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+    }
+
     private void initAfterSetContentView() {
         if (isUseImmersionBar()) {
             mImmersionBar = ImmersionBar.with(this);
@@ -58,7 +68,7 @@ public class ImmersionBarActivity extends AppCompatActivity {
                     //Windows
                     .fitsSystemWindows(fitsSystemWindows())//解决状态栏和布局重叠问题，默认为false，当为true时一定要指定statusBarColor()，不然状态栏为透明色
                     //Keyboard
-                    .keyboardEnable(true)  //解决软键盘与底部输入框冲突问题，默认为false
+                    .keyboardEnable(true, getKeyboardMode())//解决软键盘与底部输入框冲突问题，默认为false
                     .init();
 
         }
