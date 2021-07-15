@@ -1,6 +1,5 @@
 package com.netease.audioroom.demo.activity;
 
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ToastUtils;
 import com.example.william.my.module.router.ARouterPath;
-import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.ChatLoginManager;
 import com.netease.audioroom.demo.R;
@@ -23,16 +21,9 @@ import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 import com.netease.audioroom.demo.model.AccountInfo;
-import com.netease.audioroom.demo.receiver.NetworkConnectChangedReceiver;
-import com.netease.audioroom.demo.util.Network;
+import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.NetworkUtils;
-import com.netease.audioroom.demo.widget.loadsir.callback.EmptyChatRoomListCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.EmptyMuteRoomListCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.NetErrCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.TimeoutCallback;
-import com.netease.audioroom.demo.widget.loadsir.core.LoadSir;
-import com.netease.yunxin.android.lib.network.common.NetworkClient;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 
 import java.util.ArrayList;
@@ -58,54 +49,12 @@ public class ChatRoomListActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!isTaskRoot()) {
-            finish();
-            return;
-        }
-        initNim();
+        //if (!isTaskRoot()) {
+        //    finish();
+        //    return;
+        //}
         initViews();
-        fetchRoomList();
         watchNetWork();
-    }
-
-    private void initNim() {
-        if (NetworkUtils.isNetworkConnected(getApplicationContext())) {
-            Network network = Network.getInstance();
-            network.setConnected(true);
-        }
-        //同一页面初始化
-        LoadSir.beginBuilder()
-                .addCallback(new FailureCallback())
-                .addCallback(new EmptyChatRoomListCallback())
-                .addCallback(new NetErrCallback())
-                .addCallback(new TimeoutCallback())
-                .addCallback(new EmptyChatRoomListCallback())
-                .addCallback(new EmptyMuteRoomListCallback())
-                .setDefaultCallback(FailureCallback.class)
-                .commit();
-
-        registerReceiver();
-
-        NetworkClient.getInstance().configBaseUrl(BuildConfig.SERVER_BASE_URL)
-                .appKey(BuildConfig.NIM_APP_KEY)
-                .configDebuggable(true);
-
-        DemoCache.init(this);//用户数据初始化
-
-        ChatHelper.initPlayer(getApplicationContext());//播放器初始化
-
-        ChatHelper.initIM(this, null);//IM 初始化
-    }
-
-    /**
-     * 网络变化观察者
-     */
-    private void registerReceiver() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        filter.addAction("android.net.wifi.WIFI_STATE_CHANGE");
-        filter.addAction("android.net.conn.STATE_CHANGE");
-        registerReceiver(new NetworkConnectChangedReceiver(), filter);
     }
 
     private void initViews() {
@@ -128,20 +77,19 @@ public class ChatRoomListActivity extends BaseActivity {
         mRecyclerView.setAdapter(roomListAdapter);
 
         View toCreate = findViewById(R.id.iv_new_live);
-        toCreate.setOnClickListener(v -> {
-            getRandomName();
-        });
+        toCreate.setOnClickListener(v ->
+                getRandomName()
+        );
     }
 
     private void watchNetWork() {
-        onNetwork();
-//        NetworkChange.getInstance().getNetworkLiveData().observe(this, network -> {
-//            if (network != null && network.isConnected()) {
-//                onNetwork();
-//            } else {
-//                showError();
-//            }
-//        });
+        NetworkChange.getInstance().getNetworkLiveData().observe(this, network -> {
+            if (network != null && network.isConnected()) {
+                onNetwork();
+            } else {
+                showError();
+            }
+        });
     }
 
     // not need every time login. im auto login when network change
@@ -150,6 +98,7 @@ public class ChatRoomListActivity extends BaseActivity {
             @Override
             public void onSuccess(AccountInfo accountInfo) {
                 loadSuccess();
+                fetchRoomList();
                 requestLivePermission();
             }
 

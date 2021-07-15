@@ -3,7 +3,6 @@ package com.netease.audioroom.demo.app;
 import android.app.Application;
 import android.content.IntentFilter;
 
-import com.example.william.my.library.interfaces.IComponentApplication;
 import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.base.BaseActivityManager;
@@ -19,18 +18,14 @@ import com.netease.audioroom.demo.widget.loadsir.callback.TimeoutCallback;
 import com.netease.audioroom.demo.widget.loadsir.core.LoadSir;
 import com.netease.yunxin.android.lib.network.common.NetworkClient;
 
-public class NimApplication implements IComponentApplication {
+public class NimApp extends Application {
 
     private final NetworkConnectChangedReceiver networkConnectChangedReceiver = new NetworkConnectChangedReceiver();
 
     @Override
-    public void init(Application application) {
-        initNim(application);
-    }
-
-    @Override
-    public void initAsync(Application application) {
-
+    public void onCreate() {
+        super.onCreate();
+        initNim(this);
     }
 
     private void initNim(Application application) {
@@ -59,7 +54,7 @@ public class NimApplication implements IComponentApplication {
 
         DemoCache.init(application);//用户数据初始化
 
-        ChatHelper.initPlayer(application);//播放器初始化
+        ChatHelper.initPlayer(getApplicationContext());//播放器初始化
 
         ChatHelper.initIM(application, null);//IM 初始化
     }
@@ -75,6 +70,4 @@ public class NimApplication implements IComponentApplication {
         filter.addAction("android.net.conn.STATE_CHANGE");
         application.registerReceiver(networkConnectChangedReceiver, filter);
     }
-
-
 }

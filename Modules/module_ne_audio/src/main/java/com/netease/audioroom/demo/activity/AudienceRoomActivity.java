@@ -14,6 +14,7 @@ import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
+import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Reason;
@@ -102,32 +103,26 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     }
 
     private void watchNetWork() {
-        if (mTopTipsDialogFragment != null) {
-            mTopTipsDialogFragment.dismiss();
-        }
-        loadSuccess();
-        //刷新音频和座位信息
-        ChatRoomHelper.restartAudioAndSeat();
-//        NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
-//            if (network != null && network.isConnected()) {
-//                if (mTopTipsDialogFragment != null) {
-//                    mTopTipsDialogFragment.dismiss();
-//                }
-//                loadSuccess();
-//                //刷新音频和座位信息
-//                ChatRoomHelper.restartAudioAndSeat();
-//            } else {
-//                Bundle bundle = new Bundle();
-//                mTopTipsDialogFragment = new TopTipsDialogFragment();
-//                TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style("网络断开", 0, R.drawable.neterrricon, 0);
-//                bundle.putParcelable(mTopTipsDialogFragment.TAG, style);
-//                mTopTipsDialogFragment.setArguments(bundle);
-//                if (!mTopTipsDialogFragment.isVisible()) {
-//                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.TAG);
-//                }
-//                showError();
-//            }
-//        });
+        NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
+            if (network != null && network.isConnected()) {
+                if (mTopTipsDialogFragment != null) {
+                    mTopTipsDialogFragment.dismiss();
+                }
+                loadSuccess();
+                //刷新音频和座位信息
+                ChatRoomHelper.restartAudioAndSeat();
+            } else {
+                Bundle bundle = new Bundle();
+                mTopTipsDialogFragment = new TopTipsDialogFragment();
+                TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style("网络断开", 0, R.drawable.neterrricon, 0);
+                bundle.putParcelable(mTopTipsDialogFragment.TAG, style);
+                mTopTipsDialogFragment.setArguments(bundle);
+                if (!mTopTipsDialogFragment.isVisible()) {
+                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.TAG);
+                }
+                showError();
+            }
+        });
     }
 
     @Override
