@@ -80,8 +80,8 @@ public class BaseDialogFragment extends DialogFragment {
     protected void setAttributes(LayoutParams params) {
         params.width = LayoutParams.MATCH_PARENT;
         params.height = LayoutParams.WRAP_CONTENT;
-        params.dimAmount = 0.8f;
         params.gravity = Gravity.CENTER;
+        params.dimAmount = 0.8f;
     }
 
     protected int getWindowAnimationsRes() {
