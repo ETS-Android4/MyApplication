@@ -137,5 +137,4 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
 
     }
-
 }

@@ -65,7 +65,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/color_ffffffff"
+        android:textColor="@color/basics_white"
         android:textSize="12dp"
         tools:text="麦位1" />
 

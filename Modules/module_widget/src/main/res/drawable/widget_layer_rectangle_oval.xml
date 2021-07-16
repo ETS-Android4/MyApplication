@@ -1,13 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+    <!--    <item>-->
+    <!--        <shape android:shape="rectangle">-->
+    <!--            <solid android:color="@color/colorPrimaryDark" />-->
+    <!--        </shape>-->
+    <!--    </item>-->
+    <!--    <item>-->
+    <!--        <shape android:shape="oval">-->
+    <!--            <solid android:color="@color/colorPrimary" />-->
+    <!--        </shape>-->
+    <!--    </item>-->
+    <!-- 阴影 -->
+    <!--android:top 顶部的偏移量-->
+    <!--android:bottom 底部的偏移量-->
+    <!--android:left 左边的偏移量-->
+    <!--android:right 右边的偏移量-->
+    <!--值越大，消失越多-->
+    <!--color 设置阴影颜色-->
+    <item
+        android:left="40dp"
+        android:top="20dp">
         <shape android:shape="rectangle">
+
             <solid android:color="@color/colorPrimaryDark" />
+            <corners android:radius="10dp" />
         </shape>
     </item>
-    <item>
-        <shape android:shape="oval">
+
+    <!-- 前景       按钮背景 -->
+    <!--bottom 下边也有阴影，明显度为： 10dp-->
+    <!--right  右边也有阴影，明显度为： 20dp-->
+    <!--color 设置阴影背景色-->
+    <item
+        android:bottom="10dp"
+        android:right="20dp">
+        <shape android:shape="rectangle">
             <solid android:color="@color/colorPrimary" />
+            <corners android:radius="10dp" />
         </shape>
     </item>
 </layer-list>

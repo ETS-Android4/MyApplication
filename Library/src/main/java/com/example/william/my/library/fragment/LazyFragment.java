@@ -76,7 +76,11 @@ public abstract class LazyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayout(), container, false);
+        if (getLayout() != 0) {
+            return inflater.inflate(getLayout(), container, false);
+        } else {
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
     }
 
     /**

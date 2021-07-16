@@ -17,7 +17,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/room_list_empty"
-        android:textColor="@color/color_999999"
         android:textSize="@dimen/text_14"
         android:visibility="gone"
         tools:visibility="visible" />

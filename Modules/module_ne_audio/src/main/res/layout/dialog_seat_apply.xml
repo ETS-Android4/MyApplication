@@ -18,7 +18,7 @@
             android:layout_height="@dimen/action_bar_height"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/color_ffffffff"
+            android:textColor="@color/basics_white"
             android:textSize="@dimen/text_16"
             android:textStyle="bold"
             tools:text="sssss" />
@@ -34,7 +34,7 @@
             android:layout_height="1px"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@color/color_ffffffff" />
+            android:background="@color/basics_white" />
 
         <TextView
             android:id="@+id/dismiss"
@@ -47,7 +47,7 @@
             android:paddingLeft="@dimen/dimen_30"
             android:paddingRight="@dimen/dimen_30"
             android:text="@string/pick_up_has_blank"
-            android:textColor="@color/color_ffffffff"
+            android:textColor="@color/basics_white"
             android:textSize="@dimen/text_14" />
 
     </LinearLayout>

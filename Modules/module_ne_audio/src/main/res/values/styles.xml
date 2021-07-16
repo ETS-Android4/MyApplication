@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/color_0888ff</item>
         <item name="colorPrimaryDark">@color/color_0888ff</item>
         <item name="colorAccent">@color/color_0888ff</item>
-        <item name="android:textColorPrimary">@color/color_ffffffff</item>
+        <item name="android:textColorPrimary">@color/basics_white</item>
         <item name="actionBarSize">@dimen/action_bar_height</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

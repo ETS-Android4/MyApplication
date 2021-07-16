@@ -24,8 +24,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.blankj.utilcode.util.SizeUtils;
+import com.example.william.my.library.base.BaseDialogFragment;
 import com.netease.audioroom.demo.R;
-
 
 public class TopTipsDialogFragment extends BaseDialogFragment {
 
@@ -52,7 +52,7 @@ public class TopTipsDialogFragment extends BaseDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            style = getArguments().getParcelable(TAG);
+            style = getArguments().getParcelable(getTag());
         } else {
             dismiss();
         }

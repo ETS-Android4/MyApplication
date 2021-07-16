@@ -15,8 +15,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * onAttach -> onCreateDialog -> onCreateView -> onViewCreated -> onStart
  */
@@ -25,7 +23,11 @@ public class BaseDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayout(), container, false);
+        if (getLayout() != 0) {
+            return inflater.inflate(getLayout(), container, false);
+        } else {
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
     }
 
     @Override
@@ -71,18 +73,18 @@ public class BaseDialogFragment extends DialogFragment {
         }
     }
 
-    public int getLayout() {
+    protected int getLayout() {
         return 0;
     }
 
-    public void setAttributes(LayoutParams params) {
+    protected void setAttributes(LayoutParams params) {
         params.width = LayoutParams.MATCH_PARENT;
         params.height = LayoutParams.WRAP_CONTENT;
         params.dimAmount = 0.8f;
         params.gravity = Gravity.CENTER;
     }
 
-    public int getWindowAnimationsRes() {
+    protected int getWindowAnimationsRes() {
         return 0;
     }
 }

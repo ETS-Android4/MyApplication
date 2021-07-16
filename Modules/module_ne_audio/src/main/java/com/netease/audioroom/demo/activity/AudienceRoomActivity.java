@@ -70,9 +70,9 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                                     //展示申请上麦提示弹窗
                                     Bundle bundle = new Bundle();
                                     TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style("已申请上麦，等待通过...  <font color=\"#0888ff\">取消</color>", 0, 0, 0);
-                                    bundle.putParcelable(mTopTipsDialogFragment.TAG, style);
+                                    bundle.putParcelable(mTopTipsDialogFragment.getTag(), style);
                                     mTopTipsDialogFragment.setArguments(bundle);
-                                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.TAG);
+                                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.getTag());
                                     mTopTipsDialogFragment.setClickListener(() -> {
                                         //取消上麦
                                         ChatRoomHelper.cancelSeatApply();
@@ -115,10 +115,10 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                 Bundle bundle = new Bundle();
                 mTopTipsDialogFragment = new TopTipsDialogFragment();
                 TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style("网络断开", 0, R.drawable.neterrricon, 0);
-                bundle.putParcelable(mTopTipsDialogFragment.TAG, style);
+                bundle.putParcelable(mTopTipsDialogFragment.getTag(), style);
                 mTopTipsDialogFragment.setArguments(bundle);
                 if (!mTopTipsDialogFragment.isVisible()) {
-                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.TAG);
+                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.getTag());
                 }
                 showError();
             }

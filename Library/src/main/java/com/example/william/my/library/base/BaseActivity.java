@@ -17,7 +17,7 @@ public class BaseActivity extends AppCompatActivity {
         setTheme(R.style.Basics_WindowAnimTheme_Slide);
     }
 
-    public int setStatusBarColor() {
+    protected int setStatusBarColor() {
         return android.R.color.transparent;
     }
 

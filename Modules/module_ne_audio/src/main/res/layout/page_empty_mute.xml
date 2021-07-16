@@ -12,7 +12,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="暂无禁言成员~"
-        android:textColor="@color/color_ffffffff" />
+        android:textColor="@color/basics_white" />
 
     <ImageView
         android:id="@+id/icon"

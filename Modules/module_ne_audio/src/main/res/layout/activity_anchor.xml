@@ -20,7 +20,7 @@
         android:paddingLeft="@dimen/dimen_12"
         android:paddingRight="@dimen/dimen_12"
         android:text="@string/apply_micro"
-        android:textColor="@color/color_ffffffff"
+        android:textColor="@color/basics_white"
         android:textSize="@dimen/text_14"
         app:drawableEndCompat="@drawable/arrow_down" />
 

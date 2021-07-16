@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="解除禁言"
-            android:textColor="@color/color_ffffffff"
+            android:textColor="@color/basics_white"
             android:textSize="14dp" />
     </LinearLayout>
     <!-- Bottom View End-->

@@ -12,7 +12,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="网络错误，点击重试"
-        android:textColor="@color/color_ffffffff" />
+        android:textColor="@color/basics_white" />
 
     <ImageView
         android:id="@+id/icon"

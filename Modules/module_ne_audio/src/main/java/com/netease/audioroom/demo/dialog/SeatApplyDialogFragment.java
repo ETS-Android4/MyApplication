@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.william.my.library.base.BaseDialogFragment;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.SeatApplyAdapter;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -48,7 +49,7 @@ public class SeatApplyDialogFragment extends BaseDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            ArrayList<VoiceRoomSeat> seats = getArguments().getParcelableArrayList(TAG);
+            ArrayList<VoiceRoomSeat> seats = getArguments().getParcelableArrayList(getTag());
             if (seats != null) {
                 this.seats.addAll(seats);
             }

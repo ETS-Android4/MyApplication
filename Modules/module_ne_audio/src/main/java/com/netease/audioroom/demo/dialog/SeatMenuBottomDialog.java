@@ -55,7 +55,7 @@ public class SeatMenuBottomDialog extends BaseBottomDialog {
 
             @Override
             protected int getLayoutId(int viewType) {
-                return R.layout.view_item_list_text;
+                return R.layout.item_recycle;
             }
 
             @Override
