@@ -1,11 +1,10 @@
-package com.netease.audioroom.demo.activity;
+package com.netease.audioroom.demo.act;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.netease.audioroom.demo.ChatRoomManager;
-import com.netease.audioroom.demo.callback.ChatRoomCallback;
 import com.netease.audioroom.demo.databinding.ActivityAnchorBinding;
 
 public class ChatRoomActivity extends AppCompatActivity {
@@ -32,5 +31,4 @@ public class ChatRoomActivity extends AppCompatActivity {
         super.onDestroy();
         ChatRoomManager.getInstance().onActivityDetach();
     }
-
 }

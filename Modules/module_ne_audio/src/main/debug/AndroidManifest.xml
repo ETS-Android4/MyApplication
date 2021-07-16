@@ -18,10 +18,10 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <permission
-        android:name="com.netease.audioroom.demo.permission.RECEIVE_MSG"
+        android:name=".permission.RECEIVE_MSG"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.netease.audioroom.demo.permission.RECEIVE_MSG" />
+    <uses-permission android:name=".permission.RECEIVE_MSG" />
 
     <application
         android:name=".app.NimApp"
@@ -58,7 +58,7 @@
 
         <provider
             android:name="com.netease.nimlib.ipc.NIMContentProvider"
-            android:authorities="com.netease.audioroom.demo.ipc.provider"
+            android:authorities=".ipc.provider"
             android:exported="false"
             android:process=":core" />
 
@@ -74,7 +74,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ChatRoomActivity"
+            android:name=".act.ChatRoomActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity

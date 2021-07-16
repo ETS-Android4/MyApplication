@@ -1,4 +1,4 @@
-package com.netease.audioroom.demo.callback;
+package com.netease.audioroom.demo.act;
 
 import com.netease.audioroom.demo.IChatRoomCallback;
 import com.netease.audioroom.demo.databinding.ActivityAnchorBinding;

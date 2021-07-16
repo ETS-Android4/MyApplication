@@ -31,15 +31,14 @@ android {
 dependencies {
     implementation project(':modules:module_ne_rtc')
 
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-
     implementation "android.arch.lifecycle:livedata:1.1.1"
-
-    implementation "com.blankj:utilcodex:1.30.6"
-    //implementation 'com.netease.yunxin.kit:alog:1.0.0'
-
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
-    implementation 'com.airbnb.android:lottie:3.5.0'
+
+    implementation deps.recyclerview
+
+    implementation deps.utils
+    implementation deps.brvah
+    implementation deps.lottie
 
     implementation "com.netease.nimlib:basesdk:8.2.0"
     implementation "com.netease.nimlib:neliveplayer:2.7.1"
