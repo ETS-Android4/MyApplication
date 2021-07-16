@@ -102,7 +102,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                         .setPositive("确认", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                onSeatAction(null, "退出房间");
+                                ChatRoomHelper.leaveRoom();
                             }
                         })
                         .show();
@@ -147,42 +147,8 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
             ToastUtils.showShort(getString(R.string.applying_now));
             return;
         }
-        List<String> items = new ArrayList<>();
         SeatMenuBottomDialog itemDialog = new SeatMenuBottomDialog(AnchorRoomActivity.this, seat);
-        switch (seat.getStatus()) {
-            // 抱观众上麦（点击麦位）
-            case Status.INIT:
-                items.add("将成员抱上麦位");
-                items.add("屏蔽麦位");
-                items.add("关闭麦位");
-                break;
-            // 当前存在有效用户
-            case Status.ON:
-                // 当前麦位已经关闭
-            case Status.AUDIO_CLOSED:
-                items.add("将TA踢下麦位");
-                items.add("屏蔽麦位");
-                break;
-            // 当前麦位已经被关闭
-            case Status.CLOSED:
-                items.add("打开麦位");
-                break;
-            // 且当前麦位无人，麦位禁麦触发
-            case Status.FORBID:
-                items.add("将成员抱上麦位");
-                items.add("解除语音屏蔽");
-                break;
-            // 当前麦位已经禁麦或已经关闭
-            case Status.AUDIO_MUTED:
-            case Status.AUDIO_CLOSED_AND_MUTED:
-                items.add("将TA踢下麦位");
-                items.add("解除语音屏蔽");
-                break;
-        }
-        items.add(getString(R.string.cancel));
-        itemDialog.setOnItemClickListener(item -> {
-            onSeatAction(seat, item);
-        }).show(getSupportFragmentManager(), items);
+        itemDialog.show();
     }
 
     //
@@ -217,46 +183,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     //
     // Anchor.Callback END
     //
-
-    /**
-     * 麦位菜单
-     */
-    private void onSeatAction(VoiceRoomSeat seat, String item) {
-        switch (item) {
-            case "将成员抱上麦位":
-                //获取成员列表
-                ChatRoomHelper.fetchMemberList(new SuccessCallback<List<VoiceRoomSeat>>() {
-                    @Override
-                    public void onSuccess(List<VoiceRoomSeat> seats) {
-                        //展示成员列表
-                        new MemberSelectBottomDialog(AnchorRoomActivity.this, seats, member -> {
-                            //被抱用户
-                            if (member != null) {
-                                ChatRoomHelper.checkIsRoomMember(seat.getIndex(), member);
-                            }
-                        }).show();
-
-                    }
-                });
-                break;
-            case "将TA踢下麦位":
-                ChatRoomHelper.kickSeat(seat);
-                break;
-            case "关闭麦位":
-                ChatRoomHelper.closeSeat(seat);
-                break;
-            case "屏蔽麦位":
-                ChatRoomHelper.muteSeat(seat);
-                break;
-            case "解除语音屏蔽":
-            case "打开麦位":
-                ChatRoomHelper.openSeat(seat);
-                break;
-            case "退出房间":
-                ChatRoomHelper.leaveRoom();
-                break;
-        }
-    }
 
     @Override
     public void onLeaveRoom() {

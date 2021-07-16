@@ -5,18 +5,17 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
-import com.netease.audioroom.demo.widget.OnMenuItemClickListener;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
-
-import org.jetbrains.annotations.NotNull;
+import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
+import com.netease.yunxin.nertc.util.SuccessCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,6 @@ public class SeatMenuBottomDialog extends BaseBottomDialog {
 
     private Activity activity;
     private final List<String> items = new ArrayList<>();
-    private OnMenuItemClickListener<String> onItemClickListener;
 
     private VoiceRoomSeat mSeat;
 
@@ -36,11 +34,7 @@ public class SeatMenuBottomDialog extends BaseBottomDialog {
         super(activity);
         this.activity = activity;
         this.mSeat = seat;
-    }
-
-    public SeatMenuBottomDialog setOnItemClickListener(OnMenuItemClickListener<String> onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-        return this;
+        addMenuItem();
     }
 
     @Override
@@ -64,12 +58,9 @@ public class SeatMenuBottomDialog extends BaseBottomDialog {
 
         mAdapter.setNewInstance(items);
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
-
             @Override
-            public void onItemClick(@NonNull @NotNull BaseQuickAdapter<?, ?> adapter, @NonNull @NotNull View view, int position) {
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(adapter.getData().get(position).toString());
-                }
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                onSeatAction(mSeat, adapter.getData().get(position).toString());
                 dismiss();
             }
         });
@@ -110,10 +101,42 @@ public class SeatMenuBottomDialog extends BaseBottomDialog {
         items.add(activity.getString(R.string.cancel));
     }
 
-    public void show(@NonNull FragmentManager manager, List<String> items) {
-        if (items != null && !items.isEmpty()) {
-            this.items.addAll(items);
+    private void onSeatAction(VoiceRoomSeat seat, String item) {
+        switch (item) {
+            case "将成员抱上麦位":
+                //获取成员列表
+                ChatRoomHelper.fetchMemberList(new SuccessCallback<List<VoiceRoomSeat>>() {
+                    @Override
+                    public void onSuccess(List<VoiceRoomSeat> seats) {
+                        //展示成员列表
+                        new MemberSelectBottomDialog(null, seats, new MemberSelectBottomDialog.OnMemberChosenListener() {
+                            @Override
+                            public void onMemberChosen(VoiceRoomUser member) {
+                                //被抱用户
+                                if (member != null) {
+                                    ChatRoomHelper.checkIsRoomMember(seat.getIndex(), member);
+                                }
+                            }
+                        }).show();
+                    }
+                });
+                break;
+            case "将TA踢下麦位":
+                ChatRoomHelper.kickSeat(seat);
+                break;
+            case "关闭麦位":
+                ChatRoomHelper.closeSeat(seat);
+                break;
+            case "屏蔽麦位":
+                ChatRoomHelper.muteSeat(seat);
+                break;
+            case "解除语音屏蔽":
+            case "打开麦位":
+                ChatRoomHelper.openSeat(seat);
+                break;
+            case "退出房间":
+                ChatRoomHelper.leaveRoom();
+                break;
         }
-        super.show();
     }
 }
