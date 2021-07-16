@@ -17,7 +17,6 @@ import com.netease.audioroom.demo.dialog.MemberSelectBottomDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.SeatApplyDialogFragment;
 import com.netease.audioroom.demo.dialog.SeatMenuBottomDialog;
-import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.util.Network;
@@ -148,44 +147,42 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
             ToastUtils.showShort(getString(R.string.applying_now));
             return;
         }
-        SeatMenuDialog dialog = new SeatMenuDialog(seat);
-        dialog.show(getSupportFragmentManager(),dialog.getTag());
-//        List<String> items = new ArrayList<>();
-//        SeatMenuBottomDialog itemDialog = new SeatMenuBottomDialog(AnchorRoomActivity.this);
-//        switch (seat.getStatus()) {
-//            // 抱观众上麦（点击麦位）
-//            case Status.INIT:
-//                items.add("将成员抱上麦位");
-//                items.add("屏蔽麦位");
-//                items.add("关闭麦位");
-//                break;
-//            // 当前存在有效用户
-//            case Status.ON:
-//                // 当前麦位已经关闭
-//            case Status.AUDIO_CLOSED:
-//                items.add("将TA踢下麦位");
-//                items.add("屏蔽麦位");
-//                break;
-//            // 当前麦位已经被关闭
-//            case Status.CLOSED:
-//                items.add("打开麦位");
-//                break;
-//            // 且当前麦位无人，麦位禁麦触发
-//            case Status.FORBID:
-//                items.add("将成员抱上麦位");
-//                items.add("解除语音屏蔽");
-//                break;
-//            // 当前麦位已经禁麦或已经关闭
-//            case Status.AUDIO_MUTED:
-//            case Status.AUDIO_CLOSED_AND_MUTED:
-//                items.add("将TA踢下麦位");
-//                items.add("解除语音屏蔽");
-//                break;
-//        }
-//        items.add(getString(R.string.cancel));
-//        itemDialog.setOnItemClickListener(item -> {
-//            onSeatAction(seat, item);
-//        }).show(getSupportFragmentManager(), items);
+        List<String> items = new ArrayList<>();
+        SeatMenuBottomDialog itemDialog = new SeatMenuBottomDialog(AnchorRoomActivity.this, seat);
+        switch (seat.getStatus()) {
+            // 抱观众上麦（点击麦位）
+            case Status.INIT:
+                items.add("将成员抱上麦位");
+                items.add("屏蔽麦位");
+                items.add("关闭麦位");
+                break;
+            // 当前存在有效用户
+            case Status.ON:
+                // 当前麦位已经关闭
+            case Status.AUDIO_CLOSED:
+                items.add("将TA踢下麦位");
+                items.add("屏蔽麦位");
+                break;
+            // 当前麦位已经被关闭
+            case Status.CLOSED:
+                items.add("打开麦位");
+                break;
+            // 且当前麦位无人，麦位禁麦触发
+            case Status.FORBID:
+                items.add("将成员抱上麦位");
+                items.add("解除语音屏蔽");
+                break;
+            // 当前麦位已经禁麦或已经关闭
+            case Status.AUDIO_MUTED:
+            case Status.AUDIO_CLOSED_AND_MUTED:
+                items.add("将TA踢下麦位");
+                items.add("解除语音屏蔽");
+                break;
+        }
+        items.add(getString(R.string.cancel));
+        itemDialog.setOnItemClickListener(item -> {
+            onSeatAction(seat, item);
+        }).show(getSupportFragmentManager(), items);
     }
 
     //

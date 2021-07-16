@@ -14,8 +14,10 @@ public class BaseRecycleAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
 
     @Override
     protected void convert(@NotNull BaseViewHolder holder, T t) {
-        //onBindViewHolder(holder, t);
-        holder.setText(R.id.tv_item,"BaseRecycleAdapter");
+        onBindViewHolder(holder, t);
+        if (t instanceof String) {
+            holder.setText(R.id.tv_item, t.toString());
+        }
     }
 
     protected void onBindViewHolder(BaseViewHolder holder, T itemData) {

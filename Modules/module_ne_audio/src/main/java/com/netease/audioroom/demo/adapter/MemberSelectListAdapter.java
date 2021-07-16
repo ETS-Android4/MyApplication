@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.widget.OnItemClickListener;
+import com.netease.audioroom.demo.widget.OnMenuItemClickListener;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 
@@ -28,7 +28,7 @@ public class MemberSelectListAdapter extends RecyclerView.Adapter<MemberSelectLi
 
     private final List<VoiceRoomUser> members = new ArrayList<>();
     private final Context context;
-    private OnItemClickListener<Integer> onItemClickListener;
+    private OnMenuItemClickListener<Integer> onMenuItemClickListener;
 
     public MemberSelectListAdapter(List<VoiceRoomUser> dataList, Context context) {
         if (dataList != null && !dataList.isEmpty()) {
@@ -50,8 +50,8 @@ public class MemberSelectListAdapter extends RecyclerView.Adapter<MemberSelectLi
         notifyDataSetChanged();
     }
 
-    public void setOnItemClickListener(OnItemClickListener<Integer> onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    public void setOnItemClickListener(OnMenuItemClickListener<Integer> onMenuItemClickListener) {
+        this.onMenuItemClickListener = onMenuItemClickListener;
     }
 
     @Override
@@ -80,8 +80,8 @@ public class MemberSelectListAdapter extends RecyclerView.Adapter<MemberSelectLi
         ImageLoader.with(context).commonLoad(member.getAvatar(), holder.ivBg);
         holder.tvRoomName.setText(member.getNick());
         holder.itemView.setOnClickListener(v -> {
-            if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(position);
+            if (onMenuItemClickListener != null) {
+                onMenuItemClickListener.onItemClick(position);
             }
         });
     }
