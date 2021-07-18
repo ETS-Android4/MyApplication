@@ -114,8 +114,8 @@ public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
                 ChatRoomHelper.fetchMemberList(new SuccessCallback<List<VoiceRoomSeat>>() {
                     @Override
                     public void onSuccess(List<VoiceRoomSeat> seats) {
-                        MemberListDialog dialog = new MemberListDialog(mActivity, seat, seats);
-                        dialog.show(requireActivity().getSupportFragmentManager(), dialog.getTag());
+                        MemberSelectListDialog dialog = new MemberSelectListDialog(mActivity, seat, seats);
+                        dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
                     }
                 });
                 break;

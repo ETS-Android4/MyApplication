@@ -23,6 +23,7 @@ import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.MemberMuteBottomDialog;
+import com.netease.audioroom.demo.dialog.MemberMuteListDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.util.Network;
@@ -58,6 +59,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
     //麦位
     protected RecyclerView mSeatRecyclerView;
     protected SeatAdapter mSeatAdapter;
+    protected LinearLayoutManager mSeatLayoutManager;
 
     //消息列表
     protected RecyclerView mMsgRecyclerView;
@@ -151,9 +153,12 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         );
         //禁言
         mute = findViewById(R.id.iv_room_mute);
-        mute.setOnClickListener(view ->
-                new MemberMuteBottomDialog(BaseRoomActivity.this, mVoiceRoomInfo)
-                        .show()
+        mute.setOnClickListener(view -> {
+//                    MemberMuteListDialog dialog = new MemberMuteListDialog(this, mVoiceRoomInfo);
+//                    dialog.show(getSupportFragmentManager(), dialog.getTag());
+                    new MemberMuteBottomDialog(BaseRoomActivity.this, mVoiceRoomInfo)
+                            .show();
+                }
         );
         //     -> 管理员可见
         if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
@@ -184,11 +189,12 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         String count = "在线" + mVoiceRoomInfo.getOnlineUserCount() + "人";
         tvMemberCount.setText(count);
 
-        mSeatRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        mSeatLayoutManager = new GridLayoutManager(this, 4);
+        mSeatRecyclerView.setLayoutManager(mSeatLayoutManager);
         mSeatAdapter = new SeatAdapter(this);
-
         mSeatRecyclerView.setAdapter(mSeatAdapter);
         mSeatAdapter.setItemClickListener(this::onSeatItemClick);
+
         mMsgLayoutManager = new LinearLayoutManager(this);
         mMsgRecyclerView.setLayoutManager(mMsgLayoutManager);
         mMsgAdapter = new MessageListAdapter(null, this);
@@ -269,7 +275,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         ivAnchorAvatar.loadAvatar(user.avatar);
         tvAnchorNick.setText(user.nick);
     }
-
 
     /**
      * 主播静音状态
@@ -380,11 +385,12 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
      */
     private static void showVolume(ImageView view, int volume) {
         volume = toStepVolume(volume);
-        if (volume == 0) {
-            view.setVisibility(View.INVISIBLE);
-        } else {
-            view.setVisibility(View.VISIBLE);
-        }
+        //todo
+//        if (volume == 0) {
+//            view.setVisibility(View.INVISIBLE);
+//        } else {
+//            view.setVisibility(View.VISIBLE);
+//        }
     }
 
     private static int toStepVolume(int volume) {

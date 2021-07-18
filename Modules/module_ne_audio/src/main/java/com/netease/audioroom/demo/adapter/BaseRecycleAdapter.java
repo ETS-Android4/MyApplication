@@ -1,5 +1,10 @@
 package com.netease.audioroom.demo.adapter;
 
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -11,18 +16,23 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 public class BaseRecycleAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
 
     public BaseRecycleAdapter() {
-        super(R.layout.item_menu);
+        super(R.layout.item_base_recycle);
     }
 
     @Override
     protected void convert(@NonNull BaseViewHolder holder, T t) {
-        if (t instanceof String) {
-            holder.setText(R.id.tv_text, t.toString());
-        } else if (t instanceof VoiceRoomUser) {
-            VoiceRoomUser member = (VoiceRoomUser) t;
-            holder.setVisible(R.id.iv_head, true);
-            ImageLoader.with(getContext()).commonLoad(member.getAvatar(), holder.findView(R.id.iv_head));
-            holder.setText(R.id.tv_text, member.getNick());
+        ImageView imageView = holder.findView(R.id.iv_head);
+        TextView textView = holder.findView(R.id.tv_text);
+        if (textView != null && imageView != null) {
+            if (t instanceof String) {
+                textView.setGravity(Gravity.CENTER);
+                textView.setText(t.toString());
+            } else if (t instanceof VoiceRoomUser) {
+                VoiceRoomUser member = (VoiceRoomUser) t;
+                imageView.setVisibility(View.VISIBLE);
+                ImageLoader.with(getContext()).commonLoad(member.getAvatar(), imageView);
+                holder.setText(R.id.tv_text, member.getNick());
+            }
         }
     }
 }

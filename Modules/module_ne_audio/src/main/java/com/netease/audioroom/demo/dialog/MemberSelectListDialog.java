@@ -27,7 +27,7 @@ import com.netease.yunxin.nertc.model.interfaces.Anchor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemberListDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
+public class MemberSelectListDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
 
     private final Anchor mAnchor;
     private final VoiceRoomSeat mSeat;
@@ -38,7 +38,7 @@ public class MemberListDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> 
         return new BaseRecycleAdapter<>();
     }
 
-    public MemberListDialog(FragmentActivity activity, VoiceRoomSeat seat, List<VoiceRoomSeat> seats) {
+    public MemberSelectListDialog(FragmentActivity activity, VoiceRoomSeat seat, List<VoiceRoomSeat> seats) {
         this.mSeat = seat;
         List<String> accounts = new ArrayList<>();
         for (VoiceRoomSeat s : seats) {

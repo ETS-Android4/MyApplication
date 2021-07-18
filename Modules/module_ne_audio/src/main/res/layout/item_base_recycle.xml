@@ -3,22 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="8dp"
     tools:viewBindingIgnore="true">
 
     <com.netease.audioroom.demo.widget.HeadImageView
         android:id="@+id/iv_head"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_text"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:gravity="center_horizontal" />
+        android:gravity="center_vertical" />
 
 </LinearLayout>

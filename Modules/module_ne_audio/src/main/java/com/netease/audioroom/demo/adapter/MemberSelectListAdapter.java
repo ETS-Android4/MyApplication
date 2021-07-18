@@ -65,7 +65,7 @@ public class MemberSelectListAdapter extends RecyclerView.Adapter<MemberSelectLi
         if (viewType == TYPE_EMPTY) {
             return new ChatRoomHolder(LayoutInflater.from(context).inflate(R.layout.view_item_dialog_members_empty, parent, false), false);
         }
-        return new ChatRoomHolder(LayoutInflater.from(context).inflate(R.layout.item_menu, parent, false), true);
+        return new ChatRoomHolder(LayoutInflater.from(context).inflate(R.layout.item_base_recycle, parent, false), true);
     }
 
     @Override
