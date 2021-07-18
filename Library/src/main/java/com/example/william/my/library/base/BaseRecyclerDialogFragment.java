@@ -25,14 +25,16 @@ import java.util.List;
 public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
         implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener {
 
+    private RecyclerView mRecyclerView;
     private SmartRefreshLayout mSmartRefreshLayout;
 
     protected BaseQuickAdapter<T, BaseViewHolder> mAdapter;
 
     @Override
     protected int getLayout() {
-        return R.layout.basics_fragment_recycler_dialog;
+        return R.layout.basics_fragment_recycler;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -44,15 +46,15 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
     }
 
     private void initRecyclerView(@NonNull View view) {
-        RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
+        mRecyclerView = view.findViewById(R.id.recyclerView);
         mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
 
+        mAdapter = setAdapter();
         if (mRecyclerView != null) {
             //取消recyclerview单独的滑动效果
             mRecyclerView.setNestedScrollingEnabled(true);
             mRecyclerView.setLayoutManager(setLayoutManager());
 
-            mAdapter = setAdapter();
             mRecyclerView.setAdapter(mAdapter);
 
             mAdapter.setOnItemClickListener(this);

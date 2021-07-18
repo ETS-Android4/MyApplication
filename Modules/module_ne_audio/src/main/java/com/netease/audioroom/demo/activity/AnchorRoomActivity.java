@@ -13,10 +13,9 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.MemberSelectBottomDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.SeatApplyDialogFragment;
-import com.netease.audioroom.demo.dialog.SeatMenuBottomDialog;
+import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.util.Network;
@@ -26,7 +25,6 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Status;
 import com.netease.yunxin.nertc.model.interfaces.Anchor;
-import com.netease.yunxin.nertc.util.SuccessCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,10 +143,10 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     protected void onSeatItemClick(VoiceRoomSeat seat, int position) {
         if (seat.getStatus() == Status.APPLY) {
             ToastUtils.showShort(getString(R.string.applying_now));
-            return;
+        } else {
+            SeatMenuDialog dialog = new SeatMenuDialog(this,seat);
+            dialog.show(getSupportFragmentManager(), dialog.getTag());
         }
-        SeatMenuBottomDialog itemDialog = new SeatMenuBottomDialog(AnchorRoomActivity.this, seat);
-        itemDialog.show();
     }
 
     //

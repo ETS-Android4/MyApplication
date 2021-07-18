@@ -7,7 +7,6 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -91,8 +90,8 @@ public class RecyclerDialogFragment extends BaseRecyclerDialogFragment<ArticleDe
     }
 
     @Override
-    protected void setAttributes(WindowManager.LayoutParams params) {
-        params.width = SizeUtils.dp2px(300);
-        params.height = SizeUtils.dp2px(300);
+    protected void setAttributes(@NonNull WindowManager.LayoutParams params) {
+        super.setAttributes(params);
+        params.height = WindowManager.LayoutParams.MATCH_PARENT;
     }
 }

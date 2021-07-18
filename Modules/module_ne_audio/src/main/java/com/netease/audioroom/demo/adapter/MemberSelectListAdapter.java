@@ -65,7 +65,7 @@ public class MemberSelectListAdapter extends RecyclerView.Adapter<MemberSelectLi
         if (viewType == TYPE_EMPTY) {
             return new ChatRoomHolder(LayoutInflater.from(context).inflate(R.layout.view_item_dialog_members_empty, parent, false), false);
         }
-        return new ChatRoomHolder(LayoutInflater.from(context).inflate(R.layout.item_chatroom_list, parent, false), true);
+        return new ChatRoomHolder(LayoutInflater.from(context).inflate(R.layout.item_menu, parent, false), true);
     }
 
     @Override
@@ -101,8 +101,8 @@ public class MemberSelectListAdapter extends RecyclerView.Adapter<MemberSelectLi
                 ((TextView) (itemView.findViewById(R.id.tv_empty_comment))).setText("暂无群成员");
                 return;
             }
-            ivBg = itemView.findViewById(R.id.headview);
-            tvRoomName = itemView.findViewById(R.id.chatroom_name);
+            ivBg = itemView.findViewById(R.id.iv_head);
+            tvRoomName = itemView.findViewById(R.id.tv_text);
 
         }
     }

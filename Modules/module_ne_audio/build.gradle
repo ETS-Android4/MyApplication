@@ -39,7 +39,8 @@ dependencies {
     implementation deps.utils
     implementation deps.lottie
 
-    implementation deps.brvah
+    //implementation deps.brvah
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4"
     implementation deps.smartrefresh
     implementation deps.smartrefresh_header
     implementation deps.smartrefresh_footer

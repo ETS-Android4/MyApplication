@@ -111,8 +111,8 @@ public class MemberMuteListAdapter extends RecyclerSwipeAdapter<MemberMuteListAd
             }
             swipeLayout = itemView.findViewById(R.id.swipeLayout);
             linearLayout = itemView.findViewById(R.id.bottom_wrapper);
-            headImageView = itemView.findViewById(R.id.memberinfo).findViewById(R.id.headview);
-            name = itemView.findViewById(R.id.memberinfo).findViewById(R.id.chatroom_name);
+            headImageView = itemView.findViewById(R.id.memberinfo).findViewById(R.id.iv_head);
+            name = itemView.findViewById(R.id.memberinfo).findViewById(R.id.tv_text);
         }
     }
 
