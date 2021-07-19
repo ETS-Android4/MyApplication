@@ -231,7 +231,7 @@ public class AnchorImpl implements Anchor {
     }
 
     @Override
-    public void fetchRoomSeats(final RequestCallback<List<VoiceRoomSeat>> callback) {
+    public void fetchSeats(final RequestCallback<List<VoiceRoomSeat>> callback) {
         voiceRoom.fetchRoomSeats(callback);
     }
 

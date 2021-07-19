@@ -1,7 +1,6 @@
 package com.netease.audioroom.demo;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.cache.DemoCache;
@@ -258,28 +257,30 @@ public class ChatRoomHelper {
      * 获取房间内麦位列表
      */
     public static void fetchRoomSeats(RequestCallback<List<VoiceRoomSeat>> callback) {
-        mAnchor.fetchRoomSeats(callback);
+        mAnchor.fetchSeats(callback);
     }
 
     /**
-     * 获取房间内成员列表
+     * 获取房间内成员列表 -> 用户
+     *
+     * @param excludeAccounts 排除麦上用户
      */
-    public static void fetchRoomMembers(final List<String> excludeAccounts, RequestCallback<List<VoiceRoomUser>> callback) {
-        if (!excludeAccounts.isEmpty()) {
-            Log.e("TAG", "fetchMembersByAccount");
-            fetchMembersByAccount(excludeAccounts, callback);
-        } else {
-            Log.e("TAG", "fetchMembersByMuted");
-            fetchMembersByMuted(callback);
-        }
-    }
-
-    private static void fetchMembersByAccount(final List<String> excludeAccounts, RequestCallback<List<VoiceRoomUser>> callback) {
+    public static void fetchMembersByAccount(final List<String> excludeAccounts, RequestCallback<List<VoiceRoomUser>> callback) {
         mAnchor.getRoomQuery().fetchMembersByAccount(excludeAccounts, false, callback);
     }
 
-    private static void fetchMembersByMuted(RequestCallback<List<VoiceRoomUser>> callback) {
+    /**
+     * 获取房间内成员列表 -> 禁言
+     */
+    public static void fetchMembersByMuted(RequestCallback<List<VoiceRoomUser>> callback) {
         mAnchor.getRoomQuery().fetchMembersByMuted(false, callback);
+    }
+
+    /**
+     * 禁言 / 解除禁言
+     */
+    public static void muteMember(VoiceRoomUser member, Boolean mute, RequestCallback<Void> callback) {
+        mAnchor.getRoomQuery().muteMember(member, mute, callback);
     }
 
     /**

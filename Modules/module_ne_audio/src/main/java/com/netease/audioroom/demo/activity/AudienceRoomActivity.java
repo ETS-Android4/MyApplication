@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
+import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
@@ -23,6 +24,8 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Status;
 import com.netease.yunxin.nertc.model.interfaces.Audience;
 import com.netease.yunxin.nertc.util.SuccessCallback;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
@@ -69,16 +72,20 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                                 @Override
                                 public void onSuccess(Void param) {
                                     //展示申请上麦提示弹窗
-                                    Bundle bundle = new Bundle();
-                                    TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style("已申请上麦，等待通过...  <font color=\"#0888ff\">取消</color>", 0, 0, 0);
-                                    bundle.putParcelable(mTopTipsDialogFragment.getTag(), style);
-                                    mTopTipsDialogFragment.setArguments(bundle);
-                                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.getTag());
-                                    mTopTipsDialogFragment.setClickListener(() -> {
-                                        //取消上麦
-                                        ChatRoomHelper.cancelSeatApply();
-                                        mTopTipsDialogFragment.dismiss();
-                                    });
+                                    new AlertDialog.Builder(AudienceRoomActivity.this)
+                                            .setTitle("通知")
+                                            .setMessage("已申请上麦，等待通过...")
+                                            .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    //取消上麦
+                                                    ChatRoomHelper.cancelSeatApply();
+                                                    mTopTipsDialogFragment.dismiss();
+                                                }
+                                            })
+                                            .setCancelable(false)
+                                            .create()
+                                            .show();
                                 }
                             });
                             break;
@@ -91,7 +98,8 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                         case Status.AUDIO_CLOSED_AND_MUTED:
                             //是否是自己
                             if (seat.isSameAccount(DemoCache.getAccountId())) {
-                                ChatRoomHelper.leaveSeat();
+                                SeatMenuDialog dialog = new SeatMenuDialog(this, seat, createMenuItem(seat));
+                                dialog.show(getSupportFragmentManager(), dialog.getTag());
                             } else {
                                 ToastUtils.showShort("当前麦位有人");
                             }
@@ -286,5 +294,17 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
+    }
+
+    private List<String> createMenuItem(VoiceRoomSeat seat) {
+        List<String> menus = new ArrayList<>();
+        switch (seat.getStatus()) {
+            case Status.ON:
+            case Status.AUDIO_MUTED:
+            case Status.AUDIO_CLOSED:
+            case Status.AUDIO_CLOSED_AND_MUTED:
+                menus.add("下麦");
+        }
+        return menus;
     }
 }

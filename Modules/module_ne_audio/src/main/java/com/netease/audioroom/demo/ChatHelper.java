@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.Log;
 
-import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.base.ChatLoginManager;
 import com.netease.neliveplayer.sdk.NELivePlayer;
 import com.netease.neliveplayer.sdk.model.NESDKConfig;

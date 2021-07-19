@@ -73,7 +73,7 @@ public interface Anchor {
      *
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      */
-    void fetchRoomSeats(RequestCallback<List<VoiceRoomSeat>> callback);
+    void fetchSeats(RequestCallback<List<VoiceRoomSeat>> callback);
 
     /**
      * 获取本地麦位

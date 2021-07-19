@@ -24,7 +24,7 @@ import com.netease.audioroom.demo.adapter.MessageListAdapter;
 import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.RoomMuteDialog;
+import com.netease.audioroom.demo.dialog.RoomMuteListDialog;
 import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.ViewUtils;
@@ -154,10 +154,8 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         //禁言
         mute = findViewById(R.id.iv_room_mute);
         mute.setOnClickListener(view -> {
-                    RoomMuteDialog dialog = new RoomMuteDialog(this, mVoiceRoomInfo);
+                    RoomMuteListDialog dialog = new RoomMuteListDialog(this, mVoiceRoomInfo);
                     dialog.show(getSupportFragmentManager(), dialog.getTag());
-//                    new MemberMuteBottomDialog(BaseRoomActivity.this, mVoiceRoomInfo)
-//                            .show();
                 }
         );
         //     -> 管理员可见

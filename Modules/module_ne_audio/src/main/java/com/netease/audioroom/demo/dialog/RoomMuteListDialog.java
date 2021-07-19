@@ -17,20 +17,24 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerDialogFragment;
+import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
-import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 import com.netease.yunxin.nertc.model.interfaces.Anchor;
+import com.netease.yunxin.nertc.util.SuccessCallback;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class RoomMuteDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
+/**
+ * 禁言列表弹窗
+ */
+public class RoomMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
 
     private final FragmentActivity mActivity;
 
@@ -52,21 +56,34 @@ public class RoomMuteDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
         return false;
     }
 
-    public RoomMuteDialog(FragmentActivity activity, VoiceRoomInfo voiceRoomInfo) {
+    public RoomMuteListDialog(FragmentActivity activity, VoiceRoomInfo voiceRoomInfo) {
         this.mActivity = activity;
         this.mVoiceRoomInfo = voiceRoomInfo;
         this.mAnchor = NERtcVoiceRoom.sharedInstance(activity).getAnchor();
     }
 
-
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        addTitle();
+        addHeaderView();
 
         fetchRoomMute();
+
         fetchRoomMutedMembers();
+    }
+
+    @Override
+    public void onItemClick(@NonNull @NotNull BaseQuickAdapter adapter, @NonNull @NotNull View view, int position) {
+        super.onItemClick(adapter, view, position);
+        VoiceRoomUser member = (VoiceRoomUser) adapter.getData().get(position);
+        ChatRoomHelper.muteMember(member, false, new SuccessCallback<Void>() {
+            @Override
+            public void onSuccess(Void param) {
+                ToastUtils.showShort(member.getNick() + "已被解除禁言");
+            }
+        });
+        dismiss();
     }
 
     @Override
@@ -76,7 +93,7 @@ public class RoomMuteDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
         params.gravity = Gravity.BOTTOM;
     }
 
-    private void addTitle() {
+    private void addHeaderView() {
         LinearLayout linearLayout = new LinearLayout(getContext());
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -110,7 +127,7 @@ public class RoomMuteDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
      * 房间禁言状态
      */
     private void fetchRoomMute() {
-        mAnchor.getRoomQuery().fetchRoomMute(new RequestCallback<Boolean>() {
+        ChatRoomHelper.fetchRoomMute(new SuccessCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean isMute) {
                 if (isMute) {
@@ -121,16 +138,6 @@ public class RoomMuteDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
                     tvMuteAll.setText("全部禁言");
                 }
             }
-
-            @Override
-            public void onFailed(int code) {
-                ToastUtils.showShort("禁言失败code" + code);
-            }
-
-            @Override
-            public void onException(Throwable exception) {
-                ToastUtils.showShort("禁言失败exception" + exception.getMessage());
-            }
         });
     }
 
@@ -138,36 +145,10 @@ public class RoomMuteDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
      * 获取房间禁言成员列表
      */
     private void fetchRoomMutedMembers() {
-        mAnchor.getRoomQuery().fetchMembersByMuted(true, new RequestCallback<List<VoiceRoomUser>>() {
+        mAnchor.getRoomQuery().fetchMembersByMuted(true, new SuccessCallback<List<VoiceRoomUser>>() {
             @Override
             public void onSuccess(List<VoiceRoomUser> members) {
                 mAdapter.setNewInstance(members);
-
-//                muteList.clear();
-//                muteList.addAll(members);
-//                if (muteList.isEmpty()) {
-//                    return;
-//                }
-//                tvTitle.setText("禁言成员 (" + muteList.size() + ")");
-//
-//                adapter.updateDataSource(muteList);
-//                adapter.setRemoveMute((p) -> {
-//                    if (isAllMute) {
-//                        ToastUtils.showShort("全员禁言中,不能解禁");
-//                    } else {
-//                        removeMuteMember(p, muteList.get(p));
-//                    }
-//                });
-            }
-
-            @Override
-            public void onFailed(int i) {
-                ToastUtils.showShort("获取禁言用户失败code" + i);
-            }
-
-            @Override
-            public void onException(Throwable throwable) {
-                ToastUtils.showShort("获取禁言用户失败Exception" + throwable.getMessage());
             }
         });
     }
@@ -178,6 +159,7 @@ public class RoomMuteDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
     private void showRoomMember() {
         RoomMemberListDialog dialog = new RoomMemberListDialog();
         dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
+        dismiss();
     }
 
     /**
@@ -204,5 +186,6 @@ public class RoomMuteDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
                         ToastUtils.showShort("全部禁麦失败+" + errorMsg);
                     }
                 });
+        dismiss();
     }
 }

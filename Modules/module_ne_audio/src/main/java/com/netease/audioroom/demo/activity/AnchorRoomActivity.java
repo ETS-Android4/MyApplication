@@ -146,7 +146,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         if (seat.getStatus() == Status.APPLY) {
             ToastUtils.showShort(getString(R.string.applying_now));
         } else {
-            SeatMenuDialog dialog = new SeatMenuDialog(this, seat);
+            SeatMenuDialog dialog = new SeatMenuDialog(this, seat, createMenuItem(seat));
             dialog.show(getSupportFragmentManager(), dialog.getTag());
         }
     }
@@ -206,5 +206,41 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                         finish();
                     }
                 });
+    }
+
+    private List<String> createMenuItem(VoiceRoomSeat seat) {
+        List<String> menus = new ArrayList<>();
+        switch (seat.getStatus()) {
+            // 抱观众上麦（点击麦位）
+            case VoiceRoomSeat.Status.INIT:
+                menus.add("将成员抱上麦位");
+                menus.add("屏蔽麦位");
+                menus.add("关闭麦位");
+                break;
+            // 当前存在有效用户
+            case VoiceRoomSeat.Status.ON:
+                // 当前麦位已经关闭
+            case VoiceRoomSeat.Status.AUDIO_CLOSED:
+                menus.add("将TA踢下麦位");
+                menus.add("屏蔽麦位");
+                break;
+            // 当前麦位已经被关闭
+            case VoiceRoomSeat.Status.CLOSED:
+                menus.add("打开麦位");
+                break;
+            // 且当前麦位无人，麦位禁麦触发
+            case VoiceRoomSeat.Status.FORBID:
+                menus.add("将成员抱上麦位");
+                menus.add("解除语音屏蔽");
+                break;
+            // 当前麦位已经禁麦或已经关闭
+            case VoiceRoomSeat.Status.AUDIO_MUTED:
+            case VoiceRoomSeat.Status.AUDIO_CLOSED_AND_MUTED:
+                menus.add("将TA踢下麦位");
+                menus.add("解除语音屏蔽");
+                break;
+        }
+        menus.add(getString(R.string.cancel));
+        return menus;
     }
 }

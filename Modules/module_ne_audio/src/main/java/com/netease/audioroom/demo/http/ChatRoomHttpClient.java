@@ -207,6 +207,7 @@ public class ChatRoomHttpClient {
 
     /**
      * 获取随机主题
+     *
      * @param callback
      */
     public void getRandomTopic(final ChatRoomHttpCallback<String> callback) {
