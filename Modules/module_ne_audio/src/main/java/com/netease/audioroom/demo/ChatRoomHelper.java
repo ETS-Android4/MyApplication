@@ -248,16 +248,23 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 获取房间麦位列表
+     * 获取房间禁言状态
+     */
+    public static void fetchRoomMute(RequestCallback<Boolean> callback) {
+        mAnchor.getRoomQuery().fetchRoomMute(callback);
+    }
+
+    /**
+     * 获取房间内麦位列表
      */
     public static void fetchRoomSeats(RequestCallback<List<VoiceRoomSeat>> callback) {
         mAnchor.fetchRoomSeats(callback);
     }
 
     /**
-     * 获取房间成员
+     * 获取房间内成员列表
      */
-    public static void fetchRoomMembers(Anchor anchor, final List<String> excludeAccounts, RequestCallback<List<VoiceRoomUser>> callback) {
+    public static void fetchRoomMembers(final List<String> excludeAccounts, RequestCallback<List<VoiceRoomUser>> callback) {
         if (!excludeAccounts.isEmpty()) {
             Log.e("TAG", "fetchMembersByAccount");
             fetchMembersByAccount(excludeAccounts, callback);

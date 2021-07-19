@@ -109,7 +109,7 @@ public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
     private void onSeatAction(VoiceRoomSeat seat, @NonNull String item) {
         switch (item) {
             case "将成员抱上麦位":
-                MemberSelectListDialog dialog = new MemberSelectListDialog(mActivity, seat);
+                RoomMemberListDialog dialog = new RoomMemberListDialog(seat);
                 dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
                 break;
             case "将TA踢下麦位":

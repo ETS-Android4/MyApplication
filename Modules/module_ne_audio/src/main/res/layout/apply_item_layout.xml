@@ -29,7 +29,7 @@
         android:layout_marginRight="@dimen/dimen_12"
         android:padding="@dimen/dimen_2"
         android:scaleType="fitXY"
-        android:src="@drawable/icon_close" />
+        android:src="@drawable/icon_refuse" />
 
     <ImageView
         android:id="@+id/agree"
@@ -38,7 +38,7 @@
         android:layout_marginRight="@dimen/dimen_16"
         android:padding="@dimen/dimen_2"
         android:scaleType="fitXY"
-        android:src="@drawable/right_icon" />
+        android:src="@drawable/icon_agree" />
 
 
 </LinearLayout>

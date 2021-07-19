@@ -45,33 +45,33 @@ public class BaseDialogFragment extends DialogFragment {
                 LayoutParams params = window.getAttributes();
                 setAttributes(params);
                 window.setAttributes(params);
-                //Android 5.0以上自定义Dialog时发现无法横向铺满屏幕
-                window.getDecorView().setPadding(0, 0, 0, 0);
-                window.setBackgroundDrawableResource(android.R.color.white);
                 if (getWindowAnimationsRes() > 0) {
                     window.setWindowAnimations(getWindowAnimationsRes());
                 }
+                //Android 5.0以上自定义Dialog时发现无法横向铺满屏幕
+                window.getDecorView().setPadding(0, 0, 0, 0);
+                window.setBackgroundDrawableResource(android.R.color.white);
             }
         }
     }
 
-//    @Override
-//    public void show(@NonNull FragmentManager manager, @Nullable String tag) {
-//        try {
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            //在每个add事务前增加一个remove事务，防止连续的add
-//            transaction.remove(this);
-//            // commit()方法换成了commitAllowingStateLoss()
-//            // 解决Can not perform this action after onSaveInstanceState with DialogFragment
-//            transaction.add(this, tag);
-//            transaction.commitAllowingStateLoss();
-//            // 解决java.lang.IllegalStateException: Fragment already added
-//            manager.executePendingTransactions();
-//        } catch (Exception e) {
-//            //同一实例使用不同的tag会异常,这里捕获一下
-//            e.printStackTrace();
-//        }
-//    }
+    @Override
+    public void show(@NonNull FragmentManager manager, @Nullable String tag) {
+        try {
+            FragmentTransaction transaction = manager.beginTransaction();
+            //在每个add事务前增加一个remove事务，防止连续的add
+            transaction.remove(this);
+            // commit()方法换成了commitAllowingStateLoss()
+            // 解决Can not perform this action after onSaveInstanceState with DialogFragment
+            transaction.add(this, tag);
+            transaction.commitAllowingStateLoss();
+            // 解决java.lang.IllegalStateException: Fragment already added
+            manager.executePendingTransactions();
+        } catch (Exception e) {
+            //同一实例使用不同的tag会异常,这里捕获一下
+            e.printStackTrace();
+        }
+    }
 
     protected int getLayout() {
         return 0;

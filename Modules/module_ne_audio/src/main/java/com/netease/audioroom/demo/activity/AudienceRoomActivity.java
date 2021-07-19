@@ -2,17 +2,18 @@ package com.netease.audioroom.demo.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
@@ -171,14 +172,18 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                 mTopTipsDialogFragment.dismiss();
             }
         } else {
-            new NoticeDialog(this)
+            new AlertDialog.Builder(this)
                     .setTitle("通知")
-                    .setContent("您的申请已被拒绝")
-                    .setPositive("知道了", v -> {
-                        if (mTopTipsDialogFragment != null) {
-                            mTopTipsDialogFragment.dismiss();
+                    .setMessage("您的申请已被拒绝")
+                    .setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (mTopTipsDialogFragment != null) {
+                                mTopTipsDialogFragment.dismiss();
+                            }
                         }
                     })
+                    .create()
                     .show();
         }
     }
@@ -196,17 +201,19 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                 if (mTopTipsDialogFragment != null) {
                     mTopTipsDialogFragment.dismiss();
                 }
-                new NoticeDialog(AudienceRoomActivity.this)
+                new AlertDialog.Builder(this)
                         .setTitle("通知")
-                        .setContent("申请通过")
-                        .setPositive("知道了", null)
+                        .setMessage("申请通过")
+                        .setPositiveButton("知道了", null)
+                        .create()
                         .show();
             } else if (seat.getReason() == Reason.ANCHOR_INVITE) {//主播抱上麦
                 int position = seat.getIndex() + 1;
-                new NoticeDialog(AudienceRoomActivity.this)
+                new AlertDialog.Builder(this)
                         .setTitle("通知")
-                        .setContent("您已被主播抱上“麦位”" + position + "\n" + "现在可以进行语音互动啦\n" + "如需下麦，可点击自己的头像或下麦按钮")
-                        .setPositive("知道了", null)
+                        .setMessage("您已被主播抱上“麦位”" + position + "\n" + "现在可以进行语音互动啦\n" + "如需下麦，可点击自己的头像或下麦按钮")
+                        .setPositiveButton("知道了", null)
+                        .create()
                         .show();
             }
         }
@@ -220,10 +227,11 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         mic.setVisibility(View.GONE);
         if (!bySelf) {
             if (seat.getReason() == Reason.ANCHOR_KICK) {
-                new NoticeDialog(this)
+                new AlertDialog.Builder(this)
                         .setTitle("通知")
-                        .setContent("您已被主播请下麦位")
-                        .setPositive("知道了", null)
+                        .setMessage("您已被主播请下麦位")
+                        .setPositiveButton("知道了", null)
+                        .create()
                         .show();
             }
         }
@@ -237,10 +245,11 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         if (mTopTipsDialogFragment != null) {
             mTopTipsDialogFragment.dismiss();
         }
-        new NoticeDialog(this)
+        new AlertDialog.Builder(this)
                 .setTitle("通知")
-                .setContent("该麦位被主播“屏蔽语音”\n 现在您已无法进行语音互动")
-                .setPositive("知道了", null)
+                .setMessage("该麦位被主播“屏蔽语音”\n 现在您已无法进行语音互动")
+                .setPositiveButton("知道了", null)
+                .create()
                 .show();
     }
 

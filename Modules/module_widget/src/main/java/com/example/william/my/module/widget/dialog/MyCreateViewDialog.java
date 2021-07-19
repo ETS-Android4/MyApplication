@@ -18,11 +18,11 @@ public class MyCreateViewDialog extends BaseDialogFragment {
     @Override
     public void setAttributes(@NonNull WindowManager.LayoutParams params) {
         super.setAttributes(params);
-        params.gravity = Gravity.BOTTOM;
+        params.gravity = Gravity.TOP;
     }
 
     @Override
     public int getWindowAnimationsRes() {
-        return R.style.Basics_WindowAnimTheme_Bottom;
+        return R.style.Basics_DialogWindowTopAnim;
     }
 }

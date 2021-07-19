@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -31,8 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
-
+public class RoomMuteDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
 
     private final FragmentActivity mActivity;
 
@@ -49,7 +47,12 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
         return new BaseRecycleAdapter<>();
     }
 
-    public MemberMuteListDialog(FragmentActivity activity, VoiceRoomInfo voiceRoomInfo) {
+    @Override
+    protected boolean canRefresh() {
+        return false;
+    }
+
+    public RoomMuteDialog(FragmentActivity activity, VoiceRoomInfo voiceRoomInfo) {
         this.mActivity = activity;
         this.mVoiceRoomInfo = voiceRoomInfo;
         this.mAnchor = NERtcVoiceRoom.sharedInstance(activity).getAnchor();
@@ -83,7 +86,7 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
         tvMuteAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                muteAllMember(!isAllMute);
+                showRoomMember();
             }
         });
 
@@ -93,7 +96,7 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
         tvMuteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addMuteMember();
+                muteAllMember(!isAllMute);
             }
         });
 
@@ -138,11 +141,7 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
         mAnchor.getRoomQuery().fetchMembersByMuted(true, new RequestCallback<List<VoiceRoomUser>>() {
             @Override
             public void onSuccess(List<VoiceRoomUser> members) {
-                if (CollectionUtils.isNotEmpty(members)) {
-                    mAdapter.setNewInstance(members);
-                } else {
-                    onEmptyView();
-                }
+                mAdapter.setNewInstance(members);
 
 //                muteList.clear();
 //                muteList.addAll(members);
@@ -174,6 +173,14 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
     }
 
     /**
+     * 添加禁言成员
+     */
+    private void showRoomMember() {
+        RoomMemberListDialog dialog = new RoomMemberListDialog();
+        dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
+    }
+
+    /**
      * 全部禁言
      */
     private void muteAllMember(boolean mute) {
@@ -197,10 +204,5 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
                         ToastUtils.showShort("全部禁麦失败+" + errorMsg);
                     }
                 });
-    }
-
-    private void addMuteMember() {
-        MemberSelectListDialog dialog = new MemberSelectListDialog(mActivity);
-        dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
     }
 }

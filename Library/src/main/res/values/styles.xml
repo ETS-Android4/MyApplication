@@ -40,15 +40,10 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="Basics_WindowAnimTheme_Bottom" parent="Basics_AppTheme">
-        <item name="android:windowAnimationStyle">@style/Basics_Translate_Bottom</item>
-    </style>
-
-    <style name="Basics_Translate_Bottom" parent="@android:style/Animation.Translucent">
-        <item name="android:activityOpenEnterAnimation">@anim/basic_anim_bottom_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/basic_anim_bottom_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/basic_anim_bottom_in</item>
-        <item name="android:activityCloseExitAnimation">@anim/basic_anim_bottom_out</item>
+    <!--Dialog顶部动画-->
+    <style name="Basics_DialogWindowTopAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/basic_anim_top_in</item>
+        <item name="android:windowExitAnimation">@anim/basic_anim_top_out</item>
     </style>
 
     <style name="Basics_WindowAnimTheme_Slide" parent="Basics_AppTheme">
