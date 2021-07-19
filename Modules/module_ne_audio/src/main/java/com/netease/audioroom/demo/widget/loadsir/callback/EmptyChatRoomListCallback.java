@@ -1,11 +1,9 @@
 package com.netease.audioroom.demo.widget.loadsir.callback;
 
-
 import android.content.Context;
 import android.view.View;
 
 import com.netease.audioroom.demo.R;
-
 
 public class EmptyChatRoomListCallback extends BaseCallback {
     @Override

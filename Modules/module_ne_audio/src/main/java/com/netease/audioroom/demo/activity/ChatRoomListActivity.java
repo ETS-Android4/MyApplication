@@ -43,7 +43,7 @@ public class ChatRoomListActivity extends BaseActivity {
 
     @Override
     protected int getContentViewID() {
-        return R.layout.activity_chat_room_list;
+        return R.layout.activity_room_list;
     }
 
     @Override

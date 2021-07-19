@@ -1,8 +1,9 @@
-package com.netease.audioroom.demo;
+package com.netease.audioroom.demo.act;
 
 import android.app.Activity;
 
-import com.netease.audioroom.demo.act.IChatRoomCallback;
+import com.netease.audioroom.demo.ChatHelper;
+import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.base.ChatLoginManager;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef;

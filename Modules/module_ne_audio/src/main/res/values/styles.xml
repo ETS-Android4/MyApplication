@@ -35,7 +35,6 @@
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
 
-
     <!-- dialogfragment出现消失动画 -->
     <style name="Animation" parent="@android:style/Animation.Activity">
         <item name="android:windowEnterAnimation">@anim/anim_enter</item>
@@ -48,12 +47,5 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowSoftInputMode">adjustNothing</item>
-    </style>
-
-    <style name="TransBottomDialogTheme" parent="ThemeOverlay.AppCompat.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowAnimationStyle">@style/Animation</item>
     </style>
 </resources>

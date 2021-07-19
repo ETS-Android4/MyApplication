@@ -83,7 +83,7 @@ public abstract class NERtcVoiceRoom {
      *
      * @return 是否静音
      */
-    public abstract boolean isLocalAudioMute();
+    public abstract boolean isLocalMicMute();
 
     /**
      * 设置开启扬声器

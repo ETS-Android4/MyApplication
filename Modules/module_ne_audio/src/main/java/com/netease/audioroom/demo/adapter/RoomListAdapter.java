@@ -29,7 +29,7 @@ public class RoomListAdapter extends BaseAdapter<VoiceRoomInfo> {
 
     @Override
     protected RecyclerView.ViewHolder onCreateBaseViewHolder(ViewGroup parent, int viewType) {
-        return new ChatRoomHolder(layoutInflater.inflate(R.layout.item_chat_room_list, parent, false));
+        return new ChatRoomHolder(layoutInflater.inflate(R.layout.item_room_list, parent, false));
     }
 
     @Override

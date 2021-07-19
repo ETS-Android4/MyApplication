@@ -81,10 +81,10 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 本地是否静音
+     * 麦克风是否静音
      */
     public static boolean isMicClosed() {
-        return mNERtcVoiceRoom.isLocalAudioMute();
+        return mNERtcVoiceRoom.isLocalMicMute();
     }
 
     /**
@@ -100,7 +100,7 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 本地是否静音
+     * 房间是否静音
      */
     public static boolean isRoomAudioMute() {
         return mNERtcVoiceRoom.isRoomAudioMute();
@@ -247,13 +247,6 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 获取房间禁言状态
-     */
-    public static void fetchRoomMute(RequestCallback<Boolean> callback) {
-        mAnchor.getRoomQuery().fetchRoomMute(callback);
-    }
-
-    /**
      * 获取房间内麦位列表
      */
     public static void fetchRoomSeats(RequestCallback<List<VoiceRoomSeat>> callback) {
@@ -274,6 +267,13 @@ public class ChatRoomHelper {
      */
     public static void fetchMembersByMuted(RequestCallback<List<VoiceRoomUser>> callback) {
         mAnchor.getRoomQuery().fetchMembersByMuted(false, callback);
+    }
+
+    /**
+     * 获取房间禁言状态
+     */
+    public static void fetchRoomMute(RequestCallback<Boolean> callback) {
+        mAnchor.getRoomQuery().fetchRoomMute(callback);
     }
 
     /**

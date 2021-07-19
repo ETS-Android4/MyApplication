@@ -480,7 +480,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     @Override
     public boolean muteLocalMic(boolean mute) {
         engine.setRecordDeviceMute(mute);
-        boolean muted = isLocalAudioMute();
+        boolean muted = isLocalMicMute();
 
         if (anchorMode) {
             anchor.muteLocalAudio(muted);
@@ -496,7 +496,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    public boolean isLocalAudioMute() {
+    public boolean isLocalMicMute() {
         return engine.isRecordDeviceMute();
     }
 
@@ -923,7 +923,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
 
     private void updateVolumes(Map<Long, Integer> volumes) {
         if (roomCallback != null) {
-            boolean enable = !isLocalAudioMute() && !isRoomAudioMute();
+            boolean enable = !isLocalMicMute() && !isRoomAudioMute();
             roomCallback.onAnchorVolume(enable
                     ? getVolume(volumes, voiceRoomInfo.getCreatorAccount())
                     : 0);

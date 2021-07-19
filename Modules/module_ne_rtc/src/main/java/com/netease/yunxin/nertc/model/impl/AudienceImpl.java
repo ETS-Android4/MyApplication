@@ -369,7 +369,7 @@ public class AudienceImpl implements Audience {
             voiceRoom.getPushTypeSwitcher().toRTC(voiceRoomInfo, Long.parseLong(user.account));
         }
         voiceRoom.startLocalAudio();
-        if (voiceRoom.isLocalAudioMute()) {
+        if (voiceRoom.isLocalMicMute()) {
             voiceRoom.muteLocalMic(false);
         }
         if (callback != null) {
