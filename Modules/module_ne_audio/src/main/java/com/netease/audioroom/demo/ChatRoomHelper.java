@@ -1,9 +1,9 @@
-package com.netease.audioroom.demo.act;
+package com.netease.audioroom.demo;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.Network;
@@ -119,28 +119,28 @@ public class ChatRoomHelper {
         }
     }
 
-    private static Anchor anchor;
+    private static Anchor mAnchor;
 
     /**
      * 初始化房主
      */
     public static void initAnchor(Anchor.Callback callback) {
-        anchor = mNERtcVoiceRoom.getAnchor();
-        anchor.setCallback(callback);
+        mAnchor = mNERtcVoiceRoom.getAnchor();
+        mAnchor.setCallback(callback);
     }
 
     /**
      * 获取上麦请求列表
      */
     public static List<VoiceRoomSeat> getApplySeats() {
-        return anchor.getApplySeats();
+        return mAnchor.getApplySeats();
     }
 
     /**
      * 拒绝麦位申请
      */
     public static void denySeatApply(VoiceRoomSeat seat) {
-        anchor.denySeatApply(seat, new SuccessCallback<Void>() {
+        mAnchor.denySeatApply(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void param) {
                 VoiceRoomUser user = seat.getUser();
@@ -156,7 +156,7 @@ public class ChatRoomHelper {
      * @param seat
      */
     public static void agreeSeatApply(VoiceRoomSeat seat) {
-        boolean ret = anchor.approveSeatApply(seat, new SuccessCallback<Void>() {
+        boolean ret = mAnchor.approveSeatApply(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 ToastUtils.showShort("成功通过连麦请求");
@@ -171,7 +171,7 @@ public class ChatRoomHelper {
      * 踢人
      */
     public static void kickSeat(VoiceRoomSeat seat) {
-        anchor.kickSeat(seat, new SuccessCallback<Void>() {
+        mAnchor.kickSeat(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void param) {
                 VoiceRoomUser user = seat.getUser();
@@ -185,7 +185,7 @@ public class ChatRoomHelper {
      * 关闭麦位
      */
     public static void closeSeat(VoiceRoomSeat seat) {
-        anchor.closeSeat(seat, new SuccessCallback<Void>() {
+        mAnchor.closeSeat(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void param) {
                 ToastUtils.showShort("麦位" + (seat.getIndex() + 1) + "已关闭");
@@ -197,7 +197,7 @@ public class ChatRoomHelper {
      * 屏蔽麦位
      */
     public static void muteSeat(VoiceRoomSeat seat) {
-        anchor.muteSeat(seat, new SuccessCallback<Void>() {
+        mAnchor.muteSeat(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void param) {
                 ToastUtils.showShort("该麦位语音已被屏蔽，无法发言");
@@ -229,7 +229,7 @@ public class ChatRoomHelper {
         }
         String text = msg;
         String textError = msgError;
-        anchor.openSeat(seat, new RequestCallback<Void>() {
+        mAnchor.openSeat(seat, new RequestCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 ToastUtils.showShort(text);
@@ -248,17 +248,38 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 获取直播间成员列表
+     * 获取房间麦位列表
      */
-    public static void fetchMemberList(SuccessCallback<List<VoiceRoomSeat>> callback) {
-        anchor.fetchMemberList(callback);
+    public static void fetchRoomSeats(RequestCallback<List<VoiceRoomSeat>> callback) {
+        mAnchor.fetchRoomSeats(callback);
+    }
+
+    /**
+     * 获取房间成员
+     */
+    public static void fetchRoomMembers(Anchor anchor, final List<String> excludeAccounts, RequestCallback<List<VoiceRoomUser>> callback) {
+        if (!excludeAccounts.isEmpty()) {
+            Log.e("TAG", "fetchMembersByAccount");
+            fetchMembersByAccount(excludeAccounts, callback);
+        } else {
+            Log.e("TAG", "fetchMembersByMuted");
+            fetchMembersByMuted(callback);
+        }
+    }
+
+    private static void fetchMembersByAccount(final List<String> excludeAccounts, RequestCallback<List<VoiceRoomUser>> callback) {
+        mAnchor.getRoomQuery().fetchMembersByAccount(excludeAccounts, false, callback);
+    }
+
+    private static void fetchMembersByMuted(RequestCallback<List<VoiceRoomUser>> callback) {
+        mAnchor.getRoomQuery().fetchMembersByMuted(false, callback);
     }
 
     /**
      * 成员是否还在直播间
      */
     public static void checkIsRoomMember(int index, VoiceRoomUser member) {
-        anchor.getRoomQuery().isMember(member.getAccount(), new SuccessCallback<Boolean>() {
+        mAnchor.getRoomQuery().isMember(member.getAccount(), new SuccessCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean in) {
                 if (!in) {
@@ -267,7 +288,7 @@ public class ChatRoomHelper {
                 }
 
                 //获取直播间成员列表
-                fetchMemberList(new SuccessCallback<List<VoiceRoomSeat>>() {
+                fetchRoomSeats(new SuccessCallback<List<VoiceRoomSeat>>() {
                     @Override
                     public void onSuccess(List<VoiceRoomSeat> seats) {
                         inviteSeat(member, index, seats);
@@ -299,14 +320,14 @@ public class ChatRoomHelper {
         }
 
         //拒绝 选中麦位 其他成员的申请
-        VoiceRoomSeat local = anchor.getSeat(index);
+        VoiceRoomSeat local = mAnchor.getSeat(index);
         if (local.getStatus() == VoiceRoomSeat.Status.APPLY && !local.isSameAccount(account)) {
             denySeatApply(local);
         }
 
         //拒绝 选中成员 其他麦位的申请
         if (position != -1 && position != index) {
-            denySeatApply(anchor.getSeat(position));
+            denySeatApply(mAnchor.getSeat(position));
         }
 
         inviteSeat(new VoiceRoomSeat(
@@ -320,7 +341,7 @@ public class ChatRoomHelper {
      * 抱麦
      */
     private static void inviteSeat(VoiceRoomSeat seat) {
-        boolean ret = anchor.inviteSeat(seat, new SuccessCallback<Void>() {
+        boolean ret = mAnchor.inviteSeat(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 VoiceRoomUser user = seat.getUser();

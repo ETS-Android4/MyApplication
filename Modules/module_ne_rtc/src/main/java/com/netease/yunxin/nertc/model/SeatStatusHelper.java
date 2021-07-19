@@ -39,7 +39,7 @@ public final class SeatStatusHelper {
             return;
         }
 
-        voiceRoomInner.fetchSeats(new RequestCallback<List<VoiceRoomSeat>>() {
+        voiceRoomInner.fetchRoomSeats(new RequestCallback<List<VoiceRoomSeat>>() {
 
             @Override
             public void onSuccess(List<VoiceRoomSeat> param) {

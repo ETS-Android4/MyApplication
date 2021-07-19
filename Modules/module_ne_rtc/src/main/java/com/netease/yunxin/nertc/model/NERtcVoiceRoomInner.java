@@ -15,7 +15,7 @@ public abstract class NERtcVoiceRoomInner extends NERtcVoiceRoom {
 
     public abstract void sendSeatUpdate(VoiceRoomSeat seat, RequestCallback<Void> callback);
 
-    public abstract void fetchSeats(final RequestCallback<List<VoiceRoomSeat>> callback);
+    public abstract void fetchRoomSeats(final RequestCallback<List<VoiceRoomSeat>> callback);
 
     public abstract void refreshSeats();
 

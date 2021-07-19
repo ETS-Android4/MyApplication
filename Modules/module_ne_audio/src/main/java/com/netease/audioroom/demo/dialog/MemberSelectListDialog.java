@@ -2,6 +2,7 @@ package com.netease.audioroom.demo.dialog;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,13 +13,12 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerDialogFragment;
-import com.netease.audioroom.demo.act.ChatRoomHelper;
+import com.google.gson.Gson;
+import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
-import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
@@ -45,18 +45,6 @@ public class MemberSelectListDialog extends BaseRecyclerDialogFragment<VoiceRoom
 
     public MemberSelectListDialog(FragmentActivity activity, VoiceRoomSeat seat) {
         this.mSeat = seat;
-//        List<String> accounts = new ArrayList<>();
-//        for (VoiceRoomSeat s : seats) {
-//            if (s.isOn()) {
-//                String account = s.getAccount();
-//                if (!TextUtils.isEmpty(account)) {
-//                    accounts.add(account);
-//                }
-//            }
-//        }
-//        if (!accounts.isEmpty()) {
-//            this.excludeAccounts.addAll(accounts);
-//        }
         this.mAnchor = NERtcVoiceRoom.sharedInstance(activity).getAnchor();
     }
 
@@ -84,21 +72,17 @@ public class MemberSelectListDialog extends BaseRecyclerDialogFragment<VoiceRoom
     }
 
     private void fetchMemberList() {
-        //获取成员列表
-        ChatRoomHelper.fetchMemberList(new SuccessCallback<List<VoiceRoomSeat>>() {
+        ChatRoomHelper.fetchRoomSeats(new SuccessCallback<List<VoiceRoomSeat>>() {
             @Override
             public void onSuccess(List<VoiceRoomSeat> seats) {
-                List<String> accounts = new ArrayList<>();
                 for (VoiceRoomSeat s : seats) {
+                    Log.e("TAG", new Gson().toJson(s));
                     if (s.isOn()) {
                         String account = s.getAccount();
                         if (!TextUtils.isEmpty(account)) {
-                            accounts.add(account);
+                            excludeAccounts.add(account);
                         }
                     }
-                }
-                if (!accounts.isEmpty()) {
-                    excludeAccounts.addAll(accounts);
                 }
                 fetchRoomMembers(mAnchor, excludeAccounts);
             }
@@ -106,30 +90,18 @@ public class MemberSelectListDialog extends BaseRecyclerDialogFragment<VoiceRoom
     }
 
     private void fetchRoomMembers(Anchor anchor, List<String> excludeAccounts) {
-        RequestCallback<List<VoiceRoomUser>> callback = new RequestCallback<List<VoiceRoomUser>>() {
+        ChatRoomHelper.fetchRoomMembers(anchor, excludeAccounts, new SuccessCallback<List<VoiceRoomUser>>() {
             @Override
             public void onSuccess(List<VoiceRoomUser> members) {
+                for (VoiceRoomUser m : members) {
+                    Log.e("TAG", new Gson().toJson(m));
+                }
                 if (CollectionUtils.isNotEmpty(members)) {
                     mAdapter.setNewInstance(members);
                 } else {
                     onEmptyView();
                 }
             }
-
-            @Override
-            public void onFailed(int i) {
-                ToastUtils.showShort("获取用户失败code" + i);
-            }
-
-            @Override
-            public void onException(Throwable throwable) {
-                ToastUtils.showShort("获取用户失败Exception" + throwable.getMessage());
-            }
-        };
-        if (!excludeAccounts.isEmpty()) {
-            anchor.getRoomQuery().fetchMembersByAccount(excludeAccounts, false, callback);
-        } else {
-            anchor.getRoomQuery().fetchMembersByMuted(false, callback);
-        }
+        });
     }
 }

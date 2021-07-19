@@ -231,8 +231,8 @@ public class AnchorImpl implements Anchor {
     }
 
     @Override
-    public void fetchMemberList(final RequestCallback<List<VoiceRoomSeat>> callback) {
-        voiceRoom.fetchSeats(callback);
+    public void fetchRoomSeats(final RequestCallback<List<VoiceRoomSeat>> callback) {
+        voiceRoom.fetchRoomSeats(callback);
     }
 
     @Override
@@ -445,7 +445,7 @@ public class AnchorImpl implements Anchor {
     }
 
     private void fetchSeat(final String account, final RequestCallback<List<VoiceRoomSeat>> callback) {
-        voiceRoom.fetchSeats(new RequestCallback<List<VoiceRoomSeat>>() {
+        voiceRoom.fetchRoomSeats(new RequestCallback<List<VoiceRoomSeat>>() {
             @Override
             public void onSuccess(List<VoiceRoomSeat> seats) {
                 if (callback != null) {

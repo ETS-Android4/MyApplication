@@ -13,7 +13,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerDialogFragment;
-import com.netease.audioroom.demo.act.ChatRoomHelper;
+import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 麦位点击弹窗
+ * 麦位菜单弹窗
  */
 public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
 

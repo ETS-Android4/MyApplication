@@ -1,10 +1,8 @@
-package com.netease.audioroom.demo;
-
+package com.netease.audioroom.demo.base;
 
 import android.util.Log;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.netease.audioroom.demo.base.action.ILoginAction;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.model.AccountInfo;
@@ -13,7 +11,7 @@ import com.netease.nimlib.sdk.NIMSDK;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 
-public class ChatLoginManager implements ILoginAction {
+public class ChatLoginManager {
 
     private static final String TAG = "LoginManager";
 
@@ -29,7 +27,6 @@ public class ChatLoginManager implements ILoginAction {
         return instance;
     }
 
-    @Override
     public void tryLogin() {
         final AccountInfo accountInfo = DemoCache.getAccountInfo();
         if (accountInfo == null) {

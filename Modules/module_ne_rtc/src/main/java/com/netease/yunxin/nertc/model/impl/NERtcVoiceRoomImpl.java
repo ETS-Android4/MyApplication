@@ -607,7 +607,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    public void fetchSeats(final RequestCallback<List<VoiceRoomSeat>> callback) {
+    public void fetchRoomSeats(final RequestCallback<List<VoiceRoomSeat>> callback) {
         chatRoomService.fetchQueue(voiceRoomInfo.getRoomId()).setCallback(new RequestCallback<List<Entry<String, String>>>() {
             @Override
             public void onSuccess(List<Entry<String, String>> param) {
@@ -752,7 +752,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         if (anchorMode) {
             setOnUpdateSeats(createSeats());
         }
-        fetchSeats(new SuccessCallback<List<VoiceRoomSeat>>() {
+        fetchRoomSeats(new SuccessCallback<List<VoiceRoomSeat>>() {
             @Override
             public void onSuccess(List<VoiceRoomSeat> seats) {
                 if (!anchorMode) {
