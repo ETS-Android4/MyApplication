@@ -12,12 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerDialogFragment;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
+import com.netease.audioroom.demo.cache.DemoCache;
+import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
@@ -29,6 +32,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
+
+
+    private final FragmentActivity mActivity;
 
     private final Anchor mAnchor;
     private final VoiceRoomInfo mVoiceRoomInfo;
@@ -44,6 +50,7 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
     }
 
     public MemberMuteListDialog(FragmentActivity activity, VoiceRoomInfo voiceRoomInfo) {
+        this.mActivity = activity;
         this.mVoiceRoomInfo = voiceRoomInfo;
         this.mAnchor = NERtcVoiceRoom.sharedInstance(activity).getAnchor();
     }
@@ -73,10 +80,22 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
         tvMuteAdd = new TextView(getContext());
         tvMuteAdd.setGravity(Gravity.CENTER);
         tvMuteAdd.setText("添加禁言成员");
+        tvMuteAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                muteAllMember(!isAllMute);
+            }
+        });
 
         tvMuteAll = new TextView(getContext());
         tvMuteAll.setGravity(Gravity.CENTER);
         tvMuteAll.setText("全部禁言");
+        tvMuteAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addMuteMember();
+            }
+        });
 
         linearLayout.addView(tvMuteAdd, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, SizeUtils.dp2px(48), 1f));
         linearLayout.addView(tvMuteAll, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, SizeUtils.dp2px(48), 1f));
@@ -119,6 +138,11 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
         mAnchor.getRoomQuery().fetchMembersByMuted(true, new RequestCallback<List<VoiceRoomUser>>() {
             @Override
             public void onSuccess(List<VoiceRoomUser> members) {
+                if (CollectionUtils.isNotEmpty(members)) {
+                    mAdapter.setNewInstance(members);
+                } else {
+                    onEmptyView();
+                }
 
 //                muteList.clear();
 //                muteList.addAll(members);
@@ -147,5 +171,36 @@ public class MemberMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
                 ToastUtils.showShort("获取禁言用户失败Exception" + throwable.getMessage());
             }
         });
+    }
+
+    /**
+     * 全部禁言
+     */
+    private void muteAllMember(boolean mute) {
+        ChatRoomHttpClient.getInstance().muteAll(
+                DemoCache.getAccountId(), mVoiceRoomInfo.getRoomId(), mute, true, false,
+                new ChatRoomHttpClient.ChatRoomHttpCallback<Object>() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        if (!isAllMute) {
+                            tvMuteAll.setText("取消全部禁麦");
+                            ToastUtils.showShort("已全部禁麦");
+                        } else {
+                            tvMuteAll.setText("全部禁言");
+                            ToastUtils.showShort("取消全部禁麦");
+                        }
+                        isAllMute = mute;
+                    }
+
+                    @Override
+                    public void onFailed(int code, String errorMsg) {
+                        ToastUtils.showShort("全部禁麦失败+" + errorMsg);
+                    }
+                });
+    }
+
+    private void addMuteMember() {
+        MemberSelectListDialog dialog = new MemberSelectListDialog(mActivity);
+        dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
     }
 }

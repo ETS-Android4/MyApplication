@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -112,8 +113,7 @@ public class SecurityCodeView extends RelativeLayout {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (onKeyDelete()) return true;
-                    return true;
+                    return onKeyDelete();
                 }
                 return false;
             }
@@ -168,5 +168,9 @@ public class SecurityCodeView extends RelativeLayout {
 
     public String getEditContent() {
         return mInputContent;
+    }
+
+    public void setEditContent(String content) {
+        mEditText.setText(content);
     }
 }

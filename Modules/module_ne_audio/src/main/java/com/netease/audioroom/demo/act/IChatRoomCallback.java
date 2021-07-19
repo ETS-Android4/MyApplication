@@ -1,4 +1,4 @@
-package com.netease.audioroom.demo;
+package com.netease.audioroom.demo.act;
 
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;

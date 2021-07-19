@@ -1,8 +1,9 @@
-package com.netease.audioroom.demo;
+package com.netease.audioroom.demo.act;
 
 import android.content.Context;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.util.Network;

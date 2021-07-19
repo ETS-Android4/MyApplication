@@ -2,18 +2,19 @@ package com.netease.audioroom.demo.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.netease.audioroom.demo.ChatRoomHelper;
+import com.netease.audioroom.demo.act.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.dialog.SeatApplyDialogFragment;
 import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
@@ -93,16 +94,17 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new NoticeDialog(AnchorRoomActivity.this)
+                new AlertDialog.Builder(AnchorRoomActivity.this)
                         .setTitle("确认结束直播？")
-                        .setContent("请确认是否结束直播")
-                        .setNegative(getString(R.string.cancel), null)
-                        .setPositive("确认", new View.OnClickListener() {
+                        .setMessage("请确认是否结束直播")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(View v) {
+                            public void onClick(DialogInterface dialog, int which) {
                                 ChatRoomHelper.leaveRoom();
                             }
                         })
+                        .setNegativeButton("取消", null)
+                        .create()
                         .show();
             }
         });
@@ -144,7 +146,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         if (seat.getStatus() == Status.APPLY) {
             ToastUtils.showShort(getString(R.string.applying_now));
         } else {
-            SeatMenuDialog dialog = new SeatMenuDialog(this,seat);
+            SeatMenuDialog dialog = new SeatMenuDialog(this, seat);
             dialog.show(getSupportFragmentManager(), dialog.getTag());
         }
     }

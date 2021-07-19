@@ -1,7 +1,8 @@
-package com.netease.audioroom.demo;
+package com.netease.audioroom.demo.act;
 
 import android.app.Activity;
 
+import com.netease.audioroom.demo.ChatLoginManager;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;

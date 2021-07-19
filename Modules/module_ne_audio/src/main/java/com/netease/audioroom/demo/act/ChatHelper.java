@@ -1,10 +1,12 @@
-package com.netease.audioroom.demo;
+package com.netease.audioroom.demo.act;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.Log;
 
+import com.netease.audioroom.demo.BuildConfig;
+import com.netease.audioroom.demo.ChatLoginManager;
 import com.netease.neliveplayer.sdk.NELivePlayer;
 import com.netease.neliveplayer.sdk.model.NESDKConfig;
 import com.netease.nimlib.sdk.NIMClient;

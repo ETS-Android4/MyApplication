@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ToastUtils;
 import com.example.william.my.module.router.ARouterPath;
-import com.netease.audioroom.demo.ChatHelper;
+import com.netease.audioroom.demo.act.ChatHelper;
 import com.netease.audioroom.demo.ChatLoginManager;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.RoomListAdapter;

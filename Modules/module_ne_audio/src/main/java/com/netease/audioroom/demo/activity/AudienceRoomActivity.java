@@ -9,11 +9,10 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.netease.audioroom.demo.ChatRoomHelper;
+import com.netease.audioroom.demo.act.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
-import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;

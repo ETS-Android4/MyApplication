@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.core.widget.securitycode.SecurityCodeView;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -15,5 +16,7 @@ public class SecurityCodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_activity_security_code_view);
+        SecurityCodeView codeView = findViewById(R.id.securityCodeView);
+        codeView.setEditContent("0731");
     }
 }

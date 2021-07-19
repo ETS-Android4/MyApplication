@@ -16,13 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.netease.audioroom.demo.ChatRoomHelper;
+import com.netease.audioroom.demo.act.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MessageListAdapter;
 import com.netease.audioroom.demo.adapter.SeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.MemberMuteBottomDialog;
 import com.netease.audioroom.demo.dialog.MemberMuteListDialog;
 import com.netease.audioroom.demo.dialog.NoticeDialog;
 import com.netease.audioroom.demo.util.InputUtils;
@@ -154,10 +153,10 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         //禁言
         mute = findViewById(R.id.iv_room_mute);
         mute.setOnClickListener(view -> {
-//                    MemberMuteListDialog dialog = new MemberMuteListDialog(this, mVoiceRoomInfo);
-//                    dialog.show(getSupportFragmentManager(), dialog.getTag());
-                    new MemberMuteBottomDialog(BaseRoomActivity.this, mVoiceRoomInfo)
-                            .show();
+                    MemberMuteListDialog dialog = new MemberMuteListDialog(this, mVoiceRoomInfo);
+                    dialog.show(getSupportFragmentManager(), dialog.getTag());
+//                    new MemberMuteBottomDialog(BaseRoomActivity.this, mVoiceRoomInfo)
+//                            .show();
                 }
         );
         //     -> 管理员可见

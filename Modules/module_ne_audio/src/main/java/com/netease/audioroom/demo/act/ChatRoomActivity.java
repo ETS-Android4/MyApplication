@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.netease.audioroom.demo.ChatRoomManager;
 import com.netease.audioroom.demo.databinding.ActivityAnchorBinding;
 
 public class ChatRoomActivity extends AppCompatActivity {

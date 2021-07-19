@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.IntentFilter;
 
 import com.netease.audioroom.demo.BuildConfig;
-import com.netease.audioroom.demo.ChatHelper;
+import com.netease.audioroom.demo.act.ChatHelper;
 import com.netease.audioroom.demo.base.BaseActivityManager;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.receiver.NetworkConnectChangedReceiver;

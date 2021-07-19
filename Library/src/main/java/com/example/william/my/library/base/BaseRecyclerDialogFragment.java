@@ -1,6 +1,7 @@
 package com.example.william.my.library.base;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -14,16 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.listener.OnItemLongClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.R;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
-        implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener {
+        implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener, OnItemLongClickListener {
 
     private RecyclerView mRecyclerView;
     private SmartRefreshLayout mSmartRefreshLayout;
@@ -58,11 +62,11 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
             mRecyclerView.setAdapter(mAdapter);
 
             mAdapter.setOnItemClickListener(this);
+            mAdapter.setOnItemLongClickListener(this);
             mAdapter.setOnItemChildClickListener(this);
         }
 
         if (mSmartRefreshLayout != null) {
-
             mSmartRefreshLayout.setEnableRefresh(canRefresh());
             mSmartRefreshLayout.setEnableLoadMore(canLoadMore());
 
@@ -107,9 +111,13 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
     }
 
     protected void onEmptyView() {
+        onEmptyView("暂无数据");
+    }
+
+    protected void onEmptyView(String message) {
         TextView textView = new TextView(getActivity());
         textView.setGravity(Gravity.CENTER);
-        textView.setText("无数据");
+        textView.setText(TextUtils.isEmpty(message) ? "暂无数据" : message);
         mAdapter.setEmptyView(textView);
         mAdapter.notifyDataSetChanged();
         mSmartRefreshLayout.setEnableLoadMore(false);
@@ -136,7 +144,13 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
     }
 
     @Override
+    public boolean onItemLongClick(@NonNull @NotNull BaseQuickAdapter adapter, @NonNull @NotNull View view, int position) {
+        return false;
+    }
+
+    @Override
     public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
 
     }
+
 }

@@ -13,11 +13,10 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerDialogFragment;
-import com.netease.audioroom.demo.ChatRoomHelper;
+import com.netease.audioroom.demo.act.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
-import com.netease.yunxin.nertc.util.SuccessCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,14 +109,8 @@ public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
     private void onSeatAction(VoiceRoomSeat seat, @NonNull String item) {
         switch (item) {
             case "将成员抱上麦位":
-                //获取成员列表
-                ChatRoomHelper.fetchMemberList(new SuccessCallback<List<VoiceRoomSeat>>() {
-                    @Override
-                    public void onSuccess(List<VoiceRoomSeat> seats) {
-                        MemberSelectListDialog dialog = new MemberSelectListDialog(mActivity, seat, seats);
-                        dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
-                    }
-                });
+                MemberSelectListDialog dialog = new MemberSelectListDialog(mActivity, seat);
+                dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
                 break;
             case "将TA踢下麦位":
                 ChatRoomHelper.kickSeat(seat);
