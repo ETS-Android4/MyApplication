@@ -51,7 +51,7 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
 
     private void initRecyclerView(@NonNull View view) {
         mRecyclerView = view.findViewById(R.id.recyclerView);
-        mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
+        mSmartRefreshLayout = view.findViewById(R.id.smartRefresh);
 
         mAdapter = setAdapter();
         if (mRecyclerView != null) {

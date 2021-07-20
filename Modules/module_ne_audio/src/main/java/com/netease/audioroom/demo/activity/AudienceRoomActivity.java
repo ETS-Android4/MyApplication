@@ -80,7 +80,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     //取消上麦
                                                     ChatRoomHelper.cancelSeatApply();
-                                                    mTopTipsDialogFragment.dismiss();
                                                 }
                                             })
                                             .setCancelable(false)

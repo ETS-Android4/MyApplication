@@ -64,7 +64,7 @@ public class MvvmFragment extends Fragment implements OnRefreshLoadMoreListener 
 
     private void initView(View view) {
         mRecyclerView = view.findViewById(R.id.recycleView);
-        mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
+        mSmartRefreshLayout = view.findViewById(R.id.smartRefresh);
 
         mAdapter = new ArticleAdapter();
         mRecyclerView.setAdapter(mAdapter);

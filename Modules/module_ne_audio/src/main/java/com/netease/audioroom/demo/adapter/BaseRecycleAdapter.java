@@ -1,5 +1,6 @@
 package com.netease.audioroom.demo.adapter;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,20 +23,35 @@ public class BaseRecycleAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
 
     @Override
     protected void convert(@NonNull BaseViewHolder holder, T t) {
-        ImageView imageView = holder.findView(R.id.iv_head);
-        TextView textView = holder.findView(R.id.tv_text);
-        if (textView != null && imageView != null) {
-            if (t instanceof VoiceRoomSeat) {
-                textView.setGravity(Gravity.CENTER);
-                textView.setText(((VoiceRoomSeat) t).getAccount());
-            } else if (t instanceof String) {
-                textView.setGravity(Gravity.CENTER);
-                textView.setText(t.toString());
+        ImageView ivAccount = holder.findView(R.id.iv_account);
+        TextView tvContent = holder.findView(R.id.tv_content);
+        ImageView ivRefuse = holder.findView(R.id.iv_refuse);
+        ImageView ivAgree = holder.findView(R.id.iv_agree);
+        if (tvContent != null && ivAccount != null &&
+                ivRefuse != null && ivAgree != null) {
+            if (t instanceof String) {
+                //菜单
+                Log.e("TAG", "String");
+                tvContent.setGravity(Gravity.CENTER);
+                tvContent.setText(t.toString());
             } else if (t instanceof VoiceRoomUser) {
+                //成员列表，禁言列表
+                Log.e("TAG", "VoiceRoomUser");
                 VoiceRoomUser member = (VoiceRoomUser) t;
-                imageView.setVisibility(View.VISIBLE);
-                ImageLoader.with(getContext()).commonLoad(member.getAvatar(), imageView);
-                holder.setText(R.id.tv_text, member.getNick());
+                ivAccount.setVisibility(View.VISIBLE);
+                ImageLoader.with(getContext()).commonLoad(member.getAvatar(), ivAccount);
+                holder.setText(R.id.tv_content, member.getNick());
+            } else if (t instanceof VoiceRoomSeat) {
+                Log.e("TAG", "VoiceRoomSeat");
+                VoiceRoomSeat seat = (VoiceRoomSeat) t;
+                VoiceRoomUser member = seat.getUser();
+                if (member != null) {
+                    ivAccount.setVisibility(View.VISIBLE);
+                    ImageLoader.with(getContext()).commonLoad(member.getAvatar(), ivAccount);
+                    tvContent.setText(member.getNick() + "\t申请麦位(" + seat.getIndex() + 1 + ")");
+                    ivRefuse.setVisibility(View.VISIBLE);
+                    ivAgree.setVisibility(View.VISIBLE);
+                }
             }
         }
     }

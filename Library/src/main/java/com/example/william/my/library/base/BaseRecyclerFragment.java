@@ -45,7 +45,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
 
     private void initRecyclerView(@NonNull View view) {
         RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
-        mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
+        mSmartRefreshLayout = view.findViewById(R.id.smartRefresh);
 
         if (mRecyclerView != null) {
             //取消recyclerview单独的滑动效果

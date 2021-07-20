@@ -49,7 +49,7 @@ class KtBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         val mAdapter = ArticleDataBindAdapter()
         mBinding.recycleView.adapter = mAdapter
 
-        mBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(this)
+        mBinding.smartRefresh.setOnRefreshLoadMoreListener(this)
     }
 
     private fun subscribeToModel() {
@@ -58,11 +58,11 @@ class KtBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         mViewModel.onRefresh()
-        mBinding.smartRefreshLayout.finishRefresh(1000)
+        mBinding.smartRefresh.finishRefresh(1000)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         mViewModel.onLoadMore()
-        mBinding.smartRefreshLayout.finishLoadMore(1000)
+        mBinding.smartRefresh.finishLoadMore(1000)
     }
 }

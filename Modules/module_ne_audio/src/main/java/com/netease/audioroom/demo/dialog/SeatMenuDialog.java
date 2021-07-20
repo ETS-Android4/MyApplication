@@ -20,7 +20,7 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import java.util.List;
 
 /**
- * 麦位菜单弹窗
+ * 麦位菜单
  */
 public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
 

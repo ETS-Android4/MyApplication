@@ -49,7 +49,7 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
         super.onViewCreated(view, savedInstanceState);
 
         mRecyclerView = view.findViewById(R.id.recycleView);
-        mSmartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
+        mSmartRefreshLayout = view.findViewById(R.id.smartRefresh);
 
         mAdapter = new ArticleAdapter();
         mRecyclerView.setAdapter(mAdapter);

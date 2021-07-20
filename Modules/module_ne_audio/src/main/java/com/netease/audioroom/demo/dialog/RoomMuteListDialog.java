@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * 禁言列表弹窗
+ * 禁言列表
  */
 public class RoomMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
 

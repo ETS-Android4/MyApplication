@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 房间内成员列表
+ * 成员列表
  */
 public class RoomMemberListDialog extends BaseRecyclerDialogFragment<VoiceRoomUser> {
 

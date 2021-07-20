@@ -1,4 +1,4 @@
-package com.netease.audioroom.demo.dialog;
+package com.netease.audioroom.demo;
 
 import android.content.DialogInterface;
 import android.os.Bundle;

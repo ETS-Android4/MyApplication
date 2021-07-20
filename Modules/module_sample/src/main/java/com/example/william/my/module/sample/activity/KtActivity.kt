@@ -48,7 +48,7 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         mAdapter = ArticleAdapter()
         mBinding.recycleView.adapter = mAdapter
         mBinding.recycleView.layoutManager = LinearLayoutManager(this)
-        mBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(this)
+        mBinding.smartRefresh.setOnRefreshLoadMoreListener(this)
     }
 
     private fun subscribeToModel() {
@@ -87,7 +87,7 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     private fun showToast(message: String?) {
         ToastUtils.showShort(message)
-        mBinding.smartRefreshLayout.setEnableLoadMore(false)
+        mBinding.smartRefresh.setEnableLoadMore(false)
     }
 
     private fun showArticles(isFirst: Boolean, articles: MutableList<ArticleDetailBean>) {
@@ -96,7 +96,7 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         } else {
             mAdapter.addData(articles)
         }
-        mBinding.smartRefreshLayout.setEnableLoadMore(true)
+        mBinding.smartRefresh.setEnableLoadMore(true)
     }
 
     private fun onDataNotAvailable(isFirst: Boolean) {
@@ -113,21 +113,21 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         textView.text = "无数据"
         mAdapter.setEmptyView(textView)
         mAdapter.notifyDataSetChanged()
-        mBinding.smartRefreshLayout.setEnableLoadMore(false)
+        mBinding.smartRefresh.setEnableLoadMore(false)
     }
 
     private fun onDataNoMore() {
         ToastUtils.showShort("无更多数据")
-        mBinding.smartRefreshLayout.setEnableLoadMore(false)
+        mBinding.smartRefresh.setEnableLoadMore(false)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         mViewModel.onRefresh()
-        mBinding.smartRefreshLayout.finishRefresh(1000)
+        mBinding.smartRefresh.finishRefresh(1000)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         mViewModel.onLoadMore()
-        mBinding.smartRefreshLayout.finishLoadMore(1000)
+        mBinding.smartRefresh.finishLoadMore(1000)
     }
 }

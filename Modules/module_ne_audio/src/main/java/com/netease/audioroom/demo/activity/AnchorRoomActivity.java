@@ -15,7 +15,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.SeatApplyDialogFragment;
+import com.netease.audioroom.demo.SeatApplyDialogFragment;
+import com.netease.audioroom.demo.dialog.RoomSeatListDialog;
 import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
@@ -114,29 +115,31 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         tvApplyHint.setClickable(true);
         tvApplyHint.setOnClickListener(view -> {
                     //申请上麦弹窗
-                    mSeatApplyDialogFragment = new SeatApplyDialogFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList(mSeatApplyDialogFragment.getTag(), new ArrayList<>(ChatRoomHelper.getApplySeats()));
-                    mSeatApplyDialogFragment.setArguments(bundle);
-                    mSeatApplyDialogFragment.show(getSupportFragmentManager(), mSeatApplyDialogFragment.getTag());
-                    mSeatApplyDialogFragment.setRequestAction(new SeatApplyDialogFragment.IRequestAction() {
-                        @Override
-                        public void refuse(VoiceRoomSeat seat) {
-                            //拒绝麦位申请
-                            ChatRoomHelper.denySeatApply(seat);
-                        }
-
-                        @Override
-                        public void agree(VoiceRoomSeat seat) {
-                            //同意麦位申请
-                            ChatRoomHelper.agreeSeatApply(seat);
-                        }
-
-                        @Override
-                        public void dismiss() {
-
-                        }
-                    });
+                    RoomSeatListDialog dialog = new RoomSeatListDialog();
+                    dialog.show(getSupportFragmentManager(), dialog.getTag());
+//                    mSeatApplyDialogFragment = new SeatApplyDialogFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putParcelableArrayList(mSeatApplyDialogFragment.getTag(), new ArrayList<>(ChatRoomHelper.getApplySeats()));
+//                    mSeatApplyDialogFragment.setArguments(bundle);
+//                    mSeatApplyDialogFragment.show(getSupportFragmentManager(), mSeatApplyDialogFragment.getTag());
+//                    mSeatApplyDialogFragment.setRequestAction(new SeatApplyDialogFragment.IRequestAction() {
+//                        @Override
+//                        public void refuse(VoiceRoomSeat seat) {
+//                            //拒绝麦位申请
+//                            ChatRoomHelper.denySeatApply(seat);
+//                        }
+//
+//                        @Override
+//                        public void agree(VoiceRoomSeat seat) {
+//                            //同意麦位申请
+//                            ChatRoomHelper.agreeSeatApply(seat);
+//                        }
+//
+//                        @Override
+//                        public void dismiss() {
+//
+//                        }
+//                    });
                 }
         );
     }

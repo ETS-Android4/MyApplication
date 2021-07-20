@@ -78,7 +78,6 @@ class CoilLoader : ILoader {
                     bottomRight = radius
                 )
             }
-
             CornerType.TOP -> {
                 transformations = RoundedCornersTransformation(
                     topLeft = radius,

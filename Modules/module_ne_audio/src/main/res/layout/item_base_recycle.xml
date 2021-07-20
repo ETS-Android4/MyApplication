@@ -9,13 +9,13 @@
     tools:viewBindingIgnore="true">
 
     <com.netease.audioroom.demo.widget.HeadImageView
-        android:id="@+id/iv_head"
+        android:id="@+id/iv_account"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/tv_text"
+        android:id="@+id/tv_content"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -24,22 +24,26 @@
 
     <ImageView
         android:id="@+id/iv_refuse"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:padding="8dp"
+        android:padding="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/icon_refuse"
-        android:visibility="gone" />
+        android:tint="@color/colorPrimary"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/iv_agree"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:padding="8dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/icon_agree"
-        android:visibility="gone" />
+        android:tint="@color/colorPrimary"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </LinearLayout>
