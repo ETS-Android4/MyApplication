@@ -1,7 +1,6 @@
 package com.netease.audioroom.demo.dialog;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,7 +26,9 @@ public class RoomSeatListDialog extends BaseRecyclerDialogFragment<VoiceRoomSeat
 
     @Override
     protected BaseQuickAdapter<VoiceRoomSeat, BaseViewHolder> setAdapter() {
-        return new BaseRecycleAdapter<>();
+        BaseRecycleAdapter<VoiceRoomSeat> adapter = new BaseRecycleAdapter<>();
+        adapter.addChildClickViewIds(R.id.iv_refuse, R.id.iv_agree);
+        return adapter;
     }
 
     @Override
@@ -47,15 +48,11 @@ public class RoomSeatListDialog extends BaseRecyclerDialogFragment<VoiceRoomSeat
     public void onItemChildClick(@NonNull @NotNull BaseQuickAdapter adapter, @NonNull @NotNull View view, int position) {
         super.onItemChildClick(adapter, view, position);
         VoiceRoomSeat seat = (VoiceRoomSeat) adapter.getData().get(position);
-        int id = view.getId();
-        if (id == R.id.iv_refuse) {
-            Log.e("TAG", "iv_refuse");
-            //拒绝麦位申请
+        if (view.getId() == R.id.iv_refuse) {
             ChatRoomHelper.denySeatApply(seat);
-        } else if (id == R.id.iv_agree) {
-            Log.e("TAG", "iv_agree");
-            //同意麦位申请
+        } else if (view.getId() == R.id.iv_agree) {
             ChatRoomHelper.agreeSeatApply(seat);
         }
+        dismiss();
     }
 }

@@ -15,13 +15,10 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.SeatApplyDialogFragment;
 import com.netease.audioroom.demo.dialog.RoomSeatListDialog;
 import com.netease.audioroom.demo.dialog.SeatMenuDialog;
-import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.util.Network;
-import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -45,10 +42,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         }
     }
 
-    private TopTipsDialogFragment mTopTipsDialogFragment;
-
     private TextView tvApplyHint;
-    private SeatApplyDialogFragment mSeatApplyDialogFragment;//上麦请求列表
 
     @Override
     protected int getContentViewID() {
@@ -61,27 +55,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
 
         ChatRoomHelper.enterRoom(true);
 
-        watchNetWork();
-    }
-
-    private void watchNetWork() {
-        NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
-            if (network != null && network.isConnected()) {
-                if (mTopTipsDialogFragment != null) {
-                    mTopTipsDialogFragment.dismiss();
-                }
-                loadSuccess();
-            } else {
-                Bundle bundle = new Bundle();
-                TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style(getString(R.string.network_broken), 0, R.drawable.neterrricon, 0);
-                bundle.putParcelable(mTopTipsDialogFragment.getTag(), style);
-                mTopTipsDialogFragment.setArguments(bundle);
-                if (!mTopTipsDialogFragment.isVisible()) {
-                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.getTag());
-                }
-                showError();
-            }
-        });
+        loadSuccess();
     }
 
     @Override
@@ -109,7 +83,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                         .show();
             }
         });
-        mTopTipsDialogFragment = new TopTipsDialogFragment();
         tvApplyHint = findViewById(R.id.apply_hint);
         tvApplyHint.setVisibility(View.INVISIBLE);
         tvApplyHint.setClickable(true);
@@ -117,29 +90,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                     //申请上麦弹窗
                     RoomSeatListDialog dialog = new RoomSeatListDialog();
                     dialog.show(getSupportFragmentManager(), dialog.getTag());
-//                    mSeatApplyDialogFragment = new SeatApplyDialogFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putParcelableArrayList(mSeatApplyDialogFragment.getTag(), new ArrayList<>(ChatRoomHelper.getApplySeats()));
-//                    mSeatApplyDialogFragment.setArguments(bundle);
-//                    mSeatApplyDialogFragment.show(getSupportFragmentManager(), mSeatApplyDialogFragment.getTag());
-//                    mSeatApplyDialogFragment.setRequestAction(new SeatApplyDialogFragment.IRequestAction() {
-//                        @Override
-//                        public void refuse(VoiceRoomSeat seat) {
-//                            //拒绝麦位申请
-//                            ChatRoomHelper.denySeatApply(seat);
-//                        }
-//
-//                        @Override
-//                        public void agree(VoiceRoomSeat seat) {
-//                            //同意麦位申请
-//                            ChatRoomHelper.agreeSeatApply(seat);
-//                        }
-//
-//                        @Override
-//                        public void dismiss() {
-//
-//                        }
-//                    });
                 }
         );
     }
@@ -171,15 +121,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
             tvApplyHint.setText(getString(R.string.apply_micro_has_arrow, size));
         } else {
             tvApplyHint.setVisibility(View.INVISIBLE);
-        }
-        if (size > 0) {
-            if (mSeatApplyDialogFragment != null && mSeatApplyDialogFragment.isVisible()) {
-                mSeatApplyDialogFragment.update(seats);
-            }
-        } else {
-            if (mSeatApplyDialogFragment != null && mSeatApplyDialogFragment.isVisible()) {
-                mSeatApplyDialogFragment.dismiss();
-            }
         }
     }
 

@@ -25,32 +25,27 @@ public class BaseRecycleAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
     protected void convert(@NonNull BaseViewHolder holder, T t) {
         ImageView ivAccount = holder.findView(R.id.iv_account);
         TextView tvContent = holder.findView(R.id.tv_content);
-        ImageView ivRefuse = holder.findView(R.id.iv_refuse);
-        ImageView ivAgree = holder.findView(R.id.iv_agree);
-        if (tvContent != null && ivAccount != null &&
-                ivRefuse != null && ivAgree != null) {
+        if (tvContent != null && ivAccount != null ) {
             if (t instanceof String) {
                 //菜单
-                Log.e("TAG", "String");
                 tvContent.setGravity(Gravity.CENTER);
                 tvContent.setText(t.toString());
             } else if (t instanceof VoiceRoomUser) {
                 //成员列表，禁言列表
-                Log.e("TAG", "VoiceRoomUser");
                 VoiceRoomUser member = (VoiceRoomUser) t;
                 ivAccount.setVisibility(View.VISIBLE);
                 ImageLoader.with(getContext()).commonLoad(member.getAvatar(), ivAccount);
                 holder.setText(R.id.tv_content, member.getNick());
             } else if (t instanceof VoiceRoomSeat) {
-                Log.e("TAG", "VoiceRoomSeat");
+                //申请上麦列表
                 VoiceRoomSeat seat = (VoiceRoomSeat) t;
                 VoiceRoomUser member = seat.getUser();
                 if (member != null) {
                     ivAccount.setVisibility(View.VISIBLE);
                     ImageLoader.with(getContext()).commonLoad(member.getAvatar(), ivAccount);
                     tvContent.setText(member.getNick() + "\t申请麦位(" + seat.getIndex() + 1 + ")");
-                    ivRefuse.setVisibility(View.VISIBLE);
-                    ivAgree.setVisibility(View.VISIBLE);
+                    holder.setVisible(R.id.iv_refuse,true);
+                    holder.setVisible(R.id.iv_agree,true);
                 }
             }
         }

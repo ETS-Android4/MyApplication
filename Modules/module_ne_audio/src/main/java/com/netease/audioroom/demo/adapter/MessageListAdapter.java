@@ -1,7 +1,6 @@
 package com.netease.audioroom.demo.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -41,14 +40,13 @@ public class MessageListAdapter extends BaseAdapter<VoiceRoomMessage> {
 
         if (message.type == VoiceRoomMessage.Type.TEXT) {
             CharSequence content = new MessageSpannableStr.Builder()
-                    .append(message.nick + "：", Color.parseColor("#99ffffff"))
+                    .append(message.nick + "：")
                     .append(message.content)
                     .build().getMessageInfo();
             msgHolder.tvContent.setText(content);
         } else if (message.type == VoiceRoomMessage.Type.EVENT) {
             msgHolder.tvContent.setText(message.content);
         }
-
     }
 
 

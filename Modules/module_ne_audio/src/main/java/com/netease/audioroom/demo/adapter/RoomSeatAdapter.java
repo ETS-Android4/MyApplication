@@ -24,15 +24,15 @@ import java.util.ArrayList;
 /**
  * 麦位列表
  */
-public class SeatAdapter extends BaseAdapter<VoiceRoomSeat> {
+public class RoomSeatAdapter extends BaseAdapter<VoiceRoomSeat> {
 
-    public SeatAdapter(Context context) {
+    public RoomSeatAdapter(Context context) {
         super(new ArrayList<>(), context);
     }
 
     @Override
     protected RecyclerView.ViewHolder onCreateBaseViewHolder(ViewGroup parent, int viewType) {
-        return new SeatViewHolder(layoutInflater.inflate(R.layout.item_seat, parent, false));
+        return new SeatViewHolder(layoutInflater.inflate(R.layout.item_room_seat, parent, false));
     }
 
     @Override

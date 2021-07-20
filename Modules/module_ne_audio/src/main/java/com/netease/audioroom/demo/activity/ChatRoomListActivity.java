@@ -21,7 +21,6 @@ import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 import com.netease.audioroom.demo.model.AccountInfo;
-import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.audioroom.demo.util.NetworkUtils;
 import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
@@ -54,7 +53,8 @@ public class ChatRoomListActivity extends BaseActivity {
         //    return;
         //}
         initViews();
-        watchNetWork();
+
+        onNetwork();
     }
 
     private void initViews() {
@@ -80,16 +80,6 @@ public class ChatRoomListActivity extends BaseActivity {
         toCreate.setOnClickListener(v ->
                 getRandomName()
         );
-    }
-
-    private void watchNetWork() {
-        NetworkChange.getInstance().getNetworkLiveData().observe(this, network -> {
-            if (network != null && network.isConnected()) {
-                onNetwork();
-            } else {
-                showError();
-            }
-        });
     }
 
     // not need every time login. im auto login when network change

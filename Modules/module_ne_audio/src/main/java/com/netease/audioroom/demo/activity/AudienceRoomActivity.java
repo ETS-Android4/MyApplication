@@ -15,8 +15,6 @@ import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.SeatMenuDialog;
-import com.netease.audioroom.demo.dialog.TopTipsDialogFragment;
-import com.netease.audioroom.demo.util.NetworkChange;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Reason;
@@ -45,10 +43,10 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         }
     }
 
-    private TopTipsDialogFragment mTopTipsDialogFragment;
-
     private Disposable disposable;
     private final PublishSubject<VoiceRoomSeat> seatSource = PublishSubject.create();
+
+    private AlertDialog applySeatDialog;
 
     @Override
     protected int getContentViewID() {
@@ -61,7 +59,9 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
 
         ChatRoomHelper.enterRoom(false);
 
-        watchNetWork();
+        loadSuccess();
+        //刷新音频和座位信息
+        ChatRoomHelper.restartAudioAndSeat();
 
         disposable = seatSource.serialize().throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(seat -> {
@@ -72,7 +72,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                                 @Override
                                 public void onSuccess(Void param) {
                                     //展示申请上麦提示弹窗
-                                    new AlertDialog.Builder(AudienceRoomActivity.this)
+                                    applySeatDialog = new AlertDialog.Builder(AudienceRoomActivity.this)
                                             .setTitle("通知")
                                             .setMessage("已申请上麦，等待通过...")
                                             .setPositiveButton("取消", new DialogInterface.OnClickListener() {
@@ -83,8 +83,8 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                                                 }
                                             })
                                             .setCancelable(false)
-                                            .create()
-                                            .show();
+                                            .create();
+                                    applySeatDialog.show();
                                 }
                             });
                             break;
@@ -110,29 +110,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                 }, Throwable::printStackTrace);
     }
 
-    private void watchNetWork() {
-        NetworkChange.getInstance().getNetworkLiveData().observeInitAware(this, network -> {
-            if (network != null && network.isConnected()) {
-                if (mTopTipsDialogFragment != null) {
-                    mTopTipsDialogFragment.dismiss();
-                }
-                loadSuccess();
-                //刷新音频和座位信息
-                ChatRoomHelper.restartAudioAndSeat();
-            } else {
-                Bundle bundle = new Bundle();
-                mTopTipsDialogFragment = new TopTipsDialogFragment();
-                TopTipsDialogFragment.Style style = new TopTipsDialogFragment.Style("网络断开", 0, R.drawable.neterrricon, 0);
-                bundle.putParcelable(mTopTipsDialogFragment.getTag(), style);
-                mTopTipsDialogFragment.setArguments(bundle);
-                if (!mTopTipsDialogFragment.isVisible()) {
-                    mTopTipsDialogFragment.show(getSupportFragmentManager(), mTopTipsDialogFragment.getTag());
-                }
-                showError();
-            }
-        });
-    }
-
     @Override
     protected void setupRoom() {
         ChatRoomHelper.initAudience(this);
@@ -153,7 +130,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                 }
             }
         });
-        mTopTipsDialogFragment = new TopTipsDialogFragment();
         mic.setVisibility(View.GONE);
     }
 
@@ -175,8 +151,8 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
     public void onSeatApplyDenied(boolean otherOn) {
         if (otherOn) {
             ToastUtils.showShort("申请麦位已被拒绝");
-            if (mTopTipsDialogFragment != null) {
-                mTopTipsDialogFragment.dismiss();
+            if (applySeatDialog != null && applySeatDialog.isShowing()) {
+                applySeatDialog.dismiss();
             }
         } else {
             new AlertDialog.Builder(this)
@@ -185,8 +161,8 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                     .setPositiveButton("知道了", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if (mTopTipsDialogFragment != null) {
-                                mTopTipsDialogFragment.dismiss();
+                            if (applySeatDialog != null && applySeatDialog.isShowing()) {
+                                applySeatDialog.dismiss();
                             }
                         }
                     })
@@ -205,8 +181,8 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
         mic.setVisibility(View.VISIBLE);
         if (!last) {
             if (seat.getReason() == Reason.ANCHOR_APPROVE_APPLY) {//主播同意上麦
-                if (mTopTipsDialogFragment != null) {
-                    mTopTipsDialogFragment.dismiss();
+                if (applySeatDialog != null && applySeatDialog.isShowing()) {
+                    applySeatDialog.dismiss();
                 }
                 new AlertDialog.Builder(this)
                         .setTitle("通知")
@@ -215,10 +191,9 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                         .create()
                         .show();
             } else if (seat.getReason() == Reason.ANCHOR_INVITE) {//主播抱上麦
-                int position = seat.getIndex() + 1;
                 new AlertDialog.Builder(this)
                         .setTitle("通知")
-                        .setMessage("您已被主播抱上“麦位”" + position + "\n" + "现在可以进行语音互动啦\n" + "如需下麦，可点击自己的头像或下麦按钮")
+                        .setMessage("您已被主播抱上“麦位”" + (seat.getIndex() + 1) + "\n" + "现在可以进行语音互动啦\n" + "如需下麦，可点击自己的头像或下麦按钮")
                         .setPositiveButton("知道了", null)
                         .create()
                         .show();
@@ -249,9 +224,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
      */
     @Override
     public void onSeatMuted() {
-        if (mTopTipsDialogFragment != null) {
-            mTopTipsDialogFragment.dismiss();
-        }
         new AlertDialog.Builder(this)
                 .setTitle("通知")
                 .setMessage("该麦位被主播“屏蔽语音”\n 现在您已无法进行语音互动")
@@ -265,9 +237,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
      */
     @Override
     public void onSeatClosed() {
-        if (mTopTipsDialogFragment != null) {
-            mTopTipsDialogFragment.dismiss();
-        }
+
     }
 
     /**
