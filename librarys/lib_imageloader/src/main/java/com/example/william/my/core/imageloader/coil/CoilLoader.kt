@@ -3,6 +3,7 @@ package com.example.william.my.core.imageloader.coil
 import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
 import coil.load
+import coil.transform.BlurTransformation
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 import com.example.william.my.core.imageloader.corner.CornerType
@@ -111,6 +112,45 @@ class CoilLoader : ILoader {
         imageView.load(url) {
             transformations(
                 transformations
+            )
+        }
+    }
+
+    override fun loadBlur(
+        activity: FragmentActivity,
+        url: String,
+        imageView: ImageView
+    ) {
+        imageView.load(url) {
+            transformations(
+                BlurTransformation(activity)
+            )
+        }
+    }
+
+    override fun loadBlur(
+        activity: FragmentActivity,
+        url: String,
+        imageView: ImageView,
+        radius: Float
+    ) {
+        imageView.load(url) {
+            transformations(
+                BlurTransformation(activity, radius)
+            )
+        }
+    }
+
+    override fun loadBlur(
+        activity: FragmentActivity,
+        url: String,
+        imageView: ImageView,
+        radius: Float,
+        sampling: Float
+    ) {
+        imageView.load(url) {
+            transformations(
+                BlurTransformation(activity, radius, sampling)
             )
         }
     }

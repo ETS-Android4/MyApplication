@@ -33,6 +33,7 @@ android {
 dependencies {
     implementation deps.glide
     kapt deps.glide_compiler
+    //implementation deps.glide_transformations
     //Coil
     implementation deps.coil
     implementation deps.coil_gif

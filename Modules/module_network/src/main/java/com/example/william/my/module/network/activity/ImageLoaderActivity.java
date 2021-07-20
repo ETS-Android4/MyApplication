@@ -42,6 +42,8 @@ public class ImageLoaderActivity extends BaseActivity {
                     case 4:
                         ImageLoader.getInstance().loadRadius(ImageLoaderActivity.this, URL_IMG, mImageView, 48, CornerType.TOP);
                         break;
+                    case 5:
+                        ImageLoader.getInstance().loadBlur(ImageLoaderActivity.this, URL_IMG, mImageView, 600, 1);
                     default:
                         type = 0;
                         break;

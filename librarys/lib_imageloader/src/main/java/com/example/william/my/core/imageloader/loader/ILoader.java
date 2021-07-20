@@ -15,4 +15,10 @@ public interface ILoader {
     void loadRadius(FragmentActivity activity, String url, ImageView imageView, float radius);
 
     void loadRadius(FragmentActivity activity, String url, ImageView imageView, float radius, CornerType type);
+
+    void loadBlur(FragmentActivity activity, String url, ImageView imageView);
+
+    void loadBlur(FragmentActivity activity, String url, ImageView imageView, float radius);
+
+    void loadBlur(FragmentActivity activity, String url, ImageView imageView, float radius, float sampling);
 }

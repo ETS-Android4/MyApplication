@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.william.my.core.imageloader.corner.CornerType;
 import com.example.william.my.core.imageloader.glide.module.GlideApp;
+import com.example.william.my.core.imageloader.glide.transformation.BlurTransformation;
 import com.example.william.my.core.imageloader.glide.transformation.RadiusTransformation;
 import com.example.william.my.core.imageloader.loader.ILoader;
 
@@ -36,17 +37,38 @@ public class GlideLoader implements ILoader {
 
     @Override
     public void loadCircle(FragmentActivity activity, String url, ImageView imageView) {
-        loadCircleActivity(activity, url, imageView);
+        RequestOptions circleOptions = new RequestOptions().circleCrop();
+        loadActivity(activity, url, imageView, circleOptions);
     }
 
     @Override
     public void loadRadius(FragmentActivity activity, String url, ImageView imageView, float radius) {
-        loadRadiusActivity(activity, url, imageView, radius, CornerType.ALL);
+        RequestOptions radiusOptions = new RequestOptions().transform(new RadiusTransformation(radius, CornerType.ALL));
+        loadActivity(activity, url, imageView, radiusOptions);
     }
 
     @Override
     public void loadRadius(FragmentActivity activity, String url, ImageView imageView, float radius, CornerType type) {
-        loadRadiusActivity(activity, url, imageView, radius, type);
+        RequestOptions radiusOptions = new RequestOptions().transform(new RadiusTransformation(radius, type));
+        loadActivity(activity, url, imageView, radiusOptions);
+    }
+
+    @Override
+    public void loadBlur(FragmentActivity activity, String url, ImageView imageView) {
+        RequestOptions radiusOptions = new RequestOptions().transform(new BlurTransformation(activity));
+        loadActivity(activity, url, imageView, radiusOptions);
+    }
+
+    @Override
+    public void loadBlur(FragmentActivity activity, String url, ImageView imageView, float radius) {
+        RequestOptions radiusOptions = new RequestOptions().transform(new BlurTransformation(activity, radius));
+        loadActivity(activity, url, imageView, radiusOptions);
+    }
+
+    @Override
+    public void loadBlur(FragmentActivity activity, String url, ImageView imageView, float radius, float sampling) {
+        RequestOptions radiusOptions = new RequestOptions().transform(new BlurTransformation(activity, radius, sampling));
+        loadActivity(activity, url, imageView, radiusOptions);
     }
 
     private void loadActivity(Activity activity, String url, ImageView imageView, RequestOptions options) {
@@ -57,20 +79,9 @@ public class GlideLoader implements ILoader {
                 .into(imageView);
     }
 
-    private void loadCircleActivity(Activity activity, String url, ImageView imageView) {
-        RequestOptions circleOptions = new RequestOptions().circleCrop();
-        loadActivity(activity, url, imageView, circleOptions);
-    }
-
-    private void loadRadiusActivity(Activity activity, String url, ImageView imageView, float radius, CornerType type) {
-        RequestOptions radiusOptions = new RequestOptions().transform(new RadiusTransformation(radius, type));
-        loadActivity(activity, url, imageView, radiusOptions);
-    }
-
-    private void loadBlurActivity() {
-
-    }
-
+    /**
+     * 加载图片 - GIF
+     */
     private void loadGifActivity(Activity activity, String url, ImageView imageView, int count) {
         GlideApp.with(activity)
                 .asGif()
@@ -91,6 +102,9 @@ public class GlideLoader implements ILoader {
                 .into(imageView);
     }
 
+    /**
+     * 加载图片 - GIF - 播放完成监听
+     */
     private void loadGifActivity(Activity activity, String url, ImageView imageView, final GifListener gifListener) {
         GlideApp.with(activity)
                 .asGif()

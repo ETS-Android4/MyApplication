@@ -20,7 +20,6 @@ import java.security.MessageDigest;
  */
 public class RadiusTransformation extends BitmapTransformation {
 
-
     private final float mRadius;
     private final float mDiameter;
     private final CornerType mCornerType;
