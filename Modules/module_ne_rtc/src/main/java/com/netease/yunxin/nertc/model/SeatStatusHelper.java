@@ -2,6 +2,7 @@ package com.netease.yunxin.nertc.model;
 
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomInner;
 
 import java.util.List;
 import java.util.Objects;

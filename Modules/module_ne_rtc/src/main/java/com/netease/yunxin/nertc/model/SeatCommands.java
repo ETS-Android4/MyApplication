@@ -17,6 +17,9 @@ import org.json.JSONObject;
 
 public class SeatCommands {
 
+    /**
+     * 上麦
+     */
     public static CustomNotification applySeat(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
         String content;
         try {
@@ -39,6 +42,9 @@ public class SeatCommands {
         return notification;
     }
 
+    /**
+     * 下麦
+     */
     public static CustomNotification leaveSeat(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
         String content;
         try {
@@ -58,6 +64,9 @@ public class SeatCommands {
         return notification;
     }
 
+    /**
+     * 取消申请上麦
+     */
     public static CustomNotification cancelSeatApply(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, VoiceRoomSeat seat) {
         String content;
         try {

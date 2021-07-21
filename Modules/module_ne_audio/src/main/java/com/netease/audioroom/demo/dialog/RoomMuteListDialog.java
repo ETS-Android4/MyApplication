@@ -21,7 +21,7 @@ import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 import com.netease.yunxin.nertc.model.interfaces.Anchor;

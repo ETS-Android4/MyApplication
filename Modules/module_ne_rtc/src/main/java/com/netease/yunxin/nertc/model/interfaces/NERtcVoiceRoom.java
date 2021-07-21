@@ -1,19 +1,16 @@
-package com.netease.yunxin.nertc.model;
+package com.netease.yunxin.nertc.model.interfaces;
 
 import android.content.Context;
 
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.AccountMapper;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomCallback;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomDef.AccountMapper;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomDef.RoomCallback;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 import com.netease.yunxin.nertc.model.impl.NERtcVoiceRoomImpl;
-import com.netease.yunxin.nertc.model.interfaces.Anchor;
-import com.netease.yunxin.nertc.model.interfaces.Audience;
-import com.netease.yunxin.nertc.model.interfaces.PushTypeSwitcher;
 
 /**
- * 语聊房
+ * 语聊房实现功能
  */
 public abstract class NERtcVoiceRoom {
     /**
@@ -29,14 +26,14 @@ public abstract class NERtcVoiceRoom {
      * 初始化
      *
      * @param appKey   app kay
-     * @param callback {@link com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomCallback 回调}
+     * @param callback {@link NERtcVoiceRoomDef.RoomCallback 回调}
      */
     public abstract void init(String appKey, RoomCallback callback);
 
     /**
      * 设置音质（需要在进入房间前调用）
      *
-     * @param quality {@link com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomAudioQuality 音质}
+     * @param quality {@link NERtcVoiceRoomDef.RoomAudioQuality 音质}
      */
     public abstract void setAudioQuality(int quality);
 

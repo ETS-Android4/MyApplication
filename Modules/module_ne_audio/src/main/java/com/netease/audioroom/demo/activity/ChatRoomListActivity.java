@@ -30,7 +30,7 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 
 import java.util.ArrayList;
 
-import static com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomAudioQuality.DEFAULT_QUALITY;
+import static com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomDef.RoomAudioQuality.DEFAULT_QUALITY;
 
 @Route(path = ARouterPath.NeRtc.Audio)
 public class ChatRoomListActivity extends BaseActivity {

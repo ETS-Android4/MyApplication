@@ -41,10 +41,10 @@ import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.netease.nimlib.sdk.util.Entry;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoom;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.AccountMapper;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomCallback;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomInner;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoom;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomDef.AccountMapper;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomDef.RoomCallback;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomInner;
 import com.netease.yunxin.nertc.model.RoomQuery;
 import com.netease.yunxin.nertc.model.SeatCommands;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
@@ -230,6 +230,9 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
 
     private PushTypeSwitcher switcher;
 
+    /**
+     * 聊天室消息
+     */
     private final Observer<List<ChatRoomMessage>> messageObserver = new Observer<List<ChatRoomMessage>>() {
         @Override
         public void onEvent(List<ChatRoomMessage> chatRoomMessages) {
@@ -269,6 +272,9 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         }
     };
 
+    /**
+     * 聊天室踢出
+     */
     private final Observer<ChatRoomKickOutEvent> kickOutObserver = new Observer<ChatRoomKickOutEvent>() {
         @Override
         public void onEvent(ChatRoomKickOutEvent event) {
@@ -286,6 +292,9 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         }
     };
 
+    /**
+     * 自定义通知
+     */
     private final Observer<CustomNotification> customNotification = new Observer<CustomNotification>() {
         @Override
         public void onEvent(CustomNotification notification) {
@@ -298,6 +307,9 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         }
     };
 
+    /**
+     * 聊天室状态
+     */
     Observer<ChatRoomStatusChangeData> onlineStatusObserver = new Observer<ChatRoomStatusChangeData>() {
         @Override
         public void onEvent(ChatRoomStatusChangeData change) {
@@ -607,6 +619,19 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
+    public void sendSeatUpdateList(List<VoiceRoomSeat> seats, RequestCallback<List<String>> callback) {
+        List<Entry<String, String>> queues = new ArrayList<>();
+        for (VoiceRoomSeat seat : seats) {
+            Entry<String, String> entry = new Entry<>(seat.getKey(), seat.toJsonString());
+            queues.add(entry);
+        }
+        chatRoomService.batchUpdateQueue(voiceRoomInfo.getRoomId(),
+                queues,
+                true,
+                new HashMap<>()).setCallback(callback);
+    }
+
+    @Override
     public void fetchRoomSeats(final RequestCallback<List<VoiceRoomSeat>> callback) {
         chatRoomService.fetchQueue(voiceRoomInfo.getRoomId()).setCallback(new RequestCallback<List<Entry<String, String>>>() {
             @Override
@@ -641,10 +666,17 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         return initial;
     }
 
+    /**
+     * 消息观察者
+     */
     private void listen(boolean on) {
+        // 自定义通知
         NIMClient.getService(MsgServiceObserve.class).observeCustomNotification(customNotification, on);
+        // 聊天室消息
         NIMClient.getService(ChatRoomServiceObserver.class).observeReceiveMessage(messageObserver, on);
+        // 聊天室踢出
         NIMClient.getService(ChatRoomServiceObserver.class).observeKickOutEvent(kickOutObserver, on);
+        // 聊天室状态
         NIMClient.getService(ChatRoomServiceObserver.class).observeOnlineStatus(onlineStatusObserver, on);
     }
 

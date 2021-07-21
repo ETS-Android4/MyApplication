@@ -1,6 +1,6 @@
 package com.netease.yunxin.nertc.model.bean;
 
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomDef;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomDef;
 
 import java.io.Serializable;
 
@@ -35,7 +35,7 @@ public class VoiceRoomInfo implements Serializable {
     private int roomType;
 
     /**
-     * 房间音质 {@link com.netease.yunxin.nertc.model.NERtcVoiceRoomDef.RoomAudioQuality}
+     * 房间音质 {@link NERtcVoiceRoomDef.RoomAudioQuality}
      */
     private int audioQuality = NERtcVoiceRoomDef.RoomAudioQuality.DEFAULT_QUALITY;
 

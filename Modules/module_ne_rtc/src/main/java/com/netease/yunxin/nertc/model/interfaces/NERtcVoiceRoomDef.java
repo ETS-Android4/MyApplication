@@ -1,4 +1,4 @@
-package com.netease.yunxin.nertc.model;
+package com.netease.yunxin.nertc.model.interfaces;
 
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;

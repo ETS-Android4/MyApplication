@@ -9,7 +9,7 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.chatroom.ChatRoomMessageBuilder;
 import com.netease.nimlib.sdk.chatroom.ChatRoomService;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomUpdateInfo;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomInner;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomInner;
 import com.netease.yunxin.nertc.model.RoomQuery;
 import com.netease.yunxin.nertc.model.SeatStatusHelper;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;

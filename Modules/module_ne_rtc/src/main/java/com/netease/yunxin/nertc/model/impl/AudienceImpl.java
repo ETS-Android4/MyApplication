@@ -12,7 +12,7 @@ import com.netease.nimlib.sdk.chatroom.model.ChatRoomMember;
 import com.netease.nimlib.sdk.chatroom.model.EnterChatRoomResultData;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
-import com.netease.yunxin.nertc.model.NERtcVoiceRoomInner;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomInner;
 import com.netease.yunxin.nertc.model.SeatCommands;
 import com.netease.yunxin.nertc.model.SeatStatusHelper;
 import com.netease.yunxin.nertc.model.bean.StreamConfig;
