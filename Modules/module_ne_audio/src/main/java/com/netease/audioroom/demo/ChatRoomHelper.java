@@ -421,7 +421,7 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 上麦
+     * 申请上麦
      */
     public static void applySeat(VoiceRoomSeat seat, SuccessCallback<Void> callback) {
         if (checkSeat()) {
@@ -445,7 +445,7 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 取消上麦
+     * 取消申请上麦
      */
     public static void cancelSeatApply() {
         audience.cancelSeatApply(new RequestCallback<Void>() {

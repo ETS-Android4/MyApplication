@@ -2,10 +2,13 @@ package com.netease.audioroom.demo.act;
 
 import android.app.Activity;
 
+import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.base.ChatLoginManager;
+import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoom;
 import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
@@ -33,6 +36,8 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     private IChatRoomCallback mIChatRoomCallback;
 
+    private static NERtcVoiceRoom mNERtcVoiceRoom;
+
     /**
      * 绑定Activity
      */
@@ -51,7 +56,38 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
      * 初始化房间
      */
     public void initRoom(Activity context, VoiceRoomInfo roomInfo, NERtcVoiceRoomDef.RoomCallback callback) {
-        ChatRoomHelper.initRoom(context, roomInfo, this);
+        NERtcVoiceRoom.setAccountMapper(new NERtcVoiceRoomDef.AccountMapper() {
+            @Override
+            public long accountToVoiceUid(String account) {
+                return AccountInfo.accountUid(account);
+            }
+        });
+        NERtcVoiceRoom.setMessageBuilder(new VoiceRoomMessage.MessageTextBuilder() {
+            @Override
+            public String roomEvent(String nick, boolean enter) {
+                String who = "“" + nick + "”";
+                String action = enter ? "进了房间" : "离开了房间";
+                return who + action;
+            }
+
+            @Override
+            public String seatEvent(VoiceRoomSeat seat, boolean enter) {
+                VoiceRoomUser user = seat.getUser();
+                String nick = user != null ? user.getNick() : "";
+                String who = "“" + nick + "”";
+                String action = enter ? "进入了麦位" : "退出了麦位";
+                int position = seat.getIndex() + 1;
+                return who + action + position;
+            }
+        });
+        mNERtcVoiceRoom = NERtcVoiceRoom.sharedInstance(context);
+        mNERtcVoiceRoom.init(BuildConfig.NERTC_APP_KEY, callback);
+        mNERtcVoiceRoom.initRoom(roomInfo, createUser());
+    }
+
+    protected static VoiceRoomUser createUser() {
+        AccountInfo accountInfo = DemoCache.getAccountInfo();
+        return new VoiceRoomUser(accountInfo.account, accountInfo.nick, accountInfo.avatar);
     }
 
     /**
@@ -60,21 +96,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
      * @param anchorMode 是否为主播
      */
     public void enterRoom(boolean anchorMode) {
-        if (!ChatHelper.isLogin()) {
-            ChatHelper.loginIM(new ChatLoginManager.Callback() {
-                @Override
-                public void onSuccess(AccountInfo accountInfo) {
-                    ChatRoomHelper.enterRoom(anchorMode);
-                }
 
-                @Override
-                public void onFailed(int code, String errorMsg) {
-
-                }
-            });
-        } else {
-            ChatRoomHelper.enterRoom(anchorMode);
-        }
     }
 
     @Override
