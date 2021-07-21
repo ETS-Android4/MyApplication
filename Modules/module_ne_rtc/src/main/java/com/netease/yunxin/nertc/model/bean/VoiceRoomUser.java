@@ -18,17 +18,17 @@ public class VoiceRoomUser implements Serializable {
     /**
      * 账号
      */
-    public final String account;
+    private final String account;
 
     /**
      * 昵称
      */
-    public final String nick;
+    private final String nick;
 
     /**
      * 头像
      */
-    public final String avatar;
+    private final String avatar;
 
     public VoiceRoomUser(String account, String nick, String avatar) {
         this.account = account;

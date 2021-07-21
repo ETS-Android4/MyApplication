@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,6 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.MessageListAdapter;
@@ -189,9 +192,14 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
 
         mSeatLayoutManager = new GridLayoutManager(this, 4);
         mSeatRecyclerView.setLayoutManager(mSeatLayoutManager);
-        mRoomSeatAdapter = new RoomSeatAdapter(this);
+        mRoomSeatAdapter = new RoomSeatAdapter();
         mSeatRecyclerView.setAdapter(mRoomSeatAdapter);
-        mRoomSeatAdapter.setItemClickListener(this::onSeatItemClick);
+        mRoomSeatAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+
+            }
+        });
 
         mMsgLayoutManager = new LinearLayoutManager(this);
         mMsgRecyclerView.setLayoutManager(mMsgLayoutManager);
@@ -316,7 +324,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
      */
     @Override
     public void onUpdateSeats(List<VoiceRoomSeat> seats) {
-        mRoomSeatAdapter.setItems(seats);
+        mRoomSeatAdapter.setNewInstance(seats);
     }
 
     /**
@@ -326,7 +334,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
      */
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
-        mRoomSeatAdapter.updateItem(seat.getIndex(), seat);
+        mRoomSeatAdapter.notifyItemChanged(seat.getIndex(), seat);
     }
 
     /**
