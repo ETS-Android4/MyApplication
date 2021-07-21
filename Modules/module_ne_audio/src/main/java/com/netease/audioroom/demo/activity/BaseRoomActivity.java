@@ -203,7 +203,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
 
         mMsgLayoutManager = new LinearLayoutManager(this);
         mMsgRecyclerView.setLayoutManager(mMsgLayoutManager);
-        mMsgAdapter = new MessageListAdapter(null, this);
+        mMsgAdapter = new MessageListAdapter();
         mMsgRecyclerView.setAdapter(mMsgAdapter);
     }
 
@@ -282,8 +282,8 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
      */
     @Override
     public void onAnchorInfo(VoiceRoomUser user) {
-        ivAnchorAvatar.loadAvatar(user.avatar);
-        tvAnchorNick.setText(user.nick);
+        ivAnchorAvatar.loadAvatar(user.getAvatar());
+        tvAnchorNick.setText(user.getNick());
     }
 
     /**
@@ -366,7 +366,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
      */
     @Override
     public void onVoiceRoomMessage(VoiceRoomMessage message) {
-        mMsgAdapter.appendItem(message);
+        mMsgAdapter.addData(message);
         mMsgLayoutManager.scrollToPosition(mMsgAdapter.getItemCount() - 1);
     }
 

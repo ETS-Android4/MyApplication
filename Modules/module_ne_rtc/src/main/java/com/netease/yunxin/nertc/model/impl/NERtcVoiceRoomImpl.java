@@ -151,7 +151,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         @Override
         public void onJoinChannel(int result, long channelId, long elapsed) {
             if (anchorMode && voiceRoomInfo.isSupportCDN()) {
-                getStreamTaskControl().addStreamTask(accountToVoiceUid(user.account), voiceRoomInfo.getStreamConfig().pushUrl);
+                getStreamTaskControl().addStreamTask(accountToVoiceUid(user.getAccount()), voiceRoomInfo.getStreamConfig().pushUrl);
             }
             Log.e("NERtcVoiceRoomImpl", "join channel result code is " + result);
             onEnterRoom(result == NERtcConstants.ErrorCode.OK || result == NERtcConstants.ErrorCode.ENGINE_ERROR_ROOM_ALREADY_JOINED);
@@ -383,8 +383,8 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     public void enterRoom(final boolean anchorMode) {
         this.anchorMode = anchorMode;
         EnterChatRoomData roomData = new EnterChatRoomData(voiceRoomInfo.getRoomId());
-        roomData.setNick(user.nick);
-        roomData.setAvatar(user.avatar);
+        roomData.setNick(user.getNick());
+        roomData.setAvatar(user.getAvatar());
         InvocationFuture<EnterChatRoomResultData> future = anchorMode ? chatRoomService.enterChatRoom(roomData) : chatRoomService.enterChatRoomEx(roomData, 1);
         future.setCallback(new RequestCallback<EnterChatRoomResultData>() {
             @Override
@@ -682,7 +682,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         } else {
             stopLocalAudio();
         }
-        int result = engine.joinChannel(null, voiceRoomInfo.getRoomId(), accountToVoiceUid(user.account));
+        int result = engine.joinChannel(null, voiceRoomInfo.getRoomId(), accountToVoiceUid(user.getAccount()));
         Log.e("====>", "join channel code is " + result);
         if (result != 0) {
             if (roomCallback != null) {
@@ -813,7 +813,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             }
             case ChatRoomRoomDeMuted: {
                 if (!anchorMode) {
-                    roomQuery.fetchMember(user.account, new SuccessCallback<ChatRoomMember>() {
+                    roomQuery.fetchMember(user.getAccount(), new SuccessCallback<ChatRoomMember>() {
                         @Override
                         public void onSuccess(ChatRoomMember member) {
                             if (member != null) {
@@ -827,7 +827,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             case ChatRoomMemberTempMuteAdd: {
                 ChatRoomTempMuteAddAttachment muteAdd = (ChatRoomTempMuteAddAttachment) notification;
                 if (!anchorMode) {
-                    if (muteAdd.getTargets().contains(user.account)) {
+                    if (muteAdd.getTargets().contains(user.getAccount())) {
                         audience.muteText(true);
                     }
                 }
@@ -836,7 +836,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             case ChatRoomMemberTempMuteRemove: {
                 ChatRoomTempMuteRemoveAttachment muteRemove = (ChatRoomTempMuteRemoveAttachment) notification;
                 if (!anchorMode) {
-                    if (muteRemove.getTargets().contains(user.account)) {
+                    if (muteRemove.getTargets().contains(user.getAccount())) {
                         audience.muteText(false);
                     }
                 }
@@ -955,7 +955,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         if (roomCallback != null) {
             VoiceRoomMessage msg = event
                     ? VoiceRoomMessage.createEventMessage(text)
-                    : VoiceRoomMessage.createTextMessage(user.nick, text);
+                    : VoiceRoomMessage.createTextMessage(user.getNick(), text);
             roomCallback.onVoiceRoomMessage(msg);
         }
     }

@@ -24,7 +24,7 @@ public class BaseRecycleAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
     protected void convert(@NonNull BaseViewHolder holder, T t) {
         ImageView ivAccount = holder.findView(R.id.iv_account);
         TextView tvContent = holder.findView(R.id.tv_content);
-        if (tvContent != null && ivAccount != null ) {
+        if (tvContent != null && ivAccount != null) {
             if (t instanceof String) {
                 //菜单
                 tvContent.setGravity(Gravity.CENTER);
@@ -43,8 +43,8 @@ public class BaseRecycleAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
                     ivAccount.setVisibility(View.VISIBLE);
                     ImageLoader.with(getContext()).commonLoad(member.getAvatar(), ivAccount);
                     tvContent.setText(member.getNick() + "\t申请麦位(" + seat.getIndex() + 1 + ")");
-                    holder.setVisible(R.id.iv_refuse,true);
-                    holder.setVisible(R.id.iv_agree,true);
+                    holder.setVisible(R.id.iv_refuse, true);
+                    holder.setVisible(R.id.iv_agree, true);
                 }
             }
         }

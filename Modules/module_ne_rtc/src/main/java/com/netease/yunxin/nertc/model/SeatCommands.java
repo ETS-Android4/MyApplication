@@ -23,8 +23,8 @@ public class SeatCommands {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put(SeatCommandDef.COMMAND, SeatCommandDef.APPLY_SEAT);
             jsonObject.put(SeatCommandDef.INDEX, seat.getIndex());
-            jsonObject.put(SeatCommandDef.NICK, user.nick);
-            jsonObject.put(SeatCommandDef.AVATAR, user.avatar);
+            jsonObject.put(SeatCommandDef.NICK, user.getNick());
+            jsonObject.put(SeatCommandDef.AVATAR, user.getAvatar());
             content = jsonObject.toString();
         } catch (JSONException ex) {
             ex.printStackTrace();
@@ -34,7 +34,7 @@ public class SeatCommands {
         CustomNotification notification = new CustomNotification();
         notification.setSessionId(voiceRoomInfo.getCreatorAccount());
         notification.setSessionType(SessionTypeEnum.P2P);
-        notification.setFromAccount(user.account);
+        notification.setFromAccount(user.getAccount());
         notification.setContent(content);
         return notification;
     }
@@ -53,7 +53,7 @@ public class SeatCommands {
         CustomNotification notification = new CustomNotification();
         notification.setSessionId(voiceRoomInfo.getCreatorAccount());
         notification.setSessionType(SessionTypeEnum.P2P);
-        notification.setFromAccount(user.account);
+        notification.setFromAccount(user.getAccount());
         notification.setContent(content);
         return notification;
     }
@@ -72,7 +72,7 @@ public class SeatCommands {
         CustomNotification notification = new CustomNotification();
         notification.setSessionId(voiceRoomInfo.getCreatorAccount());
         notification.setSessionType(SessionTypeEnum.P2P);
-        notification.setFromAccount(user.account);
+        notification.setFromAccount(user.getAccount());
         notification.setContent(content);
         return notification;
     }

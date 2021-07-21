@@ -273,7 +273,7 @@ public class AudienceImpl implements Audience {
     }
 
     public void initSeats(@NonNull List<VoiceRoomSeat> seats) {
-        List<VoiceRoomSeat> userSeats = VoiceRoomSeat.find(seats, user.account);
+        List<VoiceRoomSeat> userSeats = VoiceRoomSeat.find(seats, user.getAccount());
         for (VoiceRoomSeat seat : userSeats) {
             if (seat != null && seat.isOn()) {
                 mySeat = seat;
@@ -299,7 +299,7 @@ public class AudienceImpl implements Audience {
         }
 
         // others
-        if (!seat.isSameAccount(user.account)) {
+        if (!seat.isSameAccount(user.getAccount())) {
             // my seat is 'STATUS_NORMAL' by other
             if (seat.getStatus() == Status.ON
                     && mySeat != null && mySeat.isSameIndex(seat)) {
@@ -366,7 +366,7 @@ public class AudienceImpl implements Audience {
     private void onEnterSeat(VoiceRoomSeat seat, boolean last) {
         mySeat = seat;
         if (voiceRoomInfo.isSupportCDN()) {
-            voiceRoom.getPushTypeSwitcher().toRTC(voiceRoomInfo, Long.parseLong(user.account));
+            voiceRoom.getPushTypeSwitcher().toRTC(voiceRoomInfo, Long.parseLong(user.getAccount()));
         }
         voiceRoom.startLocalAudio();
         if (voiceRoom.isLocalMicMute()) {
