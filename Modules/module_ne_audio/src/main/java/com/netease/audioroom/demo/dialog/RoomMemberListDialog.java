@@ -137,7 +137,6 @@ public class RoomMemberListDialog extends BaseRecyclerDialogFragment<VoiceRoomUs
         ChatRoomHelper.fetchMembersByMuted(new SuccessCallback<List<VoiceRoomUser>>() {
             @Override
             public void onSuccess(List<VoiceRoomUser> members) {
-
                 if (CollectionUtils.isNotEmpty(members)) {
                     mAdapter.setNewInstance(members);
                 } else {

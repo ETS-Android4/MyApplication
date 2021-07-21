@@ -5,12 +5,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ToastUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.william.my.module.router.ARouterPath;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.R;
@@ -60,18 +63,18 @@ public class ChatRoomListActivity extends BaseActivity {
     private void initViews() {
         mEmptyView = findViewById(R.id.tv_empty);
 
-        roomListAdapter = new RoomListAdapter(this);
-        roomListAdapter.setItemClickListener((model, position) -> {
-            //当前帐号创建的房间
-            model.setAudioQuality(DEFAULT_QUALITY);
-
-            if (TextUtils.equals(DemoCache.getAccountId(), model.getCreatorAccount())) {
-                AnchorRoomActivity.start(this, model);//主播
-            } else {
-                AudienceRoomActivity.start(this, model);//观众
+        roomListAdapter = new RoomListAdapter();
+        roomListAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                VoiceRoomInfo info = (VoiceRoomInfo) adapter.getData().get(position);
+                if (TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount())) {
+                    AnchorRoomActivity.start(ChatRoomListActivity.this, info);//主播
+                } else {
+                    AudienceRoomActivity.start(ChatRoomListActivity.this, info);//观众
+                }
             }
         });
-
         mRecyclerView = findViewById(R.id.rv_room_list);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mRecyclerView.setAdapter(roomListAdapter);
@@ -106,7 +109,7 @@ public class ChatRoomListActivity extends BaseActivity {
                     @Override
                     public void onSuccess(ArrayList<VoiceRoomInfo> voiceRoomInfos) {
                         dataSource.addAll(voiceRoomInfos);
-                        roomListAdapter.refreshList(dataSource);
+                        roomListAdapter.setNewInstance(dataSource);
                         showEmptyView();
                     }
 

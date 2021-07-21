@@ -1,6 +1,5 @@
 package com.netease.audioroom.demo.adapter;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
