@@ -17,7 +17,7 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 public class BaseRecycleAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
 
     public BaseRecycleAdapter() {
-        super(R.layout.item_base_recycle);
+        super(R.layout.item_room_member);
     }
 
     @Override

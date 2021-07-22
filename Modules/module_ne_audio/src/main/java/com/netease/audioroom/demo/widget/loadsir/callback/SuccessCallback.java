@@ -3,7 +3,6 @@ package com.netease.audioroom.demo.widget.loadsir.callback;
 import android.content.Context;
 import android.view.View;
 
-
 public class SuccessCallback extends BaseCallback {
     public SuccessCallback(View view, Context context, OnReloadListener onReloadListener) {
         super(view, context, onReloadListener);

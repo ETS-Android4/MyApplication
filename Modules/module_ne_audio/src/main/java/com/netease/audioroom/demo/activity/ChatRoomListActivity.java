@@ -57,7 +57,7 @@ public class ChatRoomListActivity extends BaseActivity {
         //}
         initViews();
 
-        onNetwork();
+        login();
     }
 
     private void initViews() {
@@ -86,7 +86,7 @@ public class ChatRoomListActivity extends BaseActivity {
     }
 
     // not need every time login. im auto login when network change
-    private void onNetwork() {
+    private void login() {
         ChatHelper.loginIM(new ChatLoginManager.Callback() {
             @Override
             public void onSuccess(AccountInfo accountInfo) {

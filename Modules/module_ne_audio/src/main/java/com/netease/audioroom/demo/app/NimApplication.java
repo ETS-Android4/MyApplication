@@ -11,11 +11,7 @@ import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.receiver.NetworkConnectChangedReceiver;
 import com.netease.audioroom.demo.util.Network;
 import com.netease.audioroom.demo.util.NetworkUtils;
-import com.netease.audioroom.demo.widget.loadsir.callback.EmptyChatRoomListCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.EmptyMuteRoomListCallback;
 import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.NetErrCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.TimeoutCallback;
 import com.netease.audioroom.demo.widget.loadsir.core.LoadSir;
 import com.netease.yunxin.android.lib.network.common.NetworkClient;
 
@@ -41,11 +37,6 @@ public class NimApplication implements IComponentApplication {
         //同一页面初始化
         LoadSir.beginBuilder()
                 .addCallback(new FailureCallback())
-                .addCallback(new EmptyChatRoomListCallback())
-                .addCallback(new NetErrCallback())
-                .addCallback(new TimeoutCallback())
-                .addCallback(new EmptyChatRoomListCallback())
-                .addCallback(new EmptyMuteRoomListCallback())
                 .setDefaultCallback(FailureCallback.class)
                 .commit();
 
