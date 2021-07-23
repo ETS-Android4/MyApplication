@@ -23,7 +23,7 @@ include ':modules:module_jetpack'
 include ':modules:module_kotlin'
 include ':modules:module_sample'
 
-include ':modules:module_ne_rtc'
+include ':modules:module_ne_voiceroom'
 include ':modules:module_ne_audio'
 
 //include ':modules:module_flutter'
