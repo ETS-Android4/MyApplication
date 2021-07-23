@@ -18,8 +18,8 @@ import com.netease.yunxin.voiceroom.model.constant.ChatRoomInfoExtKey;
 import com.netease.yunxin.voiceroom.model.custom.command.StreamRestartedAttach;
 import com.netease.yunxin.voiceroom.model.interfaces.Anchor;
 import com.netease.yunxin.voiceroom.model.interfaces.SeatCommandDef;
-import com.netease.yunxin.voiceroom.util.RequestCallbackEx;
-import com.netease.yunxin.voiceroom.util.SuccessCallback;
+import com.netease.yunxin.voiceroom.model.callback.RequestCallbackEx;
+import com.netease.yunxin.voiceroom.model.callback.SuccessCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,6 +104,11 @@ public class AnchorImpl implements Anchor {
                 super.onSuccess(param);
             }
         });
+    }
+
+    @Override
+    public void jumpSeatApply(VoiceRoomSeat fromSeat, VoiceRoomSeat toSeat, RequestCallback<Void> callback) {
+
     }
 
     @Override

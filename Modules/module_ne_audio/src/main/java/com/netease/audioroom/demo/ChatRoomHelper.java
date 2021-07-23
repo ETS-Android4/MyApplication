@@ -15,7 +15,7 @@ import com.netease.yunxin.voiceroom.model.interfaces.Audience;
 import com.netease.yunxin.voiceroom.model.interfaces.AudiencePlay;
 import com.netease.yunxin.voiceroom.model.interfaces.NERtcVoiceRoom;
 import com.netease.yunxin.voiceroom.model.interfaces.NERtcVoiceRoomDef;
-import com.netease.yunxin.voiceroom.util.SuccessCallback;
+import com.netease.yunxin.voiceroom.model.callback.SuccessCallback;
 
 import java.util.List;
 

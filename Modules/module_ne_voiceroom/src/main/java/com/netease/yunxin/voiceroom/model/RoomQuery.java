@@ -8,8 +8,8 @@ import com.netease.nimlib.sdk.chatroom.model.ChatRoomMember;
 import com.netease.nimlib.sdk.chatroom.model.MemberOption;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
-import com.netease.yunxin.voiceroom.util.ConvertCallback;
-import com.netease.yunxin.voiceroom.util.ConvertCallback.Converter;
+import com.netease.yunxin.voiceroom.model.callback.ConvertCallback;
+import com.netease.yunxin.voiceroom.model.callback.ConvertCallback.Converter;
 
 import java.util.ArrayList;
 import java.util.List;

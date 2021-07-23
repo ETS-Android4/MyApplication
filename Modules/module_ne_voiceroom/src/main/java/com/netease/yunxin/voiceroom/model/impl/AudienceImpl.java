@@ -22,8 +22,8 @@ import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Status;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
 import com.netease.yunxin.voiceroom.model.interfaces.Audience;
 import com.netease.yunxin.voiceroom.model.interfaces.AudiencePlay;
-import com.netease.yunxin.voiceroom.util.DoneCallback;
-import com.netease.yunxin.voiceroom.util.RequestCallbackEx;
+import com.netease.yunxin.voiceroom.model.callback.DoneCallback;
+import com.netease.yunxin.voiceroom.model.callback.RequestCallbackEx;
 
 import java.util.List;
 

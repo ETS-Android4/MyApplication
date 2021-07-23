@@ -60,7 +60,7 @@ import com.netease.yunxin.voiceroom.model.interfaces.NERtcVoiceRoomDef.AccountMa
 import com.netease.yunxin.voiceroom.model.interfaces.NERtcVoiceRoomDef.RoomCallback;
 import com.netease.yunxin.voiceroom.model.interfaces.PushTypeSwitcher;
 import com.netease.yunxin.voiceroom.model.interfaces.StreamTaskControl;
-import com.netease.yunxin.voiceroom.util.SuccessCallback;
+import com.netease.yunxin.voiceroom.model.callback.SuccessCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -248,6 +248,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                     continue;
                 }
                 MsgAttachment attachment = message.getAttachment();
+                // 聊天室通知消息
                 if (attachment instanceof ChatRoomNotificationAttachment) {
                     onNotification((ChatRoomNotificationAttachment) attachment);
                     continue;
@@ -262,7 +263,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                     }
                     return;
                 }
-
                 if (attachment instanceof StreamRestartedAttach) {
                     audience.restartAudioOrNot();
                     return;
@@ -809,20 +809,23 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         initSeatsInfo();
     }
 
+    /**
+     * 聊天室通知消息
+     */
     private void onNotification(final ChatRoomNotificationAttachment notification) {
         switch (notification.getType()) {
-            case ChatRoomQueueChange: {
+            case ChatRoomQueueChange: {//对列变更
                 ChatRoomQueueChangeAttachment queueChange = (ChatRoomQueueChangeAttachment) notification;
                 onQueueChange(queueChange);
                 break;
             }
-            case ChatRoomMemberIn: {
+            case ChatRoomMemberIn: {//成员进入
                 delayHandler.removeMessages(MSG_MEMBER_EXIT);
                 updateRoomInfo();
                 sendRoomEvent(notification.getTargetNicks(), true);
                 break;
             }
-            case ChatRoomMemberExit: {
+            case ChatRoomMemberExit: {//成员退出
                 delayHandler.sendMessageDelayed(delayHandler.obtainMessage(MSG_MEMBER_EXIT, new Runnable() {
                     @Override
                     public void run() {

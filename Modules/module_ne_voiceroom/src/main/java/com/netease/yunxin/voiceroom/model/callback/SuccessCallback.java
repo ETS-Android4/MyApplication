@@ -1,4 +1,4 @@
-package com.netease.yunxin.voiceroom.util;
+package com.netease.yunxin.voiceroom.model.callback;
 
 import com.netease.nimlib.sdk.RequestCallback;
 

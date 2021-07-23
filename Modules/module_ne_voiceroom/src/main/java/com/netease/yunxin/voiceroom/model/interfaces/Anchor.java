@@ -27,6 +27,16 @@ public interface Anchor {
      */
     void denySeatApply(VoiceRoomSeat seat, RequestCallback<Void> callback);
 
+
+    /**
+     * 跳麦
+     *
+     * @param fromSeat {@link VoiceRoomSeat 从 fromSeat 麦位}
+     * @param toSeat   {@link VoiceRoomSeat 跳到 toSeat 麦位}
+     * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}在
+     */
+    void jumpSeatApply(VoiceRoomSeat fromSeat, VoiceRoomSeat toSeat, RequestCallback<Void> callback);
+
     /**
      * 打开麦位
      *

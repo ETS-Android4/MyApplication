@@ -19,7 +19,7 @@ import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
-import com.netease.yunxin.voiceroom.util.SuccessCallback;
+import com.netease.yunxin.voiceroom.model.callback.SuccessCallback;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -25,7 +25,7 @@ import com.netease.yunxin.voiceroom.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
 import com.netease.yunxin.voiceroom.model.interfaces.Anchor;
 import com.netease.yunxin.voiceroom.model.interfaces.NERtcVoiceRoom;
-import com.netease.yunxin.voiceroom.util.SuccessCallback;
+import com.netease.yunxin.voiceroom.model.callback.SuccessCallback;
 
 import org.jetbrains.annotations.NotNull;
 
