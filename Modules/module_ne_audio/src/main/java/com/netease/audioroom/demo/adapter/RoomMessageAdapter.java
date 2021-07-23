@@ -11,9 +11,9 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
 /**
  * 消息列表
  */
-public class MessageListAdapter extends BaseQuickAdapter<VoiceRoomMessage, BaseViewHolder> {
+public class RoomMessageAdapter extends BaseQuickAdapter<VoiceRoomMessage, BaseViewHolder> {
 
-    public MessageListAdapter() {
+    public RoomMessageAdapter() {
         super(R.layout.item_msg_list);
     }
 

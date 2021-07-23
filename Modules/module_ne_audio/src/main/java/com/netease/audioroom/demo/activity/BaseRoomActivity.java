@@ -23,7 +23,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.adapter.MessageListAdapter;
+import com.netease.audioroom.demo.adapter.RoomMessageAdapter;
 import com.netease.audioroom.demo.adapter.RoomSeatAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.cache.DemoCache;
@@ -66,7 +66,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
 
     //消息列表
     protected RecyclerView mMsgRecyclerView;
-    protected MessageListAdapter mMsgAdapter;
+    protected RoomMessageAdapter mMsgAdapter;
     protected LinearLayoutManager mMsgLayoutManager;
 
     //底部操作栏按钮
@@ -203,7 +203,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
 
         mMsgLayoutManager = new LinearLayoutManager(this);
         mMsgRecyclerView.setLayoutManager(mMsgLayoutManager);
-        mMsgAdapter = new MessageListAdapter();
+        mMsgAdapter = new RoomMessageAdapter();
         mMsgRecyclerView.setAdapter(mMsgAdapter);
     }
 

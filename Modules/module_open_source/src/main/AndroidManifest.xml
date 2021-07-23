@@ -3,7 +3,6 @@
     package="com.example.william.my.module.open">
 
     <application>
-        <activity android:name=".activity.BackgroundActivity$LottieActivity"></activity>
         <activity android:name=".OpenSourceActivity" />
         <activity android:name=".activity.MMKVActivity" />
         <activity android:name=".activity.GreenDaoActivity" />
@@ -21,6 +20,7 @@
         <activity android:name=".activity.GSYPlayerActivity" />
         <activity android:name=".activity.ImageSelectorActivity" />
         <activity android:name=".activity.ImmersionBarActivity" />
+        <activity android:name=".activity.LoadSirActivity"/>
         <activity android:name=".activity.LottieActivity" />
         <activity android:name=".activity.PhotoViewActivity" />
         <activity android:name=".activity.PickerViewActivity" />

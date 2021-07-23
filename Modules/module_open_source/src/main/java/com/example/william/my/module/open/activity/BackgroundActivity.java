@@ -27,13 +27,4 @@ public class BackgroundActivity extends BaseActivity {
                 .setSolidColor(ContextCompat.getColor(this, R.color.colorPrimary))
                 .build();
     }
-
-    public static class LottieActivity extends AppCompatActivity {
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_lottie);
-        }
-    }
 }

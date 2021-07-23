@@ -64,7 +64,9 @@ dependencies {
     implementation deps.matisse
     //https://github.com/gyf-dev/ImmersionBar
     implementation deps.immersionbar
-    ///https://github.com/airbnb/lottie-android
+    //https://github.com/KingJA/LoadSir
+    implementation deps.loadsir
+    //https://github.com/airbnb/lottie-android
     implementation deps.lottie
     //https://github.com/chrisbanes/PhotoView
     implementation deps.photoview

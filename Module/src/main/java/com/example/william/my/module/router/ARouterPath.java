@@ -92,6 +92,7 @@ public class ARouterPath {
         public static final String OpenSource_GSYPlayer = "/module_open/gsy_player";
         public static final String OpenSource_ImageSelector = "/module_open/image_picker";
         public static final String OpenSource_ImmersionBar = "/module_open/immersion_bar";
+        public static final String OpenSource_LoadSir = "/module_open/load_sir";
         public static final String OpenSource_Lottie = "/module_open/lottie";
         public static final String OpenSource_PhotoView = "/module_open/photo_view";
         public static final String OpenSource_PickerView = "/module_open/picker_view";
