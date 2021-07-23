@@ -24,8 +24,6 @@ import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.http.ChatRoomNetConstants;
 import com.netease.audioroom.demo.model.AccountInfo;
-import com.netease.audioroom.demo.util.NetworkUtils;
-import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 
 import java.util.ArrayList;
@@ -57,7 +55,7 @@ public class ChatRoomListActivity extends BaseActivity {
         //}
         initViews();
 
-        login();
+        loginIM();
     }
 
     private void initViews() {
@@ -86,7 +84,7 @@ public class ChatRoomListActivity extends BaseActivity {
     }
 
     // not need every time login. im auto login when network change
-    private void login() {
+    private void loginIM() {
         ChatHelper.loginIM(new ChatLoginManager.Callback() {
             @Override
             public void onSuccess(AccountInfo accountInfo) {
@@ -182,7 +180,7 @@ public class ChatRoomListActivity extends BaseActivity {
                         } else {
                             errorMsg = "服务器失败";
                         }
-                        ToastUtils.showShort("创建失败:" + (!NetworkUtils.isNetworkConnected(ChatRoomListActivity.this) ? "网络错误" : errorMsg));
+                        ToastUtils.showShort("创建失败:" + errorMsg);
                     }
                 });
     }

@@ -18,7 +18,6 @@ import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.RoomSeatListDialog;
 import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
-import com.netease.audioroom.demo.util.Network;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -139,11 +138,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
 
                     @Override
                     public void onFailed(int code, String errorMsg) {
-                        if (!Network.getInstance().isConnected()) {
-                            ToastUtils.showShort("网络问题导致房间解散失败");
-                        } else {
-                            ToastUtils.showShort("房间解散失败 " + errorMsg);
-                        }
+                        ToastUtils.showShort("房间解散失败 " + errorMsg);
                         finish();
                     }
                 });

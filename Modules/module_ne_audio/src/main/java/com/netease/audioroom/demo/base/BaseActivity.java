@@ -8,13 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.PermissionUtils;
-import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
-import com.netease.audioroom.demo.widget.loadsir.callback.BaseCallback;
-import com.netease.audioroom.demo.widget.loadsir.callback.FailureCallback;
-import com.netease.audioroom.demo.widget.loadsir.core.LoadService;
-import com.netease.audioroom.demo.widget.loadsir.core.LoadSir;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.StatusCode;

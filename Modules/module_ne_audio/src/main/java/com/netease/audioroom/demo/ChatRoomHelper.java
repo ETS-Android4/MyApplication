@@ -5,10 +5,7 @@ import android.content.Context;
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
-import com.netease.audioroom.demo.util.Network;
 import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoom;
-import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
 import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
@@ -16,6 +13,8 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 import com.netease.yunxin.nertc.model.interfaces.Anchor;
 import com.netease.yunxin.nertc.model.interfaces.Audience;
 import com.netease.yunxin.nertc.model.interfaces.AudiencePlay;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoom;
+import com.netease.yunxin.nertc.model.interfaces.NERtcVoiceRoomDef;
 import com.netease.yunxin.nertc.util.SuccessCallback;
 
 import java.util.List;
@@ -379,9 +378,7 @@ public class ChatRoomHelper {
 
             @Override
             public void onError() {
-                if (Network.getInstance().isConnected()) {
-                    ToastUtils.showShort("主播网络好像出了问题");
-                }
+                ToastUtils.showShort("主播网络好像出了问题");
             }
         });
     }
