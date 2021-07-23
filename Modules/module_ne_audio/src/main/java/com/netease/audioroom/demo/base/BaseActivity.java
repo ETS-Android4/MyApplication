@@ -23,8 +23,6 @@ import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private LoadService<?> loadService;//提示页面
-
     // 权限控制
     private static final String[] LIVE_PERMISSIONS = new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -39,19 +37,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         registerObserver(true);
         setContentView(getContentViewID());
-        loadService = LoadSir.getDefault().register(BaseActivityManager.getInstance().getCurrentActivity());
     }
 
     @Override
     protected void onDestroy() {
         registerObserver(false);
         super.onDestroy();
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
     }
 
     private void registerObserver(boolean register) {
@@ -80,22 +71,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
             }
         }).request();
-    }
-
-    protected void showError() {
-        loadShowCallback(FailureCallback.class);
-    }
-
-    protected void loadSuccess() {
-        if (loadService != null) {
-            loadService.showSuccess();
-        }
-    }
-
-    public void loadShowCallback(Class<? extends BaseCallback> callback) {
-        if (loadService != null) {
-            loadService.showCallback(callback);
-        }
     }
 
     protected static VoiceRoomUser createUser() {

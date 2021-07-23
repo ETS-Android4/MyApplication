@@ -90,14 +90,13 @@ public class ChatRoomListActivity extends BaseActivity {
         ChatHelper.loginIM(new ChatLoginManager.Callback() {
             @Override
             public void onSuccess(AccountInfo accountInfo) {
-                loadSuccess();
                 fetchRoomList();
                 requestLivePermission();
             }
 
             @Override
             public void onFailed(int code, String errorMsg) {
-                loadShowCallback(FailureCallback.class);
+
             }
         });
     }

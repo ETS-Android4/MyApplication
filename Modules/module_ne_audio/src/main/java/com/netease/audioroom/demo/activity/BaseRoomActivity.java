@@ -100,16 +100,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         requestLivePermission();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (Network.getInstance().isConnected()) {
-            loadSuccess();
-        } else {
-            showError();
-        }
-    }
-
     /**
      * 屏蔽返回按键
      */
@@ -240,8 +230,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         if (!success) {
             ToastUtils.showShort("进入聊天室失败");
             finish();
-        } else {
-            loadSuccess();
         }
     }
 

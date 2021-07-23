@@ -59,7 +59,6 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
 
         ChatRoomHelper.enterRoom(false);
 
-        loadSuccess();
         //刷新音频和座位信息
         ChatRoomHelper.restartAudioAndSeat();
 

@@ -54,8 +54,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         super.onCreate(savedInstanceState);
 
         ChatRoomHelper.enterRoom(true);
-
-        loadSuccess();
     }
 
     @Override
@@ -135,7 +133,6 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
 
                     @Override
                     public void onSuccess(BaseResponse<Void> response) {
-                        loadSuccess();
                         ToastUtils.showShort("退出房间成功");
                         finish();
                     }
