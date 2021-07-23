@@ -6,7 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.widget.MessageSpannableStr;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomMessage;
 
 /**
  * 消息列表

@@ -1,6 +1,6 @@
 package com.netease.audioroom.demo.model;
 
-import com.netease.yunxin.nertc.util.JsonUtil;
+import com.netease.yunxin.voiceroom.util.JsonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

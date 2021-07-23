@@ -11,8 +11,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.audioroom.demo.R;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
 
 public class BaseRecycleAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
 

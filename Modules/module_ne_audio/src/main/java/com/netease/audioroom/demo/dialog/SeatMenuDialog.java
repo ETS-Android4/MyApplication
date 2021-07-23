@@ -15,7 +15,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerDialogFragment;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
 
 import java.util.List;
 

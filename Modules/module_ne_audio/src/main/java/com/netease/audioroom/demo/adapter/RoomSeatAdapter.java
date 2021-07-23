@@ -12,10 +12,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.widget.HeadImageView;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Reason;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Reason;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
 
 /**
  * 麦位列表

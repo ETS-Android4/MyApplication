@@ -14,7 +14,7 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.StatusCode;
 import com.netease.nimlib.sdk.auth.AuthServiceObserver;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomUser;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

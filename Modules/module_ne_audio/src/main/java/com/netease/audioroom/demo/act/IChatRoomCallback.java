@@ -1,7 +1,7 @@
 package com.netease.audioroom.demo.act;
 
-import com.netease.yunxin.nertc.model.bean.VoiceRoomMessage;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomMessage;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
 
 import java.util.List;
 

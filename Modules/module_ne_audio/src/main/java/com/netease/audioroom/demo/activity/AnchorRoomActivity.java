@@ -19,10 +19,10 @@ import com.netease.audioroom.demo.dialog.RoomSeatListDialog;
 import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.model.interfaces.Anchor;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.voiceroom.model.interfaces.Anchor;
 
 import java.util.ArrayList;
 import java.util.List;

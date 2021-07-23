@@ -15,12 +15,12 @@ import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.dialog.SeatMenuDialog;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomInfo;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Reason;
-import com.netease.yunxin.nertc.model.bean.VoiceRoomSeat.Status;
-import com.netease.yunxin.nertc.model.interfaces.Audience;
-import com.netease.yunxin.nertc.util.SuccessCallback;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomInfo;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Reason;
+import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Status;
+import com.netease.yunxin.voiceroom.model.interfaces.Audience;
+import com.netease.yunxin.voiceroom.util.SuccessCallback;
 
 import java.util.ArrayList;
 import java.util.List;
