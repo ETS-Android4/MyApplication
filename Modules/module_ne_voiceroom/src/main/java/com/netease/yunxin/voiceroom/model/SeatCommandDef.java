@@ -1,4 +1,4 @@
-package com.netease.yunxin.voiceroom.model.interfaces;
+package com.netease.yunxin.voiceroom.model;
 
 public interface SeatCommandDef {
     /**

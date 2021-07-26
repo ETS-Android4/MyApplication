@@ -20,10 +20,10 @@ import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Reason;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Status;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
-import com.netease.yunxin.voiceroom.model.interfaces.Audience;
-import com.netease.yunxin.voiceroom.model.interfaces.AudiencePlay;
 import com.netease.yunxin.voiceroom.model.callback.DoneCallback;
 import com.netease.yunxin.voiceroom.model.callback.RequestCallbackEx;
+import com.netease.yunxin.voiceroom.model.interfaces.Audience;
+import com.netease.yunxin.voiceroom.model.interfaces.AudiencePlay;
 
 import java.util.List;
 

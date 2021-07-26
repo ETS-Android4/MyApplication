@@ -48,6 +48,7 @@ import com.netease.yunxin.voiceroom.model.bean.VoiceRoomMessage;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Status;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
+import com.netease.yunxin.voiceroom.model.callback.SuccessCallback;
 import com.netease.yunxin.voiceroom.model.constant.ChatRoomInfoExtKey;
 import com.netease.yunxin.voiceroom.model.constant.ChatRoomMsgExtKey;
 import com.netease.yunxin.voiceroom.model.custom.CustomAttachParser;
@@ -60,7 +61,6 @@ import com.netease.yunxin.voiceroom.model.interfaces.NERtcVoiceRoomDef.AccountMa
 import com.netease.yunxin.voiceroom.model.interfaces.NERtcVoiceRoomDef.RoomCallback;
 import com.netease.yunxin.voiceroom.model.interfaces.PushTypeSwitcher;
 import com.netease.yunxin.voiceroom.model.interfaces.StreamTaskControl;
-import com.netease.yunxin.voiceroom.model.callback.SuccessCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;

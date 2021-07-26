@@ -8,14 +8,8 @@ public interface AudioPlay {
      * 设置伴音音量（播放和发送音量）
      *
      * @param volume 混音音量 0-100
-     * @param isKtv  是否ktv
      */
-    void setMixingVolume(int volume, boolean isKtv);
-
-    /**
-     * 获取当前伴音音量
-     */
-    int getMixingVolume(boolean isKtv);
+    void setMixingVolume(int volume);
 
     /**
      * 设置伴音文件

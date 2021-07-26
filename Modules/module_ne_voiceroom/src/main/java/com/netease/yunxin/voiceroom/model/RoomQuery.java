@@ -6,10 +6,9 @@ import com.netease.nimlib.sdk.chatroom.constant.MemberQueryType;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomInfo;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomMember;
 import com.netease.nimlib.sdk.chatroom.model.MemberOption;
+import com.netease.yunxin.voiceroom.model.RoomQuery.ConvertCallback.Converter;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
-import com.netease.yunxin.voiceroom.model.callback.ConvertCallback;
-import com.netease.yunxin.voiceroom.model.callback.ConvertCallback.Converter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,5 +125,42 @@ public final class RoomQuery {
             }
         }
         return false;
+    }
+
+    public static class ConvertCallback<T, S> implements RequestCallback<S> {
+
+        public interface Converter<S, T> {
+            T convert(S param);
+        }
+
+        private final RequestCallback<T> callback;
+
+        private final Converter<S, T> converter;
+
+        public ConvertCallback(RequestCallback<T> callback, Converter<S, T> converter) {
+            this.callback = callback;
+            this.converter = converter;
+        }
+
+        @Override
+        public void onSuccess(S param) {
+            if (callback != null && converter != null) {
+                callback.onSuccess(converter.convert(param));
+            }
+        }
+
+        @Override
+        public void onFailed(int code) {
+            if (callback != null) {
+                callback.onFailed(code);
+            }
+        }
+
+        @Override
+        public void onException(Throwable exception) {
+            if (callback != null) {
+                callback.onException(exception);
+            }
+        }
     }
 }

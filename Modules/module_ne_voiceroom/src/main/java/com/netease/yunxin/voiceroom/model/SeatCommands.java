@@ -9,7 +9,6 @@ import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Reason;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Status;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
-import com.netease.yunxin.voiceroom.model.interfaces.SeatCommandDef;
 import com.netease.yunxin.voiceroom.util.JsonUtil;
 
 import org.json.JSONException;

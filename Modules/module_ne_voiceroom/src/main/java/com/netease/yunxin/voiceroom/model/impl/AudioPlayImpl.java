@@ -25,8 +25,6 @@ class AudioPlayImpl implements AudioPlay {
      */
     private int audioMixingVolume = 50;
 
-    private int ktvAudioMixingVolume = 50;
-
     /**
      * 混音文件
      */
@@ -52,16 +50,6 @@ class AudioPlayImpl implements AudioPlay {
      */
     private String[] effectPaths;
 
-    /**
-     * 是否是KTV唱歌(自己或者他人)
-     */
-    private boolean isKtvSinging;
-
-    /**
-     * 自己是否正在唱歌
-     */
-    private boolean isSinging;
-
     AudioPlayImpl(NERtcEx engine) {
         this.engine = engine;
     }
@@ -72,22 +60,9 @@ class AudioPlayImpl implements AudioPlay {
     }
 
     @Override
-    public void setMixingVolume(int volume, boolean isKtv) {
+    public void setMixingVolume(int volume) {
         engine.setAudioMixingSendVolume(volume);
         engine.setAudioMixingPlaybackVolume(volume);
-        if (isKtv) {
-            ktvAudioMixingVolume = volume;
-        } else {
-            audioMixingVolume = volume;
-        }
-    }
-
-    @Override
-    public int getMixingVolume(boolean isKtv) {
-        if (isKtv) {
-            return ktvAudioMixingVolume;
-        }
-        return audioMixingVolume;
     }
 
     @Override
@@ -123,27 +98,11 @@ class AudioPlayImpl implements AudioPlay {
 
     @Override
     public boolean playOrPauseMixing() {
-        if (!ktvCheck()) {
-            return false;
-        }
         return shiftPlayState();
-    }
-
-    private boolean ktvCheck() {
-        if (isKtvSinging) {
-            if (callback != null) {
-                callback.onError("演唱过程中不支持此操作");
-            }
-            return false;
-        }
-        return true;
     }
 
     @Override
     public boolean playNextMixing() {
-        if (!ktvCheck()) {
-            return false;
-        }
         stopAudioMixing();
         audioMixingIndex = getNextAudioMixingIndex(audioMixingIndex, audioMixingFilePaths);
 
@@ -152,9 +111,6 @@ class AudioPlayImpl implements AudioPlay {
 
     @Override
     public boolean playMixing(int index) {
-        if (!ktvCheck()) {
-            return false;
-        }
         if (isAudioMixingIndexInvalid(index, audioMixingFilePaths)) {
             return false;
         }
@@ -314,10 +270,7 @@ class AudioPlayImpl implements AudioPlay {
         stopAudioMixing();
         audioMixingIndex = 0;
         audioMixingVolume = 50;
-        ktvAudioMixingVolume = 50;
         effectVolume = 50;
-        isKtvSinging = false;
-        isSinging = false;
     }
 
     private static int getNextAudioMixingIndex(int index, @NonNull String[] paths) {
