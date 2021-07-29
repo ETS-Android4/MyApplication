@@ -27,7 +27,7 @@ public class VoiceRoomSeat implements Serializable, Parcelable {
     /**
      * 麦位容量
      */
-    public static final int SEAT_COUNT = 8;
+    public static final int SEAT_COUNT = 9;
 
     public interface Status {
         /**

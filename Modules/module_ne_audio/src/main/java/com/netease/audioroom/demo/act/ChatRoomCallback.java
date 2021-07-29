@@ -16,11 +16,36 @@ public class ChatRoomCallback implements IChatRoomCallback {
 
     @Override
     public void onUpdateSeats(List<VoiceRoomSeat> seats) {
-
+        
     }
 
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
+
+    }
+
+    @Override
+    public void onApplySeats(List<VoiceRoomSeat> seats) {
+
+    }
+
+    @Override
+    public void updateVolume(int index, int volume) {
+
+    }
+
+    @Override
+    public void onSeatMuted() {
+
+    }
+
+    @Override
+    public void onSeatClosed() {
+
+    }
+
+    @Override
+    public void onTextMuted(boolean muted) {
 
     }
 

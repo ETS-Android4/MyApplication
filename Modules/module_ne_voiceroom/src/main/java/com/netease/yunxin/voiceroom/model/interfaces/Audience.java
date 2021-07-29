@@ -3,6 +3,8 @@ package com.netease.yunxin.voiceroom.model.interfaces;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
 
+import java.util.List;
+
 /**
  * 观众操作接口
  */
@@ -28,6 +30,13 @@ public interface Audience {
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
      */
     void leaveSeat(RequestCallback<Void> callback);
+
+    /**
+     * 获取服务器最新成员列表
+     *
+     * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
+     */
+    void fetchSeats(RequestCallback<List<VoiceRoomSeat>> callback);
 
     /**
      * 获取当前麦位

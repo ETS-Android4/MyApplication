@@ -10,6 +10,15 @@ import java.util.List;
  * 主播操作接口
  */
 public interface Anchor {
+
+    /**
+     * 申请上麦
+     *
+     * @param seat     {@link VoiceRoomSeat 麦位}
+     * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
+     */
+    void applySeat(VoiceRoomSeat seat, RequestCallback<Void> callback);
+
     /**
      * 通过上麦请求
      *
@@ -27,7 +36,6 @@ public interface Anchor {
      */
     void denySeatApply(VoiceRoomSeat seat, RequestCallback<Void> callback);
 
-
     /**
      * 跳麦
      *
@@ -36,6 +44,13 @@ public interface Anchor {
      * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}在
      */
     void jumpSeatApply(VoiceRoomSeat mySeat, VoiceRoomSeat toSeat, RequestCallback<Void> callback);
+
+    /**
+     * 下麦
+     *
+     * @param callback {@link com.netease.nimlib.sdk.RequestCallback 回调}
+     */
+    void leaveSeat(RequestCallback<Void> callback);
 
     /**
      * 打开麦位

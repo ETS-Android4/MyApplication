@@ -61,7 +61,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
     //麦位
     protected RecyclerView mSeatRecyclerView;
     protected RoomSeatAdapter mRoomSeatAdapter;
-    protected LinearLayoutManager mSeatLayoutManager;
+    protected GridLayoutManager mSeatLayoutManager;
 
     //消息列表
     protected RecyclerView mMsgRecyclerView;
@@ -180,6 +180,12 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         tvMemberCount.setText(count);
 
         mSeatLayoutManager = new GridLayoutManager(this, 4);
+        mSeatLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position == 0 ? 4 : 1;
+            }
+        });
         mSeatRecyclerView.setLayoutManager(mSeatLayoutManager);
         mRoomSeatAdapter = new RoomSeatAdapter();
         mSeatRecyclerView.setAdapter(mRoomSeatAdapter);
@@ -382,12 +388,11 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
      */
     private static void showVolume(ImageView view, int volume) {
         volume = toStepVolume(volume);
-        //todo
-//        if (volume == 0) {
-//            view.setVisibility(View.INVISIBLE);
-//        } else {
-//            view.setVisibility(View.VISIBLE);
-//        }
+        if (volume == 0) {
+            view.setVisibility(View.INVISIBLE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
     }
 
     private static int toStepVolume(int volume) {

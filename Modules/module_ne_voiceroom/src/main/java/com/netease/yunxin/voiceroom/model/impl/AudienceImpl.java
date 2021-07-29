@@ -22,6 +22,7 @@ import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Status;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomUser;
 import com.netease.yunxin.voiceroom.model.callback.DoneCallback;
 import com.netease.yunxin.voiceroom.model.callback.RequestCallbackEx;
+import com.netease.yunxin.voiceroom.model.callback.SuccessCallback;
 import com.netease.yunxin.voiceroom.model.interfaces.Audience;
 import com.netease.yunxin.voiceroom.model.interfaces.AudiencePlay;
 
@@ -199,6 +200,11 @@ public class AudienceImpl implements Audience {
     }
 
     @Override
+    public void fetchSeats(RequestCallback<List<VoiceRoomSeat>> callback) {
+        voiceRoom.fetchRoomSeats(callback);
+    }
+
+    @Override
     public VoiceRoomSeat getSeat() {
         return mySeat != null ? voiceRoom.getSeat(mySeat.getIndex()) : null;
     }
@@ -269,6 +275,10 @@ public class AudienceImpl implements Audience {
         if (!member.isTempMuted() && !member.isMuted()) {
             muteText(false);
         }
+    }
+
+    public void memberExit(String account) {
+
     }
 
     public void initSeats(@NonNull List<VoiceRoomSeat> seats) {

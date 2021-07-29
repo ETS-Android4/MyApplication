@@ -9,6 +9,7 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.chatroom.ChatRoomMessageBuilder;
 import com.netease.nimlib.sdk.chatroom.ChatRoomService;
 import com.netease.nimlib.sdk.chatroom.model.ChatRoomUpdateInfo;
+import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.yunxin.voiceroom.model.RoomQuery;
 import com.netease.yunxin.voiceroom.model.SeatCommandDef;
 import com.netease.yunxin.voiceroom.model.SeatStatusHelper;
@@ -41,11 +42,21 @@ public class AnchorImpl implements Anchor {
     private final ChatRoomService chatRoomService;
 
     /**
+     * 消息服务
+     */
+    private final MsgService msgService;
+
+    /**
      * 房间信息
      */
     private VoiceRoomInfo voiceRoomInfo;
 
     private RoomQuery roomQuery;
+
+    /**
+     * 当前麦位
+     */
+    private VoiceRoomSeat mySeat;
 
     /**
      * 主播回调
@@ -68,11 +79,17 @@ public class AnchorImpl implements Anchor {
         this.voiceRoom = voiceRoom;
         this.statusRecorder = new SeatStatusHelper(voiceRoom);
         this.chatRoomService = NIMClient.getService(ChatRoomService.class);
+        this.msgService = NIMClient.getService(MsgService.class);
     }
 
     @Override
     public void setCallback(Callback callback) {
         this.callback = callback;
+    }
+
+    @Override
+    public void applySeat(VoiceRoomSeat seat, RequestCallback<Void> callback) {
+
     }
 
     @Override
@@ -107,7 +124,12 @@ public class AnchorImpl implements Anchor {
     }
 
     @Override
-    public void jumpSeatApply(VoiceRoomSeat fromSeat, VoiceRoomSeat toSeat, RequestCallback<Void> callback) {
+    public void jumpSeatApply(VoiceRoomSeat mySeat, VoiceRoomSeat toSeat, RequestCallback<Void> callback) {
+
+    }
+
+    @Override
+    public void leaveSeat(RequestCallback<Void> callback) {
 
     }
 

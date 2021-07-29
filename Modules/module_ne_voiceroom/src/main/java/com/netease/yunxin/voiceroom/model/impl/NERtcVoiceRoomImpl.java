@@ -833,6 +833,8 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
 
                         if (anchorMode) {
                             anchor.memberExit(notification.getOperator());
+                        } else {
+                            audience.memberExit(notification.getOperator());
                         }
                         sendRoomEvent(notification.getTargetNicks(), false);
                     }
@@ -1023,7 +1025,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         Object value = remoteExtension != null ? remoteExtension.get(ChatRoomMsgExtKey.KEY_TYPE) : null;
         return value instanceof Integer && (Integer) value == ChatRoomMsgExtKey.TYPE_EVENT;
     }
-
 
     private static List<VoiceRoomSeat> createSeats() {
         int size = VoiceRoomSeat.SEAT_COUNT;
