@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.william.my.module.router.ARouterPath;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.R;
+import com.netease.audioroom.demo.act.ChatRoomActivity;
 import com.netease.audioroom.demo.adapter.RoomListAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.base.ChatLoginManager;
@@ -66,11 +67,13 @@ public class ChatRoomListActivity extends BaseActivity {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 VoiceRoomInfo info = (VoiceRoomInfo) adapter.getData().get(position);
-                if (TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount())) {
-                    AnchorRoomActivity.start(ChatRoomListActivity.this, info);//主播
-                } else {
-                    AudienceRoomActivity.start(ChatRoomListActivity.this, info);//观众
-                }
+                //if (TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount())) {
+                //    AnchorRoomActivity.start(ChatRoomListActivity.this, info);//主播
+                //} else {
+                //    AudienceRoomActivity.start(ChatRoomListActivity.this, info);//观众
+                //}
+                ChatRoomActivity.start(ChatRoomListActivity.this, info,
+                        TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount()));
             }
         });
         mRecyclerView = findViewById(R.id.rv_room_list);
@@ -166,8 +169,8 @@ public class ChatRoomListActivity extends BaseActivity {
                     public void onSuccess(VoiceRoomInfo roomInfo) {
                         if (roomInfo != null) {
                             roomInfo.setAudioQuality(DEFAULT_QUALITY);
-
-                            AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);
+                            ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, true);
+                            //AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);
                         } else {
                             ToastUtils.showShort(getString(R.string.crate_room_error));
                         }

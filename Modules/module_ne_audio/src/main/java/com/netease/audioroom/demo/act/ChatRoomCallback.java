@@ -16,7 +16,7 @@ public class ChatRoomCallback implements IChatRoomCallback {
 
     @Override
     public void onUpdateSeats(List<VoiceRoomSeat> seats) {
-        
+
     }
 
     @Override

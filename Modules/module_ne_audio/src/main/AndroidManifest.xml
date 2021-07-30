@@ -70,13 +70,14 @@
             android:exported="false"
             android:process=":core" />
 
-        <receiver android:name=".receiver.NetworkConnectChangedReceiver" />
-
         <activity
             android:name=".activity.ChatRoomListActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
+        <activity
+            android:name=".act.ChatRoomActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activity.AnchorRoomActivity"
             android:launchMode="singleTop"

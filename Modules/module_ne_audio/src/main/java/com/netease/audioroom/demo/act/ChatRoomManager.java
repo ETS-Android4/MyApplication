@@ -79,12 +79,10 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
         });
         mNERtcVoiceRoom = NERtcVoiceRoom.sharedInstance(context);
         mNERtcVoiceRoom.init(BuildConfig.NERTC_APP_KEY, callback);
-        mNERtcVoiceRoom.initRoom(roomInfo, createUser());
-    }
-
-    protected static VoiceRoomUser createUser() {
-        AccountInfo accountInfo = DemoCache.getAccountInfo();
-        return new VoiceRoomUser(accountInfo.account, accountInfo.nick, accountInfo.avatar);
+        mNERtcVoiceRoom.initRoom(roomInfo, new VoiceRoomUser(
+                DemoCache.getAccountInfo().account,
+                DemoCache.getAccountInfo().nick,
+                DemoCache.getAccountInfo().avatar));
     }
 
     /**

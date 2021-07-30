@@ -62,8 +62,6 @@
             android:exported="false"
             android:process=":core" />
 
-        <receiver android:name=".receiver.NetworkConnectChangedReceiver" />
-
         <activity
             android:name=".activity.ChatRoomListActivity"
             android:launchMode="singleTop">

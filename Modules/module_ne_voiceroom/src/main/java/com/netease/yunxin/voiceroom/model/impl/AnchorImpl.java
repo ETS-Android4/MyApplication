@@ -42,11 +42,6 @@ public class AnchorImpl implements Anchor {
     private final ChatRoomService chatRoomService;
 
     /**
-     * 消息服务
-     */
-    private final MsgService msgService;
-
-    /**
      * 房间信息
      */
     private VoiceRoomInfo voiceRoomInfo;
@@ -79,7 +74,6 @@ public class AnchorImpl implements Anchor {
         this.voiceRoom = voiceRoom;
         this.statusRecorder = new SeatStatusHelper(voiceRoom);
         this.chatRoomService = NIMClient.getService(ChatRoomService.class);
-        this.msgService = NIMClient.getService(MsgService.class);
     }
 
     @Override
@@ -89,7 +83,20 @@ public class AnchorImpl implements Anchor {
 
     @Override
     public void applySeat(VoiceRoomSeat seat, RequestCallback<Void> callback) {
-
+        boolean ret = approveSeatApply(seat, new SuccessCallback<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mySeat = seat;
+            }
+        });
+        if (!ret) {
+            denySeatApply(seat, new RequestCallbackEx<Void>(callback) {
+                @Override
+                public void onSuccess(Void param) {
+                    mySeat = null;
+                }
+            });
+        }
     }
 
     @Override

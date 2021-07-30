@@ -63,6 +63,10 @@ public final class SeatStatusHelper {
         });
     }
 
+    public void updateSeat(final VoiceRoomSeat mySeat, final VoiceRoomSeat toSeat, final ExecuteAction action) {
+
+    }
+
     public boolean checkSeat(List<VoiceRoomSeat> seats, VoiceRoomSeat seat) {
         if (seats == null) {
             return false;
