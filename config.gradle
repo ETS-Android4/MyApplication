@@ -20,11 +20,10 @@
  **/
 ext {
     config = [
-            minSdkVersion    : 19,
-            targetSdkVersion : 30,
+            minSdk    : 19,
+            targetSdk : 30,
 
-            compileSdkVersion: 30,
-            buildToolsVersion: "30.0.3",
+            compileSdk: 30,
 
             versionCode      : 1000, //4位
             versionName      : "1.0.0", //3或者4位 跟versionCode成对应关系
@@ -32,8 +31,8 @@ ext {
             applicationId    : 'com.example.william.my.application'
     ]
     deps = [
-            gradle             : "4.2.2",//"3.6.0",
-            kotlin_stdlib      : "org.jetbrains.kotlin:kotlin-stdlib:1.5.20",
+            gradle             : "7.0.0",
+            kotlin_stdlib      : "org.jetbrains.kotlin:kotlin-stdlib:1.5.21",
 
             material           : "com.google.android.material:material:1.3.0",
 
@@ -258,8 +257,16 @@ ext {
 //自动添加gradle插件
 project.buildscript.configurations.each { configuration ->
     if (configuration.name == "classpath") {
-        //configuration.dependencies.add(getProject().dependencies.create('com.android.tools.build:gradle:4.2.0'))
-        //configuration.dependencies.add(getProject().dependencies.create('org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31'))
+        //ARouter
+        configuration.dependencies.add(getProject().dependencies.create('com.alibaba:arouter-register:1.0.2'))
+        //greenDao
+        configuration.dependencies.add(getProject().dependencies.create('org.greenrobot:greendao-gradle-plugin:3.3.0'))
+        //bus
+        configuration.dependencies.add(getProject().dependencies.create('com.blankj:bus-gradle-plugin:2.6'))
+        //protobuf
+        configuration.dependencies.add(getProject().dependencies.create('com.google.protobuf:protobuf-gradle-plugin:0.8.16'))
+        //dokitx
+        configuration.dependencies.add(getProject().dependencies.create('com.didichuxing.doraemonkit:dokitx-plugin:3.3.5'))
         //booster
         //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-gradle-plugin:3.1.0'))
         //静态分析工具
@@ -272,28 +279,10 @@ project.buildscript.configurations.each { configuration ->
         //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-transform-shared-preferences:3.1.0'))
         //PNG 图片压缩
         //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-task-compression-pngquant:3.1.0'))
-        //ARouter
-        configuration.dependencies.add(getProject().dependencies.create('com.alibaba:arouter-register:1.0.2'))
-        //greenDao
-        configuration.dependencies.add(getProject().dependencies.create('org.greenrobot:greendao-gradle-plugin:3.3.0'))
-        //bus
-        configuration.dependencies.add(getProject().dependencies.create('com.blankj:bus-gradle-plugin:2.6'))
-        //protobuf
-        configuration.dependencies.add(getProject().dependencies.create('com.google.protobuf:protobuf-gradle-plugin:0.8.16'))
-        //dokitx
-        configuration.dependencies.add(getProject().dependencies.create('com.didichuxing.doraemonkit:dokitx-plugin:3.3.5'))
     }
 }
 
 static def addRepos(RepositoryHandler handler) {
-    /**
-     * central:https://repo1.maven.org/maven2/
-     */
-    //handler.maven { url "https://maven.aliyun.com/repository/central" }
-    /**
-     * jcenter:http://jcenter.bintray.com/
-     */
-    //handler.maven { url "https://maven.aliyun.com/repository/jcenter" }
     /**
      * google
      */
@@ -311,8 +300,8 @@ static def addRepos(RepositoryHandler handler) {
      */
     handler.maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     handler.google()
+    //handler.jcenter() // Warning: this repository is going to shut down soon
     handler.mavenCentral()
-    handler.jcenter() // Warning: this repository is going to shut down soon
 }
 
 ext.addRepos = this.&addRepos
