@@ -24,7 +24,7 @@ public class ChatRoomHelper {
     private static NERtcVoiceRoom mNERtcVoiceRoom;
 
     /**
-     * 直播间初始化
+     * 房间初始化
      */
     public static void initRoom(Context context, VoiceRoomInfo roomInfo, NERtcVoiceRoomDef.RoomCallback callback) {
         NERtcVoiceRoom.setAccountMapper(new NERtcVoiceRoomDef.AccountMapper() {
@@ -57,7 +57,7 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 进入直播间
+     * 进入房间
      *
      * @param anchorMode 是否为主播
      */
@@ -66,7 +66,7 @@ public class ChatRoomHelper {
     }
 
     /**
-     * 离开直播间
+     * 离开房间
      */
     public static void leaveRoom() {
         mNERtcVoiceRoom.leaveRoom();

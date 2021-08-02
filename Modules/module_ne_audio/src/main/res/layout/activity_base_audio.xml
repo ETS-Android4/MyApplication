@@ -13,7 +13,7 @@
     android:paddingEnd="8dp">
 
     <TextView
-        android:id="@+id/tv_chat_room_name"
+        android:id="@+id/tv_room_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="middle"
@@ -41,7 +41,7 @@
         android:id="@+id/tv_room_announcement"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_below="@id/tv_chat_room_name"
+        android:layout_below="@id/tv_room_name"
         android:layout_marginTop="12dp"
         android:background="@drawable/shape_corner_7f000000_r20"
         android:drawablePadding="2dp"
@@ -53,7 +53,7 @@
         android:textSize="12sp"
         app:drawableStartCompat="@drawable/icon_announcement"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_chat_room_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_room_name" />
 
     <TextView
         android:id="@+id/tv_room_member_count"
@@ -150,10 +150,9 @@
             android:id="@+id/recyclerview_seat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
             android:overScrollMode="never"
-            app:layout_constraintTop_toBottomOf="@+id/tv_liver_nick"
-            tools:layout_editor_absoluteX="-104dp" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_liver_nick" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

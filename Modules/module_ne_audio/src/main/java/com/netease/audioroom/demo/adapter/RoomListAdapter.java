@@ -22,7 +22,7 @@ public class RoomListAdapter extends BaseQuickAdapter<VoiceRoomInfo, BaseViewHol
     @Override
     protected void convert(@NonNull BaseViewHolder holder, @NonNull VoiceRoomInfo info) {
         ImageLoader.with(getContext()).load(info.getThumbnail()).error(R.drawable.chat_room_default_bg).into(holder.getView(R.id.iv_chat_room_bg));
-        holder.setText(R.id.tv_chat_room_name, info.getName());
+        holder.setText(R.id.tv_room_name, info.getName());
         holder.setText(R.id.tv_chat_room_member_num, getCurrentCount(info.getOnlineUserCount()));
         holder.setText(R.id.tv_chat_room_anchor_name, info.getNickname());
     }

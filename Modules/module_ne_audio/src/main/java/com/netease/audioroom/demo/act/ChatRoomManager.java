@@ -52,7 +52,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     /**
      * 初始化房间
      */
-    public void initRoom(Activity context, VoiceRoomInfo roomInfo, NERtcVoiceRoomDef.RoomCallback callback) {
+    public void initRoom(Activity context, VoiceRoomInfo roomInfo) {
         NERtcVoiceRoom.setAccountMapper(new NERtcVoiceRoomDef.AccountMapper() {
             @Override
             public long accountToVoiceUid(String account) {
@@ -78,7 +78,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
             }
         });
         mNERtcVoiceRoom = NERtcVoiceRoom.sharedInstance(context);
-        mNERtcVoiceRoom.init(BuildConfig.NERTC_APP_KEY, callback);
+        mNERtcVoiceRoom.init(BuildConfig.NERTC_APP_KEY, this);
         mNERtcVoiceRoom.initRoom(roomInfo, new VoiceRoomUser(
                 DemoCache.getAccountInfo().account,
                 DemoCache.getAccountInfo().nick,
@@ -91,7 +91,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
      * @param anchorMode 是否为主播
      */
     public void enterRoom(boolean anchorMode) {
-
+        mNERtcVoiceRoom.enterRoom(anchorMode);
     }
 
     @Override
@@ -198,15 +198,24 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     // =============================================================================================
     //
 
-    public static void toggleApplySeat() {
+    public void toggleLeaveRoom() {
+        mNERtcVoiceRoom.leaveRoom();
+    }
+
+    public void toggleApplySeat() {
 
     }
 
-    public static void toggleLeaveSeat() {
+    public void toggleLeaveSeat() {
 
     }
 
-    public static void toggleCancelSeatApply() {
+    public void toggleCancelSeatApply() {
 
     }
+
+    public void toggleSendMessage(String content) {
+        mNERtcVoiceRoom.sendMessage(content);
+    }
+
 }

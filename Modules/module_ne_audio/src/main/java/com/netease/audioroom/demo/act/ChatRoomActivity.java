@@ -8,6 +8,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.databinding.ActivityAnchorBinding;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomInfo;
@@ -39,12 +40,20 @@ public class ChatRoomActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_anchor);
 
         mBinding = ActivityAnchorBinding.inflate(getLayoutInflater());
+
         setContentView(mBinding.getRoot());
 
         isAnchorMode = getIntent().getBooleanExtra(EXTRA_VOICE_ANCHOR_MODE, false);
-        mVoiceRoomInfo = getIntent().getParcelableExtra(EXTRA_VOICE_ROOM_INFO);
+        mVoiceRoomInfo = (VoiceRoomInfo) getIntent().getSerializableExtra(EXTRA_VOICE_ROOM_INFO);
 
-        mChatRoomCallback = new ChatRoomCallback(mBinding);
+        Log.e("TAG", "VoiceRoomInfo " + new Gson().toJson(mVoiceRoomInfo));
+
+        mChatRoomCallback = new ChatRoomCallback(this, mBinding, isAnchorMode, mVoiceRoomInfo);
+
+        //聊天室初始化
+        ChatRoomManager.getInstance().initRoom(this, mVoiceRoomInfo);
+        //进入直播间
+        ChatRoomManager.getInstance().enterRoom(isAnchorMode);
     }
 
     @Override

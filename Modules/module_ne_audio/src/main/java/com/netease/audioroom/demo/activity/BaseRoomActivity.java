@@ -121,7 +121,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         tvAnchorNick = baseAudioView.findViewById(R.id.tv_liver_nick);
 
         // 房间信息
-        tvRoomName = baseAudioView.findViewById(R.id.tv_chat_room_name);
+        tvRoomName = baseAudioView.findViewById(R.id.tv_room_name);
         tvAnnouncement = baseAudioView.findViewById(R.id.tv_room_announcement);
         tvAnnouncement.setOnClickListener(v ->
                 ToastUtils.showShort("公告")

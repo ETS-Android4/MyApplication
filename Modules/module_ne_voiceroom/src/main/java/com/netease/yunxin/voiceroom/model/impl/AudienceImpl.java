@@ -239,16 +239,13 @@ public class AudienceImpl implements Audience {
         getAudiencePlay().play(config.rtmpPullUrl);
     }
 
-    public void enterRoom(VoiceRoomInfo voiceRoomInfo,
-                          VoiceRoomUser user,
-                          EnterChatRoomResultData result) {
+    public void enterRoom(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, EnterChatRoomResultData result) {
         this.voiceRoomInfo = voiceRoomInfo;
         this.user = user;
         clearSeats();
         ChatRoomMember member = result.getMember();
         ChatRoomInfo roomInfo = result.getRoomInfo();
-        if (roomInfo.isMute() ||
-                member.isTempMuted() || member.isMuted()) {
+        if (roomInfo.isMute() || member.isTempMuted() || member.isMuted()) {
             muteText(true);
         }
     }
