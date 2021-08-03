@@ -13,11 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.netease.audioroom.demo.ChatRoomHelper;
-import com.netease.audioroom.demo.activity.AnchorRoomActivity;
 import com.netease.audioroom.demo.adapter.RoomMessageAdapter;
 import com.netease.audioroom.demo.adapter.RoomSeatAdapter;
-import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.databinding.ActivityAnchorBinding;
 import com.netease.audioroom.demo.dialog.RoomMuteListDialog;
 import com.netease.audioroom.demo.util.InputUtils;
@@ -92,12 +89,15 @@ public class ChatRoomCallback implements IChatRoomCallback {
 
         if (isAnchorMode) {
             mViewBinding.include.ivRoomMute.setVisibility(View.VISIBLE);
+            mViewBinding.include.ivRoomMore.setVisibility(View.VISIBLE);
         }
         mViewBinding.include.ivRoomMute.setOnClickListener(view -> {
-                    RoomMuteListDialog dialog = new RoomMuteListDialog(mActivity, mVoiceRoomInfo);
-                    dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
-                }
-        );
+            RoomMuteListDialog dialog = new RoomMuteListDialog(mActivity, mVoiceRoomInfo);
+            dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
+        });
+        mViewBinding.include.ivRoomMore.setOnClickListener(view -> {
+
+        });
 
         mViewBinding.include.etInputText.setOnEditorActionListener((v, actionId, event) -> {
             InputUtils.hideSoftInput(mActivity, mViewBinding.include.etInputText);
@@ -131,6 +131,26 @@ public class ChatRoomCallback implements IChatRoomCallback {
         mViewBinding.include.recyclerviewMessage.setLayoutManager(mMsgLayoutManager);
         mMsgAdapter = new RoomMessageAdapter();
         mViewBinding.include.recyclerviewMessage.setAdapter(mMsgAdapter);
+    }
+
+    @Override
+    public void onEnterRoom(boolean success) {
+
+    }
+
+    @Override
+    public void onLeaveRoom() {
+
+    }
+
+    @Override
+    public void onRoomDismiss() {
+
+    }
+
+    @Override
+    public void onOnlineUserCount(int onlineUserCount) {
+
     }
 
     @Override

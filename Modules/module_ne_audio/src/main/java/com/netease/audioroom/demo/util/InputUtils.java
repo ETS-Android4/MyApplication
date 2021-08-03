@@ -1,11 +1,11 @@
 package com.netease.audioroom.demo.util;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 /**
  * 软键盘工具类

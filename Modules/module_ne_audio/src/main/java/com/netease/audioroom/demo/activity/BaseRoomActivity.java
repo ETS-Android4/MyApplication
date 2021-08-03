@@ -69,7 +69,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
     protected LinearLayoutManager mMsgLayoutManager;
 
     //底部操作栏按钮
-    protected ImageView close, audio, mic, mute;
+    protected ImageView close, audio, mic, mute, more;
 
     //聊天框
     protected TextView tvInput;
@@ -153,6 +153,11 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         //     -> 管理员可见
         if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
             mute.setVisibility(View.VISIBLE);
+        }
+        more = findViewById(R.id.iv_room_more);
+        //     -> 管理员可见
+        if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
+            more.setVisibility(View.VISIBLE);
         }
 
         mSeatRecyclerView = baseAudioView.findViewById(R.id.recyclerview_seat);

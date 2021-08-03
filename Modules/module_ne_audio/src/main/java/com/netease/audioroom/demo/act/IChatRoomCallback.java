@@ -8,6 +8,31 @@ import java.util.List;
 public interface IChatRoomCallback {
 
     /**
+     * 进入房间
+     * 进入聊天室和语音通道
+     *
+     * @param success 是否成功
+     */
+    void onEnterRoom(boolean success);
+
+    /**
+     * 离开房间
+     */
+    void onLeaveRoom();
+
+    /**
+     * 房间被解散
+     */
+    void onRoomDismiss();
+
+    /**
+     * 当前在线用户数量更新
+     *
+     * @param onlineUserCount 当前在线用户数量
+     */
+    void onOnlineUserCount(int onlineUserCount);
+
+    /**
      * 更新所有麦位信息
      *
      * @param seats {@link VoiceRoomSeat 麦位}

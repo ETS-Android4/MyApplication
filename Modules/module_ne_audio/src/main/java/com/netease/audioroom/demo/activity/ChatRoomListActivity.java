@@ -1,5 +1,7 @@
 package com.netease.audioroom.demo.activity;
 
+import static com.netease.yunxin.voiceroom.model.interfaces.NERtcVoiceRoomDef.RoomAudioQuality.DEFAULT_QUALITY;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,8 +30,6 @@ import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomInfo;
 
 import java.util.ArrayList;
-
-import static com.netease.yunxin.voiceroom.model.interfaces.NERtcVoiceRoomDef.RoomAudioQuality.DEFAULT_QUALITY;
 
 @Route(path = ARouterPath.NeRtc.Audio)
 public class ChatRoomListActivity extends BaseActivity {
@@ -67,13 +67,13 @@ public class ChatRoomListActivity extends BaseActivity {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 VoiceRoomInfo info = (VoiceRoomInfo) adapter.getData().get(position);
-                //if (TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount())) {
-                //    AnchorRoomActivity.start(ChatRoomListActivity.this, info);//主播
-                //} else {
-                //    AudienceRoomActivity.start(ChatRoomListActivity.this, info);//观众
-                //}
-                ChatRoomActivity.start(ChatRoomListActivity.this, info,
-                        TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount()));
+                if (TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount())) {
+                    AnchorRoomActivity.start(ChatRoomListActivity.this, info);//主播
+                } else {
+                    AudienceRoomActivity.start(ChatRoomListActivity.this, info);//观众
+                }
+                //ChatRoomActivity.start(ChatRoomListActivity.this, info,
+                //        TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount()));
             }
         });
         mRecyclerView = findViewById(R.id.rv_room_list);
@@ -168,9 +168,10 @@ public class ChatRoomListActivity extends BaseActivity {
                     @Override
                     public void onSuccess(VoiceRoomInfo roomInfo) {
                         if (roomInfo != null) {
+                            // 默认音质
                             roomInfo.setAudioQuality(DEFAULT_QUALITY);
-                            ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, true);
-                            //AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);
+                            //ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, true);
+                            AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);
                         } else {
                             ToastUtils.showShort(getString(R.string.crate_room_error));
                         }

@@ -19,8 +19,8 @@ import com.netease.yunxin.voiceroom.model.bean.VoiceRoomInfo;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Reason;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomSeat.Status;
-import com.netease.yunxin.voiceroom.model.interfaces.Audience;
 import com.netease.yunxin.voiceroom.model.callback.SuccessCallback;
+import com.netease.yunxin.voiceroom.model.interfaces.Audience;
 
 import java.util.ArrayList;
 import java.util.List;

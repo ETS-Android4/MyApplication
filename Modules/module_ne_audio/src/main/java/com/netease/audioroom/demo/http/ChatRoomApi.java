@@ -1,5 +1,12 @@
 package com.netease.audioroom.demo.http;
 
+import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ACCOUNT_FETCH;
+import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_CREATE;
+import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_DISSOLVE;
+import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_LIST_FETCH;
+import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_MUTE_ALL;
+import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_RANDOM_TOPIC;
+
 import com.netease.audioroom.demo.http.model.AccountInfoResp;
 import com.netease.audioroom.demo.http.model.RoomInfoResp;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
@@ -9,13 +16,6 @@ import java.util.Map;
 import io.reactivex.Single;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
-
-import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ACCOUNT_FETCH;
-import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_CREATE;
-import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_DISSOLVE;
-import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_LIST_FETCH;
-import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_MUTE_ALL;
-import static com.netease.audioroom.demo.http.ChatRoomNetConstants.URL_ROOM_RANDOM_TOPIC;
 
 public interface ChatRoomApi {
 

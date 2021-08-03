@@ -49,11 +49,6 @@ public class AnchorImpl implements Anchor {
     private RoomQuery roomQuery;
 
     /**
-     * 当前麦位
-     */
-    private VoiceRoomSeat mySeat;
-
-    /**
      * 主播回调
      */
     private Callback callback;
@@ -86,14 +81,14 @@ public class AnchorImpl implements Anchor {
         boolean ret = approveSeatApply(seat, new SuccessCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                mySeat = seat;
+
             }
         });
         if (!ret) {
             denySeatApply(seat, new RequestCallbackEx<Void>(callback) {
                 @Override
                 public void onSuccess(Void param) {
-                    mySeat = null;
+
                 }
             });
         }

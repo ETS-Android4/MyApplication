@@ -1,8 +1,14 @@
 package com.netease.audioroom.demo.act;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 
+import androidx.appcompat.app.AlertDialog;
+
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.BuildConfig;
+import com.netease.audioroom.demo.ChatRoomHelper;
+import com.netease.audioroom.demo.activity.BaseRoomActivity;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.yunxin.voiceroom.model.bean.VoiceRoomInfo;
@@ -33,6 +39,9 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     private IChatRoomCallback mIChatRoomCallback;
 
+    private Activity mActivity;
+    private VoiceRoomInfo mVoiceRoomInfo;
+
     private static NERtcVoiceRoom mNERtcVoiceRoom;
 
     /**
@@ -53,6 +62,8 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
      * 初始化房间
      */
     public void initRoom(Activity context, VoiceRoomInfo roomInfo) {
+        this.mActivity = context;
+        this.mVoiceRoomInfo = roomInfo;
         NERtcVoiceRoom.setAccountMapper(new NERtcVoiceRoomDef.AccountMapper() {
             @Override
             public long accountToVoiceUid(String account) {
@@ -96,17 +107,34 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     @Override
     public void onEnterRoom(boolean success) {
-
+        if (!success) {
+            ToastUtils.showShort("进入聊天室失败");
+            mActivity.finish();
+        }
     }
 
     @Override
     public void onLeaveRoom() {
-
+        mActivity.finish();
     }
 
     @Override
     public void onRoomDismiss() {
-
+        new AlertDialog.Builder(mActivity)
+                .setTitle("通知")
+                .setMessage("该房间已被主播解散")
+                .setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ChatRoomHelper.leaveRoom();
+                        if (mVoiceRoomInfo.isSupportCDN()) {
+                            mActivity.finish();
+                        }
+                    }
+                })
+                .setCancelable(false)
+                .create()
+                .show();
     }
 
     @Override
