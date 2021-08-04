@@ -35,7 +35,6 @@ public class ChatLoginManager {
         }
         Log.i(TAG, "nim login: account = " + accountInfo.account + " token = " + accountInfo.token);
         LoginInfo loginInfo = new LoginInfo(accountInfo.account, accountInfo.token);
-        //AbortableFuture<LoginInfo> future = NIMClient.getService(AuthService.class).login(loginInfo);
         AbortableFuture<LoginInfo> future = NIMSDK.getAuthService().login(loginInfo);
         future.setCallback(new RequestCallback<LoginInfo>() {
             @Override
@@ -81,7 +80,6 @@ public class ChatLoginManager {
     private void login(final AccountInfo accountInfo) {
         Log.i(TAG, "nim login:" + " account = " + accountInfo.account + " token = " + accountInfo.token);
         LoginInfo loginInfo = new LoginInfo(accountInfo.account, accountInfo.token);
-        //AbortableFuture<LoginInfo> future = NIMClient.getService(AuthService.class).login(loginInfo);
         AbortableFuture<LoginInfo> future = NIMSDK.getAuthService().login(loginInfo);
         future.setCallback(new RequestCallback<LoginInfo>() {
             @Override

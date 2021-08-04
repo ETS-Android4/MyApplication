@@ -35,6 +35,7 @@ import com.netease.lava.nertc.sdk.NERtcOption;
 import com.netease.lava.nertc.sdk.NERtcParameters;
 import com.netease.lava.nertc.sdk.stats.NERtcAudioVolumeInfo;
 import com.netease.lava.nertc.sdk.video.NERtcRemoteVideoStreamType;
+import com.netease.nimlib.sdk.AbortableFuture;
 import com.netease.nimlib.sdk.InvocationFuture;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
@@ -396,7 +397,10 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         EnterChatRoomData roomData = new EnterChatRoomData(voiceRoomInfo.getRoomId());
         roomData.setNick(user.getNick());
         roomData.setAvatar(user.getAvatar());
-        InvocationFuture<EnterChatRoomResultData> future = anchorMode ? chatRoomService.enterChatRoom(roomData) : chatRoomService.enterChatRoomEx(roomData, 1);
+        AbortableFuture<EnterChatRoomResultData> future =
+                anchorMode ?
+                chatRoomService.enterChatRoom(roomData) :
+                chatRoomService.enterChatRoomEx(roomData, 1);
         future.setCallback(new RequestCallback<EnterChatRoomResultData>() {
             @Override
             public void onSuccess(EnterChatRoomResultData param) {

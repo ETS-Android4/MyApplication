@@ -4,13 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.netease.audioroom.demo.R;
-import com.netease.audioroom.demo.databinding.ActivityAnchorBinding;
+import com.netease.audioroom.demo.databinding.ActivityBaseAudioBinding;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
 
 public class ChatRoomActivity extends AppCompatActivity {
@@ -31,22 +30,23 @@ public class ChatRoomActivity extends AppCompatActivity {
     private boolean isAnchorMode;
     private VoiceRoomInfo mVoiceRoomInfo;
 
-    public ActivityAnchorBinding mBinding;
+    public ActivityBaseAudioBinding mBinding;
+
     public ChatRoomCallback mChatRoomCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_anchor);
+        //setContentView(R.layout.activity_base_audio);
 
-        mBinding = ActivityAnchorBinding.inflate(getLayoutInflater());
+        // 屏幕常亮
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        mBinding = ActivityBaseAudioBinding.inflate(getLayoutInflater());
 
         setContentView(mBinding.getRoot());
 
         isAnchorMode = getIntent().getBooleanExtra(EXTRA_VOICE_ANCHOR_MODE, false);
         mVoiceRoomInfo = (VoiceRoomInfo) getIntent().getSerializableExtra(EXTRA_VOICE_ROOM_INFO);
-
-        Log.e("TAG", "VoiceRoomInfo " + new Gson().toJson(mVoiceRoomInfo));
 
         mChatRoomCallback = new ChatRoomCallback(this, mBinding, isAnchorMode, mVoiceRoomInfo);
 
@@ -60,7 +60,6 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         ChatRoomManager.getInstance().onActivityAttach(mChatRoomCallback);
-        //ChatRoomManager.getInstance().initRoom(this, mVoiceRoomInfo, mChatRoomCallback);
     }
 
     @Override

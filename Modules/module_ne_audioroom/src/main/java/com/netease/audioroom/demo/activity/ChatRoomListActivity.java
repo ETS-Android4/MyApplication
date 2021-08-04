@@ -19,6 +19,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.william.my.module.router.ARouterPath;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.R;
+import com.netease.audioroom.demo.act.ChatRoomActivity;
 import com.netease.audioroom.demo.adapter.RoomListAdapter;
 import com.netease.audioroom.demo.base.BaseActivity;
 import com.netease.audioroom.demo.base.ChatLoginManager;
@@ -167,8 +168,8 @@ public class ChatRoomListActivity extends BaseActivity {
                         if (roomInfo != null) {
                             // 默认音质
                             roomInfo.setAudioQuality(DEFAULT_QUALITY);
-                            //ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, true);
-                            AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);
+                            ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, true);
+                            //AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);
                         } else {
                             ToastUtils.showShort(getString(R.string.crate_room_error));
                         }

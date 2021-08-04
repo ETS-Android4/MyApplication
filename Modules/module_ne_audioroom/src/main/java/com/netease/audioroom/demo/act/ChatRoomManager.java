@@ -1,9 +1,6 @@
 package com.netease.audioroom.demo.act;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-
-import androidx.appcompat.app.AlertDialog;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.BuildConfig;
@@ -39,9 +36,12 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     private IChatRoomCallback mIChatRoomCallback;
 
     private Activity mActivity;
+    private boolean isAnchorMode;
     private VoiceRoomInfo mVoiceRoomInfo;
 
-    private static NERtcVoiceRoom mNERtcVoiceRoom;
+    private Anchor mAnchor;
+    private Audience mAudience;
+    private NERtcVoiceRoom mNERtcVoiceRoom;
 
     /**
      * 绑定Activity
@@ -101,39 +101,28 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
      * @param anchorMode 是否为主播
      */
     public void enterRoom(boolean anchorMode) {
+        this.isAnchorMode = anchorMode;
+        this.mAudience = mNERtcVoiceRoom.getAudience();
         mNERtcVoiceRoom.enterRoom(anchorMode);
     }
 
+    //
+    // ===
+    //
+
     @Override
     public void onEnterRoom(boolean success) {
-        if (!success) {
-            ToastUtils.showShort("进入聊天室失败");
-            mActivity.finish();
-        }
+        mIChatRoomCallback.onEnterRoom(success);
     }
 
     @Override
     public void onLeaveRoom() {
-        mActivity.finish();
+        mIChatRoomCallback.onLeaveRoom();
     }
 
     @Override
     public void onRoomDismiss() {
-        new AlertDialog.Builder(mActivity)
-                .setTitle("通知")
-                .setMessage("该房间已被主播解散")
-                .setPositiveButton("知道了", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ChatRoomHelper.leaveRoom();
-                        if (mVoiceRoomInfo.isSupportCDN()) {
-                            mActivity.finish();
-                        }
-                    }
-                })
-                .setCancelable(false)
-                .create()
-                .show();
+        mIChatRoomCallback.onRoomDismiss();
     }
 
     @Override
@@ -153,17 +142,17 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     @Override
     public void onOnlineUserCount(int onlineUserCount) {
-
+        mIChatRoomCallback.onOnlineUserCount(onlineUserCount);
     }
 
     @Override
     public void onUpdateSeats(List<VoiceRoomSeat> seats) {
-
+        mIChatRoomCallback.onUpdateSeats(seats);
     }
 
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
-
+        mIChatRoomCallback.onUpdateSeat(seat);
     }
 
     @Override
@@ -178,18 +167,26 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     @Override
     public void onLocalMuteMic(boolean muted) {
-
+        mIChatRoomCallback.onLocalMuteMic(muted);
     }
 
     @Override
     public void onRoomMuteAudio(boolean muted) {
-
+        mIChatRoomCallback.onRoomMuteAudio(muted);
     }
+
+    //
+    // ===
+    //
 
     @Override
     public void onApplySeats(List<VoiceRoomSeat> seats) {
 
     }
+
+    //
+    // ===
+    //
 
     @Override
     public void onSeatApplyDenied(boolean otherOn) {
@@ -225,8 +222,65 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     // =============================================================================================
     //
 
+    /**
+     * 是否上麦状态
+     */
+    public boolean isInChannel() {
+        VoiceRoomSeat seat = mAudience.getSeat();
+        return seat != null && seat.isOn();
+    }
+
+    /**
+     * 离开房间
+     */
     public void toggleLeaveRoom() {
-        mNERtcVoiceRoom.leaveRoom();
+        if (isAnchorMode) {
+            mNERtcVoiceRoom.leaveRoom();
+        } else if (!mVoiceRoomInfo.isSupportCDN()) {
+            mNERtcVoiceRoom.leaveRoom();
+        } else if (isInChannel()) {
+            mNERtcVoiceRoom.leaveRoom();
+        } else {
+            mActivity.finish();
+        }
+    }
+
+    /**
+     * 麦克风是否静音
+     */
+    public boolean isMicClosed() {
+        return mNERtcVoiceRoom.isLocalMicMute();
+    }
+
+    /**
+     * 关闭麦克风
+     */
+    public void toggleCloseLocalMic() {
+        boolean muted = mNERtcVoiceRoom.muteLocalMic(!isMicClosed());
+        if (muted) {
+            ToastUtils.showShort("话筒已关闭");
+        } else {
+            ToastUtils.showShort("话筒已打开");
+        }
+    }
+
+    /**
+     * 房间是否静音
+     */
+    public boolean isRoomAudioMute() {
+        return mNERtcVoiceRoom.isRoomAudioMute();
+    }
+
+    /**
+     * 关闭扬声器
+     */
+    public void toggleCloseRoomAudio() {
+        boolean muted = mNERtcVoiceRoom.muteRoomAudio(!isRoomAudioMute());
+        if (muted) {
+            ToastUtils.showShort("已关闭“聊天室声音”");
+        } else {
+            ToastUtils.showShort("已打开“聊天室声音”");
+        }
     }
 
     public void toggleApplySeat() {

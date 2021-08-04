@@ -33,6 +33,20 @@ public interface IChatRoomCallback {
     void onOnlineUserCount(int onlineUserCount);
 
     /**
+     * 是否关闭麦克风
+     *
+     * @param muted 是否静音
+     */
+    void onLocalMuteMic(boolean muted);
+
+    /**
+     * 是否关闭音频
+     *
+     * @param muted
+     */
+    void onRoomMuteAudio(boolean muted);
+
+    /**
      * 更新所有麦位信息
      *
      * @param seats {@link VoiceRoomSeat 麦位}
