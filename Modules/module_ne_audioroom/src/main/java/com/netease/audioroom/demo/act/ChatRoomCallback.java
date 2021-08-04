@@ -127,6 +127,7 @@ public class ChatRoomCallback implements IChatRoomCallback {
 
         mMsgLayoutManager = new LinearLayoutManager(mActivity);
         mViewBinding.recyclerviewMessage.setLayoutManager(mMsgLayoutManager);
+
         mMsgAdapter = new RoomMessageAdapter();
         mViewBinding.recyclerviewMessage.setAdapter(mMsgAdapter);
     }

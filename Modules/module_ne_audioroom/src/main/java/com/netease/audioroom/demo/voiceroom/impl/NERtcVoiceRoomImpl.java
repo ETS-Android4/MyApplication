@@ -397,10 +397,12 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         EnterChatRoomData roomData = new EnterChatRoomData(voiceRoomInfo.getRoomId());
         roomData.setNick(user.getNick());
         roomData.setAvatar(user.getAvatar());
-        AbortableFuture<EnterChatRoomResultData> future =
-                anchorMode ?
-                chatRoomService.enterChatRoom(roomData) :
-                chatRoomService.enterChatRoomEx(roomData, 1);
+        AbortableFuture<EnterChatRoomResultData> future;
+        if (anchorMode) {
+            future = chatRoomService.enterChatRoom(roomData);
+        } else {
+            future = chatRoomService.enterChatRoomEx(roomData, 1);
+        }
         future.setCallback(new RequestCallback<EnterChatRoomResultData>() {
             @Override
             public void onSuccess(EnterChatRoomResultData param) {

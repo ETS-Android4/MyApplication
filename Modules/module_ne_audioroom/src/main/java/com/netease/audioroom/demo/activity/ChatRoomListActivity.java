@@ -66,12 +66,13 @@ public class ChatRoomListActivity extends BaseActivity {
         roomListAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                VoiceRoomInfo info = (VoiceRoomInfo) adapter.getData().get(position);
-                if (TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount())) {
-                    AnchorRoomActivity.start(ChatRoomListActivity.this, info);//主播
-                } else {
-                    AudienceRoomActivity.start(ChatRoomListActivity.this, info);//观众
-                }
+                VoiceRoomInfo roomInfo = (VoiceRoomInfo) adapter.getData().get(position);
+                ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, true);
+                //if (TextUtils.equals(DemoCache.getAccountId(), info.getCreatorAccount())) {
+                //    AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);//主播
+                //} else {
+                //    AudienceRoomActivity.start(ChatRoomListActivity.this, roomInfo);//观众
+                //}
             }
         });
         mRecyclerView = findViewById(R.id.rv_room_list);
