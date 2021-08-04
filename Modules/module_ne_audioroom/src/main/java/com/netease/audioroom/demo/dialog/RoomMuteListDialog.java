@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -71,6 +72,15 @@ public class RoomMuteListDialog extends BaseRecyclerDialogFragment<VoiceRoomUser
         fetchRoomMute();
 
         fetchRoomMutedMembers();
+    }
+
+    @Override
+    protected View addHeadView() {
+        TextView head = new TextView(getActivity());
+        head.setHeight(SizeUtils.dp2px(48));
+        head.setGravity(Gravity.CENTER);
+        head.setText("禁言成员");
+        return head;
     }
 
     @Override

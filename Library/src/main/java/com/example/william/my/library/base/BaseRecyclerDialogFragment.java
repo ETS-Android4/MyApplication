@@ -51,7 +51,7 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
     }
 
     private void initRecyclerView(@NonNull View view) {
-        mFrameLayout = view.findViewById(R.id.fragment);
+        mFrameLayout = view.findViewById(R.id.head);
         if (addHeadView() != null) {
             mFrameLayout.addView(addHeadView());
         }
@@ -79,12 +79,12 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
         }
     }
 
-    protected void initRecyclerData(Bundle savedInstanceState) {
-
-    }
-
     protected View addHeadView() {
         return null;
+    }
+
+    protected void initRecyclerData(Bundle savedInstanceState) {
+
     }
 
     protected boolean canRefresh() {
