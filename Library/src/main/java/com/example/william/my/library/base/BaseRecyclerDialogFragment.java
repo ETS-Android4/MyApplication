@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +28,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
-        implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener, OnItemLongClickListener {
+        implements OnRefreshLoadMoreListener, OnItemClickListener, OnItemChildClickListener, OnItemLongClickListener {
 
+    private FrameLayout mFrameLayout;
     private RecyclerView mRecyclerView;
     private SmartRefreshLayout mSmartRefreshLayout;
 
@@ -38,7 +40,6 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
     protected int getLayout() {
         return R.layout.basics_fragment_recycler;
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -50,6 +51,10 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
     }
 
     private void initRecyclerView(@NonNull View view) {
+        mFrameLayout = view.findViewById(R.id.fragment);
+        if (addHeadView() != null) {
+            mFrameLayout.addView(addHeadView());
+        }
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mSmartRefreshLayout = view.findViewById(R.id.smartRefresh);
 
@@ -76,6 +81,10 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
 
     protected void initRecyclerData(Bundle savedInstanceState) {
 
+    }
+
+    protected View addHeadView() {
+        return null;
     }
 
     protected boolean canRefresh() {
@@ -119,7 +128,6 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
         textView.setGravity(Gravity.CENTER);
         textView.setText(TextUtils.isEmpty(message) ? "暂无数据" : message);
         mAdapter.setEmptyView(textView);
-        mAdapter.notifyDataSetChanged();
         mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
@@ -144,13 +152,13 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
     }
 
     @Override
-    public boolean onItemLongClick(@NonNull @NotNull BaseQuickAdapter adapter, @NonNull @NotNull View view, int position) {
-        return false;
+    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+
     }
 
     @Override
-    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-
+    public boolean onItemLongClick(@NonNull @NotNull BaseQuickAdapter adapter, @NonNull @NotNull View view, int position) {
+        return false;
     }
 
 }

@@ -22,7 +22,9 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.List;
 
-public abstract class BaseRecyclerFragment<T> extends BaseFragment
+public abstract class
+
+BaseRecyclerFragment<T> extends BaseFragment
         implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener {
 
     private SmartRefreshLayout mSmartRefreshLayout;
@@ -109,7 +111,6 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         textView.setGravity(Gravity.CENTER);
         textView.setText("无数据");
         mAdapter.setEmptyView(textView);
-        mAdapter.notifyDataSetChanged();
         mSmartRefreshLayout.setEnableLoadMore(false);
     }
 
