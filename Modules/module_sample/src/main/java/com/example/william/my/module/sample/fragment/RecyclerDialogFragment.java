@@ -74,9 +74,14 @@ public class RecyclerDialogFragment extends BaseRecyclerDialogFragment<ArticleDe
         onDataFail(message);
     }
 
+
     @Override
-    public void showArticles(boolean isFirst, List<ArticleDetailBean> article) {
-        onDataSuccess(isFirst, article);
+    public void showArticles(int page, List<ArticleDetailBean> article) {
+        if (page == 1) {
+            onFetchDataSuccess(article);
+        } else {
+            onLoadDataSuccess(article);
+        }
     }
 
     @Override

@@ -86,8 +86,8 @@ public class MvpFragment extends Fragment implements ArticleContract.View, OnRef
     }
 
     @Override
-    public void showArticles(boolean isFirst, List<ArticleDetailBean> article) {
-        if (isFirst) {
+    public void showArticles(int page, List<ArticleDetailBean> article) {
+        if (page == 0) {
             mAdapter.setNewInstance(article);
         } else {
             mAdapter.addData(article);

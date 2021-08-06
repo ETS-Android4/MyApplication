@@ -43,7 +43,7 @@ public class ArticlePresenter implements ArticleContract.Presenter {
 
             @Override
             public void onArticleLoaded(List<ArticleDetailBean> articles) {
-                mArticleView.showArticles(mPage == 0, articles);
+                mArticleView.showArticles(mPage, articles);
             }
 
             @Override

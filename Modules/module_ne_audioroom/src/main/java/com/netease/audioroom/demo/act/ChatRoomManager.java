@@ -4,15 +4,16 @@ import android.app.Activity;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.BuildConfig;
-import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomMessage;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomUser;
+import com.netease.audioroom.demo.voiceroom.impl.AudiencePlayImpl;
 import com.netease.audioroom.demo.voiceroom.interfaces.Anchor;
 import com.netease.audioroom.demo.voiceroom.interfaces.Audience;
+import com.netease.audioroom.demo.voiceroom.interfaces.AudiencePlay;
 import com.netease.audioroom.demo.voiceroom.interfaces.NERtcVoiceRoom;
 import com.netease.audioroom.demo.voiceroom.interfaces.NERtcVoiceRoomDef;
 
@@ -41,6 +42,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     private Anchor mAnchor;
     private Audience mAudience;
+    private AudiencePlay mLivePlayer;
     private NERtcVoiceRoom mNERtcVoiceRoom;
 
     /**
@@ -104,6 +106,17 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
         this.isAnchorMode = anchorMode;
         this.mAudience = mNERtcVoiceRoom.getAudience();
         mNERtcVoiceRoom.enterRoom(anchorMode);
+        //主播就在音视频频道，所以不需要初始化播放器
+        if (!anchorMode) {
+            initPlayer();
+        }
+    }
+
+    /**
+     * 初始化播放器
+     */
+    private void initPlayer() {
+        mLivePlayer = new AudiencePlayImpl();
     }
 
     //
@@ -176,7 +189,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     }
 
     //
-    // ===
+    // === Anchor
     //
 
     @Override
@@ -185,7 +198,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     }
 
     //
-    // ===
+    // === Audience
     //
 
     @Override

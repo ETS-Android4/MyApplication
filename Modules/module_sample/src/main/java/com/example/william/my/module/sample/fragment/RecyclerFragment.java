@@ -74,8 +74,12 @@ public class RecyclerFragment extends BaseRecyclerFragment<ArticleDetailBean> im
     }
 
     @Override
-    public void showArticles(boolean isFirst, List<ArticleDetailBean> article) {
-        onDataSuccess(isFirst, article);
+    public void showArticles(int page, List<ArticleDetailBean> article) {
+        if (page == 0) {
+            onFetchDataSuccess(article);
+        } else {
+            onLoadDataSuccess(article);
+        }
     }
 
     @Override

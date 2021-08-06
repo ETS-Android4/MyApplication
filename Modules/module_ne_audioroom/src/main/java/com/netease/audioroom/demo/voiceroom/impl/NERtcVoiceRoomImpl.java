@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.blankj.utilcode.util.GsonUtils;
 import com.netease.audioroom.demo.voiceroom.RoomQuery;
 import com.netease.audioroom.demo.voiceroom.SeatCommands;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
@@ -24,6 +25,7 @@ import com.netease.audioroom.demo.voiceroom.custom.command.CloseRoomAttach;
 import com.netease.audioroom.demo.voiceroom.custom.command.StreamRestartedAttach;
 import com.netease.audioroom.demo.voiceroom.interfaces.Anchor;
 import com.netease.audioroom.demo.voiceroom.interfaces.Audience;
+import com.netease.audioroom.demo.voiceroom.interfaces.AudioPlay;
 import com.netease.audioroom.demo.voiceroom.interfaces.NERtcVoiceRoom;
 import com.netease.audioroom.demo.voiceroom.interfaces.NERtcVoiceRoomDef.AccountMapper;
 import com.netease.audioroom.demo.voiceroom.interfaces.NERtcVoiceRoomDef.RoomCallback;
@@ -196,6 +198,28 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             }
         }
 
+        /**
+         * 通知混音状态
+         * 0 播放完成
+         * 1 播放出错
+         */
+        @Override
+        public void onAudioMixingStateChanged(int reason) {
+            if (audioPlay != null) {
+                audioPlay.onAudioMixingStateChanged(reason);
+            }
+        }
+
+        /**
+         * 通知音效播放完成
+         */
+        @Override
+        public void onAudioEffectFinished(int effectId) {
+            if (audioPlay != null) {
+                audioPlay.onAudioEffectFinished(effectId);
+            }
+        }
+
         @Override
         public void onUserVideoStart(long uid, int maxProfile) {
             super.onUserVideoStart(uid, maxProfile);
@@ -225,6 +249,8 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     private final AnchorImpl anchor = new AnchorImpl(this);
 
     private final AudienceImpl audience = new AudienceImpl(this);
+
+    private AudioPlayImpl audioPlay;
 
     private StreamTaskControl streamTaskControl;
 
@@ -533,7 +559,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         return audioCaptureVolume;
     }
 
-
     @Override
     public boolean muteRoomAudio(boolean mute) {
         muteRoomAudio = mute;
@@ -571,6 +596,14 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     @Override
     public void sendMessage(String text) {
         sendMessage(text, false);
+    }
+
+    @Override
+    public AudioPlay getAudioPlay() {
+        if (audioPlay == null) {
+            audioPlay = new AudioPlayImpl(engine);
+        }
+        return audioPlay;
     }
 
     @Override
@@ -703,6 +736,10 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     private void onLeaveRoom() {
+        if (audioPlay!=null){
+            audioPlay.reset();
+        }
+
         engine.release();
         restoreInstanceInfo();
 

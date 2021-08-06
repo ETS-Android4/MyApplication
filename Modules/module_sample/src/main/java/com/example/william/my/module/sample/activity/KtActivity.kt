@@ -61,10 +61,10 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
             if (it.code == State.LOADING) {
                 showLoading()
             } else if (it.code == State.SUCCESS) {
-                if (!it.data?.datas.isNullOrEmpty()) {
-                    showArticles(it.data?.curPage == 1, it.data!!.datas)
+                if (!it.data.datas.isNullOrEmpty()) {
+                    showArticles(it.data.curPage, it.data.datas)
                 } else {
-                    onDataNotAvailable(it.data?.curPage == 1)
+                    onDataNotAvailable(it.data.curPage == 0)
                 }
             } else if (it.code == State.ERROR) {
                 showToast(it.message)
@@ -90,8 +90,8 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         mBinding.smartRefresh.setEnableLoadMore(false)
     }
 
-    private fun showArticles(isFirst: Boolean, articles: MutableList<ArticleDetailBean>) {
-        if (isFirst) {
+    private fun showArticles(page: Int, articles: MutableList<ArticleDetailBean>) {
+        if (page == 0) {
             mAdapter.setNewInstance(articles)
         } else {
             mAdapter.addData(articles)

@@ -106,13 +106,18 @@ public abstract class BaseRecyclerDialogFragment<T> extends BaseDialogFragment
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    protected void onDataSuccess(boolean isFirst, List<T> list) {
+    protected void onFetchDataSuccess(List<T> list) {
         if (list != null && !list.isEmpty()) {
-            if (isFirst) {
-                mAdapter.setNewInstance(list);
-            } else {
-                mAdapter.addData(list);
-            }
+            mAdapter.setNewInstance(list);
+            mSmartRefreshLayout.setEnableLoadMore(true);
+        } else {
+            mSmartRefreshLayout.setEnableLoadMore(false);
+        }
+    }
+
+    protected void onLoadDataSuccess(List<T> list) {
+        if (list != null && !list.isEmpty()) {
+            mAdapter.addData(list);
             mSmartRefreshLayout.setEnableLoadMore(true);
         } else {
             mSmartRefreshLayout.setEnableLoadMore(false);

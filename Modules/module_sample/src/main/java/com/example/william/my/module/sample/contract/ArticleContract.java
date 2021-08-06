@@ -10,7 +10,7 @@ public interface ArticleContract {
 
     interface View extends IBaseView<Presenter> {
 
-        void showArticles(boolean isFirst, List<ArticleDetailBean> article);
+        void showArticles(int page, List<ArticleDetailBean> article);
 
         void showEmptyView();
 

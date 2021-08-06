@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * 播放器实现类
  */
-class AudiencePlayImpl implements AudiencePlay {
+public class AudiencePlayImpl implements AudiencePlay {
 
     /**
      * 播放器实例

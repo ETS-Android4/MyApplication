@@ -62,6 +62,7 @@ public class AudienceImpl implements Audience {
     /**
      * cdn 模式下播放器控制
      */
+    @Deprecated
     private final AudiencePlay audiencePlay = new AudiencePlayImpl();
 
     private final SeatStatusHelper statusRecorder;
@@ -208,6 +209,7 @@ public class AudienceImpl implements Audience {
         return mySeat != null ? voiceRoom.getSeat(mySeat.getIndex()) : null;
     }
 
+    @Deprecated
     @Override
     public AudiencePlay getAudiencePlay() {
         return audiencePlay;
@@ -219,6 +221,7 @@ public class AudienceImpl implements Audience {
     }
 
     // wifi 2 4G  if enter room async delay, may be npe
+    @Deprecated
     @Override
     public void restartAudioOrNot() {
         if (voiceRoomInfo == null) {

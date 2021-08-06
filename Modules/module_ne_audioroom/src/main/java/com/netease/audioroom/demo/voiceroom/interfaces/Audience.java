@@ -50,11 +50,13 @@ public interface Audience {
      *
      * @return {@link AudiencePlay 观众播放器控制}
      */
+    @Deprecated
     AudiencePlay getAudiencePlay();
 
     /**
      * 根据当前是否在CDN模式下以及是否在麦位上决定是否重新通过播放器拉流
      */
+    @Deprecated
     void restartAudioOrNot();
 
     /**
