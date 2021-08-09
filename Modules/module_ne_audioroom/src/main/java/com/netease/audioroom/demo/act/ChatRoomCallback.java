@@ -13,15 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.RoomMessageAdapter;
 import com.netease.audioroom.demo.adapter.RoomSeatAdapter;
 import com.netease.audioroom.demo.databinding.ActivityBaseAudioBinding;
-import com.netease.audioroom.demo.dialog.RoomMuteListDialog;
+import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomMessage;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatRoomCallback implements IChatRoomCallback {
@@ -121,7 +123,18 @@ public class ChatRoomCallback implements IChatRoomCallback {
         mRoomSeatAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-
+                VoiceRoomSeat seat = (VoiceRoomSeat) adapter.getData().get(position);
+                if (seat.getStatus() == VoiceRoomSeat.Status.APPLY) {
+                    ToastUtils.showShort(mActivity.getString(R.string.applying_now));
+                } else {
+                    SeatMenuDialog dialog;
+                    if (isAnchorMode) {
+                        dialog = new SeatMenuDialog(mActivity, seat, createAnchorMenuItem(seat));
+                    } else {
+                        dialog = new SeatMenuDialog(mActivity, seat, createAudienceMenuItem(seat));
+                    }
+                    dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
+                }
             }
         });
 
@@ -193,7 +206,7 @@ public class ChatRoomCallback implements IChatRoomCallback {
     }
 
     @Override
-    public void updateVolume(int index, int volume) {
+    public void onUpdateVolume(int index, int volume) {
 
     }
 
@@ -215,5 +228,67 @@ public class ChatRoomCallback implements IChatRoomCallback {
     @Override
     public void onVoiceRoomMessage(VoiceRoomMessage message) {
 
+    }
+
+    private List<String> createAnchorMenuItem(VoiceRoomSeat seat) {
+        List<String> menus = new ArrayList<>();
+        switch (seat.getStatus()) {
+            // 抱观众上麦（点击麦位）
+            case VoiceRoomSeat.Status.INIT:
+                menus.add("上麦");
+                menus.add("将成员抱上麦位");
+                menus.add("屏蔽麦位");
+                menus.add("关闭麦位");
+                break;
+            // 当前存在有效用户
+            case VoiceRoomSeat.Status.ON:
+                // 当前麦位已经关闭
+            case VoiceRoomSeat.Status.AUDIO_CLOSED:
+                menus.add("将TA踢下麦位");
+                menus.add("屏蔽麦位");
+                break;
+            // 当前麦位已经被关闭
+            case VoiceRoomSeat.Status.CLOSED:
+                menus.add("打开麦位");
+                break;
+            // 且当前麦位无人，麦位禁麦触发
+            case VoiceRoomSeat.Status.FORBID:
+                menus.add("将成员抱上麦位");
+                menus.add("解除语音屏蔽");
+                break;
+            // 当前麦位已经禁麦或已经关闭
+            case VoiceRoomSeat.Status.AUDIO_MUTED:
+            case VoiceRoomSeat.Status.AUDIO_CLOSED_AND_MUTED:
+                menus.add("将TA踢下麦位");
+                menus.add("解除语音屏蔽");
+                break;
+        }
+        menus.add(mActivity.getString(R.string.cancel));
+        return menus;
+    }
+
+    private List<String> createAudienceMenuItem(VoiceRoomSeat seat) {
+        List<String> menus = new ArrayList<>();
+        switch (seat.getStatus()) {
+            // 抱观众上麦（点击麦位）
+            case VoiceRoomSeat.Status.INIT:
+                menus.add("上麦");
+                menus.add("申请上麦");
+                break;
+            // 当前存在有效用户
+            case VoiceRoomSeat.Status.ON:
+                // 当前麦位已经关闭
+            case VoiceRoomSeat.Status.AUDIO_CLOSED:
+                // 当前麦位已经被关闭
+            case VoiceRoomSeat.Status.CLOSED:
+                // 且当前麦位无人，麦位禁麦触发
+            case VoiceRoomSeat.Status.FORBID:
+                // 当前麦位已经禁麦或已经关闭
+            case VoiceRoomSeat.Status.AUDIO_MUTED:
+            case VoiceRoomSeat.Status.AUDIO_CLOSED_AND_MUTED:
+                break;
+        }
+        menus.add(mActivity.getString(R.string.cancel));
+        return menus;
     }
 }

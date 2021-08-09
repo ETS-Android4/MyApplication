@@ -197,7 +197,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         mRoomSeatAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-
+                onSeatItemClick((VoiceRoomSeat) adapter.getData().get(position), position);
             }
         });
 

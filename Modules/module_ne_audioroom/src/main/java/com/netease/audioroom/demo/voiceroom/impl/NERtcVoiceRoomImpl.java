@@ -9,7 +9,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.blankj.utilcode.util.GsonUtils;
 import com.netease.audioroom.demo.voiceroom.RoomQuery;
 import com.netease.audioroom.demo.voiceroom.SeatCommands;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
@@ -38,7 +37,6 @@ import com.netease.lava.nertc.sdk.NERtcParameters;
 import com.netease.lava.nertc.sdk.stats.NERtcAudioVolumeInfo;
 import com.netease.lava.nertc.sdk.video.NERtcRemoteVideoStreamType;
 import com.netease.nimlib.sdk.AbortableFuture;
-import com.netease.nimlib.sdk.InvocationFuture;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
@@ -736,7 +734,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     private void onLeaveRoom() {
-        if (audioPlay!=null){
+        if (audioPlay != null) {
             audioPlay.reset();
         }
 

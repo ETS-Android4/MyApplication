@@ -70,7 +70,7 @@ public interface IChatRoomCallback {
     /**
      * 更新音量
      */
-    void updateVolume(int index, int volume);
+    void onUpdateVolume(int index, int volume);
 
     /**
      * 麦位被屏蔽语音
