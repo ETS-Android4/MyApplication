@@ -139,7 +139,7 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
             //dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
         });
         mBinding.ivRoomMore.setOnClickListener(view -> {
-
+            ToastUtils.showShort("更多菜单");
         });
 
         mBinding.etInputText.setOnEditorActionListener((v, actionId, event) -> {
@@ -239,7 +239,7 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
 
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
-        Log.e("TAG", "onUpdateSeat" + new Gson().toJson(seat));
+        Log.e("TAG", "onUpdateSeat " + new Gson().toJson(seat));
         mRoomSeatAdapter.notifyItemChanged(seat.getIndex(), seat);
     }
 
@@ -279,6 +279,7 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
             // 抱观众上麦（点击麦位）
             case VoiceRoomSeat.Status.INIT:
                 menus.add("上麦");
+                menus.add("申请上麦");
                 menus.add("将成员抱上麦位");
                 menus.add("屏蔽麦位");
                 menus.add("关闭麦位");

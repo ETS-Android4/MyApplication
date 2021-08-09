@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
 import com.netease.audioroom.demo.voiceroom.SeatCommands;
 import com.netease.audioroom.demo.voiceroom.SeatStatusHelper;
 import com.netease.audioroom.demo.voiceroom.bean.StreamConfig;
@@ -80,6 +81,7 @@ public class AudienceImpl implements Audience {
 
     @Override
     public void applySeat(final VoiceRoomSeat seat, final RequestCallback<Void> callback) {
+        Log.e("TAG", "applySeat: " + new Gson().toJson(seat));
         if (mySeat != null && (mySeat.isOn() || mySeat.getStatus() == Status.APPLY)) {
             if (callback != null) {
                 callback.onFailed(-1);

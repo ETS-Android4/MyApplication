@@ -169,7 +169,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
-        Log.e("TAG", "onUpdateSeat" + new Gson().toJson(seat));
+        Log.e("TAG", "onUpdateSeat " + new Gson().toJson(seat));
         mIChatRoomCallback.onUpdateSeat(seat);
     }
 
