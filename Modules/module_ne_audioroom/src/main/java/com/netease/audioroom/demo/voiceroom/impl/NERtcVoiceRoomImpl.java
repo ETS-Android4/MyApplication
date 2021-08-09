@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
 import com.netease.audioroom.demo.voiceroom.RoomQuery;
 import com.netease.audioroom.demo.voiceroom.SeatCommands;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
@@ -631,6 +632,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
 
     @Override
     public void updateSeat(VoiceRoomSeat seat) {
+        Log.e("TAG", "onUpdateSeat" + new Gson().toJson(seat));
         this.seats.set(seat.getIndex(), seat);
         if (roomCallback != null) {
             roomCallback.onUpdateSeat(seat);
@@ -1001,14 +1003,9 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     private void updateVolumes(Map<Long, Integer> volumes) {
         if (roomCallback != null) {
             boolean enable = !isLocalMicMute() && !isRoomAudioMute();
-            roomCallback.onAnchorVolume(enable
-                    ? getVolume(volumes, voiceRoomInfo.getCreatorAccount())
-                    : 0);
+            roomCallback.onAnchorVolume(enable ? getVolume(volumes, voiceRoomInfo.getCreatorAccount()) : 0);
             for (VoiceRoomSeat seat : seats) {
-                roomCallback.onSeatVolume(seat,
-                        enable && seat.getStatus() == Status.ON
-                                ? getVolume(volumes, seat.getAccount())
-                                : 0);
+                roomCallback.onSeatVolume(seat, enable && seat.getStatus() == Status.ON ? getVolume(volumes, seat.getAccount()) : 0);
             }
         }
     }

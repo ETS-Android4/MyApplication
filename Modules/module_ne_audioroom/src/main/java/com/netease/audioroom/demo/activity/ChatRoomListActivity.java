@@ -67,7 +67,8 @@ public class ChatRoomListActivity extends BaseActivity {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 VoiceRoomInfo roomInfo = (VoiceRoomInfo) adapter.getData().get(position);
-                ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, true);
+                boolean anchorMode = TextUtils.equals(DemoCache.getAccountId(), roomInfo.getCreatorAccount());
+                ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, anchorMode);
                 //if (TextUtils.equals(DemoCache.getAccountId(), roomInfo.getCreatorAccount())) {
                 //    AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);//主播
                 //} else {

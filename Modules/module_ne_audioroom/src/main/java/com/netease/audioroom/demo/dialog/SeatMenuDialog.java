@@ -10,12 +10,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.blankj.utilcode.util.SizeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerDialogFragment;
 import com.netease.audioroom.demo.ChatRoomHelper;
+import com.netease.audioroom.demo.act.ChatRoomManager;
 import com.netease.audioroom.demo.adapter.BaseRecycleAdapter;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
+import com.netease.audioroom.demo.voiceroom.callback.SuccessCallback;
 
 import java.util.List;
 
@@ -72,6 +75,17 @@ public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
 
     private void onSeatAction(VoiceRoomSeat seat, @NonNull String item) {
         switch (item) {
+            case "上麦":
+                ToastUtils.showShort("上麦");
+                break;
+            case "申请上麦":
+                ChatRoomManager.getInstance().toggleApplySeat(seat, new SuccessCallback<Void>() {
+                    @Override
+                    public void onSuccess(Void param) {
+                        ToastUtils.showShort("已申请上麦");
+                    }
+                });
+                break;
             case "将成员抱上麦位":
                 RoomMemberListDialog dialog = new RoomMemberListDialog(seat);
                 dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());

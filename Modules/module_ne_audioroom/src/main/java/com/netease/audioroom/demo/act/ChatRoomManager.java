@@ -1,8 +1,10 @@
 package com.netease.audioroom.demo.act;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.gson.Gson;
 import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
@@ -10,12 +12,14 @@ import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomMessage;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomUser;
+import com.netease.audioroom.demo.voiceroom.callback.SuccessCallback;
 import com.netease.audioroom.demo.voiceroom.impl.AudiencePlayImpl;
 import com.netease.audioroom.demo.voiceroom.interfaces.Anchor;
 import com.netease.audioroom.demo.voiceroom.interfaces.Audience;
 import com.netease.audioroom.demo.voiceroom.interfaces.AudiencePlay;
 import com.netease.audioroom.demo.voiceroom.interfaces.NERtcVoiceRoom;
 import com.netease.audioroom.demo.voiceroom.interfaces.NERtcVoiceRoomDef;
+import com.netease.nimlib.sdk.RequestCallback;
 
 import java.util.List;
 
@@ -24,14 +28,14 @@ import java.util.List;
  */
 public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.Callback, Audience.Callback {
 
-    private static final ChatRoomManager instance = new ChatRoomManager();
+    private static final ChatRoomManager INSTANCE = new ChatRoomManager();
 
     private ChatRoomManager() {
 
     }
 
     public static ChatRoomManager getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     private IChatRoomCallback mIChatRoomCallback;
@@ -165,6 +169,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
+        Log.e("TAG", "onUpdateSeat" + new Gson().toJson(seat));
         mIChatRoomCallback.onUpdateSeat(seat);
     }
 
@@ -238,7 +243,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     /**
      * 是否上麦状态
      */
-    public boolean isInChannel() {
+    private boolean isInChannel() {
         VoiceRoomSeat seat = mAudience.getSeat();
         return seat != null && seat.isOn();
     }
@@ -296,8 +301,49 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
         }
     }
 
-    public void toggleApplySeat() {
+    /**
+     * 是否可以上麦
+     */
+    private boolean checkSeat() {
+        VoiceRoomSeat seat = mAudience.getSeat();
+        if (seat != null) {
+            if (seat.getStatus() == VoiceRoomSeat.Status.CLOSED) {
+                ToastUtils.showShort("麦位已关闭");
+            } else if (seat.isOn()) {
+                ToastUtils.showShort("您已在麦上");
+            } else {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
 
+    /**
+     * 申请上麦
+     *
+     * @param seat
+     * @param callback
+     */
+    public void toggleApplySeat(VoiceRoomSeat seat, SuccessCallback<Void> callback) {
+        if (checkSeat()) {
+            mAudience.applySeat(seat, new RequestCallback<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    callback.onSuccess(aVoid);
+                }
+
+                @Override
+                public void onFailed(int i) {
+                    ToastUtils.showShort("请求连麦失败 ， code = " + i);
+                }
+
+                @Override
+                public void onException(Throwable throwable) {
+                    ToastUtils.showShort("请求连麦异常 ， e = " + throwable);
+                }
+            });
+        }
     }
 
     public void toggleLeaveSeat() {
