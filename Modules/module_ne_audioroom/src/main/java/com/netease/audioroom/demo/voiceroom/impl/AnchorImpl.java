@@ -1,9 +1,11 @@
 package com.netease.audioroom.demo.voiceroom.impl;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
 import com.netease.audioroom.demo.voiceroom.RoomQuery;
 import com.netease.audioroom.demo.voiceroom.SeatCommandDef;
 import com.netease.audioroom.demo.voiceroom.SeatStatusHelper;
@@ -32,6 +34,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * 主播实现类
  */
 public class AnchorImpl implements Anchor {
+
+    private static final String LOG_TAG = AnchorImpl.class.getSimpleName();
 
     private final NERtcVoiceRoomInner voiceRoom;
 
@@ -299,6 +303,8 @@ public class AnchorImpl implements Anchor {
     }
 
     public void command(int command, final VoiceRoomSeat seat) {
+        Log.i(LOG_TAG, "command: command = " + command +
+                " seat = " + new Gson().toJson(seat));
         switch (command) {
             case SeatCommandDef.APPLY_SEAT: {
                 VoiceRoomSeat local = seats.get(seat.getKey());

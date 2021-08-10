@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.netease.audioroom.demo.voiceroom.RoomQuery;
 import com.netease.audioroom.demo.voiceroom.SeatCommands;
 import com.netease.audioroom.demo.voiceroom.SeatStatusHelper;
 import com.netease.audioroom.demo.voiceroom.bean.StreamConfig;
@@ -243,9 +244,12 @@ public class AudienceImpl implements Audience {
         getAudiencePlay().play(config.rtmpPullUrl);
     }
 
-    public void enterRoom(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user, EnterChatRoomResultData result) {
+    public void initRoom(VoiceRoomInfo voiceRoomInfo, VoiceRoomUser user) {
         this.voiceRoomInfo = voiceRoomInfo;
         this.user = user;
+    }
+
+    public void enterRoom(EnterChatRoomResultData result) {
         clearSeats();
         ChatRoomMember member = result.getMember();
         ChatRoomInfo roomInfo = result.getRoomInfo();

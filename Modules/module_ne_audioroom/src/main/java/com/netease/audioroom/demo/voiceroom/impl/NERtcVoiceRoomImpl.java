@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.voiceroom.RoomQuery;
 import com.netease.audioroom.demo.voiceroom.SeatCommands;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
@@ -391,7 +392,9 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     public void init(String appKey, RoomCallback callback) {
         roomCallback = callback;
         NERtcOption option = new NERtcOption();
-        option.logLevel = NERtcConstants.LogLevel.DEBUG;
+        if (BuildConfig.DEBUG) {
+            option.logLevel = NERtcConstants.LogLevel.DEBUG;
+        }
         try {
             engine.init(context, appKey, this.callback, option);
         } catch (Exception e) {
@@ -414,6 +417,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         this.roomQuery = new RoomQuery(voiceRoomInfo, chatRoomService);
 
         anchor.initRoom(voiceRoomInfo);
+        audience.initRoom(voiceRoomInfo, user);
     }
 
     @Override
@@ -431,31 +435,29 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         future.setCallback(new RequestCallback<EnterChatRoomResultData>() {
             @Override
             public void onSuccess(EnterChatRoomResultData param) {
-                Log.e("====>", "enter room success.");
+                Log.e("====>", "enter room success: " + new Gson().toJson(param));
                 if (roomCallback != null) {
                     roomCallback.onOnlineUserCount(param.getRoomInfo().getOnlineUserCount());
-                }
-
-                if (!anchorMode) {
-                    audience.enterRoom(voiceRoomInfo, user, param);
-                } else {
-                    anchor.enterRoom();
-                }
-
-                Boolean mute = isAnchorMute(param.getRoomInfo());
-                if (mute != null) {
-                    if (roomCallback != null) {
+                    Boolean mute = isAnchorMute(param.getRoomInfo());
+                    if (mute != null) {
                         roomCallback.onAnchorMute(mute);
                     }
                 }
 
+                if (anchorMode) {
+                    anchor.enterRoom();
+                }
+                audience.enterRoom(param);
+
                 //主播加入音视频频道，不然无法推流
                 if (anchorMode || !voiceRoomInfo.isSupportCDN()) {
                     joinChannel();
-                } else {
-                    audience.getAudiencePlay().play(voiceRoomInfo.getStreamConfig().rtmpPullUrl);
-                    onEnterRoom(true);
                 }
+                //else {
+                //    audience.getAudiencePlay().play(voiceRoomInfo.getStreamConfig().rtmpPullUrl);
+                //    onEnterRoom(true);
+                //}
+                onEnterRoom(true);
 
                 //初始化麦位信息
                 initSeatsInfo();
@@ -632,7 +634,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
 
     @Override
     public void updateSeat(VoiceRoomSeat seat) {
-        Log.e("TAG", "onUpdateSeat" + new Gson().toJson(seat));
         this.seats.set(seat.getIndex(), seat);
         if (roomCallback != null) {
             roomCallback.onUpdateSeat(seat);

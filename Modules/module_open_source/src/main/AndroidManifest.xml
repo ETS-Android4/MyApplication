@@ -20,7 +20,7 @@
         <activity android:name=".activity.GSYPlayerActivity" />
         <activity android:name=".activity.ImageSelectorActivity" />
         <activity android:name=".activity.ImmersionBarActivity" />
-        <activity android:name=".activity.LoadSirActivity"/>
+        <activity android:name=".activity.LoadSirActivity" />
         <activity android:name=".activity.LottieActivity" />
         <activity android:name=".activity.PhotoViewActivity" />
         <activity android:name=".activity.PickerViewActivity" />

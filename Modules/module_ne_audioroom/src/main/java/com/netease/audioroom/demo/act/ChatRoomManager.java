@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.google.gson.Gson;
 import com.netease.audioroom.demo.BuildConfig;
 import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.model.AccountInfo;
@@ -108,6 +107,9 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
      */
     public void enterRoom(boolean anchorMode) {
         this.isAnchorMode = anchorMode;
+        if (anchorMode) {
+            this.mAnchor = mNERtcVoiceRoom.getAnchor();
+        }
         this.mAudience = mNERtcVoiceRoom.getAudience();
         mNERtcVoiceRoom.enterRoom(anchorMode);
         //主播就在音视频频道，所以不需要初始化播放器
@@ -169,7 +171,6 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
-        Log.e("TAG", "onUpdateSeat " + new Gson().toJson(seat));
         mIChatRoomCallback.onUpdateSeat(seat);
     }
 
@@ -197,9 +198,22 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     // === Anchor
     //
 
+    /**
+     * 自动同意上麦申请
+     *
+     * @param seats {@link VoiceRoomSeat 麦位列表}
+     */
     @Override
     public void onApplySeats(List<VoiceRoomSeat> seats) {
-
+        if (isAnchorMode) {
+            int size = seats != null ? seats.size() : 0;
+            Log.e("TAG", "onApplySeats size: " + size);
+            if (size > 0) {
+                for (VoiceRoomSeat seat : seats) {
+                    toggleApproveSeatApply(seat);
+                }
+            }
+        }
     }
 
     //
@@ -346,11 +360,50 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
         }
     }
 
-    public void toggleLeaveSeat() {
+    /**
+     * 取消申请排麦
+     */
+    public void toggleCancelSeatApply() {
 
     }
 
-    public void toggleCancelSeatApply() {
+    /**
+     * 同意申请排麦
+     */
+    public void toggleApproveSeatApply(VoiceRoomSeat seat) {
+        if (isAnchorMode) {
+            boolean ret = mAnchor.approveSeatApply(seat, new SuccessCallback<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    ToastUtils.showShort("成功通过连麦请求");
+                }
+            });
+            if (!ret) {
+                toggleDenySeatApply(seat);
+            }
+        }
+    }
+
+    /**
+     * 拒绝申请排麦
+     */
+    public void toggleDenySeatApply(VoiceRoomSeat seat) {
+        if (isAnchorMode) {
+            mAnchor.denySeatApply(seat, new SuccessCallback<Void>() {
+                @Override
+                public void onSuccess(Void param) {
+                    VoiceRoomUser user = seat.getUser();
+                    String nick = user != null ? user.getNick() : "";
+                    ToastUtils.showShort("已拒绝“" + nick + "”的申请");
+                }
+            });
+        }
+    }
+
+    /**
+     * 下麦
+     */
+    public void toggleLeaveSeat() {
 
     }
 
