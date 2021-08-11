@@ -3,6 +3,7 @@ package com.netease.audioroom.demo.activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.RoomMessageAdapter;
@@ -87,6 +89,9 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
             finish();
             return;
         }
+
+        Log.e("TAG", "BaseRoomActivity");
+
         //聊天室初始化
         ChatRoomHelper.initRoom(this, mVoiceRoomInfo, this);
 
@@ -335,6 +340,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
      */
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
+        Log.e("TAG", "onUpdateSeat " + new Gson().toJson(seat));
         mRoomSeatAdapter.notifyItemChanged(seat.getIndex(), seat);
     }
 
@@ -355,7 +361,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         }
         View itemView = mSeatRecyclerView.getLayoutManager().findViewByPosition(seat.getIndex());
         if (itemView != null) {
-            ImageView circle = itemView.findViewById(R.id.iv_anchor_circle);
+            ImageView circle = itemView.findViewById(R.id.iv_user_circle);
             showVolume(circle, volume);
         }
     }

@@ -66,6 +66,8 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_base_audio);
 
+        Log.e("TAG", "ChatRoomActivity");
+
         // 屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mBinding = ActivityBaseAudioBinding.inflate(getLayoutInflater());

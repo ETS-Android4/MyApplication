@@ -953,6 +953,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     private void onQueueChange(ChatRoomQueueChangeAttachment queueChange) {
         Log.i(LOG_TAG, "onQueueChange: type = " + queueChange.getChatRoomQueueChangeType() +
                 " key = " + queueChange.getKey() + " content = " + queueChange.getContent());
+        Log.e("TAG", "onQueueChange: " + queueChange.getContent());
         ChatRoomQueueChangeType type = queueChange.getChatRoomQueueChangeType();
         if (type == ChatRoomQueueChangeType.DROP) {
             if (anchorMode) {

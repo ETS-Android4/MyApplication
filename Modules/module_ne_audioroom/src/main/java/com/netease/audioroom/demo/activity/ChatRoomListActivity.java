@@ -16,6 +16,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.listener.OnItemLongClickListener;
 import com.example.william.my.module.router.ARouterPath;
 import com.netease.audioroom.demo.ChatHelper;
 import com.netease.audioroom.demo.R;
@@ -68,12 +69,20 @@ public class ChatRoomListActivity extends BaseActivity {
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 VoiceRoomInfo roomInfo = (VoiceRoomInfo) adapter.getData().get(position);
                 boolean anchorMode = TextUtils.equals(DemoCache.getAccountId(), roomInfo.getCreatorAccount());
+                if (anchorMode) {
+                    AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);//主播
+                } else {
+                    AudienceRoomActivity.start(ChatRoomListActivity.this, roomInfo);//观众
+                }
+            }
+        });
+        roomListAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                VoiceRoomInfo roomInfo = (VoiceRoomInfo) adapter.getData().get(position);
+                boolean anchorMode = TextUtils.equals(DemoCache.getAccountId(), roomInfo.getCreatorAccount());
                 ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, anchorMode);
-                //if (TextUtils.equals(DemoCache.getAccountId(), roomInfo.getCreatorAccount())) {
-                //    AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);//主播
-                //} else {
-                //    AudienceRoomActivity.start(ChatRoomListActivity.this, roomInfo);//观众
-                //}
+                return true;
             }
         });
         mRecyclerView = findViewById(R.id.rv_room_list);
@@ -82,7 +91,12 @@ public class ChatRoomListActivity extends BaseActivity {
 
         View toCreate = findViewById(R.id.iv_new_live);
         toCreate.setOnClickListener(v ->
-                getRandomName()
+                getRandomName(false)
+        );
+        toCreate.setOnLongClickListener(v -> {
+                    getRandomName(true);
+                    return true;
+                }
         );
     }
 
@@ -134,13 +148,13 @@ public class ChatRoomListActivity extends BaseActivity {
     /**
      * 生成随机名
      */
-    private void getRandomName() {
+    private void getRandomName(boolean re) {
         ChatRoomHttpClient.getInstance().getRandomTopic(new ChatRoomHttpClient.ChatRoomHttpCallback<String>() {
 
             @Override
             public void onSuccess(String s) {
                 if (s != null) {
-                    createRoom(s, ChatRoomNetConstants.PUSH_TYPE_CDN);
+                    createRoom(s, re);
                 }
             }
 
@@ -155,13 +169,12 @@ public class ChatRoomListActivity extends BaseActivity {
      * 创建直播间
      *
      * @param roomName
-     * @param pushType ChatRoomNetConstants.PUSH_TYPE_RTC / ChatRoomNetConstants.PUSH_TYPE_CDN
      */
-    private void createRoom(String roomName, int pushType) {
+    private void createRoom(String roomName, boolean re) {
         ChatRoomHttpClient.getInstance().createRoom(
                 DemoCache.getAccountId(),
                 roomName,
-                pushType,
+                ChatRoomNetConstants.PUSH_TYPE_CDN,
                 ChatRoomNetConstants.ROOM_TYPE_CHAT,
                 new ChatRoomHttpClient.ChatRoomHttpCallback<VoiceRoomInfo>() {
 
@@ -170,8 +183,11 @@ public class ChatRoomListActivity extends BaseActivity {
                         if (roomInfo != null) {
                             // 默认音质
                             roomInfo.setAudioQuality(DEFAULT_QUALITY);
-                            ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, true);
-                            //AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);
+                            if (!re) {
+                                AnchorRoomActivity.start(ChatRoomListActivity.this, roomInfo);
+                            } else {
+                                ChatRoomActivity.start(ChatRoomListActivity.this, roomInfo, true);
+                            }
                         } else {
                             ToastUtils.showShort(getString(R.string.crate_room_error));
                         }
