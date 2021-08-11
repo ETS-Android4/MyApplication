@@ -47,7 +47,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
     public static final String EXTRA_VOICE_ROOM_INFO = "extra_voice_room_info";
 
     //主播信息
-    protected ConstraintLayout mAnchorView;
     protected HeadImageView ivAnchorAvatar;
     protected ImageView ivAnchorCircle;
     protected ImageView ivAnchorAudio;
@@ -69,7 +68,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
     protected LinearLayoutManager mMsgLayoutManager;
 
     //底部操作栏按钮
-    protected ImageView close, audio, mic, mute, more;
+    protected ImageView close, audio, mic, mute, more, apply;
 
     //聊天框
     protected TextView tvInput;
@@ -114,11 +113,10 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         }
 
         // 主播信息
-        mAnchorView = baseAudioView.findViewById(R.id.cl_anchor_layout);
-        ivAnchorAvatar = baseAudioView.findViewById(R.id.iv_liver_avatar);
-        ivAnchorCircle = baseAudioView.findViewById(R.id.iv_circle);
-        ivAnchorAudio = baseAudioView.findViewById(R.id.iv_liver_audio);
-        tvAnchorNick = baseAudioView.findViewById(R.id.tv_liver_nick);
+        ivAnchorAvatar = baseAudioView.findViewById(R.id.iv_anchor_avatar);
+        ivAnchorCircle = baseAudioView.findViewById(R.id.iv_anchor_circle);
+        ivAnchorAudio = baseAudioView.findViewById(R.id.iv_anchor_audio);
+        tvAnchorNick = baseAudioView.findViewById(R.id.tv_anchor_nick);
 
         // 房间信息
         tvRoomName = baseAudioView.findViewById(R.id.tv_room_name);
@@ -158,6 +156,11 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         //     -> 管理员可见
         if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
             more.setVisibility(View.VISIBLE);
+        }
+        apply = findViewById(R.id.iv_room_apply);
+        //     -> 管理员可见
+        if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
+            apply.setVisibility(View.VISIBLE);
         }
 
         mSeatRecyclerView = baseAudioView.findViewById(R.id.recyclerview_seat);
@@ -352,7 +355,7 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         }
         View itemView = mSeatRecyclerView.getLayoutManager().findViewByPosition(seat.getIndex());
         if (itemView != null) {
-            ImageView circle = itemView.findViewById(R.id.iv_liver_circle);
+            ImageView circle = itemView.findViewById(R.id.iv_anchor_circle);
             showVolume(circle, volume);
         }
     }

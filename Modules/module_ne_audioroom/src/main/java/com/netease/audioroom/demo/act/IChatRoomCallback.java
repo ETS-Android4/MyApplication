@@ -2,6 +2,7 @@ package com.netease.audioroom.demo.act;
 
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomMessage;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
+import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomUser;
 
 import java.util.List;
 
@@ -24,6 +25,27 @@ public interface IChatRoomCallback {
      * 房间被解散
      */
     void onRoomDismiss();
+
+    /**
+     * 主播信息更新
+     *
+     * @param user {@link VoiceRoomSeat 资料信息}
+     */
+    void onAnchorInfo(VoiceRoomUser user);
+
+    /**
+     * 主播静音状态
+     *
+     * @param muted 是否静音
+     */
+    void onAnchorMute(boolean muted);
+
+    /**
+     * 主播说话音量
+     *
+     * @param volume 说话音量0-100
+     */
+    void onAnchorVolume(int volume);
 
     /**
      * 当前在线用户数量更新

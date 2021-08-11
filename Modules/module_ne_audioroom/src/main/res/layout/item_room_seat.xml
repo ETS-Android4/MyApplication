@@ -8,16 +8,16 @@
     tools:viewBindingIgnore="true">
 
     <View
-        android:id="@+id/avatar_bg"
+        android:id="@+id/frame"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/shape_circle_ffffffff"
+        android:background="@drawable/shape_circle_white"
         android:src="@drawable/nim_avatar_default"
         android:visibility="visible" />
 
     <ImageView
-        android:id="@+id/iv_circle"
+        android:id="@+id/iv_user_circle"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
@@ -28,10 +28,10 @@
         android:id="@+id/iv_user_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/avatar_bg"
-        android:layout_alignTop="@id/avatar_bg"
-        android:layout_alignEnd="@id/avatar_bg"
-        android:layout_alignBottom="@id/avatar_bg"
+        android:layout_alignStart="@id/frame"
+        android:layout_alignTop="@id/frame"
+        android:layout_alignEnd="@id/frame"
+        android:layout_alignBottom="@id/frame"
         android:layout_margin="1dp"
         android:visibility="visible" />
 
@@ -41,12 +41,12 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:background="@drawable/shape_circle_7f000000"
+        android:background="@drawable/shape_circle_black_80"
         android:scaleType="center"
         tools:src="@drawable/seat_add_member" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lav_apply"
+        android:id="@+id/lottie_apply"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
@@ -56,7 +56,7 @@
         app:lottie_rawRes="@raw/apply_seat" />
 
     <ImageView
-        android:id="@+id/iv_user_status_hint"
+        android:id="@+id/iv_user_audio"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_alignEnd="@+id/iv_user_avatar"

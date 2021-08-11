@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -29,6 +30,7 @@ import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomMessage;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
+import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -217,6 +219,22 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
     }
 
     @Override
+    public void onAnchorInfo(VoiceRoomUser user) {
+        mBinding.ivAnchorAvatar.loadAvatar(user.getAvatar());
+        mBinding.tvAnchorNick.setText(user.getNick());
+    }
+
+    @Override
+    public void onAnchorMute(boolean muted) {
+        mBinding.ivAnchorAudio.setImageResource(muted ? R.drawable.icon_seat_close_micro : R.drawable.icon_mic);
+    }
+
+    @Override
+    public void onAnchorVolume(int volume) {
+        showVolume(mBinding.ivAnchorCircle, volume);
+    }
+
+    @Override
     public void onOnlineUserCount(int onlineUserCount) {
         String count = "在线" + onlineUserCount + "人";
         mBinding.tvRoomMemberCount.setText(count);
@@ -273,12 +291,37 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
 
     }
 
+    /**
+     * 显示音量
+     */
+    private static void showVolume(ImageView view, int volume) {
+        volume = toStepVolume(volume);
+        if (volume == 0) {
+            view.setVisibility(View.INVISIBLE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private static int toStepVolume(int volume) {
+        int step = 0;
+        volume /= 40;
+        while (volume > 0) {
+            step++;
+            volume /= 2;
+        }
+        if (step > 8) {
+            step = 8;
+        }
+        return step;
+    }
+
     private List<String> createAnchorMenuItem(VoiceRoomSeat seat) {
         List<String> menus = new ArrayList<>();
         switch (seat.getStatus()) {
             // 抱观众上麦（点击麦位）
             case VoiceRoomSeat.Status.INIT:
-                menus.add("上麦");
+                //menus.add("上麦");
                 menus.add("申请上麦");
                 menus.add("将成员抱上麦位");
                 menus.add("屏蔽麦位");
@@ -316,7 +359,7 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
         switch (seat.getStatus()) {
             // 抱观众上麦（点击麦位）
             case VoiceRoomSeat.Status.INIT:
-                menus.add("上麦");
+                //menus.add("上麦");
                 menus.add("申请上麦");
                 break;
             // 当前存在有效用户

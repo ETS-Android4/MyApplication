@@ -599,6 +599,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         sendMessage(text, false);
     }
 
+    @Deprecated
     @Override
     public AudioPlay getAudioPlay() {
         if (audioPlay == null) {
@@ -615,7 +616,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         return switcher;
     }
 
-    public StreamTaskControl getStreamTaskControl() {
+    private StreamTaskControl getStreamTaskControl() {
         if (streamTaskControl == null) {
             streamTaskControl = new StreamTaskControlImpl(anchor, engine);
         }
@@ -630,6 +631,11 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     @Override
     public Audience getAudience() {
         return audience;
+    }
+
+    @Override
+    public List<VoiceRoomSeat> getSeats() {
+        return seats;
     }
 
     @Override
@@ -830,11 +836,10 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         fetchRoomSeats(new SuccessCallback<List<VoiceRoomSeat>>() {
             @Override
             public void onSuccess(List<VoiceRoomSeat> seats) {
-                if (!anchorMode) {
-                    audience.initSeats(seats);
-                } else {
-                    anchor.initSeats(seats);
+                if (anchorMode) {
+                    anchor.initSeats(seats);//seats
                 }
+                audience.initSeats(seats);//mySeat
                 setOnUpdateSeats(seats);
             }
         });

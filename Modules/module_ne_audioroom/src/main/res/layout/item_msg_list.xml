@@ -4,7 +4,7 @@
     android:id="@+id/tv_chat_content"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_corner_7f000000_r20"
+    android:background="@drawable/shape_corner_black_30_r20"
     android:orientation="horizontal"
     android:paddingBottom="4dp"
     android:textSize="13dp"

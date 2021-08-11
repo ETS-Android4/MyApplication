@@ -4,10 +4,13 @@ import android.content.Context;
 
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomMessage;
+import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomUser;
 import com.netease.audioroom.demo.voiceroom.impl.NERtcVoiceRoomImpl;
 import com.netease.audioroom.demo.voiceroom.interfaces.NERtcVoiceRoomDef.AccountMapper;
 import com.netease.audioroom.demo.voiceroom.interfaces.NERtcVoiceRoomDef.RoomCallback;
+
+import java.util.List;
 
 /**
  * 语聊房实现功能
@@ -172,4 +175,11 @@ public abstract class NERtcVoiceRoom {
     public static void setMessageBuilder(VoiceRoomMessage.MessageTextBuilder messageTextBuilder) {
         NERtcVoiceRoomImpl.setMessageTextBuilder(messageTextBuilder);
     }
+
+    /**
+     * 获取麦位列表接口
+     *
+     * @return 麦位列表
+     */
+    public abstract List<VoiceRoomSeat> getSeats();
 }

@@ -30,20 +30,19 @@ public class RoomSeatAdapter extends BaseQuickAdapter<VoiceRoomSeat, BaseViewHol
     protected void convert(@NonNull BaseViewHolder holder, @NonNull VoiceRoomSeat seat) {
         VoiceRoomUser user = seat.getUser();
 
-        ImageView ivCircle = holder.getView(R.id.iv_circle);
+        View frame = holder.getView(R.id.frame);
+
         HeadImageView ivAvatar = holder.getView(R.id.iv_user_avatar);
+        ImageView ivCircle = holder.getView(R.id.iv_user_circle);
+        ImageView ivAudio = holder.getView(R.id.iv_user_audio);
+        TextView tvNick = holder.getView(R.id.tv_user_nick);
 
         ImageView ivStatus = holder.getView(R.id.iv_user_stats);
-        ImageView ivStatusHint = holder.getView(R.id.iv_user_status_hint);
+        LottieAnimationView applying = holder.getView(R.id.lottie_apply);
 
-        View avatarBg = holder.getView(R.id.avatar_bg);
-
-
-        TextView tvNick = holder.getView(R.id.tv_user_nick);
-        LottieAnimationView applying = holder.getView(R.id.lav_apply);
         switch (seat.getStatus()) {
             case Status.INIT:
-                ivStatusHint.setVisibility(View.GONE);
+                ivAudio.setVisibility(View.GONE);
                 ivStatus.setVisibility(View.VISIBLE);
                 ivStatus.setImageResource(R.drawable.seat_add_member);
                 ivCircle.setVisibility(View.INVISIBLE);
@@ -56,10 +55,10 @@ public class RoomSeatAdapter extends BaseQuickAdapter<VoiceRoomSeat, BaseViewHol
                 applying.setRepeatCount(LottieDrawable.INFINITE);
                 applying.playAnimation();
                 if (seat.getReason() != Reason.APPLY_MUTED) {
-                    ivStatusHint.setVisibility(View.GONE);
+                    ivAudio.setVisibility(View.GONE);
                 } else {
-                    ivStatusHint.setVisibility(View.VISIBLE);
-                    ivStatusHint.setImageResource(R.drawable.audio_be_muted_status);
+                    ivAudio.setVisibility(View.VISIBLE);
+                    ivAudio.setImageResource(R.drawable.audio_be_muted_status);
                 }
                 tvNick.setText(user != null ? user.getAccount() : "");
                 ivCircle.setVisibility(View.INVISIBLE);
@@ -67,21 +66,21 @@ public class RoomSeatAdapter extends BaseQuickAdapter<VoiceRoomSeat, BaseViewHol
 
             case Status.ON:
                 ivStatus.setVisibility(View.GONE);
-                ivStatusHint.setVisibility(View.VISIBLE);
-                ivStatusHint.setImageResource(R.drawable.icon_mic);
+                ivAudio.setVisibility(View.VISIBLE);
+                ivAudio.setImageResource(R.drawable.icon_mic);
                 ivCircle.setVisibility(View.VISIBLE);
                 applying.setVisibility(View.GONE);
                 break;
             case Status.CLOSED:
                 ivStatus.setVisibility(View.VISIBLE);
-                ivStatusHint.setVisibility(View.GONE);
+                ivAudio.setVisibility(View.GONE);
                 ivStatus.setImageResource(R.drawable.close);
                 ivCircle.setVisibility(View.INVISIBLE);
                 applying.setVisibility(View.GONE);
                 break;
             case Status.FORBID:
                 ivStatus.setVisibility(View.VISIBLE);
-                ivStatusHint.setVisibility(View.GONE);
+                ivAudio.setVisibility(View.GONE);
                 ivStatus.setImageResource(R.drawable.seat_close);
                 ivCircle.setVisibility(View.INVISIBLE);
                 applying.setVisibility(View.GONE);
@@ -89,15 +88,15 @@ public class RoomSeatAdapter extends BaseQuickAdapter<VoiceRoomSeat, BaseViewHol
             case Status.AUDIO_MUTED:
             case Status.AUDIO_CLOSED_AND_MUTED:
                 ivStatus.setVisibility(View.GONE);
-                ivStatusHint.setVisibility(View.VISIBLE);
-                ivStatusHint.setImageResource(R.drawable.audio_be_muted_status);
+                ivAudio.setVisibility(View.VISIBLE);
+                ivAudio.setImageResource(R.drawable.audio_be_muted_status);
                 ivCircle.setVisibility(View.INVISIBLE);
                 applying.setVisibility(View.GONE);
                 break;
             case Status.AUDIO_CLOSED:
                 ivStatus.setVisibility(View.GONE);
-                ivStatusHint.setVisibility(View.VISIBLE);
-                ivStatusHint.setImageResource(R.drawable.icon_seat_close_micro);
+                ivAudio.setVisibility(View.VISIBLE);
+                ivAudio.setImageResource(R.drawable.icon_seat_close_micro);
                 ivCircle.setVisibility(View.INVISIBLE);
                 applying.setVisibility(View.GONE);
                 break;
@@ -107,18 +106,18 @@ public class RoomSeatAdapter extends BaseQuickAdapter<VoiceRoomSeat, BaseViewHol
             tvNick.setText(user.getNick());
             ivAvatar.loadAvatar(user.getAvatar());
             ivAvatar.setVisibility(View.VISIBLE);
-            avatarBg.setVisibility(View.VISIBLE);
+            //frame.setVisibility(View.VISIBLE);
         } else if (user != null && seat.isOn()) {//麦上有人
             ivAvatar.loadAvatar(user.getAvatar());
             ivAvatar.setVisibility(View.VISIBLE);
-            avatarBg.setVisibility(View.VISIBLE);
+            //frame.setVisibility(View.VISIBLE);
             tvNick.setVisibility(View.VISIBLE);
             tvNick.setText(user.getNick());
         } else {
             tvNick.setText("麦位" + (seat.getIndex() + 1));
             ivCircle.setVisibility(View.INVISIBLE);
             ivAvatar.setVisibility(View.INVISIBLE);
-            avatarBg.setVisibility(View.INVISIBLE);
+            //frame.setVisibility(View.INVISIBLE);
         }
     }
 }

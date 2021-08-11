@@ -146,17 +146,17 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
 
     @Override
     public void onAnchorInfo(VoiceRoomUser user) {
-
+        mIChatRoomCallback.onAnchorInfo(user);
     }
 
     @Override
     public void onAnchorMute(boolean muted) {
-
+        mIChatRoomCallback.onAnchorMute(muted);
     }
 
     @Override
     public void onAnchorVolume(int volume) {
-
+        mIChatRoomCallback.onAnchorVolume(volume);
     }
 
     @Override
