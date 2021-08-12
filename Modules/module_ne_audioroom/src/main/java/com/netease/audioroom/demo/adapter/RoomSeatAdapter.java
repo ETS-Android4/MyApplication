@@ -30,8 +30,7 @@ public class RoomSeatAdapter extends BaseQuickAdapter<VoiceRoomSeat, BaseViewHol
     protected void convert(@NonNull BaseViewHolder holder, @NonNull VoiceRoomSeat seat) {
         VoiceRoomUser user = seat.getUser();
 
-        View frame = holder.getView(R.id.frame);
-
+        View ivDefault = holder.getView(R.id.iv_user_default);
         HeadImageView ivAvatar = holder.getView(R.id.iv_user_avatar);
         ImageView ivCircle = holder.getView(R.id.iv_user_circle);
         ImageView ivAudio = holder.getView(R.id.iv_user_audio);
@@ -42,13 +41,14 @@ public class RoomSeatAdapter extends BaseQuickAdapter<VoiceRoomSeat, BaseViewHol
 
         switch (seat.getStatus()) {
             case Status.INIT:
-                ivAudio.setVisibility(View.GONE);
+                ivCircle.setVisibility(View.INVISIBLE);
                 ivStatus.setVisibility(View.VISIBLE);
                 ivStatus.setImageResource(R.drawable.seat_add_member);
-                ivCircle.setVisibility(View.INVISIBLE);
                 applying.setVisibility(View.GONE);
+                ivAudio.setVisibility(View.GONE);
                 break;
             case Status.APPLY:
+                ivCircle.setVisibility(View.INVISIBLE);
                 ivStatus.setVisibility(View.VISIBLE);
                 ivStatus.setImageResource(0);
                 applying.setVisibility(View.VISIBLE);
@@ -61,63 +61,62 @@ public class RoomSeatAdapter extends BaseQuickAdapter<VoiceRoomSeat, BaseViewHol
                     ivAudio.setImageResource(R.drawable.audio_be_muted_status);
                 }
                 tvNick.setText(user != null ? user.getAccount() : "");
-                ivCircle.setVisibility(View.INVISIBLE);
                 break;
 
             case Status.ON:
+                ivCircle.setVisibility(View.VISIBLE);
                 ivStatus.setVisibility(View.GONE);
+                applying.setVisibility(View.GONE);
                 ivAudio.setVisibility(View.VISIBLE);
                 ivAudio.setImageResource(R.drawable.icon_mic);
-                ivCircle.setVisibility(View.VISIBLE);
-                applying.setVisibility(View.GONE);
                 break;
             case Status.CLOSED:
-                ivStatus.setVisibility(View.VISIBLE);
-                ivAudio.setVisibility(View.GONE);
-                ivStatus.setImageResource(R.drawable.close);
                 ivCircle.setVisibility(View.INVISIBLE);
+                ivStatus.setVisibility(View.VISIBLE);
+                ivStatus.setImageResource(R.drawable.close);
                 applying.setVisibility(View.GONE);
+                ivAudio.setVisibility(View.GONE);
                 break;
             case Status.FORBID:
-                ivStatus.setVisibility(View.VISIBLE);
-                ivAudio.setVisibility(View.GONE);
-                ivStatus.setImageResource(R.drawable.seat_close);
                 ivCircle.setVisibility(View.INVISIBLE);
+                ivStatus.setVisibility(View.VISIBLE);
+                ivStatus.setImageResource(R.drawable.seat_close);
                 applying.setVisibility(View.GONE);
+                ivAudio.setVisibility(View.GONE);
                 break;
             case Status.AUDIO_MUTED:
             case Status.AUDIO_CLOSED_AND_MUTED:
+                ivCircle.setVisibility(View.INVISIBLE);
                 ivStatus.setVisibility(View.GONE);
+                applying.setVisibility(View.GONE);
                 ivAudio.setVisibility(View.VISIBLE);
                 ivAudio.setImageResource(R.drawable.audio_be_muted_status);
-                ivCircle.setVisibility(View.INVISIBLE);
-                applying.setVisibility(View.GONE);
                 break;
             case Status.AUDIO_CLOSED:
+                ivCircle.setVisibility(View.INVISIBLE);
+                applying.setVisibility(View.GONE);
                 ivStatus.setVisibility(View.GONE);
                 ivAudio.setVisibility(View.VISIBLE);
                 ivAudio.setImageResource(R.drawable.icon_seat_close_micro);
-                ivCircle.setVisibility(View.INVISIBLE);
-                applying.setVisibility(View.GONE);
                 break;
         }
 
         if (user != null && seat.getStatus() == Status.APPLY) {//请求麦位
+            ivDefault.setVisibility(View.VISIBLE);
+            ivAvatar.loadAvatar(user.getAvatar());
+            ivAvatar.setVisibility(View.VISIBLE);
             tvNick.setText(user.getNick());
-            ivAvatar.loadAvatar(user.getAvatar());
-            ivAvatar.setVisibility(View.VISIBLE);
-            //frame.setVisibility(View.VISIBLE);
         } else if (user != null && seat.isOn()) {//麦上有人
+            ivDefault.setVisibility(View.VISIBLE);
             ivAvatar.loadAvatar(user.getAvatar());
             ivAvatar.setVisibility(View.VISIBLE);
-            //frame.setVisibility(View.VISIBLE);
             tvNick.setVisibility(View.VISIBLE);
             tvNick.setText(user.getNick());
         } else {
-            tvNick.setText("麦位" + (seat.getIndex() + 1));
+            ivDefault.setVisibility(View.INVISIBLE);
             ivCircle.setVisibility(View.INVISIBLE);
             ivAvatar.setVisibility(View.INVISIBLE);
-            //frame.setVisibility(View.INVISIBLE);
+            tvNick.setText("麦位" + (seat.getIndex() + 1));
         }
     }
 }

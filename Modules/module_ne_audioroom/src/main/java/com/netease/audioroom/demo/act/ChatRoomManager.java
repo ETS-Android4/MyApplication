@@ -362,7 +362,7 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     }
 
     /**
-     * 取消申请排麦
+     * 取消申请上麦
      */
     public void toggleCancelSeatApply() {
 
@@ -405,7 +405,12 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
      * 下麦
      */
     public void toggleLeaveSeat() {
-
+        mAudience.leaveSeat(new SuccessCallback<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                ToastUtils.showShort("您已下麦");
+            }
+        });
     }
 
     public void toggleSendMessage(String content) {

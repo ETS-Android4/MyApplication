@@ -468,12 +468,14 @@ public class ChatRoomHelper {
      * 下麦
      */
     public static void leaveSeat() {
-        audience.leaveSeat(new SuccessCallback<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                ToastUtils.showShort("您已下麦");
-            }
-        });
+        if (audience != null) {
+            audience.leaveSeat(new SuccessCallback<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    ToastUtils.showShort("您已下麦");
+                }
+            });
+        }
     }
 
     /**

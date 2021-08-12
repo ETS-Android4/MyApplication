@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.RoomMessageAdapter;
 import com.netease.audioroom.demo.adapter.RoomSeatAdapter;
+import com.netease.audioroom.demo.cache.DemoCache;
 import com.netease.audioroom.demo.databinding.ActivityBaseAudioBinding;
 import com.netease.audioroom.demo.dialog.SeatMenuDialog;
 import com.netease.audioroom.demo.util.InputUtils;
@@ -332,7 +333,11 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
             case VoiceRoomSeat.Status.ON:
                 // 当前麦位已经关闭
             case VoiceRoomSeat.Status.AUDIO_CLOSED:
-                menus.add("将TA踢下麦位");
+                if (TextUtils.equals(DemoCache.getAccountId(), seat.getAccount())) {
+                    menus.add("下麦");
+                } else {
+                    menus.add("将TA踢下麦位");
+                }
                 menus.add("屏蔽麦位");
                 break;
             // 当前麦位已经被关闭
@@ -361,7 +366,7 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
             // 抱观众上麦（点击麦位）
             case VoiceRoomSeat.Status.INIT:
                 //menus.add("上麦");
-                menus.add("申请上麦");
+                //menus.add("申请上麦");
                 break;
             // 当前存在有效用户
             case VoiceRoomSeat.Status.ON:

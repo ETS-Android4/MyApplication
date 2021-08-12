@@ -8,7 +8,7 @@
     tools:viewBindingIgnore="true">
 
     <View
-        android:id="@+id/frame"
+        android:id="@+id/iv_user_default"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
@@ -26,13 +26,9 @@
 
     <com.netease.audioroom.demo.widget.HeadImageView
         android:id="@+id/iv_user_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@id/frame"
-        android:layout_alignTop="@id/frame"
-        android:layout_alignEnd="@id/frame"
-        android:layout_alignBottom="@id/frame"
-        android:layout_margin="1dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
         android:visibility="visible" />
 
     <ImageView
@@ -40,7 +36,6 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
         android:background="@drawable/shape_circle_black_80"
         android:scaleType="center"
         tools:src="@drawable/seat_add_member" />
@@ -50,10 +45,10 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:padding="18dp"
+        android:padding="15dp"
         android:visibility="gone"
-        app:lottie_rawRes="@raw/apply_seat" />
+        app:lottie_rawRes="@raw/apply_seat"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/iv_user_audio"
@@ -69,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_user_avatar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"

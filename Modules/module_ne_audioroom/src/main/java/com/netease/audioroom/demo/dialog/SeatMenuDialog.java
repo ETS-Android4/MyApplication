@@ -90,6 +90,10 @@ public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
                 RoomMemberListDialog dialog = new RoomMemberListDialog(seat);
                 dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
                 break;
+            case "下麦":
+                //ChatRoomHelper.leaveSeat();
+                ChatRoomManager.getInstance().toggleLeaveSeat();
+                break;
             case "将TA踢下麦位":
                 ChatRoomHelper.kickSeat(seat);
                 break;
@@ -102,9 +106,6 @@ public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
             case "解除语音屏蔽":
             case "打开麦位":
                 ChatRoomHelper.openSeat(seat);
-                break;
-            case "下麦":
-                ChatRoomHelper.leaveSeat();
                 break;
         }
     }
