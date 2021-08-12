@@ -109,9 +109,11 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
         this.isAnchorMode = anchorMode;
         if (anchorMode) {
             this.mAnchor = mNERtcVoiceRoom.getAnchor();
+            this.mAnchor.setCallback(this);
         }
         this.mAudience = mNERtcVoiceRoom.getAudience();
-        mNERtcVoiceRoom.enterRoom(anchorMode);
+        this.mAudience.setCallback(this);
+        this.mNERtcVoiceRoom.enterRoom(anchorMode);
         //主播就在音视频频道，所以不需要初始化播放器
         if (!anchorMode) {
             initPlayer();
@@ -207,7 +209,6 @@ public class ChatRoomManager implements NERtcVoiceRoomDef.RoomCallback, Anchor.C
     public void onApplySeats(List<VoiceRoomSeat> seats) {
         if (isAnchorMode) {
             int size = seats != null ? seats.size() : 0;
-            Log.e("TAG", "onApplySeats size: " + size);
             if (size > 0) {
                 for (VoiceRoomSeat seat : seats) {
                     toggleApproveSeatApply(seat);

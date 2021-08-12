@@ -331,6 +331,11 @@ public class AnchorImpl implements Anchor {
                             public void onSuccess(Void param) {
                                 addApplySeat(seat);
                             }
+
+                            @Override
+                            public void onFailed(int code) {
+                                super.onFailed(code);
+                            }
                         });
                     }
 
@@ -447,8 +452,9 @@ public class AnchorImpl implements Anchor {
         // local STATUS_CLOSE and remote STATUS_LOAD ???
         if (voiceRoom.getSeat(seat.getIndex()).getStatus() == Status.CLOSED && seat.getStatus() == Status.APPLY) {
             return false;
+        }else {
+            return true;
         }
-        return true;
     }
 
     public void muteLocalAudio(boolean muted) {
@@ -505,7 +511,8 @@ public class AnchorImpl implements Anchor {
     private void addApplySeat(VoiceRoomSeat seat) {
         applySeats.add(seat);
         if (callback != null) {
-            callback.onApplySeats(new ArrayList<>(applySeats));
+            List<VoiceRoomSeat> list = new ArrayList<>(applySeats);
+            callback.onApplySeats(list);
         }
     }
 

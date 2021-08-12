@@ -81,7 +81,6 @@ public class AudienceImpl implements Audience {
 
     @Override
     public void applySeat(final VoiceRoomSeat seat, final RequestCallback<Void> callback) {
-        Log.e("TAG", "applySeat: " + new Gson().toJson(seat));
         if (mySeat != null && (mySeat.isOn() || mySeat.getStatus() == Status.APPLY)) {
             if (callback != null) {
                 callback.onFailed(-1);
@@ -302,8 +301,7 @@ public class AudienceImpl implements Audience {
 
     public void seatChange(VoiceRoomSeat seat) {
         // my seat is 'STATUS_CLOSE'
-        if (seat.getStatus() == Status.CLOSED
-                && mySeat != null && mySeat.isSameIndex(seat)) {
+        if (seat.getStatus() == Status.CLOSED && mySeat != null && mySeat.isSameIndex(seat)) {
             mySeat = null;
             if (callback != null) {
                 callback.onSeatClosed();
@@ -314,8 +312,7 @@ public class AudienceImpl implements Audience {
         // others
         if (!seat.isSameAccount(user.getAccount())) {
             // my seat is 'STATUS_NORMAL' by other
-            if (seat.getStatus() == Status.ON
-                    && mySeat != null && mySeat.isSameIndex(seat)) {
+            if (seat.getStatus() == Status.ON && mySeat != null && mySeat.isSameIndex(seat)) {
                 mySeat = null;
                 if (callback != null) {
                     callback.onSeatApplyDenied(true);

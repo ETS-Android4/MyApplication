@@ -25,13 +25,7 @@ public class ModuleApp implements IComponentApplication {
     }
 
     private void initCrash(Application application) {
-        Crash.init(new Crash.OnCrashListener() {
-            @Override
-            public void onCrash(String crashInfo, Throwable e) {
-                Log.e(TAG, crashInfo);
-                Toast.makeText(application, crashInfo, Toast.LENGTH_SHORT).show();
-            }
-        });
+        Crash.init();
     }
 
     private void initARouter(Application application) {

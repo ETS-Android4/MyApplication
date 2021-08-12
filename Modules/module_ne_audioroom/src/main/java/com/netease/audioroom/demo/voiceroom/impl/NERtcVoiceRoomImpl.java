@@ -954,6 +954,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
         Log.i(LOG_TAG, "onQueueChange: type = " + queueChange.getChatRoomQueueChangeType() +
                 " key = " + queueChange.getKey() + " content = " + queueChange.getContent());
         ChatRoomQueueChangeType type = queueChange.getChatRoomQueueChangeType();
+        //清空所有队列元素
         if (type == ChatRoomQueueChangeType.DROP) {
             if (anchorMode) {
                 anchor.clearSeats();
@@ -964,6 +965,7 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             return;
         }
 
+        //新增队列元素，移除队列元素
         if (type == ChatRoomQueueChangeType.OFFER || type == ChatRoomQueueChangeType.POLL) {
             String content = queueChange.getContent();
             if (TextUtils.isEmpty(content)) {
@@ -975,20 +977,18 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
                     return;
                 }
                 VoiceRoomSeat currentSeat = getSeat(seat.getIndex());
-                if (currentSeat != null && currentSeat.isOn() && seat.getStatus() == Status.INIT && seat.getReason() == VoiceRoomSeat.Reason.CANCEL_APPLY) {
-                    if (!anchorMode) {
-                        audience.initSeats(seats);
-                    }
+                if (currentSeat != null && currentSeat.isOn() &&
+                        seat.getStatus() == Status.INIT &&
+                        seat.getReason() == VoiceRoomSeat.Reason.CANCEL_APPLY) {
+                    audience.initSeats(seats);//update mySeat and onEnterSeat
                     return;
                 }
+
                 if (anchorMode) {
-                    if (anchor.seatChange(seat)) {
-                        updateSeat(seat);
-                    }
-                } else {
-                    updateSeat(seat);
-                    audience.seatChange(seat);
+                    anchor.seatChange(seat);//update seats
                 }
+                audience.seatChange(seat);//update mySeat
+                updateSeat(seat);
             }
         }
     }

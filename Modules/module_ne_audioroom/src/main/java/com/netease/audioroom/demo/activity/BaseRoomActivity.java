@@ -340,7 +340,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
      */
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
-        Log.e("TAG", "onUpdateSeat " + new Gson().toJson(seat));
         mRoomSeatAdapter.notifyItemChanged(seat.getIndex(), seat);
     }
 

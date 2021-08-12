@@ -78,7 +78,7 @@ public class UriUtils {
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 int name = cursor.getColumnIndexOrThrow(MediaStore.Downloads.DISPLAY_NAME);
-                Log.e(TAG, cursor.getString(name));
+                Log.d(TAG, cursor.getString(name));
             }
             cursor.close();
         }
