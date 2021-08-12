@@ -259,8 +259,7 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
 
     @Override
     public void onUpdateSeat(VoiceRoomSeat seat) {
-        Log.e("TAG", "onUpdateSeat " + new Gson().toJson(seat));
-        mRoomSeatAdapter.notifyItemChanged(seat.getIndex(), seat);
+        mRoomSeatAdapter.setData(seat.getIndex(), seat);
     }
 
     @Override

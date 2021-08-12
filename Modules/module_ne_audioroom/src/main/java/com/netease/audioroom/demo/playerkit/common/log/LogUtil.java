@@ -8,7 +8,6 @@ import com.netease.audioroom.demo.playerkit.common.utils.StorageUtil;
 /**
  * @author netease
  */
-
 public class LogUtil {
 
     private static boolean inited = false;

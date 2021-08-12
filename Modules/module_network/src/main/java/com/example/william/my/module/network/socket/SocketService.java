@@ -27,9 +27,9 @@ public class SocketService extends Service {
             socketServer = new SocketServer(SocketServer.DEFAULT_SERVER_PORT);
             socketServer.setReuseAddr(true);
             socketServer.start();
-            Log.e(TAG, "Start ServerSocket Success...");
+            Log.i(TAG, "Start ServerSocket Success...");
         } catch (Exception e) {
-            Log.e(TAG, "Start ServerSocket Failed...");
+            Log.i(TAG, "Start ServerSocket Failed...");
             e.printStackTrace();
         }
     }
@@ -40,9 +40,9 @@ public class SocketService extends Service {
         if (socketServer != null) {
             try {
                 socketServer.stop();
-                Log.e(TAG, "Stop ServerSocket Success...");
+                Log.i(TAG, "Stop ServerSocket Success...");
             } catch (Exception e) {
-                Log.e(TAG, "Stop ServerSocket Failed...");
+                Log.i(TAG, "Stop ServerSocket Failed...");
                 e.printStackTrace();
             }
         }

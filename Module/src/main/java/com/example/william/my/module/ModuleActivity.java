@@ -80,7 +80,7 @@ public class ModuleActivity extends BaseListActivity {
         Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
             public boolean queueIdle() {
-                Log.e(TAG, "addIdleHandler: queueIdle " + Thread.currentThread().getName());
+                Log.d(TAG, "addIdleHandler: queueIdle " + Thread.currentThread().getName());
                 return false;
             }
         });

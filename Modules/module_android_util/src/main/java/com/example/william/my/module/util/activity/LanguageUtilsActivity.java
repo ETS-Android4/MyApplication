@@ -10,7 +10,7 @@ import com.example.william.my.module.util.R;
 import java.util.Locale;
 
 @Route(path = ARouterPath.Util.Util_Language)
-public class LanguageActivity extends BaseResponseActivity {
+public class LanguageUtilsActivity extends BaseResponseActivity {
 
     @Override
     public void initView() {

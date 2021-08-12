@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  * https://www.ssleye.com/
  */
 @Route(path = ARouterPath.Util.Util_Encrypt)
-public class EncryptActivity extends BaseResponseActivity {
+public class EncryptUtilsActivity extends BaseResponseActivity {
 
     private static final String ALGORITHM_AES = "AES/ECB/PKCS5Padding";
 

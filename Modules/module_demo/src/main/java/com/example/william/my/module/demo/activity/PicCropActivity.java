@@ -69,7 +69,7 @@ public class PicCropActivity extends BaseActivity implements View.OnClickListene
                         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         File file = new File(getExternalCacheDir() + File.separator + System.currentTimeMillis() + ".jpg");
                         sourceUri = FileProvider.getUriForFile(PicCropActivity.this, getPackageName() + ".fileProvider", file);
-                        Log.e("TAG", "Save the full-size photo : " + sourceUri);
+                        Log.i(TAG, "Save the full-size photo : " + sourceUri);
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, sourceUri);
                         startActivityForResult(takePictureIntent, TO_CAMERA_FULL);
                         break;

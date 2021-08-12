@@ -78,7 +78,7 @@ public class ResponseProgressBody extends ResponseBody {
             if (mResponseProgressListener != null) {
                 mResponseProgressListener.onResponseProgress(mUrl, bytesRead, contentLength);
             } else {
-                Log.e(TAG, "url: " + mUrl + "bytesRead: " + bytesRead + " , totalBytesCount: " + contentLength);
+                Log.d(TAG, "url: " + mUrl + "bytesRead: " + bytesRead + " , totalBytesCount: " + contentLength);
             }
             return count;
         }

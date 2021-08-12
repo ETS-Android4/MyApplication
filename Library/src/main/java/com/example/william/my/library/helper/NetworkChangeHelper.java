@@ -77,9 +77,9 @@ public class NetworkChangeHelper {
                 if (info != null) {
                     if (info.getState() == NetworkInfo.State.CONNECTED) {
                         if (ConnectivityManager.TYPE_WIFI == info.getType()) {
-                            Log.e(TAG, "CONNECTIVITY_ACTION: 网络类型为WIFI");//执行两次
+                            Log.i(TAG, "CONNECTIVITY_ACTION: 网络类型为WIFI");//执行两次
                         } else if (ConnectivityManager.TYPE_MOBILE == info.getType()) {
-                            Log.e(TAG, "CONNECTIVITY_ACTION: 网络类型为移动数据");
+                            Log.i(TAG, "CONNECTIVITY_ACTION: 网络类型为移动数据");
                         }
                         mNetworkChangeListener.onNetworkStatusChange(true);
                     } else {
@@ -113,11 +113,11 @@ public class NetworkChangeHelper {
             //网络变化时，这个方法会回调多次
             if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
                 if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    Log.e(TAG, "onCapabilitiesChanged: 网络类型为wifi");
+                    Log.i(TAG, "onCapabilitiesChanged: 网络类型为wifi");
                 } else if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                    Log.e(TAG, "onCapabilitiesChanged: 网络类型为移动数据");
+                    Log.i(TAG, "onCapabilitiesChanged: 网络类型为移动数据");
                 } else {
-                    Log.e(TAG, "onCapabilitiesChanged: 其他网络");
+                    Log.i(TAG, "onCapabilitiesChanged: 其他网络");
                 }
             }
         }

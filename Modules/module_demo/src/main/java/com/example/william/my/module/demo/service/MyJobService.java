@@ -58,7 +58,7 @@ public class MyJobService extends JobService {
                 jobFinished(params, false);
             }
         }, duration);
-        Log.e(TAG, "on start job: " + params.getJobId());
+        Log.d(TAG, "on start job: " + params.getJobId());
 
         // Return true as there's more work to be done with this job.
         return true;
@@ -67,7 +67,7 @@ public class MyJobService extends JobService {
     @Override
     public boolean onStopJob(JobParameters params) {
         sendMessage(JobActivity.MSG_COLOR_STOP, params.getJobId());
-        Log.e(TAG, "on stop job: " + params.getJobId());
+        Log.d(TAG, "on stop job: " + params.getJobId());
 
         // Return false to drop the job.
         return false;

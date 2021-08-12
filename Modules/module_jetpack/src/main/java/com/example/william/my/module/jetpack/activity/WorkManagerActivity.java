@@ -101,7 +101,7 @@ public class WorkManagerActivity extends BaseResponseActivity {
                         if (workInfo != null && workInfo.getState() == WorkInfo.State.SUCCEEDED) {
                             // 工作进度
                             Data progress = workInfo.getProgress();
-                            Log.e(TAG, "Work finished!");
+                            Log.d(TAG, "Work finished!");
                         }
                     }
                 });

@@ -8,11 +8,11 @@
         <activity android:name=".activity.AdaptScreenActivity" />
         <activity android:name=".activity.AppUtilsActivity" />
         <activity android:name=".activity.BusUtilsActivity" />
-        <activity android:name=".activity.CacheActivity" />
+        <activity android:name=".activity.CacheUtilsActivity" />
         <activity android:name=".activity.CrashUtilsActivity" />
-        <activity android:name=".activity.EncryptActivity" />
+        <activity android:name=".activity.EncryptUtilsActivity" />
         <activity android:name=".activity.ImageUtilsActivity" />
-        <activity android:name=".activity.LanguageActivity" />
+        <activity android:name=".activity.LanguageUtilsActivity" />
         <activity android:name=".activity.PermissionUtilsActivity" />
     </application>
 

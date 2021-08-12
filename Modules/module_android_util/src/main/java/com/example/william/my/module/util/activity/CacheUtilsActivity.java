@@ -12,7 +12,7 @@ import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.util.R;
 
 @Route(path = ARouterPath.Util.Util_Cache)
-public class CacheActivity extends BaseResponseActivity {
+public class CacheUtilsActivity extends BaseResponseActivity {
 
     @Override
     public void initView() {

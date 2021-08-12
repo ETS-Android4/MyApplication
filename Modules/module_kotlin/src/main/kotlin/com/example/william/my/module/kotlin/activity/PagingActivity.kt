@@ -55,9 +55,9 @@ class PagingActivity : BaseActivity() {
         //获取加载状态
         pagingAdapter.addLoadStateListener {
             when (it.refresh) {
-                is LoadState.NotLoading -> Log.e("TAG", "is NotLoading")
-                is LoadState.Loading -> Log.e("TAG", "is Loading")
-                is LoadState.Error -> Log.e("TAG", "is Error")
+                is LoadState.NotLoading -> Log.d("TAG", "is NotLoading")
+                is LoadState.Loading -> Log.d("TAG", "is Loading")
+                is LoadState.Error -> Log.d("TAG", "is Error")
             }
         }
 
