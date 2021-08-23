@@ -12,14 +12,6 @@ import java.util.List;
 public interface Anchor {
 
     /**
-     * 申请上麦
-     *
-     * @param seat     {@link VoiceRoomSeat 麦位}
-     * @param callback {@link RequestCallback 回调}
-     */
-    void applySeat(VoiceRoomSeat seat, RequestCallback<Void> callback);
-
-    /**
      * 通过上麦请求
      *
      * @param seat     {@link VoiceRoomSeat 麦位}
@@ -35,22 +27,6 @@ public interface Anchor {
      * @param callback {@link RequestCallback 回调}
      */
     void denySeatApply(VoiceRoomSeat seat, RequestCallback<Void> callback);
-
-    /**
-     * 跳麦
-     *
-     * @param mySeat   {@link VoiceRoomSeat 从 fromSeat 麦位}
-     * @param toSeat   {@link VoiceRoomSeat 跳到 toSeat 麦位}
-     * @param callback {@link RequestCallback 回调}在
-     */
-    void jumpSeatApply(VoiceRoomSeat mySeat, VoiceRoomSeat toSeat, RequestCallback<Void> callback);
-
-    /**
-     * 下麦
-     *
-     * @param callback {@link RequestCallback 回调}
-     */
-    void leaveSeat(RequestCallback<Void> callback);
 
     /**
      * 打开麦位

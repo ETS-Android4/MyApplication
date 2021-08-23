@@ -32,13 +32,6 @@ public interface Audience {
     void leaveSeat(RequestCallback<Void> callback);
 
     /**
-     * 获取服务器最新成员列表
-     *
-     * @param callback {@link RequestCallback 回调}
-     */
-    void fetchSeats(RequestCallback<List<VoiceRoomSeat>> callback);
-
-    /**
      * 获取当前麦位
      *
      * @return {@link VoiceRoomSeat 麦位}

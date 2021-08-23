@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 麦位菜单
  */
-public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
+public class RoomSeatMenuDialog extends BaseRecyclerDialogFragment<String> {
 
     private final FragmentActivity mActivity;
 
@@ -42,7 +42,7 @@ public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
         return false;
     }
 
-    public SeatMenuDialog(FragmentActivity activity, VoiceRoomSeat seat, List<String> menus) {
+    public RoomSeatMenuDialog(FragmentActivity activity, VoiceRoomSeat seat, List<String> menus) {
         this.mActivity = activity;
         this.mSeat = seat;
         this.mMenus = menus;
@@ -79,6 +79,12 @@ public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
                 ToastUtils.showShort("上麦");
                 break;
             case "申请上麦":
+                //ChatRoomHelper.applySeat(seat, new SuccessCallback<Void>() {
+                //    @Override
+                //    public void onSuccess(Void param) {
+                //        ToastUtils.showShort("已申请上麦");
+                //    }
+                //});
                 ChatRoomManager.getInstance().toggleApplySeat(seat, new SuccessCallback<Void>() {
                     @Override
                     public void onSuccess(Void param) {
@@ -86,13 +92,13 @@ public class SeatMenuDialog extends BaseRecyclerDialogFragment<String> {
                     }
                 });
                 break;
-            case "将成员抱上麦位":
-                RoomMemberListDialog dialog = new RoomMemberListDialog(seat);
-                dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
-                break;
             case "下麦":
                 //ChatRoomHelper.leaveSeat();
                 ChatRoomManager.getInstance().toggleLeaveSeat();
+                break;
+            case "将成员抱上麦位":
+                RoomMemberListDialog dialog = new RoomMemberListDialog(seat);
+                dialog.show(mActivity.getSupportFragmentManager(), dialog.getTag());
                 break;
             case "将TA踢下麦位":
                 ChatRoomHelper.kickSeat(seat);

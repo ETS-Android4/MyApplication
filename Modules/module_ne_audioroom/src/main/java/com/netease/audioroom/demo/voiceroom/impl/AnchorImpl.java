@@ -80,24 +80,6 @@ public class AnchorImpl implements Anchor {
     }
 
     @Override
-    public void applySeat(VoiceRoomSeat seat, RequestCallback<Void> callback) {
-        boolean ret = approveSeatApply(seat, new SuccessCallback<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-
-            }
-        });
-        if (!ret) {
-            denySeatApply(seat, new RequestCallbackEx<Void>(callback) {
-                @Override
-                public void onSuccess(Void param) {
-
-                }
-            });
-        }
-    }
-
-    @Override
     public boolean approveSeatApply(final VoiceRoomSeat seat, RequestCallback<Void> callback0) {
         if (!seat.approveApply()) {
             return false;
@@ -126,16 +108,6 @@ public class AnchorImpl implements Anchor {
                 super.onSuccess(param);
             }
         });
-    }
-
-    @Override
-    public void jumpSeatApply(VoiceRoomSeat mySeat, VoiceRoomSeat toSeat, RequestCallback<Void> callback) {
-
-    }
-
-    @Override
-    public void leaveSeat(RequestCallback<Void> callback) {
-
     }
 
     @Override
@@ -303,7 +275,8 @@ public class AnchorImpl implements Anchor {
     }
 
     public void command(int command, final VoiceRoomSeat seat) {
-        Log.i(LOG_TAG, "command: command = " + command +
+        Log.i(LOG_TAG, "command:" +
+                " command = " + command +
                 " seat = " + new Gson().toJson(seat));
         switch (command) {
             case SeatCommandDef.APPLY_SEAT: {

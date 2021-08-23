@@ -20,13 +20,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.google.gson.Gson;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.adapter.RoomMessageAdapter;
 import com.netease.audioroom.demo.adapter.RoomSeatAdapter;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.databinding.ActivityBaseAudioBinding;
-import com.netease.audioroom.demo.dialog.SeatMenuDialog;
+import com.netease.audioroom.demo.databinding.ActivityRoomBinding;
+import com.netease.audioroom.demo.dialog.RoomSeatMenuDialog;
 import com.netease.audioroom.demo.util.InputUtils;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomMessage;
@@ -54,7 +53,7 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
     private boolean isAnchorMode;
     private VoiceRoomInfo mVoiceRoomInfo;
 
-    public ActivityBaseAudioBinding mBinding;
+    public ActivityRoomBinding mBinding;
 
     protected RoomSeatAdapter mRoomSeatAdapter;
     protected GridLayoutManager mSeatLayoutManager;
@@ -71,7 +70,7 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
 
         // 屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        mBinding = ActivityBaseAudioBinding.inflate(getLayoutInflater());
+        mBinding = ActivityRoomBinding.inflate(getLayoutInflater());
 
         setContentView(mBinding.getRoot());
 
@@ -174,11 +173,11 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
                 if (seat.getStatus() == VoiceRoomSeat.Status.APPLY) {
                     ToastUtils.showShort(getString(R.string.applying_now));
                 } else {
-                    SeatMenuDialog dialog;
+                    RoomSeatMenuDialog dialog;
                     if (isAnchorMode) {
-                        dialog = new SeatMenuDialog(ChatRoomActivity.this, seat, createAnchorMenuItem(seat));
+                        dialog = new RoomSeatMenuDialog(ChatRoomActivity.this, seat, createAnchorMenuItem(seat));
                     } else {
-                        dialog = new SeatMenuDialog(ChatRoomActivity.this, seat, createAudienceMenuItem(seat));
+                        dialog = new RoomSeatMenuDialog(ChatRoomActivity.this, seat, createAudienceMenuItem(seat));
                     }
                     dialog.show(getSupportFragmentManager(), dialog.getTag());
                 }
@@ -366,12 +365,16 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
             // 抱观众上麦（点击麦位）
             case VoiceRoomSeat.Status.INIT:
                 //menus.add("上麦");
-                //menus.add("申请上麦");
+                menus.add("申请上麦");
                 break;
             // 当前存在有效用户
             case VoiceRoomSeat.Status.ON:
                 // 当前麦位已经关闭
             case VoiceRoomSeat.Status.AUDIO_CLOSED:
+                if (TextUtils.equals(DemoCache.getAccountId(), seat.getAccount())) {
+                    menus.add("下麦");
+                }
+                break;
                 // 当前麦位已经被关闭
             case VoiceRoomSeat.Status.CLOSED:
                 // 且当前麦位无人，麦位禁麦触发

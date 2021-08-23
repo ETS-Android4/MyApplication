@@ -144,6 +144,9 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
 
     private final List<VoiceRoomSeat> seats = new ArrayList<>();
 
+    /**
+     * 是否初始化完成
+     */
     private boolean initial = false;
 
     /**
@@ -159,6 +162,14 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             onEnterRoom(result == NERtcConstants.ErrorCode.OK || result == NERtcConstants.ErrorCode.ENGINE_ERROR_ROOM_ALREADY_JOINED);
             //设置之前保存的采集音量
             engine.adjustRecordingSignalVolume(audioCaptureVolume);
+        }
+
+        @Override
+        public void onLeaveChannel(int result) {
+            Log.e("NERtcVoiceRoomImpl", "leave channel result code is " + result);
+            if (anchorMode || !initial || !voiceRoomInfo.isSupportCDN()) {
+                onLeaveRoom();
+            }
         }
 
         /**
@@ -187,14 +198,6 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
             }
             if (anchorMode) {
                 getStreamTaskControl().removeMixStreamUser(uid);
-            }
-        }
-
-        @Override
-        public void onLeaveChannel(int result) {
-            Log.e("NERtcVoiceRoomImpl", "leave channel result code is " + result);
-            if (anchorMode || !initial || !voiceRoomInfo.isSupportCDN()) {
-                onLeaveRoom();
             }
         }
 
@@ -389,8 +392,8 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     @Override
-    public void init(String appKey, RoomCallback callback) {
-        roomCallback = callback;
+    public void init(String appKey, RoomCallback roomCallback) {
+        this.roomCallback = roomCallback;
         NERtcOption option = new NERtcOption();
         if (BuildConfig.DEBUG) {
             option.logLevel = NERtcConstants.LogLevel.DEBUG;
@@ -951,8 +954,10 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     private void onQueueChange(ChatRoomQueueChangeAttachment queueChange) {
-        Log.i(LOG_TAG, "onQueueChange: type = " + queueChange.getChatRoomQueueChangeType() +
-                " key = " + queueChange.getKey() + " content = " + queueChange.getContent());
+        Log.i(LOG_TAG, "onQueueChange:" +
+                " type = " + queueChange.getChatRoomQueueChangeType() +
+                " key = " + queueChange.getKey() +
+                " content = " + queueChange.getContent());
         ChatRoomQueueChangeType type = queueChange.getChatRoomQueueChangeType();
         //清空所有队列元素
         if (type == ChatRoomQueueChangeType.DROP) {
@@ -1017,6 +1022,9 @@ public class NERtcVoiceRoomImpl extends NERtcVoiceRoomInner {
     }
 
     private void sendMessage(String text, boolean event) {
+        Log.i(LOG_TAG, "sendMessage:" +
+                " text = " + text +
+                " event = " + event);
         if (voiceRoomInfo == null) {
             return;
         }

@@ -201,11 +201,6 @@ public class AudienceImpl implements Audience {
     }
 
     @Override
-    public void fetchSeats(RequestCallback<List<VoiceRoomSeat>> callback) {
-        voiceRoom.fetchRoomSeats(callback);
-    }
-
-    @Override
     public VoiceRoomSeat getSeat() {
         return mySeat != null ? voiceRoom.getSeat(mySeat.getIndex()) : null;
     }

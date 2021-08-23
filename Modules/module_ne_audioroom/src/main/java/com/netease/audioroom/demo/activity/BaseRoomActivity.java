@@ -162,11 +162,6 @@ public abstract class BaseRoomActivity extends BaseActivity implements NERtcVoic
         if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
             more.setVisibility(View.VISIBLE);
         }
-        apply = findViewById(R.id.iv_room_apply);
-        //     -> 管理员可见
-        if (TextUtils.equals(DemoCache.getAccountId(), mVoiceRoomInfo.getCreatorAccount())) {
-            apply.setVisibility(View.VISIBLE);
-        }
 
         mSeatRecyclerView = baseAudioView.findViewById(R.id.recyclerview_seat);
         mMsgRecyclerView = baseAudioView.findViewById(R.id.recyclerview_message);

@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * 麦位申请列表
  */
-public class RoomSeatListDialog extends BaseRecyclerDialogFragment<VoiceRoomSeat> {
+public class RoomSeatApplyListDialog extends BaseRecyclerDialogFragment<VoiceRoomSeat> {
 
     @Override
     protected BaseQuickAdapter<VoiceRoomSeat, BaseViewHolder> setAdapter() {

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -15,7 +14,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.SeatMenuDialog;
+import com.netease.audioroom.demo.dialog.RoomSeatMenuDialog;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat.Reason;
@@ -51,7 +50,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
 
     @Override
     protected int getContentViewID() {
-        return R.layout.activity_audience;
+        return R.layout.activity_room;
     }
 
     @Override
@@ -97,7 +96,7 @@ public class AudienceRoomActivity extends BaseRoomActivity implements Audience.C
                         case Status.AUDIO_CLOSED_AND_MUTED:
                             //是否是自己
                             if (seat.isSameAccount(DemoCache.getAccountId())) {
-                                SeatMenuDialog dialog = new SeatMenuDialog(this, seat, createMenuItem(seat));
+                                RoomSeatMenuDialog dialog = new RoomSeatMenuDialog(this, seat, createMenuItem(seat));
                                 dialog.show(getSupportFragmentManager(), dialog.getTag());
                             } else {
                                 ToastUtils.showShort("当前麦位有人");

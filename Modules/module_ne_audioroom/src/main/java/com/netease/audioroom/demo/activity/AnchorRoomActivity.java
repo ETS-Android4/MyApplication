@@ -5,9 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -16,8 +15,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.ChatRoomHelper;
 import com.netease.audioroom.demo.R;
 import com.netease.audioroom.demo.cache.DemoCache;
-import com.netease.audioroom.demo.dialog.RoomSeatListDialog;
-import com.netease.audioroom.demo.dialog.SeatMenuDialog;
+import com.netease.audioroom.demo.dialog.RoomSeatApplyListDialog;
+import com.netease.audioroom.demo.dialog.RoomSeatMenuDialog;
 import com.netease.audioroom.demo.http.ChatRoomHttpClient;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomInfo;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
@@ -42,11 +41,11 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         }
     }
 
-    private TextView tvApplyHint;
+    private ImageView ivApplyList;
 
     @Override
     protected int getContentViewID() {
-        return R.layout.activity_anchor;
+        return R.layout.activity_room;
     }
 
     @Override
@@ -81,12 +80,12 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
                         .show();
             }
         });
-        tvApplyHint = findViewById(R.id.apply_hint);
-        tvApplyHint.setVisibility(View.INVISIBLE);
-        tvApplyHint.setClickable(true);
-        tvApplyHint.setOnClickListener(view -> {
+        ivApplyList = findViewById(R.id.iv_room_apply);
+        ivApplyList.setVisibility(View.INVISIBLE);
+        ivApplyList.setClickable(true);
+        ivApplyList.setOnClickListener(view -> {
                     //申请上麦弹窗
-                    RoomSeatListDialog dialog = new RoomSeatListDialog();
+                    RoomSeatApplyListDialog dialog = new RoomSeatApplyListDialog();
                     dialog.show(getSupportFragmentManager(), dialog.getTag());
                 }
         );
@@ -97,7 +96,7 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
         if (seat.getStatus() == Status.APPLY) {
             ToastUtils.showShort(getString(R.string.applying_now));
         } else {
-            SeatMenuDialog dialog = new SeatMenuDialog(this, seat, createMenuItem(seat));
+            RoomSeatMenuDialog dialog = new RoomSeatMenuDialog(this, seat, createMenuItem(seat));
             dialog.show(getSupportFragmentManager(), dialog.getTag());
         }
     }
@@ -115,10 +114,9 @@ public class AnchorRoomActivity extends BaseRoomActivity implements Anchor.Callb
     public void onApplySeats(List<VoiceRoomSeat> seats) {
         int size = seats.size();
         if (size > 0) {
-            tvApplyHint.setVisibility(View.VISIBLE);
-            tvApplyHint.setText(getString(R.string.apply_micro_has_arrow, size));
+            ivApplyList.setVisibility(View.VISIBLE);
         } else {
-            tvApplyHint.setVisibility(View.INVISIBLE);
+            ivApplyList.setVisibility(View.INVISIBLE);
         }
     }
 
