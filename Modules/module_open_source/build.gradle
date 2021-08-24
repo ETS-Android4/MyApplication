@@ -47,8 +47,6 @@ dependencies {
     implementation deps.badgeview
     //https://github.com/youth5201314/banner
     implementation deps.banner
-    //https://github.com/saiwu-bigkoo/Android-ConvenientBanner
-    implementation deps.banner_convenient
     //https://github.com/zaaach/CityPicker
     implementation deps.citypicker
     //https://github.com/iwgang/CountdownView

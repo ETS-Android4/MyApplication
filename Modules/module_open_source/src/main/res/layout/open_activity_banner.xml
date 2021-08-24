@@ -6,30 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.BannerActivity">
 
-    <com.bigkoo.convenientbanner.ConvenientBanner
-        android:id="@+id/localConvenientBanner"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:autoTurningTime="2000"
-        app:canLoop="true"
-        app:layout_constraintBottom_toTopOf="@+id/netConvenientBanner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
-
-    <com.bigkoo.convenientbanner.ConvenientBanner
-        android:id="@+id/netConvenientBanner"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:autoTurningTime="2000"
-        app:canLoop="true"
-        app:layout_constraintBottom_toTopOf="@+id/banner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/localConvenientBanner"
-        app:layout_constraintVertical_weight="1" />
-
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
@@ -37,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/netConvenientBanner"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

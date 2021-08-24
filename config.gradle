@@ -168,9 +168,6 @@ ext {
             //https://github.com/youth5201314/banner
             banner             : "com.youth.banner:banner:2.1.0",
 
-            //https://github.com/saiwu-bigkoo/Android-ConvenientBanner
-            banner_convenient  : "com.bigkoo:convenientbanner:2.1.5",
-
             //https://github.com/zaaach/CityPicker
             citypicker         : "com.zaaach:citypicker:2.0.3",
 

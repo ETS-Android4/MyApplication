@@ -73,7 +73,6 @@
 1. 可拖拽小红点： https://github.com/qstumn/BadgeView
 2. 万能适配器器： https://github.com/CymChad/BaseRecyclerViewAdapterHelper
 3. Banner轮播图控件：https://github.com/youth5201314/banner
-4. Banner轮播图控件： https://github.com/saiwu-bigkoo/Android-ConvenientBanner
 5. 城市选择器： https://github.com/zaaach/CityPicker)
 6. 倒计时控件： https://github.com/iwgang/CountdownView
 7. 悬浮窗：https://github.com/princekin-f/EasyFloat
