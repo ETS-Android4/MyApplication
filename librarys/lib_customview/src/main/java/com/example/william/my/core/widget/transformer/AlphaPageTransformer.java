@@ -1,7 +1,5 @@
 package com.example.william.my.core.widget.transformer;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
@@ -28,25 +26,18 @@ public class AlphaPageTransformer extends BasePageTransformer {
         mPageTransformer = pageTransformer;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void pageTransform(View view, float position) {
+    @Override
+    protected void handleInvisiblePage(View view, float position) {
+        view.setAlpha(mMinAlpha);
+    }
 
-        view.setScaleX(0.999f);//hack
+    @Override
+    protected void handleLeftPage(View view, float position) {
+        view.setAlpha(mMinAlpha + (1 - mMinAlpha) * (1 + position));
+    }
 
-        if (position < -1) { // [-Infinity,-1)
-            view.setAlpha(mMinAlpha);
-        } else if (position <= 1) { // [-1,1]
-            float factor;
-            if (position < 0) {  //[0，-1]
-                //[1,min]
-                factor = mMinAlpha + (1 - mMinAlpha) * (1 + position);
-            } else {//[1，0]
-                //[min,1]
-                factor = mMinAlpha + (1 - mMinAlpha) * (1 - position);
-            }
-            view.setAlpha(factor);
-        } else { // (1,+Infinity]
-            view.setAlpha(mMinAlpha);
-        }
+    @Override
+    protected void handleRightPage(View view, float position) {
+        view.setAlpha(mMinAlpha + (1 - mMinAlpha) * (1 - position));
     }
 }

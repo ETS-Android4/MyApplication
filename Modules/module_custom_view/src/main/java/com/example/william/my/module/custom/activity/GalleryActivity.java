@@ -11,7 +11,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.core.widget.transformer.ScaleInTransformer;
+import com.example.william.my.core.widget.transformer.DepthPageTransformer;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
@@ -63,6 +63,8 @@ public class GalleryActivity extends BaseActivity {
         });
 
         //mViewPager.setPageTransformer(true, new AlphaPageTransformer());
-        mViewPager.setPageTransformer(true, new ScaleInTransformer());
+        //mViewPager.setPageTransformer(true, new CubePageTransformer());
+        //mViewPager.setPageTransformer(true, new DepthPageTransformer());
+        //mViewPager.setPageTransformer(true, new ScaleInTransformer());
     }
 }

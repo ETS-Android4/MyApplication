@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 public abstract class BasePageTransformer implements ViewPager.PageTransformer {
 
@@ -18,8 +19,35 @@ public abstract class BasePageTransformer implements ViewPager.PageTransformer {
         if (mPageTransformer != null) {
             mPageTransformer.transformPage(view, position);
         }
-        pageTransform(view, position);
+        if (view.getParent() instanceof ViewPager) {
+            position = getRealPosition((ViewPager) view.getParent(), view);
+        } else if (view.getParent() instanceof ViewPager2) {
+            position = getRealPosition((ViewPager2) view.getParent(), view);
+        }
+        if (position < -1.0f) {
+            handleInvisiblePage(view, position);
+        } else if (position <= 0.0f) {
+            handleLeftPage(view, position);
+        } else if (position <= 1.0f) {
+            handleRightPage(view, position);
+        } else if (position > 1.0f) {
+            handleInvisiblePage(view, position);
+        }
     }
 
-    protected abstract void pageTransform(View view, float position);
+    protected abstract void handleInvisiblePage(View view, float position);
+
+    protected abstract void handleLeftPage(View view, float position);
+
+    protected abstract void handleRightPage(View view, float position);
+
+    private float getRealPosition(ViewPager viewPager, View page) {
+        int width = viewPager.getMeasuredWidth() - viewPager.getPaddingLeft() - viewPager.getPaddingRight();
+        return (float) (page.getLeft() - viewPager.getScrollX() - viewPager.getPaddingLeft()) / width;
+    }
+
+    private float getRealPosition(ViewPager2 viewPager, View page) {
+        int width = viewPager.getMeasuredWidth() - viewPager.getPaddingLeft() - viewPager.getPaddingRight();
+        return (float) (page.getLeft() - viewPager.getScrollX() - viewPager.getPaddingLeft()) / width;
+    }
 }
