@@ -4,6 +4,7 @@
 
     <application>
         <activity android:name=".CustomViewActivity" />
+        <activity android:name=".activity.BannerActivity" />
         <activity android:name=".activity.BlurViewActivity" />
         <activity android:name=".activity.GalleryActivity" />
         <activity android:name=".activity.GestureLockActivity" />

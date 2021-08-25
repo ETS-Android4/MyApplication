@@ -4,6 +4,7 @@ include ':app'
 include ':library'
 include ':module'
 
+include ':librarys:lib_banner'
 include ':librarys:lib_customview'
 
 include ':librarys:lib_okhttp'

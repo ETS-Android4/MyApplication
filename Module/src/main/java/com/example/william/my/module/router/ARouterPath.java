@@ -54,6 +54,7 @@ public class ARouterPath {
 
     public static class CustomView {
         public static final String CustomView = "/module_custom/custom";
+        public static final String CustomView_Banner = "/module_custom/banner";
         public static final String CustomView_BlurView = "/module_custom/blur_view";
         public static final String CustomView_Gallery = "/module_custom/gallery";
         public static final String CustomView_GestureLock = "/module_custom/gesture_lock";

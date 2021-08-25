@@ -2,6 +2,6 @@ android {
     resourcePrefix "custom_"
 }
 dependencies {
+    implementation project(path: ':librarys:lib_banner')
     implementation project(path: ':librarys:lib_customview')
-
 }
