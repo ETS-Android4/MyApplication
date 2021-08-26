@@ -2,7 +2,7 @@ package com.example.william.my.core.banner.holder;
 
 import android.view.ViewGroup;
 
-public interface IViewHolder<T, VH> {
+public interface IViewHolder<VH> {
 
     /**
      * 创建ViewHolder
@@ -19,6 +19,6 @@ public interface IViewHolder<T, VH> {
      * @param position 当前位置
      * @param size     总数
      */
-    void onBindView(VH holder, T data, int position, int size);
+    void onBindView(VH holder, Object data, int position, int size);
 
 }

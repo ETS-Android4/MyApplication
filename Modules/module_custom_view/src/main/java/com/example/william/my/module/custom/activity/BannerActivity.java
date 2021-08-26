@@ -26,13 +26,13 @@ public class BannerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_activity_banner);
         mBanner = findViewById(R.id.banner);
-        mBanner.setAdapter(new BannerImageAdapter<Integer>(Arrays.asList(mImagesLocal)) {
-
-            @Override
-            public void onBindView(BannerImageHolder holder, Integer data, int position, int size) {
-                holder.imageView.setImageResource(data);
-            }
-        });
+//        mBanner.setAdapter(new BannerImageAdapter(Arrays.asList(mImagesLocal)) {
+//
+//            @Override
+//            public void onBindView(BannerImageHolder holder, Object data, int position, int size) {
+//                holder.imageView.setImageResource(data);
+//            }
+//        });
 //                .addBannerLifecycleObserver(this)//添加生命周期观察者
 //                .setIndicator(new CircleIndicator(this));
     }

@@ -10,6 +10,7 @@ public class CustomViewActivity extends BaseListActivity {
     @Override
     protected void initData() {
         super.initData();
+        mMap.put("BannerActivity", ARouterPath.CustomView.CustomView_Banner);
         mMap.put("BlurViewActivity", ARouterPath.CustomView.CustomView_BlurView);
         mMap.put("GalleryActivity", ARouterPath.CustomView.CustomView_Gallery);
         mMap.put("GestureLockActivity", ARouterPath.CustomView.CustomView_GestureLock);

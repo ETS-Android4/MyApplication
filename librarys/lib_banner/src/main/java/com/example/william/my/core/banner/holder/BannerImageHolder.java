@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class BannerImageHolder extends RecyclerView.ViewHolder {
+
     public ImageView imageView;
 
     public BannerImageHolder(@NonNull View view) {
