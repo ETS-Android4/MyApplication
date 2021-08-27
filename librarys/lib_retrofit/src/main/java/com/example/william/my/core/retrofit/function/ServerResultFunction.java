@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.functions.Function;
  */
 public class ServerResultFunction<T> implements Function<RetrofitResponse<JsonElement>, RetrofitResponse<T>> {
 
-    private final String TAG = getClass().getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     @SuppressWarnings("unchecked")
     @Override

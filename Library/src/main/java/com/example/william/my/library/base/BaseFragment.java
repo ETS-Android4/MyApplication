@@ -19,7 +19,7 @@ import com.example.william.my.library.fragment.LazyFragment;
  */
 public class BaseFragment extends LazyFragment {
 
-    public final String TAG = this.getClass().getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     @Override
     protected int getLayout() {

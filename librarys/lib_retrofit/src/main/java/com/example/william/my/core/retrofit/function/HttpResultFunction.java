@@ -17,7 +17,7 @@ import io.reactivex.rxjava3.functions.Function;
  */
 public class HttpResultFunction<T> implements Function<Throwable, ObservableSource<T>> {
 
-    private final String TAG = getClass().getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
     @Override
     public ObservableSource<T> apply(@NonNull Throwable throwable) throws Exception {
