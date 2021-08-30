@@ -4,8 +4,10 @@ include ':app'
 include ':library'
 include ':module'
 
-include ':librarys:lib_banner'
 include ':librarys:lib_customview'
+
+include ':librarys:lib_banner'
+include ':librarys:lib_security_code'
 
 include ':librarys:lib_okhttp'
 include ':librarys:lib_retrofit'
@@ -24,7 +26,6 @@ include ':modules:module_jetpack'
 include ':modules:module_kotlin'
 include ':modules:module_sample'
 
-//include ':modules:module_ne_voiceroom'
 include ':modules:module_ne_audioroom'
 
 //include ':modules:module_flutter'

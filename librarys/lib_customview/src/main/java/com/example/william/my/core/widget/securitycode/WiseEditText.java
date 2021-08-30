@@ -11,7 +11,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 public class WiseEditText extends AppCompatEditText {
 
-
     private OnKeyListener keyListener;
 
     public WiseEditText(Context context, AttributeSet attrs, int defStyle) {
@@ -60,7 +59,9 @@ public class WiseEditText extends AppCompatEditText {
 
     }
 
-    //设置监听回调
+    /**
+     * 设置监听回调
+     */
     public void setSoftKeyListener(OnKeyListener listener) {
         keyListener = listener;
     }

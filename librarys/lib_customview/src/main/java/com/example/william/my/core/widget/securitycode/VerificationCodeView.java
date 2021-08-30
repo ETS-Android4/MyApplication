@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.example.william.my.core.widget.R;
 import com.example.william.my.core.widget.utils.SizeUtils;
@@ -326,7 +327,7 @@ public class VerificationCodeView extends RelativeLayout {
      */
     public void setCursorRes(@DrawableRes int drawableRes) {
         try {
-            java.lang.reflect.Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
+            java.lang.reflect.Field f = AppCompatTextView.class.getDeclaredField("mCursorDrawableRes");
             f.setAccessible(true);
             f.set(editText, drawableRes);
         } catch (Exception e) {
