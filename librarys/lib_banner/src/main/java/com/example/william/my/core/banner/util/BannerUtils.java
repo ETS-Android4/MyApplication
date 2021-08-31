@@ -1,4 +1,4 @@
-package com.example.william.my.core.banner.utils;
+package com.example.william.my.core.banner.util;
 
 import android.content.res.Resources;
 import android.graphics.Outline;

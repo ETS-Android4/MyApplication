@@ -5,32 +5,35 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.william.my.core.banner.R;
 import com.example.william.my.core.banner.holder.IViewHolder;
-import com.example.william.my.core.banner.utils.BannerUtils;
+import com.example.william.my.core.banner.listener.OnBannerListener;
+import com.example.william.my.core.banner.util.BannerUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
+public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> implements IViewHolder<T, VH> {
 
-public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> implements IViewHolder<VH> {
-
-    protected List<Object> mDatas = new ArrayList<>();
+    protected List<T> mData;
 
     private VH mViewHolder;
+
     private int mIncreaseCount = 2;//画廊模式，首尾增加个数
 
-    public BannerAdapter(List<Object> datas) {
-        setDatas(datas);
+    private OnBannerListener<T> mOnBannerListener;
+
+    public BannerAdapter(List<T> data) {
+        setData(data);
     }
 
     /**
      * 设置实体集合（可以在自己的adapter自定义，不一定非要使用）
      *
-     * @param datas
+     * @param data
      */
-    public void setDatas(List<Object> datas) {
-        if (datas != null) {
-            mDatas = datas;
+    public void setData(List<T> data) {
+        if (data != null) {
+            mData = data;
             notifyDataSetChanged();
         }
     }
@@ -41,8 +44,8 @@ public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> exten
      * @param position 真实的position
      * @return
      */
-    public Object getData(int position) {
-        return mDatas.get(position);
+    public T getData(int position) {
+        return mData.get(position);
     }
 
     /**
@@ -51,23 +54,36 @@ public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> exten
      * @param position 这里传的position不是真实的，获取时转换了一次
      * @return
      */
-    public Object getRealData(int position) {
-        return mDatas.get(getRealPosition(position));
+    public T getRealData(int position) {
+        return mData.get(getRealPosition(position));
     }
-
 
     @Override
     public final void onBindViewHolder(@NonNull VH holder, int position) {
         mViewHolder = holder;
         int real = getRealPosition(position);
-        Object data = mDatas.get(real);
-        onBindView(holder, mDatas.get(real), real, getRealCount());
+        T data = mData.get(real);
+        holder.itemView.setTag(R.id.banner_data_key, data);
+        holder.itemView.setTag(R.id.banner_pos_key, real);
+        onBindView(holder, mData.get(real), real, getRealCount());
+        if (mOnBannerListener != null) {
+            holder.itemView.setOnClickListener(view -> mOnBannerListener.OnBannerClick(data, real));
+        }
     }
 
     @NonNull
     @Override
+    @SuppressWarnings("unchecked")
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return onCreateHolder(parent, viewType);
+        VH vh = onCreateHolder(parent, viewType);
+        vh.itemView.setOnClickListener(v -> {
+            if (mOnBannerListener != null) {
+                T data = (T) vh.itemView.getTag(R.id.banner_data_key);
+                int real = (int) vh.itemView.getTag(R.id.banner_pos_key);
+                mOnBannerListener.OnBannerClick(data, real);
+            }
+        });
+        return vh;
     }
 
     @Override
@@ -76,11 +92,15 @@ public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> exten
     }
 
     public int getRealCount() {
-        return mDatas == null ? 0 : mDatas.size();
+        return mData == null ? 0 : mData.size();
     }
 
     public int getRealPosition(int position) {
         return BannerUtils.getRealPosition(mIncreaseCount == 2, position, getRealCount());
+    }
+
+    public void setOnBannerListener(OnBannerListener<T> listener) {
+        this.mOnBannerListener = listener;
     }
 
     public VH getViewHolder() {

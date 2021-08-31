@@ -11,8 +11,6 @@ import com.example.william.my.core.banner.holder.BannerImageHolder;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
 
-import java.util.Arrays;
-
 @Route(path = ARouterPath.CustomView.CustomView_Banner)
 public class BannerActivity extends AppCompatActivity {
 

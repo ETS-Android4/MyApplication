@@ -6,6 +6,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 
 public class BannerLifecycleObserverAdapter implements LifecycleObserver {
+
     private final BannerLifecycleObserver mObserver;
     private final LifecycleOwner mLifecycleOwner;
 
@@ -28,5 +29,4 @@ public class BannerLifecycleObserverAdapter implements LifecycleObserver {
     public void onDestroy() {
         mObserver.onDestroy(mLifecycleOwner);
     }
-
 }

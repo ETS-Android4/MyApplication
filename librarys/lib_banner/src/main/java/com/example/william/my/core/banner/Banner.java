@@ -6,8 +6,13 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class Banner extends FrameLayout {
+import com.example.william.my.core.banner.adapter.BannerAdapter;
+import com.example.william.my.core.banner.observer.BannerLifecycleObserver;
+
+public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHolder>> extends FrameLayout implements BannerLifecycleObserver {
 
     public Banner(@NonNull Context context) {
         super(context);
@@ -19,5 +24,20 @@ public class Banner extends FrameLayout {
 
     public Banner(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    public void onStop(LifecycleOwner owner) {
+
+    }
+
+    @Override
+    public void onStart(LifecycleOwner owner) {
+
+    }
+
+    @Override
+    public void onDestroy(LifecycleOwner owner) {
+
     }
 }

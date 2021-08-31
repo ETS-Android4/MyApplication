@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * 默认实现的图片适配器，图片加载需要自己实现
  */
-public abstract class BannerImageAdapter extends BannerAdapter<Object, BannerImageHolder> {
+public abstract class BannerImageAdapter<T> extends BannerAdapter<T, BannerImageHolder> {
 
-    public BannerImageAdapter(List<Object> mData) {
+    public BannerImageAdapter(List<T> mData) {
         super(mData);
     }
 
