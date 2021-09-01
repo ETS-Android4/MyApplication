@@ -3,7 +3,7 @@ package com.example.william.my.core.banner.listener;
 import androidx.annotation.Px;
 import androidx.viewpager2.widget.ViewPager2;
 
-public interface OnPageChangeListener {
+public interface BannerOnPageChangeListener {
 
     /**
      * This method will be invoked when the current page is scrolled, either as part

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.william.my.core.banner.R;
 import com.example.william.my.core.banner.holder.IViewHolder;
-import com.example.william.my.core.banner.listener.OnBannerListener;
+import com.example.william.my.core.banner.listener.BannerListener;
 import com.example.william.my.core.banner.util.BannerUtils;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> exten
 
     private int mIncreaseCount = 2;//画廊模式，首尾增加个数
 
-    private OnBannerListener<T> mOnBannerListener;
+    private BannerListener<T> mBannerListener;
 
     public BannerAdapter(List<T> data) {
         setData(data);
@@ -66,8 +66,8 @@ public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> exten
         holder.itemView.setTag(R.id.banner_data_key, data);
         holder.itemView.setTag(R.id.banner_pos_key, real);
         onBindView(holder, mData.get(real), real, getRealCount());
-        if (mOnBannerListener != null) {
-            holder.itemView.setOnClickListener(view -> mOnBannerListener.OnBannerClick(data, real));
+        if (mBannerListener != null) {
+            holder.itemView.setOnClickListener(view -> mBannerListener.OnBannerClick(data, real));
         }
     }
 
@@ -77,10 +77,10 @@ public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> exten
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         VH vh = onCreateHolder(parent, viewType);
         vh.itemView.setOnClickListener(v -> {
-            if (mOnBannerListener != null) {
+            if (mBannerListener != null) {
                 T data = (T) vh.itemView.getTag(R.id.banner_data_key);
                 int real = (int) vh.itemView.getTag(R.id.banner_pos_key);
-                mOnBannerListener.OnBannerClick(data, real);
+                mBannerListener.OnBannerClick(data, real);
             }
         });
         return vh;
@@ -99,8 +99,8 @@ public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> exten
         return BannerUtils.getRealPosition(mIncreaseCount == 2, position, getRealCount());
     }
 
-    public void setOnBannerListener(OnBannerListener<T> listener) {
-        this.mOnBannerListener = listener;
+    public void setOnBannerListener(BannerListener<T> listener) {
+        this.mBannerListener = listener;
     }
 
     public VH getViewHolder() {

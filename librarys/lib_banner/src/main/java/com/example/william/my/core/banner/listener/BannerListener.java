@@ -1,6 +1,6 @@
 package com.example.william.my.core.banner.listener;
 
-public interface OnBannerListener<T> {
+public interface BannerListener<T> {
 
     /**
      * 点击事件

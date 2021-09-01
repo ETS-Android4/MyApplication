@@ -2,29 +2,35 @@ package com.example.william.my.core.banner;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.william.my.core.banner.adapter.BannerAdapter;
-import com.example.william.my.core.banner.callback.BannerOnPageChangeCallback;
+import com.example.william.my.core.banner.indicator.Indicator;
+import com.example.william.my.core.banner.listener.BannerOnPageChangeListener;
 import com.example.william.my.core.banner.observer.BannerLifecycleObserver;
 import com.example.william.my.core.banner.observer.BannerLifecycleObserverAdapter;
 import com.example.william.my.core.banner.task.AutoLoopTask;
+import com.example.william.my.core.banner.util.BannerUtils;
 
 public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHolder>> extends RelativeLayout implements BannerLifecycleObserver {
 
     private BA mAdapter;
     private ViewPager2 mViewPager2;
 
+    private Indicator mIndicator;
+
     private BannerOnPageChangeCallback mPageChangeCallback;
+    private BannerOnPageChangeListener mBannerChangeListener;
+
     private CompositePageTransformer mCompositePageTransformer;
 
     // 是否允许无限轮播（即首尾直接切换）
@@ -34,11 +40,14 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     private int mStartPosition = 1;
 
     // 是否自动轮播
-    private boolean mIsAutoLoop = true;
+    private boolean mIsAutoLoop = false;
     // 轮播切换间隔时间
-    public long mLoopTime = 3000;
+    public long mLoopTime = 1000;
     // 轮播任务
     public AutoLoopTask<T, BA> mLoopTask;
+
+    // 是否要拦截事件
+//    private boolean isIntercept = true;
 
     public Banner(@NonNull Context context) {
         this(context, null);
@@ -79,6 +88,51 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (!getViewPager2().isUserInputEnabled()) {
+            return super.dispatchTouchEvent(ev);
+        }
+        int action = ev.getActionMasked();
+        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_OUTSIDE) {
+            start();
+        } else if (action == MotionEvent.ACTION_DOWN) {
+            stop();
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent event) {
+//        if (!getViewPager2().isUserInputEnabled() || !isIntercept) {
+//            return super.onInterceptTouchEvent(event);
+//        }
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                mStartX = event.getX();
+//                mStartY = event.getY();
+//                getParent().requestDisallowInterceptTouchEvent(true);
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                float endX = event.getX();
+//                float endY = event.getY();
+//                float distanceX = Math.abs(endX - mStartX);
+//                float distanceY = Math.abs(endY - mStartY);
+//                if (getViewPager2().getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
+//                    mIsViewPager2Drag = distanceX > mTouchSlop && distanceX > distanceY;
+//                } else {
+//                    mIsViewPager2Drag = distanceY > mTouchSlop && distanceY > distanceX;
+//                }
+//                getParent().requestDisallowInterceptTouchEvent(mIsViewPager2Drag);
+//                break;
+//            case MotionEvent.ACTION_UP:
+//            case MotionEvent.ACTION_CANCEL:
+//                getParent().requestDisallowInterceptTouchEvent(false);
+//                break;
+//        }
+//        return super.onInterceptTouchEvent(event);
+//    }
+
+    @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         start();
@@ -89,6 +143,63 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
         super.onDetachedFromWindow();
         stop();
     }
+
+    class BannerOnPageChangeCallback extends ViewPager2.OnPageChangeCallback {
+
+        private boolean isScrolled;
+        private int mTempPosition = -1;
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            int realPosition = BannerUtils.getRealPosition(isInfiniteLoop(), position, getRealCount());
+            if (mBannerChangeListener != null && realPosition == getCurrentItem() - 1) {
+                mBannerChangeListener.onPageScrolled(realPosition, positionOffset, positionOffsetPixels);
+            }
+            if (getIndicator() != null && realPosition == getCurrentItem() - 1) {
+                getIndicator().onPageScrolled(realPosition, positionOffset, positionOffsetPixels);
+            }
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (isScrolled) {
+                mTempPosition = position;
+                int realPosition = BannerUtils.getRealPosition(isInfiniteLoop(), position, getRealCount());
+                if (mBannerChangeListener != null) {
+                    mBannerChangeListener.onPageSelected(realPosition);
+                }
+                if (getIndicator() != null) {
+                    getIndicator().onPageSelected(realPosition);
+                }
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            //手势滑动中,代码执行滑动中
+            if (state == ViewPager2.SCROLL_STATE_DRAGGING ||
+                    state == ViewPager2.SCROLL_STATE_SETTLING) {
+                isScrolled = true;
+            } else if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                //滑动闲置或滑动结束
+                isScrolled = false;
+                if (mTempPosition != -1 && isInfiniteLoop()) {
+                    if (mTempPosition == 0) {
+                        setCurrentItem(getRealCount(), false);
+                    } else if (mTempPosition == getItemCount() - 1) {
+                        setCurrentItem(1, false);
+                    }
+                }
+            }
+            if (mBannerChangeListener != null) {
+                mBannerChangeListener.onPageScrollStateChanged(state);
+            }
+            if (getIndicator() != null) {
+                getIndicator().onPageScrollStateChanged(state);
+            }
+        }
+    }
+
 
     private final RecyclerView.AdapterDataObserver mAdapterDataObserver = new RecyclerView.AdapterDataObserver() {
         @Override
@@ -122,6 +233,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
 
     /**
      * 是否允许自动轮播
+     *
      * @return
      */
     public boolean isAutoLoop() {
@@ -154,11 +266,21 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     }
 
     /**
-     * Banner页面数量
+     * 返回banner页面总数
      */
     public int getItemCount() {
         if (getAdapter() != null) {
             return getAdapter().getItemCount();
+        }
+        return 0;
+    }
+
+    /**
+     * 返回banner真实总数
+     */
+    public int getRealCount() {
+        if (getAdapter() != null) {
+            return getAdapter().getRealCount();
         }
         return 0;
     }
@@ -218,7 +340,20 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     }
 
     /**
-     * 设置PageTransformer，和addPageTransformer不同，这个只支持一种transformer
+     * 添加viewpager切换事件
+     * <p>
+     * 在viewpager2中切换事件{@link ViewPager2.OnPageChangeCallback}是一个抽象类，
+     * 为了方便使用习惯这里用的是和viewpager一样的{@link ViewPager.OnPageChangeListener}接口
+     * </p>
+     */
+    public Banner<T, BA> addBannerChangeListener(BannerOnPageChangeListener onPageChangeListener) {
+        this.mBannerChangeListener = onPageChangeListener;
+        return this;
+    }
+
+    /**
+     * 设置PageTransformer
+     * 和addPageTransformer不同，这个只支持一种transformer
      */
     public Banner<T, BA> setPageTransformer(@Nullable ViewPager2.PageTransformer transformer) {
         getViewPager2().setPageTransformer(transformer);
@@ -230,7 +365,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      * {@link ViewPager2.PageTransformer}
      * 如果找不到请导入implementation "androidx.viewpager2:viewpager2:1.0.0"
      */
-    public Banner<T, BA> addPageTransformer(@Nullable ViewPager2.PageTransformer transformer) {
+    public Banner<T, BA> addPageTransformer(ViewPager2.PageTransformer transformer) {
         mCompositePageTransformer.addTransformer(transformer);
         return this;
     }
@@ -238,6 +373,10 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     public Banner<T, BA> removeTransformer(ViewPager2.PageTransformer transformer) {
         mCompositePageTransformer.removeTransformer(transformer);
         return this;
+    }
+
+    public Indicator getIndicator() {
+        return mIndicator;
     }
 
     /**
