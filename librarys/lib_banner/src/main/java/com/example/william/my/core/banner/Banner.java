@@ -2,8 +2,9 @@ package com.example.william.my.core.banner;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.MotionEvent;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +22,7 @@ import com.example.william.my.core.banner.observer.BannerLifecycleObserverAdapte
 import com.example.william.my.core.banner.task.AutoLoopTask;
 import com.example.william.my.core.banner.util.BannerUtils;
 
-public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHolder>> extends RelativeLayout implements BannerLifecycleObserver {
+public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHolder>> extends FrameLayout implements BannerLifecycleObserver {
 
     private BA mAdapter;
     private ViewPager2 mViewPager2;
@@ -64,6 +65,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
 
     private void init(Context context) {
         mLoopTask = new AutoLoopTask<>(this);
+        setInfiniteLoop();
 
         mViewPager2 = new ViewPager2(context);
         LayoutParams mLayoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -75,8 +77,6 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
 
         mCompositePageTransformer = new CompositePageTransformer();
         mViewPager2.setPageTransformer(mCompositePageTransformer);
-
-        setInfiniteLoop();
     }
 
     private void setInfiniteLoop() {
@@ -209,9 +209,33 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
             } else {
                 start();
             }
-            //setIndicatorPageChange();
+            setIndicatorPageChange();
         }
     };
+
+    private void initIndicator() {
+        if (getIndicator() == null || getAdapter() == null) {
+            return;
+        }
+        removeIndicator();
+        LayoutParams mLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        mLayoutParams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
+        addView(getIndicator().getIndicatorView(), mLayoutParams);
+        setIndicatorPageChange();
+    }
+
+    public void removeIndicator() {
+        if (getIndicator() != null) {
+            removeView(getIndicator().getIndicatorView());
+        }
+    }
+
+    public void setIndicatorPageChange() {
+        if (getIndicator() != null) {
+            int realPosition = BannerUtils.getRealPosition(isInfiniteLoop(), getCurrentItem(), getRealCount());
+            getIndicator().onPageChanged(getRealCount(), realPosition);
+        }
+    }
 
     /*
      * **********************************************************************
@@ -311,17 +335,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      * 设置banner的适配器
      */
     public Banner<T, BA> setAdapter(BA adapter) {
-        if (adapter == null) {
-            throw new NullPointerException(getContext().getString(R.string.banner_adapter_null_error));
-        }
-        this.mAdapter = adapter;
-        if (!isInfiniteLoop()) {
-            getAdapter().setIncreaseCount(0);
-        }
-        getAdapter().registerAdapterDataObserver(mAdapterDataObserver);
-        mViewPager2.setAdapter(adapter);
-        setCurrentItem(mStartPosition, false);
-        //initIndicator();
+        setAdapter(adapter, true);
         return this;
     }
 
@@ -335,7 +349,28 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     public Banner<T, BA> setAdapter(BA adapter, boolean isInfiniteLoop) {
         mIsInfiniteLoop = isInfiniteLoop;
         setInfiniteLoop();
-        setAdapter(adapter);
+
+        if (adapter == null) {
+            throw new NullPointerException(getContext().getString(R.string.banner_adapter_null_error));
+        }
+        this.mAdapter = adapter;
+        if (!isInfiniteLoop()) {
+            getAdapter().setIncreaseCount(0);
+        }
+        getAdapter().registerAdapterDataObserver(mAdapterDataObserver);
+        mViewPager2.setAdapter(adapter);
+        setCurrentItem(mStartPosition, false);
+        initIndicator();
+        return this;
+    }
+
+    /**
+     * 设置轮播指示器
+     */
+    public Banner<T, BA> setIndicator(Indicator indicator) {
+        removeIndicator();
+        this.mIndicator = indicator;
+        initIndicator();
         return this;
     }
 
