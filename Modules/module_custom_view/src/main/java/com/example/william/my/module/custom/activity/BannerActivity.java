@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.banner.Banner;
 import com.example.william.my.core.banner.adapter.BannerImageAdapter;
 import com.example.william.my.core.banner.holder.BannerImageHolder;
+import com.example.william.my.core.banner.indicator.CircleIndicator;
 import com.example.william.my.core.banner.indicator.NumIndicator;
 import com.example.william.my.core.imageloader.ImageLoader;
 import com.example.william.my.module.custom.R;
@@ -35,6 +36,7 @@ public class BannerActivity extends AppCompatActivity {
             }
         })
                 .addBannerLifecycleObserver(this)//添加生命周期观察者
+                //.setIndicator(new CircleIndicator(this));
                 .setIndicator(new NumIndicator(this));
     }
 }

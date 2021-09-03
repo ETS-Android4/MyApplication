@@ -13,8 +13,8 @@ public class BaseIndicator extends View implements Indicator {
 
     protected Paint mPaint;
 
-    protected int indicatorSize;
-    protected int currentPosition;
+    protected int mIndicatorSize;
+    protected int mCurrentPosition;
 
     public BaseIndicator(Context context) {
         this(context, null);
@@ -39,8 +39,8 @@ public class BaseIndicator extends View implements Indicator {
 
     @Override
     public void onPageChanged(int count, int currentPosition) {
-        this.indicatorSize = count;
-        this.currentPosition = currentPosition;
+        this.mIndicatorSize = count;
+        this.mCurrentPosition = currentPosition;
         requestLayout();
     }
 
@@ -51,7 +51,7 @@ public class BaseIndicator extends View implements Indicator {
 
     @Override
     public void onPageSelected(int position) {
-        this.currentPosition = position;
+        this.mCurrentPosition = position;
         invalidate();
     }
 

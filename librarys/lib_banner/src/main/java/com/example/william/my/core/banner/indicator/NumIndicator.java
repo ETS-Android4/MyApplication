@@ -11,11 +11,8 @@ import com.example.william.my.core.banner.util.BannerUtils;
 
 public class NumIndicator extends BaseIndicator {
 
-    private final float width;
-    private final float height;
-    private final float radius;
-
-    private final RectF rectF;
+    private final RectF mRectF;
+    private final int mWidth, mHeight, mRadius;
 
     public NumIndicator(Context context) {
         this(context, null);
@@ -31,33 +28,33 @@ public class NumIndicator extends BaseIndicator {
         mPaint.setTextSize(BannerUtils.dp2px(16));
         mPaint.setTextAlign(Paint.Align.CENTER);
 
-        width = BannerUtils.getScreenWidth(context);
-        height = BannerUtils.dp2px(48);
+        mWidth = BannerUtils.getScreenWidth(context);
+        mHeight = BannerUtils.dp2px(48);
+        mRadius = BannerUtils.dp2px(8);
 
-        radius = BannerUtils.dp2px(8);
-
-        rectF = new RectF(0f, 0f, width, height);
+        mRectF = new RectF(0f, 0f, mWidth, mHeight);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if (indicatorSize <= 1) {
+        if (mIndicatorSize <= 1) {
             return;
         }
-        setMeasuredDimension((int) width, (int) height);
+        setMeasuredDimension(mWidth, mHeight);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (indicatorSize <= 1) {
+        if (mIndicatorSize <= 1) {
             return;
         }
         mPaint.setColor(Color.BLACK);
-        canvas.drawRoundRect(rectF, radius, radius, mPaint);
+        canvas.drawRoundRect(mRectF, mRadius, mRadius, mPaint);
 
         mPaint.setColor(Color.WHITE);
-        canvas.drawText(currentPosition + 1 + "/" + indicatorSize, width / 2, (float) (height * 0.6), mPaint);
+        mPaint.setTextSize(BannerUtils.dp2px(14f));
+        canvas.drawText(mCurrentPosition + 1 + "/" + mIndicatorSize, (float) mWidth / 2, (float) (mHeight * 0.6), mPaint);
     }
 }
