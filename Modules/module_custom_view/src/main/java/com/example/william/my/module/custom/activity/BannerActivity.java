@@ -8,8 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.banner.Banner;
 import com.example.william.my.core.banner.adapter.BannerImageAdapter;
 import com.example.william.my.core.banner.holder.BannerImageHolder;
-import com.example.william.my.core.banner.indicator.CircleIndicator;
-import com.example.william.my.core.banner.indicator.NumIndicator;
+import com.example.william.my.core.banner.indicator.RoundLinesIndicator;
 import com.example.william.my.core.imageloader.ImageLoader;
 import com.example.william.my.module.custom.R;
 import com.example.william.my.module.router.ARouterPath;
@@ -34,9 +33,10 @@ public class BannerActivity extends AppCompatActivity {
             public void onBindView(BannerImageHolder holder, String data, int position, int size) {
                 ImageLoader.getInstance().load(BannerActivity.this, data, holder.imageView);
             }
-        })
-                .addBannerLifecycleObserver(this)//添加生命周期观察者
+        }).addBannerLifecycleObserver(this)//添加生命周期观察者
+                //.setBannerGallery(48, 60)
+                //.setIndicator(new NumIndicator(this));
                 //.setIndicator(new CircleIndicator(this));
-                .setIndicator(new NumIndicator(this));
+                .setIndicator(new RoundLinesIndicator(this));
     }
 }

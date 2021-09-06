@@ -1,7 +1,6 @@
 package com.example.william.my.core.banner.listener;
 
-public interface BannerListener<T> {
-
+public interface BannerOnBannerListener<T> {
     /**
      * 点击事件
      *
@@ -9,5 +8,4 @@ public interface BannerListener<T> {
      * @param position 当前位置
      */
     void OnBannerClick(T data, int position);
-
 }

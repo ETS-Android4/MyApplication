@@ -6,8 +6,9 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
-public abstract class BasePageTransformer implements ViewPager.PageTransformer {
+public abstract class BasePageTransformer implements ViewPager2.PageTransformer {
 
     protected ViewPager.PageTransformer mPageTransformer = NonPageTransformer.INSTANCE;
 

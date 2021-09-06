@@ -1,17 +1,16 @@
-package com.example.william.my.core.banner.indicator;
+package com.example.william.my.core.banner.indic;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 
 import com.example.william.my.core.banner.util.BannerUtils;
 
 public class NumIndicator extends BaseIndicator {
 
-    private final RectF mRectF;
+    //private final RectF mRectF;
     private final int mWidth, mHeight, mRadius;
 
     public NumIndicator(Context context) {
@@ -28,11 +27,11 @@ public class NumIndicator extends BaseIndicator {
         mPaint.setTextSize(BannerUtils.dp2px(16));
         mPaint.setTextAlign(Paint.Align.CENTER);
 
-        mWidth = BannerUtils.getScreenWidth(context);
+        mWidth = BannerUtils.dp2px(60);
         mHeight = BannerUtils.dp2px(48);
-        mRadius = BannerUtils.dp2px(8);
+        mRadius = BannerUtils.dp2px(4);
 
-        mRectF = new RectF(0f, 0f, mWidth, mHeight);
+        //mRectF = new RectF(0f, 0f, mWidth, mHeight);
     }
 
     @Override
@@ -50,11 +49,12 @@ public class NumIndicator extends BaseIndicator {
         if (mIndicatorSize <= 1) {
             return;
         }
-        mPaint.setColor(Color.BLACK);
-        canvas.drawRoundRect(mRectF, mRadius, mRadius, mPaint);
-
         mPaint.setColor(Color.WHITE);
         mPaint.setTextSize(BannerUtils.dp2px(14f));
-        canvas.drawText(mCurrentPosition + 1 + "/" + mIndicatorSize, (float) mWidth / 2, (float) (mHeight * 0.6), mPaint);
+        String text = mCurrentPosition + 1 + "/" + mIndicatorSize;
+        canvas.drawText(text, (float) mWidth / 2, (float) (mHeight * 0.6), mPaint);
+
+        //mPaint.setColor(Color.BLACK);
+        //canvas.drawRoundRect(mRectF, mRadius, mRadius, mPaint);
     }
 }
