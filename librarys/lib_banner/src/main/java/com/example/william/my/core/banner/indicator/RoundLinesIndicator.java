@@ -1,5 +1,6 @@
 package com.example.william.my.core.banner.indicator;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -26,24 +27,29 @@ public class RoundLinesIndicator extends BaseIndicator {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int count = config.getIndicatorSize();
-        if (count <= 1) return;
-        setMeasuredDimension((int) (config.getSelectedWidth() * count), config.getHeight());
+        int count = mConfig.getIndicatorSize();
+        if (count <= 1) {
+            return;
+        }
+        setMeasuredDimension((int) (mConfig.getSelectedWidth() * count), mConfig.getHeight());
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int count = config.getIndicatorSize();
-        if (count <= 1) return;
+        int count = mConfig.getIndicatorSize();
+        if (count <= 1) {
+            return;
+        }
 
-        mPaint.setColor(config.getNormalColor());
-        RectF oval = new RectF(0, 0, canvas.getWidth(), config.getHeight());
-        canvas.drawRoundRect(oval, config.getRadius(), config.getRadius(), mPaint);
+        mPaint.setColor(mConfig.getNormalColor());
+        RectF oval = new RectF(0, 0, getWidth(), mConfig.getHeight());
+        canvas.drawRoundRect(oval, mConfig.getRadius(), mConfig.getRadius(), mPaint);
 
-        mPaint.setColor(config.getSelectedColor());
-        int left = config.getCurrentPosition() * config.getSelectedWidth();
-        RectF rectF = new RectF(left, 0, left + config.getSelectedWidth(), config.getHeight());
-        canvas.drawRoundRect(rectF, config.getRadius(), config.getRadius(), mPaint);
+        mPaint.setColor(mConfig.getSelectedColor());
+        int left = mConfig.getCurrentPosition() * mConfig.getSelectedWidth();
+        RectF rectF = new RectF(left, 0, left + mConfig.getSelectedWidth(), mConfig.getHeight());
+        canvas.drawRoundRect(rectF, mConfig.getRadius(), mConfig.getRadius(), mPaint);
     }
 }

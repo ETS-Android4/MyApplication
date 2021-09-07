@@ -6,8 +6,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +15,10 @@ import com.example.william.my.core.banner.config.BannerIndicatorConfig;
 
 public class BaseIndicator extends View implements Indicator {
 
-    protected BannerIndicatorConfig config;
     protected Paint mPaint;
-    protected float offset;
+    protected float mOffset;
+
+    protected BannerIndicatorConfig mConfig;
 
     public BaseIndicator(Context context) {
         this(context, null);
@@ -30,33 +30,36 @@ public class BaseIndicator extends View implements Indicator {
 
     public BaseIndicator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        config = new BannerIndicatorConfig();
+        mConfig = new BannerIndicatorConfig();
+
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(Color.TRANSPARENT);
-        mPaint.setColor(config.getNormalColor());
+        mPaint.setColor(mConfig.getNormalColor());
     }
 
     @NonNull
     @Override
     public View getIndicatorView() {
-        if (config.isAttachToBanner()) {
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            switch (config.getGravity()) {
-                case BannerIndicatorConfig.Direction.LEFT:
+        if (mConfig.isAttachToBanner()) {
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            switch (mConfig.getGravity()) {
+                case Gravity.LEFT:
+                case Gravity.START:
                     layoutParams.gravity = Gravity.BOTTOM | Gravity.START;
                     break;
-                case BannerIndicatorConfig.Direction.CENTER:
+                case Gravity.CENTER:
                     layoutParams.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
                     break;
-                case BannerIndicatorConfig.Direction.RIGHT:
+                case Gravity.RIGHT:
+                case Gravity.END:
                     layoutParams.gravity = Gravity.BOTTOM | Gravity.END;
                     break;
             }
-            layoutParams.leftMargin = config.getMargins().leftMargin;
-            layoutParams.rightMargin = config.getMargins().rightMargin;
-            layoutParams.topMargin = config.getMargins().topMargin;
-            layoutParams.bottomMargin = config.getMargins().bottomMargin;
+            layoutParams.leftMargin = mConfig.getMargins().mLeftMargin;
+            layoutParams.rightMargin = mConfig.getMargins().mRightMargin;
+            layoutParams.topMargin = mConfig.getMargins().mTopMargin;
+            layoutParams.bottomMargin = mConfig.getMargins().mBottomMargin;
             setLayoutParams(layoutParams);
         }
         return this;
@@ -64,26 +67,25 @@ public class BaseIndicator extends View implements Indicator {
 
     @Override
     public BannerIndicatorConfig getIndicatorConfig() {
-        return config;
+        return mConfig;
     }
 
     @Override
     public void onPageChanged(int count, int currentPosition) {
-        config.setIndicatorSize(count);
-        config.setCurrentPosition(currentPosition);
+        mConfig.setIndicatorSize(count);
+        mConfig.setCurrentPosition(currentPosition);
         requestLayout();
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        offset = positionOffset;
+        mOffset = positionOffset;
         invalidate();
-
     }
 
     @Override
     public void onPageSelected(int position) {
-        config.setCurrentPosition(position);
+        mConfig.setCurrentPosition(position);
         invalidate();
     }
 

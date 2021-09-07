@@ -11,6 +11,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
@@ -30,6 +31,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.william.my.core.banner.adapter.BannerAdapter;
 import com.example.william.my.core.banner.config.BannerConfig;
 import com.example.william.my.core.banner.config.BannerIndicatorConfig;
+import com.example.william.my.core.banner.config.BannerIndicatorMargins;
 import com.example.william.my.core.banner.indicator.Indicator;
 import com.example.william.my.core.banner.listener.BannerOnBannerListener;
 import com.example.william.my.core.banner.listener.BannerOnPageChangeListener;
@@ -75,25 +77,8 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     private boolean mRoundTopLeft, mRoundTopRight, mRoundBottomLeft, mRoundBottomRight;
 
 
-//    // 指示器相关配置
-//    private int normalWidth = BannerConfig.INDICATOR_NORMAL_WIDTH;
-//    private int selectedWidth = BannerConfig.INDICATOR_SELECTED_WIDTH;
-//    private int normalColor = BannerConfig.INDICATOR_NORMAL_COLOR;
-//    private int selectedColor = BannerConfig.INDICATOR_SELECTED_COLOR;
-//    private int indicatorGravity = BannerIndicatorConfig.Direction.CENTER;
-//    private int indicatorSpace;
-//    private int indicatorMargin;
-//    private int indicatorMarginLeft;
-//    private int indicatorMarginTop;
-//    private int indicatorMarginRight;
-//    private int indicatorMarginBottom;
-//    private int indicatorHeight = BannerConfig.INDICATOR_HEIGHT;
-//    private int indicatorRadius = BannerConfig.INDICATOR_RADIUS;
-//
-
     // 是否要拦截事件
     private boolean isIntercept = true;
-
     // 滑动距离范围
     private int mTouchSlop;
     // 记录触摸的位置（主要用于解决事件冲突问题）
@@ -101,7 +86,31 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     // 记录viewpager2是否被拖动
     private boolean mIsViewPager2Drag;
 
+
+    // Banner 方向
     private int mOrientation = ViewPager2.ORIENTATION_HORIZONTAL;
+
+
+    // 指示器相关配置
+    private int normalColor = BannerConfig.INDICATOR_NORMAL_COLOR;
+    private int selectedColor = BannerConfig.INDICATOR_SELECTED_COLOR;
+
+    private int indicatorTextSize = BannerConfig.INDICATOR_TEXT_SIZE;
+
+    private int normalWidth = BannerConfig.INDICATOR_NORMAL_WIDTH;
+    private int selectedWidth = BannerConfig.INDICATOR_SELECTED_WIDTH;
+
+    private int indicatorHeight = BannerConfig.INDICATOR_HEIGHT;
+    private int indicatorRadius = BannerConfig.INDICATOR_RADIUS;
+
+    private int indicatorGravity = Gravity.CENTER;
+
+    private int indicatorSpace;
+    private int indicatorMargin;
+    private int indicatorMarginLeft;
+    private int indicatorMarginTop;
+    private int indicatorMarginRight;
+    private int indicatorMarginBottom;
 
     public Banner(Context context) {
         this(context, null);
@@ -157,20 +166,21 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
             mRoundTopRight = a.getBoolean(R.styleable.Banner_banner_round_top_right, false);
             mRoundBottomLeft = a.getBoolean(R.styleable.Banner_banner_round_bottom_left, false);
             mRoundBottomRight = a.getBoolean(R.styleable.Banner_banner_round_bottom_right, false);
-            // indicator
-//            normalWidth = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_normal_width, BannerConfig.INDICATOR_NORMAL_WIDTH);
-//            selectedWidth = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_selected_width, BannerConfig.INDICATOR_SELECTED_WIDTH);
-//            normalColor = a.getColor(R.styleable.Banner_banner_indicator_normal_color, BannerConfig.INDICATOR_NORMAL_COLOR);
-//            selectedColor = a.getColor(R.styleable.Banner_banner_indicator_selected_color, BannerConfig.INDICATOR_SELECTED_COLOR);
-//            indicatorGravity = a.getInt(R.styleable.Banner_banner_indicator_gravity, BannerIndicatorConfig.Direction.CENTER);
-//            indicatorSpace = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_space, 0);
-//            indicatorMargin = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_margin, 0);
-//            indicatorMarginLeft = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginLeft, 0);
-//            indicatorMarginTop = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginTop, 0);
-//            indicatorMarginRight = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginRight, 0);
-//            indicatorMarginBottom = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginBottom, 0);
-//            indicatorHeight = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_height, BannerConfig.INDICATOR_HEIGHT);
-//            indicatorRadius = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_radius, BannerConfig.INDICATOR_RADIUS);
+            // 指示器
+            normalColor = a.getColor(R.styleable.Banner_banner_indicator_normal_color, BannerConfig.INDICATOR_NORMAL_COLOR);
+            selectedColor = a.getColor(R.styleable.Banner_banner_indicator_selected_color, BannerConfig.INDICATOR_SELECTED_COLOR);
+            indicatorTextSize = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_text_size, BannerConfig.INDICATOR_TEXT_SIZE);
+            normalWidth = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_normal_width, BannerConfig.INDICATOR_NORMAL_WIDTH);
+            selectedWidth = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_selected_width, BannerConfig.INDICATOR_SELECTED_WIDTH);
+            indicatorHeight = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_height, BannerConfig.INDICATOR_HEIGHT);
+            indicatorRadius = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_radius, BannerConfig.INDICATOR_RADIUS);
+            indicatorGravity = a.getInt(R.styleable.Banner_banner_indicator_gravity, Gravity.CENTER);
+            indicatorSpace = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_space, 0);
+            indicatorMargin = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_margin, 0);
+            indicatorMarginLeft = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginLeft, 0);
+            indicatorMarginTop = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginTop, 0);
+            indicatorMarginRight = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginRight, 0);
+            indicatorMarginBottom = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginBottom, 0);
             a.recycle();
         }
         setOrientation(mOrientation);
@@ -184,34 +194,36 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
         setStartPosition(isInfiniteLoop() ? mStartPosition : 0);
     }
 
-//    private void initIndicatorAttr() {
-//        if (indicatorMargin != 0) {
-//            setIndicatorMargins(new BannerIndicatorConfig.Margins(indicatorMargin));
-//        } else if (indicatorMarginLeft != 0 || indicatorMarginTop != 0 || indicatorMarginRight != 0 || indicatorMarginBottom != 0) {
-//            setIndicatorMargins(new BannerIndicatorConfig.Margins(indicatorMarginLeft, indicatorMarginTop, indicatorMarginRight, indicatorMarginBottom));
-//        }
-//        if (indicatorSpace > 0) {
-//            setIndicatorSpace(indicatorSpace);
-//        }
-//        if (indicatorGravity != BannerIndicatorConfig.Direction.CENTER) {
-//            setIndicatorGravity(indicatorGravity);
-//        }
-//        if (normalWidth > 0) {
-//            setIndicatorNormalWidth(normalWidth);
-//        }
-//        if (selectedWidth > 0) {
-//            setIndicatorSelectedWidth(selectedWidth);
-//        }
-//
-//        if (indicatorHeight > 0) {
-//            setIndicatorHeight(indicatorHeight);
-//        }
-//        if (indicatorRadius > 0) {
-//            setIndicatorRadius(indicatorRadius);
-//        }
-//        setIndicatorNormalColor(normalColor);
-//        setIndicatorSelectedColor(selectedColor);
-//    }
+    private void initIndicatorAttr() {
+        if (normalWidth > 0) {
+            setIndicatorNormalWidth(normalWidth);
+        }
+        if (selectedWidth > 0) {
+            setIndicatorSelectedWidth(selectedWidth);
+        }
+        if (indicatorTextSize > 0) {
+            setIndicatorSelectedWidth(indicatorTextSize);
+        }
+        if (indicatorHeight > 0) {
+            setIndicatorHeight(indicatorHeight);
+        }
+        if (indicatorRadius > 0) {
+            setIndicatorRadius(indicatorRadius);
+        }
+        if (indicatorGravity != Gravity.CENTER) {
+            setIndicatorGravity(indicatorGravity);
+        }
+        if (indicatorSpace > 0) {
+            setIndicatorSpace(indicatorSpace);
+        }
+        if (indicatorMargin != 0) {
+            setIndicatorMargins(new BannerIndicatorMargins(indicatorMargin));
+        } else if (indicatorMarginLeft != 0 || indicatorMarginTop != 0 || indicatorMarginRight != 0 || indicatorMarginBottom != 0) {
+            setIndicatorMargins(new BannerIndicatorMargins(indicatorMarginLeft, indicatorMarginTop, indicatorMarginRight, indicatorMarginBottom));
+        }
+        setIndicatorNormalColor(normalColor);
+        setIndicatorSelectedColor(selectedColor);
+    }
 
     private void initIndicator() {
         if (getIndicator() == null || getAdapter() == null) {
@@ -221,7 +233,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
             removeIndicator();
             addView(getIndicator().getIndicatorView());
         }
-        //initIndicatorAttr();
+        initIndicatorAttr();
         setIndicatorPageChange();
     }
 
@@ -869,64 +881,71 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
         return this;
     }
 
-//    public Banner<T, BA> setIndicatorGravity(@BannerIndicatorConfig.Direction int gravity) {
-//        if (getIndicatorConfig() != null && getIndicatorConfig().isAttachToBanner()) {
-//            getIndicatorConfig().setGravity(gravity);
-//            getIndicator().getIndicatorView().postInvalidate();
-//        }
-//        return this;
-//    }
-//
-//    public Banner setIndicatorSpace(int indicatorSpace) {
-//        if (getIndicatorConfig() != null) {
-//            getIndicatorConfig().setIndicatorSpace(indicatorSpace);
-//        }
-//        return this;
-//    }
-//
-//    public Banner<T, BA> setIndicatorMargins(BannerIndicatorConfig.Margins margins) {
-//        if (getIndicatorConfig() != null && getIndicatorConfig().isAttachToBanner()) {
-//            getIndicatorConfig().setMargins(margins);
-//            getIndicator().getIndicatorView().requestLayout();
-//        }
-//        return this;
-//    }
-//
-//    public Banner<T, BA> setIndicatorWidth(int normalWidth, int selectedWidth) {
-//        if (getIndicatorConfig() != null) {
-//            getIndicatorConfig().setNormalWidth(normalWidth);
-//            getIndicatorConfig().setSelectedWidth(selectedWidth);
-//        }
-//        return this;
-//    }
-//
-//    public Banner<T, BA> setIndicatorNormalWidth(int normalWidth) {
-//        if (getIndicatorConfig() != null) {
-//            getIndicatorConfig().setNormalWidth(normalWidth);
-//        }
-//        return this;
-//    }
-//
-//    public Banner<T, BA> setIndicatorSelectedWidth(int selectedWidth) {
-//        if (getIndicatorConfig() != null) {
-//            getIndicatorConfig().setSelectedWidth(selectedWidth);
-//        }
-//        return this;
-//    }
-//
-//    public Banner<T, BA> setIndicatorRadius(int indicatorRadius) {
-//        if (getIndicatorConfig() != null) {
-//            getIndicatorConfig().setRadius(indicatorRadius);
-//        }
-//        return this;
-//    }
-//
-//    public Banner<T, BA> setIndicatorHeight(int indicatorHeight) {
-//        if (getIndicatorConfig() != null) {
-//            getIndicatorConfig().setHeight(indicatorHeight);
-//        }
-//        return this;
-//    }
+    public Banner<T, BA> setIndicatorTextSize(int textSize) {
+        if (getIndicatorConfig() != null) {
+            getIndicatorConfig().setIndicatorTextSize(textSize);
+        }
+        return this;
+    }
+
+    public Banner<T, BA> setIndicatorNormalWidth(int normalWidth) {
+        if (getIndicatorConfig() != null) {
+            getIndicatorConfig().setNormalWidth(normalWidth);
+        }
+        return this;
+    }
+
+    public Banner<T, BA> setIndicatorSelectedWidth(int selectedWidth) {
+        if (getIndicatorConfig() != null) {
+            getIndicatorConfig().setSelectedWidth(selectedWidth);
+        }
+        return this;
+    }
+
+    public Banner<T, BA> setIndicatorWidth(int normalWidth, int selectedWidth) {
+        if (getIndicatorConfig() != null) {
+            getIndicatorConfig().setNormalWidth(normalWidth);
+            getIndicatorConfig().setSelectedWidth(selectedWidth);
+        }
+        return this;
+    }
+
+    public Banner<T, BA> setIndicatorHeight(int indicatorHeight) {
+        if (getIndicatorConfig() != null) {
+            getIndicatorConfig().setHeight(indicatorHeight);
+        }
+        return this;
+    }
+
+    public Banner<T, BA> setIndicatorRadius(int indicatorRadius) {
+        if (getIndicatorConfig() != null) {
+            getIndicatorConfig().setRadius(indicatorRadius);
+        }
+        return this;
+    }
+
+    public Banner<T, BA> setIndicatorGravity(int gravity) {
+        if (getIndicatorConfig() != null && getIndicatorConfig().isAttachToBanner()) {
+            getIndicatorConfig().setGravity(gravity);
+            getIndicator().getIndicatorView().postInvalidate();
+        }
+        return this;
+    }
+
+    public Banner<T, BA> setIndicatorSpace(int indicatorSpace) {
+        if (getIndicatorConfig() != null) {
+            getIndicatorConfig().setIndicatorSpace(indicatorSpace);
+        }
+        return this;
+    }
+
+    public Banner<T, BA> setIndicatorMargins(BannerIndicatorMargins margins) {
+        if (getIndicatorConfig() != null && getIndicatorConfig().isAttachToBanner()) {
+            getIndicatorConfig().setMargins(margins);
+            getIndicator().getIndicatorView().requestLayout();
+        }
+        return this;
+    }
 
     /**
      * **********************************************************************
