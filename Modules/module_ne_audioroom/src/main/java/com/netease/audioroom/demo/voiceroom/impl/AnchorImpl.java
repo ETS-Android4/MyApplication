@@ -425,7 +425,7 @@ public class AnchorImpl implements Anchor {
         // local STATUS_CLOSE and remote STATUS_LOAD ???
         if (voiceRoom.getSeat(seat.getIndex()).getStatus() == Status.CLOSED && seat.getStatus() == Status.APPLY) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }

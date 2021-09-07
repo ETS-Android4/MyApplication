@@ -36,11 +36,12 @@ public class BannerActivity extends AppCompatActivity {
             public void onBindView(BannerImageHolder holder, String data, int position, int size) {
                 ImageLoader.getInstance().load(BannerActivity.this, data, holder.imageView);
             }
-        }).addBannerLifecycleObserver(this)//添加生命周期观察者
+        })
+                .addBannerLifecycleObserver(this)//添加生命周期观察者
                 //.setBannerGallery(48, 60)
                 .setIndicator(new NumIndicator(this));
-                //.setIndicator(new CircleIndicator(this));
-                //.setIndicator(new RectangleIndicator(this));
-                //.setIndicator(new RoundLinesIndicator(this));
+        //.setIndicator(new CircleIndicator(this));
+        //.setIndicator(new RectangleIndicator(this));
+        //.setIndicator(new RoundLinesIndicator(this));
     }
 }

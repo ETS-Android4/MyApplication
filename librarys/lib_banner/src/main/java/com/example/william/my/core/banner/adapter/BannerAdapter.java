@@ -59,7 +59,6 @@ public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> exten
         return mData.get(getRealPosition(position));
     }
 
-
     @Override
     public final void onBindViewHolder(@NonNull VH holder, int position) {
         mViewHolder = holder;

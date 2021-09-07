@@ -2,7 +2,6 @@ package com.example.william.my.library.base;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -375,7 +375,7 @@ public class ChatRoomActivity extends AppCompatActivity implements IChatRoomCall
                     menus.add("下麦");
                 }
                 break;
-                // 当前麦位已经被关闭
+            // 当前麦位已经被关闭
             case VoiceRoomSeat.Status.CLOSED:
                 // 且当前麦位无人，麦位禁麦触发
             case VoiceRoomSeat.Status.FORBID:
