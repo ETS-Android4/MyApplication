@@ -3,12 +3,16 @@ package com.example.william.my.core.banner.config;
 import android.view.Gravity;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.IntDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 public class BannerIndicatorConfig {
 
     private int mIndicatorSize;
     private int mCurrentPosition;
-    private int mGravity = Gravity.CENTER;
+    private int mGravity = Direction.CENTER;
 
     @ColorInt
     private int mNormalColor = BannerConfig.INDICATOR_NORMAL_COLOR;
@@ -23,12 +27,19 @@ public class BannerIndicatorConfig {
     private int mIndicatorHeight = BannerConfig.INDICATOR_HEIGHT;
     private int mIndicatorRadius = BannerConfig.INDICATOR_RADIUS;
 
-
     private BannerIndicatorMargins mIndicatorMargins;
     private int mIndicatorSpace = BannerConfig.INDICATOR_SPACE;
 
     //是将指示器添加到banner上
     private boolean attachToBanner = true;
+
+    @IntDef({Direction.LEFT, Direction.CENTER, Direction.RIGHT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Direction {
+        int LEFT = Gravity.LEFT;
+        int CENTER = Gravity.CENTER;
+        int RIGHT = Gravity.RIGHT;
+    }
 
     public int getIndicatorSize() {
         return mIndicatorSize;
@@ -52,7 +63,7 @@ public class BannerIndicatorConfig {
         return mGravity;
     }
 
-    public BannerIndicatorConfig setGravity(int mGravity) {
+    public BannerIndicatorConfig setGravity(@Direction int mGravity) {
         this.mGravity = mGravity;
         return this;
     }

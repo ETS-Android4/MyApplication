@@ -45,14 +45,12 @@ public class BaseIndicator extends View implements Indicator {
             LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             switch (mConfig.getGravity()) {
                 case Gravity.LEFT:
-                case Gravity.START:
                     layoutParams.gravity = Gravity.BOTTOM | Gravity.START;
                     break;
                 case Gravity.CENTER:
                     layoutParams.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
                     break;
                 case Gravity.RIGHT:
-                case Gravity.END:
                     layoutParams.gravity = Gravity.BOTTOM | Gravity.END;
                     break;
             }

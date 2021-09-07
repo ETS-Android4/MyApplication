@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
@@ -42,14 +43,16 @@ import com.example.william.my.core.banner.transformer.ScalePageTransformer;
 import com.example.william.my.core.banner.util.BannerUtils;
 import com.example.william.my.core.banner.util.ScrollSpeedManger;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
 public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHolder>> extends FrameLayout implements BannerLifecycleObserver {
 
     // 轮播任务
-    public AutoLoopTask<T, BA> mLoopTask;
+    private AutoLoopTask<T, BA> mLoopTask;
     // 轮播切换间隔时间
-    public long mLoopTime = BannerConfig.LOOP_TIME;
+    private int mLoopTime = BannerConfig.LOOP_TIME;
     // 轮播切换时间
     private int mScrollTime = BannerConfig.SCROLL_TIME;
     // 是否自动轮播
@@ -86,10 +89,8 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     // 记录viewpager2是否被拖动
     private boolean mIsViewPager2Drag;
 
-
     // Banner 方向
-    private int mOrientation = ViewPager2.ORIENTATION_HORIZONTAL;
-
+    private int mOrientation = Orientation.HORIZONTAL;
 
     // 指示器相关配置
     private int normalColor = BannerConfig.INDICATOR_NORMAL_COLOR;
@@ -103,7 +104,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     private int indicatorHeight = BannerConfig.INDICATOR_HEIGHT;
     private int indicatorRadius = BannerConfig.INDICATOR_RADIUS;
 
-    private int indicatorGravity = Gravity.CENTER;
+    private int indicatorGravity = BannerIndicatorConfig.Direction.CENTER;
 
     private int indicatorSpace;
     private int indicatorMargin;
@@ -111,6 +112,13 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     private int indicatorMarginTop;
     private int indicatorMarginRight;
     private int indicatorMarginBottom;
+
+    @IntDef({Orientation.HORIZONTAL, Orientation.VERTICAL})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Orientation {
+        int HORIZONTAL = ViewPager2.ORIENTATION_HORIZONTAL;
+        int VERTICAL = ViewPager2.ORIENTATION_VERTICAL;
+    }
 
     public Banner(Context context) {
         this(context, null);
@@ -159,7 +167,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
             mIsAutoLoop = a.getBoolean(R.styleable.Banner_banner_auto_loop, BannerConfig.IS_AUTO_LOOP);
             mIsInfiniteLoop = a.getBoolean(R.styleable.Banner_banner_infinite_loop, BannerConfig.IS_INFINITE_LOOP);
             //
-            mOrientation = a.getInt(R.styleable.Banner_banner_orientation, ViewPager2.ORIENTATION_HORIZONTAL);
+            mOrientation = a.getInt(R.styleable.Banner_banner_orientation, Orientation.HORIZONTAL);
             // 圆角
             mBannerRadius = a.getDimensionPixelSize(R.styleable.Banner_banner_radius, 0);
             mRoundTopLeft = a.getBoolean(R.styleable.Banner_banner_round_top_left, false);
@@ -174,7 +182,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
             selectedWidth = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_selected_width, BannerConfig.INDICATOR_SELECTED_WIDTH);
             indicatorHeight = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_height, BannerConfig.INDICATOR_HEIGHT);
             indicatorRadius = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_radius, BannerConfig.INDICATOR_RADIUS);
-            indicatorGravity = a.getInt(R.styleable.Banner_banner_indicator_gravity, Gravity.CENTER);
+            indicatorGravity = a.getInt(R.styleable.Banner_banner_indicator_gravity, BannerIndicatorConfig.Direction.CENTER);
             indicatorSpace = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_space, 0);
             indicatorMargin = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_margin, 0);
             indicatorMarginLeft = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginLeft, 0);
@@ -210,7 +218,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
         if (indicatorRadius > 0) {
             setIndicatorRadius(indicatorRadius);
         }
-        if (indicatorGravity != Gravity.CENTER) {
+        if (indicatorGravity != BannerIndicatorConfig.Direction.CENTER) {
             setIndicatorGravity(indicatorGravity);
         }
         if (indicatorSpace > 0) {
@@ -458,16 +466,24 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      * **********************************************************************
      */
 
-    public boolean isInfiniteLoop() {
-        return mIsInfiniteLoop;
+    public AutoLoopTask<T, BA> getLoopTask() {
+        return mLoopTask;
+    }
+
+    public int getLoopTime() {
+        return mLoopTime;
+    }
+
+    public int getScrollTime() {
+        return mScrollTime;
     }
 
     public boolean isAutoLoop() {
         return mIsAutoLoop;
     }
 
-    public int getScrollTime() {
-        return mScrollTime;
+    public boolean isInfiniteLoop() {
+        return mIsInfiniteLoop;
     }
 
     public BA getAdapter() {
@@ -550,7 +566,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      *
      * @param loopTime 时间（毫秒）
      */
-    public Banner<T, BA> setLoopTime(long loopTime) {
+    public Banner<T, BA> setLoopTime(int loopTime) {
         this.mLoopTime = loopTime;
         return this;
     }
@@ -652,9 +668,9 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     /**
      * 设置banner轮播方向
      *
-     * @param orientation {@link ViewPager2.Orientation}
+     * @param orientation {@link Orientation}
      */
-    public Banner<T, BA> setOrientation(int orientation) {
+    public Banner<T, BA> setOrientation(@Orientation int orientation) {
         getViewPager2().setOrientation(orientation);
         return this;
     }
@@ -731,8 +747,8 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      * @param pagePadding item左右padding,单位dp
      * @param pageMargin  页面间距,单位dp
      */
-    public Banner<T, BA> setBannerGalley(int pagePadding, int pageMargin) {
-        return setBannerGalley(pagePadding, pageMargin, .85f);
+    public Banner<T, BA> setBannerGallery(int pagePadding, int pageMargin) {
+        return setBannerGallery(pagePadding, pageMargin, .85f);
     }
 
     /**
@@ -742,8 +758,8 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      * @param pagePadding2 item右展示的padding,单位dp
      * @param pageMargin   页面间距,单位dp
      */
-    public Banner<T, BA> setBannerGalley(int pagePadding1, int pagePadding2, int pageMargin) {
-        return setBannerGalley(pagePadding1, pagePadding2, pageMargin, .85f);
+    public Banner<T, BA> setBannerGallery(int pagePadding1, int pagePadding2, int pageMargin) {
+        return setBannerGallery(pagePadding1, pagePadding2, pageMargin, .85f);
     }
 
     /**
@@ -753,8 +769,8 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      * @param pageMargin  页面间距,单位dp
      * @param scale       缩放[0-1],1代表不缩放
      */
-    public Banner<T, BA> setBannerGalley(int pagePadding, int pageMargin, float scale) {
-        return setBannerGalley(pagePadding, pagePadding, pageMargin, scale);
+    public Banner<T, BA> setBannerGallery(int pagePadding, int pageMargin, float scale) {
+        return setBannerGallery(pagePadding, pagePadding, pageMargin, scale);
     }
 
     /**
@@ -765,7 +781,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      * @param pageMargin   页面间距,单位dp
      * @param scale        缩放[0-1],1代表不缩放
      */
-    public Banner<T, BA> setBannerGalley(int pagePadding1, int pagePadding2, int pageMargin, float scale) {
+    public Banner<T, BA> setBannerGallery(int pagePadding1, int pagePadding2, int pageMargin, float scale) {
         if (pageMargin > 0) {
             addPageTransformer(new MarginPageTransformer(BannerUtils.dp2px(pageMargin)));
         }

@@ -25,7 +25,7 @@ public class AutoLoopTask<T, BA extends BannerAdapter<T, ? extends RecyclerView.
             }
             int next = (banner.getCurrentItem() + 1) % count;
             banner.setCurrentItem(next);
-            banner.postDelayed(banner.mLoopTask, banner.mLoopTime);
+            banner.postDelayed(banner.getLoopTask(), banner.getLoopTime());
         }
     }
 }
