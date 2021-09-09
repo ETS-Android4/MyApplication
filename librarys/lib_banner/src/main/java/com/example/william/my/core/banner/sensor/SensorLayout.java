@@ -25,13 +25,13 @@ public class SensorLayout extends FrameLayout implements SensorEventListener, Ba
     private Sensor mAcceleSensor, mMagneticSensor;
     private float[] mAcceleValues, mMagneticValues;
 
-    private float[] values = new float[3];//包含 x,y,z的偏移量
-    private float[] orientation = new float[9];//旋转矩阵
+    private final float[] values = new float[3];//包含 x,y,z的偏移量
+    private final float[] orientation = new float[9];//旋转矩阵
 
-    private double mDegreeYMin = -50;//最小偏移度数  Y
-    private double mDegreeYMax = 50;//最大偏移度数  Y
-    private double mDegreeXMin = -50;//最小偏移度数  X
-    private double mDegreeXMax = 50;//最大偏移度数  X
+    private static final double mDegreeYMin = -50;//最小偏移度数  Y
+    private static final double mDegreeYMax = 50;//最大偏移度数  Y
+    private static final double mDegreeXMin = -50;//最小偏移度数  X
+    private static final double mDegreeXMax = 50;//最大偏移度数  X
     private static final double mXMoveDistance = 50;//X轴移动偏移量 实际偏移为 mXMoveDistance * mDirection
     private static final double mYMoveDistance = 50;//Y轴移动偏移量 实际偏移为 mYMoveDistance * mDirection
 
@@ -158,12 +158,8 @@ public class SensorLayout extends FrameLayout implements SensorEventListener, Ba
          *              SensorManager.SENSOR_DELAY_NORMAL = 3：对应200000微秒的更新间隔
          *              键入自定义的int值x时：对应x微秒的更新间隔
          */
-        //if (useGyroscope) {
-        //    mSensorManager.registerListener(this, mGyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        //} else {
         mSensorManager.registerListener(this, mAcceleSensor, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mMagneticSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        //}
     }
 
     @Override

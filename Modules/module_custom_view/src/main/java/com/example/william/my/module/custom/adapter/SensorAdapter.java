@@ -21,10 +21,10 @@ public class SensorAdapter extends BannerAdapter<String, SensorHolder> {
 
     @Override
     public void onBindView(SensorHolder holder, String data, int position, int size) {
-        holder.mForeground.setScaleX(1.5f);
-        holder.mForeground.setScaleY(1.2f);
-        holder.mForeground.setDirection(4);
-        holder.mMid.setDirection(1);
+        holder.mBackground.setScaleX(1.5f);
+        holder.mBackground.setScaleY(1.2f);
         holder.mBackground.setDirection(-2);
+        holder.mMid.setDirection(1);
+        holder.mForeground.setDirection(4);
     }
 }
