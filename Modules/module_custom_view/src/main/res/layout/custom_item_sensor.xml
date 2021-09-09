@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.william.my.core.banner.sensor.SensorLayout
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sensor_background" />
+
+    </com.example.william.my.core.banner.sensor.SensorLayout>
+
+    <com.example.william.my.core.banner.sensor.SensorLayout
+        android:id="@+id/mid"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_mid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/sensor_mid" />
+
+    </com.example.william.my.core.banner.sensor.SensorLayout>
+
+    <com.example.william.my.core.banner.sensor.SensorLayout
+        android:id="@+id/foreground"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_foreground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/sensor_foreground" />
+
+    </com.example.william.my.core.banner.sensor.SensorLayout>
+
+</FrameLayout>

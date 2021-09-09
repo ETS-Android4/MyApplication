@@ -15,14 +15,14 @@ public class BannerLifecycleObserverAdapter implements LifecycleObserver {
         mObserver = observer;
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    public void onStart() {
-        mObserver.onStart(mLifecycleOwner);
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+        mObserver.onResume(mLifecycleOwner);
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void onStop() {
-        mObserver.onStop(mLifecycleOwner);
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void onPause() {
+        mObserver.onPause(mLifecycleOwner);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

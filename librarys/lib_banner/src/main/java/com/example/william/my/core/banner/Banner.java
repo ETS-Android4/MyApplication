@@ -977,12 +977,12 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     }
 
     @Override
-    public void onStart(LifecycleOwner owner) {
+    public void onResume(LifecycleOwner owner) {
         start();
     }
 
     @Override
-    public void onStop(LifecycleOwner owner) {
+    public void onPause(LifecycleOwner owner) {
         stop();
     }
 

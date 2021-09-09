@@ -5,9 +5,9 @@ import androidx.lifecycle.LifecycleOwner;
 
 public interface BannerLifecycleObserver extends LifecycleObserver {
 
-    void onStop(LifecycleOwner owner);
+    void onResume(LifecycleOwner owner);
 
-    void onStart(LifecycleOwner owner);
+    void onPause(LifecycleOwner owner);
 
     void onDestroy(LifecycleOwner owner);
 }

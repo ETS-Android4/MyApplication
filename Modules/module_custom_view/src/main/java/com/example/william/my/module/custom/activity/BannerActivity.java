@@ -1,17 +1,14 @@
 package com.example.william.my.module.custom.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.banner.Banner;
-import com.example.william.my.core.banner.adapter.BannerImageAdapter;
-import com.example.william.my.core.banner.holder.BannerImageHolder;
 import com.example.william.my.core.banner.indicator.NumIndicator;
-import com.example.william.my.core.banner.listener.BannerOnBannerListener;
-import com.example.william.my.core.imageloader.ImageLoader;
 import com.example.william.my.module.custom.R;
+import com.example.william.my.module.custom.adapter.SensorAdapter;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.util.Arrays;
@@ -19,7 +16,8 @@ import java.util.Arrays;
 @Route(path = ARouterPath.CustomView.CustomView_Banner)
 public class BannerActivity extends AppCompatActivity {
 
-    private Banner<String, BannerImageAdapter<String>> mBanner;
+    //private Banner<String, BannerImageAdapter<String>> mBanner;
+    private Banner<String, SensorAdapter> mBanner;
 
     private final String[] mImagesNet = new String[]{
             "https://img.zcool.cn/community/013de756fb63036ac7257948747896.jpg",
@@ -33,13 +31,16 @@ public class BannerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_activity_banner);
         mBanner = findViewById(R.id.banner);
-        mBanner.setAdapter(new BannerImageAdapter<String>(Arrays.asList(mImagesNet)) {
 
-            @Override
-            public void onBindView(BannerImageHolder holder, String data, int position, int size) {
-                ImageLoader.getInstance().load(BannerActivity.this, data, holder.imageView);
-            }
-        })
+//        mBanner.setAdapter(new BannerImageAdapter<String>(Arrays.asList(mImagesNet)) {
+//
+//            @Override
+//            public void onBindView(BannerImageHolder holder, String data, int position, int size) {
+//                ImageLoader.getInstance().load(BannerActivity.this, data, holder.imageView);
+//            }
+//        })
+        mBanner.setAdapter(new SensorAdapter(Arrays.asList(mImagesNet)))
+                .setAutoLoop(false)
                 .addBannerLifecycleObserver(this)//添加生命周期观察者
                 .setIndicator(new NumIndicator(this));
         //.setIndicator(new CircleIndicator(this));

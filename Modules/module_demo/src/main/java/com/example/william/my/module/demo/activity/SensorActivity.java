@@ -24,6 +24,7 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
 
         //第一步：通过getSystemService获得SensorManager实例对象
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
         //第二步：通过SensorManager实例对象获得想要的传感器对象:参数决定获取哪个传感器
 
         // 重力传感器
@@ -57,7 +58,7 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
      */
     @Override
     public void onSensorChanged(SensorEvent event) {
-        //计算偏转角度
+        // 第四步：计算偏转角度
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             mAcceleValues = event.values;
         }
@@ -73,6 +74,7 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
         values[1] = (float) Math.toDegrees(values[1]);
         // y轴的偏转角度
         values[2] = (float) Math.toDegrees(values[2]);
+
     }
 
     /**
