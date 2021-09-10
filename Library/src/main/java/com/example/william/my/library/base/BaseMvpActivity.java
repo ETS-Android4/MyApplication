@@ -1,6 +1,7 @@
 package com.example.william.my.library.base;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
@@ -10,7 +11,9 @@ import com.example.william.my.library.view.IBaseView;
 import com.trello.lifecycle4.android.lifecycle.AndroidLifecycle;
 import com.trello.rxlifecycle4.LifecycleProvider;
 
-public abstract class BaseMvpActivity<T extends IBasePresenter, K extends IBaseView<T>> extends BaseActivity {
+import java.lang.reflect.Constructor;
+
+public abstract class BaseMvpActivity<T extends IBasePresenter, V extends IBaseView<T>> extends BaseActivity {
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -22,6 +25,29 @@ public abstract class BaseMvpActivity<T extends IBasePresenter, K extends IBaseV
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initPresenter();
+    }
+
+    /**
+     * 返回逻辑处理的具体类型.
+     */
+    protected abstract Class<T> getPresenterClass();
+
+    /**
+     * 返回View层的接口类.
+     */
+    protected abstract Class<V> getViewClass();
+
+    /**
+     * 初始化Presenter
+     */
+    protected void initPresenter() {
+        try {
+            Constructor<T> constructor = getPresenterClass().getConstructor(getViewClass());
+            mPresenter = constructor.newInstance(this);
+        } catch (Exception e) {
+            Log.e(TAG, "Init presenter throw an error : [" + e.getMessage() + "]");
+        }
     }
 
     @Override
@@ -31,6 +57,4 @@ public abstract class BaseMvpActivity<T extends IBasePresenter, K extends IBaseV
             mPresenter.clear();
         }
     }
-
-    protected abstract Class<T> initPresenter();
 }
