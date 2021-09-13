@@ -21,16 +21,14 @@ public class MMKVActivity extends BaseResponseActivity {
 
         MMKV kv = MMKV.defaultMMKV();
 
-        if (kv != null) {
-            kv.encode("bool", true);
-            boolean bValue = kv.decodeBool("bool");
+        kv.encode("bool", true);
+        boolean bValue = kv.decodeBool("bool");
 
-            kv.encode("int", Integer.MIN_VALUE);
-            int iValue = kv.decodeInt("int");
+        kv.encode("int", Integer.MIN_VALUE);
+        int iValue = kv.decodeInt("int");
 
-            kv.encode("string", "Hello from mmkv");
-            String str = kv.decodeString("string");
-            showResponse(str);
-        }
+        kv.encode("string", "Hello from mmkv");
+        String str = kv.decodeString("string");
+        showResponse(str);
     }
 }

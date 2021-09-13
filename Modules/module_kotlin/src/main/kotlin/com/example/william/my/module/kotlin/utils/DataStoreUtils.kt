@@ -14,7 +14,6 @@ object DataStoreUtils {
 
     private val dataStore by lazy {
         BaseApp.getApp().createDataStore(
-            //migrations = listOf(SharedPreferencesMigration(context, "sp")),
             name = "settings"
         )
     }
@@ -22,11 +21,11 @@ object DataStoreUtils {
     @Suppress("UNCHECKED_CAST")
     fun <U> getData(key: String, default: U): Flow<U> {
         val data = when (default) {
-            is Long -> readDataFlow(default, longPreferencesKey(key))
-            is String -> readDataFlow(default, stringPreferencesKey(key))
-            is Int -> readDataFlow(default, intPreferencesKey(key))
-            is Boolean -> readDataFlow(default, booleanPreferencesKey(key))
-            is Float -> readDataFlow(default, floatPreferencesKey(key))
+            is Long -> readDataFlow(longPreferencesKey(key), default)
+            is String -> readDataFlow(stringPreferencesKey(key), default)
+            is Int -> readDataFlow(intPreferencesKey(key), default)
+            is Boolean -> readDataFlow(booleanPreferencesKey(key), default)
+            is Float -> readDataFlow(floatPreferencesKey(key), default)
             else -> throw IllegalArgumentException("This type can be saved into DataStore")
         }
         return data as Flow<U>
@@ -35,17 +34,17 @@ object DataStoreUtils {
     @Suppress("UNCHECKED_CAST")
     fun <U> getSyncData(key: String, default: U): U {
         val res = when (default) {
-            is Long -> readData(default, longPreferencesKey(key))
-            is String -> readData(default, stringPreferencesKey(key))
-            is Int -> readData(default, intPreferencesKey(key))
-            is Boolean -> readData(default, booleanPreferencesKey(key))
-            is Float -> readData(default, floatPreferencesKey(key))
+            is Long -> readData(longPreferencesKey(key), default)
+            is String -> readData(stringPreferencesKey(key), default)
+            is Int -> readData(intPreferencesKey(key), default)
+            is Boolean -> readData(booleanPreferencesKey(key), default)
+            is Float -> readData(floatPreferencesKey(key), default)
             else -> throw IllegalArgumentException("This type can be saved into DataStore")
         }
         return res as U
     }
 
-    private fun <U> readDataFlow(default: U, preferences: Preferences.Key<U>): Flow<U> =
+    private fun <U> readDataFlow(preferences: Preferences.Key<U>, default: U): Flow<U> =
         dataStore.data
             .catch {
                 if (it is IOException) {
@@ -58,7 +57,7 @@ object DataStoreUtils {
                 it[preferences] ?: default
             }
 
-    private fun <U> readData(default: U, preferences: Preferences.Key<U>): U? {
+    private fun <U> readData(preferences: Preferences.Key<U>, default: U): U? {
         var value: U = default
         runBlocking {
             dataStore.data.first {

@@ -2,7 +2,9 @@ package com.example.william.my.module.kotlin
 
 import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.william.my.core.keyvalue.KeyValue
 import com.example.william.my.module.activity.BaseListActivity
+import com.example.william.my.module.kotlin.utils.Singleton
 import com.example.william.my.module.router.ARouterPath
 
 /**
@@ -20,6 +22,10 @@ class KotlinActivity : BaseListActivity() {
         mMap["ResultActivity"] = ARouterPath.Kotlin.Kotlin_Result
 
         setFuncTest()
+
+        KeyValue.INSTANCE.init(this)
+
+        Singleton.getInstance(application).showToast("showToast")
     }
 
     /**
