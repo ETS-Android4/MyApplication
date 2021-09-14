@@ -24,6 +24,8 @@ class KotlinActivity : BaseListActivity() {
         setFuncTest()
 
         KeyValue.INSTANCE.init(this)
+        KeyValue.INSTANCE.putString("key", "value")
+        Log.e("TAG", KeyValue.INSTANCE.getString("key", "???") + "")
 
         Singleton.getInstance(application).showToast("showToast")
     }

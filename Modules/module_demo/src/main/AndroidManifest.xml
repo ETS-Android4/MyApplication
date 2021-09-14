@@ -3,7 +3,7 @@
     package="com.example.william.my.module.demo">
 
     <application>
-        <activity android:name=".activity.SensorActivity" />
+        <activity android:name=".activity.NinePatchActivity" />
         <activity android:name=".activity.TouchEventActivity" />
         <activity android:name=".DemoActivity" />
         <activity android:name=".activity.AnimatorActivity" />

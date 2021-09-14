@@ -8,7 +8,7 @@ object KeyValue {
 
     val INSTANCE: IKV
         get() {
-            //return MMKVUtils()
-            return DataStoreUtils()
+            //return MMKVUtils.getInstance()
+            return DataStoreUtils.getInstance()
         }
 }

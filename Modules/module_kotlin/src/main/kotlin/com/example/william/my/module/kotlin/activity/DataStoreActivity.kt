@@ -6,7 +6,6 @@ import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.kotlin.databinding.KtLayoutResponseBinding
 import com.example.william.my.module.kotlin.datastore.ExamplePreferenceDataStore
 import com.example.william.my.module.kotlin.datastore.ExampleProtoDataStore
-import com.example.william.my.module.kotlin.utils.DataStoreUtils
 import com.example.william.my.module.router.ARouterPath
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
@@ -22,7 +21,7 @@ import kotlinx.coroutines.flow.collect
 @Route(path = ARouterPath.Kotlin.Kotlin_DataStore)
 class DataStoreActivity : BaseActivity() {
 
-    private val preferenceDataStore = ExamplePreferenceDataStore(this)
+    private val preDataStore = ExamplePreferenceDataStore(this)
 
     private val protoDataStore = ExampleProtoDataStore(this)
 
@@ -46,11 +45,7 @@ class DataStoreActivity : BaseActivity() {
      */
     private fun initCounter() {
         GlobalScope.launch(Dispatchers.Main) {
-            DataStoreUtils.getData("String", "default")
-                .collect {
-                    binding.contentTextView.text = it
-                }
-            preferenceDataStore.getCounter()
+            preDataStore.getCounter()
                 .collect {
                     binding.contentTextView.text = it.toString()
                 }
@@ -66,19 +61,15 @@ class DataStoreActivity : BaseActivity() {
      */
     private fun incrementCounter() {
         GlobalScope.launch(Dispatchers.Main) {
-            DataStoreUtils.putData("String", "String")
-            preferenceDataStore.incrementCounter()
+            preDataStore.incrementCounter()
             protoDataStore.incrementCounter()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
-        DataStoreUtils.clearSync()
-
         runBlocking {
-            preferenceDataStore.clear()
+            preDataStore.clear()
             protoDataStore.clear()
         }
     }
