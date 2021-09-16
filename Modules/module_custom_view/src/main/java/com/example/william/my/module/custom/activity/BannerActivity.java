@@ -63,7 +63,7 @@ public class BannerActivity extends AppCompatActivity {
                 ImageLoader.getInstance().load(BannerActivity.this, data, holder.imageView);
             }
         })
-                .setBannerGallery(2, 6)
+                .setBannerGallery(2, 0)
                 .addBannerLifecycleObserver(this)//添加生命周期观察者
                 .setIndicator(new NumIndicator(this));
     }

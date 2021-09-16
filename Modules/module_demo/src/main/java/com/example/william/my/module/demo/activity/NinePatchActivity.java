@@ -31,7 +31,8 @@ public class NinePatchActivity extends AppCompatActivity {
         setContentView(R.layout.basics_layout_image);
 
         mImageView = findViewById(R.id.basics_imageView);
-        mImageView.setImageResource(R.mipmap.bubble);
+        //mImageView.setImageResource(R.mipmap.bubble);
+        LoadDian9TuUtil.loadDian9Tu(this, mImageView, "http://peanut-oss.cn-bj.ufileos.com/img/%E9%B2%B8%E9%B1%BC.9.png");
     }
 
     private Drawable getNinePatchDrawable(Context context, Bitmap bitmap) {
@@ -42,4 +43,6 @@ public class NinePatchActivity extends AppCompatActivity {
         }
         return drawable;
     }
+
+
 }

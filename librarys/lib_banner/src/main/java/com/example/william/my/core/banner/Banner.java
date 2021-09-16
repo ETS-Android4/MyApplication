@@ -130,37 +130,11 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
 
     public Banner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
-        initTypedArray(context, attrs);
+        initAttrs(context, attrs);
+        initView(context);
     }
 
-    private void init(Context context) {
-        mLoopTask = new AutoLoopTask<>(this);
-        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop() / 2;
-
-        mViewPager2 = new ViewPager2(context);
-        mViewPager2.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        mViewPager2.setOffscreenPageLimit(2);
-
-        mPageChangeCallback = new BannerOnPageChangeCallback();
-        mViewPager2.registerOnPageChangeCallback(mPageChangeCallback);
-
-        mPageTransformer = new CompositePageTransformer();
-        mViewPager2.setPageTransformer(mPageTransformer);
-        ScrollSpeedManger.reflectLayoutManager(this);
-        addView(mViewPager2);
-
-        mRoundPaint = new Paint();
-        mRoundPaint.setColor(Color.WHITE);
-        mRoundPaint.setAntiAlias(true);
-        mRoundPaint.setStyle(Paint.Style.FILL);
-        mRoundPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
-
-        mImagePaint = new Paint();
-        mImagePaint.setXfermode(null);
-    }
-
-    private void initTypedArray(Context context, AttributeSet attrs) {
+    private void initAttrs(Context context, AttributeSet attrs) {
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Banner);
             mLoopTime = a.getInt(R.styleable.Banner_banner_loop_time, BannerConfig.LOOP_TIME);
@@ -191,6 +165,33 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
             indicatorMarginBottom = a.getDimensionPixelSize(R.styleable.Banner_banner_indicator_marginBottom, 0);
             a.recycle();
         }
+    }
+
+    private void initView(Context context) {
+        mLoopTask = new AutoLoopTask<>(this);
+        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop() / 2;
+
+        mViewPager2 = new ViewPager2(context);
+        mViewPager2.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        mViewPager2.setOffscreenPageLimit(2);
+
+        mPageChangeCallback = new BannerOnPageChangeCallback();
+        mViewPager2.registerOnPageChangeCallback(mPageChangeCallback);
+
+        mPageTransformer = new CompositePageTransformer();
+        mViewPager2.setPageTransformer(mPageTransformer);
+        ScrollSpeedManger.reflectLayoutManager(this);
+        addView(mViewPager2);
+
+        mRoundPaint = new Paint();
+        mRoundPaint.setColor(Color.WHITE);
+        mRoundPaint.setAntiAlias(true);
+        mRoundPaint.setStyle(Paint.Style.FILL);
+        mRoundPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+
+        mImagePaint = new Paint();
+        mImagePaint.setXfermode(null);
+
         setOrientation(mOrientation);
     }
 
