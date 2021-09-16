@@ -5,12 +5,12 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="match_parent">
 
         <com.example.william.my.core.banner.sensor.SensorLayout
             android:id="@+id/background"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center">
 
             <ImageView
@@ -25,7 +25,7 @@
         <com.example.william.my.core.banner.sensor.SensorLayout
             android:id="@+id/mid"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center">
 
             <ImageView
@@ -40,7 +40,7 @@
         <com.example.william.my.core.banner.sensor.SensorLayout
             android:id="@+id/foreground"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center">
 
             <ImageView

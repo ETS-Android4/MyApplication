@@ -728,7 +728,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      * @param radius 圆角半径
      */
     public Banner<T, BA> setBannerRound(float radius) {
-        mBannerRadius = radius;
+        mBannerRadius = BannerUtils.dp2px(radius);
         return this;
     }
 
