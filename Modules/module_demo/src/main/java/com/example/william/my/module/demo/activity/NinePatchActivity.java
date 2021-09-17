@@ -1,13 +1,7 @@
 package com.example.william.my.module.demo.activity;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.NinePatch;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.NinePatchDrawable;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,26 +17,14 @@ import com.example.william.my.module.demo.R;
  */
 public class NinePatchActivity extends AppCompatActivity {
 
-    private ImageView mImageView;
+    private TextView mTextView;
+    private static final String ninePatch = "http://peanut-oss.cn-bj.ufileos.com/img/%E9%B2%B8%E9%B1%BC.9.png";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.basics_layout_image);
+        setContentView(R.layout.basics_layout_response);
 
-        mImageView = findViewById(R.id.basics_imageView);
-        //mImageView.setImageResource(R.mipmap.bubble);
-        LoadDian9TuUtil.loadDian9Tu(this, mImageView, "http://peanut-oss.cn-bj.ufileos.com/img/%E9%B2%B8%E9%B1%BC.9.png");
+        mTextView = findViewById(R.id.basics_response);
     }
-
-    private Drawable getNinePatchDrawable(Context context, Bitmap bitmap) {
-        byte[] chunk = bitmap.getNinePatchChunk();
-        NinePatchDrawable drawable = null;
-        if (NinePatch.isNinePatchChunk(chunk)) {
-            drawable = new NinePatchDrawable(context.getResources(), bitmap, chunk, new Rect(), null);
-        }
-        return drawable;
-    }
-
-
 }

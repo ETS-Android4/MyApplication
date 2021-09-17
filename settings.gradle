@@ -14,6 +14,7 @@ include ':librarys:lib_retrofit'
 include ':librarys:lib_download'
 include ':librarys:lib_imageloader'
 include ':librarys:lib_key_value'
+include ':librarys:lib_nine_patch'
 
 include ':modules:module_custom_view'
 include ':modules:module_widget'
