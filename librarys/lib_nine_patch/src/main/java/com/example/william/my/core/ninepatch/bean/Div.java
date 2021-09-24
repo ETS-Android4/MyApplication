@@ -1,4 +1,4 @@
-package com.example.william.my.core.ninepatch;
+package com.example.william.my.core.ninepatch.bean;
 
 import java.io.Externalizable;
 import java.io.IOException;

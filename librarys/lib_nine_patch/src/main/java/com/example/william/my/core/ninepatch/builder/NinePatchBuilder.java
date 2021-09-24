@@ -1,4 +1,4 @@
-package com.example.william.my.core.ninepatch;
+package com.example.william.my.core.ninepatch.builder;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

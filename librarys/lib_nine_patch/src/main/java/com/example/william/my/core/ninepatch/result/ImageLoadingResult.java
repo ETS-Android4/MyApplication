@@ -1,9 +1,11 @@
-package com.example.william.my.core.ninepatch;
+package com.example.william.my.core.ninepatch.result;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.NinePatchDrawable;
+
+import com.example.william.my.core.ninepatch.NinePatchChunk;
 
 /**
  * Created by Anatolii on 11/2/13.
@@ -20,7 +22,7 @@ public class ImageLoadingResult {
      */
     public final NinePatchChunk chunk;
 
-    protected ImageLoadingResult(Bitmap bitmap, NinePatchChunk chunk) {
+    public ImageLoadingResult(Bitmap bitmap, NinePatchChunk chunk) {
         this.bitmap = bitmap;
         this.chunk = chunk;
     }

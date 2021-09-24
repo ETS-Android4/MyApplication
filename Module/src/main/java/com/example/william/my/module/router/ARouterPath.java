@@ -95,6 +95,7 @@ public class ARouterPath {
         public static final String OpenSource_ImmersionBar = "/module_open/immersion_bar";
         public static final String OpenSource_LoadSir = "/module_open/load_sir";
         public static final String OpenSource_Lottie = "/module_open/lottie";
+        public static final String OpenSource_NinePatch = "/module_open/nine_patch";
         public static final String OpenSource_PhotoView = "/module_open/photo_view";
         public static final String OpenSource_PickerView = "/module_open/picker_view";
         public static final String OpenSource_PopWindow = "/module_open/pop_window";

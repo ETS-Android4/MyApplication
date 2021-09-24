@@ -1,6 +1,7 @@
 package com.example.william.my.core.imageloader.glide;
 
 import android.app.Activity;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -32,7 +33,11 @@ public class GlideLoader implements ILoader {
 
     @Override
     public void load(FragmentActivity activity, String url, ImageView imageView) {
-        loadActivity(activity, url, imageView, new RequestOptions());
+        if (!isGif(url)){
+            loadActivity(activity, url, imageView, new RequestOptions());
+        }else {
+            loadGifActivity(activity, url, imageView, 1);
+        }
     }
 
     @Override
@@ -89,7 +94,7 @@ public class GlideLoader implements ILoader {
                 .addListener(new RequestListener<GifDrawable>() {
 
                     @Override
-                    public boolean onLoadFailed(@Nullable @org.jetbrains.annotations.Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
                         return false;
                     }
 
@@ -154,6 +159,10 @@ public class GlideLoader implements ILoader {
                     }
                 })
                 .into(imageView);
+    }
+
+    public static boolean isGif(String url) {
+        return !TextUtils.isEmpty(url) && url.endsWith(".gif");
     }
 
     /**

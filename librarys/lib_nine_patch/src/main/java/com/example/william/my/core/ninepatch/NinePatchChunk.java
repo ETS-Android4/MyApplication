@@ -7,6 +7,13 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.NinePatchDrawable;
 
+import com.example.william.my.core.ninepatch.bean.Div;
+import com.example.william.my.core.ninepatch.exception.ChunkNotSerializedException;
+import com.example.william.my.core.ninepatch.exception.DivLengthException;
+import com.example.william.my.core.ninepatch.exception.WrongPaddingException;
+import com.example.william.my.core.ninepatch.result.ImageLoadingResult;
+import com.example.william.my.core.ninepatch.type.BitmapType;
+
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,6 +71,8 @@ public class NinePatchChunk implements Externalizable {
     public int colors[];
 
     /**
+     * 从字节数组创建新的NinePatchChunk。
+     * 注意！为了避免一些运行时问题，请在使用此方法之前执行以下检查：NinePatch.isNinePatchChunk（byte[]chunk）。
      * Creates new NinePatchChunk from byte array.
      * Note! In order to avoid some Runtime issues, please, do this check before using this method: NinePatch.isNinePatchChunk(byte[] chunk).
      *
@@ -101,11 +110,11 @@ public class NinePatchChunk implements Externalizable {
         byteBuffer.getInt();//position = 28
 
         int xDivs = divXCount >> 1;
-        chunk.xDivs = new ArrayList<Div>(xDivs);
+        chunk.xDivs = new ArrayList<>(xDivs);
         readDivs(xDivs, byteBuffer, chunk.xDivs);
 
         int yDivs = divYCount >> 1;
-        chunk.yDivs = new ArrayList<Div>(yDivs);
+        chunk.yDivs = new ArrayList<>(yDivs);
         readDivs(yDivs, byteBuffer, chunk.yDivs);
 
         for (int i = 0; i < chunk.colors.length; i++)
@@ -115,7 +124,9 @@ public class NinePatchChunk implements Externalizable {
     }
 
     /**
-     * Creates NinePatchDrawable right from raw Bitmap object. So resulting drawable will have width and height 2 pixels less if it is raw, not compiled 9-patch resource.
+     * 从 Bitmap 创建 NinePatchDrawable。
+     * 所以，如果它是原始的，而不是编译的9-patch资源，那么生成的drawable的宽度和高度将减少2个像素。
+     * Creates NinePatchDrawable from raw Bitmap object. So resulting drawable will have width and height 2 pixels less if it is raw, not compiled 9-patch resource.
      *
      * @param context
      * @param bitmap  The bitmap describing the patches. Can be loaded from application resources
@@ -127,6 +138,7 @@ public class NinePatchChunk implements Externalizable {
     }
 
     /**
+     * 从 InputStream 创建 NinePatchDrawable。
      * Creates NinePatchDrawable from inputStream.
      *
      * @param context
@@ -139,6 +151,7 @@ public class NinePatchChunk implements Externalizable {
     }
 
     /**
+     * 从 InputStream 创建 NinePatchDrawable。
      * Creates NinePatchDrawable from inputStream.
      *
      * @param context
@@ -153,8 +166,9 @@ public class NinePatchChunk implements Externalizable {
     }
 
     /**
-     * * Creates NinePatchChunk instance from raw bitmap image. Method calls <code>isRawNinePatchBitmap</code>
-     * method to make sure the bitmap is valid.
+     * 从 raw bitmap image 创建 NinePatchChunk 实例
+     * Creates NinePatchChunk instance from raw bitmap image.
+     * Method calls <code>isRawNinePatchBitmap</code> method to make sure the bitmap is valid.
      *
      * @param bitmap source image
      * @return new instance of chunk or empty chunk if bitmap is null or some Exceptions happen.
@@ -168,7 +182,9 @@ public class NinePatchChunk implements Externalizable {
     }
 
     /**
-     * Creates chunk from bitmap loaded from input stream. Uses <code>DEFAULT_DENSITY</code> value for image decoding.
+     * 从 input stream 创建 NinePatchChunk 实例
+     * Creates chunk from bitmap loaded from input stream.
+     * Uses <code>DEFAULT_DENSITY</code> value for image decoding.
      *
      * @param context
      * @param inputStream The input stream that holds the raw data to be decoded into a bitmap.
@@ -179,6 +195,7 @@ public class NinePatchChunk implements Externalizable {
     }
 
     /**
+     * 从 input stream 创建 NinePatchChunk 实例
      * Creates chunk from bitmap loaded from input stream.
      *
      * @param context
@@ -209,6 +226,7 @@ public class NinePatchChunk implements Externalizable {
     }
 
     /**
+     * 只创建新的空NinePatchChunk对象。您可以根据需要使用它来修改数据。
      * Simply creates new empty NinePatchChunk object. You can use it to modify data as you want to.
      *
      * @return new NinePatchChunk instance.
@@ -217,8 +235,8 @@ public class NinePatchChunk implements Externalizable {
         NinePatchChunk out = new NinePatchChunk();
         out.colors = new int[0];
         out.padding = new Rect();
-        out.yDivs = new ArrayList<Div>();
-        out.xDivs = new ArrayList<Div>();
+        out.yDivs = new ArrayList<>();
+        out.xDivs = new ArrayList<>();
         return out;
     }
 
@@ -258,14 +276,13 @@ public class NinePatchChunk implements Externalizable {
         }
         for (int color : colors)
             byteBuffer.putInt(color);
-
-
         return byteBuffer.array();
-
     }
 
     /**
-     * Util method. Creates new colors array filled with NO_COLOR value according to current divs state and sets it to the chunk.
+     * Util method.
+     * 根据当前divs状态创建填充了无颜色值的新颜色数组，并将其设置为块。
+     * Creates new colors array filled with NO_COLOR value according to current divs state and sets it to the chunk.
      *
      * @param chunk        chunk instance which contains divs information.
      * @param bitmapWidth  width of bitmap. Note! This value must be width without 9-patch borders. (2 pixels less then original 9.png image width)
@@ -278,7 +295,9 @@ public class NinePatchChunk implements Externalizable {
     }
 
     /**
-     * Util method. Creates new colors array according to current divs state.
+     * Util method.
+     * 根据当前divs状态创建新的颜色数组。
+     * Creates new colors array according to current divs state.
      *
      * @param chunk        chunk instance which contains divs information.
      * @param bitmapWidth  width of bitmap. Note! This value must be width without 9-patch borders. (2 pixels less then original 9.png image width)
@@ -295,6 +314,7 @@ public class NinePatchChunk implements Externalizable {
     }
 
     /**
+     * 检查位图是否为原始位图，而不是已编译的9修补程序资源。
      * Checks if bitmap is raw, not compiled 9-patch resource.
      *
      * @param bitmap source image
@@ -304,11 +324,9 @@ public class NinePatchChunk implements Externalizable {
         if (bitmap == null) return false;
         if (bitmap.getWidth() < 3 || bitmap.getHeight() < 3)
             return false;
-        if (!isCornerPixelsAreTrasperent(bitmap))
+        if (!isCornerPixelsAreTransparent(bitmap))
             return false;
-        if (!hasNinePatchBorder(bitmap))
-            return false;
-        return true;
+        return hasNinePatchBorder(bitmap);
     }
 
     private static boolean hasNinePatchBorder(Bitmap bitmap) {
@@ -330,16 +348,14 @@ public class NinePatchChunk implements Externalizable {
             return false;
         if (getYDivs(bitmap, 0).size() == 0)
             return false;
-        if (getYDivs(bitmap, lastXPixel).size() > 1)
-            return false;
-        return true;
+        return getYDivs(bitmap, lastXPixel).size() <= 1;
     }
 
     private static boolean isBorderPixel(int tmpPixel1) {
         return isTransparent(tmpPixel1) || isBlack(tmpPixel1);
     }
 
-    private static boolean isCornerPixelsAreTrasperent(Bitmap bitmap) {
+    private static boolean isCornerPixelsAreTransparent(Bitmap bitmap) {
         int lastYPixel = bitmap.getHeight() - 1;
         int lastXPixel = bitmap.getWidth() - 1;
         return isTransparent(bitmap.getPixel(0, 0))
@@ -368,9 +384,7 @@ public class NinePatchChunk implements Externalizable {
             this.yDivs = patch.yDivs;
             this.padding = patch.padding;
             this.colors = patch.colors;
-        } catch (DivLengthException e) {
-            //ignore
-        } catch (ChunkNotSerializedException e) {
+        } catch (DivLengthException | ChunkNotSerializedException e) {
             //ignore
         }
     }
@@ -382,7 +396,7 @@ public class NinePatchChunk implements Externalizable {
         output.write(bytes);
     }
 
-    protected static NinePatchChunk createChunkFromRawBitmap(Bitmap bitmap, boolean checkBitmap) throws WrongPaddingException, DivLengthException {
+    public static NinePatchChunk createChunkFromRawBitmap(Bitmap bitmap, boolean checkBitmap) throws WrongPaddingException, DivLengthException {
         if (checkBitmap && !isRawNinePatchBitmap(bitmap)) {
             return createEmptyChunk();
         }
@@ -473,7 +487,7 @@ public class NinePatchChunk implements Externalizable {
     }
 
     private static ArrayList<Div> getRegions(ArrayList<Div> divs, int max) {
-        ArrayList<Div> out = new ArrayList<Div>();
+        ArrayList<Div> out = new ArrayList<>();
         if (divs == null || divs.size() == 0) return out;
         for (int i = 0; i < divs.size(); i++) {
             Div div = divs.get(i);
@@ -492,7 +506,7 @@ public class NinePatchChunk implements Externalizable {
     }
 
     private static ArrayList<Div> getYDivs(Bitmap bitmap, int column) {
-        ArrayList<Div> yDivs = new ArrayList<Div>();
+        ArrayList<Div> yDivs = new ArrayList<>();
         Div tmpDiv = null;
         for (int i = 1; i < bitmap.getHeight(); i++) {
             tmpDiv = processChunk(bitmap.getPixel(column, i), tmpDiv, i - 1, yDivs);
@@ -501,7 +515,7 @@ public class NinePatchChunk implements Externalizable {
     }
 
     private static ArrayList<Div> getXDivs(Bitmap bitmap, int raw) {
-        ArrayList<Div> xDivs = new ArrayList<Div>();
+        ArrayList<Div> xDivs = new ArrayList<>();
         Div tmpDiv = null;
         for (int i = 1; i < bitmap.getWidth(); i++) {
             tmpDiv = processChunk(bitmap.getPixel(i, raw), tmpDiv, i - 1, xDivs);

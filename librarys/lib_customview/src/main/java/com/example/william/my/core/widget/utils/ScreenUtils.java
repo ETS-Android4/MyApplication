@@ -2,7 +2,6 @@ package com.example.william.my.core.widget.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Point;
 import android.util.DisplayMetrics;
 
 public class ScreenUtils {

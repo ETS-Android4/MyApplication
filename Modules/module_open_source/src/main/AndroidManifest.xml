@@ -22,6 +22,7 @@
         <activity android:name=".activity.ImmersionBarActivity" />
         <activity android:name=".activity.LoadSirActivity" />
         <activity android:name=".activity.LottieActivity" />
+        <activity android:name=".activity.NinePatchActivity" />
         <activity android:name=".activity.PhotoViewActivity" />
         <activity android:name=".activity.PickerViewActivity" />
         <activity android:name=".activity.PopWindowActivity" />

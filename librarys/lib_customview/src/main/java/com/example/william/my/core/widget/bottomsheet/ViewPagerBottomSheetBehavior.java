@@ -1,5 +1,8 @@
 package com.example.william.my.core.widget.bottomsheet;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -46,9 +49,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static java.lang.Math.max;
-import static java.lang.Math.min;
 
 /**
  * BottomSheetBehavior内的ViewPager下的RecyclerView无法响应滑动

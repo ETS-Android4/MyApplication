@@ -4,5 +4,4 @@ android {
 dependencies {
     implementation project(path: ':librarys:lib_customview')
     implementation deps.localbroadcast
-    implementation deps.glide
 }

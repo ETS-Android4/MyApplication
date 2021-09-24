@@ -1,5 +1,7 @@
 package com.example.william.my.module.network.activity;
 
+import static com.example.william.my.module.base.Urls.URL_LOGIN;
+
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -8,8 +10,6 @@ import com.example.william.my.module.bean.LoginBean;
 import com.example.william.my.module.network.volley.VolleyUtils;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
-
-import static com.example.william.my.module.base.Urls.URL_LOGIN;
 
 /**
  * https://developer.android.google.cn/training/volley/index.html

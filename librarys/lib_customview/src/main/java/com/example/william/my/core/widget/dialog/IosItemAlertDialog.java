@@ -1,5 +1,7 @@
 package com.example.william.my.core.widget.dialog;
 
+import static android.view.Gravity.BOTTOM;
+
 import android.app.Activity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,8 +21,6 @@ import com.example.william.my.core.widget.utils.SizeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.view.Gravity.BOTTOM;
 
 /**
  * Ios风格的底部AlertDialog

@@ -1,7 +1,6 @@
 package com.example.william.my.module.open.activity;
 
 import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.view.View;
 

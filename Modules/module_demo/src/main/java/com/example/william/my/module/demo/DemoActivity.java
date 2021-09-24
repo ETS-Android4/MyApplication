@@ -1,10 +1,7 @@
 package com.example.william.my.module.demo;
 
-import android.content.Intent;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseListActivity;
-import com.example.william.my.module.demo.activity.NinePatchActivity;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.Demo.Demo)
@@ -29,6 +26,5 @@ public class DemoActivity extends BaseListActivity {
         mMap.put("TransparentActivity", ARouterPath.Demo.Demo_Transparent);
         mMap.put("TurntableActivity", ARouterPath.Demo.Demo_Turntable);
         mMap.put("TypefaceActivity", ARouterPath.Demo.Demo_Typeface);
-        startActivity(new Intent(this, NinePatchActivity.class));
     }
 }

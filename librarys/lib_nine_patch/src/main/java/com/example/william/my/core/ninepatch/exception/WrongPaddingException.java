@@ -1,4 +1,4 @@
-package com.example.william.my.core.ninepatch;
+package com.example.william.my.core.ninepatch.exception;
 
 /**
  * Created by Anatolii on 8/28/13.

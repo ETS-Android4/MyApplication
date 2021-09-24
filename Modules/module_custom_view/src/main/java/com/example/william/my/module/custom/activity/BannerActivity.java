@@ -14,7 +14,6 @@ import com.example.william.my.module.custom.R;
 import com.example.william.my.module.custom.adapter.SensorAdapter;
 import com.example.william.my.module.router.ARouterPath;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @Route(path = ARouterPath.CustomView.CustomView_Banner)

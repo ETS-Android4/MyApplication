@@ -1,12 +1,12 @@
 package com.example.william.my.core.okhttp.utils;
 
+import static android.Manifest.permission.ACCESS_NETWORK_STATE;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import androidx.annotation.RequiresPermission;
-
-import static android.Manifest.permission.ACCESS_NETWORK_STATE;
 
 public class NetworkUtils {
 

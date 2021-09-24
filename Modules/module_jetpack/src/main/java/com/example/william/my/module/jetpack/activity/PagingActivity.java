@@ -1,5 +1,7 @@
 package com.example.william.my.module.jetpack.activity;
 
+import static autodispose2.AutoDispose.autoDisposable;
+
 import android.os.Bundle;
 
 import androidx.lifecycle.Observer;
@@ -23,8 +25,6 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-
-import static autodispose2.AutoDispose.autoDisposable;
 
 /**
  * https://developer.android.google.cn/topic/libraries/architecture/paging/v3-overview

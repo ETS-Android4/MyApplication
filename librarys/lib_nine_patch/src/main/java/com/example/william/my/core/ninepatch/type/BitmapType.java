@@ -1,9 +1,14 @@
-package com.example.william.my.core.ninepatch;
+package com.example.william.my.core.ninepatch.type;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.NinePatchDrawable;
+
+import com.example.william.my.core.ninepatch.NinePatchChunk;
+import com.example.william.my.core.ninepatch.bean.Div;
+import com.example.william.my.core.ninepatch.exception.DivLengthException;
+import com.example.william.my.core.ninepatch.exception.WrongPaddingException;
 
 import java.util.ArrayList;
 
@@ -18,7 +23,7 @@ public enum BitmapType {
         }
     }, RawNinePatch {
         @Override
-        protected NinePatchChunk createChunk(Bitmap bitmap) {
+        public NinePatchChunk createChunk(Bitmap bitmap) {
             try {
                 return NinePatchChunk.createChunkFromRawBitmap(bitmap, false);
             } catch (WrongPaddingException | DivLengthException e) {
@@ -27,7 +32,7 @@ public enum BitmapType {
         }
 
         @Override
-        protected Bitmap modifyBitmap(Resources resources, Bitmap bitmap, NinePatchChunk chunk) {
+        public Bitmap modifyBitmap(Resources resources, Bitmap bitmap, NinePatchChunk chunk) {
             Bitmap content = Bitmap.createBitmap(bitmap, 1, 1, bitmap.getWidth() - 2, bitmap.getHeight() - 2);
             int targetDensity = resources.getDisplayMetrics().densityDpi;
             float densityChange = (float) targetDensity / bitmap.getDensity();
@@ -55,7 +60,7 @@ public enum BitmapType {
         }
     }, PlainImage {
         @Override
-        protected NinePatchChunk createChunk(Bitmap bitmap) {
+        public NinePatchChunk createChunk(Bitmap bitmap) {
             return NinePatchChunk.createEmptyChunk();
         }
     }, NULL {
@@ -71,7 +76,7 @@ public enum BitmapType {
      * @param bitmap source image
      * @return chunk instance. Or EmptyChunk. Can't be null.
      */
-    protected NinePatchChunk createChunk(Bitmap bitmap) {
+    public NinePatchChunk createChunk(Bitmap bitmap) {
         return NinePatchChunk.createEmptyChunk();
     }
 
@@ -83,7 +88,7 @@ public enum BitmapType {
      * @param chunk     chunk instance which was created using this bitmap.
      * @return modified bitmap or the same bitmap.
      */
-    protected Bitmap modifyBitmap(Resources resources, Bitmap bitmap, NinePatchChunk chunk) {
+    public Bitmap modifyBitmap(Resources resources, Bitmap bitmap, NinePatchChunk chunk) {
         return bitmap;
     }
 

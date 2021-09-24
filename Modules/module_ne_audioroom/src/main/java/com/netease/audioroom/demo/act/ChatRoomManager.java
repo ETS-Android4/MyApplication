@@ -1,7 +1,6 @@
 package com.netease.audioroom.demo.act;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.netease.audioroom.demo.BuildConfig;

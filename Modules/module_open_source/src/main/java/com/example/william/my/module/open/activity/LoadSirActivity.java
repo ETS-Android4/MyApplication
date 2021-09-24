@@ -1,9 +1,9 @@
 package com.example.william.my.module.open.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.open.R;
@@ -23,7 +23,7 @@ public class LoadSirActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_load_sir);
+        setContentView(R.layout.basics_layout_response);
         LoadSir.beginBuilder()
                 //.addCallback(new ErrorCallback())//'添加各种状态页
                 //.setDefaultCallback(LoadingCallback.class)//设置默认状态页

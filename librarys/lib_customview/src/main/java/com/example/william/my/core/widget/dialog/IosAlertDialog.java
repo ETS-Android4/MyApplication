@@ -1,5 +1,7 @@
 package com.example.william.my.core.widget.dialog;
 
+import static android.view.Gravity.CENTER;
+
 import android.app.Activity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,8 +16,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.william.my.core.widget.R;
 import com.example.william.my.core.widget.utils.ScreenUtils;
-
-import static android.view.Gravity.CENTER;
 
 /**
  * Ios风格的AlertDialog

@@ -3,8 +3,6 @@ package com.netease.audioroom.demo.voiceroom.interfaces;
 import com.netease.audioroom.demo.voiceroom.bean.VoiceRoomSeat;
 import com.netease.nimlib.sdk.RequestCallback;
 
-import java.util.List;
-
 /**
  * 观众操作接口
  */
