@@ -119,4 +119,12 @@ object DataStoreUtils : IKV {
         }
         return value
     }
+
+    override fun clear() {
+        runBlocking {
+            ds.edit {
+                it.clear()
+            }
+        }
+    }
 }

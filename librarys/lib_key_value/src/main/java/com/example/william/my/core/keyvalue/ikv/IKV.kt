@@ -28,4 +28,6 @@ interface IKV {
     fun getLong(key: String, default: Long): Long
     fun getStringSet(key: String): Set<String>
     fun <T : Parcelable?> getParcelable(key: String, cl: Class<T>): T?
+
+    fun clear()
 }

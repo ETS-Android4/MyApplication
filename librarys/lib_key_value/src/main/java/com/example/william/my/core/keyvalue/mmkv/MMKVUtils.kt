@@ -93,5 +93,10 @@ object MMKVUtils : IKV {
         val kv = MMKV.defaultMMKV()
         return kv.decodeParcelable(key, cl)
     }
+
+    override fun clear() {
+        val kv = MMKV.defaultMMKV()
+        kv.clearAll()
+    }
 }
 
