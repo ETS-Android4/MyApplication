@@ -11,12 +11,12 @@ import java.util.ArrayList;
 
 public class NinePatchBuilder {
 
-    int width;
-    int height;
-    Bitmap bitmap;
-    Resources resources;
-    private ArrayList<Integer> xRegions = new ArrayList<Integer>();
-    private ArrayList<Integer> yRegions = new ArrayList<Integer>();
+    private final int width;
+    private final int height;
+    private Bitmap bitmap;
+    private Resources resources;
+    private final ArrayList<Integer> xRegions = new ArrayList<>();
+    private final ArrayList<Integer> yRegions = new ArrayList<>();
 
     public NinePatchBuilder(Resources resources, Bitmap bitmap) {
         width = bitmap.getWidth();
@@ -30,15 +30,29 @@ public class NinePatchBuilder {
         this.height = height;
     }
 
-    public NinePatchBuilder addXRegion(int x, int width) {
+    public NinePatchBuilder addXRegion(int x1, int x2) {
+        xRegions.add(x1);
+        xRegions.add(x2);
+        return this;
+    }
+
+    public NinePatchBuilder addYRegion(int y1, int y2) {
+        yRegions.add(y1);
+        yRegions.add(y2);
+        return this;
+    }
+
+    public NinePatchBuilder addXCenteredRegion(int width) {
+        int x = (this.width - width) / 2;
         xRegions.add(x);
         xRegions.add(x + width);
         return this;
     }
 
-    public NinePatchBuilder addXRegionPoints(int x1, int x2) {
-        xRegions.add(x1);
-        xRegions.add(x2);
+    public NinePatchBuilder addYCenteredRegion(int height) {
+        int y = (this.height - height) / 2;
+        yRegions.add(y);
+        yRegions.add(y + height);
         return this;
     }
 
@@ -49,43 +63,16 @@ public class NinePatchBuilder {
         return this;
     }
 
-    public NinePatchBuilder addXRegionPoints(float x1Percent, float x2Percent) {
-        xRegions.add((int) (x1Percent * this.width));
-        xRegions.add((int) (x2Percent * this.width));
-        return this;
-    }
-
-    public NinePatchBuilder addXCenteredRegion(int width) {
-        int x = (int) ((this.width - width) / 2);
-        xRegions.add(x);
-        xRegions.add(x + width);
-        return this;
-    }
-
-    public NinePatchBuilder addXCenteredRegion(float widthPercent) {
-        int width = (int) (widthPercent * this.width);
-        int x = (int) ((this.width - width) / 2);
-        xRegions.add(x);
-        xRegions.add(x + width);
-        return this;
-    }
-
-    public NinePatchBuilder addYRegion(int y, int height) {
-        yRegions.add(y);
-        yRegions.add(y + height);
-        return this;
-    }
-
-    public NinePatchBuilder addYRegionPoints(int y1, int y2) {
-        yRegions.add(y1);
-        yRegions.add(y2);
-        return this;
-    }
-
     public NinePatchBuilder addYRegion(float yPercent, float heightPercent) {
         int ytmp = (int) (yPercent * this.height);
         yRegions.add(ytmp);
         yRegions.add(ytmp + (int) (heightPercent * this.height));
+        return this;
+    }
+
+    public NinePatchBuilder addXRegionPoints(float x1Percent, float x2Percent) {
+        xRegions.add((int) (x1Percent * this.width));
+        xRegions.add((int) (x2Percent * this.width));
         return this;
     }
 
@@ -95,16 +82,17 @@ public class NinePatchBuilder {
         return this;
     }
 
-    public NinePatchBuilder addYCenteredRegion(int height) {
-        int y = (int) ((this.height - height) / 2);
-        yRegions.add(y);
-        yRegions.add(y + height);
+    public NinePatchBuilder addXCenteredRegion(float widthPercent) {
+        int width = (int) (widthPercent * this.width);
+        int x = (this.width - width) / 2;
+        xRegions.add(x);
+        xRegions.add(x + width);
         return this;
     }
 
     public NinePatchBuilder addYCenteredRegion(float heightPercent) {
         int height = (int) (heightPercent * this.height);
-        int y = (int) ((this.height - height) / 2);
+        int y = (this.height - height) / 2;
         yRegions.add(y);
         yRegions.add(y + height);
         return this;
@@ -121,8 +109,10 @@ public class NinePatchBuilder {
         }
         /* example code from a anwser above
         // The 9 patch segment is not a solid color.
+
         private static final int NO_COLOR = 0x00000001;
         ByteBuffer buffer = ByteBuffer.allocate(56).order(ByteOrder.nativeOrder());
+
         //was translated
         buffer.put((byte)0x01);
         //divx size
