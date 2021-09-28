@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- 自定义验证码-->
-    <declare-styleable name="VerificationCodeView">
+    <declare-styleable name="VerifyCodeView">
         <!--输入框的数量-->
         <attr name="code_number" format="integer" />
         <!--单个验证码的宽度-->

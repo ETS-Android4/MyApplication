@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.SecurityCodeActivity">
 
-    <com.example.william.my.core.widget.securitycode.SecurityCodeView
+    <com.example.william.my.core.verifycode.VerifyCodeView
         android:id="@+id/securityCodeView"
         android:layout_width="match_parent"
         android:layout_height="48dp"
