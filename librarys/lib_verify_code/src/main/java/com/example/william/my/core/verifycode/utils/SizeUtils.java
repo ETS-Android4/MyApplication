@@ -1,4 +1,4 @@
-package com.example.william.my.core.widget.utils;
+package com.example.william.my.core.verifycode.utils;
 
 import android.content.res.Resources;
 

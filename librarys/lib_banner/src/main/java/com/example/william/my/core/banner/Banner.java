@@ -78,7 +78,6 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     // banner圆角方向，如果一个都不设置，默认四个角全部圆角
     private boolean mRoundTopLeft, mRoundTopRight, mRoundBottomLeft, mRoundBottomRight;
 
-
     // 是否要拦截事件
     private boolean isIntercept = true;
     // 滑动距离范围

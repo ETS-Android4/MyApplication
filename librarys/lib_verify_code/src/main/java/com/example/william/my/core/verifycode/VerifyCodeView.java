@@ -1,8 +1,11 @@
-package com.example.william.my.core.widget.securitycode;
+package com.example.william.my.core.verifycode;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -13,53 +16,75 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
+import com.example.william.my.core.verifycode.listener.InputCompleteListener;
+import com.example.william.my.core.verifycode.utils.SizeUtils;
 
-import com.example.william.my.core.widget.R;
-import com.example.william.my.core.widget.utils.SizeUtils;
+public class VerifyCodeView extends RelativeLayout {
 
-public class SecurityCodeView extends RelativeLayout {
+    private int mCodeNum;
+    private int mTextSize;
+    private int mTextColor, mTextBgColor;
+    private int mCodeWidth, mCodeHeight, mCodeMargin;
 
-    private int count = 4;
+    private TextView[] mTextViews;
 
     private EditText mEditText;
-    private TextView[] mTextViews;
     private StringBuffer mStringBuffer;
-    private String mInputContent;
 
-    public SecurityCodeView(Context context) {
+    private InputCompleteListener inputCompleteListener;
+
+    public VerifyCodeView(Context context) {
         this(context, null);
     }
 
-    public SecurityCodeView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+    public VerifyCodeView(Context context, AttributeSet attrs) {
+        this(context, null, 0);
     }
 
-    public SecurityCodeView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public VerifyCodeView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mTextViews = new TextView[count];
+        initAttrs(context, attrs);
+        initView(context);
+    }
+
+    private void initAttrs(Context context, AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.VerificationCodeView);
+            mCodeNum = a.getInteger(R.styleable.VerificationCodeView_code_number, 4);
+            mCodeWidth = a.getDimensionPixelSize(R.styleable.VerificationCodeView_code_width, SizeUtils.dp2px(48));
+            mCodeHeight = a.getDimensionPixelSize(R.styleable.VerificationCodeView_code_height, SizeUtils.dp2px(48));
+            mCodeMargin = a.getDimensionPixelSize(R.styleable.VerificationCodeView_code_margin, SizeUtils.dp2px(8));
+            mTextSize = a.getDimensionPixelSize(R.styleable.VerificationCodeView_code_size, SizeUtils.dp2px(14));
+            mTextColor = a.getColor(R.styleable.VerificationCodeView_code_color, Color.BLACK);
+            mTextBgColor = a.getColor(R.styleable.VerificationCodeView_code_bg_color, Color.TRANSPARENT);
+            a.recycle();
+        }
+    }
+
+    private void initView(Context context) {
         RelativeLayout mRelativeLayout = new RelativeLayout(context);
         LinearLayout mLinearLayout = new LinearLayout(context);
         mLinearLayout.setGravity(Gravity.CENTER);
         mLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        for (int i = 0; i < count; i++) {
+        mTextViews = new TextView[mCodeNum];
+        for (int i = 0; i < mCodeNum; i++) {
             TextView mTextView = new TextView(context);
             mTextView.setGravity(Gravity.CENTER);
-            mTextView.setTextColor(ContextCompat.getColor(context, android.R.color.white));
-            mTextView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent));
-            LayoutParams params = new LayoutParams(SizeUtils.dp2px(48), SizeUtils.dp2px(48));
-            params.setMarginStart(SizeUtils.dp2px(8));
+            mTextView.setTextSize(mTextSize);
+            mTextView.setTextColor(mTextColor);
+            mTextView.setBackgroundColor(mTextBgColor);
+            LayoutParams params = new LayoutParams(mCodeWidth, mCodeHeight);
+            params.setMarginStart(mCodeMargin);
             mTextView.setLayoutParams(params);
             mTextViews[i] = mTextView;
             mLinearLayout.addView(mTextView);
         }
+        mRelativeLayout.addView(mLinearLayout);
         mEditText = new EditText(context);
         mEditText.setBackground(null);
         mEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
         mEditText.setCursorVisible(false);//将光标隐藏
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, SizeUtils.dp2px(48));
-        mEditText.setLayoutParams(params);
-        mRelativeLayout.addView(mLinearLayout);
+        mEditText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, SizeUtils.dp2px(48)));
         mRelativeLayout.addView(mEditText);
         addView(mRelativeLayout);
         setListener();
@@ -82,8 +107,8 @@ public class SecurityCodeView extends RelativeLayout {
             @Override
             public void afterTextChanged(Editable editable) {
                 //如果字符不为""时才进行操作
-                if (!editable.toString().equals("")) {
-                    if (mStringBuffer.length() > 3) {
+                if (!TextUtils.isEmpty(editable)) {
+                    if (mStringBuffer.length() == mCodeNum) {
                         //当文本长度大于3位时editText置空
                         mEditText.setText("");
                         return;
@@ -91,8 +116,7 @@ public class SecurityCodeView extends RelativeLayout {
                         //将文字添加到StringBuffer中
                         mStringBuffer.append(editable);
                         mEditText.setText("");//添加后将EditText置空
-                        count = mStringBuffer.length();
-                        mInputContent = mStringBuffer.toString();
+                        mCodeNum = mStringBuffer.length();
                         if (mStringBuffer.length() == 4) {
                             //文字长度位4  则调用完成输入的监听
                             if (inputCompleteListener != null) {
@@ -102,7 +126,7 @@ public class SecurityCodeView extends RelativeLayout {
                     }
 
                     for (int i = 0; i < mStringBuffer.length(); i++) {
-                        mTextViews[i].setText(String.valueOf(mInputContent.charAt(i)));
+                        mTextViews[i].setText(String.valueOf(mStringBuffer.toString().charAt(i)));
                     }
                 }
             }
@@ -120,15 +144,14 @@ public class SecurityCodeView extends RelativeLayout {
     }
 
     public boolean onKeyDelete() {
-        if (count == 0) {
-            count = 4;
+        if (mCodeNum == 0) {
+            mCodeNum = 4;
             return true;
         }
         if (mStringBuffer.length() > 0) {
             //删除相应位置的字符
-            mStringBuffer.delete((count - 1), count);
-            count--;
-            mInputContent = mStringBuffer.toString();
+            mStringBuffer.delete((mCodeNum - 1), mCodeNum);
+            mCodeNum--;
             mTextViews[mStringBuffer.length()].setText("");
             if (inputCompleteListener != null)
                 inputCompleteListener.deleteContent(true);//有删除就通知manger
@@ -137,35 +160,21 @@ public class SecurityCodeView extends RelativeLayout {
         return false;
     }
 
+    public String getEditContent() {
+        return mStringBuffer.toString();
+    }
+
+    public void setEditContent(String content) {
+        mEditText.setText(content);
+    }
+
     /**
      * 清空输入内容
      */
     public void clearEditText() {
         mStringBuffer.delete(0, mStringBuffer.length());
-        mInputContent = mStringBuffer.toString();
         for (TextView textView : mTextViews) {
             textView.setText("");
         }
-    }
-
-
-    private InputCompleteListener inputCompleteListener;
-
-    public void setInputCompleteListener(InputCompleteListener inputCompleteListener) {
-        this.inputCompleteListener = inputCompleteListener;
-    }
-
-    public interface InputCompleteListener {
-        void inputComplete();
-
-        void deleteContent(boolean isDelete);
-    }
-
-    public String getEditContent() {
-        return mInputContent;
-    }
-
-    public void setEditContent(String content) {
-        mEditText.setText(content);
     }
 }
