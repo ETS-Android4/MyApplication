@@ -3,11 +3,13 @@ package com.example.william.my.core.verifycode;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,13 +23,16 @@ import com.example.william.my.core.verifycode.utils.SizeUtils;
 public class VerifyCodeView extends RelativeLayout {
 
     private int mCodeNum;
-    private int mTextSize;
-    private int mTextColor, mTextBgColor;
+    private Drawable mTextBgNormal, mTextBgFocus;
+    private int mTextSize, mTextColor, mTextBgColor;
     private int mCodeWidth, mCodeHeight, mCodeMargin;
 
     private EditText mEditText;
 
     private TextView[] mTextViews;
+    //当前选中的TextView位置，即光标所在位置
+    private int currentFocusPosition = 0;
+
     private StringBuffer mStringBuffer;
     private String mInputContent;
 
@@ -55,6 +60,11 @@ public class VerifyCodeView extends RelativeLayout {
             mTextSize = a.getDimensionPixelSize(R.styleable.VerifyCodeView_code_size, 14);
             mTextColor = a.getColor(R.styleable.VerifyCodeView_code_color, Color.WHITE);
             mTextBgColor = a.getColor(R.styleable.VerifyCodeView_code_bg_color, Color.GRAY);
+            mTextBgNormal = a.getDrawable(R.styleable.VerifyCodeView_code_bg_normal);
+            mTextBgFocus = a.getDrawable(R.styleable.VerifyCodeView_code_bg_focus);
+            if (mTextBgFocus == null) {
+                mTextBgFocus = mTextBgNormal;
+            }
             a.recycle();
         }
     }
@@ -65,16 +75,16 @@ public class VerifyCodeView extends RelativeLayout {
         mLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
         mTextViews = new TextView[mCodeNum];
         for (int i = 0; i < mCodeNum; i++) {
-            TextView mTextView = new TextView(context);
-            mTextView.setGravity(Gravity.CENTER);
-            mTextView.setTextSize(mTextSize);
-            mTextView.setTextColor(mTextColor);
-            mTextView.setBackgroundColor(mTextBgColor);
+            TextView textView = new TextView(context);
+            textView.setGravity(Gravity.CENTER);
+            textView.setTextSize(mTextSize);
+            textView.setTextColor(mTextColor);
+            textView.setBackgroundColor(mTextBgColor);
             LayoutParams params = new LayoutParams(SizeUtils.dp2px(mCodeWidth), SizeUtils.dp2px(mCodeHeight));
             params.setMarginStart(SizeUtils.dp2px(mCodeMargin));
-            mTextView.setLayoutParams(params);
-            mTextViews[i] = mTextView;
-            mLinearLayout.addView(mTextView);
+            textView.setLayoutParams(params);
+            mTextViews[i] = textView;
+            mLinearLayout.addView(textView);
         }
         addView(mLinearLayout);
         mEditText = new EditText(context);
@@ -84,7 +94,21 @@ public class VerifyCodeView extends RelativeLayout {
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, SizeUtils.dp2px(mCodeHeight));
         mEditText.setLayoutParams(params);
         addView(mEditText);
+        resetCursorPosition();
         setListener();
+    }
+
+    private void resetCursorPosition() {
+//        for (int i = 0; i < mCodeNum; i++) {
+//            TextView textView = mTextViews[i];
+//            if (i == currentFocusPosition) {
+//                //textView.setBackground(textDrawable);
+//                textView.setBackgroundColor(mTextBgColor);
+//            } else {
+//                //textView.setBackground(textFocusedDrawable);
+//                textView.setBackgroundColor(Color.BLUE);
+//            }
+//        }
     }
 
     private void setListener() {
@@ -103,17 +127,18 @@ public class VerifyCodeView extends RelativeLayout {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.e("TAG", "editable " + editable);
                 //如果字符不为""时才进行操作
                 if (!TextUtils.isEmpty(editable)) {
-                    if (mStringBuffer.length() > 3) {
-                        //当文本长度大于3位时editText置空
+                    if (mStringBuffer.length() > mCodeNum-1) {
+                        //当文本长度大于等于mCodeNum时editText置空
                         mEditText.setText("");
                         return;
                     } else {
                         //将文字添加到StringBuffer中
                         mStringBuffer.append(editable);
                         mEditText.setText("");//添加后将EditText置空
-                        mCodeNum = mStringBuffer.length();
+
                         mInputContent = mStringBuffer.toString();
                         if (mStringBuffer.length() == 4) {
                             //文字长度位4  则调用完成输入的监听
@@ -124,6 +149,7 @@ public class VerifyCodeView extends RelativeLayout {
                     }
 
                     for (int i = 0; i < mStringBuffer.length(); i++) {
+                        resetCursorPosition();
                         mTextViews[i].setText(String.valueOf(mInputContent.charAt(i)));
                     }
                 }
@@ -142,20 +168,16 @@ public class VerifyCodeView extends RelativeLayout {
     }
 
     public boolean onKeyDelete() {
-        if (mCodeNum == 0) {
-            mCodeNum = 4;
-            return true;
-        }
-        if (mStringBuffer.length() > 0) {
-            //删除相应位置的字符
-            mStringBuffer.delete((mCodeNum - 1), mCodeNum);
-            mCodeNum--;
-            mInputContent = mStringBuffer.toString();
-            mTextViews[mStringBuffer.length()].setText("");
-            if (inputCompleteListener != null)
-                inputCompleteListener.deleteContent(true);//有删除就通知manger
-
-        }
+//        if (mStringBuffer.length() > 0) {
+//            //删除相应位置的字符
+//            mStringBuffer.delete((mCodeNum - 1), mCodeNum);
+//            mCodeNum--;
+//            mInputContent = mStringBuffer.toString();
+//            mTextViews[mStringBuffer.length()].setText("");
+//            if (inputCompleteListener != null) {
+//                inputCompleteListener.deleteContent(true);//有删除就通知manger
+//            }
+//        }
         return false;
     }
 
@@ -169,7 +191,6 @@ public class VerifyCodeView extends RelativeLayout {
             textView.setText("");
         }
     }
-
 
     private InputCompleteListener inputCompleteListener;
 

@@ -61,7 +61,7 @@ public class ARouterPath {
         public static final String CustomView_IosDialog = "/module_custom/basics_ios_dialog";
         public static final String CustomView_MarqueeView = "/module_custom/marquee_view";
         public static final String CustomView_ScrollPage = "/module_custom/scroll_page";
-        public static final String CustomView_SecurityCode = "/module_custom/security_code";
+        public static final String CustomView_VerifyCode = "/module_custom/verify_code";
         public static final String CustomView_Spinner = "/module_custom/spinner";
         public static final String CustomView_TitleBar = "/module_custom/title";
     }

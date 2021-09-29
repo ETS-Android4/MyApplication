@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.william.my.module.activity.BaseListActivity;
 import com.example.william.my.module.event.DefaultSmartEventBus;
 import com.example.william.my.module.event.MessageEvent;
@@ -84,6 +85,8 @@ public class ModuleActivity extends BaseListActivity {
                 return false;
             }
         });
+
+        ARouter.getInstance().build(ARouterPath.CustomView.CustomView_VerifyCode).navigation();
     }
 
     @Override
