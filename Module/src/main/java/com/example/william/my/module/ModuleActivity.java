@@ -85,8 +85,6 @@ public class ModuleActivity extends BaseListActivity {
                 return false;
             }
         });
-
-        ARouter.getInstance().build(ARouterPath.CustomView.CustomView_VerifyCode).navigation();
     }
 
     @Override

@@ -17,6 +17,6 @@ public class VerifyCodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_activity_security_code_view);
         VerifyCodeView codeView = findViewById(R.id.securityCodeView);
-        //codeView.setEditContent("0731");
+        codeView.setEditContent("0731");
     }
 }

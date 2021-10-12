@@ -31,10 +31,9 @@ public class VerifyCodeView extends RelativeLayout {
 
     private TextView[] mTextViews;
     //当前选中的TextView位置，即光标所在位置
-    private int currentFocusPosition = 0;
+    private int mCurrentFocusPosition = 0;
 
     private StringBuffer mStringBuffer;
-    private String mInputContent;
 
     public VerifyCodeView(Context context) {
         this(context, null);
@@ -58,8 +57,8 @@ public class VerifyCodeView extends RelativeLayout {
             mCodeHeight = a.getDimensionPixelSize(R.styleable.VerifyCodeView_code_height, 48);
             mCodeMargin = a.getDimensionPixelSize(R.styleable.VerifyCodeView_code_margin, 8);
             mTextSize = a.getDimensionPixelSize(R.styleable.VerifyCodeView_code_size, 14);
-            mTextColor = a.getColor(R.styleable.VerifyCodeView_code_color, Color.WHITE);
-            mTextBgColor = a.getColor(R.styleable.VerifyCodeView_code_bg_color, Color.GRAY);
+            mTextColor = a.getColor(R.styleable.VerifyCodeView_code_color, Color.GRAY);
+            mTextBgColor = a.getColor(R.styleable.VerifyCodeView_code_bg_color, Color.LTGRAY);
             mTextBgNormal = a.getDrawable(R.styleable.VerifyCodeView_code_bg_normal);
             mTextBgFocus = a.getDrawable(R.styleable.VerifyCodeView_code_bg_focus);
             if (mTextBgFocus == null) {
@@ -99,16 +98,16 @@ public class VerifyCodeView extends RelativeLayout {
     }
 
     private void resetCursorPosition() {
-//        for (int i = 0; i < mCodeNum; i++) {
-//            TextView textView = mTextViews[i];
-//            if (i == currentFocusPosition) {
-//                //textView.setBackground(textDrawable);
-//                textView.setBackgroundColor(mTextBgColor);
-//            } else {
-//                //textView.setBackground(textFocusedDrawable);
-//                textView.setBackgroundColor(Color.BLUE);
-//            }
-//        }
+        if (mTextBgNormal != null && mTextBgFocus != null) {
+            for (int i = 0; i < mCodeNum; i++) {
+                TextView textView = mTextViews[i];
+                if (i == mCurrentFocusPosition) {
+                    textView.setBackground(mTextBgNormal);
+                } else {
+                    textView.setBackground(mTextBgFocus);
+                }
+            }
+        }
     }
 
     private void setListener() {
@@ -127,31 +126,9 @@ public class VerifyCodeView extends RelativeLayout {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                Log.e("TAG", "editable " + editable);
                 //如果字符不为""时才进行操作
                 if (!TextUtils.isEmpty(editable)) {
-                    if (mStringBuffer.length() > mCodeNum-1) {
-                        //当文本长度大于等于mCodeNum时editText置空
-                        mEditText.setText("");
-                        return;
-                    } else {
-                        //将文字添加到StringBuffer中
-                        mStringBuffer.append(editable);
-                        mEditText.setText("");//添加后将EditText置空
-
-                        mInputContent = mStringBuffer.toString();
-                        if (mStringBuffer.length() == 4) {
-                            //文字长度位4  则调用完成输入的监听
-                            if (inputCompleteListener != null) {
-                                inputCompleteListener.inputComplete();
-                            }
-                        }
-                    }
-
-                    for (int i = 0; i < mStringBuffer.length(); i++) {
-                        resetCursorPosition();
-                        mTextViews[i].setText(String.valueOf(mInputContent.charAt(i)));
-                    }
+                    setVerifyCodeText(editable.toString());
                 }
             }
         });
@@ -167,17 +144,36 @@ public class VerifyCodeView extends RelativeLayout {
         });
     }
 
+    private void setVerifyCodeText(String editable) {
+        if (mStringBuffer.length() < mCodeNum) {
+            mStringBuffer.append(editable);
+            mCurrentFocusPosition = mStringBuffer.length();
+            for (int i = 0; i < mStringBuffer.length(); i++) {
+                mTextViews[i].setText(String.valueOf(mStringBuffer.charAt(i)));
+            }
+
+            if (inputCompleteListener != null) {
+                if (mStringBuffer.length() == mCodeNum) {
+                    inputCompleteListener.inputComplete();
+                }
+            }
+        }
+        resetCursorPosition();
+        mEditText.setText("");
+    }
+
     public boolean onKeyDelete() {
-//        if (mStringBuffer.length() > 0) {
-//            //删除相应位置的字符
-//            mStringBuffer.delete((mCodeNum - 1), mCodeNum);
-//            mCodeNum--;
-//            mInputContent = mStringBuffer.toString();
-//            mTextViews[mStringBuffer.length()].setText("");
-//            if (inputCompleteListener != null) {
-//                inputCompleteListener.deleteContent(true);//有删除就通知manger
-//            }
-//        }
+        if (mStringBuffer.length() > 0) {
+            //删除相应位置的字符
+            mStringBuffer.delete((mCurrentFocusPosition - 1), mCurrentFocusPosition);
+            mCurrentFocusPosition = mStringBuffer.length();
+            mTextViews[mCurrentFocusPosition].setText("");
+
+            if (inputCompleteListener != null) {
+                inputCompleteListener.deleteContent(true);
+            }
+        }
+        resetCursorPosition();
         return false;
     }
 
@@ -186,10 +182,10 @@ public class VerifyCodeView extends RelativeLayout {
      */
     public void clearEditText() {
         mStringBuffer.delete(0, mStringBuffer.length());
-        mInputContent = mStringBuffer.toString();
         for (TextView textView : mTextViews) {
             textView.setText("");
         }
+        resetCursorPosition();
     }
 
     private InputCompleteListener inputCompleteListener;
@@ -205,7 +201,7 @@ public class VerifyCodeView extends RelativeLayout {
     }
 
     public String getEditContent() {
-        return mInputContent;
+        return mStringBuffer.toString();
     }
 
     public void setEditContent(String content) {
