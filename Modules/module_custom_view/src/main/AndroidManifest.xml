@@ -3,6 +3,7 @@
     package="com.example.william.my.module.custom">
 
     <application>
+        <activity android:name=".activity.InfiniteImageActivity" />
         <activity android:name=".CustomViewActivity" />
         <activity android:name=".activity.BannerActivity" />
         <activity android:name=".activity.BlurViewActivity" />

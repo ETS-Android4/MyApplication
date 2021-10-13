@@ -58,6 +58,7 @@ public class ARouterPath {
         public static final String CustomView_BlurView = "/module_custom/blur_view";
         public static final String CustomView_Gallery = "/module_custom/gallery";
         public static final String CustomView_GestureLock = "/module_custom/gesture_lock";
+        public static final String CustomView_InfiniteImage = "/module_custom/infinite_image";
         public static final String CustomView_IosDialog = "/module_custom/basics_ios_dialog";
         public static final String CustomView_MarqueeView = "/module_custom/marquee_view";
         public static final String CustomView_ScrollPage = "/module_custom/scroll_page";

@@ -27,6 +27,13 @@ public class ImmersionBarActivity extends AppCompatActivity {
     }
 
     /**
+     * 状态栏颜色
+     */
+    protected int getStatusBarColor() {
+        return R.color.colorPrimary;
+    }
+
+    /**
      * 解决布局与状态栏重叠问题，默认true
      */
     protected boolean fitsSystemWindows() {
@@ -34,10 +41,10 @@ public class ImmersionBarActivity extends AppCompatActivity {
     }
 
     /**
-     * 状态栏颜色
+     * 状态栏字体颜色是否为深色
      */
-    protected int getStatusBarColor() {
-        return R.color.colorPrimary;
+    public boolean statusBarDark() {
+        return true;
     }
 
     private int getKeyboardMode() {
@@ -64,7 +71,7 @@ public class ImmersionBarActivity extends AppCompatActivity {
                     .navigationBarAlpha(0.4f)  //导航栏透明度，不写默认0.0F
                     .barAlpha(0.3f)  //状态栏和导航栏透明度，不写默认0.0f
                     //Font
-                    .statusBarDarkFont(true) //状态栏字体是深色，不写默认为亮色
+                    .statusBarDarkFont(statusBarDark()) //状态栏字体是深色，不写默认为亮色
                     //Windows
                     .fitsSystemWindows(fitsSystemWindows())//解决状态栏和布局重叠问题，默认为false，当为true时一定要指定statusBarColor()，不然状态栏为透明色
                     //Keyboard
