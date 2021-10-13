@@ -1,0 +1,30 @@
+package com.example.william.my.module.demo.activity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.william.my.module.demo.R;
+import com.example.william.my.module.demo.hook.HookManager;
+
+public class HookActivity extends AppCompatActivity {
+
+    private TextView mTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.basics_layout_response);
+        mTextView = findViewById(R.id.basics_response);
+        mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("TAG", "click!");
+            }
+        });
+        HookManager.hookOnClickListener(this, mTextView);
+    }
+}
