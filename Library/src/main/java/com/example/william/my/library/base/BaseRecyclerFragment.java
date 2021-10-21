@@ -22,9 +22,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.List;
 
-public abstract class
-
-BaseRecyclerFragment<T> extends BaseFragment
+public abstract class BaseRecyclerFragment<T> extends BaseFragment
         implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener {
 
     private SmartRefreshLayout mSmartRefreshLayout;
@@ -46,27 +44,35 @@ BaseRecyclerFragment<T> extends BaseFragment
     }
 
     private void initRecyclerView(@NonNull View view) {
-        RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         mSmartRefreshLayout = view.findViewById(R.id.smartRefresh);
+        if (mSmartRefreshLayout != null) {
+            mSmartRefreshLayout.setEnableRefresh(canRefresh());
+            mSmartRefreshLayout.setEnableLoadMore(canLoadMore());
+            mSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
+        }
 
+        RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         if (mRecyclerView != null) {
             //取消recyclerview单独的滑动效果
             mRecyclerView.setNestedScrollingEnabled(true);
-            mRecyclerView.setLayoutManager(setLayoutManager());
 
-            mAdapter = setAdapter();
+            RecyclerView.OnScrollListener onScrollListener = getOnScrollListener();
+            if (onScrollListener != null) {
+                mRecyclerView.addOnScrollListener(onScrollListener);
+            }
+            RecyclerView.ItemDecoration itemDecoration = getItemDecoration();
+            if (itemDecoration != null) {
+                mRecyclerView.addItemDecoration(itemDecoration);
+            }
+
+            mAdapter = getAdapter();
+
+            RecyclerView.LayoutManager layoutManager = getLayoutManager();
+            mRecyclerView.setLayoutManager(layoutManager);
             mRecyclerView.setAdapter(mAdapter);
 
             mAdapter.setOnItemClickListener(this);
             mAdapter.setOnItemChildClickListener(this);
-        }
-
-        if (mSmartRefreshLayout != null) {
-
-            mSmartRefreshLayout.setEnableRefresh(canRefresh());
-            mSmartRefreshLayout.setEnableLoadMore(canLoadMore());
-
-            mSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
         }
     }
 
@@ -82,11 +88,19 @@ BaseRecyclerFragment<T> extends BaseFragment
         return false;
     }
 
-    protected RecyclerView.LayoutManager setLayoutManager() {
-        return new LinearLayoutManager(getActivity());
+    protected RecyclerView.OnScrollListener getOnScrollListener() {
+        return null;
     }
 
-    protected abstract BaseQuickAdapter<T, BaseViewHolder> setAdapter();
+    protected RecyclerView.ItemDecoration getItemDecoration() {
+        return null;
+    }
+
+    protected abstract BaseQuickAdapter<T, BaseViewHolder> getAdapter();
+
+    protected RecyclerView.LayoutManager getLayoutManager() {
+        return new LinearLayoutManager(getActivity());
+    }
 
     protected void onDataFail(String message) {
         mSmartRefreshLayout.setEnableLoadMore(false);

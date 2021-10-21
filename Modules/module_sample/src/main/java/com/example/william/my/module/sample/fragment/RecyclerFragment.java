@@ -24,7 +24,7 @@ public class RecyclerFragment extends BaseRecyclerFragment<ArticleDetailBean> im
     private ArticleContract.Presenter mPresenter;
 
     @Override
-    public BaseQuickAdapter<ArticleDetailBean, BaseViewHolder> setAdapter() {
+    public BaseQuickAdapter<ArticleDetailBean, BaseViewHolder> getAdapter() {
         return new ArticleAdapter();
     }
 

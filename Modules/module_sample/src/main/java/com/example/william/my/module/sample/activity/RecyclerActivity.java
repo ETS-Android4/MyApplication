@@ -1,5 +1,7 @@
 package com.example.william.my.module.sample.activity;
 
+import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -12,6 +14,9 @@ public class RecyclerActivity extends BaseFragmentActivity {
 
     @Override
     public Fragment setFragment() {
-        return new RecyclerFragment();
+        Bundle bundle = new Bundle();
+        Fragment fragment = new RecyclerFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 }

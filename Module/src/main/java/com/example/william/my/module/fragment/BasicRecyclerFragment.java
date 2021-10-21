@@ -33,7 +33,7 @@ public class BasicRecyclerFragment extends BaseRecyclerFragment<String> {
     }
 
     @Override
-    public BaseQuickAdapter<String, BaseViewHolder> setAdapter() {
+    public BaseQuickAdapter<String, BaseViewHolder> getAdapter() {
         return new RecyclerAdapter();
     }
 
