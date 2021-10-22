@@ -15,6 +15,7 @@ public class DemoActivity extends BaseListActivity {
         mMap.put("BehaviorActivity", ARouterPath.Demo.Demo_Behavior);
         mMap.put("BroadcastActivity", ARouterPath.Demo.Demo_Broadcast);
         mMap.put("FloatWindowActivity", ARouterPath.Demo.Demo_FloatWindow);
+        mMap.put("HookActivity", ARouterPath.Demo.Demo_Hook);
         mMap.put("JobSchedulerActivity", ARouterPath.Demo.Demo_JobScheduler);
         mMap.put("MessengerActivity", ARouterPath.Demo.Demo_Messenger);
         mMap.put("NetworkStatusActivity", ARouterPath.Demo.Demo_NetworkStatus);
