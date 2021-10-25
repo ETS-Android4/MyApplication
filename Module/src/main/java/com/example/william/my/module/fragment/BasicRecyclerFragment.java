@@ -20,16 +20,6 @@ public class BasicRecyclerFragment extends BaseRecyclerFragment<String> {
     @Override
     protected void initRecyclerData(Bundle savedInstanceState) {
         super.initRecyclerData(savedInstanceState);
-        List<String> mData = new ArrayList<>();
-        for (int i = 1; i < 61; i++) {
-            mData.add("POSITION " + i);
-        }
-        mAdapter.setNewInstance(mData);
-    }
-
-    @Override
-    protected boolean canRefresh() {
-        return false;
     }
 
     @Override
