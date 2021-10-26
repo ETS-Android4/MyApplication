@@ -25,6 +25,8 @@ dependencies {
     implementation project(path: ':librarys:lib_okhttp')
     //Android
     implementation deps.constraintlayout
+    //Gson
+    implementation deps.gson
     //Retrofit
     implementation deps.retrofit
     implementation deps.retrofit_gson

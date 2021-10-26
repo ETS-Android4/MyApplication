@@ -33,9 +33,9 @@ public class GlideLoader implements ILoader {
 
     @Override
     public void load(FragmentActivity activity, String url, ImageView imageView) {
-        if (!isGif(url)){
+        if (!isGif(url)) {
             loadActivity(activity, url, imageView, new RequestOptions());
-        }else {
+        } else {
             loadGifActivity(activity, url, imageView, 1);
         }
     }

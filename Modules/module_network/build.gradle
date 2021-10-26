@@ -5,6 +5,8 @@ dependencies {
     implementation project(path: ':librarys:lib_okhttp')
     implementation project(path: ':librarys:lib_retrofit')
     implementation project(path: ':librarys:lib_imageloader')
+    //Gson
+    implementation deps.gson
     //Volley
     implementation deps.volley
     //RxAndroid

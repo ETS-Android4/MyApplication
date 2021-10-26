@@ -26,6 +26,6 @@ class Config {
             ModuleFlutter    : new DepConfig(false, ":modules:module_flutter"),
 
             //ModuleNeRtc  : new DepConfig(true, ":modules:module_ne_voiceroom"),
-            ModuleNeAudioRoom: new DepConfig(true, ":modules:module_ne_audioroom"),
+            ModuleNeAudioRoom: new DepConfig(false, ":modules:module_ne_audioroom"),
     ]
 }

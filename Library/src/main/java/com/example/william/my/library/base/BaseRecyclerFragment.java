@@ -123,7 +123,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     }
 
     protected void queryData() {
-        mPage = 1;
+
     }
 
     protected void onDataFail(String message) {
@@ -197,12 +197,14 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         mPage = 0;
+        queryData();
         mPullRefreshLayout.finishRefresh(1000);
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         mPage++;
+        queryData();
         mPullRefreshLayout.finishLoadMore(1000);
     }
 
