@@ -2,33 +2,34 @@ rootProject.name = "My Application"
 include ':app'
 
 include ':library'
+include ':module'
+
 include ':librarys:lib_customview'
 
 include ':librarys:lib_banner'
 include ':librarys:lib_infiniteimage'
 include ':librarys:lib_verify_code'
-include ':librarys:lib_nine_patch'
 
 include ':librarys:lib_okhttp'
 include ':librarys:lib_retrofit'
 include ':librarys:lib_download'
 include ':librarys:lib_imageloader'
 include ':librarys:lib_key_value'
+include ':librarys:lib_nine_patch'
 
-include ':module'
-//include ':modules:module_custom_view'
-//include ':modules:module_widget'
-//include ':modules:module_demo'
-//
-//include ':modules:module_android_util'
-//include ':modules:module_open_source'
-//include ':modules:module_network'
-//include ':modules:module_jetpack'
-//
-//include ':modules:module_kotlin'
-//include ':modules:module_sample'
-//
-//include ':modules:module_ne_audioroom'
+include ':modules:module_custom_view'
+include ':modules:module_widget'
+include ':modules:module_demo'
+
+include ':modules:module_android_util'
+include ':modules:module_open_source'
+include ':modules:module_network'
+include ':modules:module_jetpack'
+
+include ':modules:module_kotlin'
+include ':modules:module_sample'
+
+include ':modules:module_ne_audioroom'
 
 //include ':modules:module_flutter'
 //include ':flutter_module'

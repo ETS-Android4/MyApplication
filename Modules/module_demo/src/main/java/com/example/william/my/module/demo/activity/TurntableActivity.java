@@ -41,7 +41,7 @@ public class TurntableActivity extends BaseActivity {
 
     private void goAward(int index) {
         int n = 10;//奖品数目
-        int lap = 6;//旋转圈数
+        int lap = 3;//旋转圈数
         int one = 1000;//旋转一圈需要的时间
         final int angle = index * 360 / n;//奖品角度
         int increaseDegree = lap * 360 + angle;//目标角度
