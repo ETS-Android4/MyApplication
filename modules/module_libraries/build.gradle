@@ -3,5 +3,5 @@ android {
 }
 dependencies {
     implementation project(path: ':libraries:lib_imageloader')
-    implementation project(path: ':libraries:lib_nine_patch')
+    implementation project(path: ':libraries:lib_ninepatch')
 }

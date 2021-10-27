@@ -3,37 +3,37 @@ include ':app'
 
 include ':library'
 
-//include ':Libraries:lib_banner'
-//include ':Libraries:lib_infiniteimage'
-//include ':Libraries:lib_verify_code'
-//include ':Libraries:lib_customview'
-include ':libraries:lib_nine_patch'
+//include ':libraries:lib_banner'
+//include ':libraries:lib_infiniteimage'
+//include ':libraries:lib_verifycode'
+//include ':libraries:lib_customview'
+//include ':libraries:lib_ninepatch'
 //
-//include ':Libraries:lib_okhttp'
-//include ':Libraries:lib_retrofit'
-//include ':Libraries:lib_download'
+//include ':libraries:lib_okhttp'
+//include ':libraries:lib_retrofit'
+//include ':libraries:lib_download'
 //include ':libraries:lib_imageloader'
-//include ':Libraries:lib_key_value'
+//include ':libraries:lib_keyvalue'
 
 include ':module'
-//include ':moduleBean'
+//include ':bean'
 //
-//include ':Modules:module_custom_view'
-//include ':Modules:module_widget'
-//include ':Modules:module_demo'
-//
-//include ':Modules:module_android_util'
+//include ':modules:module_custom_view'
+//include ':modules:module_widget'
+//include ':modules:module_demo'
+
+//include ':modules:module_android_util'
 //include ':modules:module_open_source'
-//include ':Modules:module_network'
-//include ':Modules:module_jetpack'
+//include ':modules:module_network'
+//include ':modules:module_jetpack'
 //
-//include ':Modules:module_kotlin'
-//include ':Modules:module_sample'
+//include ':modules:module_kotlin'
+//include ':modules:module_sample'
 //include ':modules:module_libraries'
 //
-//include ':Modules:module_ne_audioroom'
+//include ':modules:module_ne_audioroom'
 
-//include ':Modules:module_flutter'
+//include ':modules:module_flutter'
 //include ':flutter_module'
 //setBinding(new Binding([gradle: this]))
 //evaluate(new File(

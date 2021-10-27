@@ -26,7 +26,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * Plugins:
  * GsonForMartPlus
- * Google Library Version Querier
+ * Google library Version Querier
  * Alibaba Java Coding Guidelines
  */
 @Route(path = ARouterPath.Module)
