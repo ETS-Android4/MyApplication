@@ -21,8 +21,8 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':librarys:lib_okhttp')
-    implementation project(path: ':librarys:lib_retrofit')
+    implementation project(path: ':Libraries:lib_okhttp')
+    implementation project(path: ':Libraries:lib_retrofit')
     //Retrofit
     implementation deps.retrofit
     implementation deps.retrofit_gson

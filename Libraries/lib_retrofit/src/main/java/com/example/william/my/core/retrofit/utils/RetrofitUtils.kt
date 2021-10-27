@@ -66,7 +66,7 @@ object RetrofitUtils {
                     callback.onResponse(response)
                 }
 
-                override fun onFailure(e: ApiException?) {
+                override fun onFailure(e: ApiException) {
                     callback.onFailure(e)
                 }
             })
@@ -86,7 +86,7 @@ object RetrofitUtils {
                     callback.onResponse(response)
                 }
 
-                override fun onFailure(e: ApiException?) {
+                override fun onFailure(e: ApiException) {
                     callback.onFailure(e)
                 }
             })

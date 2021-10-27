@@ -15,7 +15,7 @@ kapt {
     }
 }
 dependencies {
-    implementation project(path: ':librarys:lib_retrofit')
+    implementation project(path: ':Libraries:lib_retrofit')
     //Retrofit
     implementation deps.retrofit_gson
     implementation deps.retrofit_rxjava3

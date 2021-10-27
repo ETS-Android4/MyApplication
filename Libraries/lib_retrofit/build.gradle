@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':librarys:lib_okhttp')
+    implementation project(path: ':Libraries:lib_okhttp')
     //Android
     implementation deps.constraintlayout
     //Gson

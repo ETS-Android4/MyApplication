@@ -2,21 +2,20 @@ rootProject.name = "My Application"
 include ':app'
 
 include ':library'
+
+include ':Libraries:lib_banner'
+include ':Libraries:lib_infiniteimage'
+include ':Libraries:lib_verify_code'
+include ':Libraries:lib_customview'
+include ':Libraries:lib_nine_patch'
+
+include ':Libraries:lib_okhttp'
+include ':Libraries:lib_retrofit'
+include ':Libraries:lib_download'
+include ':Libraries:lib_imageloader'
+include ':Libraries:lib_key_value'
+
 include ':module'
-
-include ':librarys:lib_customview'
-
-include ':librarys:lib_banner'
-include ':librarys:lib_infiniteimage'
-include ':librarys:lib_verify_code'
-
-include ':librarys:lib_okhttp'
-include ':librarys:lib_retrofit'
-include ':librarys:lib_download'
-include ':librarys:lib_imageloader'
-include ':librarys:lib_key_value'
-include ':librarys:lib_nine_patch'
-
 include ':modules:module_custom_view'
 include ':modules:module_widget'
 include ':modules:module_demo'

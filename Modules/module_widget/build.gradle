@@ -2,6 +2,6 @@ android {
     resourcePrefix "widget_"
 }
 dependencies {
-    implementation project(path: ':librarys:lib_customview')
+    implementation project(path: ':Libraries:lib_customview')
     implementation deps.flexbox
 }
