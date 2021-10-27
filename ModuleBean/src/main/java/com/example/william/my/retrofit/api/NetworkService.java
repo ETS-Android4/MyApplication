@@ -1,10 +1,10 @@
-package com.example.william.my.module.api;
+package com.example.william.my.retrofit.api;
 
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
-import com.example.william.my.module.base.Urls;
-import com.example.william.my.module.bean.ArticleBean;
-import com.example.william.my.module.bean.BannerBean;
-import com.example.william.my.module.bean.BannerDetailBean;
+import com.example.william.my.retrofit.base.Urls;
+import com.example.william.my.retrofit.bean.ArticleBean;
+import com.example.william.my.retrofit.bean.BannerBean;
+import com.example.william.my.retrofit.bean.BannerDetailBean;
 
 import java.util.List;
 

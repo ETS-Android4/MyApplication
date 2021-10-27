@@ -1,4 +1,4 @@
-package com.example.william.my.module.bean;
+package com.example.william.my.retrofit.bean;
 
 import com.example.william.my.core.retrofit.base.BaseBean;
 import com.google.gson.annotations.SerializedName;

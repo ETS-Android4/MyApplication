@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.ToastUtils
 import com.example.william.my.core.retrofit.status.State
-import com.example.william.my.module.bean.ArticleDetailBean
+import com.example.william.my.retrofit.ArticleDetailBean
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.adapter.ArticleAdapter
 import com.example.william.my.module.sample.databinding.SampleLayoutRecyclerBinding
@@ -90,7 +90,7 @@ class KtActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         mBinding.smartRefresh.setEnableLoadMore(false)
     }
 
-    private fun showArticles(page: Int, articles: MutableList<ArticleDetailBean>) {
+    private fun showArticles(page: Int, articles: MutableList<com.example.william.my.retrofit.ArticleDetailBean>) {
         if (page == 0) {
             mAdapter.setNewInstance(articles)
         } else {

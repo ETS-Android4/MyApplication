@@ -7,14 +7,17 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
 import com.example.william.my.core.retrofit.response.RetrofitResponse
-import com.example.william.my.module.bean.ArticleDataBean
-import com.example.william.my.module.bean.ArticleDetailBean
+import com.example.william.my.retrofit.ArticleDataBean
+import com.example.william.my.retrofit.ArticleDetailBean
 
 object ArticleBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("items")
-    fun setItemsResponse(view: RecyclerView, articleBean: RetrofitResponse<ArticleDataBean>?) {
+    fun setItemsResponse(
+        view: RecyclerView,
+        articleBean: RetrofitResponse<com.example.william.my.retrofit.ArticleDataBean>?
+    ) {
         val adapter = view.adapter
         if (adapter is ArticleDataBindAdapter) {
             if (articleBean?.data != null) {
@@ -32,7 +35,7 @@ object ArticleBindingAdapter {
     private fun showArticles(
         adapter: ArticleDataBindAdapter,
         isFirst: Boolean,
-        datas: MutableList<ArticleDetailBean?>
+        datas: MutableList<com.example.william.my.retrofit.ArticleDetailBean?>
     ) {
         if (isFirst) {
             adapter.setNewInstance(datas)

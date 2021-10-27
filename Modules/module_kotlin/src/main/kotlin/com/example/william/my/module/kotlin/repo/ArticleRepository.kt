@@ -1,14 +1,13 @@
 package com.example.william.my.module.kotlin.repo
 
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
-import com.example.william.my.module.bean.ArticleBean
+import com.example.william.my.retrofit.ArticleBean
 import com.example.william.my.module.kotlin.api.KotlinApi
 import com.example.william.my.module.kotlin.utils.ThreadUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
 /**
@@ -17,7 +16,7 @@ import kotlinx.coroutines.flow.map
  */
 class ArticleRepository {
 
-    private val getArticleFlow: Flow<ArticleBean> =
+    private val getArticleFlow: Flow<com.example.william.my.retrofit.ArticleBean> =
         flow {
             //打印线程
             ThreadUtils.isMainThread("ArticleRepository getArticle")
@@ -36,7 +35,7 @@ class ArticleRepository {
      * These operations are lazy and don't trigger the flow. They just transform
      * the current value emitted by the flow at that point in time.
      */
-    val article: Flow<ArticleBean> =
+    val article: Flow<com.example.william.my.retrofit.ArticleBean> =
         getArticleFlow
             // 中间运算符 map 转换数据
             .map { article ->
@@ -51,7 +50,7 @@ class ArticleRepository {
     //    Log.e("TAG", "exception : " + exception.message.toString())
     //}
 
-    private fun articleTakeOne(article: ArticleBean): ArticleBean {
+    private fun articleTakeOne(article: com.example.william.my.retrofit.ArticleBean): com.example.william.my.retrofit.ArticleBean {
         //打印线程
         ThreadUtils.isMainThread("ArticleRepository articleTakeOne")
 

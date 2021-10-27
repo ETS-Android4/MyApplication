@@ -6,7 +6,7 @@ import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.observer.RetrofitObserver;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.base.Urls;
+import com.example.william.my.retrofit.base.Urls;
 import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;

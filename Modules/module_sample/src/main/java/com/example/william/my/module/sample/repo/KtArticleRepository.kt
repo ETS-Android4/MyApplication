@@ -7,8 +7,8 @@ import com.example.william.my.core.retrofit.exception.ApiException
 import com.example.william.my.core.retrofit.exception.ExceptionHandler
 import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
-import com.example.william.my.module.bean.ArticleBean
-import com.example.william.my.module.bean.ArticleDataBean
+import com.example.william.my.retrofit.ArticleBean
+import com.example.william.my.retrofit.ArticleDataBean
 import com.example.william.my.module.sample.api.KtArticleService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -18,12 +18,12 @@ class KtArticleRepository : KtArticleDataSource {
 
     private var counter = 0
 
-    private val _article = MutableLiveData<ArticleBean>()
-    override val article: LiveData<ArticleBean> = _article
+    private val _article = MutableLiveData<com.example.william.my.retrofit.ArticleBean>()
+    override val article: LiveData<com.example.william.my.retrofit.ArticleBean> = _article
 
     // 移动到IO调度程序以使其成为安全的
     // move the execution to an IO dispatcher to make it main-safe
-    private suspend fun getArticle(counter: Int): ArticleBean =
+    private suspend fun getArticle(counter: Int): com.example.william.my.retrofit.ArticleBean =
         withContext(Dispatchers.IO) {
             val api = RetrofitUtils.buildApi(KtArticleService::class.java)
             api.getArticle(counter)
@@ -43,16 +43,17 @@ class KtArticleRepository : KtArticleDataSource {
         }
     }
 
-    private val _articleResponse = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
-    override val articleResponse: LiveData<RetrofitResponse<ArticleDataBean>> = _articleResponse
+    private val _articleResponse = MutableLiveData<RetrofitResponse<com.example.william.my.retrofit.ArticleDataBean>>()
+    override val articleResponse: LiveData<RetrofitResponse<com.example.william.my.retrofit.ArticleDataBean>> =
+        _articleResponse
 
-    private fun buildArticleResponseFLow(counter: Int): Flow<RetrofitResponse<ArticleDataBean>> =
+    private fun buildArticleResponseFLow(counter: Int): Flow<RetrofitResponse<com.example.william.my.retrofit.ArticleDataBean>> =
         flow {
             val articleResponse = getArticleResponse(counter)
             emit(articleResponse)
         }
 
-    private suspend fun getArticleResponse(counter: Int): RetrofitResponse<ArticleDataBean> =
+    private suspend fun getArticleResponse(counter: Int): RetrofitResponse<com.example.william.my.retrofit.ArticleDataBean> =
         withContext(Dispatchers.IO) {
             val api = RetrofitUtils.buildApi(KtArticleService::class.java)
             api.getArticleResponse(counter)

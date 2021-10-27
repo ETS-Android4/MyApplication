@@ -26,7 +26,7 @@ dependencies {
     //Android
     implementation deps.constraintlayout
     //Gson
-    implementation deps.gson
+    api deps.gson
     //Retrofit
     implementation deps.retrofit
     implementation deps.retrofit_gson

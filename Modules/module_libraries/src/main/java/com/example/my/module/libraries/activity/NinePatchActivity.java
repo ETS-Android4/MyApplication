@@ -1,7 +1,6 @@
-package com.example.william.my.module.open.activity;
+package com.example.my.module.libraries.activity;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Bundle;
@@ -16,13 +15,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import com.example.my.module.libraries.R;
 import com.example.william.my.core.ninepatch.NinePatchChunk;
 import com.example.william.my.core.ninepatch.builder.NinePatchBuilder;
-import com.example.william.my.module.open.R;
 import com.example.william.my.module.router.ARouterPath;
-
-import java.io.File;
-import java.io.InputStream;
 
 /**
  * 拉伸区域(左上)：设置拉伸区域

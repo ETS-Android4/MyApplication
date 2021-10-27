@@ -1,4 +1,4 @@
-package com.example.william.my.module.base;
+package com.example.william.my.retrofit.base;
 
 /**
  * https://www.wanandroid.com/blog/show/2

@@ -2,7 +2,7 @@ package com.example.william.my.module.kotlin.repo
 
 import android.util.Log
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
-import com.example.william.my.module.base.Urls
+import com.example.william.my.retrofit.base.Urls
 import com.example.william.my.module.kotlin.api.KotlinApi
 import com.example.william.my.module.kotlin.data.LoginData
 import com.example.william.my.module.kotlin.result.NetworkResult

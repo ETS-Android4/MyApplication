@@ -2,7 +2,7 @@ package com.example.william.my.module.sample.api;
 
 import com.example.william.my.core.okhttp.base.Header;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
-import com.example.william.my.module.base.Urls;
+import com.example.william.my.retrofit.base.Urls;
 import com.example.william.my.module.bean.ArticleDataBean;
 
 import io.reactivex.rxjava3.core.Observable;

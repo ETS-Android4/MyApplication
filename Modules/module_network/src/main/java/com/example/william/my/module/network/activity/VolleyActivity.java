@@ -1,6 +1,6 @@
 package com.example.william.my.module.network.activity;
 
-import static com.example.william.my.module.base.Urls.URL_LOGIN;
+import static com.example.william.my.retrofit.base.Urls.URL_LOGIN;
 
 import androidx.annotation.NonNull;
 

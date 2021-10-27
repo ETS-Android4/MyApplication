@@ -3,7 +3,7 @@ package com.example.william.my.module.network.activity;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.helper.AppExecutorsHelper;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.base.Urls;
+import com.example.william.my.retrofit.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.io.BufferedReader;

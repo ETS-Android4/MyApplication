@@ -20,8 +20,6 @@ android {
     resourcePrefix "open_"
 }
 dependencies {
-    implementation project(path: ':Libraries:lib_imageloader')
-    implementation project(path: ':Libraries:lib_nine_patch')
     //https://github.com/Blankj/AndroidUtilCode
     implementation deps.utils
     //https://github.com/ReactiveX/RxJava
