@@ -2,9 +2,9 @@ android {
     resourcePrefix "net_"
 }
 dependencies {
-    implementation project(path: ':Libraries:lib_okhttp')
-    implementation project(path: ':Libraries:lib_retrofit')
-    implementation project(path: ':Libraries:lib_imageloader')
+    implementation project(path: ':libraries:lib_okhttp')
+    implementation project(path: ':libraries:lib_retrofit')
+    implementation project(path: ':libraries:lib_imageloader')
     //Gson
     implementation deps.gson
     //Volley

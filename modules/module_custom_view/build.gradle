@@ -2,9 +2,9 @@ android {
     resourcePrefix "custom_"
 }
 dependencies {
-    implementation project(path: ':Libraries:lib_banner')
-    implementation project(path: ':Libraries:lib_customview')
-    implementation project(path: ':Libraries:lib_imageloader')
-    implementation project(path: ':Libraries:lib_infiniteimage')
-    implementation project(path: ':Libraries:lib_verifycode')
+    implementation project(path: ':libraries:lib_banner')
+    implementation project(path: ':libraries:lib_customview')
+    implementation project(path: ':libraries:lib_imageloader')
+    implementation project(path: ':libraries:lib_infiniteimage')
+    implementation project(path: ':libraries:lib_verifycode')
 }

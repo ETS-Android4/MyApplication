@@ -10,6 +10,7 @@ android {
     compileSdk config.compileSdk
     defaultConfig {
         applicationId config.applicationId
+        applicationIdSuffix config.applicationIdSuffix
         minSdk config.minSdk
         targetSdk config.targetSdk
         versionCode config.versionCode

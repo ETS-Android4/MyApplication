@@ -7,6 +7,7 @@ buildscript {
         kotlin_version = '1.5.31'
     }
     ConfigUtils.init(gradle)
+    //gradle脚本执行所需依赖
     addRepos(repositories)
     dependencies {
 
@@ -22,6 +23,7 @@ buildscript {
 }
 
 allprojects {
+    //项目本身需要的依赖
     addRepos(repositories)
 }
 
