@@ -31,12 +31,14 @@ ext {
             applicationId      : 'com.example.william.my.application',
             applicationIdSuffix: 'com.example.william.my.application.suffix'
     ]
-    deps = [//https://developer.android.google.cn/jetpack/androidx/versions
+    deps = [
+            //https://mvnrepository.com
+            //https://developer.android.google.cn/jetpack/androidx/versions
 
-            //kotlin-stdlib
             kotlin_stdlib        : "org.jetbrains.kotlin:kotlin-stdlib:1.5.31",
-            //kotlinx-coroutines
-            coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0",
+            //https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib
+            coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2",
+            //https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
 
             material             : "com.google.android.material:material:1.3.0",
             flexbox              : "com.google.android:flexbox:2.0.1",
@@ -104,7 +106,7 @@ ext {
             protobuf_protoc      : "com.google.protobuf:protoc:3.17.3",
             protobuf_javalite    : "com.google.protobuf:protoc-gen-javalite:3.0.0",
 
-            volley               : "com.android.volley:volley:1.2.0",
+            volley               : "com.android.volley:volley:1.2.1",
 
             //https://github.com/Blankj/AndroidUtilCode
             utils                : "com.blankj:utilcodex:1.30.6",
