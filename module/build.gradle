@@ -27,16 +27,9 @@ android {
 
 dependencies {
     api project(path: ':library')
-    //Android
-    implementation deps.appcompat
-    implementation deps.constraintlayout
-    implementation deps.recyclerview
     //ARouter
     implementation deps.arouter
     annotationProcessor deps.arouter_compiler
-    //Retrofit
-    implementation deps.retrofit_gson
-    implementation deps.retrofit_rxjava3
     //EventBus
     implementation deps.eventbus
     annotationProcessor deps.eventbus_processor
@@ -45,10 +38,4 @@ dependencies {
     //SmartEventBus
     implementation deps.smartbus
     annotationProcessor deps.smartbus_compiler
-    //BRVAH
-    implementation deps.brvah
-    //SmartRefresh
-    implementation deps.smartrefresh
-    implementation deps.smartrefresh_header
-    implementation deps.smartrefresh_footer
 }

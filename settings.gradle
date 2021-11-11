@@ -3,35 +3,35 @@ include ':app'
 
 include ':library'
 
-include ':libraries:lib_banner'
-include ':libraries:lib_infiniteimage'
-include ':libraries:lib_verifycode'
-include ':libraries:lib_customview'
-include ':libraries:lib_ninepatch'
-
-include ':libraries:lib_okhttp'
-include ':libraries:lib_retrofit'
-include ':libraries:lib_download'
-include ':libraries:lib_imageloader'
-include ':libraries:lib_keyvalue'
+//include ':libraries:lib_banner'
+//include ':libraries:lib_infiniteimage'
+//include ':libraries:lib_verifycode'
+//include ':libraries:lib_customview'
+//include ':libraries:lib_ninepatch'
+//
+//include ':libraries:lib_okhttp'
+//include ':libraries:lib_retrofit'
+//include ':libraries:lib_download'
+//include ':libraries:lib_imageloader'
+//include ':libraries:lib_keyvalue'
 
 include ':module'
-include ':module_bean'
+//include ':module_bean'
 
-include ':modules:module_custom_view'
-include ':modules:module_widget'
-include ':modules:module_demo'
+//include ':modules:module_custom_view'
+//include ':modules:module_widget'
+//include ':modules:module_demo'
 
 include ':modules:module_android_util'
-include ':modules:module_open_source'
-include ':modules:module_network'
-include ':modules:module_jetpack'
-
-include ':modules:module_kotlin'
-include ':modules:module_sample'
-include ':modules:module_libraries'
-
-include ':modules:module_ne_audioroom'
+//include ':modules:module_open_source'
+//include ':modules:module_network'
+//include ':modules:module_jetpack'
+//
+//include ':modules:module_kotlin'
+//include ':modules:module_sample'
+//include ':modules:module_libraries'
+//
+//include ':modules:module_ne_audioroom'
 
 //include ':modules:module_flutter'
 //include ':flutter_module'
