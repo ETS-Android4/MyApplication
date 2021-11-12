@@ -22,20 +22,22 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':libraries:lib_okhttp')
+    api project(path: ':libraries:lib_okhttp')
     //Android
-    implementation deps.constraintlayout
+    api deps.constraintlayout
     //Gson
     api deps.gson
     //Retrofit
-    implementation deps.retrofit
-    implementation deps.retrofit_gson
-    implementation deps.retrofit_scalars
-    implementation deps.retrofit_rxjava3
+    api deps.retrofit
+    api deps.retrofit_gson
+    api deps.retrofit_scalars
+    api deps.retrofit_rxjava3
     //RxAndroid
-    implementation deps.rxandroid
+    api deps.rxandroid
     //RxLifecycle
-    implementation deps.rxlifecycle
+    api deps.rxlifecycle
+    //Lifecycle
+    api "androidx.lifecycle:lifecycle-livedata:2.4.0"
     //Coroutines
-    implementation deps.coroutines
+    api deps.coroutines
 }

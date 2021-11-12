@@ -288,7 +288,7 @@ project.buildscript.configurations.each { configuration ->
         //dokitx
         configuration.dependencies.add(getProject().dependencies.create('com.didichuxing.doraemonkit:dokitx-plugin:3.3.5'))
         //booster
-        //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-gradle-plugin:3.1.0'))
+        configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-gradle-plugin:3.1.0'))
         //静态分析工具
         //configuration.dependencies.add(getProject().dependencies.create('com.didiglobal.booster:booster-task-analyser:3.1.0'))
         //多线程优化

@@ -5,7 +5,7 @@ import android.os.Parcelable
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.core.Preferences.Key
-import androidx.datastore.preferences.createDataStore
+import androidx.datastore.preferences.preferencesDataStore
 import com.example.william.my.core.keyvalue.ikv.IKV
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -19,10 +19,10 @@ object DataStoreUtils : IKV {
 
     private lateinit var ds: DataStore<Preferences>
 
+    private val Context.dataStore by preferencesDataStore(name = "settings")
+
     override fun init(context: Context) {
-        ds = context.createDataStore(
-            name = "settings"
-        )
+        ds = context.dataStore
     }
 
     override fun putInt(key: String, value: Int) {
