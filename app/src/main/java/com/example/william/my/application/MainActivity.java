@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
         //setContentView(R.layout.activity_main);
 
-        //ARouter.getInstance()
-        //        .inject(this);//BaseActivity
+        //BaseActivity
+        //ARouter.getInstance().inject(this);
 
         ARouter.getInstance()
                 .build(ARouterPath.Module)
@@ -93,6 +93,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
-
 }

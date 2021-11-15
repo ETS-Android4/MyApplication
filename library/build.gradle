@@ -10,11 +10,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["eventBusIndex": "com.example.william.my.library.MyEventBusIndex"]
-            }
-        }
+        //javaCompileOptions {
+        //    annotationProcessorOptions {
+        //        arguments = ["eventBusIndex": "com.example.william.my.library.MyEventBusIndex"]
+        //    }
+        //}
     }
     buildTypes {
         release {
@@ -30,6 +30,7 @@ android {
 
 dependencies {
     //Android
+    api deps.material
     api deps.appcompat
     api deps.constraintlayout
     api deps.recyclerview
@@ -39,7 +40,4 @@ dependencies {
     api deps.smartrefresh
     //RxLifecycle
     api deps.rxlifecycle
-    //EventBus
-    implementation deps.eventbus
-    annotationProcessor deps.eventbus_processor
 }

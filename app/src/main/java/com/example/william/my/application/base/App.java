@@ -10,11 +10,9 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.didichuxing.doraemonkit.DoraemonKit;
-import com.example.william.my.library.MyEventBusIndex;
 import com.example.william.my.library.base.BaseApp;
 import com.example.william.my.module.BuildConfig;
 import com.example.william.my.module.MyModuleEventBusIndex;
-//import com.example.william.my.module.open.MyModuleOpenEventBusIndex;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -54,7 +52,6 @@ public class App extends BaseApp {
 
     private void initEventBus() {
         EventBus.builder()
-                .addIndex(new MyEventBusIndex())
                 .addIndex(new MyModuleEventBusIndex())
                 //.addIndex(new MyModuleOpenEventBusIndex())
                 .build();

@@ -1,8 +1,8 @@
-package com.example.william.my.library.eventbus;
+package com.example.william.my.module.event;
 
 import android.util.ArrayMap;
 
-import com.example.william.my.library.MyEventBusIndex;
+import com.example.william.my.module.MyModuleEventBusIndex;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.meta.SubscriberInfoIndex;
 public final class EventBusHelper {
 
     // EventBus 索引类 （需要项目中存在使用 @Subscribe 注解的方法，否则无法生成此类)
-    private static final SubscriberInfoIndex SUBSCRIBE_INDEX = new MyEventBusIndex();
+    private static final SubscriberInfoIndex SUBSCRIBE_INDEX = new MyModuleEventBusIndex();
 
     // 这个类是否需要注册 EventBus
     private static final ArrayMap<String, Boolean> SUBSCRIBE_EVENT = new ArrayMap<>();

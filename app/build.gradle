@@ -2,7 +2,6 @@ import java.text.SimpleDateFormat
 
 plugins {
     id 'com.android.application'
-    id 'com.didiglobal.booster'
     id 'com.blankj.bus'
 }
 
@@ -10,7 +9,6 @@ android {
     compileSdk config.compileSdk
     defaultConfig {
         applicationId config.applicationId
-        //applicationIdSuffix config.applicationIdSuffix
         minSdk config.minSdk
         targetSdk config.targetSdk
         versionCode config.versionCode
@@ -54,7 +52,7 @@ android {
         }
         debug {
             //给applicationId添加后缀“.mock”
-            //applicationIdSuffix ".mock"
+            applicationIdSuffix ".mock"
             signingConfig signingConfigs.sample//签名配置
 
             minifyEnabled false// 混淆
@@ -67,15 +65,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    if (deps.gradle == "3.6.0") {
-        dataBinding {
-            enabled = true
-        }
-    } else {
-        //gradle:4.1.0+
-        buildFeatures {
-            dataBinding = true
-        }
+    switch (deps.gradle) {
+        case "3.6.0":
+            dataBinding {
+                enabled = true
+            }
+            break
+        default: //gradle: 4.1.0 +
+            buildFeatures {
+                dataBinding = true
+            }
     }
     //多渠道支持
     //flavorDimensions "majiabao" //, "api", "appStore"
@@ -115,10 +114,6 @@ dependencies {
     for (def entrySet : ConfigUtils.getApplyModules().entrySet()) {
         api entrySet.value.dep
     }
-    //Android
-    implementation deps.material
-    implementation deps.appcompat
-    implementation deps.constraintlayout
     //ARouter
     implementation deps.arouter
     annotationProcessor deps.arouter_compiler
@@ -130,7 +125,7 @@ dependencies {
     //leakcanary
     //debugImplementation deps.leakcanary
     //AndroidTest
-    //testImplementation 'junit:junit:4.13.2'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

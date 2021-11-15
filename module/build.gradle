@@ -34,7 +34,9 @@ dependencies {
     implementation deps.eventbus
     annotationProcessor deps.eventbus_processor
     //LiveBus
-    implementation deps.livebus
+    implementation deps.livebus, {
+        exclude group: 'androidx.lifecycle'
+    }
     //SmartEventBus
     implementation deps.smartbus
     annotationProcessor deps.smartbus_compiler
