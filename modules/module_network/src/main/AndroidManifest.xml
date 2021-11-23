@@ -4,7 +4,7 @@
 
     <application>
         <activity android:name=".NetWorkActivity" />
-        <activity android:name=".activity.ImageLoaderActivity" />
+        <activity android:name=".activity.GlideActivity" />
         <activity android:name=".activity.HttpURLActivity" />
         <activity android:name=".activity.OkHttpActivity" />
         <activity android:name=".activity.RetrofitActivity" />
@@ -13,6 +13,7 @@
         <activity android:name=".activity.DownloadActivity" />
         <activity android:name=".activity.RxRetrofitActivity" />
         <activity android:name=".activity.VolleyActivity" />
+        <activity android:name=".activity.VolleyUtilsActivity" />
         <activity android:name=".activity.WebSocketActivity" />
         <activity android:name=".activity.NanoHttpDActivity" />
         <activity android:name=".activity.WebServerActivity" />

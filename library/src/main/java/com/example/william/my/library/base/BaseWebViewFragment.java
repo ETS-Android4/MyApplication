@@ -1,6 +1,5 @@
 package com.example.william.my.library.base;
 
-
 import com.example.william.my.library.R;
 
 public class BaseWebViewFragment extends BaseFragment {

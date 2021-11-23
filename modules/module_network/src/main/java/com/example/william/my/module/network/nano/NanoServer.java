@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import com.example.william.my.library.base.BaseApp;
+import com.example.william.my.module.utils.L;
 import com.example.william.my.module.network.utils.NetworkUtils;
 
 import java.io.BufferedReader;
@@ -31,7 +31,7 @@ public class NanoServer extends NanoHTTPD {
 
     public NanoServer() throws IOException {
         super(DEFAULT_SERVER_PORT);
-        Log.e(TAG, "Running! Point your browsers to " +
+        L.i(TAG, "Running! Point your browsers to " +
                 "http://" + NetworkUtils.getIPAddress(true) + ":" + DEFAULT_SERVER_PORT);
     }
 
@@ -126,15 +126,13 @@ public class NanoServer extends NanoHTTPD {
                         final String fileName = entry.getValue().get(0);
                         if (key.contains("file")) {
                             final String filePath = files.get(key);
-                            Log.e(TAG, "name: " + key + ", fileName: " + fileName + ", filePath: " + filePath);
                             saveFileToSDCard(fileName, filePath);
                             response = newFixedLengthResponse(Response.Status.OK, MIME_HTML, "{\"message\":\"上传成功\",\"status\":0}");
                         }
                     }
                     break;
                 case "/download":
-                    Log.e(TAG, "download");
-                    response = responseForNotFound();
+                    response = responseParamsNotFound();
                     break;
                 default:
                     response = responseForNotFound();

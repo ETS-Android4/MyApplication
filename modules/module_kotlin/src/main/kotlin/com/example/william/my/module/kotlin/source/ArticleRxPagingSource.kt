@@ -2,17 +2,19 @@ package com.example.william.my.module.kotlin.source
 
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
+import com.example.william.my.bean.data.ArticleBean
+import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
-import com.example.william.my.retrofit.ArticleBean
-import com.example.william.my.retrofit.ArticleDetailBean
+
 import com.example.william.my.module.kotlin.api.KotlinApi
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.functions.Function
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class ArticleRxPagingSource : RxPagingSource<Int, com.example.william.my.retrofit.ArticleDetailBean>() {
+class ArticleRxPagingSource :
+    RxPagingSource<Int, ArticleDetailBean>() {
 
-    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, com.example.william.my.retrofit.ArticleDetailBean>> {
+    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, ArticleDetailBean>> {
 
         // 如果未定义，从0开始刷新
         // Start refresh at page 0 if undefined.
@@ -26,7 +28,7 @@ class ArticleRxPagingSource : RxPagingSource<Int, com.example.william.my.retrofi
             .onErrorReturn(ReturnError())
     }
 
-    override fun getRefreshKey(state: PagingState<Int, com.example.william.my.retrofit.ArticleDetailBean>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, ArticleDetailBean>): Int? {
         // Try to find the page key of the closest page to anchorPosition, from
         // either the prevKey or the nextKey, but you need to handle nullability
         // here:
@@ -41,8 +43,8 @@ class ArticleRxPagingSource : RxPagingSource<Int, com.example.william.my.retrofi
     }
 
     private class ReturnLoadResult :
-        Function<com.example.william.my.retrofit.ArticleBean, LoadResult<Int, com.example.william.my.retrofit.ArticleDetailBean>> {
-        override fun apply(t: com.example.william.my.retrofit.ArticleBean): LoadResult<Int, com.example.william.my.retrofit.ArticleDetailBean> {
+        Function<ArticleBean, LoadResult<Int, ArticleDetailBean>> {
+        override fun apply(t: ArticleBean): LoadResult<Int, ArticleDetailBean> {
             return LoadResult.Page(
                 data = t.data.datas,
                 prevKey = null, // Only paging forward.
@@ -52,8 +54,8 @@ class ArticleRxPagingSource : RxPagingSource<Int, com.example.william.my.retrofi
     }
 
     private class ReturnError :
-        Function<Throwable, LoadResult<Int, com.example.william.my.retrofit.ArticleDetailBean>> {
-        override fun apply(throwable: Throwable): LoadResult<Int, com.example.william.my.retrofit.ArticleDetailBean> {
+        Function<Throwable, LoadResult<Int, ArticleDetailBean>> {
+        override fun apply(throwable: Throwable): LoadResult<Int, ArticleDetailBean> {
             return LoadResult.Error(throwable)
         }
     }

@@ -35,7 +35,6 @@ public class BaseActivity extends AppCompatActivity {
     //    overridePendingTransition(R.anim.basic_anim_bottom_in, R.anim.basic_anim_bottom_out);
     //}
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

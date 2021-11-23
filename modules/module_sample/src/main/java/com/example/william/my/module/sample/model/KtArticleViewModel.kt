@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.william.my.bean.data.ArticleBean
+import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.core.retrofit.response.RetrofitResponse
-import com.example.william.my.retrofit.ArticleBean
-import com.example.william.my.retrofit.ArticleDataBean
 import com.example.william.my.module.sample.repo.KtArticleRepository
 import kotlinx.coroutines.launch
 
@@ -15,9 +15,9 @@ import kotlinx.coroutines.launch
  */
 class KtArticleViewModel(private val articleDataSource: KtArticleRepository) : ViewModel() {
 
-    val article: LiveData<com.example.william.my.retrofit.ArticleBean> = articleDataSource.article
+    val article: LiveData<ArticleBean> = articleDataSource.article
 
-    val articleResponse: LiveData<RetrofitResponse<com.example.william.my.retrofit.ArticleDataBean>> =
+    val articleResponse: LiveData<RetrofitResponse<ArticleDataBean>> =
         articleDataSource.articleResponse
 
     fun onRefresh() {
@@ -43,7 +43,7 @@ object LiveDataVMFactory : ViewModelProvider.Factory {
 
     private val dataSource = KtArticleRepository()
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
         return KtArticleViewModel(dataSource) as T
     }

@@ -35,26 +35,24 @@ ext {
             //https://mvnrepository.com
             //https://developer.android.google.cn/jetpack/androidx/versions
 
-            kotlin_stdlib        : "org.jetbrains.kotlin:kotlin-stdlib:1.5.31",
-            //https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib
             coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2",
             //https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
 
             material             : "com.google.android.material:material:1.3.0",
+            //https://mvnrepository.com/artifact/com.google.android.material/material
             flexbox              : "com.google.android:flexbox:2.0.1",
-
-            multidex             : "androidx.multidex:multidex:2.0.1",
-            //https://developer.android.google.cn/jetpack/androidx/releases/multidex
+            //https://mvnrepository.com/artifact/com.google.android/flexbox
 
             core                 : "androidx.core:core:1.6.0",
             core_ktx             : "androidx.core:core-ktx:1.6.0",
             //https://developer.android.google.cn/jetpack/androidx/releases/core
 
+            multidex             : "androidx.multidex:multidex:2.0.1",
+            //https://developer.android.google.cn/jetpack/androidx/releases/multidex
             appcompat            : "androidx.appcompat:appcompat:1.3.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/appcompat
             constraintlayout     : "androidx.constraintlayout:constraintlayout:2.1.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/constraintlayout
-
             recyclerview         : "androidx.recyclerview:recyclerview:1.2.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/recyclerview
             viewpager2           : "androidx.viewpager2:viewpager2:1.0.0",
@@ -153,8 +151,8 @@ ext {
             coil_svg             : "io.coil-kt:coil-svg:1.2.2",
 
             //https://github.com/square/okhttp
-            okhttp               : "com.squareup.okhttp3:okhttp:4.9.1",
-            okhttp_logging       : "com.squareup.okhttp3:logging-interceptor:4.9.1",
+            okhttp               : "com.squareup.okhttp3:okhttp:4.9.2",
+            okhttp_logging       : "com.squareup.okhttp3:logging-interceptor:4.9.2",
 
             //https://github.com/square/retrofit
             retrofit             : "com.squareup.retrofit2:retrofit:2.9.0",

@@ -23,8 +23,6 @@ android {
 
 dependencies {
     api project(path: ':libraries:lib_okhttp')
-    //Android
-    api deps.constraintlayout
     //Gson
     api deps.gson
     //Retrofit
@@ -36,8 +34,10 @@ dependencies {
     api deps.rxandroid
     //RxLifecycle
     api deps.rxlifecycle
-    //Lifecycle
-    api "androidx.lifecycle:lifecycle-livedata:2.4.0"
     //Coroutines
     api deps.coroutines
+    //LiveData
+    api deps.livedata
+    //Android
+    implementation deps.constraintlayout
 }

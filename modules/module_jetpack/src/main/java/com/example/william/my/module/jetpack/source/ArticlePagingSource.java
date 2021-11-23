@@ -4,9 +4,10 @@ import androidx.paging.PagingSource;
 import androidx.paging.PagingState;
 import androidx.paging.rxjava3.RxPagingSource;
 
+import com.example.william.my.bean.api.NetworkService;
+import com.example.william.my.bean.data.ArticleBean;
+import com.example.william.my.bean.data.ArticleDetailBean;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
-import com.example.william.my.module.bean.ArticleBean;
-import com.example.william.my.module.bean.ArticleDetailBean;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.annotations.Nullable;

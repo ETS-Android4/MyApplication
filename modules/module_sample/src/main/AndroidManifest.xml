@@ -8,7 +8,6 @@
         <activity android:name=".activity.MvvmActivity" />
         <activity android:name=".activity.KtBindActivity" />
         <activity android:name=".activity.KtActivity" />
-        <activity android:name=".activity.RecyclerActivity" />
     </application>
 
 </manifest>

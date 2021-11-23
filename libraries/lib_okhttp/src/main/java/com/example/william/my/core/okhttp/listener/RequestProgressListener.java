@@ -12,5 +12,4 @@ public interface RequestProgressListener {
      * @param contentLength
      */
     void onProgress(long bytesWritten, long contentLength);
-
 }

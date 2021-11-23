@@ -20,7 +20,6 @@ android {
 
 dependencies {
     implementation project(path: ':libraries:lib_retrofit')
-    implementation project(path: ':libraries:lib_keyvalue')
     //Coroutines
     implementation deps.coroutines
     //implementation deps.livedata_ktx//LiveDataScope

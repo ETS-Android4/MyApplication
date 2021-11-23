@@ -2,16 +2,22 @@ package com.example.william.my.core.retrofit.builder;
 
 import androidx.lifecycle.LifecycleOwner;
 
+import com.example.william.my.core.okhttp.body.RequestProgressBody;
+import com.example.william.my.core.okhttp.listener.RequestProgressListener;
 import com.example.william.my.core.retrofit.RxRetrofit;
 import com.example.william.my.core.retrofit.method.Method;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.trello.lifecycle4.android.lifecycle.AndroidLifecycle;
 import com.trello.rxlifecycle4.LifecycleTransformer;
 
+import java.io.File;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class RetrofitBuilder<T> {
 
@@ -25,9 +31,8 @@ public class RetrofitBuilder<T> {
     private boolean isJson = true;
     private String bodyString;
 
-    //private Map<String, File> fileMap;
-    //private MultipartBody.Part bodyPart;
-    //private RetrofitRequestListener listener;
+    private Map<String, File> fileMap;
+    private MultipartBody.Part bodyPart;
 
     private MultipartBody.Builder bodyForm;
 
@@ -126,22 +131,31 @@ public class RetrofitBuilder<T> {
         return this;
     }
 
-    //public RetrofitBuilder<T> addFile(String key, File file) {
-    //    //this.bodyPart = MultipartBody.Part.createFormData(
-    //    //        key,
-    //    //        file.getName(),
-    //    //        RequestBody.Companion.create(file, MediaType.parse("multipart/form-data"))
-    //    //);
-    //    //this.bodyPart = MultipartBody.Part.createFormData(
-    //    //        key,
-    //    //        file.getName(),
-    //    //        new CountingRequestBody(RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")), listener));
-    //    //if (this.fileMap == null) {
-    //    //    fileMap = new IdentityHashMap<>();
-    //    //}
-    //    this.fileMap.put(key, file);
-    //    return this;
-    //}
+    public RetrofitBuilder<T> addFile(String key, File file) {
+        this.bodyPart = MultipartBody.Part.createFormData(
+                key,
+                file.getName(),
+                RequestBody.Companion.create(file, MediaType.parse("multipart/form-data"))
+        );
+        if (this.fileMap == null) {
+            fileMap = new IdentityHashMap<>();
+        }
+        this.fileMap.put(key, file);
+        return this;
+    }
+
+    public RetrofitBuilder<T> addFile(String key, File file, RequestProgressListener listener) {
+        this.bodyPart = MultipartBody.Part.createFormData(
+                key,
+                file.getName(),
+                new RequestProgressBody(RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")), listener));
+        if (this.fileMap == null) {
+            fileMap = new IdentityHashMap<>();
+        }
+        this.fileMap.put(key, file);
+        return this;
+    }
+
 
     public RetrofitBuilder<T> setProvider(LifecycleOwner owner) {
         this.transformer = AndroidLifecycle.createLifecycleProvider(owner).bindToLifecycle();

@@ -1,7 +1,0 @@
-android {
-    //resourcePrefix "libraries"
-}
-dependencies {
-    implementation project(path: ':libraries:lib_imageloader')
-    implementation project(path: ':libraries:lib_ninepatch')
-}

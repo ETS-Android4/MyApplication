@@ -2,13 +2,14 @@ package com.example.william.my.module.kotlin.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
-import com.example.william.my.retrofit.ArticleDetailBean
+
 import com.example.william.my.module.kotlin.api.KotlinApi
 
-class ArticlePagingSource : PagingSource<Int, com.example.william.my.retrofit.ArticleDetailBean>() {
+class ArticlePagingSource : PagingSource<Int, ArticleDetailBean>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, com.example.william.my.retrofit.ArticleDetailBean> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleDetailBean> {
         return try {
             // 如果未定义，从0开始刷新
             // Start refresh at page 0 if undefined.
@@ -31,7 +32,7 @@ class ArticlePagingSource : PagingSource<Int, com.example.william.my.retrofit.Ar
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, com.example.william.my.retrofit.ArticleDetailBean>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, ArticleDetailBean>): Int? {
         // Try to find the page key of the closest page to anchorPosition, from
         // either the prevKey or the nextKey, but you need to handle nullability
         // here:

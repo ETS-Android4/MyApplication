@@ -1,8 +1,6 @@
 package com.example.william.my.core.okhttp.interceptor;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
+import com.example.william.my.core.okhttp.utils.OkHttpLog;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -52,12 +50,11 @@ public class InterceptorLogging implements Interceptor {
         return this;
     }
 
-    @NonNull
     @Override
-    public Response intercept(@NonNull Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Connection connection = chain.connection();
-        Log.i(TAG, "--> "
+        showLog(TAG, "--> "
                 + request.method()
                 + ' ' + request.url()
                 + (connection != null ? " " + connection.protocol() : ""));
@@ -67,12 +64,12 @@ public class InterceptorLogging implements Interceptor {
         if (level == Level.BODY) {
             if (requestBody != null) {
                 if (requestBody.contentType() != null) {
-                    Log.i(TAG, "Content-Type: " + requestBody.contentType() + "-byte)");
+                    showLog(TAG, "Content-Type: " + requestBody.contentType() + "-byte)");
                 }
                 if (requestBody.contentLength() != -1) {
-                    Log.i(TAG, "Content-Length: " + requestBody.contentLength());
+                    showLog(TAG, "Content-Length: " + requestBody.contentLength());
                 }
-                Log.i(TAG, "--> END " + request.method() + " (" + requestBody.contentLength() + "-byte body)");
+                showLog(TAG, "--> END " + request.method() + " (" + requestBody.contentLength() + "-byte body)");
             }
         }
         //========================================
@@ -82,7 +79,7 @@ public class InterceptorLogging implements Interceptor {
                 // Skip headers from the request body as they are explicitly logged above.
                 if (!"Content-Type".equalsIgnoreCase(headersRequest.name(i)) &&
                         !"Content-Length".equalsIgnoreCase(headersRequest.name(i))) {
-                    Log.i(TAG, headersRequest.name(i) + ": " + headersRequest.value(i));
+                    showLog(TAG, headersRequest.name(i) + ": " + headersRequest.value(i));
                 }
             }
         }
@@ -90,7 +87,7 @@ public class InterceptorLogging implements Interceptor {
         Response response = chain.proceed(builder.build());
         long startNs = System.nanoTime();
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
-        Log.i(TAG, "<-- "
+        showLog(TAG, "<-- "
                 + response.code()
                 + (response.message().isEmpty() ? "" : ' ' + response.message())
                 + ' ' + response.request().url()
@@ -99,7 +96,7 @@ public class InterceptorLogging implements Interceptor {
         Headers headersResponse = response.headers();
         if (level == Level.BODY) {
             for (int i = 0, count = headersResponse.size(); i < count; i++) {
-                Log.i(TAG, headersResponse.name(i) + ": " + headersResponse.value(i));
+                showLog(TAG, headersResponse.name(i) + ": " + headersResponse.value(i));
             }
         }
         //========================================
@@ -114,14 +111,23 @@ public class InterceptorLogging implements Interceptor {
             if (contentType != null) {
                 Charset charset = contentType.charset(StandardCharsets.UTF_8);
                 if (charset != null) {
-                    Log.i(TAG, buffer.clone().readString(charset));
+                    showLog(TAG, buffer.clone().readString(charset));
                 }
             }
             if (level == Level.BODY) {
-                Log.i(TAG, "<-- END HTTP (" + buffer.size() + "-byte body)");
+                showLog(TAG, "<-- END HTTP (" + buffer.size() + "-byte body)");
             }
         }
 
         return response;
+    }
+
+    private static void showLog(String tag, String msg) {
+        int maxLength = 2 * 1024;
+        while (msg.length() > maxLength) {
+            OkHttpLog.i(tag, msg.substring(0, maxLength));
+            msg = msg.substring(maxLength);
+        }
+        OkHttpLog.i(tag, msg);
     }
 }

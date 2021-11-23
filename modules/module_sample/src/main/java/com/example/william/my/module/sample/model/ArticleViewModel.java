@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
-import com.example.william.my.module.bean.ArticleDataBean;
 import com.example.william.my.module.sample.repo.ArticleRepository;
 
 public class ArticleViewModel extends ViewModel {

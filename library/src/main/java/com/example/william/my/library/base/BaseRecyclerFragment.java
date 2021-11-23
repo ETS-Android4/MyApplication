@@ -126,12 +126,12 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
 
     }
 
-    protected void onDataFail(String message) {
+    private void onDataFail(String message) {
         mPullRefreshLayout.setEnableLoadMore(false);
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    protected void onFetchDataSuccess(List<T> list) {
+    private void onFetchDataSuccess(List<T> list) {
         if (list != null && !list.isEmpty()) {
             mAdapter.setNewInstance(list);
             mPullRefreshLayout.setEnableLoadMore(true);
@@ -140,7 +140,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         }
     }
 
-    protected void onLoadDataSuccess(List<T> list) {
+    private void onLoadDataSuccess(List<T> list) {
         if (list != null && !list.isEmpty()) {
             mAdapter.addData(list);
             mPullRefreshLayout.setEnableLoadMore(true);

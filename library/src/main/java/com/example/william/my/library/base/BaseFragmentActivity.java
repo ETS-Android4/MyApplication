@@ -33,11 +33,5 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 返回 Fragment
-     *
-     * @return
-     */
     public abstract Fragment setFragment();
-
 }

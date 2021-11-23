@@ -4,11 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.bean.data.BannerDetailBean;
+import com.example.william.my.bean.data.BannerDetailData;
 import com.example.william.my.core.retrofit.loading.LoadingTip;
 import com.example.william.my.core.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.bean.BannerDetailBean;
-import com.example.william.my.module.bean.BannerDetailData;
 import com.example.william.my.module.jetpack.model.BannerViewModel;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;

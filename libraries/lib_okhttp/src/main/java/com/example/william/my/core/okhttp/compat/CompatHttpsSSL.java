@@ -2,8 +2,6 @@ package com.example.william.my.core.okhttp.compat;
 
 import android.annotation.SuppressLint;
 
-import androidx.annotation.NonNull;
-
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HostnameVerifier;
@@ -18,7 +16,7 @@ import okhttp3.OkHttpClient;
 
 public class CompatHttpsSSL {
 
-    public static void ignoreSSLForOkHttp(@NonNull OkHttpClient.Builder builder) {
+    public static void ignoreSSLForOkHttp(OkHttpClient.Builder builder) {
         builder.hostnameVerifier(getIgnoreHostnameVerifier())
                 .sslSocketFactory(getIgnoreSSLSocketFactory(), getTrustManager());
     }
@@ -57,6 +55,7 @@ public class CompatHttpsSSL {
         }
     }
 
+    @SuppressLint("CustomX509TrustManager")
     private static X509TrustManager getTrustManager() {
         return new X509TrustManager() {
             @SuppressLint("TrustAllX509TrustManager")

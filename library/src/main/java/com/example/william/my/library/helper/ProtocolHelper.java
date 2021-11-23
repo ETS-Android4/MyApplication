@@ -142,12 +142,8 @@ public class ProtocolHelper {
         if (TextUtils.isEmpty(page)) {
             return null;
         }
-        switch (page) {
-            case ProtocolConstants.SCHEME_PAGE_MAIN_PAGE:
-                intent = new Intent(activity, BaseActivity.class);
-                break;
-            default:
-                break;
+        if (ProtocolConstants.SCHEME_PAGE_MAIN_PAGE.equals(page)) {
+            intent = new Intent(activity, BaseActivity.class);
         }
         if (activity != null && !TextUtils.isEmpty(activity.getClass().getSimpleName()) && intent != null) {
             intent.putExtra(ProtocolConstants.SCHEME_FROM, activity.getClass().getSimpleName());

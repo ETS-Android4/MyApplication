@@ -1,10 +1,7 @@
 package com.example.william.my.core.okhttp.body;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.okhttp.listener.ResponseProgressListener;
+import com.example.william.my.core.okhttp.utils.OkHttpLog;
 
 import java.io.IOException;
 
@@ -45,7 +42,6 @@ public class ResponseProgressBody extends ResponseBody {
         return mResponseBody.contentLength();
     }
 
-    @NonNull
     @Override
     public BufferedSource source() {
         if (mBufferedSource == null) {
@@ -67,7 +63,7 @@ public class ResponseProgressBody extends ResponseBody {
         }
 
         @Override
-        public long read(@NonNull Buffer sink, long byteCount) throws IOException {
+        public long read(Buffer sink, long byteCount) throws IOException {
             long count = super.read(sink, byteCount);
             long contentLength = mResponseBody.contentLength();
             if (count == -1) { // this source is exhausted
@@ -78,7 +74,7 @@ public class ResponseProgressBody extends ResponseBody {
             if (mResponseProgressListener != null) {
                 mResponseProgressListener.onResponseProgress(mUrl, bytesRead, contentLength);
             } else {
-                Log.d(TAG, "url: " + mUrl + "bytesRead: " + bytesRead + " , totalBytesCount: " + contentLength);
+                OkHttpLog.d(TAG, "url: " + mUrl + "bytesRead: " + bytesRead + " , totalBytesCount: " + contentLength);
             }
             return count;
         }

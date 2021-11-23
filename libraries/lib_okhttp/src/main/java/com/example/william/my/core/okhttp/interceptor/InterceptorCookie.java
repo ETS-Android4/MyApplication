@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -21,15 +19,14 @@ import okhttp3.Response;
  */
 public class InterceptorCookie implements Interceptor {
 
-    private Context mContext;
+    private final Context mContext;
 
     public InterceptorCookie(Context context) {
         this.mContext = context;
     }
 
-    @NonNull
     @Override
-    public Response intercept(@NonNull Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Request.Builder builder = request.newBuilder();
         String cookie = getCookie(request.url().toString(), request.url().host());
@@ -53,8 +50,7 @@ public class InterceptorCookie implements Interceptor {
     /**
      * 整合cookie为唯一字符串
      */
-    @NonNull
-    private String encodeCookie(@NonNull List<String> cookies) {
+    private String encodeCookie(List<String> cookies) {
         StringBuilder sb = new StringBuilder();
         Set<String> set = new HashSet<>();
         for (String cookie : cookies) {
@@ -100,6 +96,6 @@ public class InterceptorCookie implements Interceptor {
         if (!TextUtils.isEmpty(domain) && sp.contains(domain) && !TextUtils.isEmpty(sp.getString(domain, ""))) {
             return sp.getString(domain, "");
         }
-        return null;
+        return "";
     }
 }

@@ -1,13 +1,14 @@
 package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.bean.api.NetworkService;
+import com.example.william.my.bean.data.BannerBean;
+import com.example.william.my.bean.data.BannerDetailBean;
 import com.example.william.my.core.retrofit.callback.ObserverCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.bean.BannerBean;
-import com.example.william.my.module.bean.BannerDetailBean;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 

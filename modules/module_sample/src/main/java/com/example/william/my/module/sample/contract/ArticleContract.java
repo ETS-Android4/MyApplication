@@ -1,8 +1,8 @@
 package com.example.william.my.module.sample.contract;
 
+import com.example.william.my.bean.data.ArticleDetailBean;
 import com.example.william.my.library.presenter.IBasePresenter;
 import com.example.william.my.library.view.IBaseView;
-import com.example.william.my.module.bean.ArticleDetailBean;
 
 import java.util.List;
 

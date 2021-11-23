@@ -8,7 +8,7 @@ public class NetWorkApp implements IComponentApplication {
 
     @Override
     public void init(Application application) {
-        initRxRetrofit(application);
+
     }
 
     @Override
@@ -16,7 +16,4 @@ public class NetWorkApp implements IComponentApplication {
 
     }
 
-    private void initRxRetrofit(Application application) {
-
-    }
 }

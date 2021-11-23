@@ -4,11 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.william.my.bean.api.NetworkService;
+import com.example.william.my.bean.data.BannerDetailBean;
+import com.example.william.my.bean.data.BannerDetailData;
 import com.example.william.my.core.retrofit.callback.LiveDataCallback;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
-import com.example.william.my.module.bean.BannerDetailBean;
-import com.example.william.my.module.bean.BannerDetailData;
 
 import java.util.ArrayList;
 import java.util.List;

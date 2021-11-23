@@ -1,7 +1,5 @@
 package com.example.william.my.core.okhttp.interceptor;
 
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.okhttp.body.ResponseProgressBody;
 import com.example.william.my.core.okhttp.listener.ResponseProgressListener;
 
@@ -22,9 +20,8 @@ public class InterceptorProgress implements Interceptor {
         this.listener = listener;
     }
 
-    @NonNull
     @Override
-    public Response intercept(@NonNull Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Response response = chain.proceed(request);
         return response.newBuilder()

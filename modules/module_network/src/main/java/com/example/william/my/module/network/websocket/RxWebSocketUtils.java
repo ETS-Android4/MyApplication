@@ -1,8 +1,8 @@
 package com.example.william.my.module.network.websocket;
 
 import android.os.SystemClock;
-import android.util.Log;
 
+import com.example.william.my.module.utils.L;
 import com.google.gson.Gson;
 
 import java.io.EOFException;
@@ -200,7 +200,7 @@ public class RxWebSocketUtils {
                     if (!emitter.isDisposed()) {
                         emitter.onNext(new RxWebSocketInfo(webSocket, null, true));
                     }
-                    Log.i(TAG, "onOpen：" + url);
+                    L.i(TAG, "onOpen：" + url);
                 }
 
                 @Override
@@ -209,7 +209,7 @@ public class RxWebSocketUtils {
                     if (!emitter.isDisposed()) {
                         emitter.onNext(new RxWebSocketInfo(webSocket, text));
                     }
-                    Log.i(TAG, "onMessageString：" + text);
+                    L.i(TAG, "onMessageString：" + text);
                 }
 
                 @Override
@@ -218,21 +218,21 @@ public class RxWebSocketUtils {
                     if (!emitter.isDisposed()) {
                         emitter.onNext(new RxWebSocketInfo(webSocket, bytes));
                     }
-                    Log.i(TAG, "onMessageByteString：" + bytes.toString());
+                    L.i(TAG, "onMessageByteString：" + bytes.toString());
                 }
 
 
                 @Override
                 public void onClosing(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
                     super.onClosing(webSocket, code, reason);
-                    Log.i(TAG, "onClosing:" + "code:" + code + "reason:" + reason);
+                    L.i(TAG, "onClosing:" + "code:" + code + "reason:" + reason);
                 }
 
                 @Override
                 public void onClosed(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
                     super.onClosed(webSocket, code, reason);
                     emitter.onNext(new RxWebSocketInfo(false, true));
-                    Log.i(TAG, "onClosed:" + "code:" + code + "reason:" + reason);
+                    L.i(TAG, "onClosed:" + "code:" + code + "reason:" + reason);
                 }
 
                 @Override
@@ -242,10 +242,10 @@ public class RxWebSocketUtils {
                         emitter.onError(t);
                     }
                     if (response != null) {
-                        Log.e(TAG, "onFailure：" + response.code());
-                        Log.e(TAG, "onFailure：" + new Gson().toJson(response.body()));
+                        L.e(TAG, "onFailure：" + response.code());
+                        L.e(TAG, "onFailure：" + new Gson().toJson(response.body()));
                     }
-                    Log.e(TAG, "Throwable:" + t.toString());
+                    L.e(TAG, "Throwable:" + t.toString());
                 }
             });
         }

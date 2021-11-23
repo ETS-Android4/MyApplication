@@ -4,10 +4,10 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.william.my.bean.data.LoginBean;
+import com.example.william.my.bean.data.LoginUserBean;
 import com.example.william.my.library.utils.OptionalBean;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.bean.LoginBean;
-import com.example.william.my.module.bean.LoginUserBean;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

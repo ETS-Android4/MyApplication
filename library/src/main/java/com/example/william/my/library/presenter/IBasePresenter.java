@@ -7,5 +7,4 @@ public interface IBasePresenter {
     void clear();
 
     //void queryData();
-
 }

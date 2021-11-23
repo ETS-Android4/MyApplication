@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.example.william.my.bean.data.ArticleDetailBean;
 import com.example.william.my.library.base.BaseRecyclerDialogFragment;
-import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.sample.adapter.ArticleAdapter;
 import com.example.william.my.module.sample.contract.ArticleContract;
 import com.example.william.my.module.sample.presenter.ArticlePresenter;
@@ -71,27 +71,27 @@ public class RecyclerDialogFragment extends BaseRecyclerDialogFragment<ArticleDe
 
     @Override
     public void showToast(String message) {
-        onDataFail(message);
+        //onDataFail(message);
     }
 
 
     @Override
     public void showArticles(int page, List<ArticleDetailBean> article) {
         if (page == 1) {
-            onFetchDataSuccess(article);
+            //onFetchDataSuccess(article);
         } else {
-            onLoadDataSuccess(article);
+            //onLoadDataSuccess(article);
         }
     }
 
     @Override
     public void showEmptyView() {
-        onEmptyView();
+        //onEmptyView();
     }
 
     @Override
     public void showArticlesNoMore() {
-        onDataNoMore();
+        //onDataNoMore();
     }
 
     @Override

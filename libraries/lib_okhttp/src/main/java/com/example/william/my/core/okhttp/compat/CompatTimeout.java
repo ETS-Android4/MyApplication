@@ -1,14 +1,12 @@
 package com.example.william.my.core.okhttp.compat;
 
-import androidx.annotation.NonNull;
-
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 
 public class CompatTimeout {
 
-    public static void setTimeOut(@NonNull OkHttpClient.Builder builder, long timeout) {
+    public static void setTimeOut(OkHttpClient.Builder builder, long timeout) {
         //不允许失败重试
         builder.retryOnConnectionFailure(false);
         //设置连接超时时间

@@ -4,10 +4,10 @@ import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.william.my.bean.base.Urls;
 import com.example.william.my.core.okhttp.body.RequestProgressBody;
 import com.example.william.my.core.okhttp.listener.RequestProgressListener;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.retrofit.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.FileIOUtilsService;
 
@@ -95,7 +95,6 @@ public class OkHttpActivity extends BaseResponseActivity {
 //                    @Override
 //                    public void onProgress(String url, long bytesRead, long contentLength) {
 //                        int progress = (int) (bytesRead * 1f / contentLength * 100);
-//                        Log.e("TAG", "下载进度：" + progress + "%");
 //                        showResponse("下载进度：" + progress + "%");
 //                    }
 //                }))

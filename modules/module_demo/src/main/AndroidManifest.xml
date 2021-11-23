@@ -3,14 +3,12 @@
     package="com.example.william.my.module.demo">
 
     <application>
-        <activity android:name=".activity.HookActivity" />
-        <activity android:name=".activity.TouchEventActivity" />
         <activity android:name=".DemoActivity" />
         <activity android:name=".activity.AnimatorActivity" />
+        <activity android:name=".activity.AppBarActivity" />
         <activity android:name=".activity.AsyncTaskActivity" />
         <activity android:name=".activity.AudioPlayerActivity" />
         <activity android:name=".activity.BroadcastActivity" />
-        <activity android:name=".activity.BehaviorActivity" />
         <activity android:name=".activity.FloatWindowActivity" />
         <activity android:name=".activity.ImageDecoderActivity" />
         <activity android:name=".activity.JobActivity" />
@@ -28,6 +26,26 @@
             android:theme="@style/Basics_TranslucentTheme" />
         <activity android:name=".activity.TurntableActivity" />
         <activity android:name=".activity.TypefaceActivity" />
+        <activity android:name=".activity.HookActivity" />
+        <activity android:name=".activity.TouchEventActivity" />
+        <activity android:name=".activity.DialogActivity" />
+        <activity android:name=".activity.FlexBoxActivity" />
+        <activity android:name=".activity.FragmentActivity" />
+        <activity android:name=".activity.FragmentGroupActivity" />
+        <activity android:name=".activity.FragmentTabHostActivity" />
+        <activity android:name=".activity.FragmentViewPagerActivity" />
+        <activity android:name=".activity.NotificationActivity" />
+        <activity android:name=".activity.RecyclerViewActivity" />
+        <activity android:name=".activity.RecyclerViewNestedActivity" />
+        <activity android:name=".activity.ViewFlipperActivity" />
+        <activity android:name=".activity.ViewPagerActivity" />
+        <activity android:name=".activity.ViewPager2Activity" />
+        <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.BlurViewActivity" />
+        <activity android:name=".activity.IosDialogActivity" />
+        <activity android:name=".activity.MarqueeViewActivity" />
+        <activity android:name=".activity.SpinnerActivity" />
+        <activity android:name=".activity.TitleBarActivity" />
 
         <service android:name=".service.AIDLService" />
         <service android:name=".service.ForegroundService" />

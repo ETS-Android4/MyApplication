@@ -1,15 +1,21 @@
 package com.example.william.my.module.network.activity;
 
-import static com.example.william.my.retrofit.base.Urls.URL_LOGIN;
-
-import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.android.volley.Cache;
+import com.android.volley.Network;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.william.my.bean.base.Urls;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.bean.LoginBean;
-import com.example.william.my.module.network.volley.VolleyUtils;
 import com.example.william.my.module.router.ARouterPath;
-import com.google.gson.Gson;
 
 /**
  * https://developer.android.google.cn/training/volley/index.html
@@ -20,28 +26,59 @@ public class VolleyActivity extends BaseResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        login();
+        volley();
     }
 
-    private void login() {
-        VolleyUtils.<LoginBean>builder()
-                .url(URL_LOGIN)
-                .addParams("username", "17778060027")
-                .addParams("password", "wW123456")
-                .clazz(LoginBean.class)
-                .build(VolleyActivity.this)
-                .enqueue(new VolleyUtils.VolleyListener<LoginBean>() {
-                    @Override
-                    public void onMySuccess(@NonNull LoginBean result) {
-                        String net_success = "Success: " + new Gson().toJson(result);
-                        showResponse(net_success);
-                    }
+    private void volley() {
+        // Instantiate the RequestQueue.
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-                    @Override
-                    public void onMyError(@NonNull String error) {
-                        String net_error = "Error: " + error;
-                        showResponse(net_error);
-                    }
-                });
+        // Get a RequestQueue
+        //RequestQueue requestQueue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
+
+        // Instantiate the cache
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+
+        // Set up the network to use HttpURLConnection as the HTTP client.
+        Network network = new BasicNetwork(new HurlStack());
+
+        // Instantiate the RequestQueue with the cache and network.
+        requestQueue = new RequestQueue(cache, network);
+
+        // Start the queue
+        requestQueue.start();
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.URL_LOGIN, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                // Display the first 500 characters of the response string.
+                showResponse("Response is: " + response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showResponse("That didn't work!");
+            }
+        });
+
+
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL_LOGIN, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                // TODO: Handle error
+//            }
+//        });
+
+        // Add the request to the RequestQueue.
+        //requestQueue.add(stringRequest);
+
+        // Add a request (in this example, called stringRequest) to your RequestQueue.
+        //VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 }

@@ -9,8 +9,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.william.my.module.demo.delegate.ClickDelegate;
-
 public class ClickProxyLayout extends FrameLayout {
 
     public ClickProxyLayout(@NonNull Context context) {

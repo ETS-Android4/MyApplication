@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.core.retrofit.callback.LiveDataCallback;
 import com.example.william.my.core.retrofit.callback.ObserverCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
-import com.example.william.my.module.bean.ArticleDataBean;
 import com.example.william.my.module.sample.api.ArticleService;
 
 import io.reactivex.rxjava3.annotations.NonNull;

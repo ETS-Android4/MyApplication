@@ -1,9 +1,8 @@
 package com.example.william.my.core.retrofit.function;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
+import com.example.william.my.core.okhttp.utils.OkHttpLog;
 import com.example.william.my.core.retrofit.exception.ExceptionHandler;
 
 import java.util.Objects;
@@ -21,7 +20,7 @@ public class HttpResultFunction<T> implements Function<Throwable, ObservableSour
 
     @Override
     public ObservableSource<T> apply(@NonNull Throwable throwable) throws Exception {
-        Log.e(TAG, Objects.requireNonNull(throwable.getMessage()));
+        OkHttpLog.e(TAG, Objects.requireNonNull(throwable.getMessage()));
         return Observable.error(ExceptionHandler.handleException(throwable));
     }
 }

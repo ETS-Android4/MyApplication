@@ -16,5 +16,4 @@ public interface IBaseView<T> {
 
     //显示提示信息
     void showToast(String message);
-
 }

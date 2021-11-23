@@ -27,6 +27,7 @@ android {
 
 dependencies {
     api project(path: ':library')
+    api project(path: ':module_bean')
     //ARouter
     implementation deps.arouter
     annotationProcessor deps.arouter_compiler
@@ -34,9 +35,7 @@ dependencies {
     implementation deps.eventbus
     annotationProcessor deps.eventbus_processor
     //LiveBus
-    implementation deps.livebus, {
-        exclude group: 'androidx.lifecycle'
-    }
+    implementation deps.livebus
     //SmartEventBus
     implementation deps.smartbus
     annotationProcessor deps.smartbus_compiler

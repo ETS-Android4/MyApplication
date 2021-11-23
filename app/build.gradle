@@ -114,18 +114,15 @@ dependencies {
     for (def entrySet : ConfigUtils.getApplyModules().entrySet()) {
         api entrySet.value.dep
     }
-    //ARouter
-    implementation deps.arouter
-    annotationProcessor deps.arouter_compiler
     //EventBus
     implementation deps.eventbus
     //DoKit
     debugImplementation deps.dokit
     releaseImplementation deps.dokit_no_op
     //leakcanary
-    //debugImplementation deps.leakcanary
+    debugImplementation deps.leakcanary
     //AndroidTest
-    testImplementation 'junit:junit:4.13.2'
+    //testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

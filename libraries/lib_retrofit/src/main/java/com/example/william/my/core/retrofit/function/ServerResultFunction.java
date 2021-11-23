@@ -1,9 +1,8 @@
 package com.example.william.my.core.retrofit.function;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
+import com.example.william.my.core.okhttp.utils.OkHttpLog;
 import com.example.william.my.core.retrofit.exception.ServerResultException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.google.gson.Gson;
@@ -23,7 +22,7 @@ public class ServerResultFunction<T> implements Function<RetrofitResponse<JsonEl
     public RetrofitResponse<T> apply(@NonNull RetrofitResponse<JsonElement> response) throws Exception {
         //抛出服务器返回自定义异常
         if (!response.isSuccess()) {
-            Log.e(TAG, new Gson().toJson(response));
+            OkHttpLog.e(TAG, new Gson().toJson(response));
             throw new ServerResultException(response.getCode(), response.getMessage());
         }
         return (RetrofitResponse<T>) response;

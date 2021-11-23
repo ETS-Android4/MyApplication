@@ -30,9 +30,9 @@ android {
 }
 
 dependencies {
+    //Glide
     api deps.glide
     kapt deps.glide_compiler
-    //implementation deps.glide_transformations
     //Coil
     api deps.coil
     api deps.coil_gif

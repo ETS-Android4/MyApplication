@@ -1,7 +1,0 @@
-android {
-    resourcePrefix "widget_"
-}
-dependencies {
-    implementation project(path: ':libraries:lib_customview')
-    implementation deps.flexbox
-}

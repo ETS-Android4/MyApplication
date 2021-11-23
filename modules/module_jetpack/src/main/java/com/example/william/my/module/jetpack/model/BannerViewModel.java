@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.example.william.my.bean.data.BannerDetailBean;
+import com.example.william.my.bean.data.BannerDetailData;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
-import com.example.william.my.module.bean.BannerDetailBean;
-import com.example.william.my.module.bean.BannerDetailData;
 import com.example.william.my.module.jetpack.repository.DataRepository;
 
 import java.util.List;

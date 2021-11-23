@@ -13,5 +13,4 @@ public interface ResponseProgressListener {
      * @param contentLength
      */
     void onResponseProgress(String url, long bytesRead, long contentLength);
-
 }

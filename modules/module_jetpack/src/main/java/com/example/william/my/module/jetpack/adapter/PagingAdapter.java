@@ -10,7 +10,7 @@ import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.module.bean.ArticleDetailBean;
+import com.example.william.my.bean.data.ArticleDetailBean;
 import com.example.william.my.module.jetpack.R;
 
 public class PagingAdapter extends PagingDataAdapter<ArticleDetailBean, RecyclerView.ViewHolder> {

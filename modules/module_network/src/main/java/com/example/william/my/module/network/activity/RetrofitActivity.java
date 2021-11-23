@@ -4,10 +4,11 @@ import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.william.my.bean.api.NetworkService;
+import com.example.william.my.bean.base.Urls;
 import com.example.william.my.core.okhttp.body.RequestProgressBody;
 import com.example.william.my.core.okhttp.listener.RequestProgressListener;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.retrofit.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.FileIOUtilsService;
 import com.google.gson.Gson;

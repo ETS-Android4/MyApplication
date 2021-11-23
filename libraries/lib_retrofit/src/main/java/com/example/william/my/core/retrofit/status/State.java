@@ -7,5 +7,4 @@ public class State {
     public final static int SUCCESS = 0;
 
     public final static int ERROR = 1;
-
 }

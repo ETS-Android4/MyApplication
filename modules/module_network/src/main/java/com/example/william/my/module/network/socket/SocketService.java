@@ -4,9 +4,10 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import com.example.william.my.module.utils.L;
 
 public class SocketService extends Service {
 
@@ -27,9 +28,9 @@ public class SocketService extends Service {
             socketServer = new SocketServer(SocketServer.DEFAULT_SERVER_PORT);
             socketServer.setReuseAddr(true);
             socketServer.start();
-            Log.i(TAG, "Start ServerSocket Success...");
+            L.i(TAG, "Start ServerSocket Success...");
         } catch (Exception e) {
-            Log.i(TAG, "Start ServerSocket Failed...");
+            L.i(TAG, "Start ServerSocket Failed...");
             e.printStackTrace();
         }
     }
@@ -40,9 +41,9 @@ public class SocketService extends Service {
         if (socketServer != null) {
             try {
                 socketServer.stop();
-                Log.i(TAG, "Stop ServerSocket Success...");
+                L.i(TAG, "Stop ServerSocket Success...");
             } catch (Exception e) {
-                Log.i(TAG, "Stop ServerSocket Failed...");
+                L.i(TAG, "Stop ServerSocket Failed...");
                 e.printStackTrace();
             }
         }

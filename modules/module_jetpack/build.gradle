@@ -15,10 +15,6 @@ kapt {
     }
 }
 dependencies {
-    implementation project(path: ':module_bean')
-    //Retrofit
-    implementation deps.retrofit_gson
-    implementation deps.retrofit_rxjava3
     //Paging3
     implementation deps.autodispose
     implementation deps.viewmodel_ktx

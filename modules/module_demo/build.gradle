@@ -3,5 +3,7 @@ android {
 }
 dependencies {
     implementation project(path: ':libraries:lib_customview')
+    implementation project(path: ':libraries:lib_bottomsheet')
+    implementation deps.flexbox
     implementation deps.localbroadcast
 }

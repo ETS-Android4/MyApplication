@@ -2,20 +2,9 @@ android {
     resourcePrefix "net_"
 }
 dependencies {
-    implementation project(path: ':libraries:lib_okhttp')
+    implementation project(path: ':libraries:lib_volley')
     implementation project(path: ':libraries:lib_retrofit')
-    implementation project(path: ':libraries:lib_imageloader')
-    //Gson
-    implementation deps.gson
-    //Volley
-    implementation deps.volley
-    //RxAndroid
-    implementation deps.rxandroid
-    //Retrofit
-    implementation deps.retrofit
-    implementation deps.retrofit_gson
-    implementation deps.retrofit_scalars
-    implementation deps.retrofit_rxjava3
+    implementation deps.glide
     //Netty
     implementation deps.netty
     //NanoHttpD

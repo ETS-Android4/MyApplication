@@ -8,8 +8,8 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.retrofit.ArticleDetailBean
 import com.example.william.my.module.kotlin.adapter.ArticlePagingAdapter
 import com.example.william.my.module.kotlin.comparator.ArticleComparator
 import com.example.william.my.module.kotlin.databinding.KtActivityPagingBinding
@@ -20,6 +20,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 /**
@@ -40,7 +41,7 @@ class PagingActivity : BaseActivity() {
         setContentView(binding.root)
 
         //val viewModel by viewModels<ExampleViewModel>()
-        val viewModel = ViewModelProvider(this).get(PagingViewModel::class.java)
+        val viewModel = ViewModelProvider(this)[PagingViewModel::class.java]
 
         val pagingAdapter = ArticlePagingAdapter(ArticleComparator())
         val recycleView = binding.pagingRecycleView
@@ -102,7 +103,7 @@ class PagingActivity : BaseActivity() {
             viewModel.articleFlowable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Consumer<PagingData<com.example.william.my.retrofit.ArticleDetailBean>> {
+                .subscribe(Consumer<PagingData<ArticleDetailBean>> {
                     pagingPagingAdapter.submitData(lifecycle, it)
                 })
         )

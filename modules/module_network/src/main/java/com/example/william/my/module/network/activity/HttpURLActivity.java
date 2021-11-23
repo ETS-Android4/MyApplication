@@ -1,9 +1,9 @@
 package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.bean.base.Urls;
 import com.example.william.my.library.helper.AppExecutorsHelper;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.retrofit.base.Urls;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.io.BufferedReader;
@@ -15,7 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * setDoOutput()和setDoInput()：设置是否向HttpURLConnection输出与读取。setDoOutput()默认是false，setDoInput()默认是true
+ * setDoOutput() 和 setDoInput()：设置是否向HttpURLConnection输出与读取。
+ * setDoOutput()默认是false，setDoInput()默认是true
  * setUseCaches()设置缓存，POST请求不能使用缓存
  * <p>
  * InputStream & OutputStream 输入流与输出流

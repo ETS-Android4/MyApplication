@@ -9,6 +9,7 @@ import androidx.paging.rxjava3.cachedIn
 import androidx.paging.rxjava3.flowable
 import com.example.william.my.module.kotlin.source.ArticlePagingSource
 import com.example.william.my.module.kotlin.source.ArticleRxPagingSource
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class PagingViewModel : ViewModel() {
 
@@ -25,6 +26,7 @@ class PagingViewModel : ViewModel() {
      * RxJava
      * pageSize 一次加载的数目
      */
+    @ExperimentalCoroutinesApi
     val articleFlowable = Pager(PagingConfig(pageSize = 20)) {
         ArticleRxPagingSource()
     }.flowable

@@ -27,7 +27,6 @@ android {
 
 dependencies {
     //OkHttp
-    implementation deps.okhttp
-    implementation deps.okhttp_logging
-    implementation deps.appcompat
+    api deps.okhttp
+    api deps.okhttp_logging
 }

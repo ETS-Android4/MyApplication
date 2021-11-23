@@ -85,7 +85,6 @@ public class AsyncTaskActivity extends BaseResponseActivity {
     @Override
     public void initView() {
         super.initView();
-
         mAsyncTask = new MyAsyncTask(AsyncTaskActivity.this);
     }
 

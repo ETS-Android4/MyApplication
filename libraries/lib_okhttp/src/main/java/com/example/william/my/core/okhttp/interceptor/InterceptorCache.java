@@ -3,8 +3,6 @@ package com.example.william.my.core.okhttp.interceptor;
 import android.content.Context;
 import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.okhttp.base.Header;
 import com.example.william.my.core.okhttp.utils.NetworkUtils;
 
@@ -28,9 +26,8 @@ public class InterceptorCache implements Interceptor {
         this.mContext = context;
     }
 
-    @NonNull
     @Override
-    public Response intercept(@NonNull Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
         if (!TextUtils.equals(request.method(), "GET")) {
@@ -52,8 +49,7 @@ public class InterceptorCache implements Interceptor {
     /**
      * 设置由缓存还是网络请求
      */
-    @NonNull
-    private Request buildRequest(@NonNull Request request, int age) {
+    private Request buildRequest(Request request, int age) {
         Request.Builder builder = request.newBuilder();
         if (NetworkUtils.isConnected(mContext)) {
             if (age <= 0) {
@@ -78,8 +74,7 @@ public class InterceptorCache implements Interceptor {
      * only-if-cached，仅使用缓存
      * 移除pragma消息头，因为pragma也是控制缓存的一个消息头属性
      */
-    @NonNull
-    private Response buildResponse(@NonNull Response response, int age) {
+    private Response buildResponse(Response response, int age) {
         Response.Builder builder = response.newBuilder();
         if (NetworkUtils.isConnected(mContext)) {
             if (age <= 0) {
@@ -102,5 +97,4 @@ public class InterceptorCache implements Interceptor {
                     .build();
         }
     }
-
 }

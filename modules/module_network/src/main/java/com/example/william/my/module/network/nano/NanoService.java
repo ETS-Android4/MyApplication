@@ -4,9 +4,10 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import com.example.william.my.module.utils.L;
 
 import java.io.IOException;
 
@@ -28,9 +29,9 @@ public class NanoService extends Service {
         try {
             nanoServer = new NanoServer();
             nanoServer.start(30000);
-            Log.i(TAG, "Start HttpService Success...");
+            L.i(TAG, "Start HttpService Success...");
         } catch (IOException e) {
-            Log.i(TAG, "Start HttpService Failed...");
+            L.i(TAG, "Start HttpService Failed...");
             e.printStackTrace();
         }
     }
@@ -41,9 +42,9 @@ public class NanoService extends Service {
         if (nanoServer != null) {
             try {
                 nanoServer.stop();
-                Log.i(TAG, "Stop HttpService Success...");
+                L.i(TAG, "Stop HttpService Success...");
             } catch (Exception e) {
-                Log.i(TAG, "Stop HttpService Failed...");
+                L.i(TAG, "Stop HttpService Failed...");
                 e.printStackTrace();
             }
         }

@@ -1,31 +1,44 @@
 package com.example.william.my.module.kotlin
 
+import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.example.william.my.core.keyvalue.KeyValue
-import com.example.william.my.module.activity.BaseListActivity
+import com.example.william.my.library.base.BaseFragmentActivity
+import com.example.william.my.module.router.fragment.RouterRecyclerFragment
+import com.example.william.my.module.router.item.RouterItem
 import com.example.william.my.module.kotlin.utils.Singleton
 import com.example.william.my.module.router.ARouterPath
+import java.util.*
 
 /**
  * https://developer.android.google.cn/kotlin/ktx
  */
 @Route(path = ARouterPath.Kotlin.Kotlin)
-class KotlinActivity : BaseListActivity() {
+class KotlinActivity : BaseFragmentActivity() {
 
-    override fun initData() {
-        super.initData()
-        mMap["CoilActivity"] = ARouterPath.Kotlin.Kotlin_Coil
-        mMap["FLowActivity"] = ARouterPath.Kotlin.Kotlin_FLow
-        mMap["PagingActivity"] = ARouterPath.Kotlin.Kotlin_Paging
-        mMap["DataStoreActivity"] = ARouterPath.Kotlin.Kotlin_DataStore
-        mMap["ResultActivity"] = ARouterPath.Kotlin.Kotlin_Result
+    override fun setFragment(): Fragment {
+        val bundle = Bundle()
+        bundle.putParcelableArrayList("router", buildRouter())
+        val fragment =
+            RouterRecyclerFragment()
+        fragment.arguments = bundle
+        return fragment
+    }
 
+    private fun buildRouter(): ArrayList<RouterItem> {
+        val routerItems = ArrayList<RouterItem>()
+        routerItems.add(RouterItem("CoilActivity", ARouterPath.Kotlin.Kotlin_Coil))
+        routerItems.add(RouterItem("FLowActivity", ARouterPath.Kotlin.Kotlin_FLow))
+        routerItems.add(RouterItem("PagingActivity", ARouterPath.Kotlin.Kotlin_Paging))
+        routerItems.add(RouterItem("DataStoreActivity", ARouterPath.Kotlin.Kotlin_DataStore))
+        routerItems.add(RouterItem("ResultActivity", ARouterPath.Kotlin.Kotlin_Result))
+        return routerItems
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setFuncTest()
-
-        KeyValue.INSTANCE.init(this)
-        KeyValue.INSTANCE.putString("key", "value")
-        Log.e("TAG", KeyValue.INSTANCE.getString("key", "???") + "")
 
         Singleton.getInstance(application).showToast("showToast")
     }

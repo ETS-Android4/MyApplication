@@ -1,6 +1,6 @@
 package com.example.william.my.module.sample.repo;
 
-import com.example.william.my.module.bean.ArticleDetailBean;
+import com.example.william.my.bean.data.ArticleDetailBean;
 
 import java.util.List;
 

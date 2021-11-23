@@ -1,6 +1,6 @@
 package com.example.william.my.module.network.netty.client;
 
-import android.util.Log;
+import com.example.william.my.module.utils.L;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -60,16 +60,16 @@ public class NettyClient {
 
     public boolean sendMessage(String msg) {
         if (channel == null) {
-            Log.e(TAG, "聊天通道为空");
+            L.e(TAG, "聊天通道为空");
             return false;
         }
         if (channel.isActive() && channel.isWritable()) {
             channel.writeAndFlush(msg + "\n");
             return true;
         } else if (!channel.isActive()) {
-            Log.i(TAG, "聊天通道未连接");
+            L.e(TAG, "聊天通道未连接");
         } else if (!channel.isWritable()) {
-            Log.i(TAG, "聊天通道连接，但不可写");
+            L.e(TAG, "聊天通道连接，但不可写");
         }
         return false;
     }

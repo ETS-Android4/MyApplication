@@ -10,7 +10,7 @@ import androidx.paging.PagingLiveData;
 import androidx.paging.PagingSource;
 import androidx.paging.rxjava3.PagingRx;
 
-import com.example.william.my.module.bean.ArticleDetailBean;
+import com.example.william.my.bean.data.ArticleDetailBean;
 import com.example.william.my.module.jetpack.source.ArticlePagingSource;
 
 import io.reactivex.rxjava3.core.Flowable;

@@ -1,6 +1,6 @@
 package com.example.william.my.module.network.socket;
 
-import android.util.Log;
+import com.example.william.my.module.utils.L;
 
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -21,26 +21,26 @@ public class SocketServer extends WebSocketServer {
 
     @Override
     public void onStart() {
-        Log.i(TAG, "onStart");
+        L.i(TAG, "onStart");
     }
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        Log.i(TAG, "onOpen");
+        L.i(TAG, "onOpen");
     }
 
     @Override
     public void onMessage(WebSocket conn, String message) {
-        Log.i(TAG, "OnMessage:" + message);
+        L.i(TAG, "OnMessage:" + message);
     }
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        Log.i(TAG, "onStart");
+        L.i(TAG, "onStart");
     }
 
     @Override
     public void onError(WebSocket conn, Exception ex) {
-        Log.i(TAG, "Socket Exception:" + ex.toString());
+        L.i(TAG, "Socket Exception:" + ex.toString());
     }
 }

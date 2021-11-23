@@ -1,11 +1,9 @@
 package com.example.william.my.module.demo.hook;
 
 import android.annotation.SuppressLint;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;

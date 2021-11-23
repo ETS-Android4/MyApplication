@@ -2,11 +2,9 @@ package com.example.william.my.core.okhttp.compat;
 
 import android.content.Context;
 import android.os.Environment;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 
 import com.example.william.my.core.okhttp.interceptor.InterceptorCache;
+import com.example.william.my.core.okhttp.utils.OkHttpLog;
 
 import java.io.File;
 
@@ -20,11 +18,10 @@ public class CompatCache {
             builder.cache(new Cache(new File(getCacheDir(context), cacheDir), cacheSize));
             builder.addNetworkInterceptor(new InterceptorCache(context));
         } else {
-            Log.e("CompatCache", "context == null. 缓存未启用.");
+            OkHttpLog.e("CompatCache", "context == null. 缓存未启用.");
         }
     }
 
-    @NonNull
     public static String getCacheDir(Context context) {
         String cachePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())

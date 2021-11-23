@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.bean.data.ArticleDetailBean;
 import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.module.bean.ArticleDetailBean;
 import com.example.william.my.module.jetpack.R;
 import com.example.william.my.module.jetpack.adapter.PagingAdapter;
 import com.example.william.my.module.jetpack.comparator.ArticleComparator;

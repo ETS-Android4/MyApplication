@@ -1,0 +1,13 @@
+android {
+    //resourcePrefix "libraries"
+}
+dependencies {
+    //
+    implementation project(path: ':libraries:lib_keyvalue')
+    implementation project(path: ':libraries:lib_imageloader')
+    //
+    implementation project(path: ':libraries:lib_banner')
+    implementation project(path: ':libraries:lib_infiniteimage')
+    implementation project(path: ':libraries:lib_ninepatch')
+    implementation project(path: ':libraries:lib_verifycode')
+}

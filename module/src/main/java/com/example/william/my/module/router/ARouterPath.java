@@ -35,55 +35,15 @@ public class ARouterPath {
         public static final String Util_Permission = "/module_util/permission";
     }
 
-    public static class NetWork {
-        public static final String NetWork = "/module_net/net";
-        public static final String NetWork_HttpURL = "/module_net/http_url";
-        public static final String NetWork_Volley = "/module_net/volley";
-        public static final String NetWork_OkHttp = "/module_net/ok_http";
-        public static final String NetWork_Retrofit = "/module_net/retrofit";
-        public static final String NetWork_RetrofitRxJava = "/module_net/retrofit_rx_java";
-        public static final String NetWork_RetrofitRxJavaUtils = "/module_net/retrofit_rx_java_utils";
-        public static final String NetWork_RxRetrofit = "/module_net/rx_retrofit";
-        public static final String NetWork_Download = "/module_net/rx_download";
-        public static final String NetWork_WebSocket = "/module_net/web_socket";
-        public static final String NetWork_ImageLoader = "/module_net/imageloader";
-        public static final String NetWork_NanoHttpD = "/module_net/nano_http_d";
-        public static final String NetWork_WebServer = "/module_net/web_server";
-        public static final String NetWork_Netty = "/module_net/netty";
-    }
-
-    public static class CustomView {
-        public static final String CustomView = "/module_custom/custom";
-        public static final String CustomView_Banner = "/module_custom/banner";
-        public static final String CustomView_BlurView = "/module_custom/blur_view";
-        public static final String CustomView_Gallery = "/module_custom/gallery";
-        public static final String CustomView_GestureLock = "/module_custom/gesture_lock";
-        public static final String CustomView_InfiniteImage = "/module_custom/infinite_image";
-        public static final String CustomView_IosDialog = "/module_custom/basics_ios_dialog";
-        public static final String CustomView_MarqueeView = "/module_custom/marquee_view";
-        public static final String CustomView_ScrollPage = "/module_custom/scroll_page";
-        public static final String CustomView_VerifyCode = "/module_custom/verify_code";
-        public static final String CustomView_Spinner = "/module_custom/spinner";
-        public static final String CustomView_TitleBar = "/module_custom/title";
-    }
-
-    public static class JetPack {
-        public static final String JetPack = "/module_jet/jet";
-        public static final String JetPack_Bind = "/module_jet/bing";
-        public static final String JetPack_Room = "/module_jet/room";
-        public static final String JetPack_LiveData = "/module_jet/live_data";
-        public static final String JetPack_Paging = "/module_jet/paging";
-        public static final String JetPack_WorkManager = "/module_jet/work_manager";
-        public static final String JetPack_Navigation = "/module_jet/navigation";
-    }
-
     public static class OpenSource {
         public static final String OpenSource = "/module_open/open";
+        //
         public static final String OpenSource_MMKV = "/module_open/mmkv";
         public static final String OpenSource_GreenDao = "/module_open/green_dao";
         public static final String OpenSource_EventBus = "/module_open/event_bus";
         public static final String OpenSource_LiveEventBus = "/module_open/live_event_bus";
         public static final String OpenSource_SmartEventBus = "/module_open/smart_event_bus";
+        //
         public static final String OpenSource_Background = "/module_open/background";
         public static final String OpenSource_BadgeView = "/module_open/badge_view";
         public static final String OpenSource_Banner = "/module_open/banner";
@@ -96,7 +56,6 @@ public class ARouterPath {
         public static final String OpenSource_ImmersionBar = "/module_open/immersion_bar";
         public static final String OpenSource_LoadSir = "/module_open/load_sir";
         public static final String OpenSource_Lottie = "/module_open/lottie";
-        public static final String OpenSource_NinePatch = "/module_open/nine_patch";
         public static final String OpenSource_PhotoView = "/module_open/photo_view";
         public static final String OpenSource_PickerView = "/module_open/picker_view";
         public static final String OpenSource_PopWindow = "/module_open/pop_window";
@@ -108,44 +67,33 @@ public class ARouterPath {
         public static final String OpenSource_X5 = "/module_open/x5";
     }
 
-    public static class Widget {
-        public static final String Widget = "/module_widget/widget";
-        public static final String Widget_AppBar = "/module_widget/app_bar";
-        public static final String Widget_Dialog = "/module_widget/dialog";
-        public static final String Widget_FlexBox = "/module_widget/flex_box";
-        public static final String Widget_Fragment = "/module_widget/fragment";
-        public static final String Widget_FragmentGroup = "/module_widget/fragment_group";
-        public static final String Widget_FragmentTabHost = "/module_widget/fragment_tab_host";
-        public static final String Widget_FragmentViewPager = "/module_widget/fragment_view_pager";
-        public static final String Widget_Notification = "/module_widget/notification";
-        public static final String Widget_RecyclerView = "/module_widget/recycler_view";
-        public static final String Widget_RecyclerViewNested = "/module_widget/recycler_view_nested";
-        public static final String Widget_ViewFlipper = "/module_widget/view_flipper";
-        public static final String Widget_ViewPager = "/module_widget/view_pager";
-        public static final String Widget_ViewPager2 = "/module_widget/view_pager_2";
-        public static final String Widget_WebView = "/module_widget/web_view";
+
+    public static class NetWork {
+        public static final String NetWork = "/module_net/net";
+        public static final String NetWork_Glide = "/module_net/glide";
+        public static final String NetWork_HttpURL = "/module_net/http_url";
+        public static final String NetWork_Volley = "/module_net/volley";
+        public static final String NetWork_VolleyUtils = "/module_net/volley_utils";
+        public static final String NetWork_OkHttp = "/module_net/ok_http";
+        public static final String NetWork_Retrofit = "/module_net/retrofit";
+        public static final String NetWork_RetrofitRxJava = "/module_net/retrofit_rx_java";
+        public static final String NetWork_RetrofitRxJavaUtils = "/module_net/retrofit_rx_java_utils";
+        public static final String NetWork_RxRetrofit = "/module_net/rx_retrofit";
+        public static final String NetWork_Download = "/module_net/rx_download";
+        public static final String NetWork_WebSocket = "/module_net/web_socket";
+        public static final String NetWork_NanoHttpD = "/module_net/nano_http_d";
+        public static final String NetWork_WebServer = "/module_net/web_server";
+        public static final String NetWork_Netty = "/module_net/netty";
     }
 
-    public static class Demo {
-        public static final String Demo = "/module_demo/demo";
-        public static final String Demo_Animator = "/module_demo/animator";
-        public static final String Demo_AsyncTask = "/module_demo/async";
-        public static final String Demo_AudioPlayer = "/module_demo/audio_player";
-        public static final String Demo_Behavior = "/module_demo/behavior";
-        public static final String Demo_Broadcast = "/module_demo/broadcast";
-        public static final String Demo_FloatWindow = "/module_demo/float_window";
-        public static final String Demo_Hook = "/module_demo/hook";
-        public static final String Demo_JobScheduler = "/module_demo/job_scheduler";
-        public static final String Demo_Messenger = "/module_demo/messenger";
-        public static final String Demo_NetworkStatus = "/module_demo/net_status";
-        public static final String Demo_Permission = "/module_demo/permission";
-        public static final String Demo_PicCrop = "/module_demo/pic_crop";
-        public static final String Demo_Service = "/module_demo/service";
-        public static final String Demo_TouchEvent = "/module_demo/touch_event";
-        public static final String Demo_Transition = "/module_demo/transition";
-        public static final String Demo_Transparent = "/module_demo/Transparent";
-        public static final String Demo_Turntable = "/module_demo/turntable";
-        public static final String Demo_Typeface = "/module_demo/typeface";
+    public static class JetPack {
+        public static final String JetPack = "/module_jet/jet";
+        public static final String JetPack_Bind = "/module_jet/bing";
+        public static final String JetPack_Room = "/module_jet/room";
+        public static final String JetPack_LiveData = "/module_jet/live_data";
+        public static final String JetPack_Paging = "/module_jet/paging";
+        public static final String JetPack_WorkManager = "/module_jet/work_manager";
+        public static final String JetPack_Navigation = "/module_jet/navigation";
     }
 
     public static class Kotlin {
@@ -163,7 +111,60 @@ public class ARouterPath {
         public static final String Sample_MVVM = "/module_sample/sample_mvvm";
         public static final String Sample_Kotlin = "/module_sample/sample_kotlin";
         public static final String Sample_Kotlin_Bind = "/module_sample/sample_kotlin_bind";
-        public static final String Sample_Recycler = "/module_sample/sample_recycler";
+    }
+
+    public static class Lib {
+        public static final String Lib = "/module_libraries/libraries";
+        //
+        public static final String Lib_KeyValue = "/module_lib/key_value";
+        public static final String Lib_ImageLoader = "/module_lib/image_loader";
+        //
+        public static final String Lib_Banner = "/module_lib/banner";
+        public static final String Lib_InfiniteImage = "/module_lib/infinite_image";
+        public static final String Lib_NinePatch = "/module_lib/nine_patch";
+        public static final String Lib_VerifyCode = "/module_lib/verify_code";
+    }
+
+    public static class Demo {
+        public static final String Demo = "/module_demo/demo";
+        public static final String Demo_Animator = "/module_demo/animator";
+        public static final String Demo_AsyncTask = "/module_demo/async";
+        public static final String Demo_AudioPlayer = "/module_demo/audio";
+        public static final String Demo_Broadcast = "/module_demo/broadcast";
+        public static final String Demo_FloatWindow = "/module_demo/float_window";
+        public static final String Demo_Hook = "/module_demo/hook";
+        public static final String Demo_JobScheduler = "/module_demo/job_scheduler";
+        public static final String Demo_Messenger = "/module_demo/messenger";
+        public static final String Demo_NetworkStatus = "/module_demo/net_status";
+        public static final String Demo_Permission = "/module_demo/permission";
+        public static final String Demo_PicCrop = "/module_demo/pic_crop";
+        public static final String Demo_Service = "/module_demo/service";
+        public static final String Demo_TouchEvent = "/module_demo/touch_event";
+        public static final String Demo_Transition = "/module_demo/transition";
+        public static final String Demo_Transparent = "/module_demo/Transparent";
+        public static final String Demo_Turntable = "/module_demo/turntable";
+        public static final String Demo_Typeface = "/module_demo/typeface";
+        //
+        public static final String Demo_AppBar = "/module_demo/app_bar";
+        public static final String Demo_Dialog = "/module_demo/dialog";
+        public static final String Demo_FlexBox = "/module_demo/flex_box";
+        public static final String Demo_Fragment = "/module_demo/fragment";
+        public static final String Demo_FragmentGroup = "/module_demo/fragment_group";
+        public static final String Demo_FragmentTabHost = "/module_demo/fragment_tab_host";
+        public static final String Demo_FragmentViewPager = "/module_demo/fragment_view_pager";
+        public static final String Demo_Notification = "/module_demo/notification";
+        public static final String Demo_RecyclerView = "/module_demo/recycler_view";
+        public static final String Demo_RecyclerViewNested = "/module_demo/recycler_view_nested";
+        public static final String Demo_ViewFlipper = "/module_demo/view_flipper";
+        public static final String Demo_ViewPager = "/module_demo/view_pager";
+        public static final String Demo_ViewPager2 = "/module_demo/view_pager_2";
+        public static final String Demo_WebView = "/module_demo/web_view";
+        //
+        public static final String Demo_BlurView = "/module_demo/blur_view";
+        public static final String Demo_IosDialog = "/module_demo/basics_ios_dialog";
+        public static final String Demo_MarqueeView = "/module_demo/marquee_view";
+        public static final String Demo_Spinner = "/module_demo/spinner";
+        public static final String Demo_TitleBar = "/module_demo/title";
     }
 
     public static class NeRtc {
