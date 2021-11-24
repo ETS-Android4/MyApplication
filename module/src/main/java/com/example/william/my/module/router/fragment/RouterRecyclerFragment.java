@@ -13,8 +13,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerFragment;
 import com.example.william.my.module.adapter.RouterRecyclerAdapter;
-import com.example.william.my.module.router.item.RouterItem;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.router.item.RouterItem;
 
 @Route(path = ARouterPath.Fragment.FragmentBasicRecycler)
 public class RouterRecyclerFragment extends BaseRecyclerFragment<RouterItem> {

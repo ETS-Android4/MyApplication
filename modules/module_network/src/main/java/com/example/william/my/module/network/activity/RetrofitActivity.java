@@ -3,22 +3,13 @@ package com.example.william.my.module.network.activity;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.william.my.bean.api.NetworkService;
 import com.example.william.my.bean.base.Urls;
-import com.example.william.my.core.okhttp.body.RequestProgressBody;
-import com.example.william.my.core.okhttp.listener.RequestProgressListener;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.router.provider.FileIOUtilsService;
-import com.google.gson.Gson;
 
-import java.io.File;
 import java.io.IOException;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,7 +31,7 @@ public class RetrofitActivity extends BaseResponseActivity {
     private void login() {
         Retrofit retrofit = new Retrofit.Builder()
                 // baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
-                .baseUrl(Urls.URL_BASE)
+                .baseUrl(Urls.Url_Base)
                 .build();
         NetworkService service = retrofit.create(NetworkService.class);
 
@@ -67,7 +58,7 @@ public class RetrofitActivity extends BaseResponseActivity {
         });
     }
 
-    private void download() {
+//    private void download() {
 //        OkHttpClient okHttpClient = new OkHttpClient.Builder()
 //                .addInterceptor(new RetrofitInterceptorProgress(new RetrofitResponseListener() {
 //                    @Override
@@ -103,63 +94,62 @@ public class RetrofitActivity extends BaseResponseActivity {
 //                showResponse(netError);
 //            }
 //        });
-    }
-
-
-    private void update() {
-        File file = new File(getExternalCacheDir() + File.separator + "retrofit_update.txt");
-
-        FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
-        boolean successful = fileIOUtils.writeFileFromString(file, "update");
-
-        Retrofit retrofit = new Retrofit.Builder()
-                // baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
-                .baseUrl(Urls.URL_BASE)
-                .build();
-        NetworkService service = retrofit.create(NetworkService.class);
-
-        //创建表单
-        MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        RequestBody multipartBody = multipartBuilder
-                .addFormDataPart("file", file.getName(), RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")))
-                .build();
-        //监听上传进度
-        RequestBody requestBody = new RequestProgressBody(multipartBody, new RequestProgressListener() {
-            @Override
-            public void onProgress(long bytesWritten, long contentLength) {
-                int progress = (int) (bytesWritten * 1f / contentLength * 100);
-                showResponse("上传进度：" + progress + "%");
-            }
-        });
-        //创建Part
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-
-        /*
-         *  RetrofitUtils -> buildMultipart()
-         */
-        //filePart = RetrofitUtils.buildMultipart("file", mFile, new RetrofitRequestListener() {
-        //    @Override
-        //    public void onProgress(long bytesWritten, long contentLength) {
-        //        showResponse("上传进度：" + (bytesWritten * 1f / contentLength * 100));
-        //    }
-        //});
-
-        Call<ResponseBody> call = service.uploadFile(filePart);
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    String netSuccess = "Success: " + new Gson().toJson(response.body());
-                    showResponse(netSuccess);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull final Throwable t) {
-                String netError = "Error: " + t.getMessage();
-                showResponse(netError);
-            }
-        });
-    }
+//    }
+//
+//    private void update() {
+//        File file = new File(getExternalCacheDir() + File.separator + "retrofit_update.txt");
+//
+//        FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+//        boolean successful = fileIOUtils.writeFileFromString(file, "update");
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                // baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
+//                .baseUrl(Urls.URL_BASE)
+//                .build();
+//        NetworkService service = retrofit.create(NetworkService.class);
+//
+//        //创建表单
+//        MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+//        RequestBody multipartBody = multipartBuilder
+//                .addFormDataPart("file", file.getName(), RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")))
+//                .build();
+//        //监听上传进度
+//        RequestBody requestBody = new RequestProgressBody(multipartBody, new RequestProgressListener() {
+//            @Override
+//            public void onProgress(long bytesWritten, long contentLength) {
+//                int progress = (int) (bytesWritten * 1f / contentLength * 100);
+//                showResponse("上传进度：" + progress + "%");
+//            }
+//        });
+//        //创建Part
+//        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+//
+//        /*
+//         *  RetrofitUtils -> buildMultipart()
+//         */
+//        //filePart = RetrofitUtils.buildMultipart("file", mFile, new RetrofitRequestListener() {
+//        //    @Override
+//        //    public void onProgress(long bytesWritten, long contentLength) {
+//        //        showResponse("上传进度：" + (bytesWritten * 1f / contentLength * 100));
+//        //    }
+//        //});
+//
+//        Call<ResponseBody> call = service.uploadFile(filePart);
+//
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    String netSuccess = "Success: " + new Gson().toJson(response.body());
+//                    showResponse(netSuccess);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull final Throwable t) {
+//                String netError = "Error: " + t.getMessage();
+//                showResponse(netError);
+//            }
+//        });
+//    }
 }

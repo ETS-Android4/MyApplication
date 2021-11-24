@@ -8,8 +8,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 import com.example.william.my.library.base.BaseApp;
-import com.example.william.my.module.utils.L;
 import com.example.william.my.module.network.utils.NetworkUtils;
+import com.example.william.my.module.utils.L;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

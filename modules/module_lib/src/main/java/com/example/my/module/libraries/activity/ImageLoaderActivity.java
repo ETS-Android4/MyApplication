@@ -31,19 +31,19 @@ public class ImageLoaderActivity extends BaseActivity {
                 type++;
                 switch (type) {
                     case 1:
-                        ImageLoader.getInstance().load(ImageLoaderActivity.this, Urls.URL_IMAGE, mImageView);
+                        ImageLoader.getInstance().load(ImageLoaderActivity.this, Urls.Url_Image, mImageView);
                         break;
                     case 2:
-                        ImageLoader.getInstance().loadCircle(ImageLoaderActivity.this, Urls.URL_IMAGE, mImageView);
+                        ImageLoader.getInstance().loadCircle(ImageLoaderActivity.this, Urls.Url_Image, mImageView);
                         break;
                     case 3:
-                        ImageLoader.getInstance().loadRadius(ImageLoaderActivity.this, Urls.URL_IMAGE, mImageView, 48);
+                        ImageLoader.getInstance().loadRadius(ImageLoaderActivity.this, Urls.Url_Image, mImageView, 48);
                         break;
                     case 4:
-                        ImageLoader.getInstance().loadRadius(ImageLoaderActivity.this, Urls.URL_IMAGE, mImageView, 48, CornerType.TOP);
+                        ImageLoader.getInstance().loadRadius(ImageLoaderActivity.this, Urls.Url_Image, mImageView, 48, CornerType.TOP);
                         break;
                     case 5:
-                        ImageLoader.getInstance().loadBlur(ImageLoaderActivity.this, Urls.URL_IMAGE, mImageView);
+                        ImageLoader.getInstance().loadBlur(ImageLoaderActivity.this, Urls.Url_Image, mImageView);
                     default:
                         type = 0;
                         break;

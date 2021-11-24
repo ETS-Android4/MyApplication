@@ -29,9 +29,9 @@ include ':modules:module_lib'
 include ':modules:module_demo'
 
 include ':modules:module_network'
-include ':modules:module_jetpack'
-include ':modules:module_kotlin'
-include ':modules:module_sample'
+//include ':modules:module_jetpack'
+//include ':modules:module_kotlin'
+//include ':modules:module_sample'
 
 //include ':modules:module_audio_room'
 

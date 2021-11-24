@@ -3,21 +3,15 @@ package com.example.william.my.module.network.activity;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.william.my.bean.base.Urls;
-import com.example.william.my.core.okhttp.body.RequestProgressBody;
-import com.example.william.my.core.okhttp.listener.RequestProgressListener;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.router.provider.FileIOUtilsService;
 
-import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -44,7 +38,6 @@ public class OkHttpActivity extends BaseResponseActivity {
     public void setOnClick() {
         super.setOnClick();
         login();
-        //download();
     }
 
     private void login() {
@@ -62,7 +55,7 @@ public class OkHttpActivity extends BaseResponseActivity {
                 .build();
         //创建请求
         Request request = new Request.Builder()
-                .url(Urls.URL_LOGIN)
+                .url(Urls.Url_Login)
                 // 请求体
                 .post(formBody)
                 // 表单
@@ -88,7 +81,7 @@ public class OkHttpActivity extends BaseResponseActivity {
         });
     }
 
-    private void download() {
+//    private void download() {
 //        //创建Client对象
 //        OkHttpClient okHttpClient = new OkHttpClient.Builder()
 //                .addInterceptor(new RetrofitInterceptorProgress(new RetrofitResponseListener() {
@@ -123,64 +116,64 @@ public class OkHttpActivity extends BaseResponseActivity {
 //                }
 //            }
 //        });
-    }
-
-    private void upload() {
-        File file = new File(getExternalCacheDir() + File.separator + "ok_http__update.txt");
-
-        FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
-        boolean successful = fileIOUtils.writeFileFromString(file, "update");
-
-        //创建表单
-        MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        RequestBody multipartBody = multipartBuilder
-                .addFormDataPart("file", file.getName(), RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")))
-                .build();
-
-        //监听上传进度
-        RequestBody requestProgressBody = new RequestProgressBody(multipartBody, new RequestProgressListener() {
-            @Override
-            public void onProgress(long bytesWritten, long contentLength) {
-                int progress = (int) (bytesWritten * 1f / contentLength * 100);
-                showResponse("上传进度：" + progress + "%");
-            }
-        });
-
-        /*
-         *  OkHttpUtils -> buildRequestProgressBody
-         */
-        //requestProgressBody = OkHttpUtils.buildRequestProgressBody("file", file, new RequestProgressListener() {
-        //    @Override
-        //    public void onProgress(long bytesWritten, long contentLength) {
-        //        int progress = (int) (bytesWritten * 1f / contentLength * 100);
-        //        showResponse("上传进度：" + progress + "%");
-        //    }
-        //});
-
-        //创建请求
-        Request request = new Request.Builder()
-                .url(Urls.URL_UPLOAD)
-                //.post(multipartBody)
-                .post(requestProgressBody)
-                .build();
-        Call call = mOkHttpClient.newCall(request);
-
-        //加入调度
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull final IOException e) {
-                String netError = "Error: " + e.getMessage();
-                showResponse(netError);
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
-                ResponseBody body = response.body();
-                if (body != null) {
-                    String netSuccess = "Success: " + body.string();
-                    showResponse(netSuccess);
-                }
-            }
-        });
-    }
+//    }
+//
+//    private void upload() {
+//        File file = new File(getExternalCacheDir() + File.separator + "ok_http__update.txt");
+//
+//        FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
+//        boolean successful = fileIOUtils.writeFileFromString(file, "update");
+//
+//        //创建表单
+//        MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+//        RequestBody multipartBody = multipartBuilder
+//                .addFormDataPart("file", file.getName(), RequestBody.Companion.create(file, MediaType.parse("multipart/form-data")))
+//                .build();
+//
+//        //监听上传进度
+//        RequestBody requestProgressBody = new RequestProgressBody(multipartBody, new RequestProgressListener() {
+//            @Override
+//            public void onProgress(long bytesWritten, long contentLength) {
+//                int progress = (int) (bytesWritten * 1f / contentLength * 100);
+//                showResponse("上传进度：" + progress + "%");
+//            }
+//        });
+//
+//        /*
+//         *  OkHttpUtils -> buildRequestProgressBody
+//         */
+//        //requestProgressBody = OkHttpUtils.buildRequestProgressBody("file", file, new RequestProgressListener() {
+//        //    @Override
+//        //    public void onProgress(long bytesWritten, long contentLength) {
+//        //        int progress = (int) (bytesWritten * 1f / contentLength * 100);
+//        //        showResponse("上传进度：" + progress + "%");
+//        //    }
+//        //});
+//
+//        //创建请求
+//        Request request = new Request.Builder()
+//                .url(Urls.URL_UPLOAD)
+//                //.post(multipartBody)
+//                .post(requestProgressBody)
+//                .build();
+//        Call call = mOkHttpClient.newCall(request);
+//
+//        //加入调度
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(@NonNull Call call, @NonNull final IOException e) {
+//                String netError = "Error: " + e.getMessage();
+//                showResponse(netError);
+//            }
+//
+//            @Override
+//            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
+//                ResponseBody body = response.body();
+//                if (body != null) {
+//                    String netSuccess = "Success: " + body.string();
+//                    showResponse(netSuccess);
+//                }
+//            }
+//        });
+//    }
 }

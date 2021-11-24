@@ -33,61 +33,16 @@ import java.net.URL;
 @Route(path = ARouterPath.NetWork.NetWork_HttpURL)
 public class HttpURLActivity extends BaseResponseActivity {
 
-    private boolean b;
-
     @Override
     public void setOnClick() {
         super.setOnClick();
         AppExecutorsHelper.getInstance().networkIO().execute(new Runnable() {
             @Override
             public void run() {
-                b = !b;
-                if (b) {
-                    get(Urls.URL_BANNER);
-                } else {
-                    String body = "username=" + "17778060027" +
-                            "&password=" + "ww123456";
-                    post(Urls.URL_LOGIN, body);
-                }
+                String body = "username=" + "17778060027" + "&password=" + "ww123456";
+                post(Urls.Url_Login, body);
             }
         });
-    }
-
-    private void get(String urlString) {
-        try {
-            // 1. 得到访问地址的URL
-            URL url = new URL(urlString);
-            // 2. 得到网络访问对象java.net.HttpURLConnection
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            // 3. 设置请求参数
-            // 设置请求方式
-            connection.setRequestMethod("GET");
-            // 设置超时时间
-            connection.setConnectTimeout(3000);
-            // 建立连接
-            connection.connect();
-
-            // 4. 得到响应状态码的返回值 responseCode
-            int code = connection.getResponseCode();
-            // 5. 如果返回值正常，数据在网络中是以流的形式得到服务端返回的数据
-            StringBuilder msg = new StringBuilder();
-            if (code == 200) {
-                InputStream is = connection.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                String line;
-                // 循环从流中读取
-                while ((line = reader.readLine()) != null) {
-                    msg.append(line).append("\n");
-                }
-                // 关闭流
-                reader.close();
-            }
-            // 6. 断开连接，释放资源
-            connection.disconnect();
-            showResponse(msg.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void post(String urlString, String params) {

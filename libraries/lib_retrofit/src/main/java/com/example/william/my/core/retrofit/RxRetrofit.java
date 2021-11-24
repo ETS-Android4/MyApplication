@@ -12,7 +12,7 @@ import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 import com.google.gson.JsonElement;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -44,8 +44,8 @@ public class RxRetrofit<T> {
     /**
      * RetrofitConverterFactory & RetrofitResponseBodyConverter
      */
-    public Observable<RetrofitResponse<T>> createObservable() {
-        Observable<RetrofitResponse<JsonElement>> response = null;
+    public Single<RetrofitResponse<T>> createSingle() {
+        Single<RetrofitResponse<JsonElement>> response = null;
         switch (builder.getMethod()) {
             case GET:
                 response = buildApi().get(builder.getApi(), builder.getHeader(), builder.getParameter());
@@ -77,16 +77,16 @@ public class RxRetrofit<T> {
             return null;
         }
 
-        Observable<RetrofitResponse<T>> observable = response.map(new ServerResultFunction<>());
+        Single<RetrofitResponse<T>> single = response.map(new ServerResultFunction<>());
 
         if (builder.getTransformer() != null) {
             //compose 操作符 介于 map onErrorResumeNext 之间
-            observable = observable.compose(builder.getTransformer());
+            single = single.compose(builder.getTransformer());
         }
 
-        observable = observable.onErrorResumeNext(new HttpResultFunction<>());
+        single = single.onErrorResumeNext(new HttpResultFunction<>());
 
-        return observable
+        return single
                 //请求数据的事件发生在io线程
                 .subscribeOn(Schedulers.io())
                 //指定线程池

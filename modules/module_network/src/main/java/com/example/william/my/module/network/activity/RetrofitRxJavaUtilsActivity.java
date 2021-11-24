@@ -2,8 +2,8 @@ package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.api.NetworkService;
-import com.example.william.my.bean.data.BannerBean;
-import com.example.william.my.bean.data.BannerDetailBean;
+import com.example.william.my.bean.data.ArticleBean;
+import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.core.retrofit.callback.ObserverCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
@@ -11,8 +11,6 @@ import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
-
-import java.util.List;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 
@@ -44,12 +42,12 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
     }
 
     /**
-     * GsonConverterFactory Gson 解析 -> BannerBean
+     * GsonConverterFactory Gson 解析 -> ArticleBean
      */
     private void getBanner() {
-        RetrofitUtils.buildObservable(
-                service.getBanner(),
-                new ObserverCallback<BannerBean>() {
+        RetrofitUtils.buildSingle(
+                service.getArticleList(0),
+                new ObserverCallback<ArticleBean>() {
 
                     @Override
                     public void onLoading() {
@@ -57,8 +55,8 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onResponse(@NonNull BannerBean response) {
-                        String netSuccess = "getBanner: " + new Gson().toJson(response);
+                    public void onResponse(@NonNull ArticleBean response) {
+                        String netSuccess = "Article List: " + new Gson().toJson(response);
                         showResponse(netSuccess);
                     }
 
@@ -71,12 +69,12 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
     }
 
     /**
-     * RetrofitConverterFactory 自定义解析 -> List<BannerDetailBean>
+     * RetrofitConverterFactory 自定义解析 -> RetrofitResponse<ArticleDataBean>
      */
     private void getBannerList() {
-        RetrofitUtils.buildObservable(
-                service.getBannerList(),
-                new ObserverCallback<RetrofitResponse<List<BannerDetailBean>>>() {
+        RetrofitUtils.buildSingle(
+                service.getArticleDateList(0),
+                new ObserverCallback<RetrofitResponse<ArticleDataBean>>() {
 
                     @Override
                     public void onLoading() {
@@ -84,8 +82,8 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
-                        String netSuccess = "getBannerList: " + new Gson().toJson(response);
+                    public void onResponse(@NonNull RetrofitResponse<ArticleDataBean> response) {
+                        String netSuccess = "Article List: " + new Gson().toJson(response);
                         showResponse(netSuccess);
                     }
 

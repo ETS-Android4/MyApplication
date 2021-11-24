@@ -7,7 +7,7 @@ import com.example.william.my.core.retrofit.function.HttpResultFunction
 import com.example.william.my.core.retrofit.helper.RetrofitHelper
 import com.example.william.my.core.retrofit.observer.RetrofitObserver
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -53,8 +53,8 @@ object RetrofitUtils {
     }
 
     @JvmStatic
-    fun <T> buildObservable(
-        observable: Observable<T>,
+    fun <T> buildSingle(
+        observable: Single<T>,
         callback: RetrofitResponseCallback<T>
     ) {
         observable
@@ -74,7 +74,7 @@ object RetrofitUtils {
 
     @JvmStatic
     fun <T> buildLiveData(
-        observable: Observable<T>,
+        observable: Single<T>,
         callback: RetrofitResponseCallback<T>
     ) {
         observable

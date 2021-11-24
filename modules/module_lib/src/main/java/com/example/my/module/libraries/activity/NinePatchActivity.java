@@ -42,10 +42,10 @@ public class NinePatchActivity extends AppCompatActivity {
         mTextView2 = findViewById(R.id.text2);
 
         //NinePatchChunk
-        Glide.with(this).asBitmap().load(Urls.URL_NinePatch).into(new CustomTarget<Bitmap>() {
+        Glide.with(this).asBitmap().load(Urls.Url_NinePatch).into(new CustomTarget<Bitmap>() {
             @Override
             public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                NinePatchDrawable drawable = NinePatchChunk.create9PatchDrawable(NinePatchActivity.this, resource, Urls.URL_NinePatch);
+                NinePatchDrawable drawable = NinePatchChunk.create9PatchDrawable(NinePatchActivity.this, resource, Urls.Url_NinePatch);
                 mTextView1.setBackground(drawable);
             }
 
@@ -55,7 +55,7 @@ public class NinePatchActivity extends AppCompatActivity {
             }
         });
         //NinePatchBuilder
-        Glide.with(this).asBitmap().load(Urls.URL_NinePatch2).into(new CustomTarget<Bitmap>() {
+        Glide.with(this).asBitmap().load(Urls.Url_NinePatch).into(new CustomTarget<Bitmap>() {
             @Override
             public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                 NinePatchBuilder builder = new NinePatchBuilder(getResources(), resource);

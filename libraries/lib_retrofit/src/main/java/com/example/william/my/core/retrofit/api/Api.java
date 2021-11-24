@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 
 import java.util.Map;
 
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -42,7 +42,7 @@ public interface Api {
      * @return
      */
     @GET
-    Observable<RetrofitResponse<JsonElement>> get(@Url String url, @HeaderMap Map<String, Object> header, @QueryMap Map<String, Object> parameter);
+    Single<RetrofitResponse<JsonElement>> get(@Url String url, @HeaderMap Map<String, Object> header, @QueryMap Map<String, Object> parameter);
 
     /**
      * POST 请求
@@ -54,7 +54,7 @@ public interface Api {
      */
     @FormUrlEncoded
     @POST
-    Observable<RetrofitResponse<JsonElement>> post(@Url String url, @HeaderMap Map<String, Object> header, @FieldMap Map<String, Object> parameter);
+    Single<RetrofitResponse<JsonElement>> post(@Url String url, @HeaderMap Map<String, Object> header, @FieldMap Map<String, Object> parameter);
 
     /**
      * POST 请求
@@ -65,7 +65,7 @@ public interface Api {
      * @return
      */
     @POST
-    Observable<RetrofitResponse<JsonElement>> post(@Url String url, @HeaderMap Map<String, Object> header, @Body RequestBody requestBody);
+    Single<RetrofitResponse<JsonElement>> post(@Url String url, @HeaderMap Map<String, Object> header, @Body RequestBody requestBody);
 
     /**
      * DELETE 请求
@@ -76,7 +76,7 @@ public interface Api {
      * @return
      */
     @DELETE
-    Observable<RetrofitResponse<JsonElement>> delete(@Url String url, @HeaderMap Map<String, Object> header, @QueryMap Map<String, Object> parameter);
+    Single<RetrofitResponse<JsonElement>> delete(@Url String url, @HeaderMap Map<String, Object> header, @QueryMap Map<String, Object> parameter);
 
     /**
      * PUT 请求
@@ -88,7 +88,7 @@ public interface Api {
      */
     @FormUrlEncoded
     @PUT
-    Observable<RetrofitResponse<JsonElement>> put(@Url String url, @HeaderMap Map<String, Object> header, @FieldMap Map<String, Object> parameter);
+    Single<RetrofitResponse<JsonElement>> put(@Url String url, @HeaderMap Map<String, Object> header, @FieldMap Map<String, Object> parameter);
 
 
     /**
@@ -102,7 +102,7 @@ public interface Api {
      */
     @Multipart
     @POST
-    Observable<RetrofitResponse<JsonElement>> uploadFile(@Url String url, @HeaderMap Map<String, Object> header, @Part MultipartBody.Part part);
+    Single<RetrofitResponse<JsonElement>> uploadFile(@Url String url, @HeaderMap Map<String, Object> header, @Part MultipartBody.Part part);
 
     /**
      * 多文件上传
@@ -115,7 +115,7 @@ public interface Api {
      */
     @Multipart
     @POST
-    Observable<RetrofitResponse<JsonElement>> uploadFiles(@Url String url, @HeaderMap Map<String, Object> header, @PartMap Map<String, RequestBody> map);
+    Single<RetrofitResponse<JsonElement>> uploadFiles(@Url String url, @HeaderMap Map<String, Object> header, @PartMap Map<String, RequestBody> map);
 
     /**
      * 断点续传下载
@@ -127,5 +127,5 @@ public interface Api {
      */
     @Streaming
     @GET
-    Observable<ResponseBody> downloadFile(@Header("RANGE") String range, @Url String url);
+    Single<ResponseBody> downloadFile(@Header("RANGE") String range, @Url String url);
 }

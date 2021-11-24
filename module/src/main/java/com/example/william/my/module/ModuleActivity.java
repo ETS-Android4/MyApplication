@@ -12,13 +12,13 @@ import androidx.lifecycle.Observer;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseFragmentActivity;
-import com.example.william.my.module.utils.L;
 import com.example.william.my.module.event.DefaultSmartEventBus;
 import com.example.william.my.module.event.MessageEvent;
 import com.example.william.my.module.event.SmartMessageEvent;
+import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.fragment.RouterRecyclerFragment;
 import com.example.william.my.module.router.item.RouterItem;
-import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.L;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
 import org.greenrobot.eventbus.EventBus;

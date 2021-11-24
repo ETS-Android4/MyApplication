@@ -2,21 +2,14 @@ package com.example.william.my.bean.api;
 
 import com.example.william.my.bean.base.Urls;
 import com.example.william.my.bean.data.ArticleBean;
-import com.example.william.my.bean.data.BannerBean;
-import com.example.william.my.bean.data.BannerDetailBean;
+import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 
-import java.util.List;
-
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
-import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -39,41 +32,42 @@ public interface NetworkService {
      * @param password
      * @return
      */
-    @POST(Urls.URL_LOGIN)
+    @POST(Urls.Url_Login)
     Call<ResponseBody> call(@Query("username") String username, @Query("password") String password);
 
     /**
      * @param page
      * @return
      */
-    @GET(Urls.URL_ARTICLE)
+    @GET(Urls.Url_Article)
     Single<ArticleBean> getArticleList(@Path("page") int page);
 
     /**
-     * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository
-     *
+     * @param page
      * @return
      */
-    @GET(Urls.URL_BANNER)
-    Observable<BannerBean> getBanner();
+    @GET(Urls.Url_Article)
+    Single<RetrofitResponse<ArticleDataBean>> getArticleDateList(@Path("page") int page);
 
     /**
      * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository
      *
      * @return
      */
-    @GET(Urls.URL_BANNER)
-    Observable<RetrofitResponse<List<BannerDetailBean>>> getBannerList();
+    //@GET(Urls.URL_BANNER)
+    //Observable<BannerBean> getBanner();
 
     /**
-     * 上传文件
+     * RetrofitRxJavaActivity & RetrofitUtilsActivity & Repository
      *
-     * @param part
      * @return
      */
-    @Multipart
-    @POST(Urls.URL_UPLOAD)
-    Call<ResponseBody> uploadFile(@Part MultipartBody.Part part);
+    //@GET(Urls.URL_BANNER)
+    //Observable<<List<BannerDetailBean>>> getBannerList();
+
+    //@Multipart
+    //@POST(Urls.URL_UPLOAD)
+    //Call<ResponseBody> uploadFile(@Part MultipartBody.Part part);
 
     //@Multipart
     //@POST(Urls.upload)

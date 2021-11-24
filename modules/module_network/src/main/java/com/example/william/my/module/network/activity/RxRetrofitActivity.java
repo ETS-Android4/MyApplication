@@ -2,7 +2,7 @@ package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.base.Urls;
-import com.example.william.my.bean.data.BannerDetailBean;
+import com.example.william.my.bean.data.LoginBean;
 import com.example.william.my.core.retrofit.RxRetrofit;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.observer.RetrofitObserver;
@@ -11,9 +11,7 @@ import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
-import java.util.List;
-
-import io.reactivex.rxjava3.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see RxRetrofit
@@ -29,27 +27,29 @@ public class RxRetrofitActivity extends BaseResponseActivity {
 
     private void getBanner() {
         RxRetrofit
-                .<List<BannerDetailBean>>Builder()
-                .api(Urls.URL_BANNER)
-                .get()
+                .<LoginBean>Builder()
+                .api(Urls.Url_Login)
+                .addParams("username", "17778060027")
+                .addParams("password", "ww123456")
+                .post()
                 .build()
-                .createObservable()
-                .subscribe(new RetrofitObserver<RetrofitResponse<List<BannerDetailBean>>>() {
+                .createSingle()
+                .subscribe(new RetrofitObserver<RetrofitResponse<LoginBean>>() {
 
                     @Override
                     public void onLoading() {
                         super.onLoading();
-                        showResponse("Loading");
+                        showResponse("onLoading");
                     }
 
                     @Override
-                    public void onResponse(@NonNull RetrofitResponse<List<BannerDetailBean>> response) {
+                    public void onResponse(RetrofitResponse<LoginBean> response) {
                         String netSuccess = "Success: " + new Gson().toJson(response);
                         showResponse(netSuccess);
                     }
 
                     @Override
-                    public void onFailure(@NonNull ApiException e) {
+                    public void onFailure(@NotNull ApiException e) {
                         String netError = "Error: " + e.getMessage();
                         showResponse(netError);
                     }

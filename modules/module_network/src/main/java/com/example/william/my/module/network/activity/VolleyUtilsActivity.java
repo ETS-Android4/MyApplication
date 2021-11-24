@@ -22,20 +22,21 @@ public class VolleyUtilsActivity extends BaseResponseActivity {
 
     private void volleyUtils() {
         VolleyUtils.<LoginBean>builder()
-                .url(Urls.URL_LOGIN)
+                .url(Urls.Url_Login)
+                .clazz(LoginBean.class)
                 .addParams("username", "17778060027")
                 .addParams("password", "wW123456")
-                .clazz(LoginBean.class)
+                .post()
                 .build(this)
-                .enqueue(new VolleyUtils.VolleyListener<LoginBean>() {
+                .enqueue(new VolleyUtils.ResponseListener<LoginBean>() {
                     @Override
-                    public void onMySuccess(LoginBean result) {
-                        String net_success = "Success: " + new Gson().toJson(result);
+                    public void onSuccess(LoginBean response) {
+                        String net_success = "Success: " + new Gson().toJson(response);
                         showResponse(net_success);
                     }
 
                     @Override
-                    public void onMyError(String error) {
+                    public void onFailure(String error) {
                         String net_error = "Error: " + error;
                         showResponse(net_error);
                     }

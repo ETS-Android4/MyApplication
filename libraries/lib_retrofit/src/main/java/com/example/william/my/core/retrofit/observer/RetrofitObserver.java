@@ -5,7 +5,7 @@ import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.exception.ExceptionHandler;
 
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * <p>
  * io.reactivex.rxjava3.core.Observer
  */
-public abstract class RetrofitObserver<T> implements Observer<T>, RetrofitResponseCallback<T> {
+public abstract class RetrofitObserver<T> implements SingleObserver<T>, RetrofitResponseCallback<T> {
 
     private Disposable disposable;
 
@@ -27,9 +27,12 @@ public abstract class RetrofitObserver<T> implements Observer<T>, RetrofitRespon
         disposable = d;
     }
 
+
     @Override
-    public void onNext(@NonNull T t) {
+    public void onSuccess(@NonNull T t) {
         onResponse(t);
+
+        dispose();
     }
 
     @Override
@@ -40,20 +43,17 @@ public abstract class RetrofitObserver<T> implements Observer<T>, RetrofitRespon
             onFailure(new ApiException(e, ExceptionHandler.ERROR.UNKNOWN));
         }
 
-        if (disposable != null && !disposable.isDisposed()) {
-            disposable.dispose();
-        }
-    }
-
-    @Override
-    public void onComplete() {
-        if (disposable != null && !disposable.isDisposed()) {
-            disposable.dispose();
-        }
+        dispose();
     }
 
     @Override
     public void onLoading() {
 
+    }
+
+    private void dispose() {
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 }
