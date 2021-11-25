@@ -8,7 +8,7 @@ android {
         //    }
         kapt {
             arguments {
-                arg("eventBusIndex", "com.example.william.my.module.open.MyModuleOpenEventBusIndex")
+                arg("eventBusIndex", "com.example.william.my.module.opensource.MyModuleOpenEventBusIndex")
             }
         }
     }

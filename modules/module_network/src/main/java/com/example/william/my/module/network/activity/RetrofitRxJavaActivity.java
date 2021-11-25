@@ -54,7 +54,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
         NetworkService service = retrofit.create(NetworkService.class);
 
-        Single<ArticleBean> observable = service.getArticleList(0);
+        Single<ArticleBean> observable = service.getArticle(0);
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -91,7 +91,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
         NetworkService service = retrofit.create(NetworkService.class);
 
-        Single<RetrofitResponse<ArticleDataBean>> observable = service.getArticleDateList(0);
+        Single<RetrofitResponse<ArticleDataBean>> observable = service.getArticleResponse(0);
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

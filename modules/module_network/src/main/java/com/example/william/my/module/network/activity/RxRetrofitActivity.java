@@ -5,7 +5,7 @@ import com.example.william.my.bean.base.Urls;
 import com.example.william.my.bean.data.LoginBean;
 import com.example.william.my.core.retrofit.RxRetrofit;
 import com.example.william.my.core.retrofit.exception.ApiException;
-import com.example.william.my.core.retrofit.observer.RetrofitObserver;
+import com.example.william.my.core.retrofit.observer.Observer;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
@@ -34,7 +34,7 @@ public class RxRetrofitActivity extends BaseResponseActivity {
                 .post()
                 .build()
                 .createSingle()
-                .subscribe(new RetrofitObserver<RetrofitResponse<LoginBean>>() {
+                .subscribe(new Observer<RetrofitResponse<LoginBean>>() {
 
                     @Override
                     public void onLoading() {

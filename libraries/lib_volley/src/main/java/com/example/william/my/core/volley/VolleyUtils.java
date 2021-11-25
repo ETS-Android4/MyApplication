@@ -12,6 +12,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -24,9 +25,6 @@ import java.util.Map;
  * Volley请求工具类
  */
 public class VolleyUtils {
-
-    private static RequestQueue volleyQueue;
-    private static SharedPreferences sharedPreferences;
 
     public static <T> PostFormBuilder<T> builder() {
         return new PostFormBuilder<>();
@@ -77,13 +75,7 @@ public class VolleyUtils {
         }
 
         public VolleyRequest<T> build(Context context) {
-            if (volleyQueue == null) {
-                volleyQueue = VolleySingleton.Companion.getInstance(context).getRequestQueue();
-            }
-            if (sharedPreferences == null) {
-                sharedPreferences = context.getSharedPreferences("cookie", Context.MODE_PRIVATE);
-            }
-            return new VolleyRequest<>(method, url, clazz, headers, params);
+            return new VolleyRequest<>(context, method, url, clazz, headers, params);
         }
     }
 
@@ -95,33 +87,19 @@ public class VolleyUtils {
         private final Map<String, String> headers;
         private final Map<String, String> params;
 
-        public VolleyRequest(int method, String url, Class<T> clazz, Map<String, String> headers, Map<String, String> params) {
+        private final RequestQueue volleyQueue;
+
+        public VolleyRequest(Context context, int method, String url, Class<T> clazz, Map<String, String> headers, Map<String, String> params) {
             this.method = method;
             this.url = url;
             this.clazz = clazz;
             this.headers = headers;
             this.params = params;
+            this.volleyQueue = VolleySingleton.Companion.getInstance(context).getRequestQueue();
         }
 
         public void enqueue(VolleyUtils.ResponseListener<T> responseListener) {
-            volleyQueue.add(new GsonRequest<T>(method, url, clazz, headers, params,
-                    responseListener.mListener, responseListener.mErrorListener) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    String cookie = sharedPreferences.getString("cookie", "");
-                    if (!TextUtils.isEmpty(cookie)) {
-                        HashMap<String, String> headers = new HashMap<>();
-                        headers.put("Cookie", cookie);
-                        return headers;
-                    }
-                    return super.getHeaders();
-                }
-
-                @Override
-                protected Map<String, String> getParams() {
-                    return params;
-                }
-            });
+            volleyQueue.add(new GsonRequest<T>(method, url, clazz, headers, params, responseListener.mListener, responseListener.mErrorListener));
         }
     }
 
@@ -161,15 +139,8 @@ public class VolleyUtils {
         @Override
         protected Response<T> parseNetworkResponse(NetworkResponse response) {
             try {
-                Map<String, String> headers = response.headers;
-                if (headers != null) {
-                    String tempCookie = headers.get("Set-Cookie");
-                    if (tempCookie != null) {
-                        String cookie = tempCookie.split(";")[0];
-                        sharedPreferences.edit().putString("cookie", cookie).apply();
-                    }
-                }
-                String json = new String(response.data, HttpHeaderParser.parseCharset(headers));
+                String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+                VolleyLog.d(json);
                 return Response.success(gson.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response));
             } catch (UnsupportedEncodingException | JsonSyntaxException e) {
                 return Response.error(new ParseError(e));

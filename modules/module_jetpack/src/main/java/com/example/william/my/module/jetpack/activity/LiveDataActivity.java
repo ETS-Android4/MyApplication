@@ -4,16 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.bean.data.BannerDetailBean;
-import com.example.william.my.bean.data.BannerDetailData;
+import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.core.retrofit.loading.LoadingTip;
 import com.example.william.my.core.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.jetpack.model.BannerViewModel;
+import com.example.william.my.module.jetpack.model.ArticleViewModel;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
-
-import java.util.List;
 
 /**
  * https://developer.android.google.cn/topic/libraries/architecture/livedata
@@ -23,7 +20,7 @@ import java.util.List;
 public class LiveDataActivity extends BaseResponseActivity implements LoadingTip.LoadingTipListener {
 
     private LoadingTip mLoadingTip;
-    private BannerViewModel mViewModel;
+    private ArticleViewModel mViewModel;
 
     @Override
     public void initView() {
@@ -36,32 +33,10 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
         mLoadingTip = LoadingTip.addLoadingTipWithTopBar(this);
         mLoadingTip.setOnReloadListener(this);
 
-        mViewModel = new ViewModelProvider(this).get(BannerViewModel.class);
-
-        //initBannerBean();
-
-        initBannerData();
-    }
-
-    /**
-     * List<BannerDetailBean>
-     */
-    private void initBannerBean() {
-        mViewModel.getBannerBean().observe(this, new WithLoadingTipObserver<List<BannerDetailBean>>(mLoadingTip) {
+        mViewModel = new ViewModelProvider(this).get(ArticleViewModel.class);
+        mViewModel.getArticle().observe(this, new WithLoadingTipObserver<ArticleDataBean>(mLoadingTip, "getArticle") {
             @Override
-            protected void onResponse(@NonNull List<BannerDetailBean> response) {
-                showResponse(new Gson().toJson(response));
-            }
-        });
-    }
-
-    /**
-     * List<BannerDetailData>
-     */
-    private void initBannerData() {
-        mViewModel.getBannerData().observe(this, new WithLoadingTipObserver<List<BannerDetailData>>(mLoadingTip, "获取Banner数据") {
-            @Override
-            protected void onResponse(@NonNull List<BannerDetailData> response) {
+            protected void onResponse(@NonNull ArticleDataBean response) {
                 showResponse(new Gson().toJson(response));
             }
         });

@@ -1,0 +1,91 @@
+package com.example.william.my.module.jetpack.repo
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.william.my.bean.api.NetworkService
+import com.example.william.my.bean.data.ArticleBean
+import com.example.william.my.bean.data.ArticleDataBean
+import com.example.william.my.core.retrofit.callback.LiveDataCallback
+import com.example.william.my.core.retrofit.exception.ApiException
+import com.example.william.my.core.retrofit.exception.ExceptionHandler
+import com.example.william.my.core.retrofit.response.RetrofitResponse
+import com.example.william.my.core.retrofit.utils.RetrofitUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
+
+class KtArticleRepository : KtArticleDataSource {
+
+    private var counter = 0
+
+    private val _article = MutableLiveData<ArticleBean>()
+    override val article: LiveData<ArticleBean> = _article
+
+    // 移动到IO调度程序以使其成为安全的
+    // move the execution to an IO dispatcher to make it main-safe
+    private suspend fun getArticle(counter: Int): ArticleBean =
+        withContext(Dispatchers.IO) {
+            val api = RetrofitUtils.buildApi(NetworkService::class.java)
+            api.getArticleSuspend(counter)
+        }
+
+    override suspend fun fetchNewData() {
+        withContext(Dispatchers.Main) {
+            counter = 0
+            _article.value = getArticle(counter)
+        }
+    }
+
+    override suspend fun loadMoreData() {
+        withContext(Dispatchers.Main) {
+            counter++
+            _article.value = getArticle(counter)
+        }
+    }
+
+    private val _articleResponse = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
+    override val articleResponse: LiveData<RetrofitResponse<ArticleDataBean>> = _articleResponse
+
+    private fun buildArticleResponseFLow(counter: Int): Flow<RetrofitResponse<ArticleDataBean>> =
+        flow {
+            val articleResponse = getArticleResponse(counter)
+            emit(articleResponse)
+        }
+
+    private suspend fun getArticleResponse(counter: Int): RetrofitResponse<ArticleDataBean> =
+        withContext(Dispatchers.IO) {
+            val api = RetrofitUtils.buildApi(NetworkService::class.java)
+            api.getArticleResponseSuspend(counter)
+        }
+
+    override suspend fun fetchNewDataResponse() {
+        counter = 0
+        RetrofitUtils.buildFlow(
+            buildArticleResponseFLow(counter), LiveDataCallback(_articleResponse)
+        )
+    }
+
+    override suspend fun loadMoreDataResponse() {
+        counter++
+        RetrofitUtils.buildFlow(
+            buildArticleResponseFLow(counter), LiveDataCallback(_articleResponse)
+        )
+    }
+
+    private suspend fun fetchNewDataFLow() {
+        withContext(Dispatchers.Main) {
+            counter = 0
+            buildArticleResponseFLow(counter)
+                .onStart {
+                    _articleResponse.postValue(RetrofitResponse.loading())
+                }
+                .catch { exception ->
+                    val e: ApiException = ExceptionHandler.handleException(exception)
+                    _articleResponse.postValue(RetrofitResponse.error(e.message))
+                }
+                .collect { article ->
+                    _articleResponse.postValue(article)
+                }
+        }
+    }
+}

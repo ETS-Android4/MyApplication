@@ -54,17 +54,18 @@ public class ModuleActivity extends BaseFragmentActivity {
         routerItems.add(new RouterItem("AndroidUtilActivity", ARouterPath.Util.Util));
         routerItems.add(new RouterItem("OpenSourceActivity", ARouterPath.OpenSource.OpenSource));
         //
-        routerItems.add(new RouterItem("NetWorkActivity", ARouterPath.NetWork.NetWork));
-        routerItems.add(new RouterItem("JetPackActivity", ARouterPath.JetPack.JetPack));
-        routerItems.add(new RouterItem("KotlinActivity", ARouterPath.Kotlin.Kotlin));
-        routerItems.add(new RouterItem("SampleActivity", ARouterPath.Sample.Sample));
-        //
-        routerItems.add(new RouterItem("LibrariesActivity", ARouterPath.Lib.Lib));
+        routerItems.add(new RouterItem(" ", " "));
+        routerItems.add(new RouterItem("LibActivity", ARouterPath.Lib.Lib));
         routerItems.add(new RouterItem("DemoActivity", ARouterPath.Demo.Demo));
-        // 网易云信直播间
-        routerItems.add(new RouterItem("NeRtcActivity", ARouterPath.NeRtc.Audio));
         //
-        routerItems.add(new RouterItem("FlutterActivity", ARouterPath.Flutter.Flutter));
+        routerItems.add(new RouterItem(" ", " "));
+        routerItems.add(new RouterItem("NetWorkActivity", ARouterPath.NetWork.NetWork));
+        routerItems.add(new RouterItem("KotlinActivity", ARouterPath.Kotlin.Kotlin));
+        routerItems.add(new RouterItem("JetPackActivity", ARouterPath.JetPack.JetPack));
+        // 网易云信直播间
+        //routerItems.add(new RouterItem("NeRtcActivity", ARouterPath.NeRtc.Audio));
+        // Flutter
+        //routerItems.add(new RouterItem("FlutterActivity", ARouterPath.Flutter.Flutter));
         return routerItems;
     }
 

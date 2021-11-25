@@ -1,6 +1,9 @@
 package com.example.william.my.module.jetpack.model;
 
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelKt;
 import androidx.paging.Pager;
@@ -10,14 +13,61 @@ import androidx.paging.PagingLiveData;
 import androidx.paging.PagingSource;
 import androidx.paging.rxjava3.PagingRx;
 
+import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.bean.data.ArticleDetailBean;
-import com.example.william.my.module.jetpack.source.ArticlePagingSource;
+import com.example.william.my.bean.repo.DataRepository;
+import com.example.william.my.core.retrofit.response.RetrofitResponse;
+import com.example.william.my.module.jetpack.source.ArticleRxPagingSource;
 
 import io.reactivex.rxjava3.core.Flowable;
 import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.CoroutineScope;
 
+/**
+ * 如果需要Context则使用AndroidViewModel
+ * <p>
+ * MutableLiveData 可变的，私有，对内访问
+ * LiveData 不可变的，对外访问
+ * <p>
+ * 1.MutableLiveData的父类是LiveData
+ * 2.LiveData在实体类里可以通知指定某个字段的数据更新.
+ * 3.MutableLiveData则是完全是整个实体类或者数据类型变化后才通知.不会细节到某个字段
+ */
 public class ArticleViewModel extends ViewModel {
+//public class ArticleViewModel extends AndroidViewModel {
+
+    //public ArticleViewModel(@NonNull Application application) {
+    //    super(application);
+    //}
+
+    //private int mPage;
+
+    private final DataRepository mArticleRepo;
+
+    private final MutableLiveData<Integer> mMutableLiveData;
+
+    private final LiveData<RetrofitResponse<ArticleDataBean>> mObservableArticle;
+
+    public ArticleViewModel() {
+
+        mArticleRepo = DataRepository.getInstance();
+
+        mMutableLiveData = new MutableLiveData<>();
+
+        mObservableArticle = Transformations.switchMap(mMutableLiveData, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
+            @Override
+            public LiveData<RetrofitResponse<ArticleDataBean>> apply(Integer input) {
+                return mArticleRepo.getArticle(input);
+            }
+        });
+    }
+
+    /**
+     * Expose the LiveData Comments query so the UI can observe it.
+     */
+    public LiveData<RetrofitResponse<ArticleDataBean>> getArticle() {
+        return mObservableArticle;
+    }
 
     /**
      * Paging Coroutines -> LiveData
@@ -33,7 +83,7 @@ public class ArticleViewModel extends ViewModel {
                 new Function0<PagingSource<Integer, ArticleDetailBean>>() {
                     @Override
                     public PagingSource<Integer, ArticleDetailBean> invoke() {
-                        return new ArticlePagingSource();
+                        return new ArticleRxPagingSource();
                     }
                 });
         // cachedIn() 运算符使数据流可共享
@@ -54,7 +104,7 @@ public class ArticleViewModel extends ViewModel {
                 new Function0<PagingSource<Integer, ArticleDetailBean>>() {
                     @Override
                     public PagingSource<Integer, ArticleDetailBean> invoke() {
-                        return new ArticlePagingSource();
+                        return new ArticleRxPagingSource();
                     }
                 });
 
@@ -63,4 +113,18 @@ public class ArticleViewModel extends ViewModel {
         PagingRx.cachedIn(flowable, viewModelScope);
         return flowable;
     }
+
+    public void request() {
+        mMutableLiveData.postValue(0);
+    }
+
+//    public void onRefreshArticle() {
+//        mPage = 0;
+//        mMutableLiveData.postValue(mPage);
+//    }
+
+//    public void onLoadMoreArticle() {
+//        mPage++;
+//        mMutableLiveData.postValue(mPage);
+//    }
 }

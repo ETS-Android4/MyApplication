@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.paging.CombinedLoadStates;
 import androidx.paging.PagingData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,8 +22,6 @@ import com.example.william.my.module.router.ARouterPath;
 import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 /**
  * https://developer.android.google.cn/topic/libraries/architecture/paging/v3-overview
@@ -42,6 +39,7 @@ public class PagingActivity extends BaseActivity {
         setContentView(R.layout.jet_activity_paging);
 
         mPagingAdapter = new PagingAdapter(new ArticleComparator());
+
         RecyclerView mRecycleView = findViewById(R.id.paging_recycleView);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
         mRecycleView.setAdapter(mPagingAdapter);
@@ -52,12 +50,7 @@ public class PagingActivity extends BaseActivity {
 
         initArticleFlowable(mViewModel);
 
-        mPagingAdapter.addLoadStateListener(new Function1<CombinedLoadStates, Unit>() {
-            @Override
-            public Unit invoke(CombinedLoadStates combinedLoadStates) {
-                return null;
-            }
-        });
+
     }
 
     /**

@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.william.my.module.router.fragment.RouterRecyclerFragment"
+        android:name="com.example.william.my.module.fragment.PrimaryVarFragment"
         android:label="@string/jet_nav_notifications"
         tools:layout="@layout/basics_fragment_recycler" />
 

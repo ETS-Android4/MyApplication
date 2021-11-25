@@ -10,6 +10,7 @@ import coil.decode.SvgDecoder
 import coil.load
 import coil.transform.BlurTransformation
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.william.my.bean.base.Urls
 import com.example.william.my.module.kotlin.R
 import com.example.william.my.module.kotlin.databinding.KtActivityCoilBinding
 import com.example.william.my.module.router.ARouterPath
@@ -21,9 +22,6 @@ import com.example.william.my.module.router.ARouterPath
  */
 @Route(path = ARouterPath.Kotlin.Kotlin_Coil)
 class CoilActivity : AppCompatActivity() {
-
-    private val url =
-        "https://web.hycdn.cn/arknights/official/pic/20210401/8b683b7c01ebf0eb570370a48b655504.png"
 
     lateinit var binding: KtActivityCoilBinding
 
@@ -37,7 +35,7 @@ class CoilActivity : AppCompatActivity() {
 
         //binding.image.load(url)
 
-        binding.image.load(url) {
+        binding.image.load(Urls.Url_Image) {
             crossfade(true)//淡入淡出
             placeholder(R.drawable.ic_launcher)
             transformations(

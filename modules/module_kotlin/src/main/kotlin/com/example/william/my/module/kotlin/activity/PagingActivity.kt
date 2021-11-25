@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.base.BaseActivity
-import com.example.william.my.module.kotlin.adapter.ArticlePagingAdapter
+import com.example.william.my.module.kotlin.adapter.PagingAdapter
 import com.example.william.my.module.kotlin.comparator.ArticleComparator
 import com.example.william.my.module.kotlin.databinding.KtActivityPagingBinding
 import com.example.william.my.module.kotlin.holder.ExampleLoadStateAdapter
@@ -20,6 +20,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -34,23 +35,21 @@ class PagingActivity : BaseActivity() {
 
     lateinit var binding: KtActivityPagingBinding
 
+    lateinit var viewModel: PagingViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = KtActivityPagingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val viewModel by viewModels<ExampleViewModel>()
-        val viewModel = ViewModelProvider(this)[PagingViewModel::class.java]
-
-        val pagingAdapter = ArticlePagingAdapter(ArticleComparator())
+        val pagingAdapter = PagingAdapter(ArticleComparator())
         val recycleView = binding.pagingRecycleView
         recycleView.layoutManager = LinearLayoutManager(this)
         recycleView.adapter = pagingAdapter
 
-        //initArticleLiveData(viewModel, pagingAdapter)
-
-        initArticleFlowable(viewModel, pagingAdapter)
+        viewModel = ViewModelProvider(this)[PagingViewModel::class.java]
+        initArticleLiveData(viewModel, pagingAdapter)
 
         //获取加载状态
         pagingAdapter.addLoadStateListener {
@@ -69,19 +68,12 @@ class PagingActivity : BaseActivity() {
         )
     }
 
-    override fun onStop() {
-        super.onStop()
-
-        // clear all the subscriptions
-        mDisposable.clear()
-    }
-
     /**
      * Paging Coroutines -> LiveData
      */
     private fun initArticleLiveData(
         viewModel: PagingViewModel,
-        pagingPagingAdapter: ArticlePagingAdapter
+        pagingPagingAdapter: PagingAdapter
     ) {
         // activity 可以使用 lifecycleScope。fragment 需要使用 viewLifecycleOwner.lifecycleScope
         // Activities can use lifecycleScope directly, but Fragments should instead use viewLifecycleOwner.lifecycleScope.
@@ -95,9 +87,10 @@ class PagingActivity : BaseActivity() {
     /**
      * Paging RxJava -> Flowable
      */
+    @ExperimentalCoroutinesApi
     private fun initArticleFlowable(
         viewModel: PagingViewModel,
-        pagingPagingAdapter: ArticlePagingAdapter
+        pagingPagingAdapter: PagingAdapter
     ) {
         mDisposable.add(
             viewModel.articleFlowable
@@ -107,5 +100,11 @@ class PagingActivity : BaseActivity() {
                     pagingPagingAdapter.submitData(lifecycle, it)
                 })
         )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // clear all the subscriptions
+        mDisposable.clear()
     }
 }

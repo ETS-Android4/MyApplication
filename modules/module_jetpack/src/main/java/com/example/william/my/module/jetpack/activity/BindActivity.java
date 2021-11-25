@@ -32,11 +32,11 @@ public class BindActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.jet_activity_bind);
 
-        setViewBinding();
+        //setViewBinding();
 
         //setDataBindingByLiveData();
 
-        //setDataBindingByObservable();
+        setDataBindingByObservable();
     }
 
     /**

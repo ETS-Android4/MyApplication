@@ -7,7 +7,7 @@
         <activity android:name=".activity.CoilActivity" />
         <activity android:name=".activity.FlowActivity" />
         <activity android:name=".activity.PagingActivity" />
-        <activity android:name=".activity.DataStoreActivity" />
+        <activity android:name="com.example.william.my.module.kotlin.activity.DataStoreActivity" />
         <activity android:name=".activity.ResultActivity" />
         <activity android:name=".activity.ResultSecondActivity" />
         <activity android:name=".activity.CoroutinesActivity" />

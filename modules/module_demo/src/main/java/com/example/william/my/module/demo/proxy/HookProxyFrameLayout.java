@@ -39,8 +39,8 @@ public class HookProxyFrameLayout extends FrameLayout {
                 //ACTION_DOWN do some thing
                 View touchViewDown = findEventSrcView(ev, this);
                 if (touchViewDown != null) {
-                    L.e("TAG", "Activity:" + resumedActivity.getClass().getName()
-                            + "- ACTION_DOWN:" + ViewUtils.getAbsolutePath(touchViewDown));
+                    //L.e("TAG", "Activity:" + resumedActivity.getClass().getName()
+                    //        + "- ACTION_DOWN:" + ViewUtils.getAbsolutePath(touchViewDown));
                 }
             }
             case MotionEvent.ACTION_MOVE: {
@@ -50,8 +50,8 @@ public class HookProxyFrameLayout extends FrameLayout {
                 //ACTION_UP do some thing
                 View touchViewUp = findEventSrcView(ev, this);
                 if (touchViewUp != null) {
-                    L.e("TAG", "Activity:" + resumedActivity.getClass().getName()
-                            + "- ACTION_UP:" + ViewUtils.getAbsolutePath(touchViewUp));
+                    //L.e("TAG", "Activity:" + resumedActivity.getClass().getName()
+                    //        + "- ACTION_UP:" + ViewUtils.getAbsolutePath(touchViewUp));
                 }
             }
         }

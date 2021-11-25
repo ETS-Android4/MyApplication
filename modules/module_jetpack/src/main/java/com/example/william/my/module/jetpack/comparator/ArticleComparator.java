@@ -5,8 +5,7 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import com.example.william.my.bean.data.ArticleDetailBean;
 
-public class ArticleComparator extends DiffUtil.ItemCallback<ArticleDetailBean
-        > {
+public class ArticleComparator extends DiffUtil.ItemCallback<ArticleDetailBean> {
 
     @Override
     public boolean areItemsTheSame(@NonNull ArticleDetailBean oldItem, @NonNull ArticleDetailBean newItem) {

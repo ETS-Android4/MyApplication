@@ -8,7 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.example.william.my.module.open.greendao.NoteEntity;
+import com.example.william.my.module.opensource.greendao.NoteEntity;
 
 import com.example.william.my.module.open.greendao.generated.NoteEntityDao;
 

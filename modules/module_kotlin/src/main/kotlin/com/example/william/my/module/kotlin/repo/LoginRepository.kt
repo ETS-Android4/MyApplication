@@ -73,7 +73,7 @@ class LoginRepository {
         //打印线程
         ThreadUtils.isMainThread("LoginRepository makeLoginRequest")
 
-        val url = URL(Urls.URL_LOGIN)
+        val url = URL(Urls.Url_Login)
         (url.openConnection() as? HttpURLConnection)?.run {
             requestMethod = "POST"
             setRequestProperty("Content-Type", "application/x-www-form-urlencoded")

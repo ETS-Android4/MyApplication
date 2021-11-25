@@ -86,16 +86,6 @@ public class ARouterPath {
         public static final String NetWork_Netty = "/module_net/netty";
     }
 
-    public static class JetPack {
-        public static final String JetPack = "/module_jet/jet";
-        public static final String JetPack_Bind = "/module_jet/bing";
-        public static final String JetPack_Room = "/module_jet/room";
-        public static final String JetPack_LiveData = "/module_jet/live_data";
-        public static final String JetPack_Paging = "/module_jet/paging";
-        public static final String JetPack_WorkManager = "/module_jet/work_manager";
-        public static final String JetPack_Navigation = "/module_jet/navigation";
-    }
-
     public static class Kotlin {
         public static final String Kotlin = "/module_kotlin/kotlin";
         public static final String Kotlin_Coil = "/module_kotlin/coil";
@@ -105,12 +95,14 @@ public class ARouterPath {
         public static final String Kotlin_Result = "/module_kotlin/result";
     }
 
-    public static class Sample {
-        public static final String Sample = "/module_sample/sample";
-        public static final String Sample_MVP = "/module_sample/sample_mvp";
-        public static final String Sample_MVVM = "/module_sample/sample_mvvm";
-        public static final String Sample_Kotlin = "/module_sample/sample_kotlin";
-        public static final String Sample_Kotlin_Bind = "/module_sample/sample_kotlin_bind";
+    public static class JetPack {
+        public static final String JetPack = "/module_jet/jet";
+        public static final String JetPack_Bind = "/module_jet/bing";
+        public static final String JetPack_Room = "/module_jet/room";
+        public static final String JetPack_LiveData = "/module_jet/live_data";
+        public static final String JetPack_Paging = "/module_jet/paging";
+        public static final String JetPack_WorkManager = "/module_jet/work_manager";
+        public static final String JetPack_Navigation = "/module_jet/navigation";
     }
 
     public static class Lib {

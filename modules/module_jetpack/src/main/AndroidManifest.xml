@@ -10,6 +10,11 @@
         <activity android:name=".activity.WorkManagerActivity" />
         <activity android:name=".activity.NavigationActivity" />
         <activity android:name=".activity.RoomActivity" />
+
+<!--        <activity android:name=".activity.MvpActivity" />-->
+<!--        <activity android:name=".activity.MvvmActivity" />-->
+<!--        <activity android:name=".activity.KtBindActivity" />-->
+<!--        <activity android:name=".activity.KtActivity" />-->
     </application>
 
 </manifest>

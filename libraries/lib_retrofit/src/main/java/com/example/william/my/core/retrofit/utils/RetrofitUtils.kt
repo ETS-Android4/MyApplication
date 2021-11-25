@@ -1,11 +1,11 @@
 package com.example.william.my.core.retrofit.utils
 
-import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback
+import com.example.william.my.core.retrofit.callback.ResponseCallback
 import com.example.william.my.core.retrofit.exception.ApiException
 import com.example.william.my.core.retrofit.exception.ExceptionHandler
 import com.example.william.my.core.retrofit.function.HttpResultFunction
 import com.example.william.my.core.retrofit.helper.RetrofitHelper
-import com.example.william.my.core.retrofit.observer.RetrofitObserver
+import com.example.william.my.core.retrofit.observer.Observer
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -54,14 +54,14 @@ object RetrofitUtils {
 
     @JvmStatic
     fun <T> buildSingle(
-        observable: Single<T>,
-        callback: RetrofitResponseCallback<T>
+        single: Single<T>,
+        callback: ResponseCallback<T>
     ) {
-        observable
+        single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RetrofitObserver<T>() {
+            .subscribe(object : Observer<T>() {
                 override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }
@@ -74,14 +74,14 @@ object RetrofitUtils {
 
     @JvmStatic
     fun <T> buildLiveData(
-        observable: Single<T>,
-        callback: RetrofitResponseCallback<T>
+        single: Single<T>,
+        callback: ResponseCallback<T>
     ) {
-        observable
+        single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RetrofitObserver<T>() {
+            .subscribe(object : Observer<T>() {
                 override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }
@@ -94,7 +94,7 @@ object RetrofitUtils {
 
     suspend fun <T> buildFlow(
         flow: Flow<T>,
-        callback: RetrofitResponseCallback<T>
+        callback: ResponseCallback<T>
     ) {
         withContext(Dispatchers.Main) {
             flow

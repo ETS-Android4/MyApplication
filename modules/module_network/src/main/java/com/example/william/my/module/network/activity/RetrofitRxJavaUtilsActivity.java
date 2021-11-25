@@ -4,7 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.api.NetworkService;
 import com.example.william.my.bean.data.ArticleBean;
 import com.example.william.my.bean.data.ArticleDataBean;
-import com.example.william.my.core.retrofit.callback.ObserverCallback;
+import com.example.william.my.core.retrofit.callback.SingleCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
@@ -46,8 +46,8 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      */
     private void getBanner() {
         RetrofitUtils.buildSingle(
-                service.getArticleList(0),
-                new ObserverCallback<ArticleBean>() {
+                service.getArticle(0),
+                new SingleCallback<ArticleBean>() {
 
                     @Override
                     public void onLoading() {
@@ -73,8 +73,8 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      */
     private void getBannerList() {
         RetrofitUtils.buildSingle(
-                service.getArticleDateList(0),
-                new ObserverCallback<RetrofitResponse<ArticleDataBean>>() {
+                service.getArticleResponse(0),
+                new SingleCallback<RetrofitResponse<ArticleDataBean>>() {
 
                     @Override
                     public void onLoading() {
