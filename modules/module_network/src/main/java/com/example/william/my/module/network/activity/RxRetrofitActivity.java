@@ -2,7 +2,7 @@ package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.base.Urls;
-import com.example.william.my.bean.data.LoginBean;
+import com.example.william.my.bean.data.LoginData;
 import com.example.william.my.core.retrofit.RxRetrofit;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.observer.Observer;
@@ -27,14 +27,14 @@ public class RxRetrofitActivity extends BaseResponseActivity {
 
     private void getBanner() {
         RxRetrofit
-                .<LoginBean>Builder()
+                .<LoginData>Builder()
                 .api(Urls.Url_Login)
                 .addParams("username", "17778060027")
                 .addParams("password", "ww123456")
                 .post()
                 .build()
                 .createSingle()
-                .subscribe(new Observer<RetrofitResponse<LoginBean>>() {
+                .subscribe(new Observer<RetrofitResponse<LoginData>>() {
 
                     @Override
                     public void onLoading() {
@@ -43,7 +43,7 @@ public class RxRetrofitActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onResponse(RetrofitResponse<LoginBean> response) {
+                    public void onResponse(RetrofitResponse<LoginData> response) {
                         String netSuccess = "Success: " + new Gson().toJson(response);
                         showResponse(netSuccess);
                     }

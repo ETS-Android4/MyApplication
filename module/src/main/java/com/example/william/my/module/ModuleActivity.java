@@ -60,8 +60,7 @@ public class ModuleActivity extends BaseFragmentActivity {
         //
         routerItems.add(new RouterItem(" ", " "));
         routerItems.add(new RouterItem("NetWorkActivity", ARouterPath.NetWork.NetWork));
-        routerItems.add(new RouterItem("KotlinActivity", ARouterPath.Kotlin.Kotlin));
-        routerItems.add(new RouterItem("JetPackActivity", ARouterPath.JetPack.JetPack));
+        routerItems.add(new RouterItem("SampleActivity", ARouterPath.Sample.Sample));
         // 网易云信直播间
         //routerItems.add(new RouterItem("NeRtcActivity", ARouterPath.NeRtc.Audio));
         // Flutter

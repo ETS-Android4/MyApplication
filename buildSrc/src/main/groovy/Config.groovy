@@ -15,8 +15,7 @@ class Config {
             Demo      : new DepConfig(true, ":modules:module_demo"),
 
             Network   : new DepConfig(true, ":modules:module_network"),
-            Jetpack   : new DepConfig(true, ":modules:module_jetpack"),
-            Kotlin    : new DepConfig(true, ":modules:module_kotlin"),
+            Sample    : new DepConfig(true, ":modules:module_sample"),
 
             //AudioRoom : new DepConfig(true, ":modules:module_audio_room"),
 

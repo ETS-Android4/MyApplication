@@ -2,7 +2,7 @@ package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.base.Urls;
-import com.example.william.my.bean.data.LoginBean;
+import com.example.william.my.bean.data.LoginData;
 import com.example.william.my.core.volley.VolleyUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
@@ -21,16 +21,16 @@ public class VolleyUtilsActivity extends BaseResponseActivity {
     }
 
     private void volleyUtils() {
-        VolleyUtils.<LoginBean>builder()
+        VolleyUtils.<LoginData>builder()
                 .url(Urls.Url_Login)
-                .clazz(LoginBean.class)
+                .clazz(LoginData.class)
                 .addParams("username", "17778060027")
                 .addParams("password", "wW123456")
                 .post()
                 .build(this)
-                .enqueue(new VolleyUtils.ResponseListener<LoginBean>() {
+                .enqueue(new VolleyUtils.ResponseListener<LoginData>() {
                     @Override
-                    public void onSuccess(LoginBean response) {
+                    public void onSuccess(LoginData response) {
                         String net_success = "Success: " + new Gson().toJson(response);
                         showResponse(net_success);
                     }

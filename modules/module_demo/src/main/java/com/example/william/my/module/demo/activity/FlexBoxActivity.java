@@ -34,19 +34,15 @@ public class FlexBoxActivity extends AppCompatActivity {
         recyclerView.setClipToPadding(false);
 
         List<String> mData = new ArrayList<>();
-        mData.add("module_android_util");
-        mData.add("module_bugly");
-        mData.add("module_demo_view");
-        mData.add("module_flutter");
-        mData.add("module_jetpack");
-        mData.add("module_jiguang");
-        mData.add("module_kotlin");
-        mData.add("module_network");
-        mData.add("module_open_source");
-        mData.add("module_sample");
-        mData.add("module_sophix");
-        mData.add("module_tencent_im");
-        mData.add("module_wechat");
+        mData.add("module_123");
+        mData.add("module_456");
+        mData.add("module_789");
+        mData.add("module_1234");
+        mData.add("module_5678");
+        mData.add("module_12345");
+        mData.add("module_67890");
+        mData.add("module_123456");
+        mData.add("module_456789");
         recyclerView.setAdapter(new RecyclerAdapter(mData));
     }
 }

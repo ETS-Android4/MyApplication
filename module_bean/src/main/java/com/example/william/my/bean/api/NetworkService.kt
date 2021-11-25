@@ -3,9 +3,9 @@ package com.example.william.my.bean.api
 import com.example.william.my.bean.base.Urls
 import com.example.william.my.bean.data.ArticleBean
 import com.example.william.my.bean.data.ArticleDataBean
+import com.example.william.my.bean.data.LoginData
 import com.example.william.my.core.okhttp.base.Header
 import com.example.william.my.core.retrofit.response.RetrofitResponse
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -27,7 +27,7 @@ interface NetworkService {
     fun call(
         @Query("username") username: String?,
         @Query("password") password: String?
-    ): Call<ResponseBody?>?
+    ): Call<ResponseBody>
 
     @GET(Urls.Url_Article)
     fun getArticle(@Path("page") page: Int): Single<ArticleBean>
@@ -35,6 +35,12 @@ interface NetworkService {
     @Headers(Header.RETROFIT_CACHE_ALIVE_SECOND + ":" + 10)
     @GET(Urls.Url_Article)
     fun getArticleResponse(@Path("page") page: Int): Single<RetrofitResponse<ArticleDataBean?>>
+
+    @POST(Urls.Url_Login)
+    suspend fun login(
+        @Query("username") username: String,
+        @Query("password") password: String
+    ): LoginData
 
     // 提供挂起功能的网络请求接口
     // Interface that provides a way to make network requests with suspend functions

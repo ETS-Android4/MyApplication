@@ -1,0 +1,74 @@
+apply plugin: 'com.google.protobuf'
+apply from: '../../protobuf.gradle'
+android {
+    defaultConfig {
+        //javaCompileOptions {
+        //    annotationProcessorOptions {
+        //        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+        //    }
+        //}
+    }
+    //自定义源文件
+    sourceSets {
+        //main.java.srcDirs += 'src/main/kotlin'
+        main {
+            proto {
+                srcDir 'src/main/proto'
+            }
+            java {
+                srcDir 'src/main/kotlin'
+            }
+        }
+    }
+    resourcePrefix "jet_"
+}
+kapt {
+    arguments {
+        // 指定 schema 文件夹
+        arg("room.schemaLocation", "$projectDir/schemas".toString())
+    }
+}
+dependencies {
+    //By ViewModels
+    implementation deps.activity_ktx
+    implementation deps.fragment_ktx
+    //Coroutines
+    implementation deps.coroutines
+    implementation deps.livedata_ktx//LiveDataScope
+    implementation deps.viewmodel_ktx//ViewModelScope
+
+    //WorkManager
+    implementation deps.work
+    //Navigation
+    implementation deps.navigation
+    implementation deps.navigation_ui
+
+    //Room
+    implementation deps.room
+    implementation deps.room_rxjava3
+    kapt deps.room_compiler
+
+    //https://github.com/Blankj/AndroidUtilCode
+    //implementation deps.utils
+
+    //RxJava
+    implementation deps.rxandroid
+    //Proto DataStore
+    implementation deps.datastore
+    //Preferences DataStore
+    implementation deps.datastore_pre
+
+    //Paging3
+    implementation deps.autodispose
+    implementation deps.paging
+    implementation deps.paging_rxjava3
+
+    //protobuf
+    //You need to depend on the lite runtime library, not protobuf-java
+    implementation deps.protobuf
+
+    //Coil
+    implementation deps.coil
+    implementation deps.coil_gif
+    implementation deps.coil_svg
+}

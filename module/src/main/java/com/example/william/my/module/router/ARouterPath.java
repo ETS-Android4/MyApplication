@@ -86,23 +86,20 @@ public class ARouterPath {
         public static final String NetWork_Netty = "/module_net/netty";
     }
 
-    public static class Kotlin {
-        public static final String Kotlin = "/module_kotlin/kotlin";
-        public static final String Kotlin_Coil = "/module_kotlin/coil";
-        public static final String Kotlin_FLow = "/module_kotlin/flow";
-        public static final String Kotlin_DataStore = "/module_kotlin/dataStore";
-        public static final String Kotlin_Paging = "/module_kotlin/paging";
-        public static final String Kotlin_Result = "/module_kotlin/result";
-    }
+    public static class Sample {
+        public static final String Sample = "/module_sample/sample";
+        public static final String Sample_Bind = "/module_jet/bing";
+        public static final String Sample_Room = "/module_jet/room";
+        public static final String Sample_LiveData = "/module_jet/live_data";
+        public static final String Sample_Paging = "/module_jet/paging";
+        public static final String Sample_WorkManager = "/module_jet/work_manager";
+        public static final String Sample_Navigation = "/module_jet/navigation";
 
-    public static class JetPack {
-        public static final String JetPack = "/module_jet/jet";
-        public static final String JetPack_Bind = "/module_jet/bing";
-        public static final String JetPack_Room = "/module_jet/room";
-        public static final String JetPack_LiveData = "/module_jet/live_data";
-        public static final String JetPack_Paging = "/module_jet/paging";
-        public static final String JetPack_WorkManager = "/module_jet/work_manager";
-        public static final String JetPack_Navigation = "/module_jet/navigation";
+        public static final String Sample_Coil = "/module_kotlin/coil";
+        public static final String Sample_FLow = "/module_kotlin/flow";
+        public static final String Sample_DataStore = "/module_kotlin/dataStore";
+        public static final String Kotlin_Paging = "/module_kotlin/paging";
+        public static final String Sample_Result = "/module_kotlin/result";
     }
 
     public static class Lib {

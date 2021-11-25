@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-option java_package = "com.example.william.my.module.kotlin.proto";
-option java_outer_classname = "SettingsProto";
-
-message Settings {
-  int32 example_counter = 1;
-}
