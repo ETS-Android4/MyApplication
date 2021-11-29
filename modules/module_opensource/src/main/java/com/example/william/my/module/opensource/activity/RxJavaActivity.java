@@ -3,6 +3,7 @@ package com.example.william.my.module.opensource.activity;
 import android.util.Log;
 
 import com.example.william.my.module.activity.BaseResponseActivity;
+import com.example.william.my.module.utils.L;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,7 +63,7 @@ public class RxJavaActivity extends BaseResponseActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
+                L.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
             }
 
             @Override
@@ -87,7 +88,7 @@ public class RxJavaActivity extends BaseResponseActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
+                L.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
             }
         };
     }
@@ -107,7 +108,7 @@ public class RxJavaActivity extends BaseResponseActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
+                L.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
             }
         };
     }
@@ -126,7 +127,7 @@ public class RxJavaActivity extends BaseResponseActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
+                L.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
             }
 
             @Override
@@ -629,7 +630,7 @@ public class RxJavaActivity extends BaseResponseActivity {
                         Log.d(TAG, "retry错误: " + throwable.toString());
 
                         // 重试次数
-                        Log.e(TAG, "当前重试次数 =  " + integer);
+                        L.e(TAG, "当前重试次数 =  " + integer);
 
                         //返回false = 不重新重新发送数据 & 调用观察者的onError结束
                         //返回true = 重新发送请求（若持续遇到错误，就持续重新发送）

@@ -1,10 +1,9 @@
 package com.example.william.my.module.opensource.activity;
 
-import android.util.Log;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.L;
 import com.tencent.mmkv.MMKV;
 
 /**
@@ -17,7 +16,7 @@ public class MMKVActivity extends BaseResponseActivity {
     public void initView() {
         super.initView();
         String rootDir = MMKV.initialize(this);
-        Log.e(TAG, "mmkv root: " + rootDir);
+        L.e(TAG, "mmkv root: " + rootDir);
 
         MMKV kv = MMKV.defaultMMKV();
 

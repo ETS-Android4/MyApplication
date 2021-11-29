@@ -1,7 +1,6 @@
 package com.example.william.my.module.demo.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.demo.R;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.L;
 
 /**
  * 1. 点击 View1 区域且事件被 View1 消费        => View onTouchEvent 返回 true
@@ -59,11 +59,11 @@ public class TouchEventActivity extends AppCompatActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             if (plan == 1) {
-                Log.e(TAG, "dispatchTouchEvent     " + "把按钮做的好看一点,要有光泽,给人一种点击的欲望.");
+                L.e(TAG, "dispatchTouchEvent     " + "把按钮做的好看一点,要有光泽,给人一种点击的欲望.");
             } else if (plan == 2) {
-                Log.e(TAG, "dispatchTouchEvent     " + "经理,我准备发展一下电商业务,下周之前做一个淘宝出来.");
+                L.e(TAG, "dispatchTouchEvent     " + "经理,我准备发展一下电商业务,下周之前做一个淘宝出来.");
             } else if (plan == 3) {
-                Log.e(TAG, "dispatchTouchEvent     " + "现在项目做到什么程度了?");
+                L.e(TAG, "dispatchTouchEvent     " + "现在项目做到什么程度了?");
             }
         }
         return super.dispatchTouchEvent(ev);
@@ -73,7 +73,7 @@ public class TouchEventActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if (plan == 2) {
-                Log.e(TAG, "onTouchEvent           " + "这么简单都做不了,你们都是干啥的(愤怒).");
+                L.e(TAG, "onTouchEvent           " + "这么简单都做不了,你们都是干啥的(愤怒).");
             }
         }
         return super.onTouchEvent(event);

@@ -8,8 +8,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
-import com.example.william.my.module.sample.R;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.sample.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
@@ -28,7 +28,7 @@ public class NavigationActivity extends BaseActivity {
 
         //setTheme(R.style.Theme_AppCompat_Light_DarkActionBar);
 
-        setContentView(R.layout.jet_activity_navigation);
+        setContentView(R.layout.sample_activity_navigation);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

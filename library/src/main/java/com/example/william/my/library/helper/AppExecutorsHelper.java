@@ -33,8 +33,10 @@ public class AppExecutorsHelper {
     }
 
     private AppExecutorsHelper() {
-        this(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
-                new MainThreadExecutor(), Executors.newScheduledThreadPool(COUNT));
+        this(Executors.newSingleThreadExecutor(),
+                Executors.newFixedThreadPool(3),
+                new MainThreadExecutor(),
+                Executors.newScheduledThreadPool(COUNT));
     }
 
     /**

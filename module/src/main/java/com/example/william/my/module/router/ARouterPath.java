@@ -88,18 +88,22 @@ public class ARouterPath {
 
     public static class Sample {
         public static final String Sample = "/module_sample/sample";
-        public static final String Sample_Bind = "/module_jet/bing";
-        public static final String Sample_Room = "/module_jet/room";
-        public static final String Sample_LiveData = "/module_jet/live_data";
-        public static final String Sample_Paging = "/module_jet/paging";
-        public static final String Sample_WorkManager = "/module_jet/work_manager";
-        public static final String Sample_Navigation = "/module_jet/navigation";
-
-        public static final String Sample_Coil = "/module_kotlin/coil";
-        public static final String Sample_FLow = "/module_kotlin/flow";
-        public static final String Sample_DataStore = "/module_kotlin/dataStore";
-        public static final String Kotlin_Paging = "/module_kotlin/paging";
-        public static final String Sample_Result = "/module_kotlin/result";
+        public static final String Sample_Bind = "/module_sample/bing";
+        public static final String Sample_Navigation = "/module_sample/navigation";
+        public static final String Sample_LiveData = "/module_sample/live_data";
+        public static final String Sample_Room = "/module_sample/room";
+        public static final String Sample_WorkManager = "/module_sample/work_manager";
+        //
+        public static final String Sample_Coil = "/module_sample/coil";
+        public static final String Sample_DataStore = "/module_sample/dataStore";
+        public static final String Sample_Suspend = "/module_sample/suspend";
+        public static final String Sample_FLow = "/module_sample/flow";
+        public static final String Sample_Paging = "/module_sample/paging";
+        public static final String Sample_Result = "/module_sample/result";
+        //
+        public static final String Sample_MVP = "/module_sample/mvp";
+        public static final String Sample_MVVM = "/module_sample/mvvm";
+        public static final String Sample_DataBing = "/module_sample/data_bing";
     }
 
     public static class Lib {

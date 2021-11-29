@@ -1,8 +1,7 @@
 package com.example.william.my.module.util.activity;
 
-import android.util.Log;
-
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
 
 public class AppUtilsActivity extends BaseResponseActivity {
@@ -12,9 +11,9 @@ public class AppUtilsActivity extends BaseResponseActivity {
         super.initView();
 
         // 获取所有已安装 App 信息
-        Log.e(TAG, AppUtils.getAppsInfo().toString());
+        LogUtils.e(TAG, AppUtils.getAppsInfo().toString());
         // 判断 App 是否安装
-        //Log.e(TAG, AppUtils.isAppInstalled("com.android.phone"));
+        //LogUtils.e(TAG, AppUtils.isAppInstalled("com.android.phone"));
         // 安装 App（支持 8.0）
         AppUtils.installApp("");
         // 卸载 App

@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+/**
+ * LiveData
+ */
 public class BindLiveDataViewModel extends ViewModel {
 
     private final MutableLiveData<Integer> _likes;

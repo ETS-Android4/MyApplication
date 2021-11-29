@@ -11,9 +11,9 @@ import coil.load
 import coil.transform.BlurTransformation
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.bean.base.Urls
-import com.example.william.my.module.sample.R
-import com.example.william.my.module.sample.databinding.KtActivityCoilBinding
 import com.example.william.my.module.router.ARouterPath
+import com.example.william.my.module.sample.R
+import com.example.william.my.module.sample.databinding.SampleActivityCoilBinding
 
 /**
  * https://github.com/coil-kt/coil
@@ -23,19 +23,19 @@ import com.example.william.my.module.router.ARouterPath
 @Route(path = ARouterPath.Sample.Sample_Coil)
 class CoilActivity : AppCompatActivity() {
 
-    lateinit var binding: KtActivityCoilBinding
+    lateinit var mBinding: SampleActivityCoilBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //setContentView(R.layout.kt_activity_coil)
 
-        binding = KtActivityCoilBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        mBinding = SampleActivityCoilBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
         //binding.image.load(url)
 
-        binding.image.load(Urls.Url_Image) {
+        mBinding.imageView.load(Urls.Url_Image) {
             crossfade(true)//淡入淡出
             placeholder(R.drawable.ic_launcher)
             transformations(

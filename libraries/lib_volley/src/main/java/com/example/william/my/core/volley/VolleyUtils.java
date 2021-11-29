@@ -1,8 +1,6 @@
 package com.example.william.my.core.volley;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.text.TextUtils;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;

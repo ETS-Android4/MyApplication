@@ -14,8 +14,8 @@ import androidx.work.WorkManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.sample.worker.UploadWorker;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.sample.worker.WorkerManager;
 
 import java.util.concurrent.TimeUnit;
 
@@ -59,7 +59,7 @@ public class WorkManagerActivity extends BaseResponseActivity {
 
         // 配置运行任务的方式和时间。
         // OneTimeWorkRequest 只执行一次的任务请求，支持任务链
-        oneTimeWorkRequest = new OneTimeWorkRequest.Builder(UploadWorker.class)
+        oneTimeWorkRequest = new OneTimeWorkRequest.Builder(WorkerManager.class)
                 //初始延迟
                 .setInitialDelay(3, TimeUnit.SECONDS)
                 //工作约束
@@ -72,7 +72,7 @@ public class WorkManagerActivity extends BaseResponseActivity {
 
         // 配置运行任务的方式和时间。
         // PeriodicWorkRequest 可以多次、定时执行的任务请求，不支持任务链。可以定义的最短重复间隔是 15 分钟
-        periodicWorkRequest = new PeriodicWorkRequest.Builder(UploadWorker.class, 15, TimeUnit.MINUTES)
+        periodicWorkRequest = new PeriodicWorkRequest.Builder(WorkerManager.class, 15, TimeUnit.MINUTES)
                 .setConstraints(constraints)
                 .build();
 

@@ -33,5 +33,5 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         }
     }
 
-    public abstract Fragment setFragment();
+    protected abstract Fragment setFragment();
 }

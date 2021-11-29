@@ -12,8 +12,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.library.base.BaseRecyclerFragment;
-import com.example.william.my.module.adapter.RouterRecyclerAdapter;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.router.adapter.RouterRecyclerAdapter;
 import com.example.william.my.module.router.item.RouterItem;
 
 @Route(path = ARouterPath.Fragment.FragmentBasicRecycler)
@@ -47,5 +47,15 @@ public class RouterRecyclerFragment extends BaseRecyclerFragment<RouterItem> {
         } catch (HandlerException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected boolean canRefresh() {
+        return false;
+    }
+
+    @Override
+    protected boolean canLoadMore() {
+        return false;
     }
 }

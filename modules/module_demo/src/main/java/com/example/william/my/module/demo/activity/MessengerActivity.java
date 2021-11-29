@@ -10,7 +10,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -19,6 +18,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.demo.service.MessageService;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.L;
 
 import java.lang.ref.WeakReference;
 
@@ -124,7 +124,7 @@ public class MessengerActivity extends BaseResponseActivity {
         try {
             mServiceMessenger.send(message);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error passing service object back to activity.");
+            L.e(TAG, "Error passing service object back to activity.");
         }
     }
 }

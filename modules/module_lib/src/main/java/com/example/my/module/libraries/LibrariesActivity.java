@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseFragmentActivity;
+import com.example.william.my.module.activity.BaseRecyclerActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.fragment.RouterRecyclerFragment;
 import com.example.william.my.module.router.item.RouterItem;
@@ -13,18 +14,9 @@ import com.example.william.my.module.router.item.RouterItem;
 import java.util.ArrayList;
 
 @Route(path = ARouterPath.Lib.Lib)
-public class LibrariesActivity extends BaseFragmentActivity {
+public class LibrariesActivity extends BaseRecyclerActivity {
 
-    @Override
-    public Fragment setFragment() {
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("router", buildRouter());
-        RouterRecyclerFragment fragment = new RouterRecyclerFragment();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
-    private ArrayList<RouterItem> buildRouter() {
+    protected ArrayList<RouterItem> buildRouter() {
         ArrayList<RouterItem> routerItems = new ArrayList<>();
         routerItems.add(new RouterItem("BannerActivity", ARouterPath.Lib.Lib_Banner));
         routerItems.add(new RouterItem("InfiniteImageActivity", ARouterPath.Lib.Lib_InfiniteImage));

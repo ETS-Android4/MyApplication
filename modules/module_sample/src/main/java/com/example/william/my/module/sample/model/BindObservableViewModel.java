@@ -5,6 +5,9 @@ import androidx.databinding.ObservableField;
 
 import com.example.william.my.module.sample.BR;
 
+/**
+ * Observable
+ */
 public class BindObservableViewModel extends BaseObservable {
 
     private final ObservableField<Integer> likes;
@@ -19,8 +22,9 @@ public class BindObservableViewModel extends BaseObservable {
     }
 
     public void onLike() {
-        if (likes.get() != null) {
-            likes.set(likes.get() + 1);
+        Integer like = likes.get();
+        if (like != null) {
+            likes.set(like + 1);
             // You control when the @Bindable properties are updated using `notifyPropertyChanged()`.
             notifyPropertyChanged(BR.likes);
         }

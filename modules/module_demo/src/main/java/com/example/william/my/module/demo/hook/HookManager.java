@@ -2,8 +2,9 @@ package com.example.william.my.module.demo.hook;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
+
+import com.example.william.my.module.utils.L;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -47,7 +48,7 @@ public class HookManager {
             // 4. 用我们自己的点击事件代理类，设置到"持有者"中
             field.set(listenerInfo, proxyOnClickListener);
         } catch (Exception e) {
-            Log.e("TAG", "hook clickListener failed!", e);
+            e.printStackTrace();
         }
     }
 
@@ -67,12 +68,11 @@ public class HookManager {
 
         @Override
         public void onClick(View v) {
-            Log.e("TAG", "点击事件被hook到了!");
             if (mOriginalListener != null) {
                 mOriginalListener.onClick(v);
             }
-            Object obj = v.getTag(v.getId());
-            Log.e("TAG", "hooked" + " : " + obj.toString());
+            L.e("TAG", "点击事件被hook到了!");
+            L.e("TAG", "hooked" + " : " + v.getTag(v.getId()).toString());
         }
     }
 
@@ -85,7 +85,7 @@ public class HookManager {
         return Proxy.newProxyInstance(context.getClass().getClassLoader(), new Class[]{View.OnClickListener.class}, new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                Log.e("TAG", "点击事件被hook到了");//加入自己的逻辑
+                L.e("TAG", "点击事件被hook到了");//加入自己的逻辑
                 return method.invoke(clickListener, args);//执行被代理的对象的逻辑
             }
         });

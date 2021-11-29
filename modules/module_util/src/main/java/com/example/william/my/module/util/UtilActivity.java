@@ -1,13 +1,8 @@
 package com.example.william.my.module.util;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.library.base.BaseFragmentActivity;
+import com.example.william.my.module.activity.BaseRecyclerActivity;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.router.fragment.RouterRecyclerFragment;
 import com.example.william.my.module.router.item.RouterItem;
 
 import java.util.ArrayList;
@@ -17,18 +12,9 @@ import java.util.ArrayList;
  * https://github.com/Blankj/AndroidUtilCode
  */
 @Route(path = ARouterPath.Util.Util)
-public class UtilActivity extends BaseFragmentActivity {
+public class UtilActivity extends BaseRecyclerActivity {
 
-    @Override
-    public Fragment setFragment() {
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("router", buildRouter());
-        RouterRecyclerFragment fragment = new RouterRecyclerFragment();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
-    private ArrayList<RouterItem> buildRouter() {
+    protected ArrayList<RouterItem> buildRouter() {
         ArrayList<RouterItem> routerItems = new ArrayList<>();
         routerItems.add(new RouterItem("AdaptScreenActivity", ARouterPath.Util.Util_AdaptScreen));
         routerItems.add(new RouterItem("BusUtilsActivity", ARouterPath.Util.Util_BusUtils));

@@ -6,17 +6,15 @@ import android.os.MessageQueue;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.library.base.BaseFragmentActivity;
+import com.example.william.my.module.activity.BaseRecyclerActivity;
 import com.example.william.my.module.event.DefaultSmartEventBus;
 import com.example.william.my.module.event.MessageEvent;
 import com.example.william.my.module.event.SmartMessageEvent;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.router.fragment.RouterRecyclerFragment;
 import com.example.william.my.module.router.item.RouterItem;
 import com.example.william.my.module.utils.L;
 import com.jeremyliao.liveeventbus.LiveEventBus;
@@ -34,21 +32,12 @@ import java.util.ArrayList;
  * Alibaba Java Coding Guidelines
  */
 @Route(path = ARouterPath.Module)
-public class ModuleActivity extends BaseFragmentActivity {
+public class ModuleActivity extends BaseRecyclerActivity {
 
     @Autowired(name = "param_key")
     public String mModuleParam;
 
-    @Override
-    public Fragment setFragment() {
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("router", buildRouter());
-        RouterRecyclerFragment fragment = new RouterRecyclerFragment();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
-    private ArrayList<RouterItem> buildRouter() {
+    protected ArrayList<RouterItem> buildRouter() {
         ArrayList<RouterItem> routerItems = new ArrayList<>();
         //
         routerItems.add(new RouterItem("AndroidUtilActivity", ARouterPath.Util.Util));

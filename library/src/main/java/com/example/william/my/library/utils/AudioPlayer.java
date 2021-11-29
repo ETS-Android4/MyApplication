@@ -174,10 +174,6 @@ public class AudioPlayer {
         return duration;
     }
 
-    //public interface Callback {
-    //    void onCompletion(Boolean success);
-    //}
-
     public interface Callback {
         void onStart();
 

@@ -1,7 +1,6 @@
 package com.example.william.my.module.demo.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.demo.R;
 import com.example.william.my.module.demo.hook.HookManager;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.L;
 
 @Route(path = ARouterPath.Demo.Demo_Hook)
 public class HookActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class HookActivity extends AppCompatActivity {
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("TAG", "onClick!");
+                L.e("TAG", "onClick!");
                 HookManager.setViewTag(v, "name", "hook");
             }
         });

@@ -24,10 +24,7 @@ import retrofit2.http.*
 interface NetworkService {
 
     @POST(Urls.Url_Login)
-    fun call(
-        @Query("username") username: String?,
-        @Query("password") password: String?
-    ): Call<ResponseBody>
+    fun call(@Query("username") username: String, @Query("password") password: String): Call<ResponseBody>
 
     @GET(Urls.Url_Article)
     fun getArticle(@Path("page") page: Int): Single<ArticleBean>
@@ -37,10 +34,7 @@ interface NetworkService {
     fun getArticleResponse(@Path("page") page: Int): Single<RetrofitResponse<ArticleDataBean?>>
 
     @POST(Urls.Url_Login)
-    suspend fun login(
-        @Query("username") username: String,
-        @Query("password") password: String
-    ): LoginData
+    suspend fun login(@Query("username") username: String, @Query("password") password: String): LoginData
 
     // 提供挂起功能的网络请求接口
     // Interface that provides a way to make network requests with suspend functions

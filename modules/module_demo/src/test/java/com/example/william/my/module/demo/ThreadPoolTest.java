@@ -1,6 +1,6 @@
 package com.example.william.my.module.demo;
 
-import android.util.Log;
+import com.example.william.my.module.utils.L;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,16 +54,16 @@ public class ThreadPoolTest {
         @Override
         public void run() {
             synchronized (ThreadPoolTest.class) {
-                Log.e(TAG, "thread1 enter...");
+                L.e(TAG, "thread1 enter...");
                 try {
-                    Log.e(TAG, "thread1 is waiting...");
+                    L.e(TAG, "thread1 is waiting...");
                     //调用wait()方法，线程会放弃对象锁，进入等待此对象的等待锁定池
                     ThreadPoolTest.class.wait();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Log.e(TAG, "thread1 is going on ....");
-                Log.e(TAG, "thread1 is over!!!");
+                L.e(TAG, "thread1 is going on ....");
+                L.e(TAG, "thread1 is over!!!");
             }
         }
     }
@@ -72,7 +72,7 @@ public class ThreadPoolTest {
         @Override
         public void run() {
             synchronized (ThreadPoolTest.class) {
-                Log.e(TAG, "thread2 enter....");
+                L.e(TAG, "thread2 enter....");
                 //只有针对此对象调用notify()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态。
                 ThreadPoolTest.class.notify();
                 //==================
@@ -80,7 +80,7 @@ public class ThreadPoolTest {
                 //如果我们把代码：TestD.class.notify();给注释掉，即TestD.class调用了wait()方法，但是没有调用notify()
                 //方法，则线程永远处于挂起状态。
                 try {
-                    Log.e(TAG, "thread2 is sleep....");
+                    L.e(TAG, "thread2 is sleep....");
                     //sleep()方法导致了程序暂停执行指定的时间，让出cpu该其他线程，
                     //但是他的监控状态依然保持者，当指定的时间到了又会自动恢复运行状态。
                     //在调用sleep()方法的过程中，线程不会释放对象锁。
@@ -88,8 +88,8 @@ public class ThreadPoolTest {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Log.e(TAG, "thread2 is going on....");
-                Log.e(TAG, "thread2 is over!!!");
+                L.e(TAG, "thread2 is going on....");
+                L.e(TAG, "thread2 is over!!!");
             }
         }
     }

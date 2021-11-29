@@ -14,10 +14,8 @@ class Config {
             Lib       : new DepConfig(true, ":modules:module_lib"),
             Demo      : new DepConfig(true, ":modules:module_demo"),
 
-            Network   : new DepConfig(true, ":modules:module_network"),
+            Net       : new DepConfig(true, ":modules:module_network"),
             Sample    : new DepConfig(true, ":modules:module_sample"),
-
-            //AudioRoom : new DepConfig(true, ":modules:module_audio_room"),
 
             //ModuleFlutter    : new DepConfig(false, ":modules:module_flutter"),
     ]

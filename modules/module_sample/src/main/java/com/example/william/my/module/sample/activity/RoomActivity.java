@@ -2,10 +2,10 @@ package com.example.william.my.module.sample.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
+import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.database.AppDataBase;
 import com.example.william.my.module.sample.database.dao.OAuthDao;
 import com.example.william.my.module.sample.database.table.OAuth;
-import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
 import java.util.concurrent.Executors;

@@ -1,30 +1,16 @@
 package com.example.william.my.module.demo;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.library.base.BaseFragmentActivity;
+import com.example.william.my.module.activity.BaseRecyclerActivity;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.router.fragment.RouterRecyclerFragment;
 import com.example.william.my.module.router.item.RouterItem;
 
 import java.util.ArrayList;
 
 @Route(path = ARouterPath.Demo.Demo)
-public class DemoActivity extends BaseFragmentActivity {
+public class DemoActivity extends BaseRecyclerActivity {
 
-    @Override
-    public Fragment setFragment() {
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("router", buildRouter());
-        RouterRecyclerFragment fragment = new RouterRecyclerFragment();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
-    private ArrayList<RouterItem> buildRouter() {
+    protected ArrayList<RouterItem> buildRouter() {
         ArrayList<RouterItem> routerItems = new ArrayList<>();
         //
         routerItems.add(new RouterItem("AppBarActivity", ARouterPath.Demo.Demo_AppBar));

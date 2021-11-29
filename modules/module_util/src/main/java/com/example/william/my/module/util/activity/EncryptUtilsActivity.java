@@ -1,11 +1,11 @@
 package com.example.william.my.module.util.activity;
 
 import android.util.Base64;
-import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.EncryptUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 
@@ -34,10 +34,10 @@ public class EncryptUtilsActivity extends BaseResponseActivity {
         super.initView();
 
         byte[] encrypted = EncryptUtils.encryptAES(bytesData, bytesKey, ALGORITHM_AES, null);
-        Log.e(TAG, Base64.encodeToString(encrypted, Base64.NO_WRAP));
-        Log.e(TAG, ConvertUtils.bytes2HexString(encrypted));
+        LogUtils.e(TAG, Base64.encodeToString(encrypted, Base64.NO_WRAP));
+        LogUtils.e(TAG, ConvertUtils.bytes2HexString(encrypted));
 
         byte[] decrypted = EncryptUtils.decryptAES(bytesRes, bytesKey, ALGORITHM_AES, null);
-        Log.e(TAG, new String(decrypted, StandardCharsets.UTF_8));
+        LogUtils.e(TAG, new String(decrypted, StandardCharsets.UTF_8));
     }
 }

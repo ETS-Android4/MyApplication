@@ -13,8 +13,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.william.my.module.utils.L;
-
 public class HookProxyFrameLayout extends FrameLayout {
 
     private final Activity resumedActivity;

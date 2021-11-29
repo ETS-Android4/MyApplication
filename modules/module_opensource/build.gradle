@@ -14,7 +14,7 @@ android {
     }
     greendao {
         schemaVersion 1
-        daoPackage 'com.example.william.my.module.open.greendao.generated'
+        daoPackage 'com.example.william.my.module.opensource.greendao.generated'
         targetGenDir 'src/main/java'
     }
     resourcePrefix "open_"

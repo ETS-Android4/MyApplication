@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
+import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.sample.R;
-import com.example.william.my.module.sample.databinding.JetActivityBindBinding;
-import com.example.william.my.module.sample.databinding.JetActivityBindLiveDataBinding;
-import com.example.william.my.module.sample.databinding.JetActivityBindObservableBinding;
-import com.example.william.my.module.sample.databinding.JetLayoutMergeBinding;
+import com.example.william.my.module.sample.databinding.SampleActivityBindBinding;
+import com.example.william.my.module.sample.databinding.SampleActivityBindLiveDataBinding;
+import com.example.william.my.module.sample.databinding.SampleActivityBindObservableBinding;
+import com.example.william.my.module.sample.databinding.SampleLayoutBindMergeBinding;
 import com.example.william.my.module.sample.model.BindLiveDataViewModel;
 import com.example.william.my.module.sample.model.BindObservableViewModel;
-import com.example.william.my.module.router.ARouterPath;
 
 /**
  * 主 Module 也需要添加配置
@@ -30,27 +30,28 @@ public class BindActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //setContentView(R.layout.jet_activity_bind);
 
         //setViewBinding();
 
-        //setDataBindingByLiveData();
+        setDataBindingByLiveData();
 
-        setDataBindingByObservable();
+        //setDataBindingByObservable();
     }
 
     /**
      * ViewBinding
      */
     private void setViewBinding() {
-        JetActivityBindBinding mBinding = JetActivityBindBinding.inflate(getLayoutInflater());
+        SampleActivityBindBinding mBinding = SampleActivityBindBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 
-        mBinding.bindTextView.setText("ViewBinding");
+        mBinding.bindActivityTextView.setText("ViewBinding");
 
         // 带 merge 标签的include不能使用ID，否则会找不到View报空指针异常
-        JetLayoutMergeBinding mMergeBinding = JetLayoutMergeBinding.bind(mBinding.getRoot());
-        mMergeBinding.mergeTextView.setText("ViewBinding Merge");
+        SampleLayoutBindMergeBinding mMergeBinding = SampleLayoutBindMergeBinding.bind(mBinding.getRoot());
+        mMergeBinding.bindMergeTextView.setText("ViewBinding Merge");
     }
 
     /**
@@ -61,7 +62,7 @@ public class BindActivity extends BaseActivity {
         BindLiveDataViewModel mViewModel = new ViewModelProvider(this).get(BindLiveDataViewModel.class);
 
         // Inflate view and obtain an instance of the binding class.
-        JetActivityBindLiveDataBinding mDataBinding = DataBindingUtil.setContentView(this, R.layout.jet_activity_bind_live_data);
+        SampleActivityBindLiveDataBinding mDataBinding = DataBindingUtil.setContentView(this, R.layout.sample_activity_bind_live_data);
 
         // Specify the current activity as the lifecycle owner.
         mDataBinding.setLifecycleOwner(this);
@@ -77,7 +78,7 @@ public class BindActivity extends BaseActivity {
         // An alternative ViewModel using Observable fields and @Bindable properties can be used:
         BindObservableViewModel mObsViewModel = new ViewModelProvider(this).get(BindObservableViewModel.class);
 
-        JetActivityBindObservableBinding mObsDataBinding = DataBindingUtil.setContentView(this, R.layout.jet_activity_bind_observable);
+        SampleActivityBindObservableBinding mObsDataBinding = DataBindingUtil.setContentView(this, R.layout.sample_activity_bind_observable);
 
         mObsDataBinding.setLifecycleOwner(this);
 

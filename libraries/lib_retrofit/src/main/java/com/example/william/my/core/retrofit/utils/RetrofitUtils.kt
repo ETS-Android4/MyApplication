@@ -5,7 +5,7 @@ import com.example.william.my.core.retrofit.exception.ApiException
 import com.example.william.my.core.retrofit.exception.ExceptionHandler
 import com.example.william.my.core.retrofit.function.HttpResultFunction
 import com.example.william.my.core.retrofit.helper.RetrofitHelper
-import com.example.william.my.core.retrofit.observer.Observer
+import com.example.william.my.core.retrofit.observer.RetrofitObserver
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -61,7 +61,7 @@ object RetrofitUtils {
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<T>() {
+            .subscribe(object : RetrofitObserver<T>() {
                 override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }
@@ -81,7 +81,7 @@ object RetrofitUtils {
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<T>() {
+            .subscribe(object : RetrofitObserver<T>() {
                 override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }
