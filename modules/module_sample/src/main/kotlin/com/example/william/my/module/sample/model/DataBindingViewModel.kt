@@ -18,7 +18,7 @@ class DataBindingViewModel(private val articleDataSource: ArticleRepository) : V
 
     fun fetchNewData(page: Int) {
         viewModelScope.launch {
-            articleDataSource.fetchNewData(page)
+            articleDataSource.fetchNewDataByUtils(page)
         }
     }
 }

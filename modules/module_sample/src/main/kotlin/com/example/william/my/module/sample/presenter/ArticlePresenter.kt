@@ -8,7 +8,7 @@ import com.example.william.my.module.sample.contract.ArticleContract
 class ArticlePresenter(private val mDataRepository: DataRepository, private val mArticleView: ArticleContract.View) : ArticleContract.Presenter {
 
     override fun queryArticleList(page: Int) {
-        mDataRepository.queryArticleList(page, object : LoadArticleCallback {
+        mDataRepository.getArticleResponse(page, object : LoadArticleCallback {
             override fun showLoading() {
 
             }

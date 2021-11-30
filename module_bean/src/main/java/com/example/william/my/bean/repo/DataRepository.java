@@ -43,7 +43,7 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void queryArticleList(int page, LoadArticleCallback callback) {
+    public void getArticleResponse(int page, LoadArticleCallback callback) {
         RetrofitUtils.buildSingle(
                 service.getArticleResponse(page),
                 new SingleCallback<RetrofitResponse<ArticleDataBean>>() {

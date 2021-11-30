@@ -53,10 +53,7 @@ object RetrofitUtils {
     }
 
     @JvmStatic
-    fun <T> buildSingle(
-        single: Single<T>,
-        callback: ResponseCallback<T>
-    ) {
+    fun <T> buildSingle(single: Single<T>, callback: ResponseCallback<T>) {
         single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
@@ -73,10 +70,7 @@ object RetrofitUtils {
     }
 
     @JvmStatic
-    fun <T> buildLiveData(
-        single: Single<T>,
-        callback: ResponseCallback<T>
-    ) {
+    fun <T> buildLiveData(single: Single<T>, callback: ResponseCallback<T>) {
         single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
@@ -92,10 +86,7 @@ object RetrofitUtils {
             })
     }
 
-    suspend fun <T> buildFlow(
-        flow: Flow<T>,
-        callback: ResponseCallback<T>
-    ) {
+    suspend fun <T> buildFlow(flow: Flow<T>, callback: ResponseCallback<T>) {
         withContext(Dispatchers.Main) {
             flow
                 .onStart {

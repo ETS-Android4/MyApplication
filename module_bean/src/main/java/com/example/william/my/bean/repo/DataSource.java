@@ -15,6 +15,6 @@ public interface DataSource {
         void onArticleLoaded(List<ArticleDetailBean> articles);
     }
 
-    void queryArticleList(int page, LoadArticleCallback callback);
+    void getArticleResponse(int page, LoadArticleCallback callback);
 
 }

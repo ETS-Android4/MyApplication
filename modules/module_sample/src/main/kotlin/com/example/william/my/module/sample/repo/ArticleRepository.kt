@@ -18,24 +18,27 @@ class ArticleRepository {
     private val _article = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
     val article: LiveData<RetrofitResponse<ArticleDataBean>> = _article
 
-    private suspend fun getArticle(counter: Int): RetrofitResponse<ArticleDataBean> =
-        withContext(Dispatchers.IO) {
+    private suspend fun getArticle(counter: Int): RetrofitResponse<ArticleDataBean> {
+        return withContext(Dispatchers.IO) {
             val api = RetrofitUtils.buildApi(NetworkService::class.java)
             api.getArticleResponseSuspend(counter)
         }
+    }
 
-    private fun buildArticleFLow(counter: Int): Flow<RetrofitResponse<ArticleDataBean>> =
-        flow {
+    private fun buildArticleFLow(counter: Int): Flow<RetrofitResponse<ArticleDataBean>> {
+        return flow {
             val articleResponse = getArticle(counter)
             emit(articleResponse)
         }
+    }
 
-    suspend fun fetchNewData(page: Int) {
+    suspend fun fetchNewDataByUtils(page: Int) {
         RetrofitUtils.buildFlow(
             buildArticleFLow(page), LiveDataCallback(_article)
         )
     }
 
+    @Deprecated("使用工具类构建flow")
     private suspend fun fetchNewDataFLow(page: Int) {
         withContext(Dispatchers.Main) {
             buildArticleFLow(page)
