@@ -63,7 +63,7 @@ public class LiveDataViewModel extends ViewModel {
     /**
      * Expose the LiveData Comments query so the UI can observe it.
      */
-    public LiveData<RetrofitResponse<ArticleDataBean>> getArticle() {
+    public LiveData<RetrofitResponse<ArticleDataBean>> getArticleResponse() {
         return mObservableArticle;
     }
 

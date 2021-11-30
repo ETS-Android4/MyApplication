@@ -25,9 +25,11 @@ import java.util.List;
 public abstract class BaseRecyclerFragment<T> extends BaseFragment
         implements OnItemClickListener, OnItemChildClickListener, OnRefreshLoadMoreListener {
 
-    private int mPage;
+    protected int mPage;
 
-    private SmartRefreshLayout mPullRefreshLayout;
+    private SmartRefreshLayout mSmartRefresh;
+
+    private RecyclerView mRecyclerView;
 
     private BaseQuickAdapter<T, BaseViewHolder> mAdapter;
 
@@ -48,14 +50,15 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     }
 
     private void initRecyclerView(@NonNull View view) {
-        mPullRefreshLayout = view.findViewById(R.id.smartRefresh);
-        if (mPullRefreshLayout != null) {
-            mPullRefreshLayout.setEnableRefresh(canRefresh());
-            mPullRefreshLayout.setEnableLoadMore(canLoadMore());
-            mPullRefreshLayout.setOnRefreshLoadMoreListener(this);
+        mSmartRefresh = view.findViewById(R.id.smartRefresh);
+        mRecyclerView = view.findViewById(R.id.recyclerView);
+
+        if (mSmartRefresh != null) {
+            mSmartRefresh.setEnableLoadMore(false);
+            mSmartRefresh.setEnableRefresh(canRefresh());
+            mSmartRefresh.setOnRefreshLoadMoreListener(this);
         }
 
-        RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         if (mRecyclerView != null) {
             //取消recyclerview单独的滑动效果
             mRecyclerView.setNestedScrollingEnabled(true);
@@ -64,6 +67,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
             if (onScrollListener != null) {
                 mRecyclerView.addOnScrollListener(onScrollListener);
             }
+
             RecyclerView.ItemDecoration itemDecoration = getItemDecoration();
             if (itemDecoration != null) {
                 mRecyclerView.addItemDecoration(itemDecoration);
@@ -71,14 +75,14 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
 
             mAdapter = getAdapter();
 
-            RecyclerView.LayoutManager layoutManager = getLayoutManager();
-            mRecyclerView.setLayoutManager(layoutManager);
             mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(getLayoutManager());
 
             mAdapter.setOnItemClickListener(this);
             mAdapter.setOnItemChildClickListener(this);
 
             mEmptyView = getEmptyView();
+
             if (mEmptyView != null) {
                 mEmptyView.showEmptyView();
                 mEmptyView.setOnClickListener(new IEmptyView.OnEmptyClickListener() {
@@ -100,10 +104,6 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         return true;
     }
 
-    protected boolean canLoadMore() {
-        return false;
-    }
-
     protected RecyclerView.OnScrollListener getOnScrollListener() {
         return null;
     }
@@ -122,64 +122,70 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         return null;
     }
 
-    protected void queryData() {
+    public void queryData() {
 
     }
 
-    private void onDataFail(String message) {
-        mPullRefreshLayout.setEnableLoadMore(false);
+    public void scrollToTop() {
+        if (mRecyclerView != null) {
+            mRecyclerView.scrollToPosition(0);
+        }
+    }
+
+    public void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    private void onFetchDataSuccess(List<T> list) {
+    public void onDataFail() {
+        if (mAdapter.getData().isEmpty()) {
+            onEmptyView();
+        }
+        mSmartRefresh.setEnableLoadMore(false);
+    }
+
+    private void onEmptyView() {
+        if (mAdapter.getData().isEmpty()) {
+            TextView textView = new TextView(getActivity());
+            textView.setGravity(Gravity.CENTER);
+            textView.setText("无数据");
+            mAdapter.setEmptyView(textView);
+            mSmartRefresh.setEnableLoadMore(false);
+        }
+    }
+
+    private void onFetchDataSuccess(List<T> list, boolean canLoadMore) {
         if (list != null && !list.isEmpty()) {
             mAdapter.setNewInstance(list);
-            mPullRefreshLayout.setEnableLoadMore(true);
+            mSmartRefresh.setEnableLoadMore(canLoadMore);
+
+            if (mAdapter.getData().isEmpty()) {
+                onEmptyView();
+            }
         } else {
-            mPullRefreshLayout.setEnableLoadMore(false);
+            mSmartRefresh.setEnableLoadMore(false);
         }
     }
 
     private void onLoadDataSuccess(List<T> list) {
         if (list != null && !list.isEmpty()) {
             mAdapter.addData(list);
-            mPullRefreshLayout.setEnableLoadMore(true);
+            mSmartRefresh.setEnableLoadMore(true);
         } else {
-            mPullRefreshLayout.setEnableLoadMore(false);
+            mSmartRefresh.setEnableLoadMore(false);
         }
     }
 
-    protected void onEmptyView() {
-        TextView textView = new TextView(getActivity());
-        textView.setGravity(Gravity.CENTER);
-        textView.setText("无数据");
-        mAdapter.setEmptyView(textView);
-        mPullRefreshLayout.setEnableLoadMore(false);
+    public void onDataSuccess(List<T> list) {
+        onDataSuccess(list, true);
     }
 
-    protected void onDataNoMore() {
-        mPullRefreshLayout.setEnableLoadMore(false);
-        Toast.makeText(getContext(), "无更多数据", Toast.LENGTH_SHORT).show();
-    }
-
-    protected void onDataSuccess(List<T> list) {
+    public void onDataSuccess(List<T> list, boolean canLoadMore) {
         if (mPage == 0) {
-            onFetchDataSuccess(list);
-            if (mAdapter.getData().isEmpty()) {
-                showEmptyView();
-            }
+            onFetchDataSuccess(list, canLoadMore);
+            onEmptyView();
         } else {
             onLoadDataSuccess(list);
         }
-    }
-
-    protected void onDataFail() {
-        if (mPage == 0) {
-            if (mAdapter.getData().isEmpty()) {
-                showEmptyView();
-            }
-        }
-        mPullRefreshLayout.setEnableLoadMore(false);
     }
 
     protected void showEmptyView() {
@@ -198,14 +204,14 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         mPage = 0;
         queryData();
-        mPullRefreshLayout.finishRefresh(1000);
+        mSmartRefresh.finishRefresh(1000);
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         mPage++;
         queryData();
-        mPullRefreshLayout.finishLoadMore(1000);
+        mSmartRefresh.finishLoadMore(1000);
     }
 
     @Override

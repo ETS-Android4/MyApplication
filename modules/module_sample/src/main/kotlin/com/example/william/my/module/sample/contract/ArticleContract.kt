@@ -5,10 +5,10 @@ import com.example.william.my.library.presenter.IBasePresenter
 import com.example.william.my.library.view.IBaseView
 
 interface ArticleContract {
+
     interface View : IBaseView<Presenter?> {
-        fun showArticles(page: Int, article: List<ArticleDetailBean?>)
-        fun showEmptyView()
-        fun showArticlesNoMore()
+        fun showArticles(article: List<ArticleDetailBean?>)
+        fun onDataFail()
     }
 
     interface Presenter : IBasePresenter {

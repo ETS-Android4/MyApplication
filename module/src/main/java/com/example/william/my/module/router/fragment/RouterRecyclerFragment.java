@@ -29,12 +29,13 @@ public class RouterRecyclerFragment extends BaseRecyclerFragment<RouterItem> {
         return new RouterRecyclerAdapter();
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle arguments = getArguments();
         if (arguments != null) {
-            onDataSuccess(arguments.getParcelableArrayList("router"));
+            onDataSuccess(arguments.getParcelableArrayList("router"), false);
         }
     }
 
@@ -51,11 +52,6 @@ public class RouterRecyclerFragment extends BaseRecyclerFragment<RouterItem> {
 
     @Override
     protected boolean canRefresh() {
-        return false;
-    }
-
-    @Override
-    protected boolean canLoadMore() {
         return false;
     }
 }
