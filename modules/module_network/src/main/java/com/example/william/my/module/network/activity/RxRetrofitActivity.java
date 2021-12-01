@@ -5,8 +5,7 @@ import com.example.william.my.bean.base.Urls;
 import com.example.william.my.bean.data.LoginData;
 import com.example.william.my.core.retrofit.RxRetrofit;
 import com.example.william.my.core.retrofit.exception.ApiException;
-import com.example.william.my.core.retrofit.observer.RetrofitObserver;
-import com.example.william.my.core.retrofit.response.RetrofitResponse;
+import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
@@ -34,24 +33,17 @@ public class RxRetrofitActivity extends BaseResponseActivity {
                 .post()
                 .build()
                 .createSingle()
-                .subscribe(new RetrofitObserver<RetrofitResponse<LoginData>>() {
-
-                    @Override
-                    public void onLoading() {
-                        super.onLoading();
-                        showResponse("onLoading");
-                    }
-
-                    @Override
-                    public void onResponse(RetrofitResponse<LoginData> response) {
-                        String netSuccess = "Success: " + new Gson().toJson(response);
-                        showResponse(netSuccess);
-                    }
-
+                .subscribe(new RetrofitResponseCallback<LoginData>() {
                     @Override
                     public void onFailure(@NotNull ApiException e) {
                         String netError = "Error: " + e.getMessage();
                         showResponse(netError);
+                    }
+
+                    @Override
+                    public void onResponse(LoginData response) {
+                        String netSuccess = "Success: " + new Gson().toJson(response);
+                        showResponse(netSuccess);
                     }
                 });
     }

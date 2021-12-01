@@ -15,6 +15,4 @@ public interface DataSource {
         void onArticleLoaded(List<ArticleDetailBean> articles);
     }
 
-    void getArticleResponse(int page, LoadArticleCallback callback);
-
 }

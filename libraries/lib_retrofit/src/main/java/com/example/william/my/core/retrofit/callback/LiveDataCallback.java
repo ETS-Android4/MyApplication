@@ -3,6 +3,7 @@ package com.example.william.my.core.retrofit.callback;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.william.my.core.retrofit.base.ResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.status.State;
@@ -10,7 +11,7 @@ import com.example.william.my.core.retrofit.status.State;
 /**
  * 携带状态 {@link State} 的 LiveData
  */
-public class LiveDataCallback<Bean, Data> implements ResponseCallback<RetrofitResponse<Bean>> {
+public class LiveDataCallback<Bean, Data> implements ResponseCallback<Bean> {
 
     public LiveDataConvert<Bean, Data> convert;
     private final MutableLiveData<RetrofitResponse<Data>> liveData;
@@ -36,11 +37,10 @@ public class LiveDataCallback<Bean, Data> implements ResponseCallback<RetrofitRe
         this.liveData.postValue(RetrofitResponse.loading());
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void onResponse(@NonNull RetrofitResponse<Bean> data) {
+    public void onResponse(Bean bean) {
         try {
-            liveData.postValue(convert == null ? (RetrofitResponse<Data>) data : convert.onResponse(data));
+            liveData.postValue(RetrofitResponse.success(convert == null ? (Data) bean : convert.onResponse(bean)));
         } catch (Exception e) {
             liveData.postValue(RetrofitResponse.error("数据异常"));
         }
@@ -52,6 +52,6 @@ public class LiveDataCallback<Bean, Data> implements ResponseCallback<RetrofitRe
     }
 
     public interface LiveDataConvert<Bean, Data> {
-        RetrofitResponse<Data> onResponse(@NonNull RetrofitResponse<Bean> data) throws Exception;
+        Data onResponse(@NonNull Bean data) throws Exception;
     }
 }

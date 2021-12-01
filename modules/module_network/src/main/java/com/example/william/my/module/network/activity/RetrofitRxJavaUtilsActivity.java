@@ -4,15 +4,15 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.api.NetworkService;
 import com.example.william.my.bean.data.ArticleBean;
 import com.example.william.my.bean.data.ArticleDataBean;
-import com.example.william.my.core.retrofit.callback.SingleCallback;
+import com.example.william.my.core.retrofit.callback.RetrofitCallback;
+import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
-import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
-import io.reactivex.rxjava3.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see RetrofitUtils
@@ -35,62 +35,61 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
         super.setOnClick();
         b = !b;
         if (b) {
-            getBanner();
+            getArticle();
         } else {
-            getBannerList();
+            getArticleResponse();
         }
     }
 
     /**
-     * GsonConverterFactory Gson 解析 -> ArticleBean
+     * RetrofitCallback
      */
-    private void getBanner() {
-        RetrofitUtils.buildSingle(
+    private void getArticle() {
+        RetrofitUtils.buildObs(
                 service.getArticle(0),
-                new SingleCallback<ArticleBean>() {
+                new RetrofitCallback<ArticleBean>() {
 
                     @Override
                     public void onLoading() {
-                        showResponse("Loading");
+                        super.onLoading();
                     }
 
                     @Override
-                    public void onResponse(@NonNull ArticleBean response) {
-                        String netSuccess = "Article List: " + new Gson().toJson(response);
-                        showResponse(netSuccess);
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull ApiException e) {
+                    public void onFailure(@NotNull ApiException e) {
                         String netError = "Error: " + e.getMessage();
                         showResponse(netError);
+                    }
+
+                    @Override
+                    public void onResponse(ArticleBean response) {
+                        String netSuccess = "Article List: " + new Gson().toJson(response);
+                        showResponse(netSuccess);
                     }
                 });
     }
 
     /**
-     * RetrofitConverterFactory 自定义解析 -> RetrofitResponse<ArticleDataBean>
+     * RetrofitResponseCallback
      */
-    private void getBannerList() {
-        RetrofitUtils.buildSingle(
+    private void getArticleResponse() {
+        RetrofitUtils.buildObserver(
                 service.getArticleResponse(0),
-                new SingleCallback<RetrofitResponse<ArticleDataBean>>() {
-
+                new RetrofitResponseCallback<ArticleDataBean>() {
                     @Override
                     public void onLoading() {
-                        showResponse("Loading");
+                        super.onLoading();
                     }
 
                     @Override
-                    public void onResponse(@NonNull RetrofitResponse<ArticleDataBean> response) {
-                        String netSuccess = "Article List: " + new Gson().toJson(response);
-                        showResponse(netSuccess);
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull ApiException e) {
+                    public void onFailure(@NotNull ApiException e) {
                         String netError = "Error: " + e.getMessage();
                         showResponse(netError);
+                    }
+
+                    @Override
+                    public void onResponse(ArticleDataBean response) {
+                        String netSuccess = "Article List: " + new Gson().toJson(response);
+                        showResponse(netSuccess);
                     }
                 });
     }

@@ -1,11 +1,13 @@
 package com.example.william.my.core.retrofit.utils
 
-import com.example.william.my.core.retrofit.callback.ResponseCallback
+import com.example.william.my.core.retrofit.base.ResponseCallback
+import com.example.william.my.core.retrofit.callback.RetrofitCallback
+import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback
 import com.example.william.my.core.retrofit.exception.ApiException
 import com.example.william.my.core.retrofit.exception.ExceptionHandler
 import com.example.william.my.core.retrofit.function.HttpResultFunction
 import com.example.william.my.core.retrofit.helper.RetrofitHelper
-import com.example.william.my.core.retrofit.observer.RetrofitObserver
+import com.example.william.my.core.retrofit.response.RetrofitResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -53,12 +55,12 @@ object RetrofitUtils {
     }
 
     @JvmStatic
-    fun <T> buildSingle(single: Single<T>, callback: ResponseCallback<T>) {
+    fun <T> buildObs(single: Single<T>, callback: ResponseCallback<T>) {
         single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RetrofitObserver<T>() {
+            .subscribe(object : RetrofitCallback<T>() {
                 override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }
@@ -70,12 +72,29 @@ object RetrofitUtils {
     }
 
     @JvmStatic
-    fun <T> buildLiveData(single: Single<T>, callback: ResponseCallback<T>) {
+    fun <T> buildObserver(single: Single<RetrofitResponse<T>>, callback: ResponseCallback<T>) {
         single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RetrofitObserver<T>() {
+            .subscribe(object : RetrofitResponseCallback<T>() {
+                override fun onResponse(response: T) {
+                    callback.onResponse(response)
+                }
+
+                override fun onFailure(e: ApiException) {
+                    callback.onFailure(e)
+                }
+            })
+    }
+
+    @JvmStatic
+    fun <T> buildLiveData(single: Single<RetrofitResponse<T>>, callback: ResponseCallback<T>) {
+        single
+            .onErrorResumeNext(HttpResultFunction())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : RetrofitResponseCallback<T>() {
                 override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }

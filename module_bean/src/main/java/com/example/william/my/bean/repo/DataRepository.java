@@ -5,14 +5,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.william.my.bean.api.NetworkService;
+import com.example.william.my.bean.data.ArticleBean;
 import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.core.retrofit.callback.LiveDataCallback;
-import com.example.william.my.core.retrofit.callback.SingleCallback;
+import com.example.william.my.core.retrofit.callback.RetrofitCallback;
+import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * 数据仓库
@@ -42,11 +42,10 @@ public class DataRepository implements DataSource {
         service = RetrofitUtils.buildApi(NetworkService.class);
     }
 
-    @Override
-    public void getArticleResponse(int page, LoadArticleCallback callback) {
-        RetrofitUtils.buildSingle(
-                service.getArticleResponse(page),
-                new SingleCallback<RetrofitResponse<ArticleDataBean>>() {
+    public void getArticle(int page, LoadArticleCallback callback) {
+        RetrofitUtils.buildObs(
+                service.getArticle(page),
+                new RetrofitCallback<ArticleBean>() {
 
                     @Override
                     public void onLoading() {
@@ -55,13 +54,36 @@ public class DataRepository implements DataSource {
                     }
 
                     @Override
-                    public void onFailure(@NotNull ApiException e) {
+                    public void onFailure(@NonNull ApiException e) {
                         callback.onFailure(e.getMessage());
                     }
 
                     @Override
-                    public void onResponse(RetrofitResponse<ArticleDataBean> response) {
+                    public void onResponse(ArticleBean response) {
                         callback.onArticleLoaded(response.getData().getDatas());
+                    }
+                });
+    }
+
+    public void getArticleResponse(int page, LoadArticleCallback callback) {
+        RetrofitUtils.buildObserver(
+                service.getArticleResponse(page),
+                new RetrofitResponseCallback<ArticleDataBean>() {
+
+                    @Override
+                    public void onLoading() {
+                        super.onLoading();
+                        callback.showLoading();
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull ApiException e) {
+                        callback.onFailure(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(ArticleDataBean response) {
+                        callback.onArticleLoaded(response.getDatas());
                     }
                 });
     }
@@ -81,8 +103,8 @@ public class DataRepository implements DataSource {
 
         LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean> convert = new LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean>() {
             @Override
-            public RetrofitResponse<ArticleDataBean> onResponse(@NonNull RetrofitResponse<ArticleDataBean> data) throws Exception {
-                return null;
+            public ArticleDataBean onResponse(@NonNull ArticleDataBean data) throws Exception {
+                return data;
             }
         };
 

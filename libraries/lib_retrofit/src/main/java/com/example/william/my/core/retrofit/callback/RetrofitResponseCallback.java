@@ -1,8 +1,9 @@
-package com.example.william.my.core.retrofit.observer;
+package com.example.william.my.core.retrofit.callback;
 
-import com.example.william.my.core.retrofit.callback.ResponseCallback;
+import com.example.william.my.core.retrofit.base.ResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.exception.ExceptionHandler;
+import com.example.william.my.core.retrofit.response.RetrofitResponse;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
@@ -12,13 +13,13 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * 处理基本逻辑
  * onErrorResumeNext -> ApiException
  * <p>
- * io.reactivex.rxjava3.core.Observer
+ * io.reactivex.rxjava3.core.SingleObserver
  */
-public abstract class RetrofitObserver<T> implements SingleObserver<T>, ResponseCallback<T> {
+public abstract class RetrofitResponseCallback<T> implements SingleObserver<RetrofitResponse<T>>, ResponseCallback<T> {
 
     private Disposable disposable;
 
-    public RetrofitObserver() {
+    public RetrofitResponseCallback() {
         onLoading();
     }
 
@@ -27,10 +28,9 @@ public abstract class RetrofitObserver<T> implements SingleObserver<T>, Response
         disposable = d;
     }
 
-
     @Override
-    public void onSuccess(@NonNull T t) {
-        onResponse(t);
+    public void onSuccess(@NonNull RetrofitResponse<T> t) {
+        onResponse(t.getData());
 
         dispose();
     }
