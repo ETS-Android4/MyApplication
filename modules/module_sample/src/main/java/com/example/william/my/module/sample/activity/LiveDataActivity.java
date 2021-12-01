@@ -34,7 +34,7 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
         mLoadingTip.setOnReloadListener(this);
 
         mLiveDataViewModel = new ViewModelProvider(this).get(LiveDataViewModel.class);
-        mLiveDataViewModel.getArticleResponse().observe(this, new WithLoadingTipObserver<ArticleDataBean>(mLoadingTip, "getArticle") {
+        mLiveDataViewModel.getArticle().observe(this, new WithLoadingTipObserver<ArticleDataBean>(mLoadingTip) {
             @Override
             protected void onResponse(@NonNull ArticleDataBean response) {
                 showResponse(new Gson().toJson(response));
@@ -44,6 +44,6 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
 
     @Override
     public void reload() {
-        mLiveDataViewModel.request();
+        //mLiveDataViewModel.request();
     }
 }

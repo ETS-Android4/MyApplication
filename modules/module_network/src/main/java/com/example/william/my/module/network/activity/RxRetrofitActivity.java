@@ -4,13 +4,12 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.base.Urls;
 import com.example.william.my.bean.data.LoginData;
 import com.example.william.my.core.retrofit.RxRetrofit;
+import com.example.william.my.core.retrofit.callback.RetrofitCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
-import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
+import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @see RxRetrofit
@@ -21,10 +20,10 @@ public class RxRetrofitActivity extends BaseResponseActivity {
     @Override
     public void setOnClick() {
         super.setOnClick();
-        getBanner();
+        login();
     }
 
-    private void getBanner() {
+    private void login() {
         RxRetrofit
                 .<LoginData>Builder()
                 .api(Urls.Url_Login)
@@ -32,18 +31,18 @@ public class RxRetrofitActivity extends BaseResponseActivity {
                 .addParams("password", "ww123456")
                 .post()
                 .build()
-                .createSingle()
-                .subscribe(new RetrofitResponseCallback<LoginData>() {
+                .createResponseSingle()
+                .subscribe(new RetrofitCallback<RetrofitResponse<LoginData>>() {
                     @Override
-                    public void onFailure(@NotNull ApiException e) {
-                        String netError = "Error: " + e.getMessage();
-                        showResponse(netError);
+                    public void onResponse(RetrofitResponse<LoginData> response) {
+                        String netSuccess = "onResponse: " + new Gson().toJson(response);
+                        showResponse(netSuccess);
                     }
 
                     @Override
-                    public void onResponse(LoginData response) {
-                        String netSuccess = "Success: " + new Gson().toJson(response);
-                        showResponse(netSuccess);
+                    public void onFailure(ApiException e) {
+                        String netError = "onFailure: " + e.getMessage();
+                        showResponse(netError);
                     }
                 });
     }

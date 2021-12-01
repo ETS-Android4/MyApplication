@@ -66,7 +66,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
                     @Override
                     public void onSuccess(@NonNull ArticleBean articleBean) {
-                        String netSuccess = "Article List: " + new Gson().toJson(articleBean);
+                        String netSuccess = "GsonConverterFactory: " + new Gson().toJson(articleBean);
                         showResponse(netSuccess);
                     }
 
@@ -103,7 +103,7 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
 
                     @Override
                     public void onSuccess(@NonNull RetrofitResponse<ArticleDataBean> articleBean) {
-                        String netSuccess = "Article List: " + new Gson().toJson(articleBean);
+                        String netSuccess = "RetrofitConverterFactory: " + new Gson().toJson(articleBean);
                         showResponse(netSuccess);
                     }
 

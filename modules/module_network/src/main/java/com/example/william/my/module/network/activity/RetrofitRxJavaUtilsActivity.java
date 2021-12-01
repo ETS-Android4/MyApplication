@@ -55,15 +55,15 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onFailure(@NotNull ApiException e) {
-                        String netError = "Error: " + e.getMessage();
-                        showResponse(netError);
+                    public void onResponse(ArticleBean response) {
+                        String netSuccess = "RetrofitCallback: " + new Gson().toJson(response);
+                        showResponse(netSuccess);
                     }
 
                     @Override
-                    public void onResponse(ArticleBean response) {
-                        String netSuccess = "Article List: " + new Gson().toJson(response);
-                        showResponse(netSuccess);
+                    public void onFailure(@NotNull ApiException e) {
+                        String netError = "onFailure: " + e.getMessage();
+                        showResponse(netError);
                     }
                 });
     }
@@ -81,15 +81,15 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onFailure(@NotNull ApiException e) {
-                        String netError = "Error: " + e.getMessage();
-                        showResponse(netError);
+                    public void onResponse(ArticleDataBean response) {
+                        String netSuccess = "RetrofitResponseCallback: " + new Gson().toJson(response);
+                        showResponse(netSuccess);
                     }
 
                     @Override
-                    public void onResponse(ArticleDataBean response) {
-                        String netSuccess = "Article List: " + new Gson().toJson(response);
-                        showResponse(netSuccess);
+                    public void onFailure(@NotNull ApiException e) {
+                        String netError = "onFailure: " + e.getMessage();
+                        showResponse(netError);
                     }
                 });
     }

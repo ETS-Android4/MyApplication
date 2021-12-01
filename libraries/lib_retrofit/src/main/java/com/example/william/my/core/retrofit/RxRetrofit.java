@@ -44,7 +44,7 @@ public class RxRetrofit<T> {
     /**
      * RetrofitConverterFactory & RetrofitResponseBodyConverter
      */
-    public Single<RetrofitResponse<T>> createSingle() {
+    public Single<RetrofitResponse<T>> createResponseSingle() {
         Single<RetrofitResponse<JsonElement>> response = null;
         switch (builder.getMethod()) {
             case GET:

@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 
-class ArticleRepository {
+class DataBindingRepository {
 
     private val _article = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
     val article: LiveData<RetrofitResponse<ArticleDataBean>> = _article

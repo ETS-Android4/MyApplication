@@ -14,14 +14,16 @@ object ArticleBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("items")
-    fun setItemsResponse(view: RecyclerView, articleBean: RetrofitResponse<ArticleDataBean>?) {
+    fun setItemsResponse(view: RecyclerView, articleResponse: RetrofitResponse<ArticleDataBean>?) {
         val adapter = view.adapter
         if (adapter is ArticleBindAdapter) {
-            if (articleBean?.data != null) {
-                if (!articleBean.data.datas.isNullOrEmpty()) {
-                    showArticles(adapter, articleBean.data.curPage == 1, articleBean.data.datas)
-                } else {
-                    onDataNotAvailable(view.context, adapter, articleBean.data.curPage == 1)
+            articleResponse?.data?.let {
+                articleResponse.data?.datas.let { datas ->
+                    if (datas.isNullOrEmpty()) {
+                        onDataNotAvailable(view.context, adapter, articleResponse.data?.curPage == 1)
+                    } else {
+                        showArticles(adapter, articleResponse.data?.curPage == 1, datas)
+                    }
                 }
             }
         } else {

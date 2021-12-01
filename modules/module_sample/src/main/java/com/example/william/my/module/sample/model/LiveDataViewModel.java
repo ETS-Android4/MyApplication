@@ -40,22 +40,18 @@ public class LiveDataViewModel extends ViewModel {
     //    super(application);
     //}
 
-    private final DataRepository mDataRepository;
-
     private final MutableLiveData<Integer> mMutableLiveData;
 
-    private final LiveData<RetrofitResponse<ArticleDataBean>> mArticleResponse;
+    private final LiveData<RetrofitResponse<ArticleDataBean>> mArticleLiveData;
 
     public LiveDataViewModel() {
 
-        mDataRepository = DataRepository.getInstance();
-
         mMutableLiveData = new MutableLiveData<>();
-
-        mArticleResponse = Transformations.switchMap(mMutableLiveData, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
+        
+        mArticleLiveData = Transformations.switchMap(mMutableLiveData, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
             @Override
             public LiveData<RetrofitResponse<ArticleDataBean>> apply(Integer input) {
-                return mDataRepository.getArticleResponse(input);
+                return DataRepository.getInstance().getArticle(input);
             }
         });
     }
@@ -63,8 +59,8 @@ public class LiveDataViewModel extends ViewModel {
     /**
      * Expose the LiveData Comments query so the UI can observe it.
      */
-    public LiveData<RetrofitResponse<ArticleDataBean>> getArticleResponse() {
-        return mArticleResponse;
+    public LiveData<RetrofitResponse<ArticleDataBean>> getArticle() {
+        return mArticleLiveData;
     }
 
     /**

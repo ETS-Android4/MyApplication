@@ -5,10 +5,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.william.my.bean.api.NetworkService;
-import com.example.william.my.bean.data.ArticleBean;
 import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.core.retrofit.callback.LiveDataCallback;
-import com.example.william.my.core.retrofit.callback.RetrofitCallback;
 import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
@@ -43,29 +41,6 @@ public class DataRepository implements DataSource {
     }
 
     public void getArticle(int page, LoadArticleCallback callback) {
-        RetrofitUtils.buildObs(
-                service.getArticle(page),
-                new RetrofitCallback<ArticleBean>() {
-
-                    @Override
-                    public void onLoading() {
-                        super.onLoading();
-                        callback.showLoading();
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull ApiException e) {
-                        callback.onFailure(e.getMessage());
-                    }
-
-                    @Override
-                    public void onResponse(ArticleBean response) {
-                        callback.onArticleLoaded(response.getData().getDatas());
-                    }
-                });
-    }
-
-    public void getArticleResponse(int page, LoadArticleCallback callback) {
         RetrofitUtils.buildObserver(
                 service.getArticleResponse(page),
                 new RetrofitResponseCallback<ArticleDataBean>() {
@@ -88,7 +63,7 @@ public class DataRepository implements DataSource {
                 });
     }
 
-    public LiveData<RetrofitResponse<ArticleDataBean>> getArticleResponse(int page) {
+    public LiveData<RetrofitResponse<ArticleDataBean>> getArticle(int page) {
         final MutableLiveData<RetrofitResponse<ArticleDataBean>> liveData = new MutableLiveData<>();
 
         RetrofitUtils.buildLiveData(
@@ -98,7 +73,7 @@ public class DataRepository implements DataSource {
         return liveData;
     }
 
-    public LiveData<RetrofitResponse<ArticleDataBean>> getArticleResponseData(int page) {
+    public LiveData<RetrofitResponse<ArticleDataBean>> getArticleData(int page) {
         final MutableLiveData<RetrofitResponse<ArticleDataBean>> liveData = new MutableLiveData<>();
 
         LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean> convert = new LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean>() {

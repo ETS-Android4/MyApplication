@@ -9,7 +9,6 @@ import com.example.william.my.bean.repo.DataRepository
 import com.example.william.my.library.base.BaseRecyclerFragment
 import com.example.william.my.module.sample.adapter.ArticleAdapter
 import com.example.william.my.module.sample.contract.ArticleContract
-import com.example.william.my.module.sample.presenter.ArticlePresenter
 
 class MvpFragment : BaseRecyclerFragment<ArticleDetailBean?>(), ArticleContract.View {
 
@@ -28,7 +27,7 @@ class MvpFragment : BaseRecyclerFragment<ArticleDetailBean?>(), ArticleContract.
 
     override fun queryData() {
         super.queryData()
-        mPresenter.queryArticleList(mPage)
+        mPresenter.queryArticle(mPage)
     }
 
     override fun showArticles(article: List<ArticleDetailBean?>) {

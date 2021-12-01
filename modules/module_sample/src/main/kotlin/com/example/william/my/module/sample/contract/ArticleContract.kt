@@ -12,6 +12,6 @@ interface ArticleContract {
     }
 
     interface Presenter : IBasePresenter {
-        fun queryArticleList(page: Int)
+        fun queryArticle(page: Int)
     }
 }

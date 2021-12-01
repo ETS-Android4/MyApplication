@@ -3,8 +3,9 @@ package com.example.william.my.module.sample.source
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.example.william.my.bean.api.NetworkService
-import com.example.william.my.bean.data.ArticleBean
+import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.ArticleDetailBean
+import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.functions.Function
@@ -20,7 +21,7 @@ class ArticleRxPagingSource : RxPagingSource<Int, ArticleDetailBean>() {
 
         val api = RetrofitUtils.buildApi(NetworkService::class.java)
 
-        return api.getArticle(nextPageNumber)
+        return api.getArticleResponse(nextPageNumber)
             .subscribeOn(Schedulers.io())
             .map(ReturnLoadResult())
             .onErrorReturn(ReturnError())
@@ -41,8 +42,8 @@ class ArticleRxPagingSource : RxPagingSource<Int, ArticleDetailBean>() {
     }
 
     private class ReturnLoadResult :
-        Function<ArticleBean, LoadResult<Int, ArticleDetailBean>> {
-        override fun apply(t: ArticleBean): LoadResult<Int, ArticleDetailBean> {
+        Function<RetrofitResponse<ArticleDataBean>, LoadResult<Int, ArticleDetailBean>> {
+        override fun apply(t: RetrofitResponse<ArticleDataBean>): LoadResult<Int, ArticleDetailBean> {
             return LoadResult.Page(
                 data = t.data.datas,
                 prevKey = null, // Only paging forward.

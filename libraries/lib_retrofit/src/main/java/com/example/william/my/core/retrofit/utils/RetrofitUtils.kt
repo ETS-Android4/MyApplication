@@ -54,6 +54,9 @@ object RetrofitUtils {
             .create(api)
     }
 
+    /**
+     * RetrofitResponseCallback
+     */
     @JvmStatic
     fun <T> buildObs(single: Single<T>, callback: ResponseCallback<T>) {
         single
@@ -71,6 +74,9 @@ object RetrofitUtils {
             })
     }
 
+    /**
+     * RetrofitCallback
+     */
     @JvmStatic
     fun <T> buildObserver(single: Single<RetrofitResponse<T>>, callback: ResponseCallback<T>) {
         single
