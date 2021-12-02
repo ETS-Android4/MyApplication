@@ -103,7 +103,7 @@ public class ARouterPath {
         //
         public static final String Sample_MVP = "/module_sample/mvp";
         public static final String Sample_MVVM = "/module_sample/mvvm";
-        public static final String Sample_DataBing = "/module_sample/data_bing";
+        public static final String Sample_BindingAdapter = "/module_sample/data_bing";
     }
 
     public static class Lib {

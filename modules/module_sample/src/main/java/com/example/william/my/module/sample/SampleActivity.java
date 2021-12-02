@@ -31,7 +31,7 @@ public class SampleActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem(" ", " "));
         routerItems.add(new RouterItem("MVPActivity", ARouterPath.Sample.Sample_MVP));
         routerItems.add(new RouterItem("MVVMActivity", ARouterPath.Sample.Sample_MVVM));
-        routerItems.add(new RouterItem("DataBingActivity", ARouterPath.Sample.Sample_DataBing));
+        routerItems.add(new RouterItem("DataBingActivity", ARouterPath.Sample.Sample_BindingAdapter));
         return routerItems;
     }
 }

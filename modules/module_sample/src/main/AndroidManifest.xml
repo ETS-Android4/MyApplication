@@ -19,7 +19,7 @@
         <activity android:name=".activity.ResultSecondActivity" />
         <activity android:name=".activity.MvpActivity" />
         <activity android:name=".activity.MvvmActivity" />
-        <activity android:name=".activity.DataBindActivity" />
+        <activity android:name=".activity.BindingAdapterActivity" />
     </application>
 
 </manifest>

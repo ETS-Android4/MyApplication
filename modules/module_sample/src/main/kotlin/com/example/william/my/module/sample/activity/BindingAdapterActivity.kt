@@ -14,8 +14,8 @@ import com.example.william.my.module.sample.model.DataBindingViewModel
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
-@Route(path = ARouterPath.Sample.Sample_DataBing)
-class DataBindActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
+@Route(path = ARouterPath.Sample.Sample_BindingAdapter)
+class BindingAdapterActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     // Obtain ViewModel
     private val mViewModel: DataBindingViewModel by viewModels {
