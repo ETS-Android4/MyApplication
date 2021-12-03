@@ -17,7 +17,7 @@ public class SampleActivity extends BaseRecyclerActivity {
     protected ArrayList<RouterItem> buildRouter() {
         ArrayList<RouterItem> routerItems = new ArrayList<>();
         routerItems.add(new RouterItem("BindActivity", ARouterPath.Sample.Sample_Bind));
-        //routerItems.add(new RouterItem("LiveDataActivity", ARouterPath.Sample.Sample_LiveData));
+        routerItems.add(new RouterItem("LiveDataActivity", ARouterPath.Sample.Sample_LiveData));
         routerItems.add(new RouterItem("NavigationActivity", ARouterPath.Sample.Sample_Navigation));
         routerItems.add(new RouterItem("RoomActivity", ARouterPath.Sample.Sample_Room));
         routerItems.add(new RouterItem("WorkManagerActivity", ARouterPath.Sample.Sample_WorkManager));

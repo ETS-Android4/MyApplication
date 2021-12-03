@@ -40,10 +40,11 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
                 showResponse(new Gson().toJson(response));
             }
         });
+        mLiveDataViewModel.request();
     }
 
     @Override
     public void reload() {
-        //mLiveDataViewModel.request();
+        mLiveDataViewModel.request();
     }
 }

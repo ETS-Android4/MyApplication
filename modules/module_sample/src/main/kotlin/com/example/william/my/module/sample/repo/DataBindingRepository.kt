@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.william.my.bean.api.NetworkService
 import com.example.william.my.bean.data.ArticleDataBean
-import com.example.william.my.core.retrofit.callback.LiveDataCallback
 import com.example.william.my.core.retrofit.callback.LiveDataResponseCallback
 import com.example.william.my.core.retrofit.exception.ApiException
 import com.example.william.my.core.retrofit.exception.ExceptionHandler
