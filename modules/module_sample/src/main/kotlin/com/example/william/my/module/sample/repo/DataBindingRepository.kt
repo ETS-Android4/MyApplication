@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.william.my.bean.api.NetworkService
 import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.core.retrofit.callback.LiveDataCallback
+import com.example.william.my.core.retrofit.callback.LiveDataResponseCallback
 import com.example.william.my.core.retrofit.exception.ApiException
 import com.example.william.my.core.retrofit.exception.ExceptionHandler
 import com.example.william.my.core.retrofit.response.RetrofitResponse
@@ -34,7 +35,7 @@ class DataBindingRepository {
 
     suspend fun fetchNewDataByUtils(page: Int) {
         RetrofitUtils.buildFlow(
-            buildArticleFLow(page), LiveDataCallback(_article)
+            buildArticleFLow(page), LiveDataResponseCallback(_article)
         )
     }
 

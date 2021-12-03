@@ -25,7 +25,7 @@ class DataBindingViewModel(private val dataBindingDataSource: DataBindingReposit
 
 /**
  * 自定义实例，多参构造
- * Factory for [LiveDataViewModel].
+ * Factory for [DataBindingViewModel].
  */
 object DataBindingVMFactory : ViewModelProvider.Factory {
 

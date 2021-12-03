@@ -29,7 +29,7 @@ class BindingAdapterActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //setContentView(R.layout.sample_layout_recycler)
+        //setContentView(R.layout.sample_activity_data_binding)
 
         // Obtain binding object using the Data Binding library
         mBinding = DataBindingUtil.setContentView(this, R.layout.sample_activity_data_binding)
