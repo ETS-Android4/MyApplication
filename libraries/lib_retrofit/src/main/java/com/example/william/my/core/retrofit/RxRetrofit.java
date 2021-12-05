@@ -44,7 +44,7 @@ public class RxRetrofit<T> {
     /**
      * RetrofitConverterFactory & RetrofitResponseBodyConverter
      */
-    public Single<RetrofitResponse<T>> createResponseSingle() {
+    public Single<RetrofitResponse<T>> createResponse() {
         Single<RetrofitResponse<JsonElement>> response = null;
         switch (builder.getMethod()) {
             case GET:
@@ -79,9 +79,9 @@ public class RxRetrofit<T> {
 
         Single<RetrofitResponse<T>> single = response.map(new ServerResultFunction<>());
 
-        if (builder.getTransformer() != null) {
+        if (builder.getLifecycle() != null) {
             //compose 操作符 介于 map onErrorResumeNext 之间
-            single = single.compose(builder.getTransformer());
+            single = single.compose(builder.getLifecycle());
         }
 
         single = single.onErrorResumeNext(new HttpResultFunction<>());

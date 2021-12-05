@@ -66,9 +66,7 @@ public class DataRepository implements DataSource {
     public LiveData<RetrofitResponse<ArticleDataBean>> getArticle(int page) {
         final MutableLiveData<RetrofitResponse<ArticleDataBean>> liveData = new MutableLiveData<>();
 
-        RetrofitUtils.buildLiveData(
-                service.getArticleResponse(page),
-                new LiveDataCallback<>(liveData));
+        RetrofitUtils.buildLiveData(service.getArticleResponse(page), new LiveDataCallback<>(liveData));
 
         return liveData;
     }
@@ -83,9 +81,7 @@ public class DataRepository implements DataSource {
             }
         };
 
-        RetrofitUtils.buildLiveData(
-                service.getArticleResponse(page),
-                new LiveDataCallback<>(liveData, convert));
+        RetrofitUtils.buildLiveData(service.getArticleResponse(page), new LiveDataCallback<>(liveData, convert));
 
         return liveData;
     }

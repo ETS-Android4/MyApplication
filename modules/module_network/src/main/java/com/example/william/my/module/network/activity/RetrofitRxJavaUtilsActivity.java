@@ -42,6 +42,7 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
     }
 
     /**
+     * buildSingle
      * RetrofitCallback
      */
     private void getArticle() {
@@ -69,6 +70,7 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
     }
 
     /**
+     * buildResponseSingle
      * RetrofitResponseCallback
      */
     private void getArticleResponse() {

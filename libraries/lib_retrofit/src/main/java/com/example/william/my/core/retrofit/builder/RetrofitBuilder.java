@@ -36,7 +36,7 @@ public class RetrofitBuilder<T> {
 
     private MultipartBody.Builder bodyForm;
 
-    private LifecycleTransformer<RetrofitResponse<T>> transformer;
+    private LifecycleTransformer<RetrofitResponse<T>> lifecycle;
 
     public String getApi() {
         return api;
@@ -70,8 +70,8 @@ public class RetrofitBuilder<T> {
         return bodyForm;
     }
 
-    public LifecycleTransformer<RetrofitResponse<T>> getTransformer() {
-        return transformer;
+    public LifecycleTransformer<RetrofitResponse<T>> getLifecycle() {
+        return lifecycle;
     }
 
     public RetrofitBuilder<T> api(String api) {
@@ -158,7 +158,7 @@ public class RetrofitBuilder<T> {
 
 
     public RetrofitBuilder<T> setProvider(LifecycleOwner owner) {
-        this.transformer = AndroidLifecycle.createLifecycleProvider(owner).bindToLifecycle();
+        this.lifecycle = AndroidLifecycle.createLifecycleProvider(owner).bindToLifecycle();
         return this;
     }
 

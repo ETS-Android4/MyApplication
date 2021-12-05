@@ -13,6 +13,8 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * 处理基本逻辑
  * onErrorResumeNext -> ApiException
  * <p>
+ * onSuccess : RetrofitResponse<T> -> T
+ * <p>
  * io.reactivex.rxjava3.core.SingleObserver
  */
 public abstract class RetrofitResponseCallback<T> implements SingleObserver<RetrofitResponse<T>>, ResponseCallback<T> {
