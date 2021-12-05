@@ -16,10 +16,8 @@ import androidx.annotation.Nullable;
 
 import com.example.william.my.core.retrofit.R;
 
-
 public class LoadingTip extends LinearLayout implements View.OnClickListener {
 
-    private String mMessage;
     private TextView mTextView;
 
     public LoadingTip(Context context) {
@@ -44,9 +42,7 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
 
         mTextView = findViewById(R.id.loading_textView);
         mTextView.setOnClickListener(this);
-
         setLoadingTip(Status.loading);
-        setOnReloadListener(onReloadListener);
     }
 
     @Override
@@ -61,10 +57,14 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
     }
 
     public void setMessage(String message) {
-        mMessage = message;
+        mTextView.setText(message);
     }
 
     public void setLoadingTip(@NonNull Status status) {
+        this.setLoadingTip(status, null);
+    }
+
+    public void setLoadingTip(@NonNull Status status, String message) {
         switch (status) {
             case loading:
                 setVisibility(View.VISIBLE);
@@ -74,10 +74,10 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
             case empty:
                 setVisibility(View.VISIBLE);
                 setEnabled(false);
-                if (mMessage == null) {
+                if (message == null) {
                     mTextView.setText("暂无数据");
                 } else {
-                    mTextView.setText(mMessage);
+                    mTextView.setText(message);
                 }
                 break;
             case finish:
@@ -86,10 +86,10 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
             case error:
                 setVisibility(View.VISIBLE);
                 setEnabled(true);
-                if (mMessage == null) {
+                if (message == null) {
                     mTextView.setText("网络异常，请刷新页面");
                 } else {
-                    mTextView.setText(mMessage);
+                    mTextView.setText(message);
                 }
                 break;
             default:
@@ -135,7 +135,7 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
     private LoadingTipListener onReloadListener;
 
     public void setOnReloadListener(LoadingTipListener listener) {
-        this.onReloadListener = listener;
+        onReloadListener = listener;
     }
 
     public interface LoadingTipListener {

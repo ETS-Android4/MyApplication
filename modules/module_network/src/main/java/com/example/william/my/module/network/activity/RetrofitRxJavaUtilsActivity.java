@@ -45,7 +45,7 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      * RetrofitCallback
      */
     private void getArticle() {
-        RetrofitUtils.buildObs(
+        RetrofitUtils.buildSingle(
                 service.getArticle(0),
                 new RetrofitCallback<ArticleBean>() {
 
@@ -72,7 +72,7 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
      * RetrofitResponseCallback
      */
     private void getArticleResponse() {
-        RetrofitUtils.buildObserver(
+        RetrofitUtils.buildResponseSingle(
                 service.getArticleResponse(0),
                 new RetrofitResponseCallback<ArticleDataBean>() {
                     @Override

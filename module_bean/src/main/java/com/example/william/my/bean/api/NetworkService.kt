@@ -31,10 +31,6 @@ interface NetworkService {
     @GET(Urls.Url_Article)
     fun getArticle(@Path("page") page: Int): Single<ArticleBean>
 
-    /**
-     * Paging
-     * DataRepo
-     */
     //@Headers(Header.RETROFIT_CACHE_ALIVE_SECOND + ":" + 10)
     @GET(Urls.Url_Article)
     fun getArticleResponse(@Path("page") page: Int): Single<RetrofitResponse<ArticleDataBean>>
@@ -46,14 +42,12 @@ interface NetworkService {
     suspend fun login(@Query("username") username: String, @Query("password") password: String): LoginData
 
     /**
-     * Paging
-     * DataBinding
-     *      -> RetrofitUtils.buildFlow()
+     * DataBinding，Paging
      */
     // 提供挂起功能的网络请求接口
     // Interface that provides a way to make network requests with suspend functions
     @GET(Urls.Url_Article)
-    suspend fun getArticleResponseSuspend(@Path("page") page: Int): RetrofitResponse<ArticleDataBean>
+    suspend fun getArticleSuspend(@Path("page") page: Int): RetrofitResponse<ArticleDataBean>
 
     //@Multipart
     //@POST(Urls.URL_UPLOAD)

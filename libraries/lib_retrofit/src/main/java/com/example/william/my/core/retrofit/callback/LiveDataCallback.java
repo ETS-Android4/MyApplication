@@ -11,7 +11,7 @@ import com.example.william.my.core.retrofit.status.State;
 /**
  * 携带状态 {@link State} 的 LiveData
  */
-public class LiveDataCallback<Bean, Data> implements ResponseCallback<Bean> {
+public class LiveDataCallback<Bean, Data> implements ResponseCallback<RetrofitResponse<Bean>> {
 
     public LiveDataConvert<Bean, Data> convert;
     private final MutableLiveData<RetrofitResponse<Data>> liveData;
@@ -37,10 +37,11 @@ public class LiveDataCallback<Bean, Data> implements ResponseCallback<Bean> {
         this.liveData.postValue(RetrofitResponse.loading());
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public void onResponse(Bean bean) {
+    public void onResponse(@NonNull RetrofitResponse<Bean> data) {
         try {
-            liveData.postValue(RetrofitResponse.success(convert == null ? (Data) bean : convert.onResponse(bean)));
+            liveData.postValue(convert == null ? (RetrofitResponse<Data>) data : convert.onResponse(data));
         } catch (Exception e) {
             liveData.postValue(RetrofitResponse.error("数据异常"));
         }
@@ -52,6 +53,6 @@ public class LiveDataCallback<Bean, Data> implements ResponseCallback<Bean> {
     }
 
     public interface LiveDataConvert<Bean, Data> {
-        Data onResponse(@NonNull Bean data) throws Exception;
+        RetrofitResponse<Data> onResponse(@NonNull RetrofitResponse<Bean> data) throws Exception;
     }
 }

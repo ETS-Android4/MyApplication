@@ -55,10 +55,10 @@ object RetrofitUtils {
     }
 
     /**
-     * RetrofitResponseCallback
+     * RetrofitCallback
      */
     @JvmStatic
-    fun <T> buildObs(single: Single<T>, callback: ResponseCallback<T>) {
+    fun <T> buildSingle(single: Single<T>, callback: ResponseCallback<T>) {
         single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
@@ -75,10 +75,10 @@ object RetrofitUtils {
     }
 
     /**
-     * RetrofitCallback
+     * RetrofitResponseCallback
      */
     @JvmStatic
-    fun <T> buildObserver(single: Single<RetrofitResponse<T>>, callback: ResponseCallback<T>) {
+    fun <T> buildResponseSingle(single: Single<RetrofitResponse<T>>, callback: ResponseCallback<T>) {
         single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
@@ -95,12 +95,12 @@ object RetrofitUtils {
     }
 
     @JvmStatic
-    fun <T> buildLiveData(single: Single<RetrofitResponse<T>>, callback: ResponseCallback<T>) {
+    fun <T> buildLiveData(single: Single<T>, callback: ResponseCallback<T>) {
         single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RetrofitResponseCallback<T>() {
+            .subscribe(object : RetrofitCallback<T>() {
                 override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }

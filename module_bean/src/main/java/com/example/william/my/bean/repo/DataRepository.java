@@ -41,7 +41,7 @@ public class DataRepository implements DataSource {
     }
 
     public void getArticle(int page, LoadArticleCallback callback) {
-        RetrofitUtils.buildObserver(
+        RetrofitUtils.buildResponseSingle(
                 service.getArticleResponse(page),
                 new RetrofitResponseCallback<ArticleDataBean>() {
 
@@ -78,8 +78,8 @@ public class DataRepository implements DataSource {
 
         LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean> convert = new LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean>() {
             @Override
-            public ArticleDataBean onResponse(@NonNull ArticleDataBean data) throws Exception {
-                return data;
+            public RetrofitResponse<ArticleDataBean> onResponse(@NonNull RetrofitResponse<ArticleDataBean> data) throws Exception {
+                return RetrofitResponse.success(data.getData());
             }
         };
 

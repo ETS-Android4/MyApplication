@@ -14,10 +14,7 @@ import java.util.Collection;
  */
 public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResponse<T>> {
 
-    private LoadingTip mLoadingTip;
-
-    public WithLoadingTipObserver() {
-    }
+    private final LoadingTip mLoadingTip;
 
     public WithLoadingTipObserver(LoadingTip loadingTip) {
         this.mLoadingTip = loadingTip;
@@ -45,7 +42,7 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
             default:
                 if (!onFailure(tRetrofitResponse.getMessage())) {
                     if (mLoadingTip != null) {
-                        mLoadingTip.setLoadingTip(LoadingTip.Status.error);
+                        mLoadingTip.setLoadingTip(LoadingTip.Status.error, tRetrofitResponse.getMessage());
                     }
                 }
                 break;
