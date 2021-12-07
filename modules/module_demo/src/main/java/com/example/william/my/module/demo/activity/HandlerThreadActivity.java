@@ -5,8 +5,11 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
+import com.example.william.my.module.router.ARouterPath;
 
+@Route(path = ARouterPath.Demo.Demo_HandlerThread)
 public class HandlerThreadActivity extends BaseResponseActivity {
 
     private Handler mHandler;

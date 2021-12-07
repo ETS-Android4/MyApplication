@@ -13,6 +13,7 @@ public class DemoActivity extends BaseRecyclerActivity {
     protected ArrayList<RouterItem> buildRouter() {
         ArrayList<RouterItem> routerItems = new ArrayList<>();
         //
+        routerItems.add(new RouterItem(" ", ""));
         routerItems.add(new RouterItem("AppBarActivity", ARouterPath.Demo.Demo_AppBar));
         routerItems.add(new RouterItem("DialogActivity", ARouterPath.Demo.Demo_Dialog));
         routerItems.add(new RouterItem("FlexBoxActivity", ARouterPath.Demo.Demo_FlexBox));
@@ -28,16 +29,19 @@ public class DemoActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("ViewPager2Activity", ARouterPath.Demo.Demo_ViewPager2));
         routerItems.add(new RouterItem("WebViewActivity", ARouterPath.Demo.Demo_WebView));
         //
+        routerItems.add(new RouterItem(" ", ""));
         routerItems.add(new RouterItem("BlurViewActivity", ARouterPath.Demo.Demo_BlurView));
         routerItems.add(new RouterItem("IosDialogActivity", ARouterPath.Demo.Demo_IosDialog));
         routerItems.add(new RouterItem("MarqueeViewActivity", ARouterPath.Demo.Demo_MarqueeView));
         routerItems.add(new RouterItem("SpinnerActivity", ARouterPath.Demo.Demo_Spinner));
         routerItems.add(new RouterItem("TitleBarActivity", ARouterPath.Demo.Demo_TitleBar));
         //
+        routerItems.add(new RouterItem(" ", ""));
         routerItems.add(new RouterItem("AnimatorActivity", ARouterPath.Demo.Demo_Animator));
         routerItems.add(new RouterItem("AsyncTaskActivity", ARouterPath.Demo.Demo_AsyncTask));
         routerItems.add(new RouterItem("BroadcastActivity", ARouterPath.Demo.Demo_Broadcast));
         routerItems.add(new RouterItem("FloatWindowActivity", ARouterPath.Demo.Demo_FloatWindow));
+        routerItems.add(new RouterItem("HandlerThreadActivity", ARouterPath.Demo.Demo_HandlerThread));
         routerItems.add(new RouterItem("HookActivity", ARouterPath.Demo.Demo_Hook));
         routerItems.add(new RouterItem("JobSchedulerActivity", ARouterPath.Demo.Demo_JobScheduler));
         routerItems.add(new RouterItem("MessengerActivity", ARouterPath.Demo.Demo_Messenger));

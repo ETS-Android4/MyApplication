@@ -125,6 +125,7 @@ public class ARouterPath {
         public static final String Demo_AudioPlayer = "/module_demo/audio";
         public static final String Demo_Broadcast = "/module_demo/broadcast";
         public static final String Demo_FloatWindow = "/module_demo/float_window";
+        public static final String Demo_HandlerThread = "/module_demo/handler_thread";
         public static final String Demo_Hook = "/module_demo/hook";
         public static final String Demo_JobScheduler = "/module_demo/job_scheduler";
         public static final String Demo_Messenger = "/module_demo/messenger";

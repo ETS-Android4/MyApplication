@@ -56,3 +56,11 @@
         message.callback.run();
     }
 ```
+
+# Handler、Thread、HandlerThread三者的区别
+
+1. Handler：在android中负责发送和处理消息，通过它可以实现其他支线线程与主线程之间的消息通讯。
+
+2. Thread：Java进程中执行运算的最小单位，亦即执行处理机调度的基本单位。某一进程中一路单独运行的程序。
+
+3. HandlerThread：一个继承自Thread的类HandlerThread，Android中没有对Java中的Thread进行任何封装，而是提供了一个继承自Thread的类HandlerThread类，这个类对Java的Thread做了很多便利的封装。
