@@ -317,6 +317,10 @@ static def addRepos(RepositoryHandler handler) {
      * sonatype
      */
     handler.maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    /**
+     * 友盟+
+     */
+    //handler.maven { url 'https://repo1.maven.org/maven2/' }
     handler.google()
     //handler.jcenter() // Warning: this repository is going to shut down soon
     handler.mavenCentral()
