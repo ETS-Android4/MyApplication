@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.william.my.module.demo.activity.MarqueeViewActivity">
+    tools:context="com.example.william.my.module.demo.activity.custom.MarqueeViewActivity">
 
     <com.example.william.my.core.widget.marqueeview.MarqueeView
         android:id="@+id/marquee_marqueeView"

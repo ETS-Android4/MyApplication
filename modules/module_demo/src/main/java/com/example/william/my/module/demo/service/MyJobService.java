@@ -29,7 +29,7 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.william.my.module.demo.activity.JobActivity;
+import com.example.william.my.module.demo.activity.sample.JobActivity;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MyJobService extends JobService {

@@ -120,20 +120,18 @@ public class ARouterPath {
 
     public static class Demo {
         public static final String Demo = "/module_demo/demo";
+        //
         public static final String Demo_Animator = "/module_demo/animator";
         public static final String Demo_AsyncTask = "/module_demo/async";
-        public static final String Demo_AudioPlayer = "/module_demo/audio";
         public static final String Demo_Broadcast = "/module_demo/broadcast";
         public static final String Demo_FloatWindow = "/module_demo/float_window";
         public static final String Demo_HandlerThread = "/module_demo/handler_thread";
         public static final String Demo_Hook = "/module_demo/hook";
         public static final String Demo_JobScheduler = "/module_demo/job_scheduler";
         public static final String Demo_Messenger = "/module_demo/messenger";
-        public static final String Demo_NetworkStatus = "/module_demo/net_status";
         public static final String Demo_Permission = "/module_demo/permission";
         public static final String Demo_PicCrop = "/module_demo/pic_crop";
         public static final String Demo_Service = "/module_demo/service";
-        public static final String Demo_TouchEvent = "/module_demo/touch_event";
         public static final String Demo_Transition = "/module_demo/transition";
         public static final String Demo_Transparent = "/module_demo/Transparent";
         public static final String Demo_Turntable = "/module_demo/turntable";
@@ -159,6 +157,11 @@ public class ARouterPath {
         public static final String Demo_MarqueeView = "/module_demo/marquee_view";
         public static final String Demo_Spinner = "/module_demo/spinner";
         public static final String Demo_TitleBar = "/module_demo/title";
+        //
+        public static final String Demo_AudioPlayer = "/module_demo/audio";
+        public static final String Demo_ImageDecoder = "/module_demo/image_decoder";
+        public static final String Demo_NetworkStatus = "/module_demo/net_status";
+        public static final String Demo_TouchEvent = "/module_demo/touch_event";
     }
 
     public static class NeRtc {

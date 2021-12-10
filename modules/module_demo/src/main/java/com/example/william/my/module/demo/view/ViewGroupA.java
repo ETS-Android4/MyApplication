@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.william.my.module.demo.activity.TouchEventActivity;
+import com.example.william.my.module.demo.activity.other.TouchEventActivity;
 import com.example.william.my.module.utils.L;
 
 public class ViewGroupA extends ConstraintLayout {

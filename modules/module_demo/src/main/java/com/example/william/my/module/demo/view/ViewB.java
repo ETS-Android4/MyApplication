@@ -7,7 +7,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.example.william.my.module.demo.activity.TouchEventActivity;
+import com.example.william.my.module.demo.activity.other.TouchEventActivity;
 import com.example.william.my.module.utils.L;
 
 public class ViewB extends View {

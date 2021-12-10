@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="360dp"
     android:background="@color/colorPrimary"
-    tools:context=".activity.TouchEventActivity">
+    tools:context=".activity.other.TouchEventActivity">
 
     <com.example.william.my.module.demo.view.ViewB
         android:layout_width="120dp"

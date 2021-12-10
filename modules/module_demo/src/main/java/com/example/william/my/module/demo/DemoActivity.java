@@ -13,7 +13,6 @@ public class DemoActivity extends BaseRecyclerActivity {
     protected ArrayList<RouterItem> buildRouter() {
         ArrayList<RouterItem> routerItems = new ArrayList<>();
         //
-        routerItems.add(new RouterItem(" ", ""));
         routerItems.add(new RouterItem("AppBarActivity", ARouterPath.Demo.Demo_AppBar));
         routerItems.add(new RouterItem("DialogActivity", ARouterPath.Demo.Demo_Dialog));
         routerItems.add(new RouterItem("FlexBoxActivity", ARouterPath.Demo.Demo_FlexBox));
@@ -30,13 +29,6 @@ public class DemoActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("WebViewActivity", ARouterPath.Demo.Demo_WebView));
         //
         routerItems.add(new RouterItem(" ", ""));
-        routerItems.add(new RouterItem("BlurViewActivity", ARouterPath.Demo.Demo_BlurView));
-        routerItems.add(new RouterItem("IosDialogActivity", ARouterPath.Demo.Demo_IosDialog));
-        routerItems.add(new RouterItem("MarqueeViewActivity", ARouterPath.Demo.Demo_MarqueeView));
-        routerItems.add(new RouterItem("SpinnerActivity", ARouterPath.Demo.Demo_Spinner));
-        routerItems.add(new RouterItem("TitleBarActivity", ARouterPath.Demo.Demo_TitleBar));
-        //
-        routerItems.add(new RouterItem(" ", ""));
         routerItems.add(new RouterItem("AnimatorActivity", ARouterPath.Demo.Demo_Animator));
         routerItems.add(new RouterItem("AsyncTaskActivity", ARouterPath.Demo.Demo_AsyncTask));
         routerItems.add(new RouterItem("BroadcastActivity", ARouterPath.Demo.Demo_Broadcast));
@@ -45,15 +37,20 @@ public class DemoActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("HookActivity", ARouterPath.Demo.Demo_Hook));
         routerItems.add(new RouterItem("JobSchedulerActivity", ARouterPath.Demo.Demo_JobScheduler));
         routerItems.add(new RouterItem("MessengerActivity", ARouterPath.Demo.Demo_Messenger));
-        routerItems.add(new RouterItem("NetworkStatusActivity", ARouterPath.Demo.Demo_NetworkStatus));
         routerItems.add(new RouterItem("PermissionActivity", ARouterPath.Demo.Demo_Permission));
         routerItems.add(new RouterItem("PicCropActivity", ARouterPath.Demo.Demo_PicCrop));
         routerItems.add(new RouterItem("ServiceActivity", ARouterPath.Demo.Demo_Service));
-        routerItems.add(new RouterItem("TouchEventActivity", ARouterPath.Demo.Demo_TouchEvent));
         routerItems.add(new RouterItem("TransitionActivity", ARouterPath.Demo.Demo_Transition));
         routerItems.add(new RouterItem("TransparentActivity", ARouterPath.Demo.Demo_Transparent));
         routerItems.add(new RouterItem("TurntableActivity", ARouterPath.Demo.Demo_Turntable));
         routerItems.add(new RouterItem("TypefaceActivity", ARouterPath.Demo.Demo_Typeface));
+        //
+        routerItems.add(new RouterItem(" ", ""));
+        routerItems.add(new RouterItem("BlurViewActivity", ARouterPath.Demo.Demo_BlurView));
+        routerItems.add(new RouterItem("IosDialogActivity", ARouterPath.Demo.Demo_IosDialog));
+        routerItems.add(new RouterItem("MarqueeViewActivity", ARouterPath.Demo.Demo_MarqueeView));
+        routerItems.add(new RouterItem("SpinnerActivity", ARouterPath.Demo.Demo_Spinner));
+        routerItems.add(new RouterItem("TitleBarActivity", ARouterPath.Demo.Demo_TitleBar));
         return routerItems;
     }
 }

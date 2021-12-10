@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/basics_white"
-    tools:context=".activity.TransparentActivity">
+    tools:context=".activity.sample.TransparentActivity">
 
     <TextView
         android:id="@+id/transparent_response"
