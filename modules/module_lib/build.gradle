@@ -10,4 +10,5 @@ dependencies {
     implementation project(path: ':libraries:lib_infiniteimage')
     implementation project(path: ':libraries:lib_ninepatch')
     implementation project(path: ':libraries:lib_verifycode')
+    implementation project(path: ':libraries:lib_sphere_collision')
 }

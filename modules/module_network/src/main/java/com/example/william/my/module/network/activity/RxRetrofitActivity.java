@@ -2,7 +2,6 @@ package com.example.william.my.module.network.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.base.Urls;
-import com.example.william.my.bean.data.LoginData;
 import com.example.william.my.core.retrofit.RxRetrofit;
 import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;

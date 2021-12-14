@@ -36,10 +36,9 @@
 
 ### RecyclerView
 
-• 尽量减少Item布局嵌套
-• 写死ItemView的布局宽高，设置RecyclerView.setHasFixedSize(true)，避免重新计算大小
-• 在onBindViewHolder 或 getView 方法中，减少逻辑判断，减少临时对象创建。
-• 避免整个列表的数据更新，只更新受影响的布局。例如，加载更多时，不使用notifyDataSetChanged，而是使用notifyItemRangeInserted(rangeStart,rangeEnd)
+1. 尽量减少Item布局嵌套 • 写死ItemView的布局宽高，设置RecyclerView.setHasFixedSize(true)，避免重新计算大小
+2. 在onBindViewHolder 或 getView 方法中，减少逻辑判断，减少临时对象创建。
+3. 避免整个列表的数据更新，只更新受影响的布局。例如，加载更多时，不使用notifyDataSetChanged，而是使用notifyItemRangeInserted(rangeStart,rangeEnd)
 
 ## 7. 线程优化
 

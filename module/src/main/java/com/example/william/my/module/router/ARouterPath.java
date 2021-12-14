@@ -115,6 +115,7 @@ public class ARouterPath {
         public static final String Lib_Banner = "/module_lib/banner";
         public static final String Lib_InfiniteImage = "/module_lib/infinite_image";
         public static final String Lib_NinePatch = "/module_lib/nine_patch";
+        public static final String Lib_SphereCollision = "/module_lib/sphere_collision";
         public static final String Lib_VerifyCode = "/module_lib/verify_code";
     }
 

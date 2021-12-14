@@ -5,6 +5,7 @@
 • 利用 xml 实现逐帧动画。使用较少，可以用gif替代。
 
 res/drawable 下新建 xml 文件
+
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
@@ -89,6 +90,7 @@ res/drawable 下新建 xml 文件
 ## 9. 矢量图动画
 
 1. 起始动画 VectorDrawable文件 drawable/vector_drawable_satisfied.xml
+
 ```
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
@@ -114,6 +116,7 @@ res/drawable 下新建 xml 文件
 ```
 
 2. 属性动画 anim/anim_path_type.xml
+
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android"
@@ -134,6 +137,7 @@ res/drawable 下新建 xml 文件
 ```
 
 3. AnimatedVector文件 drawable/vector_animated_satisfied.xml
+
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
@@ -159,12 +163,15 @@ ordering 有两个选项：sequentially 和 together 。其中 together 为默�
 大写的字母是基于原点的坐标系(偏移量)，即绝对位置；小写字母是基于当前点坐标系(偏移量)，即相对位置。
 
 1. 移动：
-• M x,y (m dx, dy) 移动虚拟画笔到对应的点，但是并不绘制。一开始的时候默认是在(0,0)。
+
+* M x,y (m dx, dy) 移动虚拟画笔到对应的点，但是并不绘制。一开始的时候默认是在(0,0)。
 
 2. 直线：
-• L x,y (l dx, dy) 从当前点划一条直线到对应的点。
-• H x (h dx) 从当前点绘制水平线，相当于l x,0
-• V y (v dy) 从当前点绘制垂直线，相当于l 0,y
+
+* L x,y (l dx, dy) 从当前点划一条直线到对应的点。
+* H x (h dx) 从当前点绘制水平线，相当于l x,0
+* Y y (v dy) 从当前点绘制垂直线，相当于l 0,y
 
 3. 闭合
-• Z(或z) 从结束点绘制一条直线到开始点，闭合路径
+
+Z(或z) 从结束点绘制一条直线到开始点，闭合路径

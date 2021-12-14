@@ -47,7 +47,7 @@ public class LiveDataViewModel extends ViewModel {
     public LiveDataViewModel() {
 
         mMutableLiveData = new MutableLiveData<>();
-        
+
         mArticleLiveData = Transformations.switchMap(mMutableLiveData, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
             @Override
             public LiveData<RetrofitResponse<ArticleDataBean>> apply(Integer input) {

@@ -5,6 +5,7 @@
 ### 动态权限申请
 
 危险权限：
+
 ```
 <!--android.permission-group.CALENDAR-->
 <!-- 允许应用程序读取用户的日历数据。 -->
@@ -66,17 +67,19 @@
 ```
 
 申请权限：
+
 ```
 if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
     ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{Manifest.permission.CAMERA}, position);
     //Fragment.this.requestPermissions(new String[]{Manifest.permission.CAMERA}, position);
 }
 ```
+
 ## Android 7.0适配
 
 ### 应用间共享文件
 
-1. 在mainfest中添加provider
+1. 在manifest中添加provider
 
 ```
 <manifest>
@@ -98,6 +101,7 @@ if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permissi
 ```
 
 2. 配置需要获取文件的文件路径
+
 ```
 <resources>
     <paths>
@@ -112,6 +116,7 @@ if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permissi
 ```
 
 3. 获取文件Uri
+
 ```
 Uri contentUri = FileProvider.getUriForFile(getContext(), "包名.fileProvider", newFile);
 ```
@@ -121,6 +126,7 @@ Uri contentUri = FileProvider.getUriForFile(getContext(), "包名.fileProvider",
 ### 通知适配
 
 1. 创建通知渠道
+
 ```
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
     NotificationChannel notificationChannel = new NotificationChannel(
@@ -130,6 +136,7 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
     mNotificationManager.createNotificationChannel(notificationChannel);
 }
 ```
+
 2. 创建Notification
 
 ```
@@ -152,6 +159,7 @@ notificationManager.notify(notificationId, builder.build());
 ### 未知来源
 
 AndroidManifest文件中添加安装未知来源应用的权限
+
 ```
 <!-- Android8.0 允许安装未知来源 -->
 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
@@ -162,6 +170,7 @@ AndroidManifest文件中添加安装未知来源应用的权限
 ### HTTP请求限制
 
 1. 在资源文件新建xml目录，新建文件
+
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config xmlns:tools="http://schemas.android.com/tools">
@@ -172,6 +181,7 @@ AndroidManifest文件中添加安装未知来源应用的权限
 ```
 
 2. 清单文件配置
+
 ```
 <application
     android:networkSecurityConfig="@xml/network_security_config"/>
@@ -182,6 +192,7 @@ AndroidManifest文件中添加安装未知来源应用的权限
 ### 作用域存储
 
 请求旧版外部存储
+
 ```
 <manifest ... >
   <application android:requestLegacyExternalStorage="true" ...>
@@ -191,6 +202,7 @@ AndroidManifest文件中添加安装未知来源应用的权限
 ```
 
 获取相册中的图片（无法获取图片绝对路径，通过MediaStore获取图片Uri）
+
 ```
 Cursor cursor = getContentResolver().query(
         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,//查询数据库

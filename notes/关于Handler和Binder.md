@@ -14,8 +14,7 @@ Message持有Handler的引用，Handler又持有Activity的引用。解决：使
 
 ## 4. 子线程中维护的Looper，消息队列无消息的时候的处理方案是什么?有什么用？
 
-如果不处理的话，会阻塞线程，处理方案是调用Looper的quitSafely()；
-这个方法会调用MessageQueue的quit()方法，清空所有的Message，并调用nativeWake()方法唤醒之前被阻塞的nativePollOnce()，使得方法next()方法中的for循环继续执行，接下来发现Message为null后就会结束循环，Looper结束。如此便可以释放内存和线程。
+如果不处理的话，会阻塞线程，处理方案是调用Looper的quitSafely()； 这个方法会调用MessageQueue的quit()方法，清空所有的Message，并调用nativeWake()方法唤醒之前被阻塞的nativePollOnce()，使得方法next()方法中的for循环继续执行，接下来发现Message为null后就会结束循环，Looper结束。如此便可以释放内存和线程。
 
 ## 5. 既然可以存在多个Handler往MessageQueue中添加数据(发消息时各个Handler可能处于不同线程)，那它内部是如何确保线程安全的？
 
@@ -32,10 +31,7 @@ Message持有Handler的引用，Handler又持有Activity的引用。解决：使
 1. 在5s内没有响应输入的事件(例如按键，屏幕触摸等)
 2. BroadcastReceiver在10s内没有执行完毕。
 
-应用运行到虚拟机之后，首先它要执行的就是启动ActivityThread，在ActivityThread中，它又会启动它的main()函数。所以在程序运行的时候，主线程所有的代码都运行在这个Looper里面。
-也就是说应用所有生命周期的函数（包括Activity、Service所有生命周期）都运行在这个Looper里面，而且，它们都是以消息的方式存在的。
-所以在没有消息产生的时候，looper会被block(阻塞)，主线程会进入休眠，一旦有输入事件或者Looper添加消息的操作后会唤醒这个Looper，从而对事件进行响应，所以不会导致ANR。
-简单来说looper的阻塞表明没有事件输入，而ANR是由于有事件没响应导致，所以looper的死循环并不会导致应用卡死。
+应用运行到虚拟机之后，首先它要执行的就是启动ActivityThread，在ActivityThread中，它又会启动它的main()函数。所以在程序运行的时候，主线程所有的代码都运行在这个Looper里面。 也就是说应用所有生命周期的函数（包括Activity、Service所有生命周期）都运行在这个Looper里面，而且，它们都是以消息的方式存在的。 所以在没有消息产生的时候，looper会被block(阻塞)，主线程会进入休眠，一旦有输入事件或者Looper添加消息的操作后会唤醒这个Looper，从而对事件进行响应，所以不会导致ANR。 简单来说looper的阻塞表明没有事件输入，而ANR是由于有事件没响应导致，所以looper的死循环并不会导致应用卡死。
 
 ## 8. Binder有什么优势？
 
@@ -62,8 +58,7 @@ mmap优点总结：
 
 ## 11. 为什么Intent不能传递大数据？
 
-因为Intent内部使用了 Binder 通信机制，Binder 事务缓冲区限制了传递数据的大小。
-解决方案：通过 EventBus 粘性事件来传递数据。
+因为Intent内部使用了 Binder 通信机制，Binder 事务缓冲区限制了传递数据的大小。 解决方案：通过 EventBus 粘性事件来传递数据。
 
 ## 12. 描述AIDL生成的java类细节
 

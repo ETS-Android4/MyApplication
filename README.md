@@ -50,9 +50,7 @@
 
 根据Google官方推出的JetPack库写的demo。包括了ViewModel，Room，Navigation，WorkManager。
 
-1. LiveData + ViewModel + Room + Retrofit + RxJava搭建MVVM架构。
-使用 Retrofit 把返回的网络数据转化为本地数据存储在 Repository
-通过 ViewModel 把 Repository 数据与 View 绑定，使更新 ViewModel 层的数据的时候，View 层会相应的更新 UI 。
+1. LiveData + ViewModel + Room + Retrofit + RxJava搭建MVVM架构。 使用 Retrofit 把返回的网络数据转化为本地数据存储在 Repository 通过 ViewModel 把 Repository 数据与 View 绑定，使更新 ViewModel 层的数据的时候，View 层会相应的更新 UI 。
 2. ViewBinding & DataBinding
 3. Navigation导航
 4. Paging3 分页
@@ -61,8 +59,8 @@
 
 ### modules_sample
 
-1. Kolint +  Retrofit + Flow + LiveData + ViewModel
-2. Kolint +  Retrofit + Flow + LiveData + ViewModel + DataBinding
+1. Kolint + Retrofit + Flow + LiveData + ViewModel
+2. Kolint + Retrofit + Flow + LiveData + ViewModel + DataBinding
 3. MVP gooogle 官方 Demo
 4. MVVM gooogle 官方 Demo
 

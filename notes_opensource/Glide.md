@@ -13,6 +13,6 @@ https://www.cnblogs.com/Android-Alvin/p/12672294.html
 
 ## Glide 生命周期
 
-1.Glide如何绑定Activity、Fragment生命周期。
-2.Glide如何监听内存变化、网络变化。
-3.Glide如何处理请求的生命周期。
+1. Glide如何绑定Activity、Fragment生命周期。
+2. Glide如何监听内存变化、网络变化。
+3. Glide如何处理请求的生命周期。

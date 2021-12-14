@@ -1,4 +1,5 @@
 # EventBus
+
 > https://github.com/greenrobot/EventBus
 
 ## EventBus 简单使用
@@ -38,16 +39,15 @@ EventBus.getDefault().post(new MessageEvent("Activity Content"));
 
 ### EventBus的三要素
 
-Event：可以是任意类型的对象。通过事件的发布者将事件进行传递。
-Subscriber：事件订阅者，需要添加一个注解@Subscribe，并且要指定线程模型（默认为POSTING）
-Publisher：事件发布者，以在任意线程任意位置发送事件，使用EventBus的post(Object)方法调用，根据post函数参数的类型，会自动调用订阅相应类型事件的函数
+* Event：可以是任意类型的对象。通过事件的发布者将事件进行传递。
+* Subscriber：事件订阅者，需要添加一个注解@Subscribe，并且要指定线程模型（默认为POSTING）
+* Publisher：事件发布者，以在任意线程任意位置发送事件，使用EventBus的post(Object)方法调用，根据post函数参数的类型，会自动调用订阅相应类型事件的函数
 
 ### EventBus的四种ThreadMode
 
-POSTING（默认）：订阅者将在发布该事件的同一个线程中被调用
-MAIN：订阅者将在主线程中被调用
-BACKGROUND：订阅者将在后台线程中被调用
-ASYNC：订阅者将单独开辟一个线程中调用
+* POSTING（默认）：订阅者将在发布该事件的同一个线程中被调用
+* MAIN：订阅者将在主线程中被调用
+* BACKGROUND：订阅者将在后台线程中被调用 ASYNC：订阅者将单独开辟一个线程中调用
 
 ### EventBus的粘性事件StickyEvent
 

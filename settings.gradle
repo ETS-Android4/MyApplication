@@ -15,6 +15,7 @@ include ':libraries:lib_banner'
 include ':libraries:lib_bottomsheet'
 include ':libraries:lib_infiniteimage'
 include ':libraries:lib_ninepatch'
+include ':libraries:lib_sphere_collision'
 include ':libraries:lib_verifycode'
 
 include ':libraries:lib_customview'
@@ -38,4 +39,3 @@ include ':modules:module_sample'
 //        settingsDir,
 //        'flutter_module/.android/include_flutter.groovy'
 //))
-

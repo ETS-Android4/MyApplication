@@ -9,6 +9,7 @@
         <activity android:name=".activity.NinePatchActivity" />
         <activity android:name=".activity.VerifyCodeActivity" />
         <activity android:name=".activity.KeyValueActivity" />
+        <activity android:name=".activity.SphereCollisionActivity" />
         <activity android:name=".activity.ImageLoaderActivity" />
     </application>
 
