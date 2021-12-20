@@ -17,7 +17,6 @@ public class LibrariesActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("NinePatchActivity", ARouterPath.Lib.Lib_NinePatch));
         routerItems.add(new RouterItem("VerifyCodeActivity", ARouterPath.Lib.Lib_VerifyCode));
         routerItems.add(new RouterItem("SphereCollisionActivity", ARouterPath.Lib.Lib_SphereCollision));
-        routerItems.add(new RouterItem("ImageLoaderActivity", ARouterPath.Lib.Lib_ImageLoader));
         return routerItems;
     }
 }

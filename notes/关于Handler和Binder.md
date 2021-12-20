@@ -63,3 +63,12 @@ mmap优点总结：
 ## 12. 描述AIDL生成的java类细节
 
 ## 13. 四大组件底层的通信机制
+
+## 14. Binder机制原理
+
+* Android系统的Binder机制中，是有Client,Service,ServiceManager,Binder驱动程序组成的，其中Client，service，Service Manager运行在用户空间，Binder驱动程序是运行在内核空间的。 
+* Binder就是把这4种组件粘合在一块的粘合剂，其中核心的组件就是Binder驱动程序。
+* Service Manager提供辅助管理的功能，而Client和Service正是在Binder驱动程序和Service Manager提供的基础设施上实现C/S 之间的通信。
+* Binder驱动程序提供设备文件/dev/binder与用户控件进行交互，Client、Service，Service Manager通过open和ioctl文件操作相应的方法与Binder驱动程序进行通信。
+* Client和Service之间的进程间通信是通过Binder驱动程序间接实现的。
+* Binder Manager是一个守护进程，用来管理Service，并向Client提供查询Service接口的能力。

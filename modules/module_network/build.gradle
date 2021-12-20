@@ -4,7 +4,9 @@ android {
 dependencies {
     implementation project(path: ':libraries:lib_volley')
     implementation project(path: ':libraries:lib_retrofit')
+    //Glide
     implementation deps.glide
+    kapt deps.glide_compiler
     //Netty
     implementation deps.netty
     //NanoHttpD

@@ -32,10 +32,5 @@ include ':modules:module_demo'
 include ':modules:module_network'
 include ':modules:module_sample'
 
+
 //include ':modules:module_flutter'
-//include ':flutter_module'
-//setBinding(new Binding([gradle: this]))
-//evaluate(new File(
-//        settingsDir,
-//        'flutter_module/.android/include_flutter.groovy'
-//))

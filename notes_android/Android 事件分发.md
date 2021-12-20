@@ -58,8 +58,42 @@ public boolean dispatch(MotionEvent ev) {
 * ViewGroup特有方法。一般在子view中来调用的。
 * 当一个子view不希望它的父view来通过onInterceptTouchEvent方法拦截事件的时候，调用该方法即可实现事件的传递和接管
 
-## onTouch、onTouchEvent、onClick执行顺序
+## OnCLick，OnTouch，onTouchEvent
 
-* 执行顺序：onTouch —> onTouchEvent —> onClick
+### View dispatchTouchEvent()
+```
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (mOnTouchListener != null
+                && (mViewFlags & ENABLED_MASK) == ENABLED
+                && mOnTouchListener.onTouch(this, event)) {
+            return true;
+        }
+        return onTouchEvent(event);
+    }
+```
+### View onTouchEvent()
+```
+    public boolean onTouchEvent(MotionEvent event) {
+        if (clickable || (viewFlags & TOOLTIP) == TOOLTIP) {
+            switch (action) {
+                case MotionEvent.ACTION_UP:
+                
+                        performClick();
+                
+                    break;
+                case MotionEvent.ACTION_DOWN:
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    break;
+            }
+            return true;
+        }
+        return false;
+    }
+```
 
-因此onTouchListener的onTouch()方法会先触发；如果onTouch()返回false才会接着触发onTouchEvent()，同样的，内置诸如onClick()事件的实现等等都基于onTouchEvent()；如果onTouch()返回true，这些事件将不会被触发。
+* onTouch是优先于onClick执行的，并且onTouch执行了两次，一次是ACTION_DOWN，一次是ACTION_UP
+* 当onTouch事件里返回了true，onClick方法不再执行。
+* 当onTouch事件里返回了false，就一定会进入到onTouchEvent方法中。onTouchEvent方法中系统返回了true，ACTION_UP可以得到执行。

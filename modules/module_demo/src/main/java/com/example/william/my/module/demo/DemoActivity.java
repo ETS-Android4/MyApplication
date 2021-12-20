@@ -51,6 +51,9 @@ public class DemoActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("MarqueeViewActivity", ARouterPath.Demo.Demo_MarqueeView));
         routerItems.add(new RouterItem("SpinnerActivity", ARouterPath.Demo.Demo_Spinner));
         routerItems.add(new RouterItem("TitleBarActivity", ARouterPath.Demo.Demo_TitleBar));
+        //
+        routerItems.add(new RouterItem(" ", ""));
+        routerItems.add(new RouterItem("DispatchActivity", ARouterPath.Demo.Demo_Dispatch));
         return routerItems;
     }
 }

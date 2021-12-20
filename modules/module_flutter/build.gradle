@@ -2,5 +2,5 @@ android {
     resourcePrefix "flutter_"
 }
 dependencies {
-    //implementation project(path: ':flutter')
+    implementation project(path: ':flutter')
 }

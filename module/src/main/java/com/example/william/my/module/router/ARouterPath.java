@@ -59,6 +59,7 @@ public class ARouterPath {
         public static final String OpenSource_PhotoView = "/module_open/photo_view";
         public static final String OpenSource_PickerView = "/module_open/picker_view";
         public static final String OpenSource_PopWindow = "/module_open/pop_window";
+        public static final String OpenSource_ShadowLayout = "/module_open/shadow_layout";
         public static final String OpenSource_SmartRefresh = "/module_open/smart_refresh";
         public static final String OpenSource_SvagPlayer = "/module_open/svga_player";
         public static final String OpenSource_SwipeLayout = "/module_open/swipe_layout";
@@ -110,7 +111,6 @@ public class ARouterPath {
         public static final String Lib = "/module_libraries/libraries";
         //
         public static final String Lib_KeyValue = "/module_lib/key_value";
-        public static final String Lib_ImageLoader = "/module_lib/image_loader";
         //
         public static final String Lib_Banner = "/module_lib/banner";
         public static final String Lib_InfiniteImage = "/module_lib/infinite_image";
@@ -162,7 +162,7 @@ public class ARouterPath {
         public static final String Demo_AudioPlayer = "/module_demo/audio";
         public static final String Demo_ImageDecoder = "/module_demo/image_decoder";
         public static final String Demo_NetworkStatus = "/module_demo/net_status";
-        public static final String Demo_TouchEvent = "/module_demo/touch_event";
+        public static final String Demo_Dispatch = "/module_demo/dispatch";
     }
 
     public static class NeRtc {

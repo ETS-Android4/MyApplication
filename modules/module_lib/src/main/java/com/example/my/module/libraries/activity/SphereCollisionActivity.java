@@ -28,8 +28,8 @@ public class SphereCollisionActivity extends AppCompatActivity {
 
     private PoolBallView poolBall;
 
-    private final int[] mImages = {R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round,
-            R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round};
+    private final int[] mImages = {R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher,
+            R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher};
 
     private final SensorEventListener mListener = new SensorEventListener() {
 

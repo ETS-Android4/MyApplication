@@ -16,6 +16,7 @@ import com.example.william.my.core.widget.decoration.RItemDecorationTop;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.demo.R;
 import com.example.william.my.module.demo.adapter.RecyclerAdapter;
+import com.example.william.my.module.demo.cache.RecyclerCacheExtension;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.util.ArrayList;
@@ -49,12 +50,18 @@ public class RecyclerViewActivity extends BaseActivity {
         mRecyclerView.addItemDecoration(new RItemDecorationTop());
         mRecyclerView.addItemDecoration(new RItemDecorationDivider(this));
 
+        /*
+         * LinearSnapHelper,PagerSnapHelper 使RecyclerView 像ViewPager一样的效果，每次只能滑动一页
+         * LinearSnapHelper 支持快速滑动
+         * PagerSnapHelper 限制一次只能滑动一页，不能快速滑动
+         */
+        //LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+        //linearSnapHelper.attachToRecyclerView(mRecyclerView);
+
         //PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         //pagerSnapHelper.attachToRecyclerView(mRecyclerView);
 
-
-        LayoutAnimationController mController = new LayoutAnimationController(
-                AnimationUtils.loadAnimation(this, R.anim.widget_anim_item_left));
+        LayoutAnimationController mController = new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.widget_anim_item_left));
         //显示顺序：ORDER_NORMAL 顺序，ORDER_REVERSE 倒序，ORDER_RANDOM 随机
         mController.setOrder(LayoutAnimationController.ORDER_NORMAL);
         //显示间隔
@@ -69,5 +76,8 @@ public class RecyclerViewActivity extends BaseActivity {
         RecyclerAdapter mRecyclerAdapter = new RecyclerAdapter(mData);
         mRecyclerAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mRecyclerAdapter);
+
+        //设置ViewCacheExtension缓存
+        mRecyclerView.setViewCacheExtension(new RecyclerCacheExtension());
     }
 }

@@ -225,6 +225,9 @@ ext {
             //https://github.com/pinguo-zhouwei/CustomPopwindow
             popwindow            : "com.github.pinguo-zhouwei:CustomPopwindow:2.1.1",
 
+            //https://github.com/lihangleo2/ShadowLayout
+            shadowlayout         : "com.github.lihangleo2:ShadowLayout:3.2.4",
+
             //https://github.com/scwang90/SmartRefreshLayout
             smartrefresh         : "com.scwang.smart:refresh-layout-kernel:2.0.3",
             smartrefresh_header  : "com.scwang.smart:refresh-header-classics:2.0.3",

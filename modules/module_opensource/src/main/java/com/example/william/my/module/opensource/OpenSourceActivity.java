@@ -41,6 +41,7 @@ public class OpenSourceActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("PhotoViewActivity", ARouterPath.OpenSource.OpenSource_PhotoView));
         routerItems.add(new RouterItem("PickerViewActivity", ARouterPath.OpenSource.OpenSource_PickerView));
         routerItems.add(new RouterItem("PopWindowActivity", ARouterPath.OpenSource.OpenSource_PopWindow));
+        routerItems.add(new RouterItem("ShadowLayoutActivity", ARouterPath.OpenSource.OpenSource_ShadowLayout));
         routerItems.add(new RouterItem("SmartRefreshActivity", ARouterPath.OpenSource.OpenSource_SmartRefresh));
         routerItems.add(new RouterItem("SwipeLayoutActivity", ARouterPath.OpenSource.OpenSource_SwipeLayout));
         routerItems.add(new RouterItem("SvagPlayerActivity", ARouterPath.OpenSource.OpenSource_SvagPlayer));

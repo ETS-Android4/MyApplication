@@ -73,6 +73,8 @@ dependencies {
     implementation deps.pickerview
     //https://github.com/pinguo-zhouwei/CustomPopwindow
     implementation deps.popwindow
+    //https://github.com/lihangleo2/ShadowLayout
+    implementation deps.shadowlayout
     //https://github.com/scwang90/SmartRefreshLayout
     implementation deps.smartrefresh
     implementation deps.smartrefresh_header
