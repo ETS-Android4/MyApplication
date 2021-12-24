@@ -32,7 +32,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         mCaches.addCache(position, holder.itemView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(RecyclerAdapter.this, v, holder.getBindingAdapterPosition());
+            }
+        });
         ((ViewHolder) holder).textView.setText(mData.get(position));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
+        if (payloads.isEmpty()) {
+            //会执行不带payloads参数的onBindViewHolder
+            super.onBindViewHolder(holder, position, payloads);
+        } else {
+            String payload = (String) payloads.get(0);
+            ((ViewHolder) holder).textView.setText(payload);
+        }
     }
 
     @Override
@@ -59,7 +76,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public void setData(List<String> data) {
-        this.mData = data;
+    public interface OnItemClickListener {
+        void onItemClick(RecyclerAdapter adapter, View view, int position);
+    }
+
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

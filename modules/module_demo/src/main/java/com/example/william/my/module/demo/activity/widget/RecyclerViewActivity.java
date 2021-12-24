@@ -1,6 +1,7 @@
 package com.example.william.my.module.demo.activity.widget;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
@@ -16,14 +17,15 @@ import com.example.william.my.core.widget.decoration.RItemDecorationTop;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.demo.R;
 import com.example.william.my.module.demo.adapter.RecyclerAdapter;
-import com.example.william.my.module.demo.cache.RecyclerCacheExtension;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = ARouterPath.Demo.Demo_RecyclerView)
-public class RecyclerViewActivity extends BaseActivity {
+public class RecyclerViewActivity extends BaseActivity implements RecyclerAdapter.OnItemClickListener {
+
+    private RecyclerAdapter mRecyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +75,20 @@ public class RecyclerViewActivity extends BaseActivity {
             mData.add("POSITION " + i);
         }
 
-        RecyclerAdapter mRecyclerAdapter = new RecyclerAdapter(mData);
+        mRecyclerAdapter = new RecyclerAdapter(mData);
+        //设置唯一标识符，需要在setAdapter之前调用
         mRecyclerAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
+        //设置点击事件
+        mRecyclerAdapter.setOnItemClickListener(this);
+
         //设置ViewCacheExtension缓存
-        mRecyclerView.setViewCacheExtension(new RecyclerCacheExtension());
+        //mRecyclerView.setViewCacheExtension(new RecyclerCacheExtension());
+    }
+
+    @Override
+    public void onItemClick(RecyclerAdapter adapter, View view, int position) {
+        adapter.notifyItemChanged(position, "payload");
     }
 }

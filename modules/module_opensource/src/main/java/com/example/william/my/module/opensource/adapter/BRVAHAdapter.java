@@ -6,6 +6,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.module.opensource.R;
 
+import java.util.List;
+
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
@@ -25,5 +27,14 @@ public class BRVAHAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     @Override
     protected void convert(@NonNull BaseViewHolder helper, String item) {
         helper.setText(R.id.item_textView, item);
+    }
+
+    @Override
+    protected void convert(@NonNull BaseViewHolder holder, String item, @NonNull List<?> payloads) {
+        if (payloads.isEmpty()) {
+            super.convert(holder, item, payloads);
+        } else {
+            holder.setText(R.id.item_textView, payloads.get(0).toString());
+        }
     }
 }

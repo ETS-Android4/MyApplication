@@ -1,37 +1,37 @@
 package com.example.william.my.module.opensource.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.opensource.R;
 import com.example.william.my.module.opensource.adapter.BRVAHAdapter;
-import com.example.william.my.module.opensource.adapter.BRVAHAdapter2;
-import com.example.william.my.module.opensource.bean.SectionBean;
+import com.example.william.my.module.opensource.adapter.BRVAHProviderAdapter;
 import com.example.william.my.module.router.ARouterPath;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * https://github.com/scwang90/SmartRefreshLayout
  */
 @Route(path = ARouterPath.OpenSource.OpenSource_SmartRefresh)
-public class SmartRefreshActivity extends BaseActivity {
+public class SmartRefreshActivity extends BaseActivity implements OnItemClickListener, OnItemChildClickListener {
 
     private int i = 0;
 
     private BRVAHAdapter mRefreshAdapter;
-
-    private List<SectionBean> mRefreshData2;
-    private BRVAHAdapter2 mRefreshAdapter2;
+    private BRVAHProviderAdapter mBRVAHMultiAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,36 +47,43 @@ public class SmartRefreshActivity extends BaseActivity {
         mRefreshAdapter = new BRVAHAdapter();
         mRefreshRecyclerView.setAdapter(mRefreshAdapter);
 
+        //mBRVAHMultiAdapter = new BRVAHProviderAdapter();
+        //mRefreshRecyclerView.setAdapter(mBRVAHMultiAdapter);
+
         //设置布局管理器
         mRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //分组功能
-        //mRefreshData2 = new ArrayList<>();
-        //for (int i = 0; i <= 30; i++) {
-        //    mRefreshData2.add(new Section(i));
-        //}
-        //mRefreshAdapter2 = new BRVAHAdapter2(mRefreshData2);
-        //mRefreshRecyclerView.setAdapter(mRefreshAdapter2);
 
         mRefreshRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
                 i = 0;
-                //mRefreshData.clear();
                 mRefreshAdapter.setNewInstance(new ArrayList<>());
-                mRefreshAdapter.notifyDataSetChanged();
+                //mBRVAHMultiAdapter.setNewInstance(new ArrayList<>());
                 refreshlayout.finishRefresh(1000);//传入false表示刷新失败
             }
         });
         mRefreshRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
-                i++;
-                //mRefreshData.add("item : " + i);
-                mRefreshAdapter.addData("item : " + i);
-                mRefreshAdapter.notifyDataSetChanged();
+                for (int j = 0; j < 10; j++) {
+                    i = i + 1;
+                    mRefreshAdapter.addData("item : " + i);
+                    //mBRVAHMultiAdapter.addData("item : " + i);
+                }
                 refreshlayout.finishLoadMore(1000);//传入false表示加载失败
             }
         });
+        mRefreshAdapter.setOnItemClickListener(this);
+        mRefreshAdapter.setOnItemChildClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+        mRefreshAdapter.notifyItemChanged(position, "payload");
+    }
+
+    @Override
+    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+
     }
 }

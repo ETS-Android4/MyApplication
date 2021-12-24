@@ -34,11 +34,11 @@ Handler 创建后可以通过 sendMessage 将消息加入消息队列，然后 l
 
 ## Looper的工作原理
 
-* Looper.prepare()-为当前线程创建一个Looper；
-* Looper.loop()-开启消息循环，只有调用该方法，消息循环系统才会开始循环；
-* Looper.prepareMainLooper()-为主线程也就是ActivityThread创建Looper使用；
-* Looper.getMainLooper()-通过该方法可以在任意地方获取到主线程的Looper；
-* Looper.quit() Looper.quitSafely()-退出Looper，自主创建的Looper建议在不使用的时候退出
+* Looper.prepare()                      -   为当前线程创建一个Looper；
+* Looper.loop()                         -   开启消息循环，内部会调用MessageQueue中的next()方法，只有调用该方法，消息循环系统才会开始循环；
+* Looper.prepareMainLooper()            -   为主线程也就是ActivityThread创建Looper使用；
+* Looper.getMainLooper()                -   通过该方法可以在任意地方获取到主线程的Looper；
+* Looper.quit(),Looper.quitSafely()     -   退出Looper，自主创建的Looper建议在不使用的时候退出
 
 ## sendMessage 与 post 区别
 
