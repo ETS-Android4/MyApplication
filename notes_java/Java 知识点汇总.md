@@ -14,7 +14,7 @@
 ## ArrayList 与 LinkedList
 
 * ArrayList 基于数组实现，查找快：o(1)，增删慢：o(n)
-* LinkedList 基于双向链表实现，查找慢：o(n)，增删快：o(1)。 
+* LinkedList 基于双向链表实现，查找慢：o(n)，增删快：o(1)。
 * 当需要对数据进行对此访问的情况下选用ArrayList，当需要对数据进行多次增加删除修改时采用LinkedList。
 
 ## HashMap 与 HashTable
@@ -26,19 +26,54 @@
 
 ## 开启线程的三种方式
 
-## run() 和 start() 方法的区别
+1. 继承Thread类
+2. 实现Runnable接口
+3. 实现Callable接口，继承FutureTask类
+
+## run 和 start 方法的区别
+
+run方法是线程默认执行的方法，start方法是启动线程的方法。单独调用run方法是同步执行，通过start方法调用run方法是异步执行。
 
 ## 线程安全的集合
 
 1. HashTable
 2. ConcurrentHashMap
 
-## lock 和 synchronized的区别
+## synchronized 和 lock 的区别
 
-## Thread wait 和 sleep的区别
+### synchronized
 
-* sleep()方法是Thread类里面的，主要的意义就是让当前线程停止执行，让出cpu给其他的线程，但是不会释放对象锁资源以及监控的状态，当指定的时间到了之后又会自动恢复运行状态。
-* wait()方法是Object类里面的，主要的意义就是让线程放弃当前的对象的锁，进入等待此对象的等待锁定池，只有针对此对象调动notify方法后本线程才能够进入对象锁定池准备获取对象锁进入运行状态。
+1. synchronized是java的关键字
+2. synchronized无法判断锁的状态
+3. synchronized会自动释放锁
+4. A线程阻塞，B线程会一直等待
+5. 可重入，不可中断，非公平
+6. 少量代码块
+
+### lock
+
+1. lock是java类
+2. lock可以判断是否获取到锁
+3. lock需在finally中手工释放锁
+4. 可以尝试获取锁，不需要一直等待
+5. 可重入，可中断，可公平
+6. 大量代码块
+
+## sleep 和 wait 的区别
+
+### sleep
+
+1. 暂停当前线程，不释放锁
+2. Thread方法
+3. 任何场景下都可以使用
+4. 时间执行完毕才能释放
+
+### wait
+
+1. 暂停当前线程，释放锁
+2. Object方法
+3. 只能在同步代码块中使用
+4. 可以随时唤醒（notify方法）
 
 # JAVA 网络基础知识
 
