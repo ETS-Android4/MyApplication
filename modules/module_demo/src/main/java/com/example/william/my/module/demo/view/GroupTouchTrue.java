@@ -48,7 +48,7 @@ public class GroupTouchTrue extends ConstraintLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN && mContext instanceof DispatchActivity) {
-            ((DispatchActivity) mContext).showLogcat("ViewGroup    onTouchEvent                  :    true");
+            ((DispatchActivity) mContext).showLogcat("ViewGroup    onTouchEvent              :    true");
         }
         return true;
     }

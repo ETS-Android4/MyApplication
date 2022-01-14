@@ -1,5 +1,5 @@
 class Config {
-    //static gradleVersion = '7.0.3'
+    //static gradleVersion = '7.0.4'
     //https://developer.android.google.cn/studio/releases/gradle-plugin
 
     static depConfig = [

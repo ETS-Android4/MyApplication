@@ -31,7 +31,7 @@ public class ViewTouchFalse extends AppCompatTextView {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN && mContext instanceof DispatchActivity) {
-            ((DispatchActivity) mContext).showLogcat("View               dispatchTouchEvent");
+            ((DispatchActivity) mContext).showLogcat("View             dispatchTouchEvent");
         }
         return super.dispatchTouchEvent(ev);
     }
@@ -39,7 +39,7 @@ public class ViewTouchFalse extends AppCompatTextView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN && mContext instanceof DispatchActivity) {
-            ((DispatchActivity) mContext).showLogcat("View               onTouchEvent                  :    false");
+            ((DispatchActivity) mContext).showLogcat("View             onTouchEvent              :    false");
         }
         return super.onTouchEvent(event);
     }

@@ -48,7 +48,7 @@ public class GroupInterceptFalse extends ConstraintLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN && mContext instanceof DispatchActivity) {
-            ((DispatchActivity) mContext).showLogcat("ViewGroup    onTouchEvent                  :    false");
+            ((DispatchActivity) mContext).showLogcat("ViewGroup    onTouchEvent               :    false");
         }
         return super.onTouchEvent(event);
     }

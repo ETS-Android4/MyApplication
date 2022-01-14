@@ -9,7 +9,7 @@
 ## requestLayout、invalidate与postInvalidate的区别
 
 * invalidate和postInvalidate都会使view重绘（即调用onDraw方法），不同的是，invalidate是在UI线程自身中使用，而postInvalidate在非UI线程中使用
-* requestLayout：当当前布局的布局属性发生了变化的时候, 此时需要重新调用父view的onMeaure和onLayout, 来给子view重新排版布局
+* requestLayout：当当前布局的布局属性发生了变化的时候, 此时需要重新调用父view的OnMeasure和onLayout, 来给子view重新排版布局
 
 ## View的绘制流程
 

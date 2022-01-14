@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.other.DispatchActivity">
 
-    <com.example.william.my.module.demo.view.GroupInterceptFalse
+    <com.example.william.my.module.demo.view.GroupInterceptTrue
         android:id="@+id/group1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,14 +19,14 @@
             android:layout_height="48dp"
             android:layout_margin="6dp"
             android:gravity="start|center"
-            android:text="Group onInterceptTouchEvent : false"
+            android:text="Group     onInterceptTouchEvent   :   true\nView      onTouchEvent                 :   false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </com.example.william.my.module.demo.view.GroupInterceptFalse>
+    </com.example.william.my.module.demo.view.GroupInterceptTrue>
 
-    <com.example.william.my.module.demo.view.GroupInterceptTrue
+    <com.example.william.my.module.demo.view.GroupInterceptFalse
         android:id="@+id/group2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,12 +39,12 @@
             android:layout_height="48dp"
             android:layout_margin="6dp"
             android:gravity="start|center"
-            android:text="Group onInterceptTouchEvent : true"
+            android:text="Group     onInterceptTouchEvent   :   false\nView      onTouchEven                  :   false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </com.example.william.my.module.demo.view.GroupInterceptTrue>
+    </com.example.william.my.module.demo.view.GroupInterceptFalse>
 
     <com.example.william.my.module.demo.view.GroupInterceptFalse
         android:id="@+id/group3"
@@ -59,7 +59,7 @@
             android:layout_height="48dp"
             android:layout_margin="6dp"
             android:gravity="start|center"
-            android:text="View onTouchEvent : true"
+            android:text="Group     onInterceptTouchEvent   :   false\nView      onTouchEvent                :    true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,18 +79,17 @@
             android:layout_height="48dp"
             android:layout_margin="6dp"
             android:gravity="start|center"
-            android:text="Group onTouchEvent : true"
+            android:text="Group     onTouchEvent                :    true\nView      onTouchEvent                :    false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </com.example.william.my.module.demo.view.GroupTouchTrue>
 
-
     <TextView
         android:id="@+id/logcat"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="360dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
