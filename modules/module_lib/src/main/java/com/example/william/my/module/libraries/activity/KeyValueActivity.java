@@ -1,11 +1,11 @@
-package com.example.my.module.libraries.activity;
+package com.example.william.my.module.libraries.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.my.module.libraries.R;
+import com.example.william.my.module.libraries.R;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.Lib.Lib_KeyValue)

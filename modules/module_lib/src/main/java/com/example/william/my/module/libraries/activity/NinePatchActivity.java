@@ -1,4 +1,4 @@
-package com.example.my.module.libraries.activity;
+package com.example.william.my.module.libraries.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -14,7 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.my.module.libraries.R;
+import com.example.william.my.module.libraries.R;
 import com.example.william.my.bean.base.Urls;
 import com.example.william.my.core.ninepatch.NinePatchBuilder;
 import com.example.william.my.core.ninepatch.NinePatchChunk;

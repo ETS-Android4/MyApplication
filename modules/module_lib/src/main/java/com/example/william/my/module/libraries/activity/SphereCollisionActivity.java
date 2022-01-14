@@ -1,4 +1,4 @@
-package com.example.my.module.libraries.activity;
+package com.example.william.my.module.libraries.activity;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.my.module.libraries.R;
+import com.example.william.my.module.libraries.R;
 import com.example.william.my.core.spherecollision.widget.PoolBallView;
 import com.example.william.my.module.router.ARouterPath;
 

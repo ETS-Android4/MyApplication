@@ -1,5 +1,5 @@
 android {
-    //resourcePrefix "libraries"
+    //resourcePrefix "lib"
 }
 dependencies {
     //

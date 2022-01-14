@@ -17,6 +17,6 @@ class Config {
             Net       : new DepConfig(true, ":modules:module_network"),
             Sample    : new DepConfig(true, ":modules:module_sample"),
 
-            //ModuleFlutter    : new DepConfig(false, ":modules:module_flutter"),
+            //flutter    : new DepConfig(true, ":modules:module_flutter"),
     ]
 }

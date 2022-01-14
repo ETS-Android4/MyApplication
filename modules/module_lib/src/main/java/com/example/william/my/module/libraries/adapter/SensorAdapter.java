@@ -1,4 +1,4 @@
-package com.example.my.module.libraries.adapter;
+package com.example.william.my.module.libraries.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.my.module.libraries.R;
+import com.example.william.my.module.libraries.R;
 import com.example.william.my.core.banner.adapter.BannerAdapter;
 import com.example.william.my.core.banner.sensor.SensorLayout;
 

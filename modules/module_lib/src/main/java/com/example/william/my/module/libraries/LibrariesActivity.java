@@ -1,4 +1,4 @@
-package com.example.my.module.libraries;
+package com.example.william.my.module.libraries;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseRecyclerActivity;

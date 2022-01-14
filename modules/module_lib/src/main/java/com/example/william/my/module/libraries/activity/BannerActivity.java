@@ -1,12 +1,12 @@
-package com.example.my.module.libraries.activity;
+package com.example.william.my.module.libraries.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.my.module.libraries.R;
-import com.example.my.module.libraries.adapter.SensorAdapter;
+import com.example.william.my.module.libraries.R;
+import com.example.william.my.module.libraries.adapter.SensorAdapter;
 import com.example.william.my.core.banner.Banner;
 import com.example.william.my.core.banner.adapter.BannerImageAdapter;
 import com.example.william.my.core.banner.holder.BannerImageHolder;
