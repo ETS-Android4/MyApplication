@@ -165,8 +165,8 @@ public class ARouterPath {
         public static final String Demo_Dispatch = "/module_demo/dispatch";
     }
 
-    public static class NeRtc {
-        public static final String Audio = "/module_ne_rtc/audio";
+    public static class Compose {
+        public static final String Compose = "/module_compose/compose";
     }
 
     public static class Flutter {

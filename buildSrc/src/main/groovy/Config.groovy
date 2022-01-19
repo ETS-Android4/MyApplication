@@ -9,7 +9,8 @@ class Config {
             ModuleBean: new DepConfig(true, ":module_bean"),
 
             Util      : new DepConfig(true, ":modules:module_util"),
-            Opensource: new DepConfig(true, ":modules:module_opensource"),
+            Open      : new DepConfig(true, ":modules:module_opensource"),
+            QMUI      : new DepConfig(true, ":modules:module_qmui"),
 
             Lib       : new DepConfig(true, ":modules:module_lib"),
             Demo      : new DepConfig(true, ":modules:module_demo"),
@@ -17,6 +18,8 @@ class Config {
             Net       : new DepConfig(true, ":modules:module_network"),
             Sample    : new DepConfig(true, ":modules:module_sample"),
 
-            //flutter    : new DepConfig(true, ":modules:module_flutter"),
+            Compose   : new DepConfig(true, ":modules:module_compose"),
+
+            Flutter   : new DepConfig(true, ":modules:module_flutter"),
     ]
 }

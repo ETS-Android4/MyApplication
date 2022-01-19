@@ -37,7 +37,7 @@ dependencies {
     //Coroutines
     api deps.coroutines
     //LiveData
-    api deps.livedata
+    api deps.livedata_ktx
     //Android
     implementation deps.constraintlayout
 }

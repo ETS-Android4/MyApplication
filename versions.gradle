@@ -21,21 +21,21 @@
 ext.deps = [:]
 
 def build_versions = [:]
-build_versions.min_sdk = 19
-build_versions.compile_sdk = 30
-build_versions.target_sdk = 30
-build_versions.build_tools = "30.0.3"
+//build_versions.min_sdk =
+//build_versions.compile_sdk =
+//build_versions.target_sdk =
+//build_versions.build_tools =
 ext.build_versions = build_versions
 
 def versions = [:]
-versions.appcompat = "1.2.0"
-versions.constraintlayout = "2.0.4"
+//versions.appcompat =
+//versions.constraintlayout =
 ext.versions = versions
 
 
 def androidx = [:]
-androidx.appcompat = "androidx.appcompat:appcompat:1.2.0"
-androidx.constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+androidx.appcompat = "androidx.appcompat:$versions.appcompat"
+androidx.constraintlayout = "androidx.constraintlayout:$versions.constraintlayout"
 deps.androidx = androidx
 
 ext.deps = deps

@@ -50,10 +50,12 @@ public class ModuleActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem(" ", " "));
         routerItems.add(new RouterItem("NetWorkActivity", ARouterPath.NetWork.NetWork));
         routerItems.add(new RouterItem("SampleActivity", ARouterPath.Sample.Sample));
-        // 网易云信直播间
-        //routerItems.add(new RouterItem("NeRtcActivity", ARouterPath.NeRtc.Audio));
+        // Compose
+        routerItems.add(new RouterItem(" ", " "));
+        routerItems.add(new RouterItem("ComposeActivity", ARouterPath.Compose.Compose));
         // Flutter
-        //routerItems.add(new RouterItem("FlutterActivity", ARouterPath.Flutter.Flutter));
+        routerItems.add(new RouterItem(" ", " "));
+        routerItems.add(new RouterItem("FlutterActivity", ARouterPath.Flutter.Flutter));
         return routerItems;
     }
 

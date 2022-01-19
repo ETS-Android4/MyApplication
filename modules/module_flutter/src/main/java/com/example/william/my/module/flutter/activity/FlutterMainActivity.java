@@ -1,13 +1,14 @@
 package com.example.william.my.module.flutter.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.flutter.R;
 import com.example.william.my.module.router.ARouterPath;
+
+import io.flutter.embedding.android.FlutterActivity;
 
 /**
  * https://flutter.dev/docs/development/add-to-app/android/add-flutter-screen
@@ -19,14 +20,13 @@ public class FlutterMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.flutter_activity_flutter);
+        setContentView(R.layout.f_activity_flutter);
 
-        //Step 1: Add FlutterActivity to AndroidManifest.xml
-//        startActivity(
-//                FlutterActivity.createDefaultIntent(this)
-//        );
+        //Step 2: 启动FlutterActivity
+        startActivity(
+                FlutterActivity.createDefaultIntent(this)
+        );
 
-        //Step 2: Launch FlutterActivity
 //        startActivity(
 //                FlutterActivity
 //                        .withNewEngine()
@@ -34,11 +34,12 @@ public class FlutterMainActivity extends AppCompatActivity {
 //                        .build(this)
 //        );
 
-        //Step 3: (Optional) Use a cached FlutterEngine
+        //Step 3: 使用 FlutterEngine 缓存
 //        startActivity(
 //                FlutterActivity
 //                        .withCachedEngine("main")
 //                        .build(this)
 //        );
+        finish();
     }
 }
