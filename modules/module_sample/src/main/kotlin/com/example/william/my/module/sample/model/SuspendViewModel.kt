@@ -1,9 +1,6 @@
 package com.example.william.my.module.sample.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.william.my.bean.data.LoginData
 import com.example.william.my.module.sample.repo.SuspendRepository
 import com.example.william.my.module.sample.result.NetworkResult
@@ -11,7 +8,7 @@ import com.example.william.my.module.sample.utils.ThreadUtils
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
-class SuspendViewModel : ViewModel() {
+class SuspendViewModel(private val dataSource: SuspendRepository) : ViewModel() {
 
     private val _login = MutableLiveData<String>()
 
@@ -31,7 +28,7 @@ class SuspendViewModel : ViewModel() {
             // Make the network call and suspend execution until it finishes
             val result =
                 try {
-                    SuspendRepository().loginByRetrofit(username, password)
+                    dataSource.loginByRetrofit(username, password)
                 } catch (e: Exception) {
                     NetworkResult.Error(Exception("Network request failed"))
                 }
@@ -50,5 +47,19 @@ class SuspendViewModel : ViewModel() {
                 }
             }
         }
+    }
+}
+
+/**
+ * 自定义实例，多参构造
+ * Factory for [DataBindingViewModel].
+ */
+object SuspendVMFactory : ViewModelProvider.Factory {
+
+    private val dataSource = SuspendRepository()
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        @Suppress("UNCHECKED_CAST")
+        return SuspendViewModel(dataSource) as T
     }
 }

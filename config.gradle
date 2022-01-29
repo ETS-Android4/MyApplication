@@ -21,9 +21,9 @@
 ext {
     config = [
             minSdk             : 21,
-            targetSdk          : 32,
+            targetSdk          : 31,
 
-            compileSdk         : 32,
+            compileSdk         : 31,
 
             versionCode        : 1000, //4位
             versionName        : "1.0.0", //3或者4位 跟versionCode成对应关系

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 /**
  * ViewModel 应创建协程
  */
-class FlowViewModel : ViewModel() {
+class FlowViewModel(private val dataSource: FlowRepository) : ViewModel() {
 
     private val _login = MutableLiveData<String>()
 
@@ -27,7 +27,7 @@ class FlowViewModel : ViewModel() {
 
             // 使用 collect 触发流并消耗其元素
             // Trigger the flow and consume its elements using collect
-            FlowRepository().login(username, password)
+            dataSource.login(username, password)
                 .onStart {
                     // 在调用 flow 请求数据之前，做一些准备工作，例如显示正在加载数据的进度条
                 }
@@ -50,7 +50,7 @@ class FlowViewModel : ViewModel() {
      * 使用 Flow 流构造方法 -> asLiveData()
      */
     fun loginByFLow(username: String, password: String): LiveData<String> {
-        return FlowRepository().login(username, password)
+        return dataSource.login(username, password)
             .map {
                 Gson().toJson(it)
             }
@@ -62,10 +62,24 @@ class FlowViewModel : ViewModel() {
      */
     fun loginByCoroutine(username: String, password: String): LiveData<String> {
         return liveData {
-            FlowRepository().login(username, password)
+            dataSource.login(username, password)
                 .collect {
                     emit(Gson().toJson(it))
                 }
         }
+    }
+}
+
+/**
+ * 自定义实例，多参构造
+ * Factory for [DataBindingViewModel].
+ */
+object FlowVMFactory : ViewModelProvider.Factory {
+
+    private val dataSource = FlowRepository()
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        @Suppress("UNCHECKED_CAST")
+        return FlowViewModel(dataSource) as T
     }
 }

@@ -24,7 +24,7 @@ class BindingAdapterActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     private var mPage = 0;
 
-    private lateinit var mBinding: SampleActivityDataBindingBinding
+    lateinit var mBinding: SampleActivityDataBindingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

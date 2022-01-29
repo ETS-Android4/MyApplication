@@ -70,30 +70,13 @@ EventBus.getDefault().removeAllStickyEvents();
 
 ## EventBus 源码解析
 
-1. EventBus.getDefault()
-
-```
-    public static EventBus getDefault() {
-        EventBus instance = defaultInstance;
-        if (instance == null) {
-            synchronized (EventBus.class) {
-                instance = EventBus.defaultInstance;
-                if (instance == null) {
-                    instance = EventBus.defaultInstance = new EventBus();
-                }
-            }
-        }
-        return instance;
-    }
-```
-
-register()
+### 注册 -> register()
 
 ```
     public void register(Object subscriber) {
         Class<?> subscriberClass = subscriber.getClass();
         // subscriberMethods 返回的是 subscriber 这个类中所有的订阅方法
-        List<SubscriberMethod> subscriberMethods = subscriberMethodFinder.findSubscriberMethods(subscriberClass);
+        List<SubscriberMethod> subscriberMethods = subscriberMethodFinder.findSubscriberMethods(subscriberClass);   --> ①
         synchronized (this) {
             for (SubscriberMethod subscriberMethod : subscriberMethods) {
                 // 分类保存
@@ -103,7 +86,194 @@ register()
     }
 ```
 
-subscribe()
+① findSubscriberMethods()
+
+```
+    List<SubscriberMethod> findSubscriberMethods(Class<?> subscriberClass) {
+        // 先从缓存中查找是否存在订阅者的方法
+        List<SubscriberMethod> subscriberMethods = METHOD_CACHE.get(subscriberClass);
+        if (subscriberMethods != null) {
+            return subscriberMethods;
+        }
+
+        if (ignoreGeneratedIndex) {
+            // 使用反射方法拿到订阅者中的订阅方法
+            subscriberMethods = findUsingReflection(subscriberClass);   --> ②
+        } else {
+            // 使用apt处理器拿到订阅者中的订阅方法
+            subscriberMethods = findUsingInfo(subscriberClass);   --> ⑥
+        }
+        if (subscriberMethods.isEmpty()) {
+            throw new EventBusException("Subscriber " + subscriberClass + " and its super classes have no public methods with the @Subscribe annotation");
+        } else {
+            // 将查到的方法放到缓存中，以便下次使用
+            METHOD_CACHE.put(subscriberClass, subscriberMethods);
+            return subscriberMethods;
+        }
+    }
+```
+
+② findUsingReflection()
+
+```
+    private List<SubscriberMethod> findUsingReflection(Class<?> subscriberClass) {
+        FindState findState = prepareFindState();   --> ③
+        findState.initForSubscriber(subscriberClass);
+        while (findState.clazz != null) {
+            findUsingReflectionInSingleClass(findState);    --> ⑤
+            findState.moveToSuperclass();
+        }
+        return getMethodsAndRelease(findState);   --> ④
+    }
+```
+
+③ prepareFindState()
+
+```
+    /**
+     * 准备一个FindState 来装订阅者的方法
+     */
+    private FindState prepareFindState() {
+        synchronized (FIND_STATE_POOL) {
+            for (int i = 0; i < POOL_SIZE; i++) {
+                FindState state = FIND_STATE_POOL[i];
+                if (state != null) {
+                    // 得到一个state并将相应的引用变量置为null
+                    FIND_STATE_POOL[i] = null;
+                    return state;
+                }
+            }
+        }
+        return new FindState();
+    }
+```
+
+④ getMethodsAndRelease()
+
+```
+    /**
+     * 将FindState 里面的方法放入subscriberMethods list中，并将FindState 放回去继续使用
+     */
+    private List<SubscriberMethod> getMethodsAndRelease(FindState findState) {
+        List<SubscriberMethod> subscriberMethods = new ArrayList<>(findState.subscriberMethods);
+        findState.recycle();
+        synchronized (FIND_STATE_POOL) {
+            for (int i = 0; i < POOL_SIZE; i++) {
+                if (FIND_STATE_POOL[i] == null) {
+                    // 将FindState 里面的方法放入subscriberMethods list中，并将FindState 放回去继续使用
+                    FIND_STATE_POOL[i] = findState;
+                    break;
+                }
+            }
+        }
+        return subscriberMethods;
+    }
+```
+
+⑤ findUsingReflectionInSingleClass
+
+```
+    private void findUsingReflectionInSingleClass(FindState findState) {
+        Method[] methods;
+        try {
+            // 通过反射方法得到订阅者类里面的订阅方法
+            // This is faster than getMethods, especially when subscribers are fat classes like Activities
+            methods = findState.clazz.getDeclaredMethods();
+        } catch (Throwable th) {
+            // Workaround for java.lang.NoClassDefFoundError, see https://github.com/greenrobot/EventBus/issues/149
+            try {
+                methods = findState.clazz.getMethods();
+            } catch (LinkageError error) { // super class of NoClassDefFoundError to be a bit more broad...
+                String msg = "Could not inspect methods of " + findState.clazz.getName();
+                if (ignoreGeneratedIndex) {
+                    msg += ". Please consider using EventBus annotation processor to avoid reflection.";
+                } else {
+                    msg += ". Please make this class visible to EventBus annotation processor to avoid reflection.";
+                }
+                throw new EventBusException(msg, error);
+            }
+            findState.skipSuperClasses = true;
+        }
+        for (Method method : methods) {
+            int modifiers = method.getModifiers();
+            //  判断方法是不是public
+            if ((modifiers & Modifier.PUBLIC) != 0 && (modifiers & MODIFIERS_IGNORE) == 0) {
+                Class<?>[] parameterTypes = method.getParameterTypes();
+                // 方法参数是不是一个
+                if (parameterTypes.length == 1) {
+                    Subscribe subscribeAnnotation = method.getAnnotation(Subscribe.class);
+                    // 是否有注解
+                    if (subscribeAnnotation != null) {
+                        Class<?> eventType = parameterTypes[0];
+                        // 检查方法和参数（事件）类型是否合法
+                        if (findState.checkAdd(method, eventType)) {
+                            ThreadMode threadMode = subscribeAnnotation.threadMode();
+                            // 都满足将方法加入findState中
+                            findState.subscriberMethods.add(new SubscriberMethod(method, eventType, threadMode,
+                                    subscribeAnnotation.priority(), subscribeAnnotation.sticky()));
+                        }
+                    }
+                } else if (strictMethodVerification && method.isAnnotationPresent(Subscribe.class)) {
+                    String methodName = method.getDeclaringClass().getName() + "." + method.getName();
+                    throw new EventBusException("@Subscribe method " + methodName +
+                            "must have exactly 1 parameter but has " + parameterTypes.length);
+                }
+            } else if (strictMethodVerification && method.isAnnotationPresent(Subscribe.class)) {
+                String methodName = method.getDeclaringClass().getName() + "." + method.getName();
+                throw new EventBusException(methodName +
+                        " is a illegal @Subscribe method: must be public, non-static, and non-abstract");
+            }
+        }
+    }
+```
+
+⑥ findUsingInfo()
+
+```
+    private List<SubscriberMethod> findUsingInfo(Class<?> subscriberClass) {
+        FindState findState = prepareFindState();
+        findState.initForSubscriber(subscriberClass);
+        while (findState.clazz != null) {
+            findState.subscriberInfo = getSubscriberInfo(findState);
+            if (findState.subscriberInfo != null) {
+                SubscriberMethod[] array = findState.subscriberInfo.getSubscriberMethods();
+                for (SubscriberMethod subscriberMethod : array) {
+                    if (findState.checkAdd(subscriberMethod.method, subscriberMethod.eventType)) {
+                        findState.subscriberMethods.add(subscriberMethod);
+                    }
+                }
+            } else {
+                findUsingReflectionInSingleClass(findState);
+            }
+            findState.moveToSuperclass();
+        }
+        return getMethodsAndRelease(findState);
+    }
+```
+
+getSubscriberInfo()
+
+```
+    private SubscriberInfo getSubscriberInfo(FindState findState) {
+        if (findState.subscriberInfo != null && findState.subscriberInfo.getSuperSubscriberInfo() != null) {
+            SubscriberInfo superclassInfo = findState.subscriberInfo.getSuperSubscriberInfo();
+            if (findState.clazz == superclassInfo.getSubscriberClass()) {
+                return superclassInfo;
+            }
+        }
+        if (subscriberInfoIndexes != null) {
+            for (SubscriberInfoIndex index : subscriberInfoIndexes) {
+                SubscriberInfo info = index.getSubscriberInfo(findState.clazz);
+                if (info != null) {
+                    return info;
+                }
+            }
+        }
+        return null;
+    }
+```
+
+### 订阅 -> subscribe()
 
 ```
     private void subscribe(Object subscriber, SubscriberMethod subscriberMethod) {
@@ -163,29 +333,46 @@ subscribe()
     }
 ```
 
-post()
+### 发送
+
+postToSubscription()
 
 ```
-    public void post(Object event) {
-        // currentPostingThreadState 是 ThreadLocal
-        PostingThreadState postingState = currentPostingThreadState.get();
-        List<Object> eventQueue = postingState.eventQueue;
-        eventQueue.add(event);
-
-        if (!postingState.isPosting) {
-            postingState.isMainThread = isMainThread();
-            postingState.isPosting = true;
-            if (postingState.canceled) {
-                throw new EventBusException("Internal error. Abort state was not reset");
-            }
-            try {
-                while (!eventQueue.isEmpty()) {
-                    postSingleEvent(eventQueue.remove(0), postingState);
+    /**
+     * 通过threadMode来确认使用哪个线程执行订阅者的订阅函数
+     */
+    private void postToSubscription(Subscription subscription, Object event, boolean isMainThread) {
+        switch (subscription.subscriberMethod.threadMode) {
+            case POSTING:
+                invokeSubscriber(subscription, event);
+                break;
+            case MAIN:
+                if (isMainThread) {
+                    invokeSubscriber(subscription, event);
+                } else {
+                    mainThreadPoster.enqueue(subscription, event);
                 }
-            } finally {
-                postingState.isPosting = false;
-                postingState.isMainThread = false;
-            }
+                break;
+            case MAIN_ORDERED:
+                if (mainThreadPoster != null) {
+                    mainThreadPoster.enqueue(subscription, event);
+                } else {
+                    // temporary: technically not correct as poster not decoupled from subscriber
+                    invokeSubscriber(subscription, event);
+                }
+                break;
+            case BACKGROUND:
+                if (isMainThread) {
+                    backgroundPoster.enqueue(subscription, event);
+                } else {
+                    invokeSubscriber(subscription, event);
+                }
+                break;
+            case ASYNC:
+                asyncPoster.enqueue(subscription, event);
+                break;
+            default:
+                throw new IllegalStateException("Unknown thread mode: " + subscription.subscriberMethod.threadMode);
         }
     }
 ```

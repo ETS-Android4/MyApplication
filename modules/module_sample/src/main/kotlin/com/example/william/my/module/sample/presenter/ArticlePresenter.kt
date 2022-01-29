@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.fragment
+package com.example.william.my.module.sample.presenter
 
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.bean.repo.DataRepository

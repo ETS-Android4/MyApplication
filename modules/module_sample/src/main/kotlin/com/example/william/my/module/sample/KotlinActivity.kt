@@ -18,7 +18,7 @@ class KotlinActivity : BaseActivity() {
     private var string: String? = null
     private var arrayList: ArrayList<String>? = null
 
-    private lateinit var mBinding: SampleLayoutResponseBinding
+    lateinit var mBinding: SampleLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

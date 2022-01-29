@@ -1,7 +1,9 @@
 package com.example.william.my.module.sample.repo
 
 import com.example.william.my.bean.api.NetworkService
+import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.LoginData
+import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.sample.utils.ThreadUtils
 import com.example.william.my.module.utils.L

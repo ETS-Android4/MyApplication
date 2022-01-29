@@ -33,8 +33,7 @@ include ':modules:module_demo'
 include ':modules:module_network'
 include ':modules:module_sample'
 
-include ':modules:module_compose'
-
+//include ':modules:module_compose'
 
 setBinding(new Binding([gradle: this]))
 evaluate(new File(

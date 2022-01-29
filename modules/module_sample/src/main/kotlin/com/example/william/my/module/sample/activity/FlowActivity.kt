@@ -1,12 +1,13 @@
 package com.example.william.my.module.sample.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.databinding.SampleLayoutResponseBinding
+import com.example.william.my.module.sample.model.FlowVMFactory
 import com.example.william.my.module.sample.model.FlowViewModel
 
 /**
@@ -16,7 +17,9 @@ import com.example.william.my.module.sample.model.FlowViewModel
 @Route(path = ARouterPath.Sample.Sample_FLow)
 class FlowActivity : BaseActivity() {
 
-    lateinit var mViewModel: FlowViewModel
+    private val mViewModel: FlowViewModel by viewModels{
+        FlowVMFactory
+    }
 
     private val username = "17778060027"
     private val password = "ww123456"
@@ -29,7 +32,6 @@ class FlowActivity : BaseActivity() {
         mBinding = SampleLayoutResponseBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        mViewModel = ViewModelProvider(this)[FlowViewModel::class.java]
         login()
     }
 

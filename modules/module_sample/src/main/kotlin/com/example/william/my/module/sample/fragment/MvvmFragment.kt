@@ -9,10 +9,14 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.base.BaseRecyclerFragment
 import com.example.william.my.module.sample.adapter.ArticleAdapter
+import com.example.william.my.module.sample.model.ArticleVMFactory
+import com.example.william.my.module.sample.model.LiveDataViewModel
 
 class MvvmFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
 
-    private val mArticleViewModel: ArticleViewModel by viewModels()
+    private val mLiveDataViewModel: LiveDataViewModel by viewModels {
+        ArticleVMFactory
+    }
 
     override fun getAdapter(): BaseQuickAdapter<ArticleDetailBean?, BaseViewHolder> {
         return ArticleAdapter()
@@ -21,14 +25,18 @@ class MvvmFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mArticleViewModel.article.observe(viewLifecycleOwner, Observer { articles ->
+        observeViewModel()
+        queryData()
+    }
+
+    private fun observeViewModel() {
+        mLiveDataViewModel.article.observe(viewLifecycleOwner, Observer { articles ->
             onDataSuccess(articles?.data?.datas)
         })
-        queryData()
     }
 
     override fun queryData() {
         super.queryData()
-        mArticleViewModel.queryArticle(mPage)
+        mLiveDataViewModel.queryArticle(mPage)
     }
 }
