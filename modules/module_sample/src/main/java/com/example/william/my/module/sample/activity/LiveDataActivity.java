@@ -9,7 +9,7 @@ import com.example.william.my.core.retrofit.loading.LoadingTip;
 import com.example.william.my.core.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.sample.model.LiveDataViewModel;
+import com.example.william.my.module.sample.model.ArticleViewModel;
 import com.google.gson.Gson;
 
 /**
@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 public class LiveDataActivity extends BaseResponseActivity implements LoadingTip.LoadingTipListener {
 
     private LoadingTip mLoadingTip;
-    private LiveDataViewModel mLiveDataViewModel;
+    private ArticleViewModel mArticleViewModel;
 
     @Override
     public void initView() {
@@ -33,18 +33,18 @@ public class LiveDataActivity extends BaseResponseActivity implements LoadingTip
         mLoadingTip = LoadingTip.addLoadingTipWithTopBar(this);
         mLoadingTip.setOnReloadListener(this);
 
-        mLiveDataViewModel = new ViewModelProvider(this).get(LiveDataViewModel.class);
-        mLiveDataViewModel.getArticle().observe(this, new WithLoadingTipObserver<ArticleDataBean>(mLoadingTip, "getArticle") {
+        mArticleViewModel = new ViewModelProvider(this).get(ArticleViewModel.class);
+        mArticleViewModel.getArticle().observe(this, new WithLoadingTipObserver<ArticleDataBean>(mLoadingTip, "getArticle") {
             @Override
             protected void onResponse(@NonNull ArticleDataBean response) {
                 showResponse(new Gson().toJson(response));
             }
         });
-        mLiveDataViewModel.request();
+        mArticleViewModel.request();
     }
 
     @Override
     public void reload() {
-        mLiveDataViewModel.request();
+        mArticleViewModel.request();
     }
 }

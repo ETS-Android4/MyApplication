@@ -18,7 +18,7 @@ class Config {
             Net       : new DepConfig(true, ":modules:module_network"),
             Sample    : new DepConfig(true, ":modules:module_sample"),
 
-            //Compose   : new DepConfig(true, ":modules:module_compose"),
+            Compose   : new DepConfig(true, ":modules:module_compose"),
 
             Flutter   : new DepConfig(true, ":modules:module_flutter"),
     ]

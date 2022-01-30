@@ -34,26 +34,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    if (deps.gradle == "3.6.0") {
-        viewBinding {
-            enabled = true
-        }
-        dataBinding {
-            enabled = true
-        }
-    } else {
-        //gradle:4.1.0+
-        buildFeatures {
-            viewBinding = true
-            dataBinding = true
-        }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
     }
     sourceSets {
         main {
@@ -63,6 +46,13 @@ android {
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
             }
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 kapt {

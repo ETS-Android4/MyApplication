@@ -61,6 +61,7 @@ public boolean dispatch(MotionEvent ev) {
 ## OnCLick，OnTouch，onTouchEvent
 
 ### View dispatchTouchEvent()
+
 ```
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (mOnTouchListener != null
@@ -71,7 +72,9 @@ public boolean dispatch(MotionEvent ev) {
         return onTouchEvent(event);
     }
 ```
+
 ### View onTouchEvent()
+
 ```
     public boolean onTouchEvent(MotionEvent event) {
         if (clickable || (viewFlags & TOOLTIP) == TOOLTIP) {

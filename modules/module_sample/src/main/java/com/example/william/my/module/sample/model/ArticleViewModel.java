@@ -33,7 +33,7 @@ import kotlinx.coroutines.CoroutineScope;
  * 2.LiveData在实体类里可以通知指定某个字段的数据更新.
  * 3.MutableLiveData则是完全是整个实体类或者数据类型变化后才通知.不会细节到某个字段
  */
-public class LiveDataViewModel extends ViewModel {
+public class ArticleViewModel extends ViewModel {
 //public class ArticleViewModel extends AndroidViewModel {
 
     //public ArticleViewModel(@NonNull Application application) {
@@ -44,7 +44,7 @@ public class LiveDataViewModel extends ViewModel {
 
     private final LiveData<RetrofitResponse<ArticleDataBean>> mArticleLiveData;
 
-    public LiveDataViewModel() {
+    public ArticleViewModel() {
 
         mMutableLiveData = new MutableLiveData<>();
 

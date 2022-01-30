@@ -76,7 +76,7 @@ res/drawable 下新建 xml 文件
 
 ## 5. 揭露动画
 
-# 6. 转场动画（Android 5.0）
+## 6. 转场动画（Android 5.0）
 
 1. explode（分解）
 2. slide（滑动）
