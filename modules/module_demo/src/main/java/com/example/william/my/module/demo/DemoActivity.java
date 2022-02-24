@@ -40,6 +40,7 @@ public class DemoActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("PermissionActivity", ARouterPath.Demo.Demo_Permission));
         routerItems.add(new RouterItem("PicCropActivity", ARouterPath.Demo.Demo_PicCrop));
         routerItems.add(new RouterItem("ServiceActivity", ARouterPath.Demo.Demo_Service));
+        routerItems.add(new RouterItem("ShapeableActivity", ARouterPath.Demo.Demo_Shapeable));
         routerItems.add(new RouterItem("TransitionActivity", ARouterPath.Demo.Demo_Transition));
         routerItems.add(new RouterItem("TransparentActivity", ARouterPath.Demo.Demo_Transparent));
         routerItems.add(new RouterItem("TurntableActivity", ARouterPath.Demo.Demo_Turntable));

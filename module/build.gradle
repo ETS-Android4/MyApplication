@@ -7,8 +7,6 @@ android {
     defaultConfig {
         minSdk config.minSdk
         targetSdk config.targetSdk
-        versionCode 1
-        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -34,9 +32,4 @@ dependencies {
     //EventBus
     implementation deps.eventbus
     annotationProcessor deps.eventbus_processor
-    //LiveBus
-    implementation deps.livebus
-    //SmartEventBus
-    implementation deps.smartbus
-    annotationProcessor deps.smartbus_compiler
 }

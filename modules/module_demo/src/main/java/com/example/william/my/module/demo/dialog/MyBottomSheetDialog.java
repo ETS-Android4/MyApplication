@@ -17,7 +17,9 @@ import com.example.william.my.module.fragment.PrimaryVarFragment;
 import java.util.Arrays;
 
 /**
+ * https://blog.csdn.net/jhl122/article/details/86526710
  * https://github.com/JiangAndroidwork/BottomSheetViewPager
+ * BottomSheetDialogFragment + ViewPager + Fragment + RecyclerView，BottomSheetBehavior 内的 ViewPager下的 RecyclerView 无法响应滑动
  */
 public class MyBottomSheetDialog extends ViewPagerBottomSheetDialogFragment {
 

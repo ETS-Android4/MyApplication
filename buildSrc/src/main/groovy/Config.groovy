@@ -1,5 +1,5 @@
 class Config {
-    //static gradleVersion = '7.0.4'
+    //static gradleVersion = ''
     //https://developer.android.google.cn/studio/releases/gradle-plugin
 
     static depConfig = [
@@ -9,8 +9,7 @@ class Config {
             ModuleBean: new DepConfig(true, ":module_bean"),
 
             Util      : new DepConfig(true, ":modules:module_util"),
-            Open      : new DepConfig(true, ":modules:module_opensource"),
-            QMUI      : new DepConfig(true, ":modules:module_qmui"),
+            Open      : new DepConfig(true, ":modules:module_open"),
 
             Lib       : new DepConfig(true, ":modules:module_lib"),
             Demo      : new DepConfig(true, ":modules:module_demo"),
@@ -18,8 +17,8 @@ class Config {
             Net       : new DepConfig(true, ":modules:module_network"),
             Sample    : new DepConfig(true, ":modules:module_sample"),
 
-            Compose   : new DepConfig(true, ":modules:module_compose"),
+            //Compose   : new DepConfig(true, ":modules:module_compose"),
 
-            Flutter   : new DepConfig(true, ":modules:module_flutter"),
+            //Flutter   : new DepConfig(true, ":modules:module_flutter"),
     ]
 }

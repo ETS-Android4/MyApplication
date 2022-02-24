@@ -26,9 +26,9 @@ class SuspendViewModel(private val dataSource: SuspendRepository) : ViewModel() 
 
             // 执行网络请求 并 挂起，直至请求完成
             // Make the network call and suspend execution until it finishes
-            val result =
+            val result: NetworkResult<LoginData> =
                 try {
-                    dataSource.loginByRetrofit(username, password)
+                    dataSource.login(username, password)
                 } catch (e: Exception) {
                     NetworkResult.Error(Exception("Network request failed"))
                 }
@@ -52,7 +52,7 @@ class SuspendViewModel(private val dataSource: SuspendRepository) : ViewModel() 
 
 /**
  * 自定义实例，多参构造
- * Factory for [DataBindingViewModel].
+ * Factory for [SuspendViewModel].
  */
 object SuspendVMFactory : ViewModelProvider.Factory {
 

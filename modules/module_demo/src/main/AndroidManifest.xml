@@ -3,6 +3,9 @@
     package="com.example.william.my.module.demo">
 
     <application>
+        <activity
+            android:name=".activity.sample.ShapeableActivity"
+            android:exported="false" />
         <activity android:name=".activity.other.DispatchActivity" />
         <activity android:name=".DemoActivity" />
         <activity android:name=".activity.sample.AnimatorActivity" />

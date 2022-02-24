@@ -1,9 +1,7 @@
 package com.example.william.my.module.sample.repo
 
 import com.example.william.my.bean.api.NetworkService
-import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.LoginData
-import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.sample.utils.ThreadUtils
 import com.example.william.my.module.utils.L
@@ -11,17 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 class FlowRepository {
-
-    private fun loginFlow(username: String, password: String): Flow<LoginData> {
-        return flow {
-            //打印线程
-            ThreadUtils.isMainThread("ArticleRepository getArticle")
-
-            val api = RetrofitUtils.buildApi(NetworkService::class.java)
-            val loginData = api.login(username, password)
-            emit(loginData) // Emits the result of the request to the flow 向数据流发送请求结果
-        }
-    }
 
     /**
      * 返回流上的数据转换。
@@ -31,8 +18,17 @@ class FlowRepository {
      * the current value emitted by the flow at that point in time.
      */
     fun login(username: String, password: String): Flow<LoginData> {
-        return loginFlow(username, password)
-            // 中间运算符 map 转换数据
+        val flow = flow {
+            //打印线程
+            ThreadUtils.isMainThread("FlowRepository getArticle")
+
+            val api = RetrofitUtils.buildApi(NetworkService::class.java)
+            val loginData = api.login(username, password)
+            emit(loginData) // Emits the result of the request to the flow 向数据流发送请求结果
+        }
+
+        // 中间运算符 map 转换数据
+        return flow
             .map { loginData ->
                 loginData
             }

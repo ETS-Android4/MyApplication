@@ -2,9 +2,7 @@ package com.example.william.my.module.sample.repo
 
 import com.example.william.my.bean.api.NetworkService
 import com.example.william.my.bean.base.Urls
-import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.LoginData
-import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.sample.result.NetworkResult
 import com.example.william.my.module.sample.utils.ThreadUtils
@@ -24,11 +22,11 @@ import java.net.URL
  */
 class SuspendRepository {
 
-    suspend fun loginByRetrofit(username: String, password: String): NetworkResult<LoginData> {
+    suspend fun login(username: String, password: String): NetworkResult<LoginData> {
 
         return withContext(Dispatchers.IO) {
             //打印线程
-            ThreadUtils.isMainThread("FlowRepository loginByRetrofit")
+            ThreadUtils.isMainThread("SuspendRepository loginByRetrofit")
 
             val api = RetrofitUtils.buildApi(NetworkService::class.java)
             val loginData = api.login(username, password)
@@ -82,10 +80,5 @@ class SuspendRepository {
         reader.close()
         val response = msg.toString()
         return Gson().fromJson(response, LoginData::class.java)
-    }
-
-    suspend fun getArticle(page: Int): RetrofitResponse<ArticleDataBean> {
-        val api = RetrofitUtils.buildApi(NetworkService::class.java)
-        return api.getArticleSuspend(page)
     }
 }

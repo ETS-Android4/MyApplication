@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.william.my.module.demo.activity.custom.BlurViewActivity">
+    tools:context=".activity.custom.BlurViewActivity">
 
     <com.example.william.my.core.widget.blur.BlurView
         android:id="@+id/blur_blurView"

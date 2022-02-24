@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * 无线滚动的ImageView
+ * 无限滚动的ImageView
  */
 public class InfiniteImageView extends View {
 

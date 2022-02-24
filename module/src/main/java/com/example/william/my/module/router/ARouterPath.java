@@ -41,8 +41,6 @@ public class ARouterPath {
         public static final String OpenSource_MMKV = "/module_open/mmkv";
         public static final String OpenSource_GreenDao = "/module_open/green_dao";
         public static final String OpenSource_EventBus = "/module_open/event_bus";
-        public static final String OpenSource_LiveEventBus = "/module_open/live_event_bus";
-        public static final String OpenSource_SmartEventBus = "/module_open/smart_event_bus";
         //
         public static final String OpenSource_Background = "/module_open/background";
         public static final String OpenSource_BadgeView = "/module_open/badge_view";
@@ -91,7 +89,7 @@ public class ARouterPath {
         public static final String Sample = "/module_sample/sample";
         public static final String Sample_Bind = "/module_sample/bing";
         public static final String Sample_Navigation = "/module_sample/navigation";
-        public static final String Sample_LiveData = "/module_sample/live_data";
+        public static final String Sample_ViewModel = "/module_sample/view_mode";
         public static final String Sample_Room = "/module_sample/room";
         public static final String Sample_WorkManager = "/module_sample/work_manager";
         //
@@ -134,6 +132,7 @@ public class ARouterPath {
         public static final String Demo_Permission = "/module_demo/permission";
         public static final String Demo_PicCrop = "/module_demo/pic_crop";
         public static final String Demo_Service = "/module_demo/service";
+        public static final String Demo_Shapeable = "/module_demo/shapeable";
         public static final String Demo_Transition = "/module_demo/transition";
         public static final String Demo_Transparent = "/module_demo/Transparent";
         public static final String Demo_Turntable = "/module_demo/turntable";

@@ -20,10 +20,10 @@
  **/
 ext {
     config = [
-            minSdk             : 21,
-            targetSdk          : 31,
+            minSdk             : 19,
+            targetSdk          : 32,
 
-            compileSdk         : 31,
+            compileSdk         : 32,
 
             versionCode        : 1000, //4位
             versionName        : "1.0.0", //3或者4位 跟versionCode成对应关系
@@ -35,31 +35,31 @@ ext {
             //https://mvnrepository.com
             //https://developer.android.google.cn/jetpack/androidx/versions
 
-            coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2",
+            coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0",
             //https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
 
-            material             : "com.google.android.material:material:1.3.0",
+            material             : "com.google.android.material:material:1.5.0",
             //https://mvnrepository.com/artifact/com.google.android.material/material
             flexbox              : "com.google.android:flexbox:2.0.1",
             //https://mvnrepository.com/artifact/com.google.android/flexbox
 
-            core                 : "androidx.core:core:1.6.0",
-            core_ktx             : "androidx.core:core-ktx:1.6.0",
+            core                 : "androidx.core:core:1.7.0",
+            core_ktx             : "androidx.core:core-ktx:1.7.0",
             //https://developer.android.google.cn/jetpack/androidx/releases/core
 
             multidex             : "androidx.multidex:multidex:2.0.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/multidex
-            appcompat            : "androidx.appcompat:appcompat:1.3.1",
+            appcompat            : "androidx.appcompat:appcompat:1.4.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/appcompat
-            constraintlayout     : "androidx.constraintlayout:constraintlayout:2.1.1",
+            constraintlayout     : "androidx.constraintlayout:constraintlayout:2.1.3",
             //https://developer.android.google.cn/jetpack/androidx/releases/constraintlayout
             recyclerview         : "androidx.recyclerview:recyclerview:1.2.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/recyclerview
             viewpager2           : "androidx.viewpager2:viewpager2:1.0.0",
             //https://developer.android.google.cn/jetpack/androidx/releases/viewpager2
-            coordinatorlayout    : "androidx.coordinatorlayout:coordinatorlayout:1.1.0",
+            coordinatorlayout    : "androidx.coordinatorlayout:coordinatorlayout:1.2.0",
             //https://developer.android.google.cn/jetpack/androidx/releases/coordinatorlayout
-            localbroadcast       : "androidx.localbroadcastmanager:localbroadcastmanager:1.0.0",
+            localbroadcast       : "androidx.localbroadcastmanager:localbroadcastmanager:1.1.0",
             //https://developer.android.google.cn/jetpack/androidx/releases/localbroadcastmanager
 
             //架构组件
@@ -67,46 +67,46 @@ ext {
             datastore_pre        : "androidx.datastore:datastore-preferences:1.0.0",
             //https://developer.android.google.cn/jetpack/androidx/releases/datastore
 
-            paging               : "androidx.paging:paging-runtime:3.0.1",
-            paging_rxjava3       : "androidx.paging:paging-rxjava3:3.0.1",
+            paging               : "androidx.paging:paging-runtime:3.1.0",
+            paging_rxjava3       : "androidx.paging:paging-rxjava3:3.1.0",
             //https://developer.android.google.cn/jetpack/androidx/releases/paging
 
-            work                 : "androidx.work:work-runtime:2.7.0",
+            work                 : "androidx.work:work-runtime:2.7.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/work
 
             //导航组件
-            navigation           : "androidx.navigation:navigation-fragment:2.3.5",
-            navigation_ui        : "androidx.navigation:navigation-ui:2.3.5",
+            navigation           : "androidx.navigation:navigation-fragment:2.4.1",
+            navigation_ui        : "androidx.navigation:navigation-ui:2.4.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/navigation
 
             //应用数据
-            room                 : "androidx.room:room-runtime:2.3.0",
-            room_rxjava3         : "androidx.room:room-rxjava3:2.3.0",
-            room_compiler        : "androidx.room:room-compiler:2.3.0",
+            room                 : "androidx.room:room-runtime:2.4.1",
+            room_rxjava3         : "androidx.room:room-rxjava3:2.4.1",
+            room_compiler        : "androidx.room:room-compiler:2.4.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/room
 
             activity             : "androidx.activity:activity:1.4.0",
             activity_ktx         : "androidx.activity:activity-ktx:1.4.0",
             //https://developer.android.google.cn/jetpack/androidx/releases/activity
 
-            fragment             : "androidx.fragment:fragment:1.3.6",
-            fragment_ktx         : "androidx.fragment:fragment-ktx:1.3.6",
+            fragment             : "androidx.fragment:fragment:1.4.1",
+            fragment_ktx         : "androidx.fragment:fragment-ktx:1.4.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/fragment
 
-            //livedata             : "androidx.lifecycle:lifecycle-livedata:2.4.0",
-            livedata_ktx         : "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0",
-            //viewmodel            : "androidx.lifecycle:lifecycle-viewmodel:2.4.0",
-            viewmodel_ktx        : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0",
+            //livedata             : "androidx.lifecycle:lifecycle-livedata:2.4.1",
+            livedata_ktx         : "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1",
+            //viewmodel            : "androidx.lifecycle:lifecycle-viewmodel:2.4.1",
+            viewmodel_ktx        : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1",
 
             // ViewModel utilities for Compose
-            //lifecycle_compose    : "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0",
+            //lifecycle_compose    : "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1",
             // Lifecycles only (without ViewModel or LiveData)
-            //lifecycle            : "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0",
+            //lifecycle            : "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
 
-            gson                 : "com.google.code.gson:gson:2.8.7",
-            protobuf             : "com.google.protobuf:protobuf-javalite:3.17.3",
-            protobuf_protoc      : "com.google.protobuf:protoc:3.17.3",
+            gson                 : "com.google.code.gson:gson:2.9.0",
+            protobuf             : "com.google.protobuf:protobuf-javalite:3.19.4",
+            protobuf_protoc      : "com.google.protobuf:protoc:3.19.4",
             protobuf_javalite    : "com.google.protobuf:protoc-gen-javalite:3.0.0",
 
             volley               : "com.android.volley:volley:1.2.1",
@@ -119,7 +119,7 @@ ext {
             arouter_compiler     : "com.alibaba:arouter-compiler:1.5.2",
 
             //https://github.com/ReactiveX/RxJava
-            rxjava               : "io.reactivex.rxjava3:rxjava:3.0.13",
+            rxjava               : "io.reactivex.rxjava3:rxjava:3.1.3",
 
             //https://github.com/ReactiveX/RxAndroid
             rxandroid            : "io.reactivex.rxjava3:rxandroid:3.0.0",
@@ -128,36 +128,29 @@ ext {
             rxlifecycle          : "com.trello.rxlifecycle4:rxlifecycle-android-lifecycle:4.0.2",
 
             //https://github.com/uber/AutoDispose
-            autodispose          : "com.uber.autodispose2:autodispose-androidx-lifecycle:2.0.0",
+            autodispose          : "com.uber.autodispose2:autodispose-androidx-lifecycle:2.1.1",
 
             //https://github.com/greenrobot/EventBus
-            eventbus             : "org.greenrobot:eventbus:3.2.0",
-            eventbus_processor   : "org.greenrobot:eventbus-annotation-processor:3.2.0",
-
-            //https://github.com/JeremyLiao/LiveEventBus
-            livebus              : "io.github.jeremyliao:live-event-bus-x:1.8.0",
-
-            //https://github.com/JeremyLiao/SmartEventBus
-            smartbus             : "com.jeremyliao:smart-event-bus-base:0.0.1",
-            smartbus_compiler    : "com.jeremyliao:smart-event-bus-compiler:0.0.2",
+            eventbus             : "org.greenrobot:eventbus:3.3.1",
+            eventbus_processor   : "org.greenrobot:eventbus-annotation-processor:3.3.1",
 
             //Network===============================================================================
 
             //https://github.com/bumptech/glide
-            glide                : "com.github.bumptech.glide:glide:4.12.0",
-            glide_compiler       : "com.github.bumptech.glide:compiler:4.12.0",
+            glide                : "com.github.bumptech.glide:glide:4.13.0",
+            glide_compiler       : "com.github.bumptech.glide:compiler:4.13.0",
 
             //https://github.com/wasabeef/glide-transformations
-            glide_transformations: "jp.wasabeef:glide-transformations:3.3.0",
+            glide_transformations: "jp.wasabeef:glide-transformations:4.3.0",
 
             //https://github.com/coil-kt/coil
-            coil                 : "io.coil-kt:coil:1.2.2",
-            coil_gif             : "io.coil-kt:coil-gif:1.2.2",
-            coil_svg             : "io.coil-kt:coil-svg:1.2.2",
+            coil                 : "io.coil-kt:coil:1.4.0",
+            coil_gif             : "io.coil-kt:coil-gif:1.4.0",
+            coil_svg             : "io.coil-kt:coil-svg:1.4.0",
 
             //https://github.com/square/okhttp
-            okhttp               : "com.squareup.okhttp3:okhttp:4.9.2",
-            okhttp_logging       : "com.squareup.okhttp3:logging-interceptor:4.9.2",
+            okhttp               : "com.squareup.okhttp3:okhttp:4.9.3",
+            okhttp_logging       : "com.squareup.okhttp3:logging-interceptor:4.9.3",
 
             //https://github.com/square/retrofit
             retrofit             : "com.squareup.retrofit2:retrofit:2.9.0",
@@ -175,7 +168,7 @@ ext {
             websocket            : "org.java-websocket:Java-WebSocket:1.5.2",
 
             //https://github.com/Tencent/MMKV
-            mmkv                 : "com.tencent:mmkv-static:1.2.10",
+            mmkv                 : "com.tencent:mmkv-static:1.2.12",
 
             //https://github.com/greenrobot/greenDAO
             greendao             : "org.greenrobot:greendao:3.3.0",
@@ -204,7 +197,7 @@ ext {
             floatwindow          : "com.github.princekin-f:EasyFloat:2.0.1",
 
             //https://github.com/CarGuo/GSYVideoPlayer
-            gsyplayer            : "com.shuyu:GSYVideoPlayer:8.1.2",
+            gsyplayer            : "com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.1.9-release-jitpack",
 
             //https://github.com/H07000223/FlycoTabLayout:
             flycotablayout       : "com.flyco.tablayout:FlycoTabLayout_Lib:2.2.0",
@@ -216,7 +209,7 @@ ext {
             loadsir              : "com.kingja.loadsir:loadsir:1.3.8",
 
             //https://github.com/airbnb/lottie-android
-            lottie               : "com.airbnb.android:lottie:3.5.0",
+            lottie               : "com.airbnb.android:lottie:4.2.2",
 
             //https://github.com/zhihu/Matisse:
             matisse              : "com.zhihu.android:matisse:0.5.2",
@@ -256,9 +249,6 @@ ext {
             //https://github.com/alibaba/UltraViewPager
             ultraviewpager       : "com.alibaba.android:ultraviewpager:1.0.7.8",
 
-            //https://github.com/guolindev/Glance
-            glance               : "com.glance.guolindev:glance:1.0.0",
-
             //http://www.dokit.cn/
             dokit                : "com.didichuxing.doraemonkit:dokitx:3.3.5",
             dokit_no_op          : "com.didichuxing.doraemonkit:dokitx-no-op:3.3.5",
@@ -266,17 +256,13 @@ ext {
             //https://github.com/didi/booster
 
             //https://x5.tencent.com:
-            x5                   : "com.tencent.tbs.tbssdk:sdk:43993",
+            x5                   : "com.tencent.tbs:tbssdk:44153",
+
+            //https://qmuiteam.com/android
+            qmui                 : "com.qmuiteam:qmui:2.0.0-alpha10",
 
             //https://square.github.io/leakcanary
-            leakcanary           : "com.squareup.leakcanary:leakcanary-android:2.7",
-
-            //
-            nertc                : "com.netease.yunxin:nertc:4.3.2",
-            nimlib               : "com.netease.nimlib:basesdk:8.2.0",
-            nimlib_chatroom      : "com.netease.nimlib:chatroom:8.2.0",
-            player               : "com.netease.nimlib:neliveplayer:2.7.1",
-            player_gslb          : "com.netease:gslb:1.1.0",
+            leakcanary           : "com.squareup.leakcanary:leakcanary-android:2.8",
     ]
 }
 
@@ -290,7 +276,7 @@ project.buildscript.configurations.each { configuration ->
         //bus
         configuration.dependencies.add(getProject().dependencies.create('com.blankj:bus-gradle-plugin:2.6'))
         //protobuf
-        configuration.dependencies.add(getProject().dependencies.create('com.google.protobuf:protobuf-gradle-plugin:0.8.16'))
+        configuration.dependencies.add(getProject().dependencies.create('com.google.protobuf:protobuf-gradle-plugin:0.8.18'))
         //dokitx
         configuration.dependencies.add(getProject().dependencies.create('com.didichuxing.doraemonkit:dokitx-plugin:3.3.5'))
         //booster

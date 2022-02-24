@@ -5,19 +5,13 @@ import android.os.Looper;
 import android.os.MessageQueue;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
-
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseRecyclerActivity;
-import com.example.william.my.module.event.DefaultSmartEventBus;
 import com.example.william.my.module.event.MessageEvent;
-import com.example.william.my.module.event.SmartMessageEvent;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.item.RouterItem;
 import com.example.william.my.module.utils.L;
-import com.jeremyliao.liveeventbus.LiveEventBus;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,11 +45,11 @@ public class ModuleActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("NetWorkActivity", ARouterPath.NetWork.NetWork));
         routerItems.add(new RouterItem("SampleActivity", ARouterPath.Sample.Sample));
         // Compose
-        routerItems.add(new RouterItem(" ", " "));
-        routerItems.add(new RouterItem("ComposeActivity", ARouterPath.Compose.Compose));
+        //routerItems.add(new RouterItem(" ", " "));
+        //routerItems.add(new RouterItem("ComposeActivity", ARouterPath.Compose.Compose));
         // Flutter
-        routerItems.add(new RouterItem(" ", " "));
-        routerItems.add(new RouterItem("FlutterActivity", ARouterPath.Flutter.Flutter));
+        //routerItems.add(new RouterItem(" ", " "));
+        //routerItems.add(new RouterItem("FlutterActivity", ARouterPath.Flutter.Flutter));
         return routerItems;
     }
 
@@ -63,24 +57,6 @@ public class ModuleActivity extends BaseRecyclerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
         super.onCreate(savedInstanceState);
-
-        LiveEventBus
-                .get("some_key", String.class)
-                .observe(this, new Observer<String>() {
-                    @Override
-                    public void onChanged(@Nullable String s) {
-                        Toast.makeText(ModuleActivity.this, s, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        DefaultSmartEventBus
-                .event1()
-                .observe(this, new Observer<SmartMessageEvent>() {
-                    @Override
-                    public void onChanged(SmartMessageEvent event) {
-                        Toast.makeText(ModuleActivity.this, event.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
 
         Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
             @Override

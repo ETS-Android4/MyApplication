@@ -7,34 +7,27 @@
 
 整体项目使用组件化开发，使用ARouter进行模块内通信。
 
-## 依赖库
+## Libraries
 
-### Libraries : lib_network
+* banner
+* 无限滚动的ImageView
+* 图片加载框架
+* 数据存储框架
+* 点九图片解析
+* okhttp封装
+* retrofit封装
+* 气泡碰撞
+* 验证码控件
+* volley封装
+* 高斯模糊
+* 轮播公告
+* 自动对齐TextView
 
-#### 1. 基于 Retrofit 封装的网络请求框架
+## Modules
 
-1. 支持常用的GET，POST，PUT，请求
-2. 统一处理返回错误信息，与返回实体类
-3. 绑定生命周期，防止内存泄漏
-4. 针对ViewModel进行封装，返回LiveData数据
-4. 针对ViewModel进行封装，返回Flow数据
+### modules_network
 
-#### 2. 基于 OkHttp + RxJava 封装的 WebSocket 请求框架
-
-### modules_custom_view
-
-项目中用过的自定义控件
-
-1. 高斯模糊
-2. ViewPager画廊效果
-3. 手势密码
-4. 轮播广告
-5. ScrollView分页
-6. 统一添加ToolBar
-
-### modules_netWork
-
-关于网络方面开发的demo。
+关于网络方面开发的demo
 
 1. Glide
 2. HttpURLConnection
@@ -46,45 +39,60 @@
 8. WebServer的Android端的服务器搭建
 9. Netty
 
-### modules_jet_pack
-
-根据Google官方推出的JetPack库写的demo。包括了ViewModel，Room，Navigation，WorkManager。
-
-1. LiveData + ViewModel + Room + Retrofit + RxJava搭建MVVM架构。 使用 Retrofit 把返回的网络数据转化为本地数据存储在 Repository 通过 ViewModel 把 Repository 数据与 View 绑定，使更新 ViewModel 层的数据的时候，View 层会相应的更新 UI 。
-2. ViewBinding & DataBinding
-3. Navigation导航
-4. Paging3 分页
-5. Room 数据
-6. WorkManager调度任务
-
 ### modules_sample
 
-1. Kolint + Retrofit + Flow + LiveData + ViewModel
-2. Kolint + Retrofit + Flow + LiveData + ViewModel + DataBinding
-3. MVP gooogle 官方 Demo
-4. MVVM gooogle 官方 Demo
+#### java
 
-### modules_open_source
+* ViewBind + DataBinding
+* Navigation
+* Room
+* ViewModel (WithLoadingTipObserver)
+* WorkManager
+
+#### kotlin
+
+* BindingAdapter
+* coil 图片加载
+* DataStore
+* Flow
+* Paging
+* ActivityResultContracts
+* Suspend
+* MVP
+* MVVM
+* MVI
+
+### modules_open
 
 记录了一些用过的开源框架的demo
 
-1. 可拖拽小红点： https://github.com/qstumn/BadgeView
-2. 万能适配器器： https://github.com/CymChad/BaseRecyclerViewAdapterHelper
-3. Banner轮播图控件：https://github.com/youth5201314/banner
-5. 城市选择器： https://github.com/zaaach/CityPicker)
-6. 倒计时控件： https://github.com/iwgang/CountdownView
-7. 悬浮窗：https://github.com/princekin-f/EasyFloat
-8. TabLayout：https://github.com/H07000223/FlycoTabLayout
-9. GreenDao： https://greenrobot.org/greendao/features/
-10. 视频播放：https://github.com/CarGuo/GSYVideoPlayer
-11. 知乎图片选择框架： https://github.com/zhihu/Matisse
-12. MMKV： https://github.com/Tencent/MMKV
-13. 图片查看： https://github.com/chrisbanes/PhotoView
-14. PickerView控件： https://github.com/Bigkoo/Android-PickerView
-15. PopuWindow： https://github.com/pinguo-zhouwei/CustomPopwindow
-16. 智能刷新控件： https://github.com/scwang90/SmartRefreshLayout
-17. SVGA动画：https://github.com/svga/SVGAPlayer-Android
-18. Android滑动布局： https://github.com/daimajia/AndroidSwipeLayout
-19. 刷新加载控件： https://github.com/Aspsine/SwipeToLoadLayout
-20. 七巧板布局： https://github.com/alibaba/Tangram-Android
-21. X5浏览器：https://x5.tencent.com/
+* 代码生成shape： https://github.com/JavaNoober/BackgroundLibrary
+* 可拖拽小红点： https://github.com/qstumn/BadgeView
+* Banner轮播图控件：https://github.com/youth5201314/banner
+* 城市选择器： https://github.com/zaaach/CityPicker
+* 倒计时控件： https://github.com/iwgang/CountdownView
+* EventBus： https://github.com/greenrobot/EventBus
+* 悬浮窗：https://github.com/princekin-f/EasyFloat
+* TabLayout：https://github.com/H07000223/FlycoTabLayout
+* GreenDao： https://greenrobot.org/greendao/features
+* 视频播放：https://github.com/CarGuo/GSYVideoPlayer
+* 知乎图片选择框架： https://github.com/zhihu/Matisse
+* 沉浸状态栏： https://github.com/gyf-dev/ImmersionBar
+* LoadSir： https://github.com/KingJA/LoadSir
+* Lottie动画： https://github.com/airbnb/lottie-android
+* MMKV： https://github.com/Tencent/MMKV
+* 图片查看： https://github.com/chrisbanes/PhotoView
+* PickerView控件： https://github.com/Bigkoo/Android-PickerView
+* PopupWindow： https://github.com/pinguo-zhouwei/CustomPopwindow
+* RxJava： https://github.com/ReactiveX/RxJava
+* RxAndroid： https://github.com/ReactiveX/Rxandroid
+* RxLifecycle： https://github.com/trello/RxLifecycle
+* 万能阴影布局： https://github.com/lihangleo2/ShadowLayout
+* 智能刷新控件： https://github.com/scwang90/SmartRefreshLayout
+* SVGA动画：https://github.com/svga/SVGAPlayer-Android
+* 智能刷新： https://github.com/scwang90/SmartRefreshLayout
+* Android滑动布局： https://github.com/daimajia/AndroidSwipeLayout
+* 刷新加载控件： https://github.com/Aspsine/SwipeToLoadLayout
+* 七巧板布局： https://github.com/alibaba/Tangram-Android
+* X5浏览器：https://x5.tencent.com
+* 万能适配器器： https://github.com/CymChad/BaseRecyclerViewAdapterHelper

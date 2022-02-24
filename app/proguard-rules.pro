@@ -110,16 +110,6 @@
     <init>(java.lang.Throwable);
 }
 
-
-# LiveEventBus
-# https://github.com/JeremyLiao/LiveEventBus
-# ==================================================================================================
--dontwarn com.jeremyliao.liveeventbus.**
--keep class com.jeremyliao.liveeventbus.** { *; }
--keep class androidx.lifecycle.** { *; }
--keep class androidx.arch.core.** { *; }
-
-
 # X5
 # https://x5.tencent.com
 # ==================================================================================================

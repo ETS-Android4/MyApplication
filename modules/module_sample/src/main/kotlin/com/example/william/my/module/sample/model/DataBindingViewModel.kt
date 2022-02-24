@@ -12,13 +12,13 @@ import kotlinx.coroutines.launch
 /**
  * ViewModel 应创建协程
  */
-class DataBindingViewModel(private val dataBindingDataSource: DataBindingRepository) : ViewModel() {
+class DataBindingViewModel(private val dataSource: DataBindingRepository) : ViewModel() {
 
-    val article: LiveData<RetrofitResponse<ArticleDataBean>> = dataBindingDataSource.article
+    val article: LiveData<RetrofitResponse<ArticleDataBean>> = dataSource.article
 
     fun fetchNewData(page: Int) {
         viewModelScope.launch {
-            dataBindingDataSource.fetchNewDataByUtils(page)
+            dataSource.fetchNewDataByUtils(page)
         }
     }
 }

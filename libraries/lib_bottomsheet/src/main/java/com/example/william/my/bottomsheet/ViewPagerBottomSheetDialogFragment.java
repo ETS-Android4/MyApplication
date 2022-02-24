@@ -13,6 +13,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+/**
+ * https://blog.csdn.net/jhl122/article/details/86526710
+ * https://github.com/JiangAndroidwork/BottomSheetViewPager
+ * BottomSheetDialogFragment + ViewPager + Fragment + RecyclerView，BottomSheetBehavior 内的 ViewPager下的 RecyclerView 无法响应滑动
+ */
 public abstract class ViewPagerBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     public FrameLayout bottomSheet;

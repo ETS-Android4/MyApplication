@@ -14,6 +14,9 @@ import com.example.william.my.module.sample.model.DataBindingViewModel
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
+/**
+ * https://developer.android.google.cn/reference/android/databinding/BindingAdapter
+ */
 @Route(path = ARouterPath.Sample.Sample_BindingAdapter)
 class BindingAdapterActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 

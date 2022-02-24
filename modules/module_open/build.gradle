@@ -1,0 +1,95 @@
+apply plugin: 'org.greenrobot.greendao'
+android {
+    defaultConfig {
+        //    javaCompileOptions {
+        //        annotationProcessorOptions {
+        //            arguments += ["eventBusIndex"    : "com.example.william.my.module.open.MyModuleOpenEventBusIndex"]
+        //        }
+        //    }
+        kapt {
+            arguments {
+                arg("eventBusIndex", "com.example.william.my.module.opensource.MyModuleOpenEventBusIndex")
+            }
+        }
+    }
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.example.william.my.module.opensource.greendao.generated'
+        targetGenDir 'src/main/java'
+    }
+    resourcePrefix "open_"
+}
+dependencies {
+    //https://github.com/Blankj/AndroidUtilCode
+    implementation deps.utils
+    //https://github.com/ReactiveX/RxJava
+    //https://github.com/ReactiveX/RxAndroid
+    implementation deps.rxandroid
+    //https://github.com/greenrobot/EventBus
+    implementation deps.eventbus
+    kapt deps.eventbus_processor
+    //
+    //https://github.com/Tencent/MMKV
+    implementation deps.mmkv
+    //https://github.com/greenrobot/greenDAO
+    implementation deps.greendao
+    //
+    //https://github.com/JavaNoober/BackgroundLibrary
+    implementation deps.background
+    //https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    implementation deps.brvah
+    //https://github.com/qstumn/BadgeView
+    implementation deps.badgeview
+    //https://github.com/youth5201314/banner
+    implementation deps.banner
+    //https://github.com/zaaach/CityPicker
+    implementation deps.citypicker
+    //https://github.com/iwgang/CountdownView
+    implementation deps.countdown
+    //https://github.com/princekin-f/EasyFloat
+    implementation deps.floatwindow
+    //https://github.com/CarGuo/GSYVideoPlayer
+    implementation deps.gsyplayer
+    //https://github.com/H07000223/FlycoTabLayout
+    implementation deps.flycotablayout
+    //https://github.com/zhihu/Matisse
+    implementation deps.glide
+    implementation deps.matisse
+    //https://github.com/gyf-dev/ImmersionBar
+    implementation deps.immersionbar
+    //https://github.com/KingJA/LoadSir
+    implementation deps.loadsir
+    //https://github.com/airbnb/lottie-android
+    implementation deps.lottie
+    //https://github.com/chrisbanes/PhotoView
+    implementation deps.photoview
+    //https://github.com/Bigkoo/Android-PickerView
+    implementation deps.gson
+    implementation deps.pickerview
+    //https://github.com/pinguo-zhouwei/CustomPopwindow
+    implementation deps.popwindow
+    //https://github.com/lihangleo2/ShadowLayout
+    //implementation deps.shadowlayout
+    //https://github.com/scwang90/SmartRefreshLayout
+    implementation deps.smartrefresh
+    implementation deps.smartrefresh_header
+    implementation deps.smartrefresh_footer
+    //https://github.com/daimajia/AndroidSwipeLayout
+    implementation deps.swipelayout
+    //https://github.com/svga/SVGAPlayer-Android
+    implementation deps.svgaplayer
+    //https://github.com/Aspsine/SwipeToLoadLayout
+    implementation deps.swipetoload
+    //https://github.com/alibaba/Tangram-Android
+    implementation deps.tangram
+    implementation(deps.virtualview) {
+        transitive = true
+    }
+    implementation(deps.vlayout) {
+        transitive = true
+    }
+    implementation(deps.ultraviewpager) {
+        transitive = true
+    }
+    implementation deps.x5
+}

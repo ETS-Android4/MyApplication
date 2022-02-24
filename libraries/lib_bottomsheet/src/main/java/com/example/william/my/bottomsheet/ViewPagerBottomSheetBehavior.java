@@ -50,9 +50,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * BottomSheetBehavior内的ViewPager下的RecyclerView无法响应滑动
- *
- * @param <V>
  * @see BottomSheetBehavior
  * @see #findScrollingChild
  * @see #updateScrollingChild
