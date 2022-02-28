@@ -3,7 +3,7 @@ package com.example.william.my.module.sample.frame.presenter
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.bean.repo.ArticleRepository
 import com.example.william.my.bean.repo.ArticleDataSource.LoadArticleCallback
-import com.example.william.my.module.sample.contract.ArticleContract
+import com.example.william.my.module.sample.frame.contract.ArticleContract
 
 class ArticlePresenter(
     private val mArticleRepository: ArticleRepository,

@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.contract
+package com.example.william.my.module.sample.frame.contract
 
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.presenter.IBasePresenter
