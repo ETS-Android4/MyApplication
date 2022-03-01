@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 
 /**
  * Created by Administrator on 2018-05-17.
+ * https://github.com/truemi/Sphere-collision
  */
 public class PoolBallView extends FrameLayout {
 

@@ -1,18 +1,18 @@
 package com.example.william.my.module.sample.frame.model
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.repo.DataRepository
+import com.example.william.my.core.retrofit.response.RetrofitResponse
 
 class ArticleViewModel(private val dataSource: DataRepository) : ViewModel() {
 
     private val mMutableLiveData = MutableLiveData<Int>()
 
-    val article = Transformations.switchMap(mMutableLiveData) { input ->
-        dataSource.getArticle(input)
-    }
+    val article: LiveData<RetrofitResponse<ArticleDataBean>>
+        get() = Transformations.switchMap(mMutableLiveData) { input ->
+            dataSource.loadArticle(input)
+        }
 
     fun queryArticle(page: Int) {
         mMutableLiveData.postValue(page)

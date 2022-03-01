@@ -9,6 +9,8 @@ import com.example.william.my.core.retrofit.status.State;
 import java.util.Collection;
 
 /**
+ * RetrofitResponse<T> --> T
+ * <p>
  * androidx.lifecycle.Observer
  */
 public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResponse<T>> {
@@ -61,6 +63,8 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
 
     /**
      * State.SUCCESS 时，返回 response
+     * <p>
+     * RetrofitResponse<T> --> T
      *
      * @param response
      */

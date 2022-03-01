@@ -62,10 +62,10 @@ public class DataRepository implements DataSource {
                 });
     }
 
-    public LiveData<RetrofitResponse<ArticleDataBean>> getArticle(int page) {
+    public LiveData<RetrofitResponse<ArticleDataBean>> loadArticle(int page) {
         final MutableLiveData<RetrofitResponse<ArticleDataBean>> liveData = new MutableLiveData<>();
 
-        RetrofitUtils.buildLiveData(service.getArticleResponse(page), new LiveDataCallback<>(liveData));
+        RetrofitUtils.buildSingle(service.getArticleResponse(page), new LiveDataCallback<>(liveData));
 
         return liveData;
     }
@@ -80,7 +80,7 @@ public class DataRepository implements DataSource {
             }
         };
 
-        RetrofitUtils.buildLiveData(service.getArticleResponse(page), new LiveDataCallback<>(liveData, convert));
+        RetrofitUtils.buildSingle(service.getArticleResponse(page), new LiveDataCallback<>(liveData, convert));
 
         return liveData;
     }

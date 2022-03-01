@@ -96,23 +96,6 @@ object RetrofitUtils {
             })
     }
 
-    @JvmStatic
-    fun <T> buildLiveData(single: Single<T>, callback: ResponseCallback<T>) {
-        single
-            .onErrorResumeNext(HttpResultFunction())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : RetrofitCallback<T>() {
-                override fun onResponse(response: T) {
-                    callback.onResponse(response)
-                }
-
-                override fun onFailure(e: ApiException) {
-                    callback.onFailure(e)
-                }
-            })
-    }
-
     suspend fun <T> buildFlow(flow: Flow<T>, callback: ResponseCallback<T>) {
         withContext(Dispatchers.Main) {
             flow

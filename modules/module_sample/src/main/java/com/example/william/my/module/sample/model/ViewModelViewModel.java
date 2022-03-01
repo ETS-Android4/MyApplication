@@ -51,7 +51,7 @@ public class ViewModelViewModel extends ViewModel {
         mArticleLiveData = Transformations.switchMap(mMutableLiveData, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
             @Override
             public LiveData<RetrofitResponse<ArticleDataBean>> apply(Integer input) {
-                return DataRepository.getInstance().getArticle(input);
+                return DataRepository.getInstance().loadArticle(input);
             }
         });
     }
