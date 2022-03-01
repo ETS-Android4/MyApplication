@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -44,7 +45,7 @@ public class GlideActivity extends BaseActivity {
                 .load(Urls.Url_Image)
                 .into(new CustomTarget<Bitmap>() {
                     @Override
-                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                    public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> transition) {
 
                     }
 

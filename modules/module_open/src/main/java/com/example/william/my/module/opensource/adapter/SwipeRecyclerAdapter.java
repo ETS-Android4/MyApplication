@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.swipe.SwipeLayout;
@@ -23,6 +24,7 @@ public class SwipeRecyclerAdapter extends RecyclerSwipeAdapter<SwipeRecyclerAdap
     }
 
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.open_item_swipe, parent, false));

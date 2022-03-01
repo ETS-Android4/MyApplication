@@ -22,6 +22,7 @@ import android.view.ViewParent;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 import androidx.annotation.VisibleForTesting;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -363,13 +364,13 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
 
 
     @Override
-    public Parcelable onSaveInstanceState(CoordinatorLayout parent, V child) {
+    public Parcelable onSaveInstanceState(@NonNull CoordinatorLayout parent, @NonNull V child) {
         return new SavedState(super.onSaveInstanceState(parent, child), this);
     }
 
     @Override
     public void onRestoreInstanceState(
-            CoordinatorLayout parent, V child, Parcelable state) {
+            @NonNull CoordinatorLayout parent, @NonNull V child, @NonNull Parcelable state) {
         SavedState ss = (SavedState) state;
         super.onRestoreInstanceState(parent, child, ss.getSuperState());
         // Restore Optional State values designated by saveFlags
@@ -383,7 +384,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
     }
 
     @Override
-    public void onAttachedToLayoutParams(CoordinatorLayout.LayoutParams layoutParams) {
+    public void onAttachedToLayoutParams(@NonNull CoordinatorLayout.LayoutParams layoutParams) {
         super.onAttachedToLayoutParams(layoutParams);
         // These may already be null, but just be safe, explicitly assign them. This lets us know the
         // first time we layout with this behavior by checking (viewRef == null).
@@ -401,7 +402,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
 
     @Override
     public boolean onLayoutChild(
-            CoordinatorLayout parent, V child, int layoutDirection) {
+            @NonNull CoordinatorLayout parent, @NonNull V child, int layoutDirection) {
         if (ViewCompat.getFitsSystemWindows(parent) && !ViewCompat.getFitsSystemWindows(child)) {
             child.setFitsSystemWindows(true);
         }
@@ -465,7 +466,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
 
     @Override
     public boolean onInterceptTouchEvent(
-            CoordinatorLayout parent, V child, MotionEvent event) {
+            @NonNull CoordinatorLayout parent, V child, @NonNull MotionEvent event) {
         if (!child.isShown() || !draggable) {
             ignoreEvents = true;
             return false;
@@ -528,7 +529,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
 
     @Override
     public boolean onTouchEvent(
-            CoordinatorLayout parent, V child, MotionEvent event) {
+            @NonNull CoordinatorLayout parent, V child, @NonNull MotionEvent event) {
         if (!child.isShown()) {
             return false;
         }
@@ -559,10 +560,10 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
 
     @Override
     public boolean onStartNestedScroll(
-            CoordinatorLayout coordinatorLayout,
-            V child,
-            View directTargetChild,
-            View target,
+            @NonNull CoordinatorLayout coordinatorLayout,
+            @NonNull V child,
+            @NonNull View directTargetChild,
+            @NonNull View target,
             int axes,
             int type) {
         lastNestedScrollDy = 0;
@@ -572,12 +573,12 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
 
     @Override
     public void onNestedPreScroll(
-            CoordinatorLayout coordinatorLayout,
-            V child,
-            View target,
+            @NonNull CoordinatorLayout coordinatorLayout,
+            @NonNull V child,
+            @NonNull View target,
             int dx,
             int dy,
-            int[] consumed,
+            @NonNull int[] consumed,
             int type) {
         if (type == ViewCompat.TYPE_NON_TOUCH) {
             // Ignore fling here. The ViewDragHelper handles it.
@@ -629,9 +630,9 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
 
     @Override
     public void onStopNestedScroll(
-            CoordinatorLayout coordinatorLayout,
+            @NonNull CoordinatorLayout coordinatorLayout,
             V child,
-            View target,
+            @NonNull View target,
             int type) {
         if (child.getTop() == getExpandedOffset()) {
             setStateInternal(STATE_EXPANDED);
@@ -712,23 +713,23 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
 
     @Override
     public void onNestedScroll(
-            CoordinatorLayout coordinatorLayout,
-            V child,
-            View target,
+            @NonNull CoordinatorLayout coordinatorLayout,
+            @NonNull V child,
+            @NonNull View target,
             int dxConsumed,
             int dyConsumed,
             int dxUnconsumed,
             int dyUnconsumed,
             int type,
-            int[] consumed) {
+            @NonNull int[] consumed) {
         // Overridden to prevent the default consumption of the entire scroll distance.
     }
 
     @Override
     public boolean onNestedPreFling(
-            CoordinatorLayout coordinatorLayout,
-            V child,
-            View target,
+            @NonNull CoordinatorLayout coordinatorLayout,
+            @NonNull V child,
+            @NonNull View target,
             float velocityX,
             float velocityY) {
         if (nestedScrollingChildRef != null) {
@@ -1403,7 +1404,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
             new ViewDragHelper.Callback() {
 
                 @Override
-                public boolean tryCaptureView(View child, int pointerId) {
+                public boolean tryCaptureView(@NonNull View child, int pointerId) {
                     if (state == STATE_DRAGGING) {
                         return false;
                     }
@@ -1422,7 +1423,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
 
                 @Override
                 public void onViewPositionChanged(
-                        View changedView, int left, int top, int dx, int dy) {
+                        @NonNull View changedView, int left, int top, int dx, int dy) {
                     dispatchOnSlide(top);
                 }
 
@@ -1439,7 +1440,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
                 }
 
                 @Override
-                public void onViewReleased(View releasedChild, float xvel, float yvel) {
+                public void onViewReleased(@NonNull View releasedChild, float xvel, float yvel) {
                     int top;
                     @State int targetState;
                     if (yvel < 0) { // Moving up
@@ -1528,7 +1529,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
                 }
 
                 @Override
-                public int clampViewPositionVertical(View child, int top, int dy) {
+                public int clampViewPositionVertical(@NonNull View child, int top, int dy) {
                     return MathUtils.clamp(
                             top, getExpandedOffset(), hideable ? parentHeight : collapsedOffset);
                 }
@@ -1539,7 +1540,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
                 }
 
                 @Override
-                public int getViewVerticalDragRange(View child) {
+                public int getViewVerticalDragRange(@NonNull View child) {
                     if (hideable) {
                         return parentHeight;
                     } else {
@@ -1816,7 +1817,7 @@ public class ViewPagerBottomSheetBehavior<V extends View> extends CoordinatorLay
                 null,
                 new AccessibilityViewCommand() {
                     @Override
-                    public boolean perform(View view, CommandArguments arguments) {
+                    public boolean perform(@NonNull View view, CommandArguments arguments) {
                         setState(state);
                         return true;
                     }

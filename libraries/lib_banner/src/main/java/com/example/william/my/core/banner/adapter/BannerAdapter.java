@@ -2,6 +2,7 @@ package com.example.william.my.core.banner.adapter;
 
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.william.my.core.banner.R;
@@ -72,9 +73,10 @@ public abstract class BannerAdapter<T, VH extends RecyclerView.ViewHolder> exten
     }
 
 
+    @NonNull
     @Override
     @SuppressWarnings("unchecked")
-    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         VH vh = onCreateHolder(parent, viewType);
         vh.itemView.setOnClickListener(v -> {
             if (mBannerOnBannerListener != null) {

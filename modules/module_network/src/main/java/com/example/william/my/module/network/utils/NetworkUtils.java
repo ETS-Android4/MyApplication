@@ -5,6 +5,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class NetworkUtils {
 
@@ -33,7 +34,7 @@ public class NetworkUtils {
             for (InetAddress add : adds) {
                 if (!add.isLoopbackAddress()) {
                     String hostAddress = add.getHostAddress();
-                    boolean isIPv4 = hostAddress.indexOf(':') < 0;
+                    boolean isIPv4 = Objects.requireNonNull(hostAddress).indexOf(':') < 0;
                     if (useIPv4) {
                         if (isIPv4) {
                             return hostAddress;

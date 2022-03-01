@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.william.my.module.demo.R;
@@ -25,11 +26,12 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
 
+    @NonNull
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View mView = LayoutInflater.from(container.getContext()).inflate(R.layout.demo_page, container, false);
@@ -39,7 +41,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
     }
 }

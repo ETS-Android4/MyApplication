@@ -1,5 +1,7 @@
 package com.example.william.my.module.network.activity;
 
+import androidx.annotation.NonNull;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.base.Urls;
 import com.example.william.my.module.activity.BaseResponseActivity;
@@ -63,13 +65,13 @@ public class OkHttpActivity extends BaseResponseActivity {
         //加入调度
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, final IOException e) {
+            public void onFailure(@NonNull Call call, @NonNull final IOException e) {
                 String netError = "Error: " + e.getMessage();
                 showResponse(netError);
             }
 
             @Override
-            public void onResponse(Call call, final Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
                 ResponseBody body = response.body();
                 if (body != null) {
                     String netSuccess = "Success: " + body.string();

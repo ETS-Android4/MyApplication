@@ -3,7 +3,6 @@ package com.example.william.my.module.sample.frame.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.william.my.bean.data.ArticleDetailBean

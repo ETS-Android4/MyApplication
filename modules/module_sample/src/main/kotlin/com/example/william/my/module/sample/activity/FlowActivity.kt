@@ -2,7 +2,6 @@ package com.example.william.my.module.sample.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.router.ARouterPath

@@ -27,6 +27,7 @@ public class HookManager {
      * @param context
      * @param view
      */
+    @SuppressWarnings("JavaReflectionMemberAccess")
     @SuppressLint("PrivateApi,DiscouragedPrivateApi")
     public static void hookOnClick(Context context, View view) {
         try {

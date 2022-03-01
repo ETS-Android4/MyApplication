@@ -3,6 +3,7 @@ package com.example.william.my.module.demo.cache;
 import android.util.SparseArray;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerCacheExtension extends RecyclerView.ViewCacheExtension {
@@ -15,7 +16,7 @@ public class RecyclerCacheExtension extends RecyclerView.ViewCacheExtension {
 
 
     @Override
-    public View getViewForPositionAndType(RecyclerView.Recycler recycler, int position, int type) {
+    public View getViewForPositionAndType(@NonNull RecyclerView.Recycler recycler, int position, int type) {
         if (mViewCache.size() > position) {
             return mViewCache.get(position);
         }

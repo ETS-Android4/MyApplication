@@ -6,6 +6,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Process;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.william.my.library.interfaces.IComponentApplication;
 import com.example.william.my.library.utils.ActivityManagerUtil;
 
@@ -99,37 +102,37 @@ public class BaseApp extends Application {
         //监听activity生命周期
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
                 ActivityManagerUtil.getInstance().addActivity(activity);
             }
 
             @Override
-            public void onActivityStarted(Activity activity) {
+            public void onActivityStarted(@NonNull Activity activity) {
 
             }
 
             @Override
-            public void onActivityResumed(Activity activity) {
+            public void onActivityResumed(@NonNull Activity activity) {
 
             }
 
             @Override
-            public void onActivityPaused(Activity activity) {
+            public void onActivityPaused(@NonNull Activity activity) {
 
             }
 
             @Override
-            public void onActivityStopped(Activity activity) {
+            public void onActivityStopped(@NonNull Activity activity) {
 
             }
 
             @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
 
             }
 
             @Override
-            public void onActivityDestroyed(Activity activity) {
+            public void onActivityDestroyed(@NonNull Activity activity) {
                 ActivityManagerUtil.getInstance().removeActivity(activity);
             }
         });

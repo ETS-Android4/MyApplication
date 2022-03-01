@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,7 +50,7 @@ public class TangramActivity extends BaseActivity {
         // 初始化 Tangram 环境
         TangramBuilder.init(this, new IInnerImageSetter() {
             @Override
-            public <IMAGE extends ImageView> void doLoadImageUrl(IMAGE view, String url) {
+            public <IMAGE extends ImageView> void doLoadImageUrl(@NonNull IMAGE view, String url) {
                 //假设你使用 Picasso 加载图片
                 //Picasso.with(context).load(url).into(view);
                 Glide.with(TangramActivity.this).load(url).into(view);
@@ -91,7 +92,7 @@ public class TangramActivity extends BaseActivity {
         // 监听 recyclerView 的滚动事件
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 //在 scroll 事件中触发 engine 的 onScroll，内部会触发需要异步加载的卡片去提前加载数据
                 engine.onScrolled();

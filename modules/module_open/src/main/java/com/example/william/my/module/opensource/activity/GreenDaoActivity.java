@@ -45,7 +45,7 @@ public class GreenDaoActivity extends BaseResponseActivity {
             for (int i = 0; i < list.size(); i++) {
                 sb.append(new Gson().toJson(list.get(i))).append(separator);
             }
-            return sb.toString().substring(0, sb.toString().length() - 1);
+            return sb.substring(0, sb.toString().length() - 1);
         } else {
             return "";
         }

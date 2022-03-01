@@ -6,6 +6,7 @@ import android.graphics.drawable.NinePatchDrawable;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,7 +44,7 @@ public class NinePatchActivity extends AppCompatActivity {
         //NinePatchChunk
         Glide.with(this).asBitmap().load(Urls.Url_NinePatch).into(new CustomTarget<Bitmap>() {
             @Override
-            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+            public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> transition) {
                 NinePatchDrawable drawable = NinePatchChunk.create9PatchDrawable(NinePatchActivity.this, resource, Urls.Url_NinePatch);
                 mTextView1.setBackground(drawable);
             }
@@ -56,7 +57,7 @@ public class NinePatchActivity extends AppCompatActivity {
         //NinePatchBuilder
         Glide.with(this).asBitmap().load(Urls.Url_NinePatch).into(new CustomTarget<Bitmap>() {
             @Override
-            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+            public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> transition) {
                 NinePatchBuilder builder = new NinePatchBuilder(getResources(), resource);
                 builder.addXRegion(30, 32);
                 NinePatchDrawable drawable = builder.build();

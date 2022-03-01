@@ -3,6 +3,8 @@ package com.example.william.my.module.utils;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -24,7 +26,7 @@ public final class Crash {
     public static void init(final OnCrashListener onCrashListener) {
         new Thread.UncaughtExceptionHandler() {
             @Override
-            public void uncaughtException(final Thread t, final Throwable e) {
+            public void uncaughtException(@NonNull final Thread t, @NonNull final Throwable e) {
                 final String time = new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss", Locale.CHINA).format(new Date());
                 final String head = "************* Log Head ****************" +
                         "\nTime Of Crash      : " + time +

@@ -3,6 +3,7 @@ package com.example.william.my.module.opensource.activity;
 import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -54,7 +55,7 @@ public class SVGAPlayerActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onComplete(SVGAVideoEntity svgaVideoEntity) {
+                public void onComplete(@NonNull SVGAVideoEntity svgaVideoEntity) {
                     SVGADrawable drawable = new SVGADrawable(svgaVideoEntity);
                     mSVGAImageView.setImageDrawable(drawable);
                     mSVGAImageView.startAnimation();

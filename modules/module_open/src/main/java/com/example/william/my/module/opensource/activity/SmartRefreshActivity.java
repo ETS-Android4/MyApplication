@@ -3,6 +3,7 @@ package com.example.william.my.module.opensource.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +56,7 @@ public class SmartRefreshActivity extends BaseActivity implements OnItemClickLis
 
         mRefreshRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
+            public void onRefresh(@NonNull RefreshLayout refreshlayout) {
                 i = 0;
                 mRefreshAdapter.setNewInstance(new ArrayList<>());
                 //mBRVAHMultiAdapter.setNewInstance(new ArrayList<>());
@@ -64,7 +65,7 @@ public class SmartRefreshActivity extends BaseActivity implements OnItemClickLis
         });
         mRefreshRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
+            public void onLoadMore(@NonNull RefreshLayout refreshlayout) {
                 for (int j = 0; j < 10; j++) {
                     i = i + 1;
                     mRefreshAdapter.addData("item : " + i);
@@ -78,12 +79,12 @@ public class SmartRefreshActivity extends BaseActivity implements OnItemClickLis
     }
 
     @Override
-    public void onItemClick(BaseQuickAdapter<?, ?> adapter, View view, int position) {
+    public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
         mRefreshAdapter.notifyItemChanged(position, "payload");
     }
 
     @Override
-    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
 
     }
 }

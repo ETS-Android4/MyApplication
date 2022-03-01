@@ -4,7 +4,7 @@
 
 ### 动态权限申请
 
-```java
+```
 if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
     ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{Manifest.permission.CAMERA}, position);
     //Fragment.this.requestPermissions(new String[]{Manifest.permission.CAMERA}, position);
@@ -53,7 +53,7 @@ if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permissi
 
 #### 3. 使用FileProvider
 
-```java
+```
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
     Uri uri = FileProvider.getUriForFile(CameraActivity.this, "包名.fileProvider", newFile);
 } else {
@@ -67,7 +67,7 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
 创建通知渠道
 
-```java
+```
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
     //groupId要唯一
     String groupId = "groupId";
@@ -95,7 +95,7 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 创建Notification
 
-```java
+```
 NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
         .setSmallIcon(R.drawable.notification_icon)
         .setContentTitle(textTitle) //通知标题
@@ -108,7 +108,7 @@ notificationManager.notify(notificationId, builder.build());
 
 Android8.0以上必须使用新的窗口类型(TYPE_APPLICATION_OVERLAY)才能显示提醒悬浮窗：
 
-```java
+```
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
     mWindowParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
 }else {
@@ -171,7 +171,7 @@ AndroidManifest文件中添加安装未知来源应用的权限
 
 获取相册中的图片（无法获取图片绝对路径，通过MediaStore获取图片Uri）
 
-```java
+```
 Cursor cursor = getContentResolver().query(
         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,//查询数据库
         null,//返回ID的List

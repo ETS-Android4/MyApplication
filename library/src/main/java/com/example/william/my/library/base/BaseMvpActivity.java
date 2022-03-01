@@ -41,6 +41,7 @@ public abstract class BaseMvpActivity<T extends IBasePresenter, V extends IBaseV
     /**
      * 初始化Presenter
      */
+    @SuppressWarnings("JavaReflectionInvocation")
     protected void initPresenter() {
         try {
             Constructor<T> constructor = getPresenterClass().getConstructor(getViewClass());

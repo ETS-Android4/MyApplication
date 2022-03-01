@@ -1,5 +1,6 @@
 package com.example.william.my.module.demo.adapter;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
@@ -17,6 +18,7 @@ public class ViewPager2FragmentAdapter extends FragmentStateAdapter {
     }
 
 
+    @NonNull
     @Override
     public Fragment createFragment(int position) {
         return mFragments.get(position);

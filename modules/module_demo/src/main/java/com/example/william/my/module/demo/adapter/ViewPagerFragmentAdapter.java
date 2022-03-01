@@ -1,5 +1,6 @@
 package com.example.william.my.module.demo.adapter;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -48,6 +49,7 @@ public class ViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         return mFragments.get(position);

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,7 +22,7 @@ public class BaseDialogFragment extends DialogFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (getLayout() != 0) {
             return inflater.inflate(getLayout(), container, false);
         } else {
@@ -29,7 +31,7 @@ public class BaseDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Dialog dialog = getDialog();
         if (dialog != null) {
@@ -53,7 +55,7 @@ public class BaseDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void show(FragmentManager manager, String tag) {
+    public void show(@NonNull FragmentManager manager, String tag) {
         try {
             FragmentTransaction transaction = manager.beginTransaction();
             //在每个add事务前增加一个remove事务，防止连续的add

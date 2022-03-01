@@ -1,5 +1,7 @@
 package com.example.william.my.module.opensource.adapter;
 
+import androidx.annotation.NonNull;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.module.opensource.R;
@@ -28,7 +30,7 @@ public class BRVAHAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     }
 
     @Override
-    protected void convert(BaseViewHolder holder, String item, List<?> payloads) {
+    protected void convert(@NonNull BaseViewHolder holder, String item, List<?> payloads) {
         if (payloads.isEmpty()) {
             super.convert(holder, item, payloads);
         } else {
