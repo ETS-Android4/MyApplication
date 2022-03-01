@@ -3,8 +3,6 @@ package com.example.william.my.library.helper;
 import android.os.Handler;
 import android.os.Looper;
 
-import androidx.annotation.NonNull;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -93,7 +91,7 @@ public class AppExecutorsHelper {
         private final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
 
         @Override
-        public void execute(@NonNull Runnable command) {
+        public void execute(Runnable command) {
             mainThreadHandler.post(command);
         }
     }

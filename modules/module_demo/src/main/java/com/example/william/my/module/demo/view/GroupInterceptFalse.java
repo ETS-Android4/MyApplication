@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.william.my.module.demo.activity.other.DispatchActivity;
@@ -14,17 +12,17 @@ public class GroupInterceptFalse extends ConstraintLayout {
 
     private final Context mContext;
 
-    public GroupInterceptFalse(@NonNull Context context) {
+    public GroupInterceptFalse(Context context) {
         super(context);
         this.mContext = context;
     }
 
-    public GroupInterceptFalse(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public GroupInterceptFalse(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
     }
 
-    public GroupInterceptFalse(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public GroupInterceptFalse(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
     }

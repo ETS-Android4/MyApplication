@@ -26,10 +26,10 @@ Call call = client.newCall(request);
 ```
 call.enqueue(new okhttp3.Callback() {
     @Override
-    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+    public void onFailure( Call call,  IOException e) {
     }
     @Override
-    public void onResponse(@NonNull Call call, @NonNull okhttp3.Response response) throws IOException {
+    public void onResponse( Call call,  okhttp3.Response response) throws IOException {
     }
 });
 ```
@@ -341,6 +341,7 @@ Dispatcher.finished()
     return isRunning
   }
 ```
+
 5. 读取 Response -> RealCall.getResponseWithInterceptorChain()
 
 RealCall.getResponseWithInterceptorChain()

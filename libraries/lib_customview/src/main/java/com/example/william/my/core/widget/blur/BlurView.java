@@ -13,8 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.AttrRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * 高斯模糊
@@ -31,15 +29,15 @@ public class BlurView extends FrameLayout {
     private final ImageView mBlurImageView;
     private final ImageView mUnclearImageView;
 
-    public BlurView(@NonNull Context context) {
+    public BlurView(Context context) {
         this(context, null);
     }
 
-    public BlurView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public BlurView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BlurView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public BlurView(Context context, AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
 

@@ -37,10 +37,10 @@ Call<ResponseBody> repos = service.requestInfo("");
 ```
 repos.enqueue(new Callback<ResponseBody>() {
     @Override
-    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+    public void onResponse( Call<ResponseBody> call,  Response<ResponseBody> response) {
     }
     @Override
-    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+    public void onFailure( Call<ResponseBody> call,  Throwable t) {
     }
 });
 ```
@@ -57,7 +57,7 @@ public final class Retrofit {
   final HttpUrl baseUrl; // 基地址
   final List<Converter.Factory> converterFactories; // 数据转换器
   final List<CallAdapter.Factory> callAdapterFactories; // 请求适配器
-  final @Nullable Executor callbackExecutor; // 回调执行器，切换线程（子线程 ->>主线程）
+  final  Executor callbackExecutor; // 回调执行器，切换线程（子线程 ->>主线程）
   final boolean validateEagerly; // 是否立即解析接口注解方法，开启则会马上加载所有方法。一般不用。
   ···
   public static final class Builder {
@@ -138,7 +138,7 @@ Retrofit.create()
               private final Object[] emptyArgs = new Object[0];
 
               @Override
-              public @Nullable Object invoke(Object proxy, Method method, @Nullable Object[] args)
+              public  Object invoke(Object proxy, Method method,  Object[] args)
                   throws Throwable {
                 // If the method is a method from Object then defer to normal invocation.
                 if (method.getDeclaringClass() == Object.class) {
@@ -186,7 +186,7 @@ abstract class ServiceMethod<T> {
     return HttpServiceMethod.parseAnnotations(retrofit, method, requestFactory);
   }
 
-  abstract @Nullable T invoke(Object[] args);
+  abstract  T invoke(Object[] args);
 }
 ```
 
@@ -290,7 +290,7 @@ Retrofit.callAdapter()
     return nextCallAdapter(null, returnType, annotations);
   }
   
-  public CallAdapter<?, ?> nextCallAdapter(@Nullable CallAdapter.Factory skipPast, Type returnType, Annotation[] annotations) {
+  public CallAdapter<?, ?> nextCallAdapter( CallAdapter.Factory skipPast, Type returnType, Annotation[] annotations) {
     Objects.requireNonNull(returnType, "returnType == null");
     Objects.requireNonNull(annotations, "annotations == null");
 
@@ -339,7 +339,7 @@ Retrofit.responseBodyConverter()
     return nextResponseBodyConverter(null, type, annotations);
   }
 
-  public <T> Converter<ResponseBody, T> nextResponseBodyConverter(@Nullable Converter.Factory skipPast, Type type, Annotation[] annotations) {
+  public <T> Converter<ResponseBody, T> nextResponseBodyConverter( Converter.Factory skipPast, Type type, Annotation[] annotations) {
     Objects.requireNonNull(type, "type == null");
     Objects.requireNonNull(annotations, "annotations == null");
 
@@ -372,13 +372,14 @@ Retrofit.responseBodyConverter()
 HttpServiceMethod.invoke()
 
 ```
-  final @Nullable ReturnT invoke(Object[] args) {
+  final  ReturnT invoke(Object[] args) {
     Call<ResponseT> call = new OkHttpCall<>(requestFactory, args, callFactory, responseConverter);
     return adapt(call, args);
   }
 ```
 
 CallAdapted.class
+
 ```
     protected ReturnT adapt(Call<ResponseT> call, Object[] args) {
       return callAdapter.adapt(call);

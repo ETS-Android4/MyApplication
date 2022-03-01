@@ -1,6 +1,5 @@
 package com.example.william.my.bean.repo;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -52,7 +51,7 @@ public class DataRepository implements DataSource {
                     }
 
                     @Override
-                    public void onFailure(@NonNull ApiException e) {
+                    public void onFailure(ApiException e) {
                         callback.onFailure(e.getMessage());
                     }
 
@@ -76,7 +75,7 @@ public class DataRepository implements DataSource {
 
         LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean> convert = new LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean>() {
             @Override
-            public RetrofitResponse<ArticleDataBean> onResponse(@NonNull RetrofitResponse<ArticleDataBean> data) throws Exception {
+            public RetrofitResponse<ArticleDataBean> onResponse(RetrofitResponse<ArticleDataBean> data) throws Exception {
                 return RetrofitResponse.success(data.getData());
             }
         };

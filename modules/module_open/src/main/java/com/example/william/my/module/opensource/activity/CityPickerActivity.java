@@ -3,6 +3,8 @@ package com.example.william.my.module.opensource.activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.opensource.R;
@@ -23,7 +25,7 @@ import com.zaaach.citypicker.model.LocatedCity;
 public class CityPickerActivity extends BaseResponseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.open_CityPickerTheme);
         super.onCreate(savedInstanceState);
     }

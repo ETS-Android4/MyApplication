@@ -1,4 +1,4 @@
-package com.example.william.my.module.network.websocket;
+package com.example.william.my.core.websocket;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;

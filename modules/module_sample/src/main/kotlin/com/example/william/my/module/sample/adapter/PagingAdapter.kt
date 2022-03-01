@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.module.sample.databinding.SampleItemRecyclerBinding
 
-class PagingAdapter(diffCallback: DiffUtil.ItemCallback<ArticleDetailBean>) : PagingDataAdapter<ArticleDetailBean, PagingAdapter.ViewHolder>(diffCallback) {
+class PagingAdapter(diffCallback: DiffUtil.ItemCallback<ArticleDetailBean>) :
+    PagingDataAdapter<ArticleDetailBean, PagingAdapter.ViewHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = position.toString() + ". " + getItem(position)?.title
@@ -16,7 +17,8 @@ class PagingAdapter(diffCallback: DiffUtil.ItemCallback<ArticleDetailBean>) : Pa
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val bind = SampleItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val bind =
+            SampleItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(bind)
     }
 

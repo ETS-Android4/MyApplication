@@ -6,18 +6,18 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.libraries.R;
 import com.example.william.my.core.spherecollision.widget.PoolBallView;
+import com.example.william.my.module.libraries.R;
 import com.example.william.my.module.router.ARouterPath;
 
 @Route(path = ARouterPath.Lib.Lib_SphereCollision)
@@ -40,7 +40,6 @@ public class SphereCollisionActivity extends AppCompatActivity {
                 int y = (int) (event.values[1] * 2.0f);
                 if (lastX != x || lastY != y) {//防止频繁回调,画面抖动
                     poolBall.getBallView().rockBallByImpulse(-x, y);
-                    Log.e("陀螺仪 ", x + "<----陀螺仪Y: " + y + "<-----");
                 }
 
                 lastX = x;
@@ -57,7 +56,7 @@ public class SphereCollisionActivity extends AppCompatActivity {
     private int lastY;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lib_activity_sphere_collision);
         poolBall = findViewById(R.id.pool_ball);
@@ -67,7 +66,6 @@ public class SphereCollisionActivity extends AppCompatActivity {
         findViewById(R.id.bottom).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("btn", "点击了");
                 poolBall.getBallView().rockBallByImpulse();
             }
         });

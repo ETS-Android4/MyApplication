@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -20,7 +21,7 @@ public class LottieActivity extends AppCompatActivity {
     private LottieAnimationView mLottieAnim;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.open_activity_lottie);
 

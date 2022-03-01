@@ -3,6 +3,7 @@ package com.example.william.my.module.opensource.activity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -19,7 +20,7 @@ public class ImmersionBarActivity extends AppCompatActivity {
     public ImmersionBar mImmersionBar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.open_activity_immersion_bar);
         initAfterSetContentView();

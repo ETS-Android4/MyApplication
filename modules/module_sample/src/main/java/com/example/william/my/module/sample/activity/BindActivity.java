@@ -2,6 +2,7 @@ package com.example.william.my.module.sample.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -28,7 +29,7 @@ import com.example.william.my.module.sample.model.BindObservableViewModel;
 public class BindActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //setContentView(R.layout.jet_activity_bind);

@@ -4,7 +4,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Keep;
-import androidx.annotation.NonNull;
 
 import com.example.william.my.module.opensource.R;
 import com.tmall.wireless.tangram.structure.BaseCell;
@@ -15,7 +14,7 @@ import java.util.Locale;
 public class CustomHolderCell extends BaseCell<LinearLayout> {
 
     @Override
-    public void bindView(@NonNull LinearLayout view) {
+    public void bindView(LinearLayout view) {
         super.bindView(view);
         if (pos % 2 == 0) {
             view.setBackgroundColor(0xff6200EE);

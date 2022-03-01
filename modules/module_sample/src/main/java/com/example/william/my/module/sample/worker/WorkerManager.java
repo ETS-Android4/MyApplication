@@ -2,7 +2,6 @@ package com.example.william.my.module.sample.worker;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
@@ -16,11 +15,11 @@ public class WorkerManager extends Worker {
 
     private static final String TAG = "UploadWorker";
 
-    public WorkerManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public WorkerManager(Context context, WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
-    @NonNull
+
     @Override
     public Result doWork() {
         // Get the input

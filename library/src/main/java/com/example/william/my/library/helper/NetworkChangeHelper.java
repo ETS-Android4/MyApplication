@@ -13,7 +13,6 @@ import android.net.NetworkRequest;
 import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 /**
@@ -96,19 +95,19 @@ public class NetworkChangeHelper {
         private static final String TAG = "NetworkCallbackImpl";
 
         @Override
-        public void onAvailable(@NonNull Network network) {
+        public void onAvailable(Network network) {
             super.onAvailable(network);
             mNetworkChangeListener.onNetworkStatusChange(true);
         }
 
         @Override
-        public void onLost(@NonNull Network network) {
+        public void onLost(Network network) {
             super.onLost(network);
             mNetworkChangeListener.onNetworkStatusChange(false);
         }
 
         @Override
-        public void onCapabilitiesChanged(@NonNull Network network, @NonNull NetworkCapabilities networkCapabilities) {
+        public void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
             super.onCapabilitiesChanged(network, networkCapabilities);
             //网络变化时，这个方法会回调多次
             if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {

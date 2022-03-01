@@ -7,8 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Keep;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.william.my.module.opensource.R;
@@ -24,17 +22,17 @@ public class CustomCellView extends FrameLayout implements ITangramViewLifeCycle
     private TextView mTextView;
     private ImageView mImageView;
 
-    public CustomCellView(@NonNull Context context) {
+    public CustomCellView(Context context) {
         super(context);
         init();
     }
 
-    public CustomCellView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public CustomCellView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CustomCellView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CustomCellView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

@@ -3,9 +3,6 @@ package com.example.william.my.module.router.fragment;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.alibaba.android.arouter.exception.HandlerException;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -31,7 +28,7 @@ public class RouterRecyclerFragment extends BaseRecyclerFragment<RouterItem> {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle arguments = getArguments();
         if (arguments != null) {
@@ -40,7 +37,7 @@ public class RouterRecyclerFragment extends BaseRecyclerFragment<RouterItem> {
     }
 
     @Override
-    public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
         RouterItem item = (RouterItem) adapter.getData().get(position);
         try {

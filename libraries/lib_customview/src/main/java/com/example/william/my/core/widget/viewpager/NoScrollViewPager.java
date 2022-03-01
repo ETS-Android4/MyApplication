@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 /**
@@ -15,11 +13,11 @@ public class NoScrollViewPager extends ViewPager {
 
     private final boolean isPagingScroll = false;
 
-    public NoScrollViewPager(@NonNull Context context) {
+    public NoScrollViewPager(Context context) {
         super(context);
     }
 
-    public NoScrollViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public NoScrollViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

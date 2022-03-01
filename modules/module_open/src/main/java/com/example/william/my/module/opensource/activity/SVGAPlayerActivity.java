@@ -3,7 +3,7 @@ package com.example.william.my.module.opensource.activity;
 import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -29,7 +29,7 @@ public class SVGAPlayerActivity extends AppCompatActivity {
     private SVGAImageView mSVGAImageView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.open_activity_svga);
         mSVGAImageView = findViewById(R.id.svga);
@@ -54,7 +54,7 @@ public class SVGAPlayerActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onComplete(@NonNull SVGAVideoEntity svgaVideoEntity) {
+                public void onComplete(SVGAVideoEntity svgaVideoEntity) {
                     SVGADrawable drawable = new SVGADrawable(svgaVideoEntity);
                     mSVGAImageView.setImageDrawable(drawable);
                     mSVGAImageView.startAnimation();

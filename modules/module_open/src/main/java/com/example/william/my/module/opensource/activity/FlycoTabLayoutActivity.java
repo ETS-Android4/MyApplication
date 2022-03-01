@@ -2,6 +2,7 @@ package com.example.william.my.module.opensource.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -25,7 +26,7 @@ public class FlycoTabLayoutActivity extends BaseActivity implements OnTabSelectL
     private final String[] mTitles = {"热门", "iOS", "Android"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.open_activity_flyco_tab_layout);
 

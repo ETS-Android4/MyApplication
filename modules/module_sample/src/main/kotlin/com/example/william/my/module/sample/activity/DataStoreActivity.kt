@@ -8,7 +8,6 @@ import com.example.william.my.module.sample.databinding.SampleLayoutResponseBind
 import com.example.william.my.module.sample.datastore.ExamplePreferenceDataStore
 import com.example.william.my.module.sample.datastore.ExampleProtoDataStore
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
 
 /**
  * DataStore

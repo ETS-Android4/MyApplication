@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.spinner.Spinner;
 import com.example.william.my.core.widget.spinner.SpinnerAdapter;
@@ -22,7 +24,7 @@ public class SpinnerActivity extends BaseActivity {
     private final String[] mData = new String[]{"第一条数据", "第二条数据", "第三条数据", "第四条数据"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity_spinner);
 

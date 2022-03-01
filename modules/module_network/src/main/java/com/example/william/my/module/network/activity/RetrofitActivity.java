@@ -1,7 +1,5 @@
 package com.example.william.my.module.network.activity;
 
-import androidx.annotation.NonNull;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.api.NetworkService;
 import com.example.william.my.bean.base.Urls;
@@ -39,7 +37,7 @@ public class RetrofitActivity extends BaseResponseActivity {
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
+            public void onResponse(Call<ResponseBody> call, final Response<ResponseBody> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     try {
                         String netSuccess = "Success: " + (response.body().string());
@@ -51,7 +49,7 @@ public class RetrofitActivity extends BaseResponseActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull final Throwable t) {
+            public void onFailure(Call<ResponseBody> call, final Throwable t) {
                 String netError = "Error: " + t.getMessage();
                 showResponse(netError);
             }
@@ -80,7 +78,7 @@ public class RetrofitActivity extends BaseResponseActivity {
 //
 //        call.enqueue(new Callback<ResponseBody>() {
 //            @Override
-//            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
+//            public void onResponse( Call<ResponseBody> call,  final Response<ResponseBody> response) {
 //                if (response.isSuccessful() && response.body() != null) {
 //                    FileIOUtilsService fileIOUtils = (FileIOUtilsService) ARouter.getInstance().build(ARouterPath.Service.FileIOUtilsService).navigation();
 //                    File file = new File(getExternalCacheDir() + File.separator + "retrofit_download.apk");
@@ -89,7 +87,7 @@ public class RetrofitActivity extends BaseResponseActivity {
 //            }
 //
 //            @Override
-//            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull final Throwable t) {
+//            public void onFailure( Call<ResponseBody> call,  final Throwable t) {
 //                String netError = "Error: " + t.getMessage();
 //                showResponse(netError);
 //            }
@@ -138,7 +136,7 @@ public class RetrofitActivity extends BaseResponseActivity {
 //
 //        call.enqueue(new Callback<ResponseBody>() {
 //            @Override
-//            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
+//            public void onResponse( Call<ResponseBody> call,  final Response<ResponseBody> response) {
 //                if (response.isSuccessful() && response.body() != null) {
 //                    String netSuccess = "Success: " + new Gson().toJson(response.body());
 //                    showResponse(netSuccess);
@@ -146,7 +144,7 @@ public class RetrofitActivity extends BaseResponseActivity {
 //            }
 //
 //            @Override
-//            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull final Throwable t) {
+//            public void onFailure( Call<ResponseBody> call,  final Throwable t) {
 //                String netError = "Error: " + t.getMessage();
 //                showResponse(netError);
 //            }

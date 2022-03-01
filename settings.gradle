@@ -7,6 +7,7 @@ include ':libraries:lib_volley'
 include ':libraries:lib_okhttp'
 include ':libraries:lib_retrofit'
 //include ':libraries:lib_download'
+include ':libraries:lib_websocket'
 
 include ':libraries:lib_keyvalue'
 include ':libraries:lib_imageloader'

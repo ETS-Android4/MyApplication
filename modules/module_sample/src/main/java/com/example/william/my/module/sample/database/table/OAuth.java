@@ -36,18 +36,18 @@ public class OAuth {
     @Ignore
     private String mRemark;
 
-    public OAuth(@NonNull String id, String refreshToken, long expires) {
+    public OAuth(String id, String refreshToken, long expires) {
         this.id = id;
         this.refreshToken = refreshToken;
         this.expires = expires;
     }
 
-    @NonNull
+
     public String getId() {
         return id;
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(String id) {
         this.id = id;
     }
 

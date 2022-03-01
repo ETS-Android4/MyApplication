@@ -1,6 +1,5 @@
 package com.example.william.my.module.demo.adapter;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -29,7 +28,7 @@ public class ViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
      * 如果 behavior 的值为 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT ，
      * 那么只有当前选中的 Fragment 在 {@link Lifecycle.State#RESUMED} 状态 ，其他不可见的 Fragment 会被限制在 {@link Lifecycle.State#STARTED} 状态。
      */
-    public ViewPagerFragmentAdapter(@NonNull FragmentManager fm, List<Fragment> mFragments, boolean isNew) {
+    public ViewPagerFragmentAdapter(FragmentManager fm, List<Fragment> mFragments, boolean isNew) {
         // 兼容旧方式懒加载
         super(fm, isNew ? BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT : BEHAVIOR_SET_USER_VISIBLE_HINT);
         // 限制Fragment声明周期
@@ -38,7 +37,7 @@ public class ViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
         this.mFragments = mFragments;
     }
 
-    public ViewPagerFragmentAdapter(@NonNull FragmentManager fm, List<Fragment> fragments, List<String> titles, boolean isNew) {
+    public ViewPagerFragmentAdapter(FragmentManager fm, List<Fragment> fragments, List<String> titles, boolean isNew) {
         // 兼容旧方式懒加载
         super(fm, isNew ? BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT : BEHAVIOR_SET_USER_VISIBLE_HINT);
         // 限制Fragment声明周期
@@ -48,7 +47,7 @@ public class ViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
         this.mTitles = titles;
     }
 
-    @NonNull
+
     @Override
     public Fragment getItem(int position) {
         return mFragments.get(position);

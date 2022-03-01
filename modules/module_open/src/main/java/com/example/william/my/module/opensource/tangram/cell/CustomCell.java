@@ -1,8 +1,6 @@
 package com.example.william.my.module.opensource.tangram.cell;
 
 import androidx.annotation.Keep;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.william.my.module.opensource.tangram.view.CustomCellView;
 import com.tmall.wireless.tangram.MVHelper;
@@ -24,7 +22,7 @@ public class CustomCell extends BaseCell<CustomCellView> {
      * 解析数据业务数据，可以将解析值缓存到成员变量里
      */
     @Override
-    public void parseWith(@NonNull JSONObject data, @NonNull MVHelper resolver) {
+    public void parseWith(JSONObject data, MVHelper resolver) {
         super.parseWith(data, resolver);
         try {
             if (data.has("imageUrl")) {
@@ -42,7 +40,7 @@ public class CustomCell extends BaseCell<CustomCellView> {
      * 解析数据样式数据，可以将解析值缓存到成员变量里
      */
     @Override
-    public void parseStyle(@Nullable JSONObject data) {
+    public void parseStyle(JSONObject data) {
         super.parseStyle(data);
     }
 
@@ -50,7 +48,7 @@ public class CustomCell extends BaseCell<CustomCellView> {
      * 绑定数据到自定义 View
      */
     @Override
-    public void bindView(@NonNull CustomCellView view) {
+    public void bindView(CustomCellView view) {
         super.bindView(view);
         if (pos % 2 == 0) {
             view.setBackgroundColor(0xff6200EE);
@@ -65,7 +63,7 @@ public class CustomCell extends BaseCell<CustomCellView> {
      * 绑定数据到 View 之后，可选实现
      */
     @Override
-    public void postBindView(@NonNull CustomCellView view) {
+    public void postBindView(CustomCellView view) {
         super.postBindView(view);
     }
 

@@ -3,8 +3,6 @@ package com.example.william.my.core.widget.scroll;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 
 import com.example.william.my.core.widget.utils.ScreenUtils;
@@ -13,17 +11,17 @@ public class MaxHeightScrollView extends NestedScrollView {
 
     private final Context mContext;
 
-    public MaxHeightScrollView(@NonNull Context context) {
+    public MaxHeightScrollView(Context context) {
         super(context);
         this.mContext = context;
     }
 
-    public MaxHeightScrollView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public MaxHeightScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
     }
 
-    public MaxHeightScrollView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MaxHeightScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
     }

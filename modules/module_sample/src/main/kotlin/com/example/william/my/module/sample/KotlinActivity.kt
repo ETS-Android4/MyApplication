@@ -90,7 +90,7 @@ class KotlinActivity : BaseActivity() {
      * it 可重命名微一个可读的lambda参数，适合多重嵌套
      */
     private fun scope() {
-        val loginData: LoginData = LoginData(LoginData.User("001", "nickname"))
+        val loginData = LoginData(LoginData.User("001", "nickname"))
 
         // with
         // 对于这个对象，执行以下操作

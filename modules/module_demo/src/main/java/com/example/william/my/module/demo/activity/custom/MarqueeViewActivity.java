@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.marqueeview.MarqueeView;
 import com.example.william.my.library.base.BaseActivity;
@@ -22,7 +24,7 @@ public class MarqueeViewActivity extends BaseActivity {
     private final String[] mData = new String[]{"第一条数据", "第二条数据", "第三条数据", "第四条数据"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity_marquee_view);
 

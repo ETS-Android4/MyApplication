@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.load.DataSource;
@@ -94,7 +93,7 @@ public class GlideLoader implements ILoader {
                 .addListener(new RequestListener<GifDrawable>() {
 
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
                         return false;
                     }
 
@@ -116,7 +115,7 @@ public class GlideLoader implements ILoader {
                 .load(url)
                 .addListener(new RequestListener<GifDrawable>() {
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
                         return false;
                     }
 
@@ -125,13 +124,13 @@ public class GlideLoader implements ILoader {
                         try {
                             Field gifStateField = GifDrawable.class.getDeclaredField("state");
                             gifStateField.setAccessible(true);
-                            Class gifStateClass = Class.forName("com.bumptech.glide.load.resource.gif.GifDrawable$GifState");
+                            Class<?> gifStateClass = Class.forName("com.bumptech.glide.load.resource.gif.GifDrawable$GifState");
                             Field gifFrameLoaderField = gifStateClass.getDeclaredField("frameLoader");
                             gifFrameLoaderField.setAccessible(true);
-                            Class gifFrameLoaderClass = Class.forName("com.bumptech.glide.load.resource.gif.GifFrameLoader");
+                            Class<?> gifFrameLoaderClass = Class.forName("com.bumptech.glide.load.resource.gif.GifFrameLoader");
                             Field gifDecoderField = gifFrameLoaderClass.getDeclaredField("gifDecoder");
                             gifDecoderField.setAccessible(true);
-                            Class gifDecoderClass = Class.forName("com.bumptech.glide.gifdecoder.GifDecoder");
+                            Class<?> gifDecoderClass = Class.forName("com.bumptech.glide.gifdecoder.GifDecoder");
                             Object gifDecoder = gifDecoderField.get(gifFrameLoaderField.get(gifStateField.get(resource)));
                             Method getDelayMethod = gifDecoderClass.getDeclaredMethod("getDelay", int.class);
                             getDelayMethod.setAccessible(true);

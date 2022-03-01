@@ -2,7 +2,6 @@ package com.example.william.my.module.sample.activity;
 
 import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.work.Constraints;
 import androidx.work.Data;
@@ -97,7 +96,7 @@ public class WorkManagerActivity extends BaseResponseActivity {
         WorkManager.getInstance(this).getWorkInfoByIdLiveData(oneTimeWorkRequest.getId())
                 .observe(this, new Observer<WorkInfo>() {
                     @Override
-                    public void onChanged(@Nullable WorkInfo workInfo) {
+                    public void onChanged(WorkInfo workInfo) {
                         if (workInfo != null && workInfo.getState() == WorkInfo.State.SUCCEEDED) {
                             // 工作进度
                             Data progress = workInfo.getProgress();

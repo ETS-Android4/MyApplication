@@ -3,6 +3,8 @@ package com.example.william.my.module.util.activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.AdaptScreenUtils;
 import com.example.william.my.library.base.BaseActivity;
@@ -19,7 +21,7 @@ import com.example.william.my.module.util.R;
 public class AdaptScreenActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.util_activity_adapt_screen);
     }

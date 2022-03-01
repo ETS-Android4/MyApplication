@@ -4,8 +4,9 @@
 
     <application>
         <activity
-            android:name=".activity.sample.ShapeableActivity"
+            android:name=".activity.sample.SAFActivity"
             android:exported="false" />
+        <activity android:name=".activity.widget.ShapeableActivity" />
         <activity android:name=".activity.other.DispatchActivity" />
         <activity android:name=".DemoActivity" />
         <activity android:name=".activity.sample.AnimatorActivity" />

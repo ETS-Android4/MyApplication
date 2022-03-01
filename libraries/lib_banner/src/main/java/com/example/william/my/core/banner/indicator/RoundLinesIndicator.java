@@ -7,19 +7,17 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 
-import androidx.annotation.Nullable;
-
 public class RoundLinesIndicator extends BaseIndicator {
 
     public RoundLinesIndicator(Context context) {
         this(context, null);
     }
 
-    public RoundLinesIndicator(Context context, @Nullable AttributeSet attrs) {
+    public RoundLinesIndicator(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RoundLinesIndicator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public RoundLinesIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mPaint.setStyle(Paint.Style.FILL);
     }

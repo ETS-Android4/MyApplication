@@ -67,7 +67,6 @@ EventBus.getDefault().removeAllStickyEvents();
 
 ## EventBus 线程池
 
-
 ## EventBus 源码解析
 
 ### 注册 -> register()

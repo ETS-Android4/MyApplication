@@ -2,6 +2,8 @@ package com.example.william.my.module.opensource.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
@@ -21,7 +23,7 @@ public class SwipeToLoadActivity extends BaseActivity {
     private SwipeToLoadLayout mSwipeToLoadLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.open_activity_swipe_to_load);
 

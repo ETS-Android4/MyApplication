@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.example.william.my.module.demo.R;
@@ -16,7 +15,7 @@ import com.example.william.my.module.demo.R;
  */
 public class ForegroundService extends Service {
 
-    @Nullable
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;

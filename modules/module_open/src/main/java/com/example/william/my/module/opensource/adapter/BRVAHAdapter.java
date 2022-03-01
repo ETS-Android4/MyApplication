@@ -1,7 +1,5 @@
 package com.example.william.my.module.opensource.adapter;
 
-import androidx.annotation.NonNull;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.module.opensource.R;
@@ -25,12 +23,12 @@ public class BRVAHAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
      * 在此方法中设置item数据
      */
     @Override
-    protected void convert(@NonNull BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, String item) {
         helper.setText(R.id.item_textView, item);
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder holder, String item, @NonNull List<?> payloads) {
+    protected void convert(BaseViewHolder holder, String item, List<?> payloads) {
         if (payloads.isEmpty()) {
             super.convert(holder, item, payloads);
         } else {

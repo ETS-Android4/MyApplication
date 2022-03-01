@@ -1,7 +1,5 @@
 package com.example.william.my.module.network.utils;
 
-import androidx.annotation.NonNull;
-
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -16,7 +14,7 @@ public class NetworkUtils {
      * @param useIPv4
      * @return
      */
-    @NonNull
+
     public static String getIPAddress(final boolean useIPv4) {
         try {
             Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();

@@ -1,7 +1,5 @@
 package com.example.william.my.core.retrofit.function;
 
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.okhttp.utils.OkHttpLog;
 import com.example.william.my.core.retrofit.exception.ServerResultException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
@@ -19,7 +17,7 @@ public class ServerResultFunction<T> implements Function<RetrofitResponse<JsonEl
 
     @SuppressWarnings("unchecked")
     @Override
-    public RetrofitResponse<T> apply(@NonNull RetrofitResponse<JsonElement> response) throws Exception {
+    public RetrofitResponse<T> apply(RetrofitResponse<JsonElement> response) throws Exception {
         //抛出服务器返回自定义异常
         if (!response.isSuccess()) {
             OkHttpLog.e(TAG, new Gson().toJson(response));

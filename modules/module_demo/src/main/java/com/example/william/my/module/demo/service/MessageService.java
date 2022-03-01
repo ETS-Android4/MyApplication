@@ -10,9 +10,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.william.my.module.demo.activity.sample.MessengerActivity;
 
 import java.lang.ref.WeakReference;
@@ -35,13 +32,13 @@ public class MessageService extends Service {
 
         private final WeakReference<MessageService> weakReference;
 
-        ServiceHandler(@NonNull Looper looper, MessageService service) {
+        ServiceHandler(Looper looper, MessageService service) {
             super(looper);
             this.weakReference = new WeakReference<>(service);
         }
 
         @Override
-        public void handleMessage(@NonNull Message msg) {
+        public void handleMessage(Message msg) {
             super.handleMessage(msg);
             MessageService mService = weakReference.get();
             if (mService == null) {
@@ -80,7 +77,7 @@ public class MessageService extends Service {
         }
     }
 
-    @Nullable
+
     @Override
     public IBinder onBind(Intent intent) {
         //获取Service自身Messenger所对应的IBinder，并将其发送共享给所有客户端

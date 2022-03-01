@@ -13,14 +13,19 @@ import com.example.william.my.module.sample.databinding.SampleItemRecyclerBindin
 // Adapter that displays a loading spinner when
 // state = LoadState.Loading, and an error message and retry
 // button when state is LoadState.Error.
-class PagingLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<LoadStateViewHolder>() {
+class PagingLoadStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<LoadStateViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState) = LoadStateViewHolder(parent, retry)
+    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState) =
+        LoadStateViewHolder(parent, retry)
 
-    override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) = holder.bind(loadState)
+    override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) =
+        holder.bind(loadState)
 }
 
-class LoadStateViewHolder(parent: ViewGroup, retry: () -> Unit) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.sample_item_recycler, parent, false)) {
+class LoadStateViewHolder(parent: ViewGroup, retry: () -> Unit) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context).inflate(R.layout.sample_item_recycler, parent, false)
+) {
 
     private val context = parent.context
     private val binding = SampleItemRecyclerBinding.bind(itemView)

@@ -7,8 +7,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
 import com.example.william.my.module.demo.IMyAidlInterface;
 
 public class AIDLService extends Service {
@@ -21,7 +19,7 @@ public class AIDLService extends Service {
 
     private static final String TAG = "AIDLService";
 
-    @Nullable
+
     @Override
     public IBinder onBind(Intent intent) {
         return xBinder;

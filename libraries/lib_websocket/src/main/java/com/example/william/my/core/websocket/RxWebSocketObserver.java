@@ -1,6 +1,5 @@
-package com.example.william.my.module.network.websocket;
+package com.example.william.my.core.websocket;
 
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import okhttp3.Response;
@@ -14,7 +13,7 @@ public abstract class RxWebSocketObserver implements Observer<RxWebSocketInfo> {
     private Disposable disposable;
 
     @Override
-    public void onNext(@NonNull RxWebSocketInfo webSocketInfo) {
+    public void onNext(RxWebSocketInfo webSocketInfo) {
         if (webSocketInfo.isOnOpen()) {
             hasOpened = true;
             onOpen(webSocketInfo.getWebSocket(), webSocketInfo.getResponse());
@@ -30,7 +29,7 @@ public abstract class RxWebSocketObserver implements Observer<RxWebSocketInfo> {
     }
 
     @Override
-    public void onError(@NonNull Throwable e) {
+    public void onError(Throwable e) {
         e.printStackTrace();
     }
 
@@ -44,7 +43,7 @@ public abstract class RxWebSocketObserver implements Observer<RxWebSocketInfo> {
     }
 
     @Override
-    public void onSubscribe(@NonNull Disposable disposable) {
+    public void onSubscribe(Disposable disposable) {
         this.disposable = disposable;
     }
 

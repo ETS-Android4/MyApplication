@@ -2,6 +2,8 @@ package com.example.william.my.module.opensource.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.opensource.R;
@@ -16,7 +18,7 @@ import cn.iwgang.countdownview.CountdownView;
 public class CountdownActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.open_activity_countdown);
 

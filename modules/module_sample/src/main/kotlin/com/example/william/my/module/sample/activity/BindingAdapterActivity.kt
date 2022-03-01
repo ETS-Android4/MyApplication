@@ -25,7 +25,7 @@ class BindingAdapterActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         DataBindingVMFactory
     }
 
-    private var mPage = 0;
+    private var mPage = 0
 
     lateinit var mBinding: SampleActivityDataBindingBinding
 
@@ -60,7 +60,7 @@ class BindingAdapterActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        mPage = 0;
+        mPage = 0
         mViewModel.fetchNewData(mPage)
         mBinding.smartRefresh.finishRefresh(1000)
     }

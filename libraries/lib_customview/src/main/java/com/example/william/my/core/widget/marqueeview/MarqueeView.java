@@ -7,9 +7,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ViewFlipper;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.william.my.core.widget.R;
 
 import java.util.List;
@@ -25,11 +22,11 @@ public class MarqueeView extends ViewFlipper {
     @SuppressWarnings("FieldCanBeLocal")
     private final int animDuration = 500;//翻页动画时间
 
-    public MarqueeView(@NonNull Context context) {
+    public MarqueeView(Context context) {
         this(context, null);
     }
 
-    public MarqueeView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public MarqueeView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         setFlipInterval(interval);//设置翻页间隔

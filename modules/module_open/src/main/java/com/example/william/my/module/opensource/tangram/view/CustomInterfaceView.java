@@ -6,8 +6,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Keep;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.william.my.module.opensource.R;
 import com.tmall.wireless.tangram.structure.BaseCell;
@@ -23,17 +21,17 @@ public class CustomInterfaceView extends FrameLayout implements ITangramViewLife
 
     private TextView mTextView;
 
-    public CustomInterfaceView(@NonNull Context context) {
+    public CustomInterfaceView(Context context) {
         super(context);
         init();
     }
 
-    public CustomInterfaceView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public CustomInterfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CustomInterfaceView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CustomInterfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

@@ -8,9 +8,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.william.my.core.banner.config.BannerIndicatorConfig;
 
 public class BaseIndicator extends View implements Indicator {
@@ -24,11 +21,11 @@ public class BaseIndicator extends View implements Indicator {
         this(context, null);
     }
 
-    public BaseIndicator(Context context, @Nullable AttributeSet attrs) {
+    public BaseIndicator(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BaseIndicator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public BaseIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mConfig = new BannerIndicatorConfig();
 
@@ -38,7 +35,7 @@ public class BaseIndicator extends View implements Indicator {
         mPaint.setColor(mConfig.getNormalColor());
     }
 
-    @NonNull
+
     @Override
     public View getIndicatorView() {
         if (mConfig.isAttachToBanner()) {

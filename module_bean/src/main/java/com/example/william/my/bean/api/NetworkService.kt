@@ -26,7 +26,10 @@ import retrofit2.http.Query
 interface NetworkService {
 
     @POST(Urls.Url_Login)
-    fun call(@Query("username") username: String, @Query("password") password: String): Call<ResponseBody>
+    fun call(
+        @Query("username") username: String,
+        @Query("password") password: String
+    ): Call<ResponseBody>
 
     @GET(Urls.Url_Article)
     fun getArticle(@Path("page") page: Int): Single<ArticleBean>
@@ -39,7 +42,10 @@ interface NetworkService {
      * flow、suspend
      */
     @POST(Urls.Url_Login)
-    suspend fun login(@Query("username") username: String, @Query("password") password: String): LoginData
+    suspend fun login(
+        @Query("username") username: String,
+        @Query("password") password: String
+    ): LoginData
 
     /**
      * DataBinding，Paging

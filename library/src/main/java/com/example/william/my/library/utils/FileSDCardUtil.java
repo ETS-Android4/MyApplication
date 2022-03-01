@@ -3,8 +3,6 @@ package com.example.william.my.library.utils;
 import android.content.Context;
 import android.os.Environment;
 
-import java.io.File;
-
 /**
  * 内部存储：
  * 通过Context.getFilesDir()方法可以获取到 /data/user/0/你的应用包名/files
@@ -19,7 +17,7 @@ public class FileSDCardUtil {
     /**
      * @return /storage/emulated/0/Android/data/包名/files
      */
-    public String getFilesPath(Context context) {
+    public static String getFilesPath(Context context) {
         String filePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
@@ -35,7 +33,7 @@ public class FileSDCardUtil {
     /**
      * @return /storage/emulated/0/Android/data/包名/cache
      */
-    public String getCachePath(Context context) {
+    public static String getCachePath(Context context) {
         String cachePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
@@ -48,25 +46,25 @@ public class FileSDCardUtil {
         return cachePath;
     }
 
-    @SuppressWarnings("deprecation")
-    public static String getSdCardPublic() {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                || !Environment.isExternalStorageRemovable()) {
-            File directoryDownloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            return directoryDownloads.getAbsolutePath();
-        }
-        return "";
-    }
+//    @SuppressWarnings("deprecation")
+//    public static String getSdCardPublic() {
+//        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+//                || !Environment.isExternalStorageRemovable()) {
+//            File directoryDownloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+//            return directoryDownloads.getAbsolutePath();
+//        }
+//        return "";
+//    }
 
-    @SuppressWarnings("deprecation")
-    public static String getSdCard() {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                || !Environment.isExternalStorageRemovable()) {
-            File directory = new File(Environment.getExternalStorageDirectory() + File.separator);
-            return directory.getAbsolutePath();
-        }
-        return "";
-    }
+//    @SuppressWarnings("deprecation")
+//    public static String getSdCard() {
+//        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+//                || !Environment.isExternalStorageRemovable()) {
+//            File directory = new File(Environment.getExternalStorageDirectory() + File.separator);
+//            return directory.getAbsolutePath();
+//        }
+//        return "";
+//    }
 }
 
 

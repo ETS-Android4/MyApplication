@@ -1,6 +1,5 @@
 package com.example.william.my.core.retrofit.callback;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.william.my.core.retrofit.base.ResponseCallback;
@@ -39,7 +38,7 @@ public class LiveDataCallback<Bean, Data> implements ResponseCallback<RetrofitRe
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onResponse(@NonNull RetrofitResponse<Bean> data) {
+    public void onResponse(RetrofitResponse<Bean> data) {
         try {
             liveData.postValue(convert == null ? (RetrofitResponse<Data>) data : convert.onResponse(data));
         } catch (Exception e) {
@@ -48,11 +47,11 @@ public class LiveDataCallback<Bean, Data> implements ResponseCallback<RetrofitRe
     }
 
     @Override
-    public void onFailure(@NonNull ApiException e) {
+    public void onFailure(ApiException e) {
         liveData.postValue(RetrofitResponse.error(e.getMessage()));
     }
 
     public interface LiveDataConvert<Bean, Data> {
-        RetrofitResponse<Data> onResponse(@NonNull RetrofitResponse<Bean> data) throws Exception;
+        RetrofitResponse<Data> onResponse(RetrofitResponse<Bean> data) throws Exception;
     }
 }

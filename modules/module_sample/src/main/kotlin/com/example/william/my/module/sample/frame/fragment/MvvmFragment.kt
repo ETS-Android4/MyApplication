@@ -33,9 +33,9 @@ class MvvmFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
     }
 
     private fun observeViewModel() {
-        mArticleViewModel.article.observe(viewLifecycleOwner, Observer { articles ->
+        mArticleViewModel.article.observe(viewLifecycleOwner) { articles ->
             onDataSuccess(articles?.data?.datas)
-        })
+        }
         queryData()
     }
 

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 
 import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 public class BannerUtils {
@@ -45,7 +44,7 @@ public class BannerUtils {
      * @param layoutId
      * @return
      */
-    public static View getView(@NonNull ViewGroup parent, @LayoutRes int layoutId) {
+    public static View getView(ViewGroup parent, @LayoutRes int layoutId) {
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
         ViewGroup.LayoutParams params = view.getLayoutParams();
         //这里判断高度和宽带是否都是match_parent

@@ -6,20 +6,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public class ClickProxyLayout extends FrameLayout {
 
-    public ClickProxyLayout(@NonNull Context context) {
+    public ClickProxyLayout(Context context) {
         super(context);
     }
 
-    public ClickProxyLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public ClickProxyLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public ClickProxyLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ClickProxyLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

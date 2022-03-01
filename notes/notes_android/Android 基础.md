@@ -44,7 +44,9 @@
 #### standard：标准模式、默认模式
 
 * 含义：每次启动一个Activity就会创建一个新的实例。
-* 注意：使用ApplicationContext去启动standard模式Activity就会报错。因为standard模式的Activity会默认进入启动它所属的任务栈，但是由于非Activity的Context没有所谓的任务栈。
+*
+
+注意：使用ApplicationContext去启动standard模式Activity就会报错。因为standard模式的Activity会默认进入启动它所属的任务栈，但是由于非Activity的Context没有所谓的任务栈。
 
 #### singleTop：栈顶复用模式
 
@@ -52,7 +54,8 @@
 
 #### singleTask：栈内复用模式
 
-* 含义：只要该Activity在一个任务栈中存在，都不会重新创建，并回调onNewIntent(intent)方法。如果不存在，系统会先寻找是否存在需要的栈，如果不存在该栈，就创建一个任务栈，并把该Activity放进去；如果存在，就会创建到已经存在的栈中。
+* 含义：只要该Activity在一个任务栈中存在，都不会重新创建，并回调onNewIntent(intent)
+  方法。如果不存在，系统会先寻找是否存在需要的栈，如果不存在该栈，就创建一个任务栈，并把该Activity放进去；如果存在，就会创建到已经存在的栈中。
 
 #### singleInstance：单实例模式
 

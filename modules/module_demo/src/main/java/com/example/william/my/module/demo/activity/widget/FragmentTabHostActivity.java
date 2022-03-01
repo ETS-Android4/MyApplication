@@ -8,6 +8,7 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTabHost;
 
@@ -41,7 +42,7 @@ public class FragmentTabHostActivity extends BaseActivity {
     private final String[] mTextArray = {"首页", "列表", "消息"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity_fragment_tabhost);
 

@@ -1,7 +1,5 @@
 package com.example.william.my.core.retrofit.converter;
 
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.status.State;
 import com.google.gson.Gson;
@@ -32,7 +30,7 @@ public class RetrofitResponseBodyConverter<T> implements Converter<ResponseBody,
     }
 
     @Override
-    public T convert(@NonNull ResponseBody value) throws IOException {
+    public T convert(ResponseBody value) throws IOException {
         String result = value.string();
         try {
             JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
@@ -53,7 +51,7 @@ public class RetrofitResponseBodyConverter<T> implements Converter<ResponseBody,
         }
     }
 
-    private String getErrMessage(@NonNull JsonObject jsonObject) {
+    private String getErrMessage(JsonObject jsonObject) {
         return jsonObject.has("errorMsg") ? jsonObject.get("errorMsg").getAsString() : "数据异常";
     }
 }

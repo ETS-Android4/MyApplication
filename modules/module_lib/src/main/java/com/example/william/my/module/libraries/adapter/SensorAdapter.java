@@ -4,12 +4,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.william.my.module.libraries.R;
 import com.example.william.my.core.banner.adapter.BannerAdapter;
 import com.example.william.my.core.banner.sensor.SensorLayout;
+import com.example.william.my.module.libraries.R;
 
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class SensorAdapter extends BannerAdapter<String, SensorAdapter.SensorHol
         public SensorLayout mMid;//中间层传感器View
         public SensorLayout mBackground;//最底层传感器View
 
-        public SensorHolder(@NonNull View view) {
+        public SensorHolder(View view) {
             super(view);
             mForeground = view.findViewById(R.id.foreground);
             mMid = view.findViewById(R.id.mid);

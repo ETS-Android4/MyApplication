@@ -29,7 +29,7 @@ public class DownloadTask implements Serializable {
 
     private DownloadCallback mDownloadCallback;
 
-    public DownloadTask(@NonNull String downloadUrl) {
+    public DownloadTask(String downloadUrl) {
         this.downloadUrl = downloadUrl;
     }
 
@@ -45,12 +45,12 @@ public class DownloadTask implements Serializable {
         setDownloadCallback(callback);
     }
 
-    @NonNull
+
     public String getDownloadUrl() {
         return downloadUrl;
     }
 
-    public void setDownloadUrl(@NonNull String downloadUrl) {
+    public void setDownloadUrl(String downloadUrl) {
         this.downloadUrl = downloadUrl;
     }
 

@@ -1,6 +1,5 @@
 package com.example.william.my.core.retrofit.observer;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 
 import com.example.william.my.core.retrofit.loading.LoadingTip;
@@ -26,7 +25,7 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
     }
 
     @Override
-    public void onChanged(@NonNull RetrofitResponse<T> tRetrofitResponse) {
+    public void onChanged(RetrofitResponse<T> tRetrofitResponse) {
         switch (tRetrofitResponse.getCode()) {
             case State.LOADING:
                 if (mLoadingTip != null) {
@@ -65,7 +64,7 @@ public abstract class WithLoadingTipObserver<T> implements Observer<RetrofitResp
      *
      * @param response
      */
-    protected abstract void onResponse(@NonNull T response);
+    protected abstract void onResponse(T response);
 
     /**
      * State.ERROR 时，返回 错误信息

@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.os.MessageQueue;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseRecyclerActivity;
@@ -54,7 +56,7 @@ public class ModuleActivity extends BaseRecyclerActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
         super.onCreate(savedInstanceState);
 

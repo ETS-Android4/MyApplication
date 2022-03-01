@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.titlebar.TitleBar;
 import com.example.william.my.library.base.BaseActivity;
@@ -14,7 +16,7 @@ import com.example.william.my.module.router.ARouterPath;
 public class TitleBarActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_title_bar);
         TitleBar titleBar = TitleBar.setContentView(this, R.layout.demo_activity_title_bar);

@@ -1,6 +1,5 @@
 package com.example.william.my.module.sample.activity;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -36,7 +35,7 @@ public class ViewModelActivity extends BaseResponseActivity implements LoadingTi
         mViewModelViewModel = new ViewModelProvider(this).get(ViewModelViewModel.class);
         mViewModelViewModel.getArticle().observe(this, new WithLoadingTipObserver<ArticleDataBean>(mLoadingTip, "getArticle") {
             @Override
-            protected void onResponse(@NonNull ArticleDataBean response) {
+            protected void onResponse(ArticleDataBean response) {
                 showResponse(new Gson().toJson(response));
             }
         });

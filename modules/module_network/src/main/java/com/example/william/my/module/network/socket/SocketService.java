@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
-import androidx.annotation.Nullable;
-
 import com.example.william.my.module.utils.L;
 
 public class SocketService extends Service {
@@ -15,7 +13,7 @@ public class SocketService extends Service {
 
     private SocketServer socketServer;
 
-    @Nullable
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;

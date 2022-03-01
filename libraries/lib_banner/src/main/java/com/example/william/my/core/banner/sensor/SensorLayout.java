@@ -9,8 +9,6 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.Scroller;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -37,15 +35,15 @@ public class SensorLayout extends FrameLayout implements SensorEventListener, Ba
 
     private float mDirection = 1;//偏移加速的倍率 可以通过设置此倍率改变偏移速度
 
-    public SensorLayout(@NonNull Context context) {
+    public SensorLayout(Context context) {
         this(context, null);
     }
 
-    public SensorLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public SensorLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SensorLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SensorLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init(context);

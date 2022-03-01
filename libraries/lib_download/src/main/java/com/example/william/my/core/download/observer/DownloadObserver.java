@@ -36,7 +36,7 @@ public class DownloadObserver implements Observer<DownloadTask> {
     }
 
     @Override
-    public void onSubscribe(@NonNull Disposable d) {
+    public void onSubscribe(Disposable d) {
         disposable = d;
 
         /*
@@ -47,7 +47,7 @@ public class DownloadObserver implements Observer<DownloadTask> {
     }
 
     @Override
-    public void onNext(@NonNull DownloadTask downloadTask) {
+    public void onNext(DownloadTask downloadTask) {
         /*
          * 完成状态
          */
@@ -65,7 +65,7 @@ public class DownloadObserver implements Observer<DownloadTask> {
     }
 
     @Override
-    public void onError(@NonNull Throwable e) {
+    public void onError(Throwable e) {
         /*
          * 错误状态
          */

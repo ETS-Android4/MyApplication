@@ -1,7 +1,6 @@
 package com.example.william.my.application.base;
 
 import android.app.Activity;
-import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -58,9 +57,9 @@ public class App extends BaseApp {
     }
 
     private void initActivityLifecycleCallbacks() {
-        registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
-            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
                 Log.e(TAG, activity.getClass().getSimpleName());
             }
 
@@ -85,7 +84,7 @@ public class App extends BaseApp {
             }
 
             @Override
-            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
 
             }
 

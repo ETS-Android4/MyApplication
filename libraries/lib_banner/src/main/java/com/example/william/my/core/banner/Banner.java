@@ -18,7 +18,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.IntDef;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
@@ -699,7 +698,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
     /**
      * 设置PageTransformer
      */
-    public Banner<T, BA> setPageTransformer(@Nullable ViewPager2.PageTransformer transformer) {
+    public Banner<T, BA> setPageTransformer(ViewPager2.PageTransformer transformer) {
         getViewPager2().setPageTransformer(transformer);
         return this;
     }
@@ -709,7 +708,7 @@ public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHo
      * {@link ViewPager2.PageTransformer}
      * 如果找不到请导入implementation "androidx.viewpager2:viewpager2:1.0.0"
      */
-    public Banner<T, BA> addPageTransformer(@Nullable ViewPager2.PageTransformer transformer) {
+    public Banner<T, BA> addPageTransformer(ViewPager2.PageTransformer transformer) {
         mPageTransformer.addTransformer(transformer);
         return this;
     }

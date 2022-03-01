@@ -2,8 +2,6 @@ package com.example.william.my.core.retrofit.exception;
 
 import android.net.ParseException;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
@@ -23,7 +21,7 @@ import retrofit2.Response;
  */
 public class ExceptionHandler {
 
-    @NonNull
+
     public static ApiException handleException(Throwable e) {
         ApiException ex;
         if (e instanceof HttpException) {

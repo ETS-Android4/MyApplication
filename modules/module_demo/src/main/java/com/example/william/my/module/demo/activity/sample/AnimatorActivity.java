@@ -15,6 +15,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -32,7 +33,7 @@ public class AnimatorActivity extends BaseActivity implements View.OnClickListen
     private ObjectAnimator animatorAlpha, animatorRotation, animatorScale, animatorTranslation;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basics_layout_image);
 

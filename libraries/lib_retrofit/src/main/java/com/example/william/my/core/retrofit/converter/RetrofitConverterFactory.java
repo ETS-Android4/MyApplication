@@ -1,7 +1,5 @@
 package com.example.william.my.core.retrofit.converter;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
@@ -26,7 +24,7 @@ public class RetrofitConverterFactory extends Converter.Factory {
      * Create an instance using a default {@link Gson} instance for conversion. Encoding to JSON and
      * decoding from JSON (when no charset is specified by a header) will use UTF-8.
      */
-    @NonNull
+
     public static RetrofitConverterFactory create() {
         return create(new Gson());
     }
@@ -51,7 +49,7 @@ public class RetrofitConverterFactory extends Converter.Factory {
      * 需要重写父类中responseBodyConverter，该方法用来转换服务器返回数据
      */
     @Override
-    public Converter<ResponseBody, ?> responseBodyConverter(@NonNull Type type, @NonNull Annotation[] annotations, @NonNull Retrofit retrofit) {
+    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
         return new RetrofitResponseBodyConverter<>(gson, adapter);
     }
@@ -60,7 +58,7 @@ public class RetrofitConverterFactory extends Converter.Factory {
      * 需要重写父类中requestBodyConverter，该方法用来转换发送给服务器的数据
      */
     @Override
-    public Converter<?, RequestBody> requestBodyConverter(@NonNull Type type, @NonNull Annotation[] parameterAnnotations, @NonNull Annotation[] methodAnnotations, @NonNull Retrofit retrofit) {
+    public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
         return new RetrofitRequestBodyConverter<>(gson, adapter);
     }

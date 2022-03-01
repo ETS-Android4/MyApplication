@@ -1,7 +1,5 @@
 package com.example.william.my.module.router.adapter;
 
-import androidx.annotation.NonNull;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.william.my.module.R;
@@ -14,7 +12,7 @@ public class RouterRecyclerAdapter extends BaseQuickAdapter<RouterItem, BaseView
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder helper, RouterItem item) {
+    protected void convert(BaseViewHolder helper, RouterItem item) {
         helper.setText(R.id.item_textView, item.mRouterName);
     }
 }

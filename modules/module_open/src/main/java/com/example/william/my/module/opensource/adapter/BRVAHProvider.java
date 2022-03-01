@@ -1,6 +1,5 @@
 package com.example.william.my.module.opensource.adapter;
 
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.chad.library.adapter.base.provider.BaseItemProvider;
@@ -22,7 +21,7 @@ public class BRVAHProvider extends BaseItemProvider<String> {
     }
 
     @Override
-    public void convert(@NonNull BaseViewHolder baseViewHolder, String s) {
+    public void convert(BaseViewHolder baseViewHolder, String s) {
         // 设置 item 数据
         baseViewHolder.setText(R.id.item_textView, s);
         baseViewHolder.setBackgroundColor(R.id.item_textView, ContextCompat.getColor(context, R.color.basics_colorPrimary));

@@ -12,7 +12,6 @@ import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -60,18 +59,18 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<ArticleBean>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+                    public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull ArticleBean articleBean) {
+                    public void onSuccess(ArticleBean articleBean) {
                         String netSuccess = "GsonConverterFactory: " + new Gson().toJson(articleBean);
                         showResponse(netSuccess);
                     }
 
                     @Override
-                    public void onError(@NonNull Throwable e) {
+                    public void onError(Throwable e) {
                         String netError = "Error: " + e.getMessage();
                         showResponse(netError);
                     }
@@ -97,18 +96,18 @@ public class RetrofitRxJavaActivity extends BaseResponseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<RetrofitResponse<ArticleDataBean>>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+                    public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull RetrofitResponse<ArticleDataBean> articleBean) {
+                    public void onSuccess(RetrofitResponse<ArticleDataBean> articleBean) {
                         String netSuccess = "RetrofitConverterFactory: " + new Gson().toJson(articleBean);
                         showResponse(netSuccess);
                     }
 
                     @Override
-                    public void onError(@NonNull Throwable e) {
+                    public void onError(Throwable e) {
                         String netError = "Error: " + e.getMessage();
                         showResponse(netError);
                     }

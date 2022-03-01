@@ -4,6 +4,7 @@ android {
 dependencies {
     implementation project(path: ':libraries:lib_volley')
     implementation project(path: ':libraries:lib_retrofit')
+    implementation project(path: ':libraries:lib_websocket')
     //Glide
     implementation deps.glide
     kapt deps.glide_compiler

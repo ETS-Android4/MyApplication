@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,7 +39,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         initRecyclerView(view);
@@ -49,7 +47,7 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
         initRecyclerData(savedInstanceState);
     }
 
-    private void initRecyclerView(@NonNull View view) {
+    private void initRecyclerView(View view) {
         mSmartRefresh = view.findViewById(R.id.smartRefresh);
         mRecyclerView = view.findViewById(R.id.recyclerView);
 
@@ -201,26 +199,26 @@ public abstract class BaseRecyclerFragment<T> extends BaseFragment
     }
 
     @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+    public void onRefresh(RefreshLayout refreshLayout) {
         mPage = 0;
         queryData();
         mSmartRefresh.finishRefresh(1000);
     }
 
     @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+    public void onLoadMore(RefreshLayout refreshLayout) {
         mPage++;
         queryData();
         mSmartRefresh.finishLoadMore(1000);
     }
 
     @Override
-    public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
     }
 
     @Override
-    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
     }
 }

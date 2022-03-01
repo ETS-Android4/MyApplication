@@ -4,8 +4,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import androidx.annotation.NonNull;
-
 import java.lang.ref.WeakReference;
 
 /**
@@ -31,13 +29,13 @@ public class HandlerUtils {
             weakReference = new WeakReference<>(handler);
         }
 
-        public HandlerHolder(@NonNull Looper looper, OnReceiveMessageHandler handler) {
+        public HandlerHolder(Looper looper, OnReceiveMessageHandler handler) {
             super(looper);
             weakReference = new WeakReference<>(handler);
         }
 
         @Override
-        public void handleMessage(@NonNull Message msg) {
+        public void handleMessage(Message msg) {
             if (weakReference.get() != null) {
                 weakReference.get().handlerMessage(msg);
             }

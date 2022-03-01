@@ -2,15 +2,16 @@ package com.example.william.my.module.libraries.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.william.my.module.libraries.R;
-import com.example.william.my.module.libraries.adapter.SensorAdapter;
 import com.example.william.my.core.banner.Banner;
 import com.example.william.my.core.banner.adapter.BannerImageAdapter;
 import com.example.william.my.core.banner.holder.BannerImageHolder;
 import com.example.william.my.core.banner.indicator.NumIndicator;
+import com.example.william.my.module.libraries.R;
+import com.example.william.my.module.libraries.adapter.SensorAdapter;
 import com.example.william.my.module.router.ARouterPath;
 
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class BannerActivity extends AppCompatActivity {
             "https://img.zcool.cn/community/016a2256fb63006ac7257948f83349.jpg"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lib_activity_banner);
         mSensorBanner = findViewById(R.id.banner1);

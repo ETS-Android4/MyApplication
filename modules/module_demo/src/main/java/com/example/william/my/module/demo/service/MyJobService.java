@@ -25,11 +25,11 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.william.my.module.demo.activity.sample.JobActivity;
+import com.example.william.my.module.utils.L;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MyJobService extends JobService {
@@ -58,7 +58,7 @@ public class MyJobService extends JobService {
                 jobFinished(params, false);
             }
         }, duration);
-        Log.d(TAG, "on start job: " + params.getJobId());
+        L.i(TAG, "on start job: " + params.getJobId());
 
         // Return true as there's more work to be done with this job.
         return true;
@@ -67,7 +67,7 @@ public class MyJobService extends JobService {
     @Override
     public boolean onStopJob(JobParameters params) {
         sendMessage(JobActivity.MSG_COLOR_STOP, params.getJobId());
-        Log.d(TAG, "on stop job: " + params.getJobId());
+        L.i(TAG, "on stop job: " + params.getJobId());
 
         // Return false to drop the job.
         return false;

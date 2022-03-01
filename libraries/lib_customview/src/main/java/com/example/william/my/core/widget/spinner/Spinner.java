@@ -6,7 +6,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,7 @@ public class Spinner extends PopupWindow implements SpinnerAdapter.SpinnerClickL
 
     private SpinnerAdapter.SpinnerClickListener listener;
 
-    public Spinner(@NonNull Activity context, List<String> data) {
+    public Spinner(Activity context, List<String> data) {
         super(context);
         RelativeLayout relativeLayout = new RelativeLayout(context);
         setContentView(relativeLayout);

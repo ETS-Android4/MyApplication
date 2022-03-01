@@ -10,7 +10,10 @@ class PagingComparator : DiffUtil.ItemCallback<ArticleDetailBean>() {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: ArticleDetailBean, newItem: ArticleDetailBean): Boolean {
+    override fun areContentsTheSame(
+        oldItem: ArticleDetailBean,
+        newItem: ArticleDetailBean
+    ): Boolean {
         return newItem.id == oldItem.id
     }
 }

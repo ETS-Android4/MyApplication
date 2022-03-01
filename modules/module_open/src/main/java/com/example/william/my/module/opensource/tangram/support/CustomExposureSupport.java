@@ -1,7 +1,6 @@
 package com.example.william.my.module.opensource.tangram.support;
 
 import androidx.annotation.Keep;
-import androidx.annotation.NonNull;
 
 import com.example.william.my.module.utils.L;
 import com.tmall.wireless.tangram.dataparser.concrete.Card;
@@ -17,7 +16,7 @@ public class CustomExposureSupport extends ExposureSupport {
     }
 
     @Override
-    public void onExposure(@NonNull Card card, int offset, int position) {
+    public void onExposure(Card card, int offset, int position) {
         L.e(TAG, "onExposure: card=" + card.getClass().getSimpleName() + ", offset=" + offset + ", position=" + position);
     }
 }

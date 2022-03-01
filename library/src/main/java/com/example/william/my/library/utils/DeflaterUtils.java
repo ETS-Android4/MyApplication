@@ -2,8 +2,6 @@ package com.example.william.my.library.utils;
 
 import android.util.Base64;
 
-import androidx.annotation.Nullable;
-
 import java.io.ByteArrayOutputStream;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
@@ -57,7 +55,7 @@ public class DeflaterUtils {
     /**
      * 解压缩
      */
-    @Nullable
+
     public static String unzipString(String zipString) {
         byte[] decode = Base64.decode(zipString, Base64.NO_PADDING);
         //创建一个新的解压缩器  https://www.yiibai.com/javazip/javazip_inflater.html

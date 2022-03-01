@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
-import androidx.annotation.Nullable;
-
 import com.example.william.my.module.utils.L;
 
 import java.io.IOException;
@@ -17,7 +15,7 @@ public class NanoService extends Service {
 
     private NanoServer nanoServer;
 
-    @Nullable
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;

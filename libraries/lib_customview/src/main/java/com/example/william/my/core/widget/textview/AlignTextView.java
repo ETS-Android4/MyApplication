@@ -7,7 +7,6 @@ import android.text.StaticLayout;
 import android.util.AttributeSet;
 
 import androidx.annotation.AttrRes;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
 /**
@@ -19,11 +18,11 @@ public class AlignTextView extends AppCompatTextView {
         this(context, null);
     }
 
-    public AlignTextView(Context context, @Nullable AttributeSet attrs) {
+    public AlignTextView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AlignTextView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public AlignTextView(Context context, AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

@@ -1,7 +1,5 @@
 package com.example.william.my.core.retrofit;
 
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.retrofit.api.Api;
 import com.example.william.my.core.retrofit.builder.RetrofitBuilder;
 import com.example.william.my.core.retrofit.function.HttpResultFunction;
@@ -32,7 +30,7 @@ public class RxRetrofit<T> {
         this.builder = builder;
     }
 
-    @NonNull
+
     private Api buildApi() {
         return RetrofitHelper
                 .getInstance()

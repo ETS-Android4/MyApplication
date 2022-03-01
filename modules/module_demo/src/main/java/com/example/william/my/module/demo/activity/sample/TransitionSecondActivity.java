@@ -8,6 +8,7 @@ import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.example.william.my.library.base.BaseActivity;
@@ -17,7 +18,7 @@ public class TransitionSecondActivity extends BaseActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         // 允许使用transitions
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         super.onCreate(savedInstanceState);

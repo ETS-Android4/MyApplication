@@ -1,11 +1,9 @@
 package com.example.william.my.module.network.activity;
 
-import androidx.annotation.NonNull;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.william.my.core.websocket.RxWebSocketObserver;
+import com.example.william.my.core.websocket.RxWebSocketUtils;
 import com.example.william.my.module.activity.BaseResponseActivity;
-import com.example.william.my.module.network.websocket.RxWebSocketObserver;
-import com.example.william.my.module.network.websocket.RxWebSocketUtils;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
@@ -46,7 +44,7 @@ public class WebSocketActivity extends BaseResponseActivity {
              * 和远程建立连接时回调
              */
             @Override
-            public void onOpen(@NonNull WebSocket webSocket, @NonNull Response response) {
+            public void onOpen(WebSocket webSocket, Response response) {
                 super.onOpen(webSocket, response);
                 showResponse("onOpen：" + response.code());
             }
@@ -55,7 +53,7 @@ public class WebSocketActivity extends BaseResponseActivity {
              * 接收到消息时回调
              */
             @Override
-            public void onMessage(@NonNull WebSocket webSocket, @NonNull String text) {
+            public void onMessage(WebSocket webSocket, String text) {
                 super.onMessage(webSocket, text);
                 webSocket.send("heart");
                 showResponse("onMessageString：" + text);
@@ -65,7 +63,7 @@ public class WebSocketActivity extends BaseResponseActivity {
              * 接收到消息时回调
              */
             @Override
-            public void onMessage(@NonNull WebSocket webSocket, @NonNull ByteString bytes) {
+            public void onMessage(WebSocket webSocket, ByteString bytes) {
                 super.onMessage(webSocket, bytes);
                 showResponse("onMessageByteString：" + bytes.toString());
             }
@@ -74,7 +72,7 @@ public class WebSocketActivity extends BaseResponseActivity {
              * 准备关闭时回调
              */
             @Override
-            public void onClosing(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
+            public void onClosing(WebSocket webSocket, int code, String reason) {
                 super.onClosing(webSocket, code, reason);
                 showResponse("onClosing:" + "code:" + code + "reason:" + reason);
             }
@@ -83,7 +81,7 @@ public class WebSocketActivity extends BaseResponseActivity {
              * 连接关闭时回调
              */
             @Override
-            public void onClosed(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
+            public void onClosed(WebSocket webSocket, int code, String reason) {
                 super.onClosed(webSocket, code, reason);
                 showResponse("onClosed:" + "code:" + code + "reason:" + reason);
             }
@@ -92,7 +90,7 @@ public class WebSocketActivity extends BaseResponseActivity {
              * 失败时被回调
              */
             @Override
-            public void onFailure(@NonNull WebSocket webSocket, @NonNull Throwable t, Response response) {
+            public void onFailure(WebSocket webSocket, Throwable t, Response response) {
                 super.onFailure(webSocket, t, response);
                 StringBuilder builder = new StringBuilder("onFailure:");
                 if (t.getMessage() != null) {
@@ -113,7 +111,7 @@ public class WebSocketActivity extends BaseResponseActivity {
                 .createWebSocket(url)
                 .subscribe(new RxWebSocketObserver() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable disposable) {
+                    public void onSubscribe(Disposable disposable) {
                         super.onSubscribe(disposable);
                     }
 

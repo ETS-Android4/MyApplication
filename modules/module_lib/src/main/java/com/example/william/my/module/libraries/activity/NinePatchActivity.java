@@ -6,7 +6,6 @@ import android.graphics.drawable.NinePatchDrawable;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,10 +13,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.william.my.module.libraries.R;
 import com.example.william.my.bean.base.Urls;
 import com.example.william.my.core.ninepatch.NinePatchBuilder;
 import com.example.william.my.core.ninepatch.NinePatchChunk;
+import com.example.william.my.module.libraries.R;
 import com.example.william.my.module.router.ARouterPath;
 
 /**
@@ -34,7 +33,7 @@ public class NinePatchActivity extends AppCompatActivity {
     private TextView mTextView1, mTextView2;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lib_activity_nine_patch);
 
@@ -44,20 +43,20 @@ public class NinePatchActivity extends AppCompatActivity {
         //NinePatchChunk
         Glide.with(this).asBitmap().load(Urls.Url_NinePatch).into(new CustomTarget<Bitmap>() {
             @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                 NinePatchDrawable drawable = NinePatchChunk.create9PatchDrawable(NinePatchActivity.this, resource, Urls.Url_NinePatch);
                 mTextView1.setBackground(drawable);
             }
 
             @Override
-            public void onLoadCleared(@Nullable Drawable placeholder) {
+            public void onLoadCleared(Drawable placeholder) {
 
             }
         });
         //NinePatchBuilder
         Glide.with(this).asBitmap().load(Urls.Url_NinePatch).into(new CustomTarget<Bitmap>() {
             @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                 NinePatchBuilder builder = new NinePatchBuilder(getResources(), resource);
                 builder.addXRegion(30, 32);
                 NinePatchDrawable drawable = builder.build();
@@ -70,7 +69,7 @@ public class NinePatchActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onLoadCleared(@Nullable Drawable placeholder) {
+            public void onLoadCleared(Drawable placeholder) {
 
             }
         });

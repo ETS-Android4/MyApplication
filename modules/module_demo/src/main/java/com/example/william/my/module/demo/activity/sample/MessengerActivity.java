@@ -12,8 +12,6 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.demo.service.MessageService;
@@ -46,13 +44,13 @@ public class MessengerActivity extends BaseResponseActivity {
 
         private final WeakReference<MessengerActivity> weakReference;
 
-        public ClientHandler(@NonNull Looper looper, MessengerActivity activity) {
+        public ClientHandler(Looper looper, MessengerActivity activity) {
             super(looper);
             this.weakReference = new WeakReference<>(activity);
         }
 
         @Override
-        public void handleMessage(@NonNull Message msg) {
+        public void handleMessage(Message msg) {
             super.handleMessage(msg);
             MessengerActivity mActivity = weakReference.get();
             if (mActivity == null) {

@@ -10,8 +10,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.AttrRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.example.william.my.core.widget.R;
@@ -40,15 +38,15 @@ public class RoundProgressBar extends View {
     private final float textSize;//中间进度字体颜色大小
     private final boolean textDisplayable;//是否显示中间进度
 
-    public RoundProgressBar(@NonNull Context context) {
+    public RoundProgressBar(Context context) {
         this(context, null);
     }
 
-    public RoundProgressBar(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public RoundProgressBar(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RoundProgressBar(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public RoundProgressBar(Context context, AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         mRectF = new RectF();

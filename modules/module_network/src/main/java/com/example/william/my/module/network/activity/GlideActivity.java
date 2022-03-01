@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -24,7 +23,7 @@ import com.example.william.my.module.router.ARouterPath;
 public class GlideActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basics_layout_image);
 
@@ -35,8 +34,6 @@ public class GlideActivity extends BaseActivity {
                 .placeholder(R.drawable.ic_launcher)//占位图
                 .error(R.drawable.ic_launcher)//加载失败
                 .centerCrop()
-                .thumbnail(0.2f)//缩略图
-                //.thumbnail(Glide.with(this).load(Urls.Url_Image))//缩略图
                 .override(200, 200)
                 .skipMemoryCache(true)//内存缓存
                 .diskCacheStrategy(DiskCacheStrategy.NONE)//磁盘缓存：NONE 什么都不缓存；SOURCE 只缓存全尺寸图；RESULT 只缓存最终的加载图；ALL 缓存所有版本图（默认）
@@ -47,12 +44,12 @@ public class GlideActivity extends BaseActivity {
                 .load(Urls.Url_Image)
                 .into(new CustomTarget<Bitmap>() {
                     @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
 
                     }
 
                     @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                    public void onLoadCleared(Drawable placeholder) {
 
                     }
                 });

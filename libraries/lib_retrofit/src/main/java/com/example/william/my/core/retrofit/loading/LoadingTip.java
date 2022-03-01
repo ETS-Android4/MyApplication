@@ -11,9 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.william.my.core.retrofit.R;
 
 public class LoadingTip extends LinearLayout implements View.OnClickListener {
@@ -25,12 +22,12 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
         initView(context);
     }
 
-    public LoadingTip(Context context, @Nullable AttributeSet attrs) {
+    public LoadingTip(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
 
-    public LoadingTip(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LoadingTip(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context);
     }
@@ -60,11 +57,11 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
         mTextView.setText(message);
     }
 
-    public void setLoadingTip(@NonNull Status status) {
+    public void setLoadingTip(Status status) {
         this.setLoadingTip(status, null);
     }
 
-    public void setLoadingTip(@NonNull Status status, String message) {
+    public void setLoadingTip(Status status, String message) {
         switch (status) {
             case loading:
                 setVisibility(View.VISIBLE);
@@ -100,7 +97,7 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
     /**
      * 全屏LoadingTip
      */
-    @NonNull
+
     public static LoadingTip addLoadingTipFullScreen(Activity context) {
         LoadingTip loadingTip = new LoadingTip(context);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -112,7 +109,7 @@ public class LoadingTip extends LinearLayout implements View.OnClickListener {
     /**
      * 带标题栏LoadingTip
      */
-    @NonNull
+
     public static LoadingTip addLoadingTipWithTopBar(Activity context) {
         LoadingTip loadingTip = new LoadingTip(context);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

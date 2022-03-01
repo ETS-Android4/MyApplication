@@ -3,8 +3,6 @@ package com.example.william.my.module.demo.service;
 import android.app.IntentService;
 import android.content.Intent;
 
-import androidx.annotation.Nullable;
-
 public class MyIntentService extends IntentService {
 
     private static final String TAG = MyIntentService.class.getSimpleName();
@@ -14,7 +12,7 @@ public class MyIntentService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
+    protected void onHandleIntent(Intent intent) {
 
     }
 }

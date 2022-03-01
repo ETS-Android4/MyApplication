@@ -131,8 +131,8 @@ public class ARouterPath {
         public static final String Demo_Messenger = "/module_demo/messenger";
         public static final String Demo_Permission = "/module_demo/permission";
         public static final String Demo_PicCrop = "/module_demo/pic_crop";
+        public static final String Demo_SAF = "/module_demo/saf";
         public static final String Demo_Service = "/module_demo/service";
-        public static final String Demo_Shapeable = "/module_demo/shapeable";
         public static final String Demo_Transition = "/module_demo/transition";
         public static final String Demo_Transparent = "/module_demo/Transparent";
         public static final String Demo_Turntable = "/module_demo/turntable";
@@ -148,6 +148,7 @@ public class ARouterPath {
         public static final String Demo_Notification = "/module_demo/notification";
         public static final String Demo_RecyclerView = "/module_demo/recycler_view";
         public static final String Demo_RecyclerViewNested = "/module_demo/recycler_view_nested";
+        public static final String Demo_Shapeable = "/module_demo/shapeable";
         public static final String Demo_ViewFlipper = "/module_demo/view_flipper";
         public static final String Demo_ViewPager = "/module_demo/view_pager";
         public static final String Demo_ViewPager2 = "/module_demo/view_pager_2";

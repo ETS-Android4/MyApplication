@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.R;
 
@@ -12,7 +14,7 @@ public class BaseResponseActivity extends BaseActivity implements View.OnClickLi
     public TextView mResponse;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basics_layout_response);
 

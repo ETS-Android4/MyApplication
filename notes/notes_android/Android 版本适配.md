@@ -15,7 +15,7 @@ if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permissi
 
 ### 应用间共享文件
 
-在manifest中添加provider
+#### 1. 在manifest中添加provider
 
 ```xml
 <manifest>
@@ -36,7 +36,7 @@ if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permissi
 </manifest>
 ```
 
-配置需要获取文件的文件路径
+#### 2. 配置需要获取文件的文件路径
 
 ```xml
 <resources>
@@ -51,10 +51,14 @@ if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permissi
 </resources>
 ```
 
-获取文件Uri
+#### 3. 使用FileProvider
 
 ```java
-Uri contentUri = FileProvider.getUriForFile(getContext(), "包名.fileProvider", newFile);
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+    Uri uri = FileProvider.getUriForFile(CameraActivity.this, "包名.fileProvider", newFile);
+} else {
+    Uri uri = Uri.fromFile(newFile);
+}
 ```
 
 ## Android 8.0适配
@@ -65,11 +69,27 @@ Uri contentUri = FileProvider.getUriForFile(getContext(), "包名.fileProvider",
 
 ```java
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-    NotificationChannel notificationChannel = new NotificationChannel(
-            "channelId",
-            "channelName",
-            NotificationManager.IMPORTANCE_HIGH);
-    mNotificationManager.createNotificationChannel(notificationChannel);
+    //groupId要唯一
+    String groupId = "groupId";
+    String groupName = "groupName";
+    NotificationChannelGroup group = new NotificationChannelGroup(groupId, groupName);
+
+    //创建group
+    mNotificationManager.createNotificationChannelGroup(group);
+
+    //channelId要唯一
+    String channelId = "channelId";
+    String channelName = "channelName";
+    String channelDescription = "channelDescription";
+    NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+    channel.setShowBadge(true);//显示角标
+    channel.setDescription(channelDescription);
+
+    //将渠道添加进组（先创建组才能添加）
+    channel.setGroup(groupId);
+
+    //创建channel
+    mNotificationManager.createNotificationChannel(channel);
 }
 ```
 
@@ -84,12 +104,16 @@ NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNE
 notificationManager.notify(notificationId, builder.build());
 ```
 
-### 透明主题
+### 悬浮窗
 
-只有全屏不透明的activity才可以设置方向，解决方案：要么去掉对应activity中的 screenOrientation 属性，或者对应设置方向的代码。
+Android8.0以上必须使用新的窗口类型(TYPE_APPLICATION_OVERLAY)才能显示提醒悬浮窗：
 
-```xml
-<item name="android:windowIsTranslucent">false</item>
+```java
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    mWindowParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+}else {
+    mWindowParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
+}
 ```
 
 ### 未知来源
@@ -99,6 +123,14 @@ AndroidManifest文件中添加安装未知来源应用的权限
 ```xml
 <!-- Android8.0 允许安装未知来源 -->
 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+```
+
+### 透明主题
+
+只有全屏不透明的activity才可以设置方向，解决方案：要么去掉对应activity中的 screenOrientation 属性，或者对应设置方向的代码。
+
+```xml
+<item name="android:windowIsTranslucent">false</item>
 ```
 
 ## Android 9.0适配

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -36,7 +37,7 @@ public class FragmentActivity extends BaseActivity implements View.OnClickListen
             (Fragment) ARouter.getInstance().build(ARouterPath.Fragment.FragmentPrimaryDark).navigation()};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity_fragment);
 

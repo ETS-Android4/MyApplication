@@ -11,7 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.william.my.core.widget.R;
@@ -34,7 +33,7 @@ public class IosAlertDialog {
     private boolean showRightBtn = false;
     private boolean showLeftBtn = false;
 
-    public IosAlertDialog(@NonNull Activity context) {
+    public IosAlertDialog(Activity context) {
         this.context = context;
     }
 

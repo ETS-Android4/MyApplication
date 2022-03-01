@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.example.william.my.module.demo.activity.other.DispatchActivity;
@@ -18,12 +17,12 @@ public class ViewTouchFalse extends AppCompatTextView {
         this.mContext = context;
     }
 
-    public ViewTouchFalse(Context context, @Nullable AttributeSet attrs) {
+    public ViewTouchFalse(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
     }
 
-    public ViewTouchFalse(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ViewTouchFalse(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
     }

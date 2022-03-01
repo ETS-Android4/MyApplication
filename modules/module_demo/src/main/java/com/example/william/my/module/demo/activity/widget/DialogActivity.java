@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
@@ -33,7 +34,7 @@ public class DialogActivity extends BaseActivity implements AdapterView.OnItemCl
             "自定义对话框", "自定义对话框2", "DialogFragment1", "DialogFragment2", "BottomSheetDialog"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity_dialog);
 

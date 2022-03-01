@@ -6,13 +6,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.WindowManager;
 
-import androidx.annotation.NonNull;
-
 import com.example.william.my.core.widget.R;
 
 public class LoadingDialog extends Dialog {
 
-    public LoadingDialog(@NonNull Context context) {
+    public LoadingDialog(Context context) {
         super(context);
         if (getWindow() != null) {
             getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

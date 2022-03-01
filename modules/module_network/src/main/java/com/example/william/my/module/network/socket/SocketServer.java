@@ -41,6 +41,6 @@ public class SocketServer extends WebSocketServer {
 
     @Override
     public void onError(WebSocket conn, Exception ex) {
-        L.i(TAG, "Socket Exception:" + ex.toString());
+        L.e(TAG, "Socket Exception:" + ex.toString());
     }
 }

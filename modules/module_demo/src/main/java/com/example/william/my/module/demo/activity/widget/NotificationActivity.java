@@ -2,6 +2,7 @@ package com.example.william.my.module.demo.activity.widget;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
@@ -24,12 +25,28 @@ public class NotificationActivity extends BaseResponseActivity {
 
         mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(
-                    "channelId",
-                    "channelName",
-                    NotificationManager.IMPORTANCE_HIGH);
-            notificationChannel.setShowBadge(true);//显示角标
-            mNotificationManager.createNotificationChannel(notificationChannel);
+
+            //groupId要唯一
+            String groupId = "groupId";
+            String groupName = "groupName";
+            NotificationChannelGroup group = new NotificationChannelGroup(groupId, groupName);
+
+            //创建group
+            mNotificationManager.createNotificationChannelGroup(group);
+
+            //channelId要唯一
+            String channelId = "channelId";
+            String channelName = "channelName";
+            String channelDescription = "channelDescription";
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+            channel.setShowBadge(true);//显示角标
+            channel.setDescription(channelDescription);
+
+            //将渠道添加进组（先创建组才能添加）
+            channel.setGroup(groupId);
+
+            //创建channel
+            mNotificationManager.createNotificationChannel(channel);
         }
     }
 

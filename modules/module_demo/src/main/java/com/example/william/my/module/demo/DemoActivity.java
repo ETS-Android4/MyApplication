@@ -1,5 +1,9 @@
 package com.example.william.my.module.demo;
 
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseRecyclerActivity;
 import com.example.william.my.module.router.ARouterPath;
@@ -39,6 +43,7 @@ public class DemoActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("MessengerActivity", ARouterPath.Demo.Demo_Messenger));
         routerItems.add(new RouterItem("PermissionActivity", ARouterPath.Demo.Demo_Permission));
         routerItems.add(new RouterItem("PicCropActivity", ARouterPath.Demo.Demo_PicCrop));
+        routerItems.add(new RouterItem("SAFActivity", ARouterPath.Demo.Demo_SAF));
         routerItems.add(new RouterItem("ServiceActivity", ARouterPath.Demo.Demo_Service));
         routerItems.add(new RouterItem("ShapeableActivity", ARouterPath.Demo.Demo_Shapeable));
         routerItems.add(new RouterItem("TransitionActivity", ARouterPath.Demo.Demo_Transition));
@@ -56,5 +61,11 @@ public class DemoActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem(" ", ""));
         routerItems.add(new RouterItem("DispatchActivity", ARouterPath.Demo.Demo_Dispatch));
         return routerItems;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        TextUtils.writeExternalFilesDirByUtils(this);
     }
 }

@@ -36,7 +36,7 @@ import kotlinx.coroutines.CoroutineScope;
 public class ViewModelViewModel extends ViewModel {
 //public class ArticleViewModel extends AndroidViewModel {
 
-    //public ArticleViewModel(@NonNull Application application) {
+    //public ArticleViewModel( Application application) {
     //    super(application);
     //}
 

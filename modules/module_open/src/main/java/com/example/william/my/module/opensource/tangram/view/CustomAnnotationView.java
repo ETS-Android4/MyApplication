@@ -6,8 +6,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Keep;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.william.my.module.opensource.R;
 import com.tmall.wireless.tangram.structure.BaseCell;
@@ -27,16 +25,16 @@ public class CustomAnnotationView extends FrameLayout {
 
     private TextView mTextView;
 
-    public CustomAnnotationView(@NonNull Context context) {
+    public CustomAnnotationView(Context context) {
         super(context);
         init();
     }
 
-    public CustomAnnotationView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public CustomAnnotationView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CustomAnnotationView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CustomAnnotationView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

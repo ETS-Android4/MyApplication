@@ -1,8 +1,8 @@
-package com.example.william.my.module.network.websocket;
+package com.example.william.my.core.websocket;
 
 import android.os.SystemClock;
+import android.util.Log;
 
-import com.example.william.my.module.utils.L;
 import com.google.gson.Gson;
 
 import java.io.EOFException;
@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeoutException;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
@@ -185,7 +184,7 @@ public class RxWebSocketUtils {
         }
 
         @Override
-        public void subscribe(@NonNull final ObservableEmitter<RxWebSocketInfo> emitter) throws Exception {
+        public void subscribe(final ObservableEmitter<RxWebSocketInfo> emitter) throws Exception {
             if (webSocket != null) {
                 //降低重连频率
                 if (!"main".equals(Thread.currentThread().getName())) {
@@ -195,57 +194,57 @@ public class RxWebSocketUtils {
             }
             webSocket = okHttpClient.newWebSocket(request, new WebSocketListener() {
                 @Override
-                public void onOpen(final @NonNull WebSocket webSocket, @NonNull Response response) {
+                public void onOpen(final WebSocket webSocket, Response response) {
                     webSocketMap.put(url, webSocket);
                     if (!emitter.isDisposed()) {
                         emitter.onNext(new RxWebSocketInfo(webSocket, null, true));
                     }
-                    L.i(TAG, "onOpen：" + url);
+                    Log.i(TAG, "onOpen：" + url);
                 }
 
                 @Override
-                public void onMessage(@NonNull WebSocket webSocket, @NonNull String text) {
+                public void onMessage(WebSocket webSocket, String text) {
                     super.onMessage(webSocket, text);
                     if (!emitter.isDisposed()) {
                         emitter.onNext(new RxWebSocketInfo(webSocket, text));
                     }
-                    L.i(TAG, "onMessageString：" + text);
+                    Log.i(TAG, "onMessageString：" + text);
                 }
 
                 @Override
-                public void onMessage(@NonNull WebSocket webSocket, @NonNull ByteString bytes) {
+                public void onMessage(WebSocket webSocket, ByteString bytes) {
                     super.onMessage(webSocket, bytes);
                     if (!emitter.isDisposed()) {
                         emitter.onNext(new RxWebSocketInfo(webSocket, bytes));
                     }
-                    L.i(TAG, "onMessageByteString：" + bytes.toString());
+                    Log.i(TAG, "onMessageByteString：" + bytes.toString());
                 }
 
 
                 @Override
-                public void onClosing(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
+                public void onClosing(WebSocket webSocket, int code, String reason) {
                     super.onClosing(webSocket, code, reason);
-                    L.i(TAG, "onClosing:" + "code:" + code + "reason:" + reason);
+                    Log.i(TAG, "onClosing:" + "code:" + code + "reason:" + reason);
                 }
 
                 @Override
-                public void onClosed(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
+                public void onClosed(WebSocket webSocket, int code, String reason) {
                     super.onClosed(webSocket, code, reason);
                     emitter.onNext(new RxWebSocketInfo(false, true));
-                    L.i(TAG, "onClosed:" + "code:" + code + "reason:" + reason);
+                    Log.i(TAG, "onClosed:" + "code:" + code + "reason:" + reason);
                 }
 
                 @Override
-                public void onFailure(@NonNull WebSocket webSocket, @NonNull Throwable t, Response response) {
+                public void onFailure(WebSocket webSocket, Throwable t, Response response) {
                     super.onFailure(webSocket, t, response);
                     if (!emitter.isDisposed()) {
                         emitter.onError(t);
                     }
                     if (response != null) {
-                        L.e(TAG, "onFailure：" + response.code());
-                        L.e(TAG, "onFailure：" + new Gson().toJson(response.body()));
+                        Log.e(TAG, "onFailure：" + response.code());
+                        Log.e(TAG, "onFailure：" + new Gson().toJson(response.body()));
                     }
-                    L.e(TAG, "Throwable:" + t.toString());
+                    Log.e(TAG, "Throwable:" + t.toString());
                 }
             });
         }

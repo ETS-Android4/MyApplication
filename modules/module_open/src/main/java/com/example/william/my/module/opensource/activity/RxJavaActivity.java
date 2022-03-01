@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.MaybeObserver;
 import io.reactivex.rxjava3.core.Notification;
 import io.reactivex.rxjava3.core.Observable;
@@ -52,17 +51,17 @@ public class RxJavaActivity extends BaseResponseActivity {
         return new Observer<Long>() {
 
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
+            public void onSubscribe(Disposable d) {
                 Log.d(TAG, "开始采用subscribe连接");
             }
 
             @Override
-            public void onNext(@NonNull Long aLong) {
+            public void onNext(Long aLong) {
                 Log.d(TAG, "接收到了事件 ：" + aLong);
             }
 
             @Override
-            public void onError(@NonNull Throwable e) {
+            public void onError(Throwable e) {
                 L.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
             }
 
@@ -77,17 +76,17 @@ public class RxJavaActivity extends BaseResponseActivity {
         return new SingleObserver<Long>() {
 
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
+            public void onSubscribe(Disposable d) {
                 Log.d(TAG, "开始采用subscribe连接");
             }
 
             @Override
-            public void onSuccess(@NonNull Long aLong) {
+            public void onSuccess(Long aLong) {
                 Log.d(TAG, "对Success事件作出响应 ：" + aLong);
             }
 
             @Override
-            public void onError(@NonNull Throwable e) {
+            public void onError(Throwable e) {
                 L.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
             }
         };
@@ -97,17 +96,17 @@ public class RxJavaActivity extends BaseResponseActivity {
         return new SingleObserver<Boolean>() {
 
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
+            public void onSubscribe(Disposable d) {
                 Log.d(TAG, "开始采用subscribe连接");
             }
 
             @Override
-            public void onSuccess(@NonNull Boolean aBoolean) {
+            public void onSuccess(Boolean aBoolean) {
                 Log.d(TAG, "对Success事件作出响应 ：" + aBoolean);
             }
 
             @Override
-            public void onError(@NonNull Throwable e) {
+            public void onError(Throwable e) {
                 L.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
             }
         };
@@ -116,17 +115,17 @@ public class RxJavaActivity extends BaseResponseActivity {
     private MaybeObserver<Long> createMaybe() {
         return new MaybeObserver<Long>() {
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
+            public void onSubscribe(Disposable d) {
                 Log.d(TAG, "开始采用subscribe连接");
             }
 
             @Override
-            public void onSuccess(@NonNull Long aLong) {
+            public void onSuccess(Long aLong) {
                 Log.d(TAG, "对Success事件作出响应 ：" + aLong);
             }
 
             @Override
-            public void onError(@NonNull Throwable e) {
+            public void onError(Throwable e) {
                 L.e(TAG, "对Error事件作出响应 ：" + e.getMessage());
             }
 
@@ -147,7 +146,7 @@ public class RxJavaActivity extends BaseResponseActivity {
     private void create() {
         Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<String> emitter) throws Throwable {
+            public void subscribe(ObservableEmitter<String> emitter) throws Throwable {
                 emitter.onNext("next");
                 emitter.onComplete();
             }
@@ -264,19 +263,19 @@ public class RxJavaActivity extends BaseResponseActivity {
                 .buffer(3, 1)
                 .subscribe(new Observer<List<Long>>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+                    public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull List<Long> longs) {
+                    public void onNext(List<Long> longs) {
                         for (Long l : longs) {
                             Log.d(TAG, "事件 = " + l);
                         }
                     }
 
                     @Override
-                    public void onError(@NonNull Throwable e) {
+                    public void onError(Throwable e) {
 
                     }
 
@@ -391,19 +390,19 @@ public class RxJavaActivity extends BaseResponseActivity {
                         })
                 .subscribe(new SingleObserver<List<Long>>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+                    public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull List<Long> longs) {
+                    public void onSuccess(List<Long> longs) {
                         for (Long l : longs) {
                             Log.d(TAG, "事件 = " + l);
                         }
                     }
 
                     @Override
-                    public void onError(@NonNull Throwable e) {
+                    public void onError(Throwable e) {
 
                     }
                 });
@@ -535,7 +534,7 @@ public class RxJavaActivity extends BaseResponseActivity {
          */
         Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<Long> emitter) throws Throwable {
+            public void subscribe(ObservableEmitter<Long> emitter) throws Throwable {
                 emitter.onNext(1L);
                 emitter.onNext(2L);
                 emitter.onError(new Throwable("发生错误了"));
@@ -561,7 +560,7 @@ public class RxJavaActivity extends BaseResponseActivity {
          */
         Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<Long> emitter) throws Throwable {
+            public void subscribe(ObservableEmitter<Long> emitter) throws Throwable {
                 emitter.onNext(1L);
                 emitter.onNext(2L);
                 emitter.onError(new Throwable("发生错误了"));
@@ -591,7 +590,7 @@ public class RxJavaActivity extends BaseResponseActivity {
          */
         Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<Long> emitter) throws Throwable {
+            public void subscribe(ObservableEmitter<Long> emitter) throws Throwable {
                 emitter.onNext(1L);
                 emitter.onNext(2L);
                 emitter.onError(new NullPointerException());
@@ -625,7 +624,7 @@ public class RxJavaActivity extends BaseResponseActivity {
                  */
                 .retry(new BiPredicate<Integer, Throwable>() {
                     @Override
-                    public boolean test(@NonNull Integer integer, @NonNull Throwable throwable) throws Throwable {
+                    public boolean test(Integer integer, Throwable throwable) throws Throwable {
                         // 捕获异常
                         Log.d(TAG, "retry错误: " + throwable.toString());
 
@@ -763,7 +762,7 @@ public class RxJavaActivity extends BaseResponseActivity {
          */
         Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<Long> emitter) throws Throwable {
+            public void subscribe(ObservableEmitter<Long> emitter) throws Throwable {
                 // 隔段事件发送时间
                 emitter.onNext(1L);
                 Thread.sleep(500);
@@ -899,7 +898,7 @@ public class RxJavaActivity extends BaseResponseActivity {
          */
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
-            public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
                 // 不发送任何有效事件，仅发送Complete事件
                 e.onComplete();
             }

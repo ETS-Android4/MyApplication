@@ -4,7 +4,6 @@ import com.example.william.my.core.retrofit.base.ResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.exception.ExceptionHandler;
 
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 
@@ -25,19 +24,19 @@ public abstract class RetrofitCallback<T> implements SingleObserver<T>, Response
     }
 
     @Override
-    public void onSubscribe(@NonNull Disposable d) {
+    public void onSubscribe(Disposable d) {
         disposable = d;
     }
 
     @Override
-    public void onSuccess(@NonNull T t) {
+    public void onSuccess(T t) {
         onResponse(t);
 
         dispose();
     }
 
     @Override
-    public void onError(@NonNull Throwable e) {
+    public void onError(Throwable e) {
         if (e instanceof ApiException) {
             onFailure((ApiException) e);
         } else {

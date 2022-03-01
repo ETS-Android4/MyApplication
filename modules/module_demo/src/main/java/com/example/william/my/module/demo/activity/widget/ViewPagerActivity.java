@@ -2,6 +2,7 @@ package com.example.william.my.module.demo.activity.widget;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -29,7 +30,7 @@ public class ViewPagerActivity extends BaseActivity {
             new PrimaryVarFragment()};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity_viewpager);
 

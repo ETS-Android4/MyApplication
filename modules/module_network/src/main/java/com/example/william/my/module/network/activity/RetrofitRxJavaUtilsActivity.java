@@ -12,8 +12,6 @@ import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * @see RetrofitUtils
  */
@@ -62,7 +60,7 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onFailure(@NotNull ApiException e) {
+                    public void onFailure(ApiException e) {
                         String netError = "onFailure: " + e.getMessage();
                         showResponse(netError);
                     }
@@ -89,7 +87,7 @@ public class RetrofitRxJavaUtilsActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onFailure(@NotNull ApiException e) {
+                    public void onFailure(ApiException e) {
                         String netError = "onFailure: " + e.getMessage();
                         showResponse(netError);
                     }

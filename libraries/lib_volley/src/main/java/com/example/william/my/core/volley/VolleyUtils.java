@@ -97,7 +97,7 @@ public class VolleyUtils {
         }
 
         public void enqueue(VolleyUtils.ResponseListener<T> responseListener) {
-            volleyQueue.add(new GsonRequest<T>(method, url, clazz, headers, params, responseListener.mListener, responseListener.mErrorListener));
+            volleyQueue.add(new GsonRequest<>(method, url, clazz, headers, params, responseListener.mListener, responseListener.mErrorListener));
         }
     }
 

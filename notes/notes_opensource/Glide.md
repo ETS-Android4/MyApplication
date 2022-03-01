@@ -4,31 +4,32 @@
 
 ### Glide.with
 
-* 在Activity上创建一个透明的RequestManagerFragment加入到FragmentManager中，通过添加的Fragment感知Activity\Fragment的生命周期。 在RequestManagerFragment中的相应生命周期方法中通过Lifecycle传递给在lifecycle中注册的LifecycleListener
+* 在Activity上创建一个透明的RequestManagerFragment加入到FragmentManager中，通过添加的Fragment感知Activity\Fragment的生命周期。
+  在RequestManagerFragment中的相应生命周期方法中通过Lifecycle传递给在lifecycle中注册的LifecycleListener
 
 ```
-  @NonNull
-  public static RequestManager with(@NonNull Context context) {
+  
+  public static RequestManager with( Context context) {
     return getRetriever(context).get(context);
   }
 
-  @NonNull
-  public static RequestManager with(@NonNull Activity activity) {
+  
+  public static RequestManager with( Activity activity) {
     return getRetriever(activity).get(activity);
   }
 
-  @NonNull
-  public static RequestManager with(@NonNull FragmentActivity activity) {
+  
+  public static RequestManager with( FragmentActivity activity) {
     return getRetriever(activity).get(activity);
   }
 
-  @NonNull
-  public static RequestManager with(@NonNull Fragment fragment) {
+  
+  public static RequestManager with( Fragment fragment) {
     return getRetriever(fragment.getContext()).get(fragment);
   }
 
-  @NonNull
-  public static RequestManager with(@NonNull View view) {
+  
+  public static RequestManager with( View view) {
     return getRetriever(view.getContext()).get(view);
   }
 ```
@@ -36,12 +37,12 @@
 ### Glide 单例模式实现
 
 ```
-  @NonNull
-  private static RequestManagerRetriever getRetriever(@Nullable Context context) {
+  
+  private static RequestManagerRetriever getRetriever( Context context) {
     return Glide.get(context).getRequestManagerRetriever();
   }
   
-  public static Glide get(@NonNull Context context) {
+  public static Glide get( Context context) {
     if (glide == null) {
       GeneratedAppGlideModule annotationGeneratedModule =getAnnotationGeneratedGlideModules(context.getApplicationContext());
       synchronized (Glide.class) {
@@ -57,8 +58,8 @@
 ### Glide 生命周期绑定：RequestManagerRetriever.get
 
 ```
-  @NonNull
-  public RequestManager get(@NonNull Context context) {
+  
+  public RequestManager get( Context context) {
     if (context == null) {
       throw new IllegalArgumentException("You cannot start a load on a null Context");
     } else if (Util.isOnMainThread() && !(context instanceof Application)) {
@@ -85,8 +86,8 @@
    * 构建RequestManager对象时，传入了ApplicationLifecycle对象
    * 也就是说，当with方法传入的是Application时，Glide加载图片的生命周期和应用的生命周期一致，当退出应用时，图片停止加载。
    */
-  @NonNull
-  private RequestManager getApplicationManager(@NonNull Context context) {
+  
+  private RequestManager getApplicationManager( Context context) {
     // Either an application context or we're on a background thread.
     if (applicationManager == null) {
       synchronized (this) {
@@ -112,11 +113,13 @@
   }
 ```
 
-* RequestManagerRetriever.get方法最终会add一个SupportRequestManagerFragment到Activity里面；SupportRequestManagerFragment里面有个lifecycle成员，我们可以向它注册监听。
+*
+
+RequestManagerRetriever.get方法最终会add一个SupportRequestManagerFragment到Activity里面；SupportRequestManagerFragment里面有个lifecycle成员，我们可以向它注册监听。
 
 ```
-  @NonNull
-  public RequestManager get(@NonNull FragmentActivity activity) {
+  
+  public RequestManager get( FragmentActivity activity) {
     if (Util.isOnBackgroundThread()) {
       return get(activity.getApplicationContext());
     } else {
@@ -126,16 +129,16 @@
     }
   }
   
-  @NonNull
-  private RequestManager supportFragmentGet(@NonNull Context context, @NonNull FragmentManager fm, @Nullable Fragment parentHint,boolean isParentVisible) {
+  
+  private RequestManager supportFragmentGet( Context context,  FragmentManager fm,  Fragment parentHint,boolean isParentVisible) {
     SupportRequestManagerFragment current = getSupportRequestManagerFragment(fm, parentHint);
     RequestManager requestManager = current.getRequestManager();
     ···
     return requestManager;
   }
   
-  @NonNull
-  private SupportRequestManagerFragment getSupportRequestManagerFragment(@NonNull final FragmentManager fm, @Nullable Fragment parentHint) {
+  
+  private SupportRequestManagerFragment getSupportRequestManagerFragment( final FragmentManager fm,  Fragment parentHint) {
     SupportRequestManagerFragment current = (SupportRequestManagerFragment) fm.findFragmentByTag(FRAGMENT_TAG);
     if (current == null) {
       ···
@@ -155,7 +158,7 @@
 * 创建了一个RequestBuilder<T>对象
 
 ```
-  public RequestBuilder<Drawable> load(@Nullable String string) {
+  public RequestBuilder<Drawable> load( String string) {
     return asDrawable().load(string);
   }
   
@@ -163,17 +166,17 @@
     return as(Drawable.class);
   }
   
-  public <ResourceType> RequestBuilder<ResourceType> as(@NonNull Class<ResourceType> resourceClass) {
+  public <ResourceType> RequestBuilder<ResourceType> as( Class<ResourceType> resourceClass) {
     return new RequestBuilder<>(glide, this, resourceClass, context);
   }
 ```
 
 ```
-  public RequestBuilder<TranscodeType> load(@Nullable String string) {
+  public RequestBuilder<TranscodeType> load( String string) {
     return loadGeneric(string);
   }
 
-  private RequestBuilder<TranscodeType> loadGeneric(@Nullable Object model) {
+  private RequestBuilder<TranscodeType> loadGeneric( Object model) {
     ···
     this.model = model;
     ···
@@ -186,7 +189,7 @@
 
 ```
   // RequestBuilder
-  public ViewTarget<ImageView, TranscodeType> into(@NonNull ImageView view) {
+  public ViewTarget<ImageView, TranscodeType> into( ImageView view) {
     ···
     return into(
         glideContext.buildImageViewTarget(view, transcodeClass),
@@ -195,7 +198,7 @@
         Executors.mainThreadExecutor());
   }
 
-  private <Y extends Target<TranscodeType>> Y into(@NonNull Y target, @Nullable RequestListener<TranscodeType> targetListener,BaseRequestOptions<?> options, Executor callbackExecutor) {
+  private <Y extends Target<TranscodeType>> Y into( Y target,  RequestListener<TranscodeType> targetListener,BaseRequestOptions<?> options, Executor callbackExecutor) {
     ···
     Request request = buildRequest(target, targetListener, options, callbackExecutor);    
     ···
@@ -206,13 +209,13 @@
   }
 
   // RequestManager
-  synchronized void track(@NonNull Target<?> target, @NonNull Request request) {
+  synchronized void track( Target<?> target,  Request request) {
     targetTracker.track(target);
     requestTracker.runRequest(request);
   }
 
   // RequestTracker
-  public void runRequest(@NonNull Request request) {
+  public void runRequest( Request request) {
     requests.add(request);
     if (!isPaused) {
       request.begin();
@@ -298,7 +301,7 @@
 * 如果开启了内存缓存的话会先从ActiveResources中查询，查不到的话再从Cache里面查询
 
 ```
-  @Nullable
+  
   private EngineResource<?> loadFromMemory(EngineKey key, boolean isMemoryCacheable, long startTime) {
     if (!isMemoryCacheable) {
       return null;
@@ -322,7 +325,7 @@
 
 ```
   // Engine
-  @Nullable
+  
   private EngineResource<?> loadFromActiveResources(Key key) {
     EngineResource<?> active = activeResources.get(key);
     if (active != null) {
@@ -338,7 +341,7 @@ final class ActiveResources {
   @VisibleForTesting
   final Map<Key, ResourceWeakReference> activeEngineResources = new HashMap<>();
   ···
-  @Nullable
+  
   synchronized EngineResource<?> get(Key key) {
     ResourceWeakReference activeRef = activeEngineResources.get(key);
     if (activeRef == null) {
@@ -498,7 +501,7 @@ public class LruResourceCache extends LruCache<Key, Resource<?>> implements Memo
 
 ```
   // GlideBuilder
-  Glide build(@NonNull Context context) {
+  Glide build( Context context) {
     ···
     if (bitmapPool == null) {
       int size = memorySizeCalculator.getBitmapPoolSize();
@@ -533,13 +536,13 @@ public class BitmapPoolAdapter implements BitmapPool {
     bitmap.recycle();
   }
 
-  @NonNull
+  
   @Override
   public Bitmap get(int width, int height, Bitmap.Config config) {
     return Bitmap.createBitmap(width, height, config);
   }
 
-  @NonNull
+  
   @Override
   public Bitmap getDirty(int width, int height, Bitmap.Config config) {
     return get(width, height, config);

@@ -3,6 +3,8 @@ package com.example.william.my.module.demo.activity.custom;
 import android.os.Bundle;
 import android.widget.SeekBar;
 
+import androidx.annotation.Nullable;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.core.widget.blur.BlurView;
 import com.example.william.my.library.base.BaseActivity;
@@ -18,7 +20,7 @@ public class BlurViewActivity extends BaseActivity {
     private BlurView mBlurView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity_blur);
 
