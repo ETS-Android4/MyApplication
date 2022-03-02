@@ -1,7 +1,6 @@
 package com.example.william.my.bean.api
 
 import com.example.william.my.bean.base.Urls
-import com.example.william.my.bean.data.ArticleBean
 import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.LoginData
 import com.example.william.my.core.retrofit.response.RetrofitResponse
@@ -30,9 +29,6 @@ interface NetworkService {
         @Query("username") username: String,
         @Query("password") password: String
     ): Call<ResponseBody>
-
-    @GET(Urls.Url_Article)
-    fun getArticle(@Path("page") page: Int): Single<ArticleBean>
 
     //@Headers(Header.RETROFIT_CACHE_ALIVE_SECOND + ":" + 10)
     @GET(Urls.Url_Article)

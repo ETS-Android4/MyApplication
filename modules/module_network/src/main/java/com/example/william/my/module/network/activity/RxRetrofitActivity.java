@@ -10,6 +10,8 @@ import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @see RxRetrofit
  */
@@ -39,7 +41,7 @@ public class RxRetrofitActivity extends BaseResponseActivity {
 //                    }
 //
 //                    @Override
-//                    public void onFailure(ApiException e) {
+//                    public void onFailure(@NotNull ApiException e) {
 //                        String netError = "onFailure: " + e.getMessage();
 //                        showResponse(netError);
 //                    }
@@ -52,7 +54,7 @@ public class RxRetrofitActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onFailure(ApiException e) {
+                    public void onFailure(@NotNull ApiException e) {
                         String netError = "onFailure: " + e.getMessage();
                         showResponse(netError);
                     }

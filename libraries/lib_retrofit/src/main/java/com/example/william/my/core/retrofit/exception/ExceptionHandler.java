@@ -21,7 +21,6 @@ import retrofit2.Response;
  */
 public class ExceptionHandler {
 
-
     public static ApiException handleException(Throwable e) {
         ApiException ex;
         if (e instanceof HttpException) {

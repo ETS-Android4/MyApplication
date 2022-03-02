@@ -1,15 +1,15 @@
 package com.example.william.my.bean.repo;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.william.my.bean.api.NetworkService;
 import com.example.william.my.bean.data.ArticleDataBean;
-import com.example.william.my.core.retrofit.callback.LiveDataCallback;
 import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 数据仓库
@@ -40,7 +40,7 @@ public class DataRepository implements DataSource {
     }
 
     public void getArticle(int page, LoadArticleCallback callback) {
-        RetrofitUtils.buildResponseSingle(
+        RetrofitUtils.buildSingle(
                 service.getArticleResponse(page),
                 new RetrofitResponseCallback<ArticleDataBean>() {
 
@@ -51,7 +51,7 @@ public class DataRepository implements DataSource {
                     }
 
                     @Override
-                    public void onFailure(ApiException e) {
+                    public void onFailure(@NotNull ApiException e) {
                         callback.onFailure(e.getMessage());
                     }
 
@@ -63,25 +63,6 @@ public class DataRepository implements DataSource {
     }
 
     public LiveData<RetrofitResponse<ArticleDataBean>> loadArticle(int page) {
-        final MutableLiveData<RetrofitResponse<ArticleDataBean>> liveData = new MutableLiveData<>();
-
-        RetrofitUtils.buildSingle(service.getArticleResponse(page), new LiveDataCallback<>(liveData));
-
-        return liveData;
-    }
-
-    public LiveData<RetrofitResponse<ArticleDataBean>> getArticleData(int page) {
-        final MutableLiveData<RetrofitResponse<ArticleDataBean>> liveData = new MutableLiveData<>();
-
-        LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean> convert = new LiveDataCallback.LiveDataConvert<ArticleDataBean, ArticleDataBean>() {
-            @Override
-            public RetrofitResponse<ArticleDataBean> onResponse(RetrofitResponse<ArticleDataBean> data) throws Exception {
-                return RetrofitResponse.success(data.getData());
-            }
-        };
-
-        RetrofitUtils.buildSingle(service.getArticleResponse(page), new LiveDataCallback<>(liveData, convert));
-
-        return liveData;
+        return RetrofitUtils.buildLiveData(service.getArticleResponse(page));
     }
 }
