@@ -49,13 +49,4 @@ class DataBindingRepository {
                 }
         }
     }
-
-//    suspend fun fetchNewDataByUtils(page: Int) {
-//        RetrofitUtils.buildFlow(
-//            buildArticleFLow(page),
-//            LiveDataConvertCallback(
-//                _article
-//            )
-//        )
-//    }
 }

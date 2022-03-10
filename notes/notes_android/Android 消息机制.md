@@ -6,9 +6,7 @@
 
 2. Thread：Java进程中执行运算的最小单位，亦即执行处理机调度的基本单位。某一进程中一路单独运行的程序。
 
-3.
-
-HandlerThread：一个继承自Thread的类HandlerThread，Android中没有对Java中的Thread进行任何封装，而是提供了一个继承自Thread的类HandlerThread类，这个类对Java的Thread做了很多便利的封装。
+3. HandlerThread：一个继承自Thread的类HandlerThread，Android中没有对Java中的Thread进行任何封装，而是提供了一个继承自Thread的类HandlerThread类，这个类对Java的Thread做了很多便利的封装。
 
 ## HandlerThread
 
@@ -16,8 +14,7 @@ HandlerThread对象start后可以获得其Looper对象，并且使用这个Loope
 
 ## Handler
 
-Handler 创建后可以通过 sendMessage 将消息加入消息队列，然后 looper 不断的将消息从 MessageQueue 中取出来，回调到 Handler 的
-handleMessage 方法，从而实现线程的通信。
+Handler 创建后可以通过 sendMessage 将消息加入消息队列，然后 looper 不断的将消息从 MessageQueue 中取出来，回调到 Handler 的 handleMessage 方法，从而实现线程的通信。
 
 ### Message（消息）
 
@@ -48,36 +45,3 @@ handleMessage 方法，从而实现线程的通信。
 
 * sendMessage : 在当前线程执行，发送一个消息，这个消息会在Looper中去处理
 * post : 开启新的线程执行，将一个Runnable投递到Handler内部的Looper中去处理
-
-```
-    public final boolean sendMessage( Message msg) {
-        return sendMessageDelayed(msg, 0);
-    }
-
-    public final boolean post( Runnable r) {
-       return  sendMessageDelayed(getPostMessage(r), 0);
-    }
-
-    private static Message getPostMessage(Runnable r) {
-        Message m = Message.obtain();
-        m.callback = r;
-        return m;
-    }
-
-    public void dispatchMessage( Message msg) {
-        if (msg.callback != null) {
-            handleCallback(msg);
-        } else {
-            if (mCallback != null) {
-                if (mCallback.handleMessage(msg)) {
-                    return;
-                }
-            }
-            handleMessage(msg);
-        }
-    }
-
-    private static void handleCallback(Message message) {
-        message.callback.run();
-    }
-```

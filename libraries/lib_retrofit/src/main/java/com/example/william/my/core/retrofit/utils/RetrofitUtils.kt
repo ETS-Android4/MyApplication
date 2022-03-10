@@ -96,18 +96,28 @@ object RetrofitUtils {
         return liveData
     }
 
-    suspend fun <T> buildFlow(flow: Flow<T>, callbackBase: BaseRetrofitCallback<T>) {
+    suspend fun <T> buildFlow(flow: Flow<RetrofitResponse<T>>, callback: BaseRetrofitCallback<RetrofitResponse<T>>) {
         withContext(Dispatchers.Main) {
             flow
                 .onStart {
-                    callbackBase.onLoading()
+                    callback.onLoading()
                 }
                 .catch { exception ->
-                    callbackBase.onFailure(ExceptionHandler.handleException(exception))
+                    callback.onFailure(ExceptionHandler.handleException(exception))
                 }
                 .collect { response ->
-                    callbackBase.onResponse(response)
+                    callback.onResponse(response)
                 }
         }
+    }
+
+    suspend fun <T> buildFlow(flow: Flow<RetrofitResponse<T>>): LiveData<RetrofitResponse<T>> {
+        val liveData: MutableLiveData<RetrofitResponse<T>> = MutableLiveData()
+        buildFlow(flow, object : RetrofitLiveDataCallback<T>() {
+            override fun onPostValue(value: RetrofitResponse<T>) {
+                liveData.postValue(value)
+            }
+        })
+        return liveData
     }
 }

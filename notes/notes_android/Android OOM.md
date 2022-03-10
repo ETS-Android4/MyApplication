@@ -2,8 +2,7 @@
 
 ## 1.使用更加轻量的数据结构
 
-如使用ArrayMap/SparseArray替代HashMap,HashMap更耗内存，因为它需要额外的实例对象来记录Mapping操作，SparseArray更加高效，因为它避免了Key
-Value的自动装箱，和装箱后的解箱操作
+如使用ArrayMap/SparseArray替代HashMap,HashMap更耗内存，因为它需要额外的实例对象来记录Mapping操作，SparseArray更加高效，因为它避免了Key Value的自动装箱，和装箱后的解箱操作
 
 ## 2. 避免枚举的使用
 

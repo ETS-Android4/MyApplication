@@ -19,7 +19,6 @@ class DataBindingViewModel(private val dataSource: DataBindingRepository) : View
     fun fetchNewData(page: Int) {
         viewModelScope.launch {
             dataSource.fetchNewDataFLow(page)
-            //dataSource.fetchNewDataByUtils(page)
         }
     }
 }

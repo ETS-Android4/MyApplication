@@ -17,7 +17,7 @@ if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permissi
 
 #### 1. 在manifest中添加provider
 
-```xml
+```
 <manifest>
     ...
     <application>
@@ -38,7 +38,7 @@ if (ContextCompat.checkSelfPermission(PermissionActivity.this, Manifest.permissi
 
 #### 2. 配置需要获取文件的文件路径
 
-```xml
+```
 <resources>
     <paths>
         <files-path name="name" path="" /><!--Context.getFilesDir()-->
@@ -120,7 +120,7 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 AndroidManifest文件中添加安装未知来源应用的权限
 
-```xml
+```
 <!-- Android8.0 允许安装未知来源 -->
 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 ```
@@ -129,7 +129,7 @@ AndroidManifest文件中添加安装未知来源应用的权限
 
 只有全屏不透明的activity才可以设置方向，解决方案：要么去掉对应activity中的 screenOrientation 属性，或者对应设置方向的代码。
 
-```xml
+```
 <item name="android:windowIsTranslucent">false</item>
 ```
 
@@ -139,7 +139,7 @@ AndroidManifest文件中添加安装未知来源应用的权限
 
 在资源文件新建xml目录，新建文件
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config xmlns:tools="http://schemas.android.com/tools">
     <base-config
@@ -150,7 +150,7 @@ AndroidManifest文件中添加安装未知来源应用的权限
 
 清单文件配置
 
-```xml
+```
 <application
     android:networkSecurityConfig="@xml/network_security_config"/>
 ```
@@ -161,7 +161,7 @@ AndroidManifest文件中添加安装未知来源应用的权限
 
 请求旧版外部存储
 
-```xml
+```
 <manifest>
   <application android:requestLegacyExternalStorage="true">
     ...

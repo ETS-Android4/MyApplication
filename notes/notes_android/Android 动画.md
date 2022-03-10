@@ -4,7 +4,7 @@
 
 利用 xml 实现逐帧动画。使用较少，可以用gif替代。
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="true">
@@ -26,7 +26,7 @@
 4. TranslateAnimation（位移动画）
 5. AnimationSet 复合动画
 
-```xml
+```
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="6000">

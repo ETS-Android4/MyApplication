@@ -34,10 +34,8 @@ Message持有Handler的引用，Handler又持有Activity的引用。解决：使
 2. BroadcastReceiver在10s内没有执行完毕。
 
 应用运行到虚拟机之后，首先它要执行的就是启动ActivityThread，在ActivityThread中，它又会启动它的main()
-函数。所以在程序运行的时候，主线程所有的代码都运行在这个Looper里面。
-也就是说应用所有生命周期的函数（包括Activity、Service所有生命周期）都运行在这个Looper里面，而且，它们都是以消息的方式存在的。
-所以在没有消息产生的时候，looper会被block(阻塞)，主线程会进入休眠，一旦有输入事件或者Looper添加消息的操作后会唤醒这个Looper，从而对事件进行响应，所以不会导致ANR。
-简单来说looper的阻塞表明没有事件输入，而ANR是由于有事件没响应导致，所以looper的死循环并不会导致应用卡死。
+函数。所以在程序运行的时候，主线程所有的代码都运行在这个Looper里面。 也就是说应用所有生命周期的函数（包括Activity、Service所有生命周期）都运行在这个Looper里面，而且，它们都是以消息的方式存在的。 所以在没有消息产生的时候，looper会被block(阻塞)
+，主线程会进入休眠，一旦有输入事件或者Looper添加消息的操作后会唤醒这个Looper，从而对事件进行响应，所以不会导致ANR。 简单来说looper的阻塞表明没有事件输入，而ANR是由于有事件没响应导致，所以looper的死循环并不会导致应用卡死。
 
 ## 8. Binder有什么优势？
 
@@ -72,11 +70,9 @@ mmap优点总结：
 
 ## 14. Binder机制原理
 
-* Android系统的Binder机制中，是有Client,Service,ServiceManager,Binder驱动程序组成的，其中Client，service，Service
-  Manager运行在用户空间，Binder驱动程序是运行在内核空间的。
+* Android系统的Binder机制中，是有Client,Service,ServiceManager,Binder驱动程序组成的，其中Client，service，Service Manager运行在用户空间，Binder驱动程序是运行在内核空间的。
 * Binder就是把这4种组件粘合在一块的粘合剂，其中核心的组件就是Binder驱动程序。
 * Service Manager提供辅助管理的功能，而Client和Service正是在Binder驱动程序和Service Manager提供的基础设施上实现C/S 之间的通信。
-* Binder驱动程序提供设备文件/dev/binder与用户控件进行交互，Client、Service，Service
-  Manager通过open和ioctl文件操作相应的方法与Binder驱动程序进行通信。
+* Binder驱动程序提供设备文件/dev/binder与用户控件进行交互，Client、Service，Service Manager通过open和ioctl文件操作相应的方法与Binder驱动程序进行通信。
 * Client和Service之间的进程间通信是通过Binder驱动程序间接实现的。
 * Binder Manager是一个守护进程，用来管理Service，并向Client提供查询Service接口的能力。
