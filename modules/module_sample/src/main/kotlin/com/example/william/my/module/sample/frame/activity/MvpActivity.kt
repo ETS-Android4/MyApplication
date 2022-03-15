@@ -8,7 +8,6 @@ import com.example.william.my.module.sample.frame.fragment.MvpFragment
 
 /**
  * MVP：Model-View-Presenter
- * https://github.com/googlesamples/android-architecture
  */
 @Route(path = ARouterPath.Sample.Sample_MVP)
 class MvpActivity : BaseFragmentActivity() {

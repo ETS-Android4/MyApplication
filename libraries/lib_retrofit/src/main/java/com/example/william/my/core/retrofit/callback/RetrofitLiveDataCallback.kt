@@ -1,6 +1,6 @@
 package com.example.william.my.core.retrofit.callback
 
-import com.example.william.my.core.retrofit.base.BaseRetrofitCallback
+import com.example.william.my.core.retrofit.base.RetrofitCallback
 import com.example.william.my.core.retrofit.exception.ApiException
 import com.example.william.my.core.retrofit.exception.ExceptionHandler
 import com.example.william.my.core.retrofit.response.RetrofitResponse
@@ -9,11 +9,9 @@ import io.reactivex.rxjava3.disposables.Disposable
 
 /**
  * 处理基本逻辑
- *
- * io.reactivex.rxjava3.core.SingleObserver
+ * 携带状态的 LiveData Callback
  */
-open class RetrofitLiveDataCallback<T> : SingleObserver<RetrofitResponse<T>>,
-    BaseRetrofitCallback<RetrofitResponse<T>> {
+open class RetrofitLiveDataCallback<T> : SingleObserver<RetrofitResponse<T>>, RetrofitCallback<RetrofitResponse<T>> {
 
     private var disposable: Disposable? = null
 

@@ -15,7 +15,7 @@ import androidx.paging.rxjava3.PagingRx;
 
 import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.bean.data.ArticleDetailBean;
-import com.example.william.my.bean.repo.DataRepository;
+import com.example.william.my.bean.repo.ArticleRepository;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.module.sample.source.ArticleRxPagingSource;
 
@@ -40,18 +40,15 @@ public class ViewModelViewModel extends ViewModel {
     //    super(application);
     //}
 
-    private final MutableLiveData<Integer> mMutableLiveData;
+    private final MutableLiveData<Integer> mMutableLiveData = new MutableLiveData<>();;
 
     private final LiveData<RetrofitResponse<ArticleDataBean>> mArticleLiveData;
 
     public ViewModelViewModel() {
-
-        mMutableLiveData = new MutableLiveData<>();
-
         mArticleLiveData = Transformations.switchMap(mMutableLiveData, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
             @Override
             public LiveData<RetrofitResponse<ArticleDataBean>> apply(Integer input) {
-                return DataRepository.getInstance().loadArticle(input);
+                return ArticleRepository.getInstance().loadArticle(input);
             }
         });
     }

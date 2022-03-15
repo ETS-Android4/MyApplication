@@ -6,19 +6,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.core.retrofit.response.RetrofitResponse
-import com.example.william.my.module.sample.repo.DataBindingRepository
+import com.example.william.my.module.sample.repo.BindingRepository
 import kotlinx.coroutines.launch
 
 /**
  * ViewModel 应创建协程
  */
-class DataBindingViewModel(private val dataSource: DataBindingRepository) : ViewModel() {
+class DataBindingViewModel(private val source: BindingRepository) : ViewModel() {
 
-    val article: LiveData<RetrofitResponse<ArticleDataBean>> = dataSource.article
+    val article: LiveData<RetrofitResponse<ArticleDataBean>> = source.article
 
     fun fetchNewData(page: Int) {
         viewModelScope.launch {
-            dataSource.fetchNewDataFLow(page)
+            source.fetchNewDataFLow(page)
         }
     }
 }
@@ -29,7 +29,7 @@ class DataBindingViewModel(private val dataSource: DataBindingRepository) : View
  */
 object DataBindingVMFactory : ViewModelProvider.Factory {
 
-    private val dataSource = DataBindingRepository()
+    private val dataSource = BindingRepository()
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

@@ -13,7 +13,7 @@ import com.example.william.my.module.sample.frame.model.ArticleViewModel
 
 /**
  * Model-View-ViewModel
- * 通过 ViewModel 将数据（Model）和 UI（View）隔离，再通过 LiveData 将数据和 UI 的绑定，实现数据驱动 UI，只要L iveData 的数据修改 UI 能自动响应更新。
+ * 通过 ViewModel 将数据（Model）和 UI（View）隔离，再通过 LiveData 将数据和 UI 的绑定，实现数据驱动 UI，只要 LiveData 的数据修改 UI 能自动响应更新。
  */
 class MvvmFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
 

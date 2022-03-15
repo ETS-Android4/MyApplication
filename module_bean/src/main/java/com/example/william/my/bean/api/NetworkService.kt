@@ -2,7 +2,7 @@ package com.example.william.my.bean.api
 
 import com.example.william.my.bean.base.Urls
 import com.example.william.my.bean.data.ArticleDataBean
-import com.example.william.my.bean.data.LoginData
+import com.example.william.my.bean.data.LoginBean
 import com.example.william.my.core.retrofit.response.RetrofitResponse
 import io.reactivex.rxjava3.core.Single
 import okhttp3.ResponseBody
@@ -41,7 +41,7 @@ interface NetworkService {
     suspend fun login(
         @Query("username") username: String,
         @Query("password") password: String
-    ): LoginData
+    ): LoginBean
 
     /**
      * DataBinding，Paging

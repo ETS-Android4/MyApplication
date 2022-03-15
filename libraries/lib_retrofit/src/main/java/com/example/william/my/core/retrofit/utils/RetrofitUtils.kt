@@ -2,22 +2,15 @@ package com.example.william.my.core.retrofit.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.william.my.core.retrofit.base.BaseRetrofitCallback
 import com.example.william.my.core.retrofit.callback.RetrofitLiveDataCallback
 import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback
 import com.example.william.my.core.retrofit.exception.ApiException
-import com.example.william.my.core.retrofit.exception.ExceptionHandler
 import com.example.william.my.core.retrofit.function.HttpResultFunction
 import com.example.william.my.core.retrofit.helper.RetrofitHelper
 import com.example.william.my.core.retrofit.response.RetrofitResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.withContext
 
 object RetrofitUtils {
 
@@ -59,10 +52,7 @@ object RetrofitUtils {
      * RetrofitResponse<T> --> onResponse(T)
      */
     @JvmStatic
-    fun <T> buildSingle(
-        single: Single<RetrofitResponse<T>>,
-        callback: RetrofitResponseCallback<T>
-    ) {
+    fun <T> buildSingle(single: Single<RetrofitResponse<T>>, callback: RetrofitResponseCallback<T>) {
         single
             .onErrorResumeNext(HttpResultFunction())
             .subscribeOn(Schedulers.io())
@@ -93,31 +83,6 @@ object RetrofitUtils {
                     liveData.postValue(value)
                 }
             })
-        return liveData
-    }
-
-    suspend fun <T> buildFlow(flow: Flow<RetrofitResponse<T>>, callback: BaseRetrofitCallback<RetrofitResponse<T>>) {
-        withContext(Dispatchers.Main) {
-            flow
-                .onStart {
-                    callback.onLoading()
-                }
-                .catch { exception ->
-                    callback.onFailure(ExceptionHandler.handleException(exception))
-                }
-                .collect { response ->
-                    callback.onResponse(response)
-                }
-        }
-    }
-
-    suspend fun <T> buildFlow(flow: Flow<RetrofitResponse<T>>): LiveData<RetrofitResponse<T>> {
-        val liveData: MutableLiveData<RetrofitResponse<T>> = MutableLiveData()
-        buildFlow(flow, object : RetrofitLiveDataCallback<T>() {
-            override fun onPostValue(value: RetrofitResponse<T>) {
-                liveData.postValue(value)
-            }
-        })
         return liveData
     }
 }

@@ -105,6 +105,7 @@ ext {
             //https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
 
             gson                 : "com.google.code.gson:gson:2.9.0",
+            guava                : "com.google.guava:guava:31.1-android",
             protobuf             : "com.google.protobuf:protobuf-javalite:3.19.4",
             protobuf_protoc      : "com.google.protobuf:protoc:3.19.4",
             protobuf_javalite    : "com.google.protobuf:protoc-gen-javalite:3.0.0",

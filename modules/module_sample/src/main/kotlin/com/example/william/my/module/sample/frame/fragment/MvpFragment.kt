@@ -5,12 +5,15 @@ import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.william.my.bean.data.ArticleDetailBean
-import com.example.william.my.bean.repo.DataRepository
+import com.example.william.my.bean.repo.ArticleRepository
 import com.example.william.my.library.base.BaseRecyclerFragment
 import com.example.william.my.module.sample.adapter.ArticleAdapter
 import com.example.william.my.module.sample.contract.ArticleContract
 import com.example.william.my.module.sample.frame.presenter.ArticlePresenter
 
+/**
+ * MVP：Model-View-Presenter
+ */
 class MvpFragment : BaseRecyclerFragment<ArticleDetailBean?>(), ArticleContract.View {
 
     lateinit var mPresenter: ArticlePresenter
@@ -22,7 +25,7 @@ class MvpFragment : BaseRecyclerFragment<ArticleDetailBean?>(), ArticleContract.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mPresenter = ArticlePresenter(DataRepository.getInstance(), this)
+        mPresenter = ArticlePresenter(ArticleRepository.getInstance(), this)
         queryData()
     }
 

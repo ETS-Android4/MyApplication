@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.withContext
 
-class DataBindingRepository {
+class BindingRepository {
 
     private val _article = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
     val article: LiveData<RetrofitResponse<ArticleDataBean>> = _article

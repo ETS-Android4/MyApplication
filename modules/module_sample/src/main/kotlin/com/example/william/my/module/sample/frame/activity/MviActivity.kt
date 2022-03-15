@@ -6,6 +6,10 @@ import com.example.william.my.library.base.BaseFragmentActivity
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.frame.fragment.MviFragment
 
+/**
+ * MVI：Model-View-Intent
+ * https://github.com/android/architecture-samples
+ */
 @Route(path = ARouterPath.Sample.Sample_MVI)
 class MviActivity : BaseFragmentActivity() {
 

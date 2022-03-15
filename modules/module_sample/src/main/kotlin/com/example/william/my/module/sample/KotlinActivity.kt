@@ -2,7 +2,7 @@ package com.example.william.my.module.sample
 
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import com.example.william.my.bean.data.LoginData
+import com.example.william.my.bean.data.LoginBean
 import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.sample.databinding.SampleLayoutResponseBinding
 import com.example.william.my.module.sample.utils.Singleton
@@ -90,23 +90,23 @@ class KotlinActivity : BaseActivity() {
      * it 可重命名微一个可读的lambda参数，适合多重嵌套
      */
     private fun scope() {
-        val loginData = LoginData(LoginData.User("001", "nickname"))
+        val loginData = LoginBean()
 
         // with
         // 对于这个对象，执行以下操作
         with(loginData) {
-            data.id = "004"
+            data.id = "001"
             data.nickname = "nickname"
         }
 
         // let  -> it
         loginData.let { login ->
-            login.data.id = "001"
+            login.data.id = "002"
             login.data.nickname = "nickname"
         }
 
         val let2: String = loginData.let { login ->
-            login.data.id = "001"
+            login.data.id = "002"
             login.data.nickname = "nickname"
             "let2"
         }
@@ -114,7 +114,7 @@ class KotlinActivity : BaseActivity() {
 
         // run -> this
         loginData.run {
-            data.id = "002"
+            data.id = "003"
             data.nickname = "nickname"
         }
 
@@ -127,19 +127,19 @@ class KotlinActivity : BaseActivity() {
 
         // also -> it
         // 上下文对象 作为 lambda 表达式参数（it）来访问。 返回值是上下文对象本身。
-        val alsoData: LoginData = loginData.also { login ->
-            login.data.id = "005"
+        val alsoBean: LoginBean = loginData.also { login ->
+            login.data.id = "004"
             login.data.nickname = "nickname"
         }
-        L.e("TAG", Gson().toJson(alsoData))
+        L.e("TAG", Gson().toJson(alsoBean))
 
         // apply -> this
         // 上下文对象 作为接收者（this）来访问。 返回值 是上下文对象本身。
-        val applyData: LoginData = loginData.apply {
-            data.id = "006"
+        val applyBean: LoginBean = loginData.apply {
+            data.id = "005"
             data.nickname = "nickname"
         }
-        L.e("TAG", Gson().toJson(applyData))
+        L.e("TAG", Gson().toJson(applyBean))
     }
 
     /**

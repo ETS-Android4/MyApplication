@@ -35,7 +35,7 @@ class StateFlowViewModel(private val dataSource: ArticleRepository) : ViewModel(
  * 自定义实例，多参构造
  * Factory for [StateFlowViewModel].
  */
-object StateVMFactory : ViewModelProvider.Factory {
+object StateFlowVMFactory : ViewModelProvider.Factory {
 
     private val dataSource = ArticleRepository()
 

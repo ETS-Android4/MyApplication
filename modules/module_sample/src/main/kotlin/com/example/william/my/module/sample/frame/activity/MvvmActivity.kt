@@ -7,7 +7,7 @@ import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.frame.fragment.MvvmFragment
 
 /**
- * https://github.com/googlesamples/android-architecture-components
+ * MVVM：Model-View-ViewModel
  */
 @Route(path = ARouterPath.Sample.Sample_MVVM)
 class MvvmActivity : BaseFragmentActivity() {

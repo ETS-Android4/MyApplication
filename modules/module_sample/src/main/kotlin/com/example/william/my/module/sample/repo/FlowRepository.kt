@@ -1,44 +1,67 @@
 package com.example.william.my.module.sample.repo
 
 import com.example.william.my.bean.api.NetworkService
-import com.example.william.my.bean.data.LoginData
+import com.example.william.my.bean.data.LoginBean
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.sample.utils.ThreadUtils
 import com.example.william.my.module.utils.L
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
 
-class FlowRepository {
+/**
+ * Android 上的 Kotlin 数据流
+ * https://developer.android.google.cn/kotlin/flow
+ */
+class FlowRepository(private val defaultDispatcher: CoroutineDispatcher) {
 
     /**
-     * 返回流上的数据转换。
-     * Returns the data transformations on the flow.
-     * 这些操作为懒汉式，不会触发流，只在发送数据时转换
-     * These operations are lazy and don't trigger the flow. They just transform
-     * the current value emitted by the flow at that point in time.
+     * 创建数据流
      */
-    fun login(username: String, password: String): Flow<LoginData> {
-        val flow = flow {
+    private fun createFlow(username: String, password: String): Flow<LoginBean> {
+        return flow {
             //打印线程
-            ThreadUtils.isMainThread("FlowRepository getArticle")
+            ThreadUtils.isMainThread("FlowRepository login")
 
             val api = RetrofitUtils.buildApi(NetworkService::class.java)
-            val loginData = api.login(username, password)
-            emit(loginData) // Emits the result of the request to the flow 向数据流发送请求结果
+            val loginBean = api.login(username, password)
+            emit(loginBean)// Emits the result of the request to the flow
         }
+            // Executes on the IO dispatcher
+            .flowOn(defaultDispatcher)
+    }
 
-        // 中间运算符 map 转换数据
+    /**
+     * 修改数据流
+     */
+    private fun transformFlow(flow: Flow<LoginBean>): Flow<LoginBean> {
         return flow
-            .map { loginData ->
-                loginData
+            // 在默认调度程序上执行
+            // Executes on the default dispatcher
+            .map { news ->
+                news
             }
-            // flowOn 只影响上游
+            // 在默认调度程序上执行
+            // Executes on the default dispatcher
+            .onEach {
+
+            }
+            // flowOn 影响上游的 flow
             // flowOn affects the upstream flow ↑
-            .flowOn(Dispatchers.IO)
-            //下游不受影响
-            //the downstream flow ↓ is not affected
-            .catch { exception ->
+            .flowOn(defaultDispatcher)
+            // 下游的 flow 不受影响
+            // the downstream flow ↓ is not affected
+            .catch { exception -> // Executes in the consumer's context
                 L.e("TAG", "exception : " + exception.message.toString())
             }
+    }
+
+    /**
+     * 这些操作是惰性的，不会触发流。它们只是转换流在该时间点发出的当前值。
+     * These operations are lazy and don't trigger the flow.
+     * They just transform the current value emitted by the flow at that point in time.
+     */
+    fun login(username: String, password: String): Flow<LoginBean> {
+        val loginBean = createFlow(username, password)
+        return transformFlow(loginBean)
     }
 }

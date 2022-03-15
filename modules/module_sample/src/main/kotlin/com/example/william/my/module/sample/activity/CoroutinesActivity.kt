@@ -6,14 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.databinding.SampleLayoutResponseBinding
-import com.example.william.my.module.sample.model.SuspendVMFactory
-import com.example.william.my.module.sample.model.SuspendViewModel
+import com.example.william.my.module.sample.model.CoroutinesVMFactory
+import com.example.william.my.module.sample.model.CoroutinesViewModel
 
-@Route(path = ARouterPath.Sample.Sample_Suspend)
-class SuspendActivity : AppCompatActivity() {
+/**
+ * Android 上的 Kotlin 协程
+ * https://developer.android.google.cn/kotlin/coroutines
+ */
+@Route(path = ARouterPath.Sample.Sample_Coroutines)
+class CoroutinesActivity : AppCompatActivity() {
 
-    private val mViewModel: SuspendViewModel by viewModels {
-        SuspendVMFactory
+    private val mViewModel: CoroutinesViewModel by viewModels {
+        CoroutinesVMFactory
     }
 
     lateinit var mBinding: SampleLayoutResponseBinding

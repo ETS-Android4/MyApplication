@@ -10,20 +10,20 @@ import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.base.BaseRecyclerFragment
 import com.example.william.my.module.sample.adapter.ArticleAdapter
 import com.example.william.my.module.sample.frame.model.StateFlowViewModel
-import com.example.william.my.module.sample.frame.model.StateVMFactory
+import com.example.william.my.module.sample.frame.model.StateFlowVMFactory
 
 import com.example.william.my.module.sample.frame.state.ArticleUiState
 import kotlinx.coroutines.launch
 
 /**
- * Model-View-Intent
+ * MVI：Model-View-Intent
  * 1. 将 LiveData 组件改成了 StateFlow
  * 2. ViewModel 传递给 View 的数据限制为 View 的 UIState
  */
 class MviFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
 
     private val mStateFlowViewModel: StateFlowViewModel by viewModels {
-        StateVMFactory
+        StateFlowVMFactory
     }
 
     override fun getAdapter(): BaseQuickAdapter<ArticleDetailBean?, BaseViewHolder> {

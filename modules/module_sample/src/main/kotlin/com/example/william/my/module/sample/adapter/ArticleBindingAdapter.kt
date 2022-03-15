@@ -9,6 +9,9 @@ import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.core.retrofit.response.RetrofitResponse
 
+/**
+ * https://developer.android.google.cn/topic/libraries/data-binding/binding-adapters
+ */
 object ArticleBindingAdapter {
 
     @JvmStatic
@@ -28,11 +31,7 @@ object ArticleBindingAdapter {
         }
     }
 
-    private fun showArticles(
-        adapter: ArticleBindAdapter,
-        isFirst: Boolean,
-        datas: MutableList<ArticleDetailBean?>
-    ) {
+    private fun showArticles(adapter: ArticleBindAdapter, isFirst: Boolean, datas: MutableList<ArticleDetailBean?>) {
         if (isFirst) {
             adapter.setNewInstance(datas)
         } else {
@@ -40,11 +39,7 @@ object ArticleBindingAdapter {
         }
     }
 
-    private fun onDataNotAvailable(
-        context: Context,
-        adapter: ArticleBindAdapter,
-        isFirst: Boolean
-    ) {
+    private fun onDataNotAvailable(context: Context, adapter: ArticleBindAdapter, isFirst: Boolean) {
         if (isFirst) {
             showEmptyView(context, adapter)
         }

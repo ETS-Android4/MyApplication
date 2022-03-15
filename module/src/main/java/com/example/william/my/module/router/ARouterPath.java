@@ -89,13 +89,14 @@ public class ARouterPath {
         public static final String Sample = "/module_sample/sample";
         public static final String Sample_Bind = "/module_sample/bing";
         public static final String Sample_Navigation = "/module_sample/navigation";
-        public static final String Sample_ViewModel = "/module_sample/view_mode";
+        public static final String Sample_ViewModel = "/module_sample/viewmodel";
         public static final String Sample_Room = "/module_sample/room";
         public static final String Sample_WorkManager = "/module_sample/work_manager";
         //
         public static final String Sample_Coil = "/module_sample/coil";
         public static final String Sample_DataStore = "/module_sample/dataStore";
-        public static final String Sample_Suspend = "/module_sample/suspend";
+        public static final String Sample_LiveData = "/module_sample/livedata";
+        public static final String Sample_Coroutines = "/module_sample/coroutines";
         public static final String Sample_FLow = "/module_sample/flow";
         public static final String Sample_Paging = "/module_sample/paging";
         public static final String Sample_Result = "/module_sample/result";

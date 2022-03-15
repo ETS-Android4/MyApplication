@@ -2,7 +2,7 @@ package com.example.william.my.core.retrofit.base
 
 import com.example.william.my.core.retrofit.exception.ApiException
 
-interface BaseRetrofitCallback<T> {
+interface RetrofitCallback<T> {
     /**
      * onLoading
      */

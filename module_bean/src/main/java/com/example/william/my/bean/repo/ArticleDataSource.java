@@ -4,7 +4,7 @@ import com.example.william.my.bean.data.ArticleDetailBean;
 
 import java.util.List;
 
-public interface DataSource {
+public interface ArticleDataSource {
 
     interface LoadArticleCallback {
 
@@ -14,5 +14,7 @@ public interface DataSource {
 
         void onArticleLoaded(List<ArticleDetailBean> articles);
     }
+
+    void getArticle(int page, LoadArticleCallback callback);
 
 }
