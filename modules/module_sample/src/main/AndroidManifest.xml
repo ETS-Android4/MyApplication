@@ -20,7 +20,7 @@
         <activity android:name=".frame.activity.MvpActivity" />
         <activity android:name=".frame.activity.MvvmActivity" />
         <activity android:name=".frame.activity.MviActivity" />
-        <activity android:name=".activity.BindingActivity" />
+        <activity android:name=".activity.BindingAdapterActivity" />
     </application>
 
 </manifest>

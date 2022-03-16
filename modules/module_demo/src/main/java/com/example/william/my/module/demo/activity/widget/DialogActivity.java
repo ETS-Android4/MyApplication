@@ -138,15 +138,15 @@ public class DialogActivity extends BaseActivity implements AdapterView.OnItemCl
                 break;
             case 6:
                 MyCreateDialogDialog dialogFragment = new MyCreateDialogDialog();
-                dialogFragment.show(getSupportFragmentManager(), "dialog");
+                dialogFragment.show(getSupportFragmentManager(), dialogFragment.getTag());
                 break;
             case 7:
                 MyCreateViewDialog dialogFragment2 = new MyCreateViewDialog();
-                dialogFragment2.show(getSupportFragmentManager(), "dialog");
+                dialogFragment2.show(getSupportFragmentManager(), dialogFragment2.getTag());
                 break;
             case 8:
                 MyBottomSheetDialog dialogFragment3 = new MyBottomSheetDialog();
-                dialogFragment3.show(getSupportFragmentManager(), "dialog");
+                dialogFragment3.show(getSupportFragmentManager(), dialogFragment3.getTag());
                 break;
             default:
                 break;

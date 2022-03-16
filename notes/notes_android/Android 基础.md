@@ -39,6 +39,34 @@
 
 * 状态：Activity 重新启动，Activity由后台切换到前台，由不可见到可见。
 
+### 启动Activity所执行的方法
+
+#### 当AActivity切换BActivity
+
+1. A: onPause()
+2. B: onCreate()
+3. B: onStart()
+4. B: onResume()
+5. A: onStop()
+
+#### 当BActivity点击back键
+
+1. B: onPause()
+2. A: onRestart()
+3. A: onStart()
+4. A: onResume()
+5. B: onStop()
+6. B: onDestroy()
+
+### 当Activity按home键，然后再打开应用
+
+1. A: onPause()
+2. A: onStop()
+3. 
+4. A: onRestart()
+5. A: onStart()
+6. A: onResume()
+
 ### 启动模式
 
 #### standard：标准模式、默认模式

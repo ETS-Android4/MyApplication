@@ -16,7 +16,6 @@ public class MyCreateDialogDialog extends DialogFragment {
     /**
      * 重新onCreateDialog方法， 返回一个创建的dialog对象
      */
-
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
