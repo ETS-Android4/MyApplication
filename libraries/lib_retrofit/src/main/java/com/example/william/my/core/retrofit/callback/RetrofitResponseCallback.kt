@@ -19,7 +19,9 @@ open class RetrofitResponseCallback<T> : SingleObserver<RetrofitResponse<T>>, Re
     }
 
     override fun onSuccess(t: RetrofitResponse<T>) {
-        onResponse(t.data)
+        t.data?.let {
+            onResponse(t.data)
+        }
         dispose()
     }
 
@@ -44,7 +46,7 @@ open class RetrofitResponseCallback<T> : SingleObserver<RetrofitResponse<T>>, Re
 
     }
 
-    override fun onResponse(response: T?) {
+    override fun onResponse(response: T) {
 
     }
 

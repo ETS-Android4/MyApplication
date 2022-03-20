@@ -40,7 +40,8 @@ public class ViewModelViewModel extends ViewModel {
     //    super(application);
     //}
 
-    private final MutableLiveData<Integer> mMutableLiveData = new MutableLiveData<>();;
+    private final MutableLiveData<Integer> mMutableLiveData = new MutableLiveData<>();
+    ;
 
     private final LiveData<RetrofitResponse<ArticleDataBean>> mArticleLiveData;
 

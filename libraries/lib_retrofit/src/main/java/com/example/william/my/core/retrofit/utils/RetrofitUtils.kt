@@ -58,7 +58,7 @@ object RetrofitUtils {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : RetrofitResponseCallback<T>() {
-                override fun onResponse(response: T?) {
+                override fun onResponse(response: T) {
                     callback.onResponse(response)
                 }
 

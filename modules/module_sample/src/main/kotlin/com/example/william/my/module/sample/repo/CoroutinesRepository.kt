@@ -2,7 +2,9 @@ package com.example.william.my.module.sample.repo
 
 import com.example.william.my.bean.api.NetworkService
 import com.example.william.my.bean.base.Urls
+import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.LoginBean
+import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.sample.result.NetworkResult
 import com.example.william.my.module.sample.utils.ThreadUtils
@@ -74,6 +76,11 @@ class CoroutinesRepository {
             val loginData = api.login(username, password)
             NetworkResult.Success(loginData)
         }
+    }
+
+    suspend fun getArticle(page: Int): RetrofitResponse<ArticleDataBean> {
+        val api = RetrofitUtils.buildApi(NetworkService::class.java)
+        return api.getArticleSuspend(page)
     }
 }
 

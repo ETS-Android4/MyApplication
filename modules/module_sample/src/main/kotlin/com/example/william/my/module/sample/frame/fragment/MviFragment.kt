@@ -9,9 +9,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.base.BaseRecyclerFragment
 import com.example.william.my.module.sample.adapter.ArticleAdapter
-import com.example.william.my.module.sample.frame.model.StateFlowViewModel
 import com.example.william.my.module.sample.frame.model.StateFlowVMFactory
-
+import com.example.william.my.module.sample.frame.model.StateFlowViewModel
 import com.example.william.my.module.sample.frame.state.ArticleUiState
 import kotlinx.coroutines.launch
 

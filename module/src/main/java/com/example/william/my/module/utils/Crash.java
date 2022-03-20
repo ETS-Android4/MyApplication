@@ -42,7 +42,7 @@ public final class Crash {
                 if (onCrashListener != null) {
                     onCrashListener.onCrash(crashInfo, e);
                 } else {
-                    Log.d(TAG, crashInfo);
+                    Log.e(TAG, crashInfo);
                 }
 
                 if (DEFAULT_UNCAUGHT_EXCEPTION_HANDLER != null) {

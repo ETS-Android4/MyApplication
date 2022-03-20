@@ -21,6 +21,7 @@ open class RetrofitLiveDataCallback<T> : SingleObserver<RetrofitResponse<T>>, Re
 
     override fun onSuccess(t: RetrofitResponse<T>) {
         onResponse(t)
+
         dispose()
     }
 
@@ -45,11 +46,9 @@ open class RetrofitLiveDataCallback<T> : SingleObserver<RetrofitResponse<T>>, Re
         onPostValue(RetrofitResponse.loading())
     }
 
-    override fun onResponse(response: RetrofitResponse<T>?) {
+    override fun onResponse(response: RetrofitResponse<T>) {
         try {
-            response?.let {
-                onPostValue(it)
-            }
+            onPostValue(response)
         } catch (e: Exception) {
             onPostValue(RetrofitResponse.error("数据异常"))
         }

@@ -12,7 +12,7 @@ import com.example.william.my.module.sample.databinding.SampleLayoutResponseBind
  */
 @Route(path = ARouterPath.Sample.Sample_FLow)
 class FlowActivity : BaseActivity() {
-    
+
     lateinit var mBinding: SampleLayoutResponseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

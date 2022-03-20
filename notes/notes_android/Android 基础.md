@@ -62,7 +62,7 @@
 
 1. A: onPause()
 2. A: onStop()
-3. 
+3.
 4. A: onRestart()
 5. A: onStart()
 6. A: onResume()

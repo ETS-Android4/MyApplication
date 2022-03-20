@@ -1,13 +1,8 @@
 package com.example.william.my.library.base;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
 import android.os.Process;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.william.my.library.interfaces.IComponentApplication;
 import com.example.william.my.library.utils.ActivityManagerUtil;
@@ -67,7 +62,7 @@ public class BaseApp extends Application {
             }
         });
 
-        //registerActivityLifecycleCallbacks();
+        ActivityManagerUtil.getInstance().register(this);
     }
 
     private void modulesApplicationInit() {
@@ -96,45 +91,5 @@ public class BaseApp extends Application {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void registerActivityLifecycleCallbacks() {
-        //监听activity生命周期
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
-                ActivityManagerUtil.getInstance().addActivity(activity);
-            }
-
-            @Override
-            public void onActivityStarted(@NonNull Activity activity) {
-
-            }
-
-            @Override
-            public void onActivityResumed(@NonNull Activity activity) {
-
-            }
-
-            @Override
-            public void onActivityPaused(@NonNull Activity activity) {
-
-            }
-
-            @Override
-            public void onActivityStopped(@NonNull Activity activity) {
-
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
-
-            }
-
-            @Override
-            public void onActivityDestroyed(@NonNull Activity activity) {
-                ActivityManagerUtil.getInstance().removeActivity(activity);
-            }
-        });
     }
 }
