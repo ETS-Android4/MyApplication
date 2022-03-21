@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.adapter
+package com.example.william.my.module.sample.bindingadapter
 
 import android.content.Context
 import android.view.Gravity
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.core.retrofit.response.RetrofitResponse
+import com.example.william.my.module.sample.adapter.ArticleBindAdapter
 
 /**
  * https://developer.android.google.cn/topic/libraries/data-binding/binding-adapters

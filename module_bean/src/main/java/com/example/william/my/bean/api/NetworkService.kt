@@ -25,27 +25,15 @@ import retrofit2.http.Query
 interface NetworkService {
 
     @POST(Urls.Url_Login)
-    fun call(
-        @Query("username") username: String,
-        @Query("password") password: String
-    ): Call<ResponseBody>
+    fun call(@Query("username") username: String, @Query("password") password: String): Call<ResponseBody>
+
+    @POST(Urls.Url_Login)
+    suspend fun login(@Query("username") username: String, @Query("password") password: String): LoginBean
 
     //@Headers(Header.RETROFIT_CACHE_ALIVE_SECOND + ":" + 10)
     @GET(Urls.Url_Article)
     fun getArticleResponse(@Path("page") page: Int): Single<RetrofitResponse<ArticleDataBean>>
 
-    /**
-     * flow、suspend
-     */
-    @POST(Urls.Url_Login)
-    suspend fun login(
-        @Query("username") username: String,
-        @Query("password") password: String
-    ): LoginBean
-
-    /**
-     * DataBinding，Paging
-     */
     // 提供挂起功能的网络请求接口
     // Interface that provides a way to make network requests with suspend functions
     @GET(Urls.Url_Article)

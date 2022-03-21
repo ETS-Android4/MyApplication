@@ -37,6 +37,5 @@ public class SwipeLayoutActivity extends BaseActivity {
         //mAdapter.setMode(Attributes.Mode.Multiple);//默认为Single
 
         mRecycleView.setAdapter(mAdapter);
-        mRecycleView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

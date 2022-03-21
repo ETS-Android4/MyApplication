@@ -2,14 +2,13 @@ package com.example.william.my.module.sample.frame.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.base.BaseRecyclerFragment
 import com.example.william.my.module.sample.adapter.ArticleAdapter
-import com.example.william.my.module.sample.frame.model.ArticleVMFactory
-import com.example.william.my.module.sample.frame.model.ArticleViewModel
+import com.example.william.my.module.sample.frame.utils.obtainViewModel
+import com.example.william.my.module.sample.frame.viewmodel.TasksViewModel
 
 /**
  * Model-View-ViewModel
@@ -17,9 +16,7 @@ import com.example.william.my.module.sample.frame.model.ArticleViewModel
  */
 class MvvmFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
 
-    private val mArticleViewModel: ArticleViewModel by viewModels {
-        ArticleVMFactory
-    }
+    private lateinit var viewModel: TasksViewModel
 
     override fun getAdapter(): BaseQuickAdapter<ArticleDetailBean?, BaseViewHolder> {
         return ArticleAdapter()
@@ -29,17 +26,22 @@ class MvvmFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
         super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
+
+        queryData()
     }
 
     private fun observeViewModel() {
-        mArticleViewModel.article.observe(viewLifecycleOwner) { articles ->
-            onDataSuccess(articles?.data?.datas)
+        viewModel = obtainViewModel()
+
+        viewModel.items.observe(viewLifecycleOwner) { articles ->
+            onDataSuccess(articles)
         }
-        queryData()
     }
 
     override fun queryData() {
         super.queryData()
-        mArticleViewModel.queryArticle(mPage)
+        viewModel.loadTasks(mPage)
     }
+
+    private fun obtainViewModel(): TasksViewModel = obtainViewModel(TasksViewModel::class.java)
 }

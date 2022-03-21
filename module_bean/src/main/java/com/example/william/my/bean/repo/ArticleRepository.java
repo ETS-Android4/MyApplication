@@ -1,5 +1,6 @@
 package com.example.william.my.bean.repo;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.example.william.my.bean.api.NetworkService;
@@ -8,8 +9,6 @@ import com.example.william.my.core.retrofit.callback.RetrofitResponseCallback;
 import com.example.william.my.core.retrofit.exception.ApiException;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * 数据仓库
@@ -52,7 +51,7 @@ public class ArticleRepository implements ArticleDataSource {
                     }
 
                     @Override
-                    public void onFailure(@NotNull ApiException e) {
+                    public void onFailure(@NonNull ApiException e) {
                         callback.onFailure(e.getMessage());
                     }
 

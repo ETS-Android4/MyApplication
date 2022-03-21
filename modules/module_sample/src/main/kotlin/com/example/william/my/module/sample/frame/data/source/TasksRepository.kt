@@ -16,6 +16,8 @@
 package com.example.william.my.module.sample.frame.data.source
 
 import com.example.william.my.bean.data.ArticleDataBean
+import com.example.william.my.core.retrofit.response.RetrofitResponse
+import io.reactivex.rxjava3.core.Single
 
 /**
  * Concrete implementation to load tasks from the data sources into a cache.
@@ -45,6 +47,14 @@ class TasksRepository private constructor(private val tasksRemoteDataSource: Tas
                 callback.onDataNotAvailable()
             }
         })
+    }
+
+    override suspend fun getArticleSuspend(page: Int): RetrofitResponse<ArticleDataBean> {
+        return tasksRemoteDataSource.getArticleSuspend(page)
+    }
+
+    override fun getArticleSingle(page: Int): Single<RetrofitResponse<ArticleDataBean>> {
+        return tasksRemoteDataSource.getArticleSingle(page)
     }
 
     companion object {

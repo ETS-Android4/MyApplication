@@ -1,29 +1,15 @@
-package com.example.william.my.module.sample.adapter
+package com.example.william.my.module.sample.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.paging.LoadState
-import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.william.my.module.sample.R
 import com.example.william.my.module.sample.databinding.SampleItemRecyclerBinding
 
-// Adapter that displays a loading spinner when
-// state = LoadState.Loading, and an error message and retry
-// button when state is LoadState.Error.
-class PagingLoadStateAdapter(private val retry: () -> Unit) :
-    LoadStateAdapter<LoadStateViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState) =
-        LoadStateViewHolder(parent, retry)
-
-    override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) =
-        holder.bind(loadState)
-}
-
-class LoadStateViewHolder(parent: ViewGroup, retry: () -> Unit) : RecyclerView.ViewHolder(
+class PagingStateViewHolder(parent: ViewGroup, retry: () -> Unit) : RecyclerView.ViewHolder(
     LayoutInflater.from(parent.context).inflate(R.layout.sample_item_recycler, parent, false)
 ) {
 

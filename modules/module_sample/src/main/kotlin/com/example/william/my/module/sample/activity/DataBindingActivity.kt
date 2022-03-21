@@ -18,7 +18,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
  * https://developer.android.google.cn/topic/libraries/data-binding/binding-adapters
  */
 @Route(path = ARouterPath.Sample.Sample_BindingAdapter)
-class BindingAdapterActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
+class DataBindingActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     // Obtain ViewModel
     private val mViewModel: DataBindingViewModel by viewModels {

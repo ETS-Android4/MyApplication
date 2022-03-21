@@ -1,5 +1,7 @@
 package com.example.william.my.module.network.activity;
 
+import androidx.annotation.NonNull;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.bean.base.Urls;
 import com.example.william.my.core.retrofit.RxRetrofit;
@@ -9,8 +11,6 @@ import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @see RxRetrofit
@@ -41,7 +41,7 @@ public class RxRetrofitActivity extends BaseResponseActivity {
 //                    }
 //
 //                    @Override
-//                    public void onFailure(@NotNull ApiException e) {
+//                    public void onFailure(@NonNull ApiException e) {
 //                        String netError = "onFailure: " + e.getMessage();
 //                        showResponse(netError);
 //                    }
@@ -54,7 +54,7 @@ public class RxRetrofitActivity extends BaseResponseActivity {
                     }
 
                     @Override
-                    public void onFailure(@NotNull ApiException e) {
+                    public void onFailure(@NonNull ApiException e) {
                         String netError = "onFailure: " + e.getMessage();
                         showResponse(netError);
                     }

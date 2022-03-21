@@ -55,9 +55,9 @@ dependencies {
     implementation deps.datastore_pre
 
     //Paging3
-    implementation deps.autodispose
     implementation deps.paging
     implementation deps.paging_rxjava3
+    implementation deps.autodispose
 
     //protobuf
     //You need to depend on the lite runtime library, not protobuf-java

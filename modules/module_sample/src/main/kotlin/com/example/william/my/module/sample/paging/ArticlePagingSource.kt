@@ -1,12 +1,15 @@
-package com.example.william.my.module.sample.source
+package com.example.william.my.module.sample.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.william.my.bean.api.NetworkService
 import com.example.william.my.bean.data.ArticleDetailBean
-import com.example.william.my.core.retrofit.utils.RetrofitUtils
+import com.example.william.my.module.sample.frame.data.source.TasksDataSource
 
-class ArticlePagingSource : PagingSource<Int, ArticleDetailBean>() {
+/**
+ * PagingSource
+ * kotlin + coroutines
+ */
+class ArticlePagingSource(private val dataSource: TasksDataSource) : PagingSource<Int, ArticleDetailBean>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleDetailBean> {
         return try {
@@ -14,9 +17,7 @@ class ArticlePagingSource : PagingSource<Int, ArticleDetailBean>() {
             // Start refresh at page 0 if undefined.
             val nextPageNumber = params.key ?: 0
 
-            val api = RetrofitUtils.buildApi(NetworkService::class.java)
-
-            val response = api.getArticleSuspend(nextPageNumber)
+            val response = dataSource.getArticleSuspend(nextPageNumber)
 
             LoadResult.Page(
                 data = response.data.datas,

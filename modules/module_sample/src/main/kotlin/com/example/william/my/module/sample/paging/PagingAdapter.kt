@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.adapter
+package com.example.william.my.module.sample.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.module.sample.databinding.SampleItemRecyclerBinding
 
+/**
+ * Paging RecyclerView 适配器
+ */
 class PagingAdapter(diffCallback: DiffUtil.ItemCallback<ArticleDetailBean>) :
     PagingDataAdapter<ArticleDetailBean, PagingAdapter.ViewHolder>(diffCallback) {
 
@@ -17,8 +20,7 @@ class PagingAdapter(diffCallback: DiffUtil.ItemCallback<ArticleDetailBean>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val bind =
-            SampleItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val bind = SampleItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(bind)
     }
 

@@ -17,6 +17,8 @@
 package com.example.william.my.module.sample.frame.data.source
 
 import com.example.william.my.bean.data.ArticleDataBean
+import com.example.william.my.core.retrofit.response.RetrofitResponse
+import io.reactivex.rxjava3.core.Single
 
 /**
  * Main entry point for accessing tasks data.
@@ -37,5 +39,9 @@ interface TasksDataSource {
     }
 
     fun getTasks(page: Int, callback: LoadTasksCallback)
+
+    suspend fun getArticleSuspend(page: Int): RetrofitResponse<ArticleDataBean>
+
+    fun getArticleSingle(page: Int): Single<RetrofitResponse<ArticleDataBean>>
 
 }
