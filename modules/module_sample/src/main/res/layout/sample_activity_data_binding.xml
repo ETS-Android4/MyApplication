@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.william.my.module.sample.model.DataBindingViewModel" />
+            type="com.example.william.my.module.sample.databinding.DataBindingViewModel" />
     </data>
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout

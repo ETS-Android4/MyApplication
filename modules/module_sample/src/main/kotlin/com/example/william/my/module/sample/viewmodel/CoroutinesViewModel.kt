@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.model
+package com.example.william.my.module.sample.viewmodel
 
 import androidx.lifecycle.*
 import com.example.william.my.bean.data.LoginBean
@@ -6,6 +6,7 @@ import com.example.william.my.module.sample.repo.CoroutinesRepository
 import com.example.william.my.module.sample.result.NetworkResult
 import com.example.william.my.module.sample.utils.ThreadUtils
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
@@ -31,7 +32,7 @@ class CoroutinesViewModel(private val dataSource: CoroutinesRepository) : ViewMo
             // Make the network call and suspend execution until it finishes
             val result: NetworkResult<LoginBean> =
                 try {
-                    dataSource.loginByHttpURL(username, password)
+                    dataSource.login(username, password)
                 } catch (e: Exception) {
                     NetworkResult.Error(Exception("Network request failed"))
                 }
@@ -59,7 +60,7 @@ class CoroutinesViewModel(private val dataSource: CoroutinesRepository) : ViewMo
  */
 object CoroutinesVMFactory : ViewModelProvider.Factory {
 
-    private val dataSource = CoroutinesRepository()
+    private val dataSource = CoroutinesRepository(Dispatchers.IO)
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

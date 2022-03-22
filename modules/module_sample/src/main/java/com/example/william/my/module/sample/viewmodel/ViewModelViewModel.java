@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.model;
+package com.example.william.my.module.sample.viewmodel;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
@@ -6,9 +6,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.example.william.my.bean.api.NetworkService;
 import com.example.william.my.bean.data.ArticleDataBean;
-import com.example.william.my.bean.repo.ArticleRepository;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
+import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 
 /**
  * 如果需要Context则使用AndroidViewModel
@@ -35,7 +36,7 @@ public class ViewModelViewModel extends ViewModel {
         mArticleLiveData = Transformations.switchMap(mMutableLiveData, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
             @Override
             public LiveData<RetrofitResponse<ArticleDataBean>> apply(Integer input) {
-                return ArticleRepository.getInstance().loadArticle(input);
+                return RetrofitUtils.buildLiveData(RetrofitUtils.buildApi(NetworkService.class).getArticleResponse(input));
             }
         });
     }

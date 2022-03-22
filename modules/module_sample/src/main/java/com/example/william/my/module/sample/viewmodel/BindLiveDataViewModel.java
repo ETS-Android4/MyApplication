@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.model;
+package com.example.william.my.module.sample.viewmodel;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

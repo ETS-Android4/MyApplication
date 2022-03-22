@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.repo
+package com.example.william.my.module.sample.databinding
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.withContext
 
-class BindingRepository {
+class DataBindingRepository {
 
     private val _article = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
     val article: LiveData<RetrofitResponse<ArticleDataBean>> = _article

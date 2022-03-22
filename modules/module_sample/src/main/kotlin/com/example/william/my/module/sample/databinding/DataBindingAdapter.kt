@@ -1,4 +1,4 @@
-package com.example.william.my.module.sample.bindingadapter
+package com.example.william.my.module.sample.databinding
 
 import android.content.Context
 import android.view.Gravity
@@ -13,7 +13,7 @@ import com.example.william.my.module.sample.adapter.ArticleBindAdapter
 /**
  * https://developer.android.google.cn/topic/libraries/data-binding/binding-adapters
  */
-object ArticleBindingAdapter {
+object DataBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("items")

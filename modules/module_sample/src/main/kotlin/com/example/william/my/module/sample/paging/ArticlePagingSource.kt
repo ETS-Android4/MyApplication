@@ -3,13 +3,13 @@ package com.example.william.my.module.sample.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.william.my.bean.data.ArticleDetailBean
-import com.example.william.my.module.sample.frame.data.source.TasksDataSource
+import com.example.william.my.module.sample.frame.data.source.ArticleDataSource
 
 /**
  * PagingSource
  * kotlin + coroutines
  */
-class ArticlePagingSource(private val dataSource: TasksDataSource) : PagingSource<Int, ArticleDetailBean>() {
+class ArticlePagingSource(private val dataSource: ArticleDataSource) : PagingSource<Int, ArticleDetailBean>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleDetailBean> {
         return try {

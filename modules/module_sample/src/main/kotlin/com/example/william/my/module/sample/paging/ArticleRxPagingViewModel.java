@@ -11,7 +11,7 @@ import androidx.paging.PagingSource;
 import androidx.paging.rxjava3.PagingRx;
 
 import com.example.william.my.bean.data.ArticleDetailBean;
-import com.example.william.my.module.sample.frame.data.source.TasksDataSource;
+import com.example.william.my.module.sample.frame.data.source.ArticleDataSource;
 
 import io.reactivex.rxjava3.core.Flowable;
 import kotlin.jvm.functions.Function0;
@@ -23,9 +23,9 @@ import kotlinx.coroutines.CoroutineScope;
  */
 public class ArticleRxPagingViewModel extends ViewModel {
 
-    private final TasksDataSource mDataSource;
+    private final ArticleDataSource mDataSource;
 
-    public ArticleRxPagingViewModel(TasksDataSource mDataSource) {
+    public ArticleRxPagingViewModel(ArticleDataSource mDataSource) {
         this.mDataSource = mDataSource;
     }
 

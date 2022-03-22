@@ -8,14 +8,15 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.R
 import com.example.william.my.module.sample.adapter.ArticleBindAdapter
+import com.example.william.my.module.sample.databinding.DataBindingVMFactory
+import com.example.william.my.module.sample.databinding.DataBindingViewModel
 import com.example.william.my.module.sample.databinding.SampleActivityDataBindingBinding
-import com.example.william.my.module.sample.model.DataBindingVMFactory
-import com.example.william.my.module.sample.model.DataBindingViewModel
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
 /**
- * https://developer.android.google.cn/topic/libraries/data-binding/binding-adapters
+ * DataBinding
+ * https://developer.android.google.cn/topic/libraries/data-binding
  */
 @Route(path = ARouterPath.Sample.Sample_BindingAdapter)
 class DataBindingActivity : AppCompatActivity(), OnRefreshLoadMoreListener {

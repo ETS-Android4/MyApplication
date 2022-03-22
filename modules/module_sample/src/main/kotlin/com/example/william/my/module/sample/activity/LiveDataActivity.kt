@@ -6,15 +6,12 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.library.base.BaseActivity
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.databinding.SampleLayoutResponseBinding
-import com.example.william.my.module.sample.model.LiveDataVMFactory
-import com.example.william.my.module.sample.model.LiveDataViewModel
+import com.example.william.my.module.sample.viewmodel.LiveDataVMFactory
+import com.example.william.my.module.sample.viewmodel.LiveDataViewModel
 
 /**
  * LiveData
  * https://developer.android.google.cn/topic/libraries/architecture/livedata
- * <p>
- * LiveData对象不应存在于存储库中。
- * LiveData objects should not live in the repository.
  */
 @Route(path = ARouterPath.Sample.Sample_LiveData)
 class LiveDataActivity : BaseActivity() {
@@ -38,14 +35,8 @@ class LiveDataActivity : BaseActivity() {
     }
 
     private fun observeViewModel() {
-        login()
-    }
-
-    private fun login() {
-        mViewModel.login.observe(this) {
-            mBinding.textView.text = it
-        }
-        mViewModel.login(username, password)
+        //loginByFlow()
+        loginByCoroutine()
     }
 
     /**

@@ -22,17 +22,17 @@ import com.example.william.my.library.view.IBaseView
 /**
  * This specifies the contract between the view and the presenter.
  */
-interface TasksContract {
+interface ArticleContract {
 
     interface View : IBaseView<Presenter> {
 
-        fun showTasks(tasks: List<ArticleDetailBean>)
+        fun showArticle(article: List<ArticleDetailBean>)
 
-        fun showNoTasks()
+        fun showNoArticle()
     }
 
     interface Presenter : IBasePresenter {
 
-        fun loadTasks(page: Int)
+        fun loadArticle(page: Int)
     }
 }

@@ -19,6 +19,7 @@ package com.example.william.my.module.sample.frame.data.source
 import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.core.retrofit.response.RetrofitResponse
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Main entry point for accessing tasks data.
@@ -29,19 +30,20 @@ import io.reactivex.rxjava3.core.Single
  * For example, when a new task is created, it's synchronously stored in cache but usually every
  * operation on database or network should be executed in a different thread.
  */
-interface TasksDataSource {
+interface ArticleDataSource {
 
-    interface LoadTasksCallback {
+    interface LoadArticleCallback {
 
-        fun onTasksLoaded(tasks: ArticleDataBean)
+        fun onArticleLoaded(article: ArticleDataBean)
 
         fun onDataNotAvailable()
     }
 
-    fun getTasks(page: Int, callback: LoadTasksCallback)
-
-    suspend fun getArticleSuspend(page: Int): RetrofitResponse<ArticleDataBean>
+    fun getArticle(page: Int, callback: LoadArticleCallback)
 
     fun getArticleSingle(page: Int): Single<RetrofitResponse<ArticleDataBean>>
 
+    suspend fun getArticleSuspend(page: Int): RetrofitResponse<ArticleDataBean>
+
+    fun getArticleFlow(page: Int): Flow<RetrofitResponse<ArticleDataBean>>
 }

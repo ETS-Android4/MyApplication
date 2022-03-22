@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.databinding.SampleLayoutResponseBinding
-import com.example.william.my.module.sample.model.CoroutinesVMFactory
-import com.example.william.my.module.sample.model.CoroutinesViewModel
+import com.example.william.my.module.sample.viewmodel.CoroutinesVMFactory
+import com.example.william.my.module.sample.viewmodel.CoroutinesViewModel
 
 /**
  * Android 上的 Kotlin 协程

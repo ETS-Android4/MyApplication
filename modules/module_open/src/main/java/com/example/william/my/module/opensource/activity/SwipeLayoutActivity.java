@@ -3,7 +3,6 @@ package com.example.william.my.module.opensource.activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;

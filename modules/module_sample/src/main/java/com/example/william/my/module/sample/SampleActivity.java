@@ -23,13 +23,13 @@ public class SampleActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("WorkManagerActivity", ARouterPath.Sample.Sample_WorkManager));
         routerItems.add(new RouterItem(" ", " "));
         routerItems.add(new RouterItem("DataStoreActivity", ARouterPath.Sample.Sample_DataStore));
-        routerItems.add(new RouterItem("LiveDataActivity", ARouterPath.Sample.Sample_LiveData));
         routerItems.add(new RouterItem("PagingActivity", ARouterPath.Sample.Sample_Paging));
         routerItems.add(new RouterItem("ResultActivity", ARouterPath.Sample.Sample_Result));
         routerItems.add(new RouterItem(" ", " "));
         routerItems.add(new RouterItem("CoilActivity", ARouterPath.Sample.Sample_Coil));
         routerItems.add(new RouterItem("CoroutinesActivity", ARouterPath.Sample.Sample_Coroutines));
-        routerItems.add(new RouterItem("FLowActivity", ARouterPath.Sample.Sample_FLow));
+        routerItems.add(new RouterItem("FLowActivity", ARouterPath.Sample.Sample_StateFlow));
+        routerItems.add(new RouterItem("LiveDataActivity", ARouterPath.Sample.Sample_LiveData));
         routerItems.add(new RouterItem(" ", " "));
         routerItems.add(new RouterItem("MVPActivity", ARouterPath.Sample.Sample_MVP));
         routerItems.add(new RouterItem("MVVMActivity", ARouterPath.Sample.Sample_MVVM));

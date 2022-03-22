@@ -2,16 +2,18 @@ package com.example.william.my.module.sample.frame.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.base.BaseRecyclerFragment
 import com.example.william.my.module.sample.adapter.ArticleAdapter
-import com.example.william.my.module.sample.frame.model.StateFlowVMFactory
-import com.example.william.my.module.sample.frame.model.StateFlowViewModel
-import com.example.william.my.module.sample.frame.state.ArticleUiState
+import com.example.william.my.module.sample.frame.intent.ArticleIntent
+import com.example.william.my.module.sample.frame.intent.ArticleViewState
+import com.example.william.my.module.sample.frame.utils.obtainViewModel
+import com.example.william.my.module.sample.frame.viewmodel.ArticleStateFlowViewModel
 import kotlinx.coroutines.launch
 
 /**
@@ -21,9 +23,7 @@ import kotlinx.coroutines.launch
  */
 class MviFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
 
-    private val mStateFlowViewModel: StateFlowViewModel by viewModels {
-        StateFlowVMFactory
-    }
+    private lateinit var viewModel: ArticleStateFlowViewModel
 
     override fun getAdapter(): BaseQuickAdapter<ArticleDetailBean?, BaseViewHolder> {
         return ArticleAdapter()
@@ -36,29 +36,33 @@ class MviFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
     }
 
     private fun observeViewModel() {
+        viewModel = obtainViewModel()
+
         lifecycleScope.launch {
-            mStateFlowViewModel.state.collect {
-                when (it) {
-                    ArticleUiState.Idle -> {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect {
+                    when (it) {
+                        is ArticleViewState.Loading -> {
 
-                    }
-                    is ArticleUiState.Loading -> {
-
-                    }
-                    is ArticleUiState.Users -> {
-                        onDataSuccess(it.list)
-                    }
-                    is ArticleUiState.Error -> {
-                        showToast(it.error)
+                        }
+                        is ArticleViewState.Success -> {
+                            onDataSuccess(it.news)
+                        }
+                        is ArticleViewState.Error -> {
+                            showToast(it.error)
+                        }
                     }
                 }
             }
         }
-        queryData()
     }
 
     override fun queryData() {
         super.queryData()
-        mStateFlowViewModel.getArticle(mPage)
+        lifecycleScope.launch {
+            viewModel.intent.send(ArticleIntent.LoadArticleIntent(mPage))
+        }
     }
+
+    private fun obtainViewModel(): ArticleStateFlowViewModel = obtainViewModel(ArticleStateFlowViewModel::class.java)
 }

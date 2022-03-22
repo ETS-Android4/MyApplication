@@ -2,14 +2,12 @@ package com.example.william.my.module.sample.repo
 
 import com.example.william.my.bean.api.NetworkService
 import com.example.william.my.bean.base.Urls
-import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.LoginBean
-import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.core.retrofit.utils.RetrofitUtils
 import com.example.william.my.module.sample.result.NetworkResult
 import com.example.william.my.module.sample.utils.ThreadUtils
 import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.InputStream
@@ -21,7 +19,21 @@ import java.net.URL
  * Android 上的 Kotlin 协程
  * https://developer.android.google.cn/kotlin/coroutines
  */
-class CoroutinesRepository {
+class CoroutinesRepository(private val defaultDispatcher: CoroutineDispatcher) {
+
+    private val service = RetrofitUtils.buildApi(NetworkService::class.java)
+
+    suspend fun login(username: String, password: String): NetworkResult<LoginBean> {
+
+        return withContext(defaultDispatcher) {
+            //打印线程
+            ThreadUtils.isMainThread("CoroutinesRepository loginByRetrofit")
+
+            // 阻塞网络请求
+            // Blocking network request code
+            NetworkResult.Success(service.login(username, password))
+        }
+    }
 
     /**
      * 1. 在后台线程中执行
@@ -35,7 +47,6 @@ class CoroutinesRepository {
 
         val url = URL(Urls.Url_Login)
         val jsonString = "username=$username&password=$password"
-        val responseParser = HttpURLResponseParser()
         (url.openConnection() as? HttpURLConnection)?.run {
             requestMethod = "POST"
             setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
@@ -43,7 +54,7 @@ class CoroutinesRepository {
             //setRequestProperty("Accept", "application/json") //希望接受的数据类型
             doOutput = true
             outputStream.write(jsonString.toByteArray())
-            return NetworkResult.Success(responseParser.parse(inputStream))
+            return NetworkResult.Success(parse(inputStream))
         }
         return NetworkResult.Error(Exception("Cannot open HttpURLConnection"))
     }
@@ -56,7 +67,7 @@ class CoroutinesRepository {
      */
     suspend fun loginByHttpURL(username: String, password: String): NetworkResult<LoginBean> {
 
-        return withContext(Dispatchers.IO) {
+        return withContext(defaultDispatcher) {
             //打印线程
             ThreadUtils.isMainThread("CoroutinesRepository loginByHttpURL")
 
@@ -66,27 +77,7 @@ class CoroutinesRepository {
         }
     }
 
-    suspend fun loginByRetrofit(username: String, password: String): NetworkResult<LoginBean> {
-
-        return withContext(Dispatchers.IO) {
-            //打印线程
-            ThreadUtils.isMainThread("CoroutinesRepository loginByRetrofit")
-
-            val api = RetrofitUtils.buildApi(NetworkService::class.java)
-            val loginData = api.login(username, password)
-            NetworkResult.Success(loginData)
-        }
-    }
-
-    suspend fun getArticle(page: Int): RetrofitResponse<ArticleDataBean> {
-        val api = RetrofitUtils.buildApi(NetworkService::class.java)
-        return api.getArticleSuspend(page)
-    }
-}
-
-class HttpURLResponseParser {
-
-    fun parse(input: InputStream): LoginBean {
+    private fun parse(input: InputStream): LoginBean {
         val msg = StringBuilder()
         val reader = BufferedReader(InputStreamReader(input))
         var line: String?

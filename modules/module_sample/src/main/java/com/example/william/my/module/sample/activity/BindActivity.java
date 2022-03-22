@@ -14,8 +14,8 @@ import com.example.william.my.module.sample.databinding.SampleActivityBindBindin
 import com.example.william.my.module.sample.databinding.SampleActivityBindLiveDataBinding;
 import com.example.william.my.module.sample.databinding.SampleActivityBindObservableBinding;
 import com.example.william.my.module.sample.databinding.SampleLayoutBindMergeBinding;
-import com.example.william.my.module.sample.model.BindLiveDataViewModel;
-import com.example.william.my.module.sample.model.BindObservableViewModel;
+import com.example.william.my.module.sample.viewmodel.BindLiveDataViewModel;
+import com.example.william.my.module.sample.viewmodel.BindObservableViewModel;
 
 /**
  * 主 Module 也需要添加配置

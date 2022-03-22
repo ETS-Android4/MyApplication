@@ -19,8 +19,8 @@ import android.annotation.SuppressLint
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.william.my.module.sample.frame.data.source.TasksRepository
-import com.example.william.my.module.sample.frame.data.source.remote.TasksRemoteDataSource
+import com.example.william.my.module.sample.frame.data.source.ArticleRepository
+import com.example.william.my.module.sample.frame.data.source.remote.ArticleRemoteDataSource
 
 /**
  * A creator is used to inject the product ID into the ViewModel
@@ -28,13 +28,15 @@ import com.example.william.my.module.sample.frame.data.source.remote.TasksRemote
  * This creator is to showcase how to inject dependencies into ViewModels. It's not
  * actually necessary in this case, as the product ID can be passed in a public method.
  */
-class ViewModelFactory private constructor(private val tasksRepository: TasksRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory private constructor(private val articleRepository: ArticleRepository) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>) =
         with(modelClass) {
             when {
-                isAssignableFrom(TasksViewModel::class.java) ->
-                    TasksViewModel(tasksRepository)
+                isAssignableFrom(ArticleLiveDataViewModel::class.java) ->
+                    ArticleLiveDataViewModel(articleRepository)
+                isAssignableFrom(ArticleStateFlowViewModel::class.java) ->
+                    ArticleStateFlowViewModel(articleRepository)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
@@ -48,7 +50,7 @@ class ViewModelFactory private constructor(private val tasksRepository: TasksRep
 
         fun getInstance() =
             INSTANCE ?: synchronized(ViewModelFactory::class.java) {
-                INSTANCE ?: ViewModelFactory(TasksRepository.getInstance(TasksRemoteDataSource))
+                INSTANCE ?: ViewModelFactory(ArticleRepository.getInstance(ArticleRemoteDataSource))
                     .also {
                         INSTANCE = it
                     }

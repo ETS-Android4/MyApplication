@@ -16,24 +16,24 @@
 package com.example.william.my.module.sample.frame.presenter
 
 import com.example.william.my.bean.data.ArticleDataBean
-import com.example.william.my.module.sample.frame.contract.TasksContract
-import com.example.william.my.module.sample.frame.data.source.TasksDataSource
-import com.example.william.my.module.sample.frame.data.source.TasksRepository
+import com.example.william.my.module.sample.frame.contract.ArticleContract
+import com.example.william.my.module.sample.frame.data.source.ArticleDataSource
+import com.example.william.my.module.sample.frame.data.source.ArticleRepository
 
 /**
  * Listens to user actions from the UI ([TasksFragment]), retrieves the data and updates the
  * UI as required.
  */
-class TasksPresenter(private val tasksRepository: TasksRepository, val tasksView: TasksContract.View) : TasksContract.Presenter {
+class ArticlePresenter(private val articleRepository: ArticleRepository, val articleView: ArticleContract.View) : ArticleContract.Presenter {
 
-    override fun loadTasks(page: Int) {
-        tasksRepository.getTasks(page, object : TasksDataSource.LoadTasksCallback {
-            override fun onTasksLoaded(tasks: ArticleDataBean) {
-                tasksView.showTasks(tasks.datas)
+    override fun loadArticle(page: Int) {
+        articleRepository.getArticle(page, object : ArticleDataSource.LoadArticleCallback {
+            override fun onArticleLoaded(article: ArticleDataBean) {
+                articleView.showArticle(article.datas)
             }
 
             override fun onDataNotAvailable() {
-                tasksView.showNoTasks()
+                articleView.showNoArticle()
             }
         })
     }

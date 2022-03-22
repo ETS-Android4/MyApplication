@@ -22,22 +22,24 @@ import com.example.william.my.core.retrofit.exception.ApiException
 import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.core.retrofit.utils.RetrofitUtils.buildApi
 import com.example.william.my.core.retrofit.utils.RetrofitUtils.buildSingle
-import com.example.william.my.module.sample.frame.data.source.TasksDataSource
+import com.example.william.my.module.sample.frame.data.source.ArticleDataSource
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 /**
  * Implementation of the data source that adds a latency simulating network.
  */
-object TasksRemoteDataSource : TasksDataSource {
+object ArticleRemoteDataSource : ArticleDataSource {
 
     private var service: NetworkService = buildApi(NetworkService::class.java)
 
     /**
-     * Note: [TasksDataSource.LoadTasksCallback.onDataNotAvailable] is never fired. In a real remote data
+     * Note: [ArticleDataSource.LoadArticleCallback.onDataNotAvailable] is never fired. In a real remote data
      * source implementation, this would be fired if the server can't be contacted or the server
      * returns an error.
      */
-    override fun getTasks(page: Int, callback: TasksDataSource.LoadTasksCallback) {
+    override fun getArticle(page: Int, callback: ArticleDataSource.LoadArticleCallback) {
         buildSingle(
             service.getArticleResponse(page),
             object : RetrofitResponseCallback<ArticleDataBean>() {
@@ -46,17 +48,23 @@ object TasksRemoteDataSource : TasksDataSource {
                 }
 
                 override fun onResponse(response: ArticleDataBean) {
-                    callback.onTasksLoaded(response)
+                    callback.onArticleLoaded(response)
                 }
             }
         )
+    }
+
+    override fun getArticleSingle(page: Int): Single<RetrofitResponse<ArticleDataBean>> {
+        return service.getArticleResponse(page)
     }
 
     override suspend fun getArticleSuspend(page: Int): RetrofitResponse<ArticleDataBean> {
         return service.getArticleSuspend(page)
     }
 
-    override fun getArticleSingle(page: Int): Single<RetrofitResponse<ArticleDataBean>> {
-        return service.getArticleResponse(page)
+    override fun getArticleFlow(page: Int): Flow<RetrofitResponse<ArticleDataBean>> {
+        return flow {
+            emit(service.getArticleSuspend(page))
+        }
     }
 }

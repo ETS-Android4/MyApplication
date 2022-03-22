@@ -16,7 +16,7 @@ import com.example.william.my.module.opensource.greendao.generated.NoteEntityDao
 
 /**
  * {@inheritDoc}
- *
+ * 
  * @see org.greenrobot.greendao.AbstractDaoSession
  */
 public class DaoSession extends AbstractDaoSession {
@@ -36,7 +36,7 @@ public class DaoSession extends AbstractDaoSession {
 
         registerDao(NoteEntity.class, noteEntityDao);
     }
-
+    
     public void clear() {
         noteEntityDaoConfig.clearIdentityScope();
     }

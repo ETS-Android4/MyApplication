@@ -7,17 +7,17 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.base.BaseRecyclerFragment
 import com.example.william.my.module.sample.adapter.ArticleAdapter
-import com.example.william.my.module.sample.frame.contract.TasksContract
-import com.example.william.my.module.sample.frame.data.source.TasksRepository
-import com.example.william.my.module.sample.frame.data.source.remote.TasksRemoteDataSource
-import com.example.william.my.module.sample.frame.presenter.TasksPresenter
+import com.example.william.my.module.sample.frame.contract.ArticleContract
+import com.example.william.my.module.sample.frame.data.source.ArticleRepository
+import com.example.william.my.module.sample.frame.data.source.remote.ArticleRemoteDataSource
+import com.example.william.my.module.sample.frame.presenter.ArticlePresenter
 
 /**
  * MVP：Model-View-Presenter
  */
-class MvpFragment : BaseRecyclerFragment<ArticleDetailBean?>(), TasksContract.View {
+class MvpFragment : BaseRecyclerFragment<ArticleDetailBean?>(), ArticleContract.View {
 
-    private lateinit var tasksPresenter: TasksPresenter
+    private lateinit var articlePresenter: ArticlePresenter
 
     override fun getAdapter(): BaseQuickAdapter<ArticleDetailBean?, BaseViewHolder> {
         return ArticleAdapter()
@@ -27,21 +27,21 @@ class MvpFragment : BaseRecyclerFragment<ArticleDetailBean?>(), TasksContract.Vi
         super.onViewCreated(view, savedInstanceState)
 
         // Create the presenter
-        tasksPresenter = TasksPresenter(TasksRepository.getInstance(TasksRemoteDataSource), this)
+        articlePresenter = ArticlePresenter(ArticleRepository.getInstance(ArticleRemoteDataSource), this)
 
         queryData()
     }
 
     override fun queryData() {
         super.queryData()
-        tasksPresenter.loadTasks(mPage)
+        articlePresenter.loadArticle(mPage)
     }
 
-    override fun showTasks(tasks: List<ArticleDetailBean>) {
-        onDataSuccess(tasks)
+    override fun showArticle(article: List<ArticleDetailBean>) {
+        onDataSuccess(article)
     }
 
-    override fun showNoTasks() {
+    override fun showNoArticle() {
         onDataFail()
     }
 }

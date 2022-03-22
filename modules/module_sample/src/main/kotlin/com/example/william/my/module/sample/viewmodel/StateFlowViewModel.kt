@@ -1,41 +1,46 @@
-package com.example.william.my.module.sample.model
+package com.example.william.my.module.sample.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.william.my.bean.data.LoginBean
 import com.example.william.my.module.sample.repo.FlowRepository
+import com.example.william.my.module.sample.result.NetworkResult
 import com.example.william.my.module.sample.utils.ThreadUtils
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class LiveDataViewModel(private val dataSource: FlowRepository) : ViewModel() {
+/**
+ * StateFlow
+ */
+class StateFlowViewModel(private val dataSource: FlowRepository) : ViewModel() {
 
-    private val _login = MutableLiveData<String>()
+    // Backing property to avoid state updates from other classes
+    private val _uiState = MutableStateFlow<NetworkResult<LoginBean>>(NetworkResult.Loading)
 
-    val login: LiveData<String>
-        get() = _login
+    // The UI collects from this StateFlow to get its state updates
+    val uiState: StateFlow<NetworkResult<LoginBean>> = _uiState
 
     fun login(username: String, password: String) {
-
         // 在UI线程上创建一个新的协同程序
         // Create a new coroutine on the UI thread
         viewModelScope.launch {
             //打印线程
-            ThreadUtils.isMainThread("LiveDataViewModel getArticle")
+            ThreadUtils.isMainThread("FlowViewModel getArticle")
 
-            val result: Flow<LoginBean> =
-                dataSource.login(username, password)
+            val result: Flow<LoginBean> = dataSource.loginByFlow(username, password)
 
             // 使用 collect 触发流并消耗其元素
             // Trigger the flow and consume its elements using collect
             result
                 .onStart {
                     // 在调用 flow 请求数据之前，做一些准备工作，例如显示正在加载数据的进度条
+                    _uiState.value = NetworkResult.Loading
                 }
                 .catch { exception ->
                     // 捕获上游出现的异常
-                    _login.postValue(exception.message.toString())
+                    _uiState.value = NetworkResult.Error(exception)
                 }
                 .onCompletion {
                     // 请求完成
@@ -43,30 +48,7 @@ class LiveDataViewModel(private val dataSource: FlowRepository) : ViewModel() {
                 .collect { article ->
                     // 更新视图
                     // Update View with the latest favorite news
-                    _login.postValue(Gson().toJson(article))
-                }
-        }
-    }
-
-    /**
-     * 使用 Flow 流构造方法 -> asLiveData()
-     */
-    fun loginByFLow(username: String, password: String): LiveData<String> {
-        return dataSource.login(username, password)
-            .map {
-                Gson().toJson(it)
-            }
-            .asLiveData()//返回一个不可变的 LiveData
-    }
-
-    /**
-     * 使用 Coroutine 协程构造方法 -> liveData{}
-     */
-    fun loginByCoroutine(username: String, password: String): LiveData<String> {
-        return liveData {
-            dataSource.login(username, password)
-                .collect {
-                    emit(Gson().toJson(it))
+                    _uiState.value = NetworkResult.Success(article)
                 }
         }
     }
@@ -76,12 +58,12 @@ class LiveDataViewModel(private val dataSource: FlowRepository) : ViewModel() {
  * 自定义实例，多参构造
  * Factory for [LiveDataViewModel].
  */
-object LiveDataVMFactory : ViewModelProvider.Factory {
+object StateFlowVMFactory : ViewModelProvider.Factory {
 
     private val dataSource = FlowRepository(Dispatchers.IO)
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
-        return LiveDataViewModel(dataSource) as T
+        return StateFlowViewModel(dataSource) as T
     }
 }

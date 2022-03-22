@@ -8,7 +8,7 @@ import com.example.william.my.core.retrofit.loading.LoadingTip;
 import com.example.william.my.core.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.sample.model.ViewModelViewModel;
+import com.example.william.my.module.sample.viewmodel.ViewModelViewModel;
 import com.google.gson.Gson;
 
 /**

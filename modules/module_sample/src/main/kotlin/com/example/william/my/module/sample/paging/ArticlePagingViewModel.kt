@@ -9,7 +9,7 @@ import androidx.paging.cachedIn
 import androidx.paging.rxjava3.cachedIn
 import androidx.paging.rxjava3.flowable
 import com.example.william.my.bean.data.ArticleDetailBean
-import com.example.william.my.module.sample.frame.data.source.TasksDataSource
+import com.example.william.my.module.sample.frame.data.source.ArticleDataSource
 import io.reactivex.rxjava3.core.Flowable
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
  * 设置 PagingData 流
  * FLow , Flowable
  */
-class ArticlePagingViewModel(private val dataSource: TasksDataSource) : ViewModel() {
+class ArticlePagingViewModel(private val dataSource: ArticleDataSource) : ViewModel() {
 
     /**
      * Paging

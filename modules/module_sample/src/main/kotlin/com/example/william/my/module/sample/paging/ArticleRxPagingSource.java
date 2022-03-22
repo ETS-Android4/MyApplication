@@ -8,7 +8,7 @@ import androidx.paging.rxjava3.RxPagingSource;
 import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.bean.data.ArticleDetailBean;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
-import com.example.william.my.module.sample.frame.data.source.TasksDataSource;
+import com.example.william.my.module.sample.frame.data.source.ArticleDataSource;
 
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -20,9 +20,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class ArticleRxPagingSource extends RxPagingSource<Integer, ArticleDetailBean> {
 
     @NonNull
-    private final TasksDataSource mDataSource;
+    private final ArticleDataSource mDataSource;
 
-    public ArticleRxPagingSource(@NonNull TasksDataSource mDataSource) {
+    public ArticleRxPagingSource(@NonNull ArticleDataSource mDataSource) {
         this.mDataSource = mDataSource;
     }
 

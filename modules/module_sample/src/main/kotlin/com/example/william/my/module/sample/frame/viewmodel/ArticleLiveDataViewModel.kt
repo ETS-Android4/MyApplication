@@ -20,22 +20,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.bean.data.ArticleDetailBean
-import com.example.william.my.module.sample.frame.data.source.TasksDataSource
-import com.example.william.my.module.sample.frame.data.source.TasksRepository
+import com.example.william.my.module.sample.frame.data.source.ArticleDataSource
 
 /**
  * Exposes the data to be used in the task list screen.
  */
-class TasksViewModel(private val tasksRepository: TasksRepository) : ViewModel() {
+class ArticleLiveDataViewModel(private val dataSource: ArticleDataSource) : ViewModel() {
 
     private val _items = MutableLiveData<List<ArticleDetailBean>>()
     val items: LiveData<List<ArticleDetailBean>>
         get() = _items
 
-    fun loadTasks(page: Int) {
-        tasksRepository.getTasks(page, object : TasksDataSource.LoadTasksCallback {
-            override fun onTasksLoaded(tasks: ArticleDataBean) {
-                _items.postValue(tasks.datas)
+    init {
+        loadArticle(0)
+    }
+
+    fun loadArticle(page: Int) {
+        dataSource.getArticle(page, object : ArticleDataSource.LoadArticleCallback {
+            override fun onArticleLoaded(article: ArticleDataBean) {
+                _items.postValue(article.datas)
             }
 
             override fun onDataNotAvailable() {

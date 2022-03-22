@@ -93,6 +93,8 @@ ext {
             fragment_ktx         : "androidx.fragment:fragment-ktx:1.4.1",
             //https://developer.android.google.cn/jetpack/androidx/releases/fragment
 
+            //lifecycle            : "androidx.lifecycle:lifecycle-runtime:2.4.1",
+            lifecycle_ktx        : "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1",
             //livedata             : "androidx.lifecycle:lifecycle-livedata:2.4.1",
             livedata_ktx         : "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1",
             //viewmodel            : "androidx.lifecycle:lifecycle-viewmodel:2.4.1",

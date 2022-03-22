@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.*
  */
 class FlowRepository(private val defaultDispatcher: CoroutineDispatcher) {
 
+    private val service = RetrofitUtils.buildApi(NetworkService::class.java)
+
     /**
      * 创建数据流
      */
@@ -22,9 +24,7 @@ class FlowRepository(private val defaultDispatcher: CoroutineDispatcher) {
             //打印线程
             ThreadUtils.isMainThread("FlowRepository login")
 
-            val api = RetrofitUtils.buildApi(NetworkService::class.java)
-            val loginBean = api.login(username, password)
-            emit(loginBean)// Emits the result of the request to the flow
+            emit(service.login(username, password))// Emits the result of the request to the flow
         }
             // Executes on the IO dispatcher
             .flowOn(defaultDispatcher)
@@ -60,8 +60,7 @@ class FlowRepository(private val defaultDispatcher: CoroutineDispatcher) {
      * These operations are lazy and don't trigger the flow.
      * They just transform the current value emitted by the flow at that point in time.
      */
-    fun login(username: String, password: String): Flow<LoginBean> {
-        val loginBean = createFlow(username, password)
-        return transformFlow(loginBean)
+    fun loginByFlow(username: String, password: String): Flow<LoginBean> {
+        return transformFlow(createFlow(username, password))
     }
 }

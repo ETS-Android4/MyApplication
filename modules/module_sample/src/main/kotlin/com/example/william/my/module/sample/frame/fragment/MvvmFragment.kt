@@ -8,7 +8,7 @@ import com.example.william.my.bean.data.ArticleDetailBean
 import com.example.william.my.library.base.BaseRecyclerFragment
 import com.example.william.my.module.sample.adapter.ArticleAdapter
 import com.example.william.my.module.sample.frame.utils.obtainViewModel
-import com.example.william.my.module.sample.frame.viewmodel.TasksViewModel
+import com.example.william.my.module.sample.frame.viewmodel.ArticleLiveDataViewModel
 
 /**
  * Model-View-ViewModel
@@ -16,7 +16,7 @@ import com.example.william.my.module.sample.frame.viewmodel.TasksViewModel
  */
 class MvvmFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
 
-    private lateinit var viewModel: TasksViewModel
+    private lateinit var viewModel: ArticleLiveDataViewModel
 
     override fun getAdapter(): BaseQuickAdapter<ArticleDetailBean?, BaseViewHolder> {
         return ArticleAdapter()
@@ -26,22 +26,20 @@ class MvvmFragment : BaseRecyclerFragment<ArticleDetailBean?>() {
         super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
-
-        queryData()
     }
 
     private fun observeViewModel() {
         viewModel = obtainViewModel()
 
-        viewModel.items.observe(viewLifecycleOwner) { articles ->
-            onDataSuccess(articles)
+        viewModel.items.observe(viewLifecycleOwner) { article ->
+            onDataSuccess(article)
         }
     }
 
     override fun queryData() {
         super.queryData()
-        viewModel.loadTasks(mPage)
+        viewModel.loadArticle(mPage)
     }
 
-    private fun obtainViewModel(): TasksViewModel = obtainViewModel(TasksViewModel::class.java)
+    private fun obtainViewModel(): ArticleLiveDataViewModel = obtainViewModel(ArticleLiveDataViewModel::class.java)
 }

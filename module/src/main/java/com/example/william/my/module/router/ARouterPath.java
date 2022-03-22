@@ -97,7 +97,7 @@ public class ARouterPath {
         public static final String Sample_DataStore = "/module_sample/dataStore";
         public static final String Sample_LiveData = "/module_sample/livedata";
         public static final String Sample_Coroutines = "/module_sample/coroutines";
-        public static final String Sample_FLow = "/module_sample/flow";
+        public static final String Sample_StateFlow = "/module_sample/stateflow";
         public static final String Sample_Paging = "/module_sample/paging";
         public static final String Sample_Result = "/module_sample/result";
         //
