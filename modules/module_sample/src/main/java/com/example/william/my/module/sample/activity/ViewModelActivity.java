@@ -8,7 +8,7 @@ import com.example.william.my.core.retrofit.loading.LoadingTip;
 import com.example.william.my.core.retrofit.observer.WithLoadingTipObserver;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
-import com.example.william.my.module.sample.viewmodel.ViewModelViewModel;
+import com.example.william.my.module.sample.viewmodel.ArticleViewModel;
 import com.google.gson.Gson;
 
 /**
@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 public class ViewModelActivity extends BaseResponseActivity implements LoadingTip.LoadingTipListener {
 
     private LoadingTip mLoadingTip;
-    private ViewModelViewModel mViewModelViewModel;
+    private ArticleViewModel mArticleViewModel;
 
     @Override
     public void initView() {
@@ -32,8 +32,8 @@ public class ViewModelActivity extends BaseResponseActivity implements LoadingTi
         mLoadingTip = LoadingTip.addLoadingTipWithTopBar(this);
         mLoadingTip.setOnReloadListener(this);
 
-        mViewModelViewModel = new ViewModelProvider(this).get(ViewModelViewModel.class);
-        mViewModelViewModel.getArticle().observe(this, new WithLoadingTipObserver<ArticleDataBean>(mLoadingTip, "getArticle") {
+        mArticleViewModel = new ViewModelProvider(this).get(ArticleViewModel.class);
+        mArticleViewModel.getArticle().observe(this, new WithLoadingTipObserver<ArticleDataBean>(mLoadingTip, "getArticle") {
             @Override
             protected void onResponse(ArticleDataBean response) {
                 showResponse(new Gson().toJson(response));
@@ -44,6 +44,6 @@ public class ViewModelActivity extends BaseResponseActivity implements LoadingTi
 
     @Override
     public void reload() {
-        mViewModelViewModel.request();
+        mArticleViewModel.request();
     }
 }

@@ -1,42 +1,29 @@
 package com.example.william.my.module.sample.databinding
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.william.my.bean.api.NetworkService
+import androidx.lifecycle.*
 import com.example.william.my.bean.data.ArticleDataBean
 import com.example.william.my.core.retrofit.exception.ApiException
 import com.example.william.my.core.retrofit.exception.ExceptionHandler
 import com.example.william.my.core.retrofit.response.RetrofitResponse
-import com.example.william.my.core.retrofit.utils.RetrofitUtils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
+import com.example.william.my.module.sample.frame.data.source.ArticleDataSource
+import com.example.william.my.module.sample.frame.data.source.ArticleRepository
+import com.example.william.my.module.sample.frame.data.source.remote.ArticleRemoteDataSource
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.launch
 
-class DataBindingRepository {
+class ArticleDataBindingViewModel(private val dataSource: ArticleDataSource) : ViewModel() {
 
     private val _article = MutableLiveData<RetrofitResponse<ArticleDataBean>>()
     val article: LiveData<RetrofitResponse<ArticleDataBean>> = _article
 
-    private suspend fun getArticle(counter: Int): RetrofitResponse<ArticleDataBean> {
-        return withContext(Dispatchers.IO) {
-            val api = RetrofitUtils.buildApi(NetworkService::class.java)
-            api.getArticleSuspend(counter)
-        }
+    init {
+        loadArticle(0)
     }
 
-    private fun buildArticleFLow(counter: Int): Flow<RetrofitResponse<ArticleDataBean>> {
-        return flow {
-            val articleResponse = getArticle(counter)
-            emit(articleResponse)
-        }
-    }
-
-    suspend fun fetchNewDataFLow(page: Int) {
-        withContext(Dispatchers.Main) {
-            buildArticleFLow(page)
+    fun loadArticle(page: Int) {
+        viewModelScope.launch {
+            dataSource.getArticleFlow(page)
                 .onStart {
                     _article.postValue(RetrofitResponse.loading())
                 }
@@ -48,5 +35,19 @@ class DataBindingRepository {
                     _article.postValue(article)
                 }
         }
+    }
+}
+
+/**
+ * 自定义实例，多参构造
+ * Factory for [ArticleDataBindingViewModel].
+ */
+object ArticleDataBindingVMFactory : ViewModelProvider.Factory {
+
+    private val dataSource = ArticleRepository.getInstance(ArticleRemoteDataSource)
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        @Suppress("UNCHECKED_CAST")
+        return ArticleDataBindingViewModel(dataSource) as T
     }
 }

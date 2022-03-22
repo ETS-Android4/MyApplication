@@ -8,8 +8,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.R
 import com.example.william.my.module.sample.adapter.ArticleBindAdapter
-import com.example.william.my.module.sample.databinding.DataBindingVMFactory
-import com.example.william.my.module.sample.databinding.DataBindingViewModel
+import com.example.william.my.module.sample.databinding.ArticleDataBindingVMFactory
+import com.example.william.my.module.sample.databinding.ArticleDataBindingViewModel
 import com.example.william.my.module.sample.databinding.SampleActivityDataBindingBinding
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
@@ -22,8 +22,8 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 class DataBindingActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
 
     // Obtain ViewModel
-    private val mViewModel: DataBindingViewModel by viewModels {
-        DataBindingVMFactory
+    private val mViewModel: ArticleDataBindingViewModel by viewModels {
+        ArticleDataBindingVMFactory
     }
 
     private var mPage = 0
@@ -44,31 +44,20 @@ class DataBindingActivity : AppCompatActivity(), OnRefreshLoadMoreListener {
         // Bind ViewModel
         mBinding.viewModel = mViewModel
 
-        initView()
-
-        subscribeToModel()
-    }
-
-    private fun initView() {
-        val mAdapter = ArticleBindAdapter()
-        mBinding.recycleView.adapter = mAdapter
+        mBinding.recycleView.adapter = ArticleBindAdapter()
 
         mBinding.smartRefresh.setOnRefreshLoadMoreListener(this)
     }
 
-    private fun subscribeToModel() {
-        mViewModel.fetchNewData(0)
-    }
-
     override fun onRefresh(refreshLayout: RefreshLayout) {
         mPage = 0
-        mViewModel.fetchNewData(mPage)
+        mViewModel.loadArticle(mPage)
         mBinding.smartRefresh.finishRefresh(1000)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         mPage++
-        mViewModel.fetchNewData(mPage)
+        mViewModel.loadArticle(mPage)
         mBinding.smartRefresh.finishLoadMore(1000)
     }
 }

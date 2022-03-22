@@ -11,16 +11,17 @@ import com.example.william.my.core.retrofit.response.RetrofitResponse
 import com.example.william.my.module.sample.adapter.ArticleBindAdapter
 
 /**
+ * DataBinding
  * https://developer.android.google.cn/topic/libraries/data-binding/binding-adapters
  */
-object DataBindingAdapter {
+object ArticleBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("items")
-    fun setItemsResponse(view: RecyclerView, articleResponse: RetrofitResponse<ArticleDataBean>?) {
+    fun setItemsResponse(view: RecyclerView, articleResponse: RetrofitResponse<ArticleDataBean>) {
         val adapter = view.adapter
         if (adapter is ArticleBindAdapter) {
-            articleResponse?.data?.let { article ->
+            articleResponse.data?.let { article ->
                 if (article.datas.isNullOrEmpty()) {
                     onDataNotAvailable(view.context, adapter, article.curPage == 1)
                 } else {

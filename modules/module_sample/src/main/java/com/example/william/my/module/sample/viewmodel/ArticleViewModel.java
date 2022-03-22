@@ -11,6 +11,8 @@ import com.example.william.my.bean.data.ArticleDataBean;
 import com.example.william.my.core.retrofit.response.RetrofitResponse;
 import com.example.william.my.core.retrofit.utils.RetrofitUtils;
 
+import io.reactivex.rxjava3.core.Single;
+
 /**
  * 如果需要Context则使用AndroidViewModel
  * <p>
@@ -21,7 +23,7 @@ import com.example.william.my.core.retrofit.utils.RetrofitUtils;
  * 2.LiveData在实体类里可以通知指定某个字段的数据更新.
  * 3.MutableLiveData则是完全是整个实体类或者数据类型变化后才通知.不会细节到某个字段
  */
-public class ViewModelViewModel extends ViewModel {
+public class ArticleViewModel extends ViewModel {
 //public class ArticleViewModel extends AndroidViewModel {
 
     //public ArticleViewModel( Application application) {
@@ -32,11 +34,13 @@ public class ViewModelViewModel extends ViewModel {
 
     private final LiveData<RetrofitResponse<ArticleDataBean>> mArticleLiveData;
 
-    public ViewModelViewModel() {
+    public ArticleViewModel() {
         mArticleLiveData = Transformations.switchMap(mMutableLiveData, new Function<Integer, LiveData<RetrofitResponse<ArticleDataBean>>>() {
             @Override
             public LiveData<RetrofitResponse<ArticleDataBean>> apply(Integer input) {
-                return RetrofitUtils.buildLiveData(RetrofitUtils.buildApi(NetworkService.class).getArticleResponse(input));
+                NetworkService service = RetrofitUtils.buildApi(NetworkService.class);
+                Single<RetrofitResponse<ArticleDataBean>> response = service.getArticleResponse(input);
+                return RetrofitUtils.buildLiveData(response);
             }
         });
     }
