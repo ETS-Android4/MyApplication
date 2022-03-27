@@ -1,7 +1,16 @@
 package com.example.william.my.library.utils;
 
+import android.content.ContentUris;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * 内部存储：
@@ -17,7 +26,7 @@ public class FileSDCardUtil {
     /**
      * @return /storage/emulated/0/Android/data/包名/files
      */
-    public static String getFilesPath(Context context) {
+    public static String getFilePath(Context context) {
         String filePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
@@ -46,25 +55,44 @@ public class FileSDCardUtil {
         return cachePath;
     }
 
-//    @SuppressWarnings("deprecation")
-//    public static String getSdCardPublic() {
-//        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-//                || !Environment.isExternalStorageRemovable()) {
-//            File directoryDownloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-//            return directoryDownloads.getAbsolutePath();
-//        }
-//        return "";
-//    }
+    public static void writeCacheDir(Context context, String name, String str) {
+        File file = new File(FileSDCardUtil.getCachePath(context), name);
+        try {
+            FileOutputStream outStream = new FileOutputStream(file);
+            outStream.write(str.getBytes());
+            outStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-//    @SuppressWarnings("deprecation")
-//    public static String getSdCard() {
-//        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-//                || !Environment.isExternalStorageRemovable()) {
-//            File directory = new File(Environment.getExternalStorageDirectory() + File.separator);
-//            return directory.getAbsolutePath();
-//        }
-//        return "";
-//    }
+    public static void writeFileDir(Context context, String name, String str) {
+        File file = new File(FileSDCardUtil.getFilePath(context), name);
+        try {
+            FileOutputStream outStream = new FileOutputStream(file);
+            outStream.write(str.getBytes());
+            outStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void getUri(Context context) {
+        Cursor cursor = context.getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,//查询数据库
+                null,//返回ID的List
+                null,//查询条件
+                null,//查询条件参数，替换第三个参数中的?
+                null);//排序
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID));
+                Uri uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
+                Log.e("TAG", "image uri is" + uri);
+            }
+            cursor.close();
+        }
+    }
 }
 
 

@@ -88,7 +88,7 @@ public class RequestProgressBody extends RequestBody {
                 if (mRequestProgressListener != null) {
                     mRequestProgressListener.onProgress(bytesWritten, totalBytesCount);
                 } else {
-                    OkHttpLog.d(TAG, "bytesWritten: " + bytesWritten + " , totalBytesCount: " + totalBytesCount);
+                    OkHttpLog.i(TAG, "bytesWritten: " + bytesWritten + " , totalBytesCount: " + totalBytesCount);
                 }
             }
         };

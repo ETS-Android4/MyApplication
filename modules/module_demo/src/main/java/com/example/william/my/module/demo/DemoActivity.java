@@ -62,10 +62,4 @@ public class DemoActivity extends BaseRecyclerActivity {
         routerItems.add(new RouterItem("DispatchActivity", ARouterPath.Demo.Demo_Dispatch));
         return routerItems;
     }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        TextUtils.writeExternalFilesDirByUtils(this);
-    }
 }

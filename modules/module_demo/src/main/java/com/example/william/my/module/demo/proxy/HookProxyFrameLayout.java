@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.example.william.my.module.utils.L;
+
 public class HookProxyFrameLayout extends FrameLayout {
 
     private final Activity resumedActivity;
@@ -34,8 +36,8 @@ public class HookProxyFrameLayout extends FrameLayout {
                 //ACTION_DOWN do some thing
                 View touchViewDown = findEventSrcView(ev, this);
                 if (touchViewDown != null) {
-                    //L.e("TAG", "Activity:" + resumedActivity.getClass().getName()
-                    //        + "- ACTION_DOWN:" + ViewUtils.getAbsolutePath(touchViewDown));
+                    L.i("TAG", "Activity:" + resumedActivity.getClass().getName()
+                            + "- ACTION_DOWN:" + ViewUtils.getAbsolutePath(touchViewDown));
                 }
             }
             case MotionEvent.ACTION_MOVE: {
@@ -45,8 +47,8 @@ public class HookProxyFrameLayout extends FrameLayout {
                 //ACTION_UP do some thing
                 View touchViewUp = findEventSrcView(ev, this);
                 if (touchViewUp != null) {
-                    //L.e("TAG", "Activity:" + resumedActivity.getClass().getName()
-                    //        + "- ACTION_UP:" + ViewUtils.getAbsolutePath(touchViewUp));
+                    L.i("TAG", "Activity:" + resumedActivity.getClass().getName()
+                            + "- ACTION_UP:" + ViewUtils.getAbsolutePath(touchViewUp));
                 }
             }
         }
@@ -74,10 +76,6 @@ public class HookProxyFrameLayout extends FrameLayout {
 
     /**
      * 判断是否在view的rect范围内
-     *
-     * @param event
-     * @param srcView
-     * @return
      */
     private Boolean isEventInView(MotionEvent event, View srcView) {
         Rect currentViewRect = new Rect();
