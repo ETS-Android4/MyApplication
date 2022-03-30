@@ -99,6 +99,7 @@ ext {
             livedata_ktx         : "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1",
             //viewmodel            : "androidx.lifecycle:lifecycle-viewmodel:2.4.1",
             viewmodel_ktx        : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1",
+            lifecycle_process    : "androidx.lifecycle:lifecycle-process:2.4.1",
 
             // ViewModel utilities for Compose
             //lifecycle_compose    : "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1",

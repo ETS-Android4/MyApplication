@@ -35,9 +35,9 @@ dependencies {
     implementation deps.fragment_ktx
     //Coroutines
     implementation deps.coroutines
-    implementation deps.lifecycle_ktx
-    //implementation deps.livedata_ktx//LiveDataScope
-    //implementation deps.viewmodel_ktx//ViewModelScope
+    implementation deps.lifecycle_ktx//repeatOnLifecycle
+    implementation deps.livedata_ktx//LiveDataScope
+    implementation deps.viewmodel_ktx//ViewModelScope
 
     //WorkManager
     implementation deps.work

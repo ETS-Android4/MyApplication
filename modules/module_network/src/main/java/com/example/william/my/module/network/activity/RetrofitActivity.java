@@ -29,14 +29,17 @@ public class RetrofitActivity extends BaseResponseActivity {
     }
 
     private void login() {
+        // （2）创建 Retrofit 实例
         Retrofit retrofit = new Retrofit.Builder()
-                // baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
-                .baseUrl(Urls.Url_Base)
+                .baseUrl(Urls.Url_Base) // baseUlr必须以 /（斜线）结束，不然会抛出一个IllegalArgumentException
                 .build();
+        // （3）创建网络请求接口实例
         NetworkService service = retrofit.create(NetworkService.class);
 
+        // （4）调用网络接口中的方法获取 Call 对象
         Call<ResponseBody> call = service.call("17778060027", "ww123456");
 
+        // （5）进行网络请求
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {

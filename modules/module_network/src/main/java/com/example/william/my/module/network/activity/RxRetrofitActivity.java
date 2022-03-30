@@ -33,19 +33,6 @@ public class RxRetrofitActivity extends BaseResponseActivity {
                 .post()
                 .build()
                 .createResponse()
-//                .subscribe(new RetrofitCallback<RetrofitResponse<LoginData>>() {
-//                    @Override
-//                    public void onResponse(RetrofitResponse<LoginData> response) {
-//                        String netSuccess = "onResponse: " + new Gson().toJson(response);
-//                        showResponse(netSuccess);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(@NonNull ApiException e) {
-//                        String netError = "onFailure: " + e.getMessage();
-//                        showResponse(netError);
-//                    }
-//                });
                 .subscribe(new RetrofitResponseCallback<JsonElement>() {
                     @Override
                     public void onResponse(JsonElement response) {

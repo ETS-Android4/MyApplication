@@ -6,24 +6,16 @@
 
 ## OkHttp 简单使用
 
-1. 创建 OkhttpClient 对象
-
 ```
+// （1）创建 OkHttpClient 对象
 OkHttpClient client = new OkHttpClient();
-```
-
-2. 创建请求
-
-```
+// （2）创建 Request 对象
 Request request = new Request.Builder()
         .url(url)
         .build();
+// （3）创建 Call 对象。
 Call call = client.newCall(request);
-```
-
-3. 加入调度
-
-```
+// （4）发送请求并获取服务器返回的数据
 call.enqueue(new okhttp3.Callback() {
     @Override
     public void onFailure( Call call,  IOException e) {
@@ -34,398 +26,300 @@ call.enqueue(new okhttp3.Callback() {
 });
 ```
 
-## 源码解析
+## 源码解析 3.14.9
 
-1. 创建 OkHttpClient -> new OkHttpClient()
+### 1. 创建 OkHttpClient 对象
 
-```
-  class Builder constructor() {
-    internal var dispatcher: Dispatcher = Dispatcher() // 任务调度器
-    internal var connectionPool: ConnectionPool = ConnectionPool() // 链接池
-    internal val interceptors: MutableList<Interceptor> = mutableListOf()
-    internal val networkInterceptors: MutableList<Interceptor> = mutableListOf()
-    internal var eventListenerFactory: EventListener.Factory = EventListener.NONE.asFactory()
-    internal var retryOnConnectionFailure = true
-    internal var authenticator: Authenticator = Authenticator.NONE
-    internal var followRedirects = true
-    internal var followSslRedirects = true
-    internal var cookieJar: CookieJar = CookieJar.NO_COOKIES
-    internal var cache: Cache? = null
-    internal var dns: Dns = Dns.SYSTEM
-    internal var proxy: Proxy? = null
-    internal var proxySelector: ProxySelector? = null
-    internal var proxyAuthenticator: Authenticator = Authenticator.NONE
-    internal var socketFactory: SocketFactory = SocketFactory.getDefault()
-    internal var sslSocketFactoryOrNull: SSLSocketFactory? = null
-    internal var x509TrustManagerOrNull: X509TrustManager? = null
-    internal var connectionSpecs: List<ConnectionSpec> = DEFAULT_CONNECTION_SPECS
-    internal var protocols: List<Protocol> = DEFAULT_PROTOCOLS
-    internal var hostnameVerifier: HostnameVerifier = OkHostnameVerifier
-    internal var certificatePinner: CertificatePinner = CertificatePinner.DEFAULT
-    internal var certificateChainCleaner: CertificateChainCleaner? = null
-    internal var callTimeout = 0
-    internal var connectTimeout = 10_000
-    internal var readTimeout = 10_000
-    internal var writeTimeout = 10_000
-    internal var pingInterval = 0
-    internal var minWebSocketMessageToCompress = RealWebSocket.DEFAULT_MINIMUM_DEFLATE_SIZE
-    internal var routeDatabase: RouteDatabase? = null
-  }
-```
-
-Dispatcher.class
+在 new OkHttpClient() 内部使用 Builder 模式初始化了一些配置信息：支持协议、任务调度器（其内部包含一个线程池，执行异步请求）、连接池(其内部包含一个线程池，维护connection)、连接/读/写超时时长等信息
 
 ```
-class Dispatcher constructor() {
+    public Builder() {
+      dispatcher = new Dispatcher(); // 任务调度器，默认最大64个请求
+      protocols = DEFAULT_PROTOCOLS; // 支持的协议 http2, http1.1
+      connectionSpecs = DEFAULT_CONNECTION_SPECS; // 网络连通性协议tsl
+      eventListenerFactory = EventListener.factory(EventListener.NONE); // 网络连接状态监听
+      proxySelector = ProxySelector.getDefault();
+      if (proxySelector == null) {
+        proxySelector = new NullProxySelector();
+      }
+      cookieJar = CookieJar.NO_COOKIES; // cookie
+      socketFactory = SocketFactory.getDefault(); // socket
+      hostnameVerifier = OkHostnameVerifier.INSTANCE; //域名校验
+      certificatePinner = CertificatePinner.DEFAULT; // 证书校验
+      proxyAuthenticator = Authenticator.NONE; // 证书
+      authenticator = Authenticator.NONE;
+      connectionPool = new ConnectionPool(); // 连接池
+      dns = Dns.SYSTEM; // DNS解析
+      followSslRedirects = true;
+      followRedirects = true;
+      retryOnConnectionFailure = true;
+      callTimeout = 0;
+      connectTimeout = 10_000; // 连接超时时间10秒
+      readTimeout = 10_000; // 接收超时时间10秒
+      writeTimeout = 10_000; // 发送超时时间10秒
+      pingInterval = 0;
+    }
+```
 
-  @get:Synchronized var maxRequests = 64 // 最大请求数量
-    set(maxRequests) {
-      require(maxRequests >= 1) { "max < 1: $maxRequests" }
-      synchronized(this) {
-        field = maxRequests
-      }
-      promoteAndExecute()
-    }
+### 任务调度器 Dispatcher.class
 
-  @get:Synchronized var maxRequestsPerHost = 5 // 每台主机最大的请求数量
-    set(maxRequestsPerHost) {
-      require(maxRequestsPerHost >= 1) { "max < 1: $maxRequestsPerHost" }
-      synchronized(this) {
-        field = maxRequestsPerHost
-      }
-      promoteAndExecute()
-    }
-  ···
-  private var executorServiceOrNull: ExecutorService? = null // 线程池
-  
-  /**
-   * 没有核心线程，线程数量无限制，空闲60秒回收
-   */
-  @get:Synchronized
-  @get:JvmName("executorService") val executorService: ExecutorService
-    get() {
-      if (executorServiceOrNull == null) {
-        executorServiceOrNull = ThreadPoolExecutor(0, Int.MAX_VALUE, 60, TimeUnit.SECONDS,
-            SynchronousQueue(), threadFactory("$okHttpName Dispatcher", false))
-      }
-      return executorServiceOrNull!!
-    }
+Dispatcher任务调度器，它定义了三个双向任务队列，两个异步队列：准备执行的请求队列 readyAsyncCalls、正在运行的请求队列 runningAsyncCalls；一个正在运行的同步请求队列 runningSyncCalls
+
+```
+public final class Dispatcher {
+  private int maxRequests = 64; // 最大请求数量
+  private int maxRequestsPerHost = 5; // 每台主机最大的请求数量
+  private @Nullable Runnable idleCallback;
+
+  /** Executes calls. Created lazily. */
+  private @Nullable ExecutorService executorService; // 线程池
 
   /** Ready async calls in the order they'll be run. */
-  private val readyAsyncCalls = ArrayDeque<AsyncCall>()
+  private final Deque<AsyncCall> readyAsyncCalls = new ArrayDeque<>();
 
   /** Running asynchronous calls. Includes canceled calls that haven't finished yet. */
-  private val runningAsyncCalls = ArrayDeque<AsyncCall>()
+  private final Deque<AsyncCall> runningAsyncCalls = new ArrayDeque<>();
 
   /** Running synchronous calls. Includes canceled calls that haven't finished yet. */
-  private val runningSyncCalls = ArrayDeque<RealCall>()
-  
-  ···
-}
-```   
+  private final Deque<RealCall> runningSyncCalls = new ArrayDeque<>();
 
-2. 创建 Request -> new Request.Builder()
+  /** 没有核心线程，线程数量无限制，空闲60秒回收 */
+  public synchronized ExecutorService executorService() {
+    if (executorService == null) {
+      executorService = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
+          new SynchronousQueue<>(), Util.threadFactory("OkHttp Dispatcher", false));
+    }
+    return executorService;
+  }
+}
+```
+
+### 2. 创建 Request 对象
+
+同样使用了 Builder 模式，用来设置一些请求链接（url）、请求方法（method）、请求头（headers）、请求体（body）、标签（tag，可作为取消请求的标记）
 
 ```
-  open class Builder {
-    internal var url: HttpUrl? = null
-    internal var method: String
-    internal var headers: Headers.Builder
-    internal var body: RequestBody? = null
+  public static class Builder {
+    @Nullable HttpUrl url;
+    String method;
+    Headers.Builder headers;
+    @Nullable RequestBody body;
 
     /** A mutable map of tags, or an immutable empty map if we don't have any. */
-    internal var tags: MutableMap<Class<*>, Any> = mutableMapOf()
+    Map<Class<?>, Object> tags = Collections.emptyMap();
 
-    constructor() {
-      this.method = "GET"
-      this.headers = Headers.Builder()
+    public Builder() {
+      this.method = "GET";
+      this.headers = new Headers.Builder();
     }
 
-    internal constructor(request: Request) {
-      this.url = request.url
-      this.method = request.method
-      this.body = request.body
-      this.tags = if (request.tags.isEmpty()) {
-        mutableMapOf()
-      } else {
-        request.tags.toMutableMap()
-      }
-      this.headers = request.headers.newBuilder()
-    }
-    ···
-    open fun build(): Request {
-      return Request(
-          checkNotNull(url) { "url == null" },
-          method,
-          headers.build(),
-          body,
-          tags.toImmutableMap()
-      )
+    Builder(Request request) {
+      this.url = request.url;
+      this.method = request.method;
+      this.body = request.body;
+      this.tags = request.tags.isEmpty()
+          ? Collections.emptyMap()
+          : new LinkedHashMap<>(request.tags);
+      this.headers = request.headers.newBuilder();
     }
   }
 ```
 
-3. 创建 RealCall -> 通过 OkHttpClient 和 Request 构造出一个 Call 对象
+### 3. 创建 Call 对象
 
-OkHttpClient.newCall()
-
-```
-  override fun newCall(request: Request): Call = RealCall(this, request, forWebSocket = false)
-```
-
-4. 执行 Call -> RealCall.enqueue()
-
-RealCall.enqueue()
+通过 OkHttpClient 和 Request 构造一个 Call 对象。实质上调用的是 RealCall 中的 newRealCall 方法。
 
 ```
-  override fun enqueue(responseCallback: Callback) {
-    // 每个请求只能之执行一次
-    check(executed.compareAndSet(false, true)) { "Already Executed" }
-
-    callStart()
-    client.dispatcher.enqueue(AsyncCall(responseCallback))
+  // OkHttpClient.class
+  @Override public Call newCall(Request request) {
+    return RealCall.newRealCall(this, request, false /* for web socket */);
   }
 ```
 
-Dispatcher.enqueue()
+通过工厂模式，创建了一个用来执行的请求 RealCall , 初始化了对应的发射器 transmitter
 
 ```
-  internal fun enqueue(call: AsyncCall) {
-    synchronized(this) {
-      readyAsyncCalls.add(call)
-
-      // Mutate the AsyncCall so that it shares the AtomicInteger of an existing running call to
-      // the same host.
-      if (!call.call.forWebSocket) {
-        val existingCall = findExistingCallWithHost(call.host)
-        if (existingCall != null) call.reuseCallsPerHostFrom(existingCall)
-      }
-    }
-    promoteAndExecute()
+  // RealCall.class
+  static RealCall newRealCall(OkHttpClient client, Request originalRequest, boolean forWebSocket) {
+    // Safely publish the Call instance to the EventListener.
+    RealCall call = new RealCall(client, originalRequest, forWebSocket);
+    call.transmitter = new Transmitter(client, call);
+    return call;
   }
 ```
 
-AsyncCall.class
+RealCall 的构造方法中主要是记录了 client, 原始的 request 对象
 
 ```
-  internal inner class AsyncCall(
-    private val responseCallback: Callback
-  ) : Runnable {
-    @Volatile var callsPerHost = AtomicInteger(0)
-      private set
-
-    fun reuseCallsPerHostFrom(other: AsyncCall) {
-      this.callsPerHost = other.callsPerHost
-    }
-
-    val host: String
-      get() = originalRequest.url.host
-
-    val request: Request
-        get() = originalRequest
-
-    val call: RealCall
-        get() = this@RealCall
-
-    /**
-     * Attempt to enqueue this async call on [executorService]. This will attempt to clean up
-     * if the executor has been shut down by reporting the call as failed.
-     */
-    fun executeOn(executorService: ExecutorService) {
-      client.dispatcher.assertThreadDoesntHoldLock()
-
-      var success = false
-      try {
-        executorService.execute(this)
-        success = true
-      } catch (e: RejectedExecutionException) {
-        val ioException = InterruptedIOException("executor rejected")
-        ioException.initCause(e)
-        noMoreExchanges(ioException)
-        responseCallback.onFailure(this@RealCall, ioException)
-      } finally {
-        if (!success) {
-          client.dispatcher.finished(this) // This call is no longer running!
-        }
-      }
-    }
-
-    override fun run() {
-      threadName("OkHttp ${redactedUrl()}") {
-        var signalledCallback = false
-        timeout.enter()
-        try {
-          // 获得响应内容
-          val response = getResponseWithInterceptorChain()
-          // 避免异常时两次次回调
-          signalledCallback = true
-          // 回调 Callback
-          responseCallback.onResponse(this@RealCall, response)
-        } catch (e: IOException) {
-          if (signalledCallback) {
-            // Do not signal the callback twice!
-            Platform.get().log("Callback failure for ${toLoggableString()}", Platform.INFO, e)
-          } else {
-            // 回调 Callback
-            responseCallback.onFailure(this@RealCall, e)
-          }
-        } catch (t: Throwable) {
-          cancel()
-          if (!signalledCallback) {
-            val canceledException = IOException("canceled due to $t")
-            canceledException.addSuppressed(t)
-            responseCallback.onFailure(this@RealCall, canceledException)
-          }
-          throw t
-        } finally {
-          // 不管请求成功与否，都进行finished操作
-          client.dispatcher.finished(this)
-        }
-      }
-    }
+  // RealCall.class
+  private RealCall(OkHttpClient client, Request originalRequest, boolean forWebSocket) {
+    this.client = client;
+    this.originalRequest = originalRequest;
+    this.forWebSocket = forWebSocket;
   }
 ```
 
-Dispatcher.finished()
+### RealCall 的父类 Call.class
+
+Call是一个准备好的可被执行的 Request。内部有获取原始请求，同步异步执行请求，取消请求，克隆请求，和判断请求状态方法。
 
 ```
-  internal fun finished(call: AsyncCall) {
-    call.callsPerHost.decrementAndGet()
-    finished(runningAsyncCalls, call)
-  }
+public interface Call extends Cloneable {
   
-  private fun <T> finished(calls: Deque<T>, call: T) {
-    val idleCallback: Runnable?
-    synchronized(this) {
-      if (!calls.remove(call)) throw AssertionError("Call wasn't in-flight!")
-      idleCallback = this.idleCallback
-    }
+  // 返回原始的请求对象
+  Request request();
 
-    val isRunning = promoteAndExecute()
+  // 同步阻塞的返回响应，这个只代表传输层成功，并不一定是应用层成功（404，500）
+  Response execute() throws IOException;
 
-    if (!isRunning && idleCallback != null) {
-      idleCallback.run()
-    }
-  }
-  
+  //  异步的执行请求，将请求放入请求队列等待执行
+  void enqueue(Callback responseCallback);
+
+  // 取消一个请求，如果请求已经执行完成是无法被取消的
+  void cancel();
+
+  boolean isExecuted();
+
+  boolean isCanceled();
+
+  Timeout timeout();
+
   /**
-   * 推进下个任务并且执行
+   * Create a new, identical call to this one which can be enqueued or executed even if this call
+   * has already been.
    */
-  private fun promoteAndExecute(): Boolean {
-    this.assertThreadDoesntHoldLock()
+  Call clone();
 
-    val executableCalls = mutableListOf<AsyncCall>()
-    val isRunning: Boolean
-    synchronized(this) {
-      val i = readyAsyncCalls.iterator()
-      // 将readyAsyncCalls中的任务移动到runningAsyncCalls中
-      while (i.hasNext()) {
-        val asyncCall = i.next()
+  interface Factory {
+    Call newCall(Request request);
+  }
+}
+```
 
-        if (runningAsyncCalls.size >= this.maxRequests) break // Max capacity.
-        if (asyncCall.callsPerHost.get() >= this.maxRequestsPerHost) continue // Host max capacity.
+### 4. 同步请求
 
-        i.remove()
-        asyncCall.callsPerHost.incrementAndGet()
-        executableCalls.add(asyncCall)
-        runningAsyncCalls.add(asyncCall)
-      }
-      isRunning = runningCallsCount() > 0
+调用 Call.execute() 方法直接返回当前请求的 Response。
+
+1. client.dispatcher() 方法返回了一个 dispatcher 对象
+2. 然后接着调用了 dispatcher 对象的 executed 方法，把一个同步任务添加到了调度器内部的数组
+3. 在将任务添加到队列之后，就调用了 getResponseWithInterceptorChain() 方法来获取 Response。
+
+```
+  @Override public Response execute() throws IOException {
+    // 这里使用 同步锁 + executed 标记，所以一个Call只可以执行一次！
+    synchronized (this) {
+      if (executed) throw new IllegalStateException("Already Executed");
+      executed = true; // 标记该Call已经执行了
     }
-
-    for (i in 0 until executableCalls.size) {
-      val asyncCall = executableCalls[i]
-      asyncCall.executeOn(executorService)
+    transmitter.timeoutEnter();
+    transmitter.callStart();
+    try {
+      client.dispatcher().executed(this); // 将该Call加入同步请求队列
+      return getResponseWithInterceptorChain(); // 执行真正的请求
+    } finally {
+      client.dispatcher().finished(this); // 请求完成，从同步请求队列中移除该Call
     }
-
-    return isRunning
   }
 ```
 
-5. 读取 Response -> RealCall.getResponseWithInterceptorChain()
+### 5. 异步请求
 
-RealCall.getResponseWithInterceptorChain()
+调用 Call.enqueue() 方法将请求（AsyncCall）添加到请求队列中去，并通过回调（Callback）获取服务器返回的结果。
+
+1. client.dispatcher() 方法返回了一个 dispatcher 对象
+2. 然后接着调用了 dispatcher 对象的 enqueue 方法，传入了一个封装了响应回调 callBack 的 AsyncCall 对象
 
 ```
-  internal fun getResponseWithInterceptorChain(): Response {
-    // Build a full stack of interceptors.
-    val interceptors = mutableListOf<Interceptor>()
-    interceptors += client.interceptors
-    interceptors += RetryAndFollowUpInterceptor(client)
-    interceptors += BridgeInterceptor(client.cookieJar)
-    interceptors += CacheInterceptor(client.cache)
-    interceptors += ConnectInterceptor
-    if (!forWebSocket) {
-      interceptors += client.networkInterceptors
+  @Override public void enqueue(Callback responseCallback) {
+    // 这里使用 同步锁 + executed 标记，所以一个Call只可以执行一次！
+    synchronized (this) {
+      if (executed) throw new IllegalStateException("Already Executed");
+      executed = true; // 标记该Call已经执行了
     }
-    interceptors += CallServerInterceptor(forWebSocket)
+    transmitter.callStart();
+    client.dispatcher().enqueue(new AsyncCall(responseCallback));
+  }
+```
 
-    val chain = RealInterceptorChain(
-        call = this,
-        interceptors = interceptors,
-        index = 0,
-        exchange = null,
-        request = originalRequest,
-        connectTimeoutMillis = client.connectTimeoutMillis,
-        readTimeoutMillis = client.readTimeoutMillis,
-        writeTimeoutMillis = client.writeTimeoutMillis
-    )
+### AsyncCall
 
-    var calledNoMoreExchanges = false
-    try {
-      // 处理请求
-      val response = chain.proceed(originalRequest)
-      if (isCanceled()) {
-        response.closeQuietly()
-        throw IOException("Canceled")
+AsyncCall 是 Runnable 的一个实现类。
+
+```
+  final class AsyncCall extends NamedRunnable {
+
+    @Override protected void execute() {
+      boolean signalledCallback = false;
+      transmitter.timeoutEnter();
+      try {
+        // 执行真正的请求
+        Response response = getResponseWithInterceptorChain();
+        // 避免执行两次
+        signalledCallback = true;
+        // 成功回调
+        responseCallback.onResponse(RealCall.this, response);
+      } catch (IOException e) {
+        if (signalledCallback) {
+          // Do not signal the callback twice!
+          Platform.get().log(INFO, "Callback failure for " + toLoggableString(), e);
+        } else {
+          responseCallback.onFailure(RealCall.this, e);
+        }
+      } catch (Throwable t) {
+        cancel();
+        if (!signalledCallback) {
+          IOException canceledException = new IOException("canceled due to " + t);
+          canceledException.addSuppressed(t);
+          // 失败回调
+          responseCallback.onFailure(RealCall.this, canceledException);
+        }
+        throw t;
+      } finally {
+        // 不管请求成语与否，都进行finished操作
+        client.dispatcher().finished(this);
       }
-      return response
-    } catch (e: IOException) {
-      calledNoMoreExchanges = true
-      throw noMoreExchanges(e) as Throwable
+    }
+  }
+```
+
+
+### 6 获取 Response getResponseWithInterceptorChain()
+
+真正去同步执行的是通过getResponseWithInterceptorChain()方法，并返回响应结果。
+
+```
+  Response getResponseWithInterceptorChain() throws IOException {
+    // Build a full stack of interceptors.
+    List<Interceptor> interceptors = new ArrayList<>();
+    interceptors.addAll(client.interceptors()); // 应用拦截器
+    interceptors.add(new RetryAndFollowUpInterceptor(client)); // 请求重试拦截器
+    interceptors.add(new BridgeInterceptor(client.cookieJar())); // 桥接拦截器
+    interceptors.add(new CacheInterceptor(client.internalCache())); // 缓存拦截器
+    interceptors.add(new ConnectInterceptor(client)); // 连接拦截器
+    if (!forWebSocket) {
+      interceptors.addAll(client.networkInterceptors()); //  网络拦截器
+    }
+    interceptors.add(new CallServerInterceptor(forWebSocket)); // Server数据交互拦截器
+
+    Interceptor.Chain chain = new RealInterceptorChain(interceptors, transmitter, null, 0,
+        originalRequest, this, client.connectTimeoutMillis(),
+        client.readTimeoutMillis(), client.writeTimeoutMillis());
+
+    boolean calledNoMoreExchanges = false;
+    try {
+      Response response = chain.proceed(originalRequest); // 处理请求
+      if (transmitter.isCanceled()) {
+        closeQuietly(response);
+        throw new IOException("Canceled");
+      }
+      return response;
+    } catch (IOException e) {
+      calledNoMoreExchanges = true;
+      throw transmitter.noMoreExchanges(e);
     } finally {
       if (!calledNoMoreExchanges) {
-        noMoreExchanges(null)
+        transmitter.noMoreExchanges(null);
       }
     }
   }
 ```
-
-RealInterceptorChain.proceed()
-
-```
-  override fun proceed(request: Request): Response {
-    check(index < interceptors.size)
-
-    calls++
-
-    if (exchange != null) {
-      check(exchange.finder.sameHostAndPort(request.url)) {
-        "network interceptor ${interceptors[index - 1]} must retain the same host and port"
-      }
-      check(calls == 1) {
-        "network interceptor ${interceptors[index - 1]} must call proceed() exactly once"
-      }
-    }
-
-    // Call the next interceptor in the chain.
-    val next = copy(index = index + 1, request = request)
-    val interceptor = interceptors[index]
-
-    @Suppress("USELESS_ELVIS")
-    val response = interceptor.intercept(next) ?: throw NullPointerException(
-        "interceptor $interceptor returned null")
-
-    if (exchange != null) {
-      check(index + 1 >= interceptors.size || next.calls == 1) {
-        "network interceptor $interceptor must call proceed() exactly once"
-      }
-    }
-
-    check(response.body != null) { "interceptor $interceptor returned a response with no body" }
-
-    return response
-  }
-```
-
-> 请求流程：RealCall.enqueue() -> RealCall.getResponseWithInterceptorChain() -> RealInterceptorChain.proceed()

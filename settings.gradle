@@ -10,6 +10,7 @@ include ':libraries:lib_retrofit'
 include ':libraries:lib_websocket'
 
 include ':libraries:lib_keyvalue'
+include ':libraries:lib_eventbus'
 include ':libraries:lib_imageloader'
 
 include ':libraries:lib_banner'

@@ -25,15 +25,6 @@ import okhttp3.ResponseBody;
 @Route(path = ARouterPath.NetWork.NetWork_OkHttp)
 public class OkHttpActivity extends BaseResponseActivity {
 
-    private OkHttpClient mOkHttpClient;
-
-    @Override
-    public void initView() {
-        super.initView();
-        //创建Client对象
-        mOkHttpClient = new OkHttpClient();
-    }
-
     @Override
     public void setOnClick() {
         super.setOnClick();
@@ -41,19 +32,21 @@ public class OkHttpActivity extends BaseResponseActivity {
     }
 
     private void login() {
-        //创建请求体
+        // （1）创建 OkHttpClient 对象
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        // 创建请求体
         FormBody.Builder formBuilder = new FormBody.Builder();
         RequestBody formBody = formBuilder
                 .add("username", "17778060027")
                 .add("password", "ww123456")
                 .build();
-        //创建表单
+        // 创建表单
         MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         RequestBody multipartBody = multipartBuilder
                 .addFormDataPart("username", "17778060027")
                 .addFormDataPart("password", "ww123456")
                 .build();
-        //创建请求
+        // （2）创建 Request 对象
         Request request = new Request.Builder()
                 .url(Urls.Url_Login)
                 // 请求体
@@ -61,8 +54,9 @@ public class OkHttpActivity extends BaseResponseActivity {
                 // 表单
                 //.post(multipartBody)
                 .build();
+        // （3）创建 Call 对象
         Call call = mOkHttpClient.newCall(request);
-        //加入调度
+        // （4）发送请求并获取服务器返回的数据
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull final IOException e) {

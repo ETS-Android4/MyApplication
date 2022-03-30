@@ -1,5 +1,8 @@
 package com.example.william.my.module.sample
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.example.william.my.bean.data.LoginBean
@@ -43,43 +46,6 @@ class KotlinActivity : BaseActivity() {
     }
 
     /**
-     * 高阶函数
-     * 如果一个函数接收另一个函数作为参数，或者返回值的类型是另一个函数，那么该函数称为高阶函数。
-     */
-    private fun setFuncTest() {
-        setListener1(javaClass.simpleName) { str ->
-            L.e("TAG", str)
-        }
-
-        setListener2(javaClass.simpleName) { str ->
-            L.e("TAG", str)
-        }
-
-        setListener3(javaClass.simpleName) { str, callback ->
-            L.e("TAG", str)
-            callback.invoke()
-        }
-        Singleton.getInstance(application).showToast("showToast")
-    }
-
-    private fun setListener1(str: String, callback: (str: String) -> Unit) {
-        L.e("TAG", str)
-        callback.invoke("setListener")
-    }
-
-    private fun setListener2(str: String, callback: ((toast: String) -> Unit) = {}) {
-        L.e("TAG", str)
-        callback.invoke("toast")
-    }
-
-    private fun setListener3(str: String, callback: (str: String, callback: () -> Unit) -> Unit) {
-        L.e("TAG", str)
-        callback.invoke("setListener") {
-            L.e("TAG", "Callback")
-        }
-    }
-
-    /**
      * 作用域函数
      * let 与 also -> it
      * run 与 apply -> this
@@ -89,7 +55,7 @@ class KotlinActivity : BaseActivity() {
      * <p>
      * it 可重命名微一个可读的lambda参数，适合多重嵌套
      */
-    private fun scope() {
+    private fun scopeTest() {
         val loginData = LoginBean()
 
         // with
@@ -140,6 +106,43 @@ class KotlinActivity : BaseActivity() {
             data.nickname = "nickname"
         }
         L.e("TAG", Gson().toJson(applyBean))
+    }
+
+    /**
+     * 高阶函数
+     * 如果一个函数接收另一个函数作为参数，或者返回值的类型是另一个函数，那么该函数称为高阶函数。
+     */
+    private fun funcTest() {
+        setListener1(javaClass.simpleName) { str ->
+            L.e("TAG", str)
+        }
+
+        setListener2(javaClass.simpleName) { str ->
+            L.e("TAG", str)
+        }
+
+        setListener3(javaClass.simpleName) { str, callback ->
+            L.e("TAG", str)
+            callback.invoke()
+        }
+        Singleton.getInstance(application).showToast("showToast")
+    }
+
+    private fun setListener1(str: String, callback: (str: String) -> Unit) {
+        L.e("TAG", str)
+        callback.invoke("setListener")
+    }
+
+    private fun setListener2(str: String, callback: ((toast: String) -> Unit) = {}) {
+        L.e("TAG", str)
+        callback.invoke("toast")
+    }
+
+    private fun setListener3(str: String, callback: (str: String, callback: () -> Unit) -> Unit) {
+        L.e("TAG", str)
+        callback.invoke("setListener") {
+            L.e("TAG", "Callback")
+        }
     }
 
     /**
@@ -312,4 +315,21 @@ class KotlinActivity : BaseActivity() {
     interface Base {
         fun print()
     }
+
+    /**
+     * reified函数,private java 无法调用
+     */
+    private fun <T : Activity> Activity.startAct1(context: Context, clazz: Class<T>) {
+        startActivity(Intent(context, clazz))
+    }
+
+    private inline fun <reified T : Activity> Activity.startAct2(context: Context) {
+        startActivity(Intent(context, T::class.java))
+    }
+
+    fun reifiedTest() {
+        startAct1(this, KotlinActivity::class.java)
+        startAct2<KotlinActivity>(this)
+    }
+
 }

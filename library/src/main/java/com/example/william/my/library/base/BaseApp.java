@@ -34,6 +34,7 @@ public class BaseApp extends Application {
             "com.example.william.my.module.network.app.NetWorkApp",
             "com.example.william.my.module.sample.app.SampleApp",
             "com.example.william.my.module.opensource.app.OpenSourceApp",
+            "com.example.william.my.module.libraries.app.LibrariesApp",
             "com.example.william.my.module.demo.app.DemoApp"
     };
 
