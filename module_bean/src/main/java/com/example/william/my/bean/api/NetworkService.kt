@@ -25,7 +25,7 @@ import retrofit2.http.Query
 interface NetworkService {
 
     @POST(Urls.Url_Login)
-    fun call(@Query("username") username: String, @Query("password") password: String): Call<ResponseBody>
+    fun getInfo(@Query("username") username: String, @Query("password") password: String): Call<ResponseBody>
 
     @POST(Urls.Url_Login)
     suspend fun login(@Query("username") username: String, @Query("password") password: String): LoginBean

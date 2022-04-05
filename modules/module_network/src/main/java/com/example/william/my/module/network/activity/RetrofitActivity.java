@@ -37,7 +37,7 @@ public class RetrofitActivity extends BaseResponseActivity {
         NetworkService service = retrofit.create(NetworkService.class);
 
         // （4）调用网络接口中的方法获取 Call 对象
-        Call<ResponseBody> call = service.call("17778060027", "ww123456");
+        Call<ResponseBody> call = service.getInfo("17778060027", "ww123456");
 
         // （5）进行网络请求
         call.enqueue(new Callback<ResponseBody>() {

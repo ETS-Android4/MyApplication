@@ -77,12 +77,12 @@ object FlowEventBus {
 
     @MainThread
     inline fun <reified T> observeEvent(
-        scope: ViewModelStoreOwner, coroutineScope: CoroutineScope,
+        owner: ViewModelStoreOwner, coroutineScope: CoroutineScope,
         isSticky: Boolean = false,
         noinline onReceived: (T) -> Unit
     ): Job {
         return coroutineScope.launch {
-            ViewModelProvider(scope)[FlowEventBusModel::class.java]
+            ViewModelProvider(owner)[FlowEventBusModel::class.java]
                 .observeWithoutLifecycle(T::class.java.name, isSticky, onReceived)
         }
     }

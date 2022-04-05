@@ -9,12 +9,13 @@ import com.example.william.my.module.libraries.databinding.LibActivityEventBusBi
 import com.example.william.my.module.libraries.event.ActivityEvent
 import com.example.william.my.module.libraries.event.GlobalEvent
 import com.example.william.my.module.router.ARouterPath
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
-@Route(path = ARouterPath.Lib.Lib_EventBus)
+@Route(path = ARouterPath.Lib.Lib_FlowEventBus)
 class FlowEventBusActivity : AppCompatActivity() {
 
-    lateinit var mBinding: LibActivityEventBusBinding
+    private lateinit var mBinding: LibActivityEventBusBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,35 +29,31 @@ class FlowEventBusActivity : AppCompatActivity() {
     }
 
     private fun observeEvent() {
-        //自定义事件
+        //自定义事件 跨页面
         FlowEventBus.observeEvent<GlobalEvent> {
-            mBinding.textView.text = it.message
+            mBinding.response.text = "received GlobalEvent 1: ${it.message}"
         }
-
-        //自定义事件
-        FlowEventBus.observeEvent<ActivityEvent>(this) {
-            mBinding.textView.text = "received ActivityEvent: ${it.message}"
+        FlowEventBus.observeEvent<GlobalEvent>(coroutineScope = CoroutineScope(Dispatchers.Main)) {
+            mBinding.response.text = "received GlobalEvent 2: ${it.message}"
         }
+        FlowEventBus.observeEvent<GlobalEvent>(owner = this, coroutineScope = CoroutineScope(Dispatchers.Main)) {
 
-        //自定义事件 切换线程
-        FlowEventBus.observeEvent<ActivityEvent>(Dispatchers.IO) {
-            mBinding.textView.text = "received ActivityEvent:${it.message} " + Thread.currentThread().name
         }
-
-        //自定义事件 指定最小生命周期
-        FlowEventBus.observeEvent<ActivityEvent>(minActiveState = Lifecycle.State.DESTROYED) {
-            mBinding.textView.text = "received ActivityEvent:${it.message}   >  DESTROYED"
+        //自定义事件 本页面页
+        FlowEventBus.observeEvent<ActivityEvent>(scope = this) {
+            mBinding.response.text = "received ActivityEvent: ${it.message}"
         }
-
         //自定义事件 切换线程 + 指定最小生命周期
-        FlowEventBus.observeEvent<ActivityEvent>(Dispatchers.IO, Lifecycle.State.DESTROYED) {
-            mBinding.textView.text = it.message
+        FlowEventBus.observeEvent<ActivityEvent>(dispatcher = Dispatchers.IO, minActiveState = Lifecycle.State.DESTROYED) {
+            mBinding.response.text = "received ActivityEvent: ${it.message} " + Thread.currentThread().name
         }
     }
 
     private fun postEvent() {
-        mBinding.textView.setOnClickListener {
+        mBinding.global.setOnClickListener {
             FlowEventBus.postEvent(GlobalEvent("send GlobalEvent by Activity"))
+        }
+        mBinding.activity.setOnClickListener {
             FlowEventBus.postEvent(this, ActivityEvent("send ActivityEvent by Activity"))
         }
     }

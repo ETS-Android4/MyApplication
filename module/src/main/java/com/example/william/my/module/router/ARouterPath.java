@@ -111,7 +111,7 @@ public class ARouterPath {
         public static final String Lib = "/module_libraries/libraries";
         //
         public static final String Lib_KeyValue = "/module_lib/key_value";
-        public static final String Lib_EventBus = "/module_lib/event_bus";
+        public static final String Lib_FlowEventBus = "/module_lib/flow_event_bus";
         //
         public static final String Lib_Banner = "/module_lib/banner";
         public static final String Lib_InfiniteImage = "/module_lib/infinite_image";

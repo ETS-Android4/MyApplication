@@ -16,7 +16,7 @@ class LibrariesActivity : BaseRecyclerActivity() {
 
     override fun buildRouter(): ArrayList<RouterItem> {
         val routerItems = ArrayList<RouterItem>()
-        routerItems.add(RouterItem("EventBusActivity", ARouterPath.Lib.Lib_EventBus))
+        routerItems.add(RouterItem("FlowEventBusActivity", ARouterPath.Lib.Lib_FlowEventBus))
         routerItems.add(RouterItem("BannerActivity", ARouterPath.Lib.Lib_Banner))
         routerItems.add(RouterItem("InfiniteImageActivity", ARouterPath.Lib.Lib_InfiniteImage))
         routerItems.add(RouterItem("NinePatchActivity", ARouterPath.Lib.Lib_NinePatch))
@@ -28,14 +28,14 @@ class LibrariesActivity : BaseRecyclerActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        FlowEventBus.observeEvent<GlobalEvent> {
-            Toast.makeText(this@LibrariesActivity, it.message, Toast.LENGTH_SHORT).show()
-        }
-        FlowEventBus.observeEvent<ActivityEvent> {
-            Toast.makeText(this@LibrariesActivity, it.message, Toast.LENGTH_SHORT).show()
-        }
-        FlowEventBus.observeEvent<FragmentEvent> {
-            Toast.makeText(this@LibrariesActivity, it.message, Toast.LENGTH_SHORT).show()
-        }
+//        FlowEventBus.observeEvent<GlobalEvent> {
+//            Toast.makeText(this@LibrariesActivity, it.message, Toast.LENGTH_SHORT).show()
+//        }
+//        FlowEventBus.observeEvent<ActivityEvent> {
+//            Toast.makeText(this@LibrariesActivity, it.message, Toast.LENGTH_SHORT).show()
+//        }
+//        FlowEventBus.observeEvent<FragmentEvent> {
+//            Toast.makeText(this@LibrariesActivity, it.message, Toast.LENGTH_SHORT).show()
+//        }
     }
 }
