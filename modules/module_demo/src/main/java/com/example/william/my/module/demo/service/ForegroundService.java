@@ -4,11 +4,11 @@ import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
 import com.example.william.my.module.demo.R;
+import com.example.william.my.module.utils.T;
 
 /**
  * 前台服务
@@ -47,7 +47,7 @@ public class ForegroundService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(ForegroundService.this, "前台服务已启动", Toast.LENGTH_SHORT).show();
+        T.show("前台服务已启动");
         return super.onStartCommand(intent, flags, startId);
     }
 }

@@ -12,7 +12,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.PersistableBundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -20,6 +19,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.demo.service.MyJobService;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.T;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -146,7 +146,7 @@ public class JobActivity extends BaseResponseActivity {
     public void cancelAllJobs() {
         JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         jobScheduler.cancelAll();
-        Toast.makeText(JobActivity.this, "All jobs cancelled", Toast.LENGTH_SHORT).show();
+        T.show("All jobs cancelled");
     }
 
     /**
@@ -158,9 +158,9 @@ public class JobActivity extends BaseResponseActivity {
         if (jobs.size() > 0) {
             int jobId = jobs.get(0).getId();
             jobScheduler.cancel(jobId);
-            Toast.makeText(JobActivity.this, "取消 : " + jobId, Toast.LENGTH_SHORT).show();
+            T.show("取消 : ");
         } else {
-            Toast.makeText(JobActivity.this, "No jobs to cancel", Toast.LENGTH_SHORT).show();
+            T.show("No jobs to cancel");
         }
     }
 }

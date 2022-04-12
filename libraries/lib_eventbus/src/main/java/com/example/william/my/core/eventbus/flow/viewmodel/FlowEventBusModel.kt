@@ -1,10 +1,6 @@
 package com.example.william.my.core.eventbus.flow.viewmodel
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.william.my.core.eventbus.flow.FlowEventBus.launchWhenStateAtLeast
+import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -38,23 +34,29 @@ class FlowEventBusModel : ViewModel() {
 
     fun <T : Any> observeEvent(
         lifecycleOwner: LifecycleOwner,
-        eventName: String,
         minState: Lifecycle.State,
         dispatcher: CoroutineDispatcher,
+        eventName: String,
         isSticky: Boolean,
         onReceived: (T) -> Unit
     ): Job {
-        return lifecycleOwner.launchWhenStateAtLeast(minState) {
-            getEventFlow(eventName, isSticky)
-                .collect { value ->
-                    this.launch(dispatcher) {
-                        invokeReceived(value, onReceived)
+        return lifecycleOwner.lifecycleScope.launch {
+            lifecycleOwner.lifecycle.whenStateAtLeast(minState) {
+                getEventFlow(eventName, isSticky)
+                    .collect { value ->
+                        this.launch(dispatcher) {
+                            invokeReceived(value, onReceived)
+                        }
                     }
-                }
+            }
         }
     }
 
-    suspend fun <T : Any> observeWithoutLifecycle(eventName: String, isSticky: Boolean, onReceived: (T) -> Unit) {
+    suspend fun <T : Any> observeEvent(
+        eventName: String,
+        isSticky: Boolean,
+        onReceived: (T) -> Unit
+    ) {
         getEventFlow(eventName, isSticky).collect { value ->
             invokeReceived(value, onReceived)
         }

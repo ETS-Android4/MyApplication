@@ -1,7 +1,6 @@
 package com.example.william.my.module.opensource.activity;
 
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
@@ -9,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.opensource.R;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.T;
 
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
@@ -31,7 +31,7 @@ public class BadgeViewActivity extends BaseResponseActivity {
                 .setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
                     @Override
                     public void onDragStateChanged(int dragState, Badge badge, View targetView) {
-                        Toast.makeText(BadgeViewActivity.this, "已读", Toast.LENGTH_SHORT).show();
+                        T.show("已读");
                     }
                 });
     }

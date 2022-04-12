@@ -1,9 +1,5 @@
 package com.example.william.my.module.demo;
 
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseRecyclerActivity;
 import com.example.william.my.module.router.ARouterPath;

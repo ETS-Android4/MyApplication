@@ -5,6 +5,8 @@
     <application>
         <activity android:name=".LibrariesActivity" />
         <activity android:name=".activity.BannerActivity" />
+        <activity android:name=".activity.RxBusActivity" />
+        <activity android:name=".activity.LiveEventBusActivity" />
         <activity android:name=".activity.FlowEventBusActivity" />
         <activity android:name=".activity.InfiniteImageActivity" />
         <activity android:name=".activity.NinePatchActivity" />

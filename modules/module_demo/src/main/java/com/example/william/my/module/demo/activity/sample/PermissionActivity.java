@@ -2,7 +2,6 @@ package com.example.william.my.module.demo.activity.sample;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -11,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.T;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +84,7 @@ public class PermissionActivity extends BaseResponseActivity {
         for (int grantResult : grantResults) {
             if (grantResult != PackageManager.PERMISSION_GRANTED) {
                 // 同意权限申请
-                Toast.makeText(this, "同意权限申请", Toast.LENGTH_SHORT).show();
+                T.show("同意权限申请");
             }
         }
     }

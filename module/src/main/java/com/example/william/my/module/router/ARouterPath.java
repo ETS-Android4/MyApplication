@@ -111,6 +111,8 @@ public class ARouterPath {
         public static final String Lib = "/module_libraries/libraries";
         //
         public static final String Lib_KeyValue = "/module_lib/key_value";
+        public static final String Lib_RxBus = "/module_lib/rx_bus";
+        public static final String Lib_LiveEventBus = "/module_lib/live_event_bus";
         public static final String Lib_FlowEventBus = "/module_lib/flow_event_bus";
         //
         public static final String Lib_Banner = "/module_lib/banner";

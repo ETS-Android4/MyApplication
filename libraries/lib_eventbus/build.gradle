@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    implementation deps.rxjava
+    implementation deps.rxlifecycle
     implementation deps.coroutines
     implementation deps.activity_ktx
     implementation deps.fragment_ktx

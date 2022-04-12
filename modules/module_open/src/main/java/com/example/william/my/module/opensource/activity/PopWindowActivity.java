@@ -3,7 +3,6 @@ package com.example.william.my.module.opensource.activity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
@@ -11,6 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.opensource.R;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.T;
 import com.example.zhouwei.library.CustomPopWindow;
 
 /**
@@ -45,7 +45,7 @@ public class PopWindowActivity extends BaseResponseActivity {
         contentView.findViewById(R.id.basics_response).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(PopWindowActivity.this, "您点击了按钮", Toast.LENGTH_SHORT).show();
+                T.show("您点击了按钮");
             }
         });
     }

@@ -282,7 +282,6 @@ AsyncCall 是 Runnable 的一个实现类。
   }
 ```
 
-
 ### 6 获取 Response getResponseWithInterceptorChain()
 
 真正去同步执行的是通过getResponseWithInterceptorChain()方法，并返回响应结果。

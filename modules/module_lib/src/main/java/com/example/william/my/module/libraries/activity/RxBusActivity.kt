@@ -3,14 +3,15 @@ package com.example.william.my.module.libraries.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.example.william.my.core.eventbus.flow.FlowEventBus
+import com.example.william.my.core.eventbus.rxjava.RxBus
 import com.example.william.my.module.libraries.databinding.LibActivityEventBusBinding
 import com.example.william.my.module.libraries.event.GlobalEvent
 import com.example.william.my.module.libraries.event.StickyEvent
 import com.example.william.my.module.router.ARouterPath
 
-@Route(path = ARouterPath.Lib.Lib_FlowEventBus)
-class FlowEventBusActivity : AppCompatActivity() {
+
+@Route(path = ARouterPath.Lib.Lib_RxBus)
+class RxBusActivity : AppCompatActivity() {
 
     private lateinit var mBinding: LibActivityEventBusBinding
 
@@ -28,19 +29,28 @@ class FlowEventBusActivity : AppCompatActivity() {
     }
 
     private fun postStickyEvent() {
-        FlowEventBus.postEvent(StickyEvent("send StickyEvent by Activity"))
+        RxBus.postSticky(StickyEvent("send StickyEvent by Activity"))
     }
 
     private fun observeEvent() {
-        FlowEventBus.observeEvent<GlobalEvent> {
-            mBinding.global.text = it.message
-        }
-        FlowEventBus.observeEvent<StickyEvent>(isSticky = true) {
-            mBinding.sticky.text = it.message
-        }
+        RxBus
+            .observeEvent(GlobalEvent::class.java)
+            .subscribe {
+                mBinding.global.text = it.message
+            }
+        RxBus
+            .observeEvent(StickyEvent::class.java)
+            .subscribe {
+                mBinding.sticky.text = it.message
+            }
     }
 
     private fun postEvent() {
-        FlowEventBus.postEvent(GlobalEvent("send GlobalEvent by Activity"))
+        RxBus.post(GlobalEvent("send GlobalEvent by Activity"))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        RxBus.removeAllStickyEvents()
     }
 }

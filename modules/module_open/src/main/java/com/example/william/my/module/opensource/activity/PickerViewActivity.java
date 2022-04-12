@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -21,6 +20,7 @@ import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.opensource.data.CityPickerData;
 import com.example.william.my.module.router.ARouterPath;
 import com.example.william.my.module.router.provider.ResourceUtilsService;
+import com.example.william.my.module.utils.T;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -73,7 +73,7 @@ public class PickerViewActivity extends BaseResponseActivity {
             if (isLoaded) {
                 showOptionsPickerView();
             } else {
-                Toast.makeText(PickerViewActivity.this, "Please waiting until the data is parsed", Toast.LENGTH_SHORT).show();
+                T.show("Please waiting until the data is parsed");
             }
         }
         isSwitch = !isSwitch;

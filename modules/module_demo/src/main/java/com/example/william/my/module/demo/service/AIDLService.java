@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.widget.Toast;
 
 import com.example.william.my.module.demo.IMyAidlInterface;
+import com.example.william.my.module.utils.T;
 
 public class AIDLService extends Service {
 
@@ -37,18 +37,18 @@ public class AIDLService extends Service {
         aidlBinder = new AIDLBinder();
     }
 
-    public class XBinder extends Binder {
+    public static class XBinder extends Binder {
 
         public void showToast(String s) {
-            Toast.makeText(AIDLService.this, s, Toast.LENGTH_SHORT).show();
+            T.show(s);
         }
     }
 
-    public class AIDLBinder extends IMyAidlInterface.Stub {
+    public static class AIDLBinder extends IMyAidlInterface.Stub {
 
         @Override
         public void showToast(String s) throws RemoteException {
-            Toast.makeText(AIDLService.this, s, Toast.LENGTH_SHORT).show();
+            T.show(s);
         }
     }
 }

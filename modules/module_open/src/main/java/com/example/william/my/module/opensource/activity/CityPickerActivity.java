@@ -1,7 +1,6 @@
 package com.example.william.my.module.opensource.activity;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -9,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.opensource.R;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.T;
 import com.zaaach.citypicker.CityPicker;
 import com.zaaach.citypicker.adapter.OnPickListener;
 import com.zaaach.citypicker.model.City;
@@ -46,7 +46,7 @@ public class CityPickerActivity extends BaseResponseActivity {
 
                     @Override
                     public void onCancel() {
-                        Toast.makeText(CityPickerActivity.this, "取消选择", Toast.LENGTH_SHORT).show();
+                        T.show("取消选择");
                     }
 
                     @Override

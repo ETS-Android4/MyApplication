@@ -3,12 +3,14 @@ package com.example.william.my.module.libraries.app;
 import android.app.Application;
 
 import com.example.william.my.core.eventbus.flow.FlowEventBus;
+import com.example.william.my.core.eventbus.livedata.LiveEventBus;
 import com.example.william.my.library.interfaces.IComponentApplication;
 
 public class LibrariesApp implements IComponentApplication {
 
     @Override
     public void init(Application application) {
+        LiveEventBus.INSTANCE.init(application);
         FlowEventBus.INSTANCE.init(application);
     }
 

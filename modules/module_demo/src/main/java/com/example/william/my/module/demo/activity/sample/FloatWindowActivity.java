@@ -14,12 +14,12 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.william.my.module.activity.BaseResponseActivity;
 import com.example.william.my.module.demo.R;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.T;
 
 /**
  * 悬浮窗
@@ -84,7 +84,7 @@ public class FloatWindowActivity extends BaseResponseActivity {
         mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FloatWindowActivity.this, "您点击了悬浮窗", Toast.LENGTH_SHORT).show();
+                T.show("您点击了悬浮窗");
             }
         });
 

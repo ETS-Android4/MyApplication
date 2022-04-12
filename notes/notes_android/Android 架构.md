@@ -20,8 +20,8 @@
 
 ## MVVM
 
-1. View： Activity 和 Layout XML 文件，与 MVP 中 View 的概念相同； 
-2. Model： 负责管理业务数据逻辑，如网络请求、数据库处理，与 MVP 中 Model 的概念相同； 
+1. View： Activity 和 Layout XML 文件，与 MVP 中 View 的概念相同；
+2. Model： 负责管理业务数据逻辑，如网络请求、数据库处理，与 MVP 中 Model 的概念相同；
 3. ViewModel： 存储视图状态，负责处理表现逻辑，并将数据设置给可观察数据容器。
 
 * 多数据流： View 与 ViewModel 的交互分散，缺少唯一修改源，不易于追踪；

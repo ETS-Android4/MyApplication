@@ -7,7 +7,6 @@ import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.module.router.ARouterPath
 import com.example.william.my.module.sample.databinding.SampleLayoutResponseBinding
+import com.example.william.my.module.utils.T
 
 /**
  * ActivityResultContracts
@@ -64,9 +64,9 @@ class ResultActivity : ComponentActivity() {
     private var requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if (it) {// 同意
-                Toast.makeText(this, "您同意了权限申请", Toast.LENGTH_SHORT).show()
+                T.show("您同意了权限申请")
             } else {// 拒绝
-                Toast.makeText(this, "您拒绝了权限申请", Toast.LENGTH_SHORT).show()
+                T.show("您拒绝了权限申请")
             }
         }
 
@@ -74,9 +74,9 @@ class ResultActivity : ComponentActivity() {
     private var requestMultiplePermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             if (it[Manifest.permission.CAMERA]!!) {// 同意
-                Toast.makeText(this, "您同意了权限申请", Toast.LENGTH_SHORT).show()
+                T.show("您同意了权限申请")
             } else {// 拒绝
-                Toast.makeText(this, "您拒绝了权限申请", Toast.LENGTH_SHORT).show()
+                T.show("您拒绝了权限申请")
             }
         }
 

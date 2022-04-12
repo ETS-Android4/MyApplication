@@ -2,7 +2,6 @@ package com.example.william.my.module.demo.activity.custom;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -11,6 +10,7 @@ import com.example.william.my.core.widget.titlebar.TitleBar;
 import com.example.william.my.library.base.BaseActivity;
 import com.example.william.my.module.demo.R;
 import com.example.william.my.module.router.ARouterPath;
+import com.example.william.my.module.utils.T;
 
 @Route(path = ARouterPath.Demo.Demo_TitleBar)
 public class TitleBarActivity extends BaseActivity {
@@ -26,7 +26,7 @@ public class TitleBarActivity extends BaseActivity {
         titleBar.setBtnRight("菜单", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(TitleBarActivity.this, "您点击了菜单", Toast.LENGTH_SHORT).show();
+                T.show("您点击了菜单");
             }
         });
     }
