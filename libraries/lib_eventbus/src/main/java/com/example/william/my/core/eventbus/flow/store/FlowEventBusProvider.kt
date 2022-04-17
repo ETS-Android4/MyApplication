@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import com.example.william.my.core.eventbus.flow.FlowEventBus
-import com.example.william.my.core.eventbus.livedata.store.LiveEventBusProvider
 
 object FlowEventBusProvider : ViewModelStoreOwner {
 
@@ -17,7 +16,7 @@ object FlowEventBusProvider : ViewModelStoreOwner {
 
     private val mFlowEventBusProvider: ViewModelProvider by lazy {
         ViewModelProvider(
-            LiveEventBusProvider,
+            FlowEventBusProvider,
             ViewModelProvider.AndroidViewModelFactory.getInstance(FlowEventBus.application)
         )
     }

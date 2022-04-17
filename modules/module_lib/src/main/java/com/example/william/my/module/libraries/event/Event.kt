@@ -4,6 +4,4 @@ data class GlobalEvent(val message: String)
 
 data class ActivityEvent(val message: String)
 
-data class FragmentEvent(val message: String)
-
 data class StickyEvent(val message: String)

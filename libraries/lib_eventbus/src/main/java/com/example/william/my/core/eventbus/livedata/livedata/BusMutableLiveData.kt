@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
+/**
+ * https://tech.meituan.com/2018/07/26/android-livedatabus.html
+ */
 class BusMutableLiveData<T> : MutableLiveData<T>() {
 
     private val observerMap: MutableMap<Observer<in T>, Observer<in T>> = HashMap()

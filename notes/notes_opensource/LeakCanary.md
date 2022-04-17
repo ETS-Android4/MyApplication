@@ -1,5 +1,13 @@
 ## LeakCanary原理介绍
 
+会注册对所有 Activity 的监听，主要可以检测到生命周期，在监听到 onDestroy 调用的时候，会把检测到 Activity 实例关联包装成一个自定义弱引用。
+
+但是这里在使用时，还给指定了一个 ReferenceQuery 队列，该队列的作用就是当发生 GC 时，弱引用所持有的的对象如果被回收，就会进入该队列。
+
+所以只要在 Activity onDestroy 发生时候，把 Activity 对象绑定到 弱引用中，然后手动执行一次 GC，然后观察引用集合 （ReferenceQuery）中是不是包含对应的 Activity 对象，如果不包含，说明内存泄漏。
+
+
+
 1. RefWatcher.watch()创建了一个KeyedWeakReference用于去观察对象。
 
 2. 然后，在后台线程中，它会检测引用是否被清除了，并且是否没有触发GC。

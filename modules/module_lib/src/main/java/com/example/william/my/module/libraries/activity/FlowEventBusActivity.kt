@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.william.my.core.eventbus.flow.FlowEventBus
 import com.example.william.my.module.libraries.databinding.LibActivityEventBusBinding
+import com.example.william.my.module.libraries.event.ActivityEvent
+import com.example.william.my.module.libraries.event.FragmentEvent
 import com.example.william.my.module.libraries.event.GlobalEvent
 import com.example.william.my.module.libraries.event.StickyEvent
 import com.example.william.my.module.router.ARouterPath
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 @Route(path = ARouterPath.Lib.Lib_FlowEventBus)
 class FlowEventBusActivity : AppCompatActivity() {
@@ -42,5 +46,17 @@ class FlowEventBusActivity : AppCompatActivity() {
 
     private fun postEvent() {
         FlowEventBus.postEvent(GlobalEvent("send GlobalEvent by Activity"))
+    }
+
+    private fun coroutineScope() {
+        //监听 App CoroutineScope 事件
+        FlowEventBus.observeEvent<ActivityEvent>(coroutineScope = CoroutineScope(Dispatchers.Main)) {
+
+        }
+
+        //监听 ViewModelStoreOwner CoroutineScope 事件
+        FlowEventBus.observeEvent<ActivityEvent>(owner = this, coroutineScope = CoroutineScope(Dispatchers.Main)) {
+
+        }
     }
 }

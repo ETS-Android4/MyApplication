@@ -8,8 +8,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.example.william.my.core.eventbus.flow.store.FlowEventBusProvider
 import com.example.william.my.core.eventbus.flow.viewmodel.FlowEventBusModel
-import com.example.william.my.core.eventbus.livedata.store.LiveEventBusProvider
 import kotlinx.coroutines.*
 
 object FlowEventBus {
@@ -34,7 +34,7 @@ object FlowEventBus {
         isSticky: Boolean = false,
         noinline onReceived: (T) -> Unit
     ): Job {
-        return LiveEventBusProvider[FlowEventBusModel::class.java]
+        return FlowEventBusProvider[FlowEventBusModel::class.java]
             .observeEvent(ProcessLifecycleOwner.get(), minState, dispatcher, T::class.java.name, isSticky, onReceived)
     }
 
@@ -78,7 +78,7 @@ object FlowEventBus {
         noinline onReceived: (T) -> Unit
     ): Job {
         return coroutineScope.launch {
-            LiveEventBusProvider[FlowEventBusModel::class.java]
+            FlowEventBusProvider[FlowEventBusModel::class.java]
                 .observeEvent(T::class.java.name, isSticky, onReceived)
         }
     }
@@ -107,7 +107,7 @@ object FlowEventBus {
      * Application范围的事件
      */
     inline fun <reified T> postEvent(event: T, timeMillis: Long = 0L) {
-        LiveEventBusProvider[FlowEventBusModel::class.java]
+        FlowEventBusProvider[FlowEventBusModel::class.java]
             .postEvent(T::class.java.name, event!!, timeMillis)
     }
 
@@ -125,7 +125,7 @@ object FlowEventBus {
 
     //获取事件
     inline fun <reified T> getEventObserverCount(event: Class<T>): Int {
-        return LiveEventBusProvider[FlowEventBusModel::class.java]
+        return FlowEventBusProvider[FlowEventBusModel::class.java]
             .getEventObserverCount(event.name)
     }
 
@@ -136,7 +136,7 @@ object FlowEventBus {
 
     //移除事件
     inline fun <reified T> removeStickyEvent(event: Class<T>) {
-        LiveEventBusProvider[FlowEventBusModel::class.java]
+        FlowEventBusProvider[FlowEventBusModel::class.java]
             .removeStickEvent(event.name)
     }
 
@@ -148,7 +148,7 @@ object FlowEventBus {
     // 清除事件缓存
     @ExperimentalCoroutinesApi
     inline fun <reified T> clearStickyEvent(event: Class<T>) {
-        LiveEventBusProvider[FlowEventBusModel::class.java]
+        FlowEventBusProvider[FlowEventBusModel::class.java]
             .clearStickEvent(event.name)
     }
 
